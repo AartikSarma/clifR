@@ -50,6 +50,18 @@ ClifOrchestrator <- R6::R6Class(
     #' @field labs Labs table object
     labs = NULL,
 
+    #' @field hospital_diagnosis HospitalDiagnosis table object
+    hospital_diagnosis = NULL,
+
+    #' @field medication_admin_continuous MedicationAdminContinuous table object
+    medication_admin_continuous = NULL,
+
+    #' @field medication_admin_intermittent MedicationAdminIntermittent table object
+    medication_admin_intermittent = NULL,
+
+    #' @field respiratory_support RespiratorySupport table object
+    respiratory_support = NULL,
+
     #' @field encounter_mapping tibble mapping original to stitched IDs
     encounter_mapping = NULL,
 
@@ -147,6 +159,30 @@ ClifOrchestrator <- R6::R6Class(
           timezone = self$timezone,
           output_directory = self$output_directory
         ),
+        hospital_diagnosis = HospitalDiagnosis$new(
+          data_directory = self$data_directory,
+          filetype = self$filetype,
+          timezone = self$timezone,
+          output_directory = self$output_directory
+        ),
+        medication_admin_continuous = MedicationAdminContinuous$new(
+          data_directory = self$data_directory,
+          filetype = self$filetype,
+          timezone = self$timezone,
+          output_directory = self$output_directory
+        ),
+        medication_admin_intermittent = MedicationAdminIntermittent$new(
+          data_directory = self$data_directory,
+          filetype = self$filetype,
+          timezone = self$timezone,
+          output_directory = self$output_directory
+        ),
+        respiratory_support = RespiratorySupport$new(
+          data_directory = self$data_directory,
+          filetype = self$filetype,
+          timezone = self$timezone,
+          output_directory = self$output_directory
+        ),
         {
           cli::cli_abort("Unknown table: {.val {table_name}}")
         }
@@ -221,7 +257,12 @@ ClifOrchestrator <- R6::R6Class(
 
       validation_results <- list()
 
-      for (table_name in c("patient", "hospitalization", "adt", "vitals", "labs")) {
+      # All supported table names
+      all_tables <- c("patient", "hospitalization", "adt", "vitals", "labs",
+                     "hospital_diagnosis", "medication_admin_continuous",
+                     "medication_admin_intermittent", "respiratory_support")
+
+      for (table_name in all_tables) {
         table_obj <- self[[table_name]]
 
         if (!is.null(table_obj)) {
@@ -270,7 +311,12 @@ ClifOrchestrator <- R6::R6Class(
         tables_loaded = list()
       )
 
-      for (table_name in c("patient", "hospitalization", "adt", "vitals", "labs")) {
+      # All supported table names
+      all_tables <- c("patient", "hospitalization", "adt", "vitals", "labs",
+                     "hospital_diagnosis", "medication_admin_continuous",
+                     "medication_admin_intermittent", "respiratory_support")
+
+      for (table_name in all_tables) {
         table_obj <- self[[table_name]]
 
         if (!is.null(table_obj)) {
@@ -318,7 +364,12 @@ ClifOrchestrator <- R6::R6Class(
 
       cli::cli_h2("Exporting Validation Reports")
 
-      for (table_name in c("patient", "hospitalization", "adt", "vitals", "labs")) {
+      # All supported table names
+      all_tables <- c("patient", "hospitalization", "adt", "vitals", "labs",
+                     "hospital_diagnosis", "medication_admin_continuous",
+                     "medication_admin_intermittent", "respiratory_support")
+
+      for (table_name in all_tables) {
         table_obj <- self[[table_name]]
 
         if (!is.null(table_obj)) {
@@ -351,8 +402,13 @@ ClifOrchestrator <- R6::R6Class(
 
       cli::cli_rule("Loaded Tables")
 
+      # All supported table names
+      all_tables <- c("patient", "hospitalization", "adt", "vitals", "labs",
+                     "hospital_diagnosis", "medication_admin_continuous",
+                     "medication_admin_intermittent", "respiratory_support")
+
       tables_loaded <- c()
-      for (table_name in c("patient", "hospitalization", "adt", "vitals", "labs")) {
+      for (table_name in all_tables) {
         if (!is.null(self[[table_name]])) {
           tables_loaded <- c(tables_loaded, table_name)
           cli::cli_text(

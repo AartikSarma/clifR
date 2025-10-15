@@ -11,12 +11,19 @@ Transform heterogeneous ICU data into standardized, analysis-ready datasets with
 
 ## Features
 
-- **Full CLIF 2.0 Implementation**: Support for all 20+ clinical data tables
+- **CLIF 2.0 Tables**: 9 core table classes implemented (Patient, Hospitalization, ADT, Vitals, Labs, Diagnoses, Medications, Respiratory Support)
 - **Schema Validation**: Automatic validation against CLIF specification
 - **Clinical Calculations**:
   - SOFA (Sequential Organ Failure Assessment) scores
-  - Charlson Comorbidity Index (CCI)
-- **Unit Conversion**: Smart conversion between medical units
+  - Charlson Comorbidity Index (CCI) from ICD-9/ICD-10 codes
+  - P/F ratio calculation
+  - Ventilator settings analysis
+- **Medication Analysis**:
+  - Vasopressor and sedation tracking
+  - Antibiotic administration timing
+  - Dose unit conversion
+- **Respiratory Support**: Ventilator modes, settings, and compliance metrics
+- **Unit Conversion**: Smart conversion between medical units (doses, temperature, pressure, labs)
 - **Encounter Stitching**: Link related hospital stays
 - **Wide Dataset Creation**: Transform narrow clinical data to time-series format
 - **High Performance**: Leverages DuckDB and arrow for efficient processing

@@ -287,7 +287,7 @@ pkgdown::build_site()
 - ✅ All 20 YAML schemas
 - ✅ Data loading (CSV/Parquet)
 - ✅ Comprehensive validation
-- ✅ 5 table classes (Patient, Hospitalization, ADT, Labs, Vitals)
+- ✅ 9 table classes (Patient, Hospitalization, ADT, Vitals, Labs, HospitalDiagnosis, MedicationAdminContinuous, MedicationAdminIntermittent, RespiratorySupport)
 - ✅ ClifOrchestrator
 - ✅ Encounter stitching
 - ✅ Cross-language test infrastructure
@@ -345,12 +345,13 @@ report <- orchestrator$generate_analysis_report(
 ## 🚧 Not Yet Implemented
 
 **Additional Features**:
-- ⏳ Additional table classes (15+ remaining: respiratory_support, medications, microbiology, etc.)
+- ⏳ Additional table classes (11+ remaining: code_status, CRRT, ECMO, microbiology, procedures, assessments, etc.)
 - ⏳ Additional clinical scores (APACHE, qSOFA, etc.)
 - ⏳ Visualization functions
 - ⏳ Export to analysis-ready formats
+- ⏳ Respiratory support waterfall analysis
 
-These can be added incrementally as needed. The core functionality and advanced features are complete!
+These can be added incrementally as needed. Core functionality, advanced features, and most common tables are complete!
 
 ---
 
