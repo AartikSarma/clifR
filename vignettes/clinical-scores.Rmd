@@ -1,0 +1,580 @@
+---
+title: "Calculating Clinical Scores"
+author: "clifR Package"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Calculating Clinical Scores}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 7,
+  fig.height = 5
+)
+```
+
+# Introduction
+
+This vignette demonstrates how to calculate common clinical severity and comorbidity scores using CLIF data:
+
+- **SOFA** (Sequential Organ Failure Assessment) - ICU severity score
+- **Charlson Comorbidity Index** (CCI) - Mortality risk from comorbidities
+
+These scores are essential for:
+- Risk stratification
+- Outcome prediction
+- Research cohort characterization
+- Quality improvement initiatives
+
+# Setup
+
+```{r eval=FALSE}
+library(clifR)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+
+# Initialize orchestrator
+orchestrator <- ClifOrchestrator$new(
+  data_directory = "path/to/clif/data",
+  filetype = "csv",
+  timezone = "America/New_York"
+)
+
+# Load required tables
+orchestrator$initialize_tables(
+  tables = c("patient", "hospitalization", "vitals", "labs", "hospital_diagnosis"),
+  validate = TRUE
+)
+```
+
+# SOFA Score
+
+## What is SOFA?
+
+The Sequential Organ Failure Assessment (SOFA) score assesses organ dysfunction across six systems:
+
+1. **Respiratory**: PaO2/FiO2 ratio (P/F ratio)
+2. **Coagulation**: Platelet count
+3. **Liver**: Bilirubin level
+4. **Cardiovascular**: Mean arterial pressure (MAP) or vasopressor use
+5. **Neurological**: Glasgow Coma Scale (GCS)
+6. **Renal**: Creatinine or urine output
+
+Total SOFA ranges from 0-24, with higher scores indicating worse organ function.
+
+## Requirements
+
+SOFA calculation requires:
+- Vitals data (for MAP)
+- Labs data (for platelets, bilirubin, creatinine, PaO2)
+- Respiratory support data (for FiO2)
+- Assessment data (for GCS) - optional, uses default if missing
+- Medication data (for vasopressors) - optional
+
+## Basic SOFA Calculation
+
+```{r eval=FALSE}
+# Create wide dataset (required for SOFA)
+wide_data <- orchestrator$create_wide_dataset(
+  time_resolution = "hour"  # Hourly aggregation
+)
+
+# Calculate SOFA scores
+sofa_results <- orchestrator$calculate_sofa_scores(
+  wide_data = wide_data
+)
+
+# View results
+head(sofa_results)
+
+# Summary statistics
+sofa_summary <- attr(sofa_results, "summary")
+print(sofa_summary)
+```
+
+## Understanding SOFA Components
+
+### Respiratory Component (P/F Ratio)
+
+```{r eval=FALSE}
+# P/F ratio categories:
+# 0 points: ≥400
+# 1 point: 300-399
+# 2 points: 200-299
+# 3 points: 100-199
+# 4 points: <100
+
+sofa_results %>%
+  filter(!is.na(pf_ratio)) %>%
+  summarize(
+    mean_pf_ratio = mean(pf_ratio, na.rm = TRUE),
+    median_pf_ratio = median(pf_ratio, na.rm = TRUE),
+    pct_severe_ards = mean(pf_ratio < 100, na.rm = TRUE) * 100
+  )
+```
+
+### Coagulation Component (Platelets)
+
+```{r eval=FALSE}
+# Platelet count categories (x 10³/μL):
+# 0 points: ≥150
+# 1 point: 100-149
+# 2 points: 50-99
+# 3 points: 20-49
+# 4 points: <20
+
+sofa_results %>%
+  filter(!is.na(platelet)) %>%
+  summarize(
+    mean_platelet = mean(platelet, na.rm = TRUE),
+    pct_thrombocytopenia = mean(platelet < 150, na.rm = TRUE) * 100,
+    pct_severe_thrombocytopenia = mean(platelet < 50, na.rm = TRUE) * 100
+  )
+```
+
+### Hepatic Component (Bilirubin)
+
+```{r eval=FALSE}
+# Bilirubin categories (mg/dL):
+# 0 points: <1.2
+# 1 point: 1.2-1.9
+# 2 points: 2.0-5.9
+# 3 points: 6.0-11.9
+# 4 points: ≥12.0
+
+sofa_results %>%
+  filter(!is.na(bilirubin_total)) %>%
+  summarize(
+    mean_bilirubin = mean(bilirubin_total, na.rm = TRUE),
+    pct_elevated = mean(bilirubin_total >= 1.2, na.rm = TRUE) * 100,
+    pct_severe = mean(bilirubin_total >= 6.0, na.rm = TRUE) * 100
+  )
+```
+
+### Cardiovascular Component (MAP)
+
+```{r eval=FALSE}
+# MAP categories (mmHg):
+# 0 points: MAP ≥70
+# 1 point: MAP <70
+# 2 points: Dopamine ≤5 or dobutamine (any dose)
+# 3 points: Dopamine >5, epinephrine ≤0.1, or norepinephrine ≤0.1
+# 4 points: Dopamine >15, epinephrine >0.1, or norepinephrine >0.1
+
+sofa_results %>%
+  filter(!is.na(map)) %>%
+  summarize(
+    mean_map = mean(map, na.rm = TRUE),
+    pct_hypotensive = mean(map < 70, na.rm = TRUE) * 100,
+    pct_shock = mean(map < 65, na.rm = TRUE) * 100
+  )
+```
+
+### Renal Component (Creatinine)
+
+```{r eval=FALSE}
+# Creatinine categories (mg/dL):
+# 0 points: <1.2
+# 1 point: 1.2-1.9
+# 2 points: 2.0-3.4
+# 3 points: 3.5-4.9
+# 4 points: ≥5.0
+
+sofa_results %>%
+  filter(!is.na(creatinine)) %>%
+  summarize(
+    mean_creatinine = mean(creatinine, na.rm = TRUE),
+    pct_aki = mean(creatinine >= 1.2, na.rm = TRUE) * 100,
+    pct_severe_aki = mean(creatinine >= 3.5, na.rm = TRUE) * 100
+  )
+```
+
+### Neurological Component (GCS)
+
+```{r eval=FALSE}
+# GCS categories:
+# 0 points: 15
+# 1 point: 13-14
+# 2 points: 10-12
+# 3 points: 6-9
+# 4 points: <6
+
+# If GCS not available, uses default value (typically 15)
+```
+
+## SOFA Analysis
+
+### Maximum SOFA per Hospitalization
+
+```{r eval=FALSE}
+# Get maximum (worst) SOFA score per patient
+max_sofa <- sofa_results %>%
+  group_by(hospitalization_id) %>%
+  summarize(
+    max_sofa = max(sofa_total, na.rm = TRUE),
+    max_respiratory = max(sofa_respiratory, na.rm = TRUE),
+    max_coagulation = max(sofa_coagulation, na.rm = TRUE),
+    max_hepatic = max(sofa_hepatic, na.rm = TRUE),
+    max_cardiovascular = max(sofa_cardiovascular, na.rm = TRUE),
+    max_renal = max(sofa_renal, na.rm = TRUE),
+    max_neurological = max(sofa_neurological, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+# Join with outcomes
+hosp_data <- orchestrator$hospitalization$df
+
+sofa_with_outcomes <- max_sofa %>%
+  inner_join(
+    hosp_data %>% select(hospitalization_id, hospital_expire_flag),
+    by = "hospitalization_id"
+  )
+
+# Analyze SOFA by outcome
+sofa_by_outcome <- sofa_with_outcomes %>%
+  group_by(hospital_expire_flag) %>%
+  summarize(
+    n = n(),
+    mean_sofa = mean(max_sofa, na.rm = TRUE),
+    median_sofa = median(max_sofa, na.rm = TRUE),
+    sd_sofa = sd(max_sofa, na.rm = TRUE)
+  )
+
+print(sofa_by_outcome)
+```
+
+### SOFA Trajectory Over Time
+
+```{r eval=FALSE}
+# Track SOFA over time for one patient
+example_patient <- sofa_results %>%
+  filter(hospitalization_id == unique(sofa_results$hospitalization_id)[1])
+
+ggplot(example_patient, aes(x = time_rounded, y = sofa_total)) +
+  geom_line(color = "steelblue", size = 1) +
+  geom_point(size = 2) +
+  labs(
+    title = "SOFA Score Trajectory",
+    x = "Time",
+    y = "SOFA Score"
+  ) +
+  theme_minimal()
+```
+
+### Component Contribution
+
+```{r eval=FALSE}
+# Analyze which components contribute most to SOFA
+component_contribution <- sofa_results %>%
+  select(
+    hospitalization_id,
+    starts_with("sofa_")
+  ) %>%
+  pivot_longer(
+    cols = starts_with("sofa_"),
+    names_to = "component",
+    values_to = "score"
+  ) %>%
+  filter(component != "sofa_total") %>%
+  group_by(component) %>%
+  summarize(
+    mean_score = mean(score, na.rm = TRUE),
+    pct_abnormal = mean(score > 0, na.rm = TRUE) * 100
+  )
+
+# Visualize
+ggplot(component_contribution, aes(x = reorder(component, -mean_score), y = mean_score)) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  coord_flip() +
+  labs(
+    title = "Average SOFA Component Scores",
+    x = "Component",
+    y = "Average Score"
+  ) +
+  theme_minimal()
+```
+
+## Delta SOFA
+
+Calculate change in SOFA from baseline:
+
+```{r eval=FALSE}
+# Calculate delta SOFA (change from first measurement)
+delta_sofa <- sofa_results %>%
+  group_by(hospitalization_id) %>%
+  arrange(time_rounded) %>%
+  mutate(
+    baseline_sofa = first(sofa_total),
+    delta_sofa = sofa_total - baseline_sofa
+  ) %>%
+  ungroup()
+
+# Patients with worsening organ failure (delta SOFA ≥2)
+worsening <- delta_sofa %>%
+  group_by(hospitalization_id) %>%
+  summarize(
+    max_delta_sofa = max(delta_sofa, na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  filter(max_delta_sofa >= 2)
+
+cat(sprintf("%d patients had delta SOFA ≥2\n", nrow(worsening)))
+```
+
+# Charlson Comorbidity Index
+
+## What is CCI?
+
+The Charlson Comorbidity Index predicts 10-year mortality based on comorbid conditions. It's calculated from ICD-9 or ICD-10 diagnosis codes.
+
+## CCI Categories and Weights
+
+| Condition | Weight |
+|-----------|--------|
+| Myocardial infarction | 1 |
+| Congestive heart failure | 1 |
+| Peripheral vascular disease | 1 |
+| Cerebrovascular disease | 1 |
+| Dementia | 1 |
+| COPD | 1 |
+| Rheumatologic disease | 1 |
+| Peptic ulcer disease | 1 |
+| Mild liver disease | 1 |
+| Diabetes without complications | 1 |
+| Diabetes with complications | 2 |
+| Hemiplegia or paraplegia | 2 |
+| Renal disease | 2 |
+| Cancer (not metastatic) | 2 |
+| Moderate/severe liver disease | 3 |
+| Metastatic solid tumor | 6 |
+| AIDS/HIV | 6 |
+
+Age adjustment: +1 point per decade over 40 years
+
+## Basic CCI Calculation
+
+```{r eval=FALSE}
+# Get diagnosis data
+diagnosis_data <- orchestrator$hospital_diagnosis$df
+
+# Calculate Charlson scores
+cci_results <- orchestrator$calculate_charlson_scores(
+  diagnosis_data = diagnosis_data,
+  patient_id_col = "hospitalization_id",
+  icd_code_col = "icd_code",
+  icd_version_col = "icd_version",  # Optional
+  age_col = "age_at_admission",      # Optional
+  default_icd_version = "10"
+)
+
+# View results
+head(cci_results)
+```
+
+## CCI Analysis
+
+### Distribution
+
+```{r eval=FALSE}
+# Summary statistics
+summary(cci_results$cci_score)
+
+# Distribution by score category
+cci_categories <- cci_results %>%
+  mutate(
+    cci_category = case_when(
+      cci_score == 0 ~ "0 (No comorbidities)",
+      cci_score == 1 ~ "1-2 (Low)",
+      cci_score <= 4 ~ "3-4 (Moderate)",
+      TRUE ~ "5+ (High)"
+    )
+  )
+
+table(cci_categories$cci_category)
+
+# Histogram
+ggplot(cci_results, aes(x = cci_score)) +
+  geom_histogram(binwidth = 1, fill = "steelblue", color = "white") +
+  labs(
+    title = "Charlson Comorbidity Index Distribution",
+    x = "CCI Score",
+    y = "Count"
+  ) +
+  theme_minimal()
+```
+
+### CCI and Outcomes
+
+```{r eval=FALSE}
+# Join with hospitalization outcomes
+cci_with_outcomes <- cci_results %>%
+  inner_join(
+    hosp_data %>% select(hospitalization_id, hospital_expire_flag, length_of_stay_days),
+    by = "hospitalization_id"
+  )
+
+# Mortality by CCI category
+mortality_by_cci <- cci_with_outcomes %>%
+  mutate(
+    cci_category = cut(
+      cci_score,
+      breaks = c(-Inf, 0, 2, 4, Inf),
+      labels = c("0", "1-2", "3-4", "5+")
+    )
+  ) %>%
+  group_by(cci_category) %>%
+  summarize(
+    n = n(),
+    mortality_rate = mean(hospital_expire_flag, na.rm = TRUE) * 100,
+    mean_los = mean(length_of_stay_days, na.rm = TRUE)
+  )
+
+print(mortality_by_cci)
+
+# Visualize
+ggplot(mortality_by_cci, aes(x = cci_category, y = mortality_rate)) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  geom_text(aes(label = sprintf("%.1f%%", mortality_rate)), vjust = -0.5) +
+  labs(
+    title = "Hospital Mortality by Charlson Score",
+    x = "Charlson Comorbidity Index",
+    y = "Mortality Rate (%)"
+  ) +
+  theme_minimal()
+```
+
+### Common Comorbidities
+
+```{r eval=FALSE}
+# Identify specific comorbidities
+# (This requires accessing the intermediate comorbidity flags)
+
+# Get diagnosis categories that contribute to CCI
+diagnosis_summary <- diagnosis_data %>%
+  group_by(icd_code) %>%
+  summarize(
+    n_patients = n_distinct(hospitalization_id),
+    .groups = "drop"
+  ) %>%
+  arrange(desc(n_patients)) %>%
+  head(20)
+
+print(diagnosis_summary)
+```
+
+# Combined Risk Stratification
+
+## SOFA + CCI
+
+Combine acute severity (SOFA) with chronic comorbidity burden (CCI):
+
+```{r eval=FALSE}
+# Join SOFA max scores with CCI
+combined_scores <- max_sofa %>%
+  inner_join(cci_results, by = "hospitalization_id") %>%
+  inner_join(
+    hosp_data %>% select(hospitalization_id, hospital_expire_flag),
+    by = "hospitalization_id"
+  )
+
+# Create risk categories
+risk_stratification <- combined_scores %>%
+  mutate(
+    sofa_high = max_sofa >= 10,
+    cci_high = cci_score >= 5,
+    risk_category = case_when(
+      !sofa_high & !cci_high ~ "Low risk",
+      sofa_high & !cci_high ~ "High acute risk",
+      !sofa_high & cci_high ~ "High chronic risk",
+      sofa_high & cci_high ~ "High combined risk"
+    )
+  )
+
+# Mortality by risk category
+risk_mortality <- risk_stratification %>%
+  group_by(risk_category) %>%
+  summarize(
+    n = n(),
+    mortality_rate = mean(hospital_expire_flag, na.rm = TRUE) * 100
+  )
+
+print(risk_mortality)
+
+# Visualization
+ggplot(combined_scores, aes(x = max_sofa, y = cci_score, color = hospital_expire_flag)) +
+  geom_point(alpha = 0.6, size = 2) +
+  scale_color_manual(
+    values = c("0" = "steelblue", "1" = "red"),
+    labels = c("Survived", "Died")
+  ) +
+  labs(
+    title = "SOFA vs. Charlson Comorbidity Index",
+    x = "Maximum SOFA Score",
+    y = "Charlson Comorbidity Index",
+    color = "Outcome"
+  ) +
+  theme_minimal()
+```
+
+# Clinical Applications
+
+## Sepsis-3 Definition
+
+Sepsis-3 requires suspected infection + SOFA ≥2:
+
+```{r eval=FALSE}
+# Identify patients with delta SOFA ≥2
+# (Requires infection diagnosis codes - simplified example)
+
+sepsis_cohort <- delta_sofa %>%
+  group_by(hospitalization_id) %>%
+  summarize(
+    max_delta_sofa = max(delta_sofa, na.rm = TRUE),
+    meets_sepsis3 = max_delta_sofa >= 2,
+    .groups = "drop"
+  )
+
+# Join with infection diagnoses (you would need to filter diagnosis_data for infection codes)
+# This is a simplified example
+```
+
+## Prognostic Enrichment for Trials
+
+Identify high-risk patients for trial enrollment:
+
+```{r eval=FALSE}
+# Example: Patients with SOFA 6-12 and low CCI
+trial_eligible <- combined_scores %>%
+  filter(
+    max_sofa >= 6,
+    max_sofa <= 12,
+    cci_score <= 3
+  )
+
+cat(sprintf("Found %d potentially eligible patients\n", nrow(trial_eligible)))
+```
+
+# Summary
+
+This vignette covered:
+
+- SOFA score calculation and interpretation
+- Component-level SOFA analysis
+- SOFA trajectories and delta SOFA
+- Charlson Comorbidity Index calculation
+- Combined risk stratification
+- Clinical applications (Sepsis-3, trial enrollment)
+
+These scores provide essential risk stratification for ICU patients and form the foundation for many critical care research studies!
+
+# Session Info
+
+```{r eval=FALSE}
+sessionInfo()
+```

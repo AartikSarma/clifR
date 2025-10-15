@@ -1,0 +1,626 @@
+---
+title: "Microbiology Data Analysis"
+author: "clifR Package"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Microbiology Data Analysis}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 7,
+  fig.height = 5
+)
+```
+
+# Introduction
+
+This vignette demonstrates analysis of microbiological data including culture results, molecular testing, and antibiotic susceptibility patterns. These data are crucial for:
+
+- Infection epidemiology
+- Antibiotic stewardship
+- Quality improvement initiatives
+- Resistance tracking
+
+# Setup
+
+```{r eval=FALSE}
+library(clifR)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(lubridate)
+
+# Initialize orchestrator
+orchestrator <- ClifOrchestrator$new(
+  data_directory = "path/to/clif/data",
+  filetype = "csv",
+  timezone = "America/New_York"
+)
+
+# Load microbiology tables
+orchestrator$initialize_tables(
+  tables = c(
+    "patient", "hospitalization",
+    "microbiology_culture",
+    "microbiology_nonculture",
+    "microbiology_susceptibility"
+  ),
+  validate = TRUE
+)
+```
+
+# Culture-Based Microbiology
+
+## Basic Culture Analysis
+
+```{r eval=FALSE}
+culture <- orchestrator$microbiology_culture
+
+# View structure
+head(culture$df)
+
+# Summary
+culture$summarize()
+
+# Get distribution by specimen source
+fluid_distribution <- culture$get_fluid_distribution()
+print(fluid_distribution)
+```
+
+## Blood Cultures
+
+```{r eval=FALSE}
+# Get all blood culture results
+blood_cultures <- culture$get_blood_cultures()
+
+# Positive blood cultures
+positive_blood_cultures <- blood_cultures %>%
+  filter(organism_category != "no_growth")
+
+# Positivity rate
+blood_culture_positivity <- nrow(positive_blood_cultures) / nrow(blood_cultures) * 100
+cat(sprintf("Blood culture positivity rate: %.1f%%\n", blood_culture_positivity))
+
+# Most common blood culture organisms
+blood_culture_organisms <- positive_blood_cultures %>%
+  group_by(organism_category) %>%
+  summarize(
+    n_cultures = n(),
+    n_patients = n_distinct(patient_id),
+    .groups = "drop"
+  ) %>%
+  arrange(desc(n_cultures)) %>%
+  head(10)
+
+print(blood_culture_organisms)
+
+# Visualize
+ggplot(blood_culture_organisms, aes(x = reorder(organism_category, n_cultures), y = n_cultures)) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  coord_flip() +
+  labs(
+    title = "Top 10 Blood Culture Organisms",
+    x = "Organism",
+    y = "Number of Positive Cultures"
+  ) +
+  theme_minimal()
+```
+
+## Respiratory Cultures
+
+```{r eval=FALSE}
+# Get respiratory culture results
+respiratory_cultures <- culture$get_respiratory_cultures()
+
+# Common respiratory pathogens
+resp_pathogens <- c(
+  "pseudomonas_aeruginosa",
+  "staphylococcus_aureus",
+  "acinetobacter_baumannii",
+  "klebsiella_pneumoniae",
+  "haemophilus_influenzae"
+)
+
+respiratory_organisms <- respiratory_cultures %>%
+  filter(organism_category %in% resp_pathogens) %>%
+  group_by(organism_category) %>%
+  summarize(
+    n = n(),
+    n_patients = n_distinct(patient_id),
+    .groups = "drop"
+  ) %>%
+  arrange(desc(n))
+
+print(respiratory_organisms)
+```
+
+## Organism Distribution
+
+```{r eval=FALSE}
+# Overall organism distribution (excluding no growth)
+organism_dist <- culture$get_organism_distribution() %>%
+  filter(organism_category != "no_growth") %>%
+  head(20)
+
+# Gram-positive vs Gram-negative
+# (This would require organism group classification)
+organism_groups <- culture$get_organism_distribution(by_group = TRUE)
+print(organism_groups)
+```
+
+## Culture Turnaround Time
+
+```{r eval=FALSE}
+# Calculate turnaround times
+tat_data <- culture$calculate_turnaround_time()
+
+# Summary statistics
+tat_summary <- tat_data %>%
+  summarize(
+    median_collection_to_result = median(collection_to_result_hours, na.rm = TRUE),
+    median_order_to_result = median(order_to_result_hours, na.rm = TRUE),
+    pct_result_within_48h = mean(order_to_result_hours <= 48, na.rm = TRUE) * 100
+  )
+
+print(tat_summary)
+
+# Turnaround time by specimen type
+tat_by_fluid <- tat_data %>%
+  group_by(fluid_category) %>%
+  summarize(
+    n = n(),
+    median_tat = median(collection_to_result_hours, na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  filter(n >= 10) %>%  # Only fluids with sufficient samples
+  arrange(desc(median_tat))
+
+print(tat_by_fluid)
+```
+
+## Multi-Drug Resistant Organisms (MDROs)
+
+Identify patients with MDR organisms (requires susceptibility data):
+
+```{r eval=FALSE}
+# Common MDROs
+mdro_organisms <- c(
+  "staphylococcus_aureus",  # May be MRSA
+  "enterococcus_faecium",   # May be VRE
+  "pseudomonas_aeruginosa", # May be MDR
+  "acinetobacter_baumannii",# Often MDR
+  "klebsiella_pneumoniae"   # May be ESBL or CRE
+)
+
+mdro_cultures <- culture$df %>%
+  filter(organism_category %in% mdro_organisms)
+
+cat(sprintf("%d cultures with potential MDROs\n", nrow(mdro_cultures)))
+```
+
+# Non-Culture Molecular Testing
+
+## Basic Nonculture Analysis
+
+```{r eval=FALSE}
+nonculture <- orchestrator$microbiology_nonculture
+
+# View structure
+head(nonculture$df)
+
+# Summary
+nonculture$summarize()
+
+# Test distribution
+test_distribution <- nonculture$get_organism_distribution()
+print(test_distribution)
+```
+
+## COVID-19 Testing
+
+```{r eval=FALSE}
+# Get all COVID-19 test results
+covid_tests <- nonculture$get_covid_tests()
+
+# Overall positivity
+covid_positivity <- covid_tests %>%
+  summarize(
+    n_tests = n(),
+    n_positive = sum(result_category == "detected", na.rm = TRUE),
+    positivity_rate = n_positive / n_tests * 100
+  )
+
+print(covid_positivity)
+
+# Positive tests over time
+covid_positive_timeline <- covid_tests %>%
+  filter(result_category == "detected") %>%
+  mutate(
+    week = floor_date(collect_dttm, "week")
+  ) %>%
+  group_by(week) %>%
+  summarize(n_positive = n(), .groups = "drop")
+
+ggplot(covid_positive_timeline, aes(x = week, y = n_positive)) +
+  geom_line(color = "steelblue", size = 1) +
+  geom_point(size = 2) +
+  labs(
+    title = "COVID-19 Positive Tests Over Time",
+    x = "Week",
+    y = "Number of Positive Tests"
+  ) +
+  theme_minimal()
+```
+
+## C. difficile Testing
+
+```{r eval=FALSE}
+# Get C. diff test results
+cdiff_tests <- nonculture$get_cdiff_tests()
+
+# Positivity rate
+cdiff_summary <- cdiff_tests %>%
+  summarize(
+    n_tests = n(),
+    n_positive = sum(result_category == "detected", na.rm = TRUE),
+    positivity_rate = n_positive / n_tests * 100,
+    n_patients_tested = n_distinct(patient_id),
+    n_patients_positive = n_distinct(patient_id[result_category == "detected"])
+  )
+
+print(cdiff_summary)
+
+# Patients with recurrent C. diff (multiple positive tests)
+recurrent_cdiff <- cdiff_tests %>%
+  filter(result_category == "detected") %>%
+  group_by(patient_id) %>%
+  summarize(
+    n_positive_tests = n(),
+    .groups = "drop"
+  ) %>%
+  filter(n_positive_tests > 1)
+
+cat(sprintf("%d patients with recurrent C. difficile\n", nrow(recurrent_cdiff)))
+```
+
+## Test Turnaround Time
+
+```{r eval=FALSE}
+# Calculate molecular test TAT
+nonculture_tat <- nonculture$calculate_turnaround_time()
+
+# Summary - molecular tests should be faster than cultures
+nonculture_tat_summary <- nonculture_tat %>%
+  summarize(
+    median_collection_to_result = median(collection_to_result_hours, na.rm = TRUE),
+    median_order_to_result = median(order_to_result_hours, na.rm = TRUE),
+    pct_result_within_24h = mean(order_to_result_hours <= 24, na.rm = TRUE) * 100
+  )
+
+print(nonculture_tat_summary)
+```
+
+# Antibiotic Susceptibility
+
+## Basic Susceptibility Analysis
+
+```{r eval=FALSE}
+susceptibility <- orchestrator$microbiology_susceptibility
+
+# View structure
+head(susceptibility$df)
+
+# Summary
+susceptibility$summarize()
+
+# Antimicrobial testing distribution
+antimicrobial_summary <- susceptibility$get_antimicrobial_summary() %>%
+  head(20)
+
+print(antimicrobial_summary)
+```
+
+## Antibiogram Creation
+
+Hospital-level antibiogram (% susceptible for common bugs/drugs):
+
+```{r eval=FALSE}
+# Create antibiogram for common antibiotics
+antibiogram <- susceptibility$get_antibiogram(common_only = TRUE)
+print(antibiogram)
+
+# Visualize antibiogram
+ggplot(antibiogram, aes(x = reorder(antimicrobial_category, -pct_susceptible), y = pct_susceptible)) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  geom_hline(yintercept = 90, linetype = "dashed", color = "red") +
+  coord_flip() +
+  labs(
+    title = "Hospital Antibiogram - % Susceptible",
+    x = "Antibiotic",
+    y = "% Susceptible"
+  ) +
+  theme_minimal()
+```
+
+## Organism-Specific Susceptibility
+
+```{r eval=FALSE}
+# Link susceptibility with culture data
+susceptibility_with_organism <- susceptibility$join_with_cultures(
+  culture_data = culture$df
+)
+
+# E. coli susceptibility patterns
+ecoli_susceptibility <- susceptibility_with_organism %>%
+  filter(organism_category == "escherichia_coli") %>%
+  group_by(antimicrobial_category) %>%
+  summarize(
+    n_tested = n(),
+    pct_susceptible = mean(susceptibility_category == "susceptible", na.rm = TRUE) * 100,
+    pct_resistant = mean(susceptibility_category == "non_susceptible", na.rm = TRUE) * 100,
+    .groups = "drop"
+  ) %>%
+  filter(n_tested >= 10) %>%
+  arrange(desc(pct_susceptible))
+
+print(ecoli_susceptibility)
+```
+
+## Multi-Drug Resistant Organisms
+
+```{r eval=FALSE}
+# Identify MDR organisms (resistant to ≥3 antibiotic classes)
+mdr_organisms <- susceptibility$get_mdr_organisms(min_resistances = 3)
+
+# How many MDR organisms?
+cat(sprintf("%d organism isolates with MDR patterns\n", nrow(mdr_organisms)))
+
+# Most resistant organisms
+top_mdr <- mdr_organisms %>%
+  arrange(desc(n_resistances)) %>%
+  head(10)
+
+print(top_mdr)
+
+# MDR organism types
+if (nrow(mdr_organisms) > 0) {
+  mdr_with_organism <- mdr_organisms %>%
+    inner_join(
+      culture$df %>% select(organism_id, organism_category, organism_group),
+      by = "organism_id"
+    )
+
+  mdr_by_type <- mdr_with_organism %>%
+    group_by(organism_category) %>%
+    summarize(
+      n_mdr_isolates = n(),
+      mean_resistances = mean(n_resistances),
+      .groups = "drop"
+    ) %>%
+    arrange(desc(n_mdr_isolates))
+
+  print(mdr_by_type)
+}
+```
+
+## Resistance Trends
+
+```{r eval=FALSE}
+# Track resistance over time for key pathogens
+# Example: E. coli resistance to fluoroquinolones
+
+resistance_trends <- susceptibility_with_organism %>%
+  filter(
+    organism_category == "escherichia_coli",
+    antimicrobial_category == "ciprofloxacin"
+  ) %>%
+  mutate(
+    month = floor_date(collect_dttm, "month")
+  ) %>%
+  group_by(month) %>%
+  summarize(
+    n_tested = n(),
+    pct_resistant = mean(susceptibility_category == "non_susceptible", na.rm = TRUE) * 100,
+    .groups = "drop"
+  ) %>%
+  filter(n_tested >= 5)  # Only months with adequate sample size
+
+ggplot(resistance_trends, aes(x = month, y = pct_resistant)) +
+  geom_line(color = "red", size = 1) +
+  geom_point(size = 2) +
+  geom_smooth(method = "loess", se = TRUE, color = "blue") +
+  labs(
+    title = "E. coli Ciprofloxacin Resistance Over Time",
+    x = "Month",
+    y = "% Resistant"
+  ) +
+  theme_minimal()
+```
+
+# Combined Analyses
+
+## Infection Epidemiology
+
+```{r eval=FALSE}
+# Identify patients with positive cultures
+infected_patients <- culture$df %>%
+  filter(organism_category != "no_growth") %>%
+  distinct(patient_id, hospitalization_id)
+
+# Join with hospitalization outcomes
+hosp_data <- orchestrator$hospitalization$df
+
+infection_outcomes <- infected_patients %>%
+  inner_join(
+    hosp_data %>% select(hospitalization_id, hospital_expire_flag, length_of_stay_days),
+    by = "hospitalization_id"
+  )
+
+# Compare to non-infected patients
+infection_comparison <- hosp_data %>%
+  left_join(infected_patients, by = "hospitalization_id") %>%
+  mutate(has_positive_culture = !is.na(patient_id)) %>%
+  group_by(has_positive_culture) %>%
+  summarize(
+    n = n(),
+    mortality_rate = mean(hospital_expire_flag, na.rm = TRUE) * 100,
+    median_los = median(length_of_stay_days, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+print(infection_comparison)
+```
+
+## Sepsis Identification
+
+Combine blood culture results with clinical data:
+
+```{r eval=FALSE}
+# Patients with positive blood cultures (potential bacteremia/sepsis)
+bacteremia_patients <- blood_cultures %>%
+  filter(organism_category != "no_growth") %>%
+  group_by(hospitalization_id) %>%
+  summarize(
+    first_positive_blood_culture = min(collect_dttm),
+    organisms = paste(unique(organism_category), collapse = ", "),
+    .groups = "drop"
+  )
+
+# Could join with:
+# - Medication data (vasopressor timing)
+# - Labs (lactate levels)
+# - SOFA scores
+# To identify sepsis cohort
+```
+
+## Antibiotic Appropriateness
+
+Evaluate empiric vs. targeted therapy:
+
+```{r eval=FALSE}
+# This would require linking:
+# 1. Culture collection time
+# 2. Culture result time
+# 3. Antibiotic administration times
+# 4. Susceptibility results
+
+# Example framework:
+antibiotic_appropriateness <- culture$df %>%
+  filter(organism_category != "no_growth") %>%
+  select(hospitalization_id, organism_id, collect_dttm, result_dttm, organism_category)
+
+# Join with susceptibility
+appropriateness_data <- antibiotic_appropriateness %>%
+  inner_join(
+    susceptibility$df,
+    by = "organism_id"
+  )
+
+# Join with antibiotic administration (from medication_admin_intermittent)
+# Check if patient was on an appropriate antibiotic
+```
+
+# Quality Metrics
+
+## Culture Collection Compliance
+
+```{r eval=FALSE}
+# Cultures per admission
+cultures_per_admission <- culture$df %>%
+  group_by(hospitalization_id) %>%
+  summarize(
+    n_cultures = n(),
+    n_blood_cultures = sum(fluid_category == "blood_buffy"),
+    .groups = "drop"
+  )
+
+# How many admissions had blood cultures drawn?
+hosp_with_cultures <- hosp_data %>%
+  left_join(cultures_per_admission, by = "hospitalization_id") %>%
+  mutate(
+    had_blood_culture = !is.na(n_blood_cultures) & n_blood_cultures > 0
+  )
+
+blood_culture_rate <- mean(hosp_with_cultures$had_blood_culture, na.rm = TRUE) * 100
+cat(sprintf("%.1f%% of admissions had blood cultures\n", blood_culture_rate))
+```
+
+## Contamination Rates
+
+Identify likely contaminants in blood cultures:
+
+```{r eval=FALSE}
+# Common contaminants
+contaminants <- c(
+  "staphylococcus_epidermidis",
+  "staphylococcus_hominis",
+  "corynebacterium_sp",
+  "bacillus_sp",
+  "cutibacterium_acnes"
+)
+
+# Contamination rate
+blood_culture_contamination <- blood_cultures %>%
+  filter(organism_category != "no_growth") %>%
+  mutate(
+    likely_contaminant = organism_category %in% contaminants
+  ) %>%
+  summarize(
+    n_positive = n(),
+    n_contaminants = sum(likely_contaminant),
+    contamination_rate = n_contaminants / n_positive * 100
+  )
+
+print(blood_culture_contamination)
+```
+
+## Stewardship Metrics
+
+```{r eval=FALSE}
+# Days of therapy (DOT) per 1000 patient-days
+# This would require:
+# - Antibiotic administration data
+# - Total patient-days from hospitalization
+
+# Resistance rates for key organisms
+key_organism_resistance <- susceptibility_with_organism %>%
+  filter(organism_category %in% c(
+    "escherichia_coli",
+    "klebsiella_pneumoniae",
+    "pseudomonas_aeruginosa",
+    "staphylococcus_aureus"
+  )) %>%
+  group_by(organism_category) %>%
+  summarize(
+    n_tested = n(),
+    resistance_rate = mean(susceptibility_category == "non_susceptible", na.rm = TRUE) * 100,
+    .groups = "drop"
+  )
+
+print(key_organism_resistance)
+```
+
+# Summary
+
+This vignette covered:
+
+- Culture-based microbiology (blood cultures, respiratory cultures, organisms)
+- Non-culture molecular testing (COVID-19, C. diff)
+- Antibiotic susceptibility testing and antibiograms
+- Multi-drug resistant organisms
+- Infection epidemiology
+- Quality and stewardship metrics
+
+Microbiology data provides critical insights for infection control, antibiotic stewardship, and patient outcomes!
+
+# Session Info
+
+```{r eval=FALSE}
+sessionInfo()
+```

@@ -1,0 +1,355 @@
+---
+title: "Getting Started with clifR"
+author: "clifR Package"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting Started with clifR}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 7,
+  fig.height = 5
+)
+```
+
+# Introduction
+
+**clifR** is an R package for standardizing and analyzing critical care (ICU) data using the Common Longitudinal ICU data Format (CLIF) version 2.0. This vignette will walk you through the basics of loading, validating, and analyzing CLIF data.
+
+## What is CLIF?
+
+The Common Longitudinal ICU data Format (CLIF) is a standardized data format designed to:
+
+- Facilitate multi-center ICU research
+- Enable reproducible critical care analyses
+- Provide consistent data validation
+- Support common clinical calculations (SOFA, Charlson, etc.)
+
+CLIF 2.0 defines 20+ standardized tables covering:
+- Patient demographics
+- Hospitalizations and transfers
+- Vital signs and laboratory results
+- Medications and respiratory support
+- Microbiology and procedures
+- Clinical assessments and outcomes
+
+## Installation
+
+```{r eval=FALSE}
+# Install from GitHub
+devtools::install_github("AartikSarma/clifR")
+```
+
+## Loading the Package
+
+```{r eval=FALSE}
+library(clifR)
+library(dplyr)
+library(ggplot2)
+```
+
+# Quick Start
+
+## Loading Individual Tables
+
+The simplest way to work with CLIF data is to load individual tables:
+
+```{r eval=FALSE}
+# Load patient demographics
+patient <- Patient$new(
+  data_directory = "path/to/clif/data",
+  filetype = "csv",
+  timezone = "America/New_York"
+)
+
+# View the data
+head(patient$df)
+
+# Get summary statistics
+patient$summarize()
+```
+
+## Using the ClifOrchestrator
+
+For working with multiple tables, use the `ClifOrchestrator`:
+
+```{r eval=FALSE}
+# Initialize orchestrator
+orchestrator <- ClifOrchestrator$new(
+  data_directory = "path/to/clif/data",
+  filetype = "csv",
+  timezone = "America/New_York"
+)
+
+# Load multiple tables at once
+orchestrator$initialize_tables(
+  tables = c("patient", "hospitalization", "adt", "vitals", "labs"),
+  validate = TRUE
+)
+
+# Access individual tables
+patient_data <- orchestrator$patient$df
+vitals_data <- orchestrator$vitals$df
+labs_data <- orchestrator$labs$df
+```
+
+# Data Validation
+
+CLIF provides comprehensive data validation against the CLIF 2.0 specification.
+
+## Validating Individual Tables
+
+```{r eval=FALSE}
+# Validate a single table
+validation_results <- patient$validate()
+
+# Check validation status
+if (patient$is_valid()) {
+  message("Data is valid!")
+} else {
+  message("Validation errors found")
+  print(patient$validation_results$errors)
+}
+```
+
+## Validating All Tables
+
+```{r eval=FALSE}
+# Validate all loaded tables
+all_validations <- orchestrator$validate_all()
+
+# Export validation reports
+orchestrator$export_validation_reports(output_dir = "validation_reports")
+```
+
+## Understanding Validation Results
+
+Validation checks include:
+
+- **Required columns**: Are all required columns present?
+- **Data types**: Are columns the correct type (VARCHAR, DATETIME, FLOAT)?
+- **Categorical values**: Do values match permissible categories?
+- **Duplicates**: Are there duplicate records?
+- **Missing data**: What percentage of data is missing?
+- **Numeric ranges**: Are values within expected ranges?
+
+# Basic Data Exploration
+
+## Patient Demographics
+
+```{r eval=FALSE}
+# Get demographic summary
+patient$get_demographics_summary()
+
+# Calculate age at a specific date
+patient$calculate_age_at_date("2024-01-01")
+
+# Get mortality statistics
+deceased_patients <- patient$df %>%
+  filter(!is.na(death_dttm))
+
+mortality_rate <- nrow(deceased_patients) / nrow(patient$df)
+cat(sprintf("Mortality rate: %.1f%%\n", mortality_rate * 100))
+```
+
+## Hospitalization Analysis
+
+```{r eval=FALSE}
+hosp <- orchestrator$hospitalization
+
+# Calculate length of stay
+los_data <- hosp$calculate_length_of_stay(units = "days")
+
+# Summary statistics
+summary(los_data$length_of_stay)
+
+# Mortality rate
+mortality_rate <- hosp$get_mortality_rate()
+cat(sprintf("Hospital mortality: %.1f%%\n", mortality_rate * 100))
+```
+
+## ADT (Admission/Discharge/Transfer) Events
+
+```{r eval=FALSE}
+adt <- orchestrator$adt
+
+# Get ICU locations
+icu_stays <- adt$get_icu_locations()
+
+# Filter by location type
+ed_events <- adt$filter_by_location("ed")
+icu_events <- adt$filter_by_location("icu")
+
+# Count events per hospitalization
+adt$df %>%
+  group_by(hospitalization_id) %>%
+  summarize(
+    n_transfers = n(),
+    unique_locations = n_distinct(location_category)
+  )
+```
+
+# Working with Clinical Data
+
+## Vital Signs
+
+```{r eval=FALSE}
+vitals <- orchestrator$vitals
+
+# Get specific vital sign
+temperature <- vitals$filter_by_category("temp_c")
+heart_rate <- vitals$filter_by_category("heart_rate")
+
+# Calculate mean arterial pressure (MAP)
+map_data <- vitals$calculate_map()
+
+# Summary for specific vital
+vitals$get_vital_summary("spo2")
+```
+
+## Laboratory Results
+
+```{r eval=FALSE}
+labs <- orchestrator$labs
+
+# Get specific lab results
+creatinine <- labs$filter_by_category("creatinine")
+sodium <- labs$filter_by_category("sodium")
+
+# Lab summary
+labs$get_lab_summary("creatinine")
+
+# Abnormal values
+abnormal_cr <- creatinine %>%
+  filter(lab_result_numeric > 1.2)  # Abnormal creatinine
+```
+
+# Data Visualization Examples
+
+## Length of Stay Distribution
+
+```{r eval=FALSE}
+los_data <- orchestrator$hospitalization$calculate_length_of_stay("days")
+
+ggplot(los_data, aes(x = length_of_stay)) +
+  geom_histogram(bins = 30, fill = "steelblue", color = "white") +
+  labs(
+    title = "Hospital Length of Stay Distribution",
+    x = "Length of Stay (days)",
+    y = "Count"
+  ) +
+  theme_minimal()
+```
+
+## Vital Signs Over Time
+
+```{r eval=FALSE}
+# Select one patient
+patient_vitals <- vitals$df %>%
+  filter(hospitalization_id == "example_id") %>%
+  filter(vital_category %in% c("temp_c", "heart_rate", "sbp"))
+
+ggplot(patient_vitals, aes(x = recorded_dttm, y = vital_value, color = vital_category)) +
+  geom_line() +
+  facet_wrap(~vital_category, scales = "free_y", ncol = 1) +
+  labs(
+    title = "Vital Signs Over Time",
+    x = "Time",
+    y = "Value"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "none")
+```
+
+# Encounter Stitching
+
+Link related hospitalizations (e.g., readmissions within 24 hours):
+
+```{r eval=FALSE}
+orchestrator <- ClifOrchestrator$new(
+  data_directory = "path/to/data",
+  stitch_encounter = TRUE,
+  stitch_time_interval = 24  # hours
+)
+
+# Encounter mapping
+encounter_map <- orchestrator$encounter_mapping
+
+# Shows original -> stitched hospitalization_id mappings
+head(encounter_map)
+```
+
+# Exporting Data
+
+## Save to Different Formats
+
+```{r eval=FALSE}
+# Save as CSV
+patient$save_data(
+  filepath = "output/patient_cleaned.csv",
+  format = "csv"
+)
+
+# Save as Parquet
+patient$save_data(
+  filepath = "output/patient_cleaned.parquet",
+  format = "parquet"
+)
+
+# Export to JSON
+export_to_json(
+  data = patient$df,
+  filepath = "output/patient.json"
+)
+```
+
+# Summary Statistics
+
+Get comprehensive summary of all loaded tables:
+
+```{r eval=FALSE}
+# Overall summary
+orchestrator$summary()
+
+# Generate analysis report
+report <- orchestrator$generate_analysis_report(
+  include_sofa = FALSE,
+  include_charlson = FALSE,
+  output_file = "analysis_report.rds"
+)
+
+# Access report components
+report$summary
+report$validation
+```
+
+# Next Steps
+
+Now that you understand the basics, explore these advanced topics:
+
+- **Vitals and Labs Analysis**: Deep dive into clinical measurements
+- **Clinical Scores**: Calculate SOFA and Charlson scores
+- **Medication Analysis**: Track vasopressors, sedation, and antibiotics
+- **Wide Datasets**: Transform data for time-series analysis
+- **Advanced Features**: Respiratory support, microbiology, assessments
+
+See the other vignettes for detailed examples of these workflows!
+
+# Additional Resources
+
+- **CLIF Specification**: https://clif-icu.com/data-dictionary
+- **GitHub Repository**: https://github.com/AartikSarma/clifR
+- **Python clifpy**: https://github.com/Common-Longitudinal-ICU-data-Format/clifpy
+- **CLIF Consortium**: https://clif-icu.com/
+
+# Session Info
+
+```{r eval=FALSE}
+sessionInfo()
+```

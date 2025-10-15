@@ -1,0 +1,590 @@
+---
+title: "Working with Vitals and Labs"
+author: "clifR Package"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Working with Vitals and Labs}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 7,
+  fig.height = 5
+)
+```
+
+# Introduction
+
+This vignette demonstrates how to work with vital signs and laboratory results in the CLIF format. These are the most frequently collected clinical measurements in the ICU and form the foundation for many clinical calculations.
+
+# Setup
+
+```{r eval=FALSE}
+library(clifR)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(lubridate)
+
+# Initialize orchestrator
+orchestrator <- ClifOrchestrator$new(
+  data_directory = "path/to/clif/data",
+  filetype = "csv",
+  timezone = "America/New_York"
+)
+
+# Load vitals and labs
+orchestrator$initialize_tables(
+  tables = c("patient", "hospitalization", "vitals", "labs"),
+  validate = TRUE
+)
+```
+
+# Vital Signs Overview
+
+## Available Vital Categories
+
+CLIF supports the following vital sign categories:
+
+- `temp_c` - Temperature (Celsius)
+- `heart_rate` - Heart rate (beats per minute)
+- `sbp` - Systolic blood pressure (mmHg)
+- `dbp` - Diastolic blood pressure (mmHg)
+- `map` - Mean arterial pressure (mmHg)
+- `resp_rate` - Respiratory rate (breaths per minute)
+- `spo2` - Oxygen saturation (%)
+- `weight_kg` - Weight (kilograms)
+
+## Basic Vital Signs Analysis
+
+```{r eval=FALSE}
+vitals <- orchestrator$vitals
+
+# View data structure
+head(vitals$df)
+
+# Get summary of all vitals
+vitals$summarize()
+
+# Count measurements by category
+vitals$df %>%
+  group_by(vital_category) %>%
+  summarize(
+    n_measurements = n(),
+    n_hospitalizations = n_distinct(hospitalization_id)
+  ) %>%
+  arrange(desc(n_measurements))
+```
+
+## Working with Specific Vital Signs
+
+### Temperature
+
+```{r eval=FALSE}
+# Get all temperature measurements
+temp_data <- vitals$filter_by_category("temp_c")
+
+# Summary statistics
+temp_summary <- vitals$get_vital_summary("temp_c")
+print(temp_summary)
+
+# Identify fevers (>38.3°C)
+fevers <- temp_data %>%
+  filter(vital_value > 38.3) %>%
+  select(hospitalization_id, recorded_dttm, vital_value)
+
+# Hypothermia (<36°C)
+hypothermia <- temp_data %>%
+  filter(vital_value < 36)
+```
+
+### Blood Pressure
+
+```{r eval=FALSE}
+# Get systolic and diastolic BP
+sbp_data <- vitals$filter_by_category("sbp")
+dbp_data <- vitals$filter_by_category("dbp")
+
+# Calculate MAP from SBP and DBP
+map_calculated <- vitals$calculate_map()
+
+# Hypotension (MAP < 65 mmHg)
+hypotension <- map_calculated %>%
+  filter(map < 65) %>%
+  select(hospitalization_id, recorded_dttm, sbp, dbp, map)
+
+# Hypertensive episodes (SBP > 180 mmHg)
+hypertension <- sbp_data %>%
+  filter(vital_value > 180)
+```
+
+### Heart Rate
+
+```{r eval=FALSE}
+hr_data <- vitals$filter_by_category("heart_rate")
+
+# Tachycardia (HR > 100)
+tachycardia <- hr_data %>%
+  filter(vital_value > 100)
+
+# Bradycardia (HR < 60)
+bradycardia <- hr_data %>%
+  filter(vital_value < 60)
+
+# Summary by hospitalization
+hr_summary <- hr_data %>%
+  group_by(hospitalization_id) %>%
+  summarize(
+    mean_hr = mean(vital_value, na.rm = TRUE),
+    min_hr = min(vital_value, na.rm = TRUE),
+    max_hr = max(vital_value, na.rm = TRUE),
+    n_measurements = n()
+  )
+```
+
+### Oxygen Saturation
+
+```{r eval=FALSE}
+spo2_data <- vitals$filter_by_category("spo2")
+
+# Hypoxemia (SpO2 < 90%)
+hypoxemia <- spo2_data %>%
+  filter(vital_value < 90)
+
+# Calculate time with hypoxemia per hospitalization
+hypoxemia_time <- spo2_data %>%
+  arrange(hospitalization_id, recorded_dttm) %>%
+  group_by(hospitalization_id) %>%
+  mutate(
+    time_diff = as.numeric(difftime(lead(recorded_dttm), recorded_dttm, units = "hours")),
+    is_hypoxemic = vital_value < 90
+  ) %>%
+  filter(is_hypoxemic) %>%
+  summarize(
+    hours_hypoxemic = sum(time_diff, na.rm = TRUE),
+    n_hypoxemic_episodes = n()
+  )
+```
+
+# Laboratory Results Overview
+
+## Available Lab Categories
+
+Common CLIF lab categories include:
+
+**Chemistry:**
+- `sodium`, `potassium`, `chloride`, `bicarbonate`
+- `creatinine`, `bun` (blood urea nitrogen)
+- `glucose`
+- `calcium`, `magnesium`, `phosphate`
+
+**Hematology:**
+- `hemoglobin`, `hematocrit`
+- `wbc` (white blood cell count)
+- `platelet`
+
+**Liver:**
+- `bilirubin_total`, `bilirubin_direct`
+- `ast`, `alt`, `alkaline_phosphatase`
+
+**Coagulation:**
+- `inr`, `pt`, `ptt`
+
+**Blood Gas:**
+- `pao2`, `paco2`, `ph`
+- `lactate`
+
+## Basic Lab Analysis
+
+```{r eval=FALSE}
+labs <- orchestrator$labs
+
+# View data structure
+head(labs$df)
+
+# Get summary
+labs$summarize()
+
+# Count by lab category
+labs$df %>%
+  group_by(lab_category) %>%
+  summarize(
+    n_results = n(),
+    n_hospitalizations = n_distinct(hospitalization_id)
+  ) %>%
+  arrange(desc(n_results))
+```
+
+## Renal Function
+
+```{r eval=FALSE}
+# Creatinine
+creatinine <- labs$filter_by_category("creatinine")
+
+cr_summary <- labs$get_lab_summary("creatinine")
+print(cr_summary)
+
+# Acute kidney injury (Cr > 1.5 mg/dL)
+aki <- creatinine %>%
+  filter(lab_result_numeric > 1.5) %>%
+  select(hospitalization_id, lab_result_dttm, lab_result_numeric)
+
+# Track creatinine changes over time
+cr_trends <- creatinine %>%
+  arrange(hospitalization_id, lab_result_dttm) %>%
+  group_by(hospitalization_id) %>%
+  mutate(
+    baseline_cr = first(lab_result_numeric),
+    cr_change = lab_result_numeric - baseline_cr,
+    cr_fold_change = lab_result_numeric / baseline_cr
+  )
+
+# KDIGO stage 1 AKI (1.5x baseline)
+kdigo_stage1 <- cr_trends %>%
+  filter(cr_fold_change >= 1.5)
+```
+
+## Electrolytes
+
+```{r eval=FALSE}
+# Sodium
+sodium <- labs$filter_by_category("sodium")
+
+# Hyponatremia (Na < 135 mEq/L)
+hyponatremia <- sodium %>%
+  filter(lab_result_numeric < 135)
+
+# Hypernatremia (Na > 145 mEq/L)
+hypernatremia <- sodium %>%
+  filter(lab_result_numeric > 145)
+
+# Potassium
+potassium <- labs$filter_by_category("potassium")
+
+# Hypokalemia (K < 3.5 mEq/L)
+hypokalemia <- potassium %>%
+  filter(lab_result_numeric < 3.5)
+
+# Hyperkalemia (K > 5.5 mEq/L)
+hyperkalemia <- potassium %>%
+  filter(lab_result_numeric > 5.5)
+```
+
+## Hematology
+
+```{r eval=FALSE}
+# White blood cell count
+wbc <- labs$filter_by_category("wbc")
+
+# Leukocytosis (WBC > 12,000/μL)
+leukocytosis <- wbc %>%
+  filter(lab_result_numeric > 12)
+
+# Leukopenia (WBC < 4,000/μL)
+leukopenia <- wbc %>%
+  filter(lab_result_numeric < 4)
+
+# Platelets
+platelets <- labs$filter_by_category("platelet")
+
+# Thrombocytopenia (Plt < 150,000/μL)
+thrombocytopenia <- platelets %>%
+  filter(lab_result_numeric < 150)
+
+# Severe thrombocytopenia (Plt < 50,000/μL)
+severe_tcp <- platelets %>%
+  filter(lab_result_numeric < 50)
+
+# Hemoglobin
+hemoglobin <- labs$filter_by_category("hemoglobin")
+
+# Anemia (Hgb < 10 g/dL)
+anemia <- hemoglobin %>%
+  filter(lab_result_numeric < 10)
+```
+
+## Liver Function
+
+```{r eval=FALSE}
+# Bilirubin
+bilirubin <- labs$filter_by_category("bilirubin_total")
+
+# Hyperbilirubinemia (total bili > 2 mg/dL)
+hyperbili <- bilirubin %>%
+  filter(lab_result_numeric > 2)
+
+# AST and ALT
+ast <- labs$filter_by_category("ast")
+alt <- labs$filter_by_category("alt")
+
+# Transaminitis (AST or ALT > 100 U/L)
+elevated_ast <- ast %>%
+  filter(lab_result_numeric > 100)
+
+elevated_alt <- alt %>%
+  filter(lab_result_numeric > 100)
+```
+
+## Blood Gas Analysis
+
+```{r eval=FALSE}
+# pH
+ph <- labs$filter_by_category("ph")
+
+# Acidemia (pH < 7.35)
+acidemia <- ph %>%
+  filter(lab_result_numeric < 7.35)
+
+# Alkalemia (pH > 7.45)
+alkalemia <- ph %>%
+  filter(lab_result_numeric > 7.45)
+
+# Lactate
+lactate <- labs$filter_by_category("lactate")
+
+# Elevated lactate (> 2 mmol/L)
+hyperlactatemia <- lactate %>%
+  filter(lab_result_numeric > 2)
+
+# Severe lactic acidosis (> 4 mmol/L)
+severe_lactic_acidosis <- lactate %>%
+  filter(lab_result_numeric > 4)
+```
+
+# Combined Vital and Lab Analysis
+
+## Shock Index
+
+Calculate shock index (HR / SBP):
+
+```{r eval=FALSE}
+# Get HR and SBP measurements
+hr <- vitals$filter_by_category("heart_rate")
+sbp <- vitals$filter_by_category("sbp")
+
+# Match measurements within 1 hour
+shock_index_data <- hr %>%
+  inner_join(
+    sbp,
+    by = "hospitalization_id",
+    suffix = c("_hr", "_sbp")
+  ) %>%
+  filter(abs(difftime(recorded_dttm_hr, recorded_dttm_sbp, units = "hours")) <= 1) %>%
+  mutate(
+    shock_index = vital_value_hr / vital_value_sbp,
+    time_avg = recorded_dttm_hr  # Use HR time as reference
+  )
+
+# Elevated shock index (>0.9) suggests shock
+elevated_si <- shock_index_data %>%
+  filter(shock_index > 0.9)
+```
+
+## P/F Ratio (PaO2/FiO2)
+
+For respiratory support analysis (see respiratory support vignette for detailed examples):
+
+```{r eval=FALSE}
+# This requires respiratory_support table for FiO2
+# See the respiratory support vignette for comprehensive P/F ratio calculation
+```
+
+# Temporal Analysis
+
+## Measurements Over Time
+
+```{r eval=FALSE}
+# Select one hospitalization for visualization
+example_hosp_id <- vitals$df$hospitalization_id[1]
+
+# Get vitals for this patient
+patient_vitals <- vitals$df %>%
+  filter(hospitalization_id == example_hosp_id) %>%
+  filter(vital_category %in% c("temp_c", "heart_rate", "sbp", "spo2"))
+
+# Plot vitals over time
+ggplot(patient_vitals, aes(x = recorded_dttm, y = vital_value, color = vital_category)) +
+  geom_line() +
+  geom_point(size = 1) +
+  facet_wrap(~vital_category, scales = "free_y", ncol = 1) +
+  labs(
+    title = paste("Vital Signs Over Time -", example_hosp_id),
+    x = "Time",
+    y = "Value",
+    color = "Vital Sign"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+```
+
+## Lab Trends
+
+```{r eval=FALSE}
+# Track creatinine over time for one patient
+patient_cr <- creatinine %>%
+  filter(hospitalization_id == example_hosp_id)
+
+ggplot(patient_cr, aes(x = lab_result_dttm, y = lab_result_numeric)) +
+  geom_line(color = "steelblue") +
+  geom_point(size = 2) +
+  geom_hline(yintercept = 1.2, linetype = "dashed", color = "red") +
+  annotate("text", x = min(patient_cr$lab_result_dttm), y = 1.2,
+           label = "Upper normal limit", vjust = -0.5, color = "red") +
+  labs(
+    title = "Creatinine Trend",
+    x = "Time",
+    y = "Creatinine (mg/dL)"
+  ) +
+  theme_minimal()
+```
+
+# Identifying Outliers
+
+## Statistical Outliers
+
+```{r eval=FALSE}
+# Identify outliers using IQR method
+identify_outliers <- function(data, value_col = "vital_value") {
+  q1 <- quantile(data[[value_col]], 0.25, na.rm = TRUE)
+  q3 <- quantile(data[[value_col]], 0.75, na.rm = TRUE)
+  iqr <- q3 - q1
+
+  data %>%
+    mutate(
+      is_outlier = !!sym(value_col) < (q1 - 1.5 * iqr) |
+                   !!sym(value_col) > (q3 + 1.5 * iqr)
+    )
+}
+
+# Find temperature outliers
+temp_with_outliers <- identify_outliers(temp_data)
+
+temp_outliers <- temp_with_outliers %>%
+  filter(is_outlier)
+
+# Visualize with outliers highlighted
+ggplot(temp_with_outliers, aes(x = recorded_dttm, y = vital_value)) +
+  geom_point(aes(color = is_outlier), alpha = 0.5) +
+  scale_color_manual(values = c("FALSE" = "gray", "TRUE" = "red")) +
+  labs(
+    title = "Temperature Measurements with Outliers",
+    x = "Time",
+    y = "Temperature (°C)",
+    color = "Outlier"
+  ) +
+  theme_minimal()
+```
+
+## Clinical Outliers
+
+```{r eval=FALSE}
+# Define clinically implausible values
+check_vital_plausibility <- function(vital_data, category) {
+
+  limits <- list(
+    temp_c = c(min = 32, max = 42),
+    heart_rate = c(min = 20, max = 220),
+    sbp = c(min = 40, max = 250),
+    dbp = c(min = 20, max = 150),
+    resp_rate = c(min = 4, max = 60),
+    spo2 = c(min = 50, max = 100)
+  )
+
+  if (category %in% names(limits)) {
+    vital_data %>%
+      mutate(
+        implausible = vital_value < limits[[category]]["min"] |
+                      vital_value > limits[[category]]["max"]
+      )
+  } else {
+    vital_data %>%
+      mutate(implausible = FALSE)
+  }
+}
+
+# Check heart rate plausibility
+hr_checked <- check_vital_plausibility(hr_data, "heart_rate")
+
+implausible_hr <- hr_checked %>%
+  filter(implausible)
+
+cat(sprintf("Found %d implausible heart rate values\n", nrow(implausible_hr)))
+```
+
+# Data Quality Assessment
+
+## Measurement Frequency
+
+```{r eval=FALSE}
+# Calculate measurement frequency per hospitalization
+vital_frequency <- vitals$df %>%
+  arrange(hospitalization_id, vital_category, recorded_dttm) %>%
+  group_by(hospitalization_id, vital_category) %>%
+  mutate(
+    time_since_last = as.numeric(
+      difftime(recorded_dttm, lag(recorded_dttm), units = "hours")
+    )
+  ) %>%
+  summarize(
+    n_measurements = n(),
+    median_interval_hours = median(time_since_last, na.rm = TRUE),
+    mean_interval_hours = mean(time_since_last, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+# Summary by vital category
+frequency_summary <- vital_frequency %>%
+  group_by(vital_category) %>%
+  summarize(
+    avg_measurements_per_hosp = mean(n_measurements),
+    median_measurement_interval = median(median_interval_hours, na.rm = TRUE)
+  )
+
+print(frequency_summary)
+```
+
+## Missing Data Patterns
+
+```{r eval=FALSE}
+# Count measurements by hospitalization and category
+measurement_matrix <- vitals$df %>%
+  group_by(hospitalization_id, vital_category) %>%
+  summarize(n = n(), .groups = "drop") %>%
+  pivot_wider(
+    names_from = vital_category,
+    values_from = n,
+    values_fill = 0
+  )
+
+# Identify which vitals are consistently missing together
+correlation_missing <- measurement_matrix %>%
+  select(-hospitalization_id) %>%
+  mutate(across(everything(), ~as.numeric(. == 0))) %>%
+  cor(use = "pairwise.complete.obs")
+
+print(correlation_missing)
+```
+
+# Summary
+
+This vignette covered:
+
+- Basic vital signs analysis (temperature, BP, HR, SpO2)
+- Laboratory results (renal, electrolytes, hematology, liver, blood gas)
+- Combined analyses (shock index)
+- Temporal trends and visualization
+- Outlier detection
+- Data quality assessment
+
+For clinical score calculations using vitals and labs (like SOFA), see the "Clinical Scores" vignette!
+
+# Session Info
+
+```{r eval=FALSE}
+sessionInfo()
+```

@@ -1,0 +1,680 @@
+---
+title: "Medication Analysis"
+author: "clifR Package"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Medication Analysis}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 7,
+  fig.height = 5
+)
+```
+
+# Introduction
+
+This vignette demonstrates how to analyze medication administration data in CLIF format, with focus on:
+
+- Continuous infusions (vasopressors, sedation, insulin)
+- Intermittent medications (antibiotics, PRN medications)
+- Time-to-treatment metrics
+- Dose calculations and unit conversions
+
+# Setup
+
+```{r eval=FALSE}
+library(clifR)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(lubridate)
+
+# Initialize orchestrator
+orchestrator <- ClifOrchestrator$new(
+  data_directory = "path/to/clif/data",
+  filetype = "csv",
+  timezone = "America/New_York"
+)
+
+# Load medication tables
+orchestrator$initialize_tables(
+  tables = c(
+    "patient", "hospitalization", "adt",
+    "medication_admin_continuous",
+    "medication_admin_intermittent"
+  ),
+  validate = TRUE
+)
+```
+
+# Continuous Medications
+
+## Available Medication Groups
+
+CLIF organizes continuous medications into groups:
+
+**Vasoactive medications:**
+- Vasopressors (norepinephrine, epinephrine, vasopressin, phenylephrine)
+- Inotropes (dobutamine, dopamine, milrinone)
+
+**Sedation:**
+- Propofol
+- Dexmedetomidine
+- Midazolam
+- Lorazepam
+
+**Analgesia:**
+- Fentanyl
+- Morphine
+- Hydromorphone
+
+**Other:**
+- Insulin
+- Neuromuscular blockers
+- Diuretics (furosemide infusion)
+
+## Basic Medication Administration Analysis
+
+```{r eval=FALSE}
+med_continuous <- orchestrator$medication_admin_continuous
+
+# View data structure
+head(med_continuous$df)
+
+# Get summary
+med_continuous$summarize()
+
+# Medication distribution
+med_distribution <- med_continuous$get_medication_summary(by_category = TRUE)
+print(med_distribution)
+```
+
+## Vasopressor Analysis
+
+### Norepinephrine
+
+```{r eval=FALSE}
+# Get norepinephrine administration
+norepi <- med_continuous$filter_by_medication("norepinephrine")
+
+# Summary
+norepi_summary <- med_continuous$get_vasopressor_summary()
+print(norepi_summary)
+
+# Dose distribution
+summary(norepi$dose)
+
+# Patients on high-dose norepinephrine (>0.3 mcg/kg/min)
+high_dose_norepi <- norepi %>%
+  filter(
+    dose_unit == "mcg/kg/min",
+    dose > 0.3
+  )
+
+cat(sprintf("%d high-dose norepinephrine observations\n", nrow(high_dose_norepi)))
+```
+
+### Multiple Vasopressors
+
+Identify patients on multiple vasopressors (indicator of refractory shock):
+
+```{r eval=FALSE}
+# Get all vasopressor medications
+vasopressors <- med_continuous$get_vasopressor_summary()
+
+# Count concurrent vasopressors per hospitalization
+multi_pressors <- med_continuous$df %>%
+  filter(med_group == "vasoactives") %>%
+  group_by(hospitalization_id, recorded_dttm) %>%
+  summarize(
+    n_vasopressors = n_distinct(med_category),
+    vasopressor_list = paste(unique(med_category), collapse = ", "),
+    .groups = "drop"
+  ) %>%
+  filter(n_vasopressors >= 2)
+
+# How many patients were on multiple vasopressors?
+multi_pressor_patients <- n_distinct(multi_pressors$hospitalization_id)
+cat(sprintf("%d patients on multiple vasopressors\n", multi_pressor_patients))
+
+# Most common combinations
+vasopressor_combinations <- multi_pressors %>%
+  group_by(vasopressor_list) %>%
+  summarize(n = n(), .groups = "drop") %>%
+  arrange(desc(n))
+
+print(vasopressor_combinations)
+```
+
+### Vasopressor Duration
+
+```{r eval=FALSE}
+# Calculate duration of vasopressor support
+vaso_duration <- med_continuous$calculate_medication_duration(
+  med_category = "norepinephrine"
+)
+
+# Summary statistics
+summary(vaso_duration$duration_hours)
+
+# Join with outcomes
+hosp_data <- orchestrator$hospitalization$df
+
+vaso_with_outcomes <- vaso_duration %>%
+  inner_join(
+    hosp_data %>% select(hospitalization_id, hospital_expire_flag),
+    by = "hospitalization_id"
+  )
+
+# Duration by outcome
+vaso_duration_by_outcome <- vaso_with_outcomes %>%
+  group_by(hospital_expire_flag) %>%
+  summarize(
+    n = n(),
+    median_hours = median(duration_hours, na.rm = TRUE),
+    mean_hours = mean(duration_hours, na.rm = TRUE)
+  )
+
+print(vaso_duration_by_outcome)
+```
+
+## Sedation Analysis
+
+### Propofol
+
+```{r eval=FALSE}
+# Get propofol administration
+propofol <- med_continuous$filter_by_medication("propofol")
+
+# Sedation summary
+sedation_summary <- med_continuous$get_sedation_summary()
+print(sedation_summary)
+
+# High-dose propofol (>50 mcg/kg/min)
+high_dose_propofol <- propofol %>%
+  filter(
+    dose_unit == "mcg/kg/min",
+    dose > 50
+  )
+
+# Propofol infusion syndrome risk (dose >83 mcg/kg/min for >48 hours)
+propofol_syndrome_risk <- propofol %>%
+  filter(
+    dose_unit == "mcg/kg/min",
+    dose > 83
+  ) %>%
+  group_by(hospitalization_id) %>%
+  summarize(
+    first_high_dose = min(recorded_dttm),
+    last_high_dose = max(recorded_dttm),
+    hours_high_dose = as.numeric(
+      difftime(last_high_dose, first_high_dose, units = "hours")
+    ),
+    .groups = "drop"
+  ) %>%
+  filter(hours_high_dose > 48)
+
+cat(sprintf("%d patients at risk for propofol infusion syndrome\n",
+            nrow(propofol_syndrome_risk)))
+```
+
+### Dexmedetomidine
+
+```{r eval=FALSE}
+# Get dexmedetomidine
+dex <- med_continuous$filter_by_medication("dexmedetomidine")
+
+# Typical dosing range: 0.2-1.5 mcg/kg/hr
+dose_analysis <- dex %>%
+  filter(dose_unit == "mcg/kg/hr") %>%
+  summarize(
+    median_dose = median(dose, na.rm = TRUE),
+    pct_below_range = mean(dose < 0.2, na.rm = TRUE) * 100,
+    pct_above_range = mean(dose > 1.5, na.rm = TRUE) * 100
+  )
+
+print(dose_analysis)
+```
+
+## Insulin Infusion
+
+```{r eval=FALSE}
+# Get insulin infusions
+insulin <- med_continuous$filter_by_medication("insulin")
+
+# Dose distribution (units/hr)
+insulin_by_hosp <- insulin %>%
+  group_by(hospitalization_id) %>%
+  summarize(
+    median_rate = median(dose, na.rm = TRUE),
+    max_rate = max(dose, na.rm = TRUE),
+    duration_hours = n(),  # Assuming hourly documentation
+    .groups = "drop"
+  )
+
+summary(insulin_by_hosp$median_rate)
+```
+
+## Dose Unit Conversion
+
+Convert all vasopressor doses to mcg/kg/min:
+
+```{r eval=FALSE}
+# Example: Convert all vasopressor doses to standard units
+# Requires patient weight data
+
+target_units <- list(
+  norepinephrine = "mcg/kg/min",
+  epinephrine = "mcg/kg/min",
+  vasopressin = "units/min",
+  dobutamine = "mcg/kg/min"
+)
+
+# This would use the unit converter utility
+# See unit_converter.R for full functionality
+```
+
+# Intermittent Medications
+
+## Available Medication Groups
+
+**Antimicrobials:**
+- Antibiotics (various classes)
+- Antivirals
+- Antifungals
+
+**Analgesics:**
+- Opioids
+- NSAIDs
+- Acetaminophen
+
+**Anticoagulation:**
+- Heparin (subcutaneous)
+- Enoxaparin
+- Others
+
+## Basic Intermittent Medication Analysis
+
+```{r eval=FALSE}
+med_intermittent <- orchestrator$medication_admin_intermittent
+
+# View data structure
+head(med_intermittent$df)
+
+# Get summary
+med_intermittent$summarize()
+
+# Medication distribution
+med_int_distribution <- med_intermittent$get_medication_summary(by_category = TRUE)
+print(med_int_distribution)
+```
+
+## Antibiotic Analysis
+
+### All Antibiotics
+
+```{r eval=FALSE}
+# Get all antibiotic administrations
+antibiotics <- med_intermittent$get_antibiotics()
+
+# Summary
+abx_summary <- med_intermittent$get_antibiotic_summary()
+print(abx_summary)
+
+# Most common antibiotics
+top_antibiotics <- antibiotics %>%
+  group_by(med_category) %>%
+  summarize(
+    n_doses = n(),
+    n_patients = n_distinct(hospitalization_id),
+    .groups = "drop"
+  ) %>%
+  arrange(desc(n_doses)) %>%
+  head(10)
+
+print(top_antibiotics)
+```
+
+### Time to First Antibiotic
+
+Critical metric for sepsis care (should be <1 hour):
+
+```{r eval=FALSE}
+# Get hospitalization admission times
+hosp_data <- orchestrator$hospitalization$df
+
+# Calculate time to first antibiotic
+time_to_abx <- med_intermittent$calculate_time_to_antibiotic(
+  reference_time_col = "admission_dttm",
+  hospitalization_data = hosp_data
+)
+
+# Summary statistics
+summary(time_to_abx$time_to_antibiotic_hours)
+
+# Performance metrics
+abx_metrics <- time_to_abx %>%
+  summarize(
+    n_patients = n(),
+    median_time_hours = median(time_to_antibiotic_hours, na.rm = TRUE),
+    pct_within_1hr = mean(time_to_antibiotic_hours <= 1, na.rm = TRUE) * 100,
+    pct_within_3hr = mean(time_to_antibiotic_hours <= 3, na.rm = TRUE) * 100
+  )
+
+print(abx_metrics)
+
+# Visualize distribution
+ggplot(time_to_abx, aes(x = time_to_antibiotic_hours)) +
+  geom_histogram(bins = 30, fill = "steelblue", color = "white") +
+  geom_vline(xintercept = 1, linetype = "dashed", color = "red") +
+  geom_vline(xintercept = 3, linetype = "dashed", color = "orange") +
+  labs(
+    title = "Time to First Antibiotic",
+    x = "Hours from Admission",
+    y = "Count"
+  ) +
+  theme_minimal()
+```
+
+### Antibiotic Duration
+
+```{r eval=FALSE}
+# Calculate days of antibiotic therapy per hospitalization
+abx_duration <- antibiotics %>%
+  group_by(hospitalization_id) %>%
+  summarize(
+    first_dose = min(admin_dttm, na.rm = TRUE),
+    last_dose = max(admin_dttm, na.rm = TRUE),
+    n_doses = n(),
+    n_unique_antibiotics = n_distinct(med_category),
+    .groups = "drop"
+  ) %>%
+  mutate(
+    treatment_days = as.numeric(difftime(last_dose, first_dose, units = "days"))
+  )
+
+# Summary
+summary(abx_duration$treatment_days)
+
+# Prolonged antibiotic courses (>7 days)
+prolonged_abx <- abx_duration %>%
+  filter(treatment_days > 7)
+
+cat(sprintf("%d patients with prolonged antibiotic courses\n",
+            nrow(prolonged_abx)))
+```
+
+### Broad-Spectrum Antibiotics
+
+Identify patients on broad-spectrum coverage:
+
+```{r eval=FALSE}
+# Define broad-spectrum antibiotics (example)
+broad_spectrum <- c(
+  "piperacillin_tazobactam",
+  "meropenem",
+  "imipenem",
+  "cefepime",
+  "vancomycin"
+)
+
+# Find patients on broad-spectrum antibiotics
+broad_spec_patients <- antibiotics %>%
+  filter(med_category %in% broad_spectrum) %>%
+  distinct(hospitalization_id)
+
+cat(sprintf("%d patients received broad-spectrum antibiotics\n",
+            nrow(broad_spec_patients)))
+```
+
+## Administration Frequency
+
+Analyze medication administration frequency:
+
+```{r eval=FALSE}
+# Calculate administration frequency for specific medication
+# Example: Scheduled acetaminophen (every 4-6 hours)
+
+acetaminophen_freq <- med_intermittent$calculate_administration_frequency(
+  med_category = "acetaminophen",
+  time_window_hours = 24
+)
+
+# Summary
+summary(acetaminophen_freq$doses_per_window)
+```
+
+# Combined Continuous and Intermittent Analysis
+
+## Sedation Strategy
+
+Combine continuous and intermittent sedation:
+
+```{r eval=FALSE}
+# Continuous sedation
+continuous_sedation <- med_continuous$df %>%
+  filter(med_group == "sedation") %>%
+  select(hospitalization_id, recorded_dttm, med_category, dose, dose_unit) %>%
+  mutate(admin_type = "continuous")
+
+# Intermittent sedation/analgesia
+intermittent_sedation <- med_intermittent$df %>%
+  filter(med_group %in% c("sedation", "analgesia")) %>%
+  select(hospitalization_id, admin_dttm, med_category, dose, dose_unit) %>%
+  rename(recorded_dttm = admin_dttm) %>%
+  mutate(admin_type = "intermittent")
+
+# Combine
+all_sedation <- bind_rows(continuous_sedation, intermittent_sedation)
+
+# Patients with both continuous and intermittent
+sedation_patterns <- all_sedation %>%
+  group_by(hospitalization_id, admin_type) %>%
+  summarize(n = n(), .groups = "drop") %>%
+  pivot_wider(
+    names_from = admin_type,
+    values_from = n,
+    values_fill = 0
+  ) %>%
+  mutate(
+    strategy = case_when(
+      continuous > 0 & intermittent > 0 ~ "Combined",
+      continuous > 0 ~ "Continuous only",
+      intermittent > 0 ~ "Intermittent only"
+    )
+  )
+
+table(sedation_patterns$strategy)
+```
+
+## Antibiotic-Vasopressor Relationship
+
+Analyze timing of antibiotics relative to vasopressor initiation (sepsis):
+
+```{r eval=FALSE}
+# First vasopressor time
+first_vasopressor <- med_continuous$df %>%
+  filter(med_group == "vasoactives") %>%
+  group_by(hospitalization_id) %>%
+  summarize(
+    first_vasopressor_dttm = min(recorded_dttm),
+    .groups = "drop"
+  )
+
+# First antibiotic time
+first_antibiotic <- antibiotics %>%
+  group_by(hospitalization_id) %>%
+  summarize(
+    first_antibiotic_dttm = min(admin_dttm),
+    .groups = "drop"
+  )
+
+# Join and calculate timing
+abx_vaso_timing <- first_antibiotic %>%
+  inner_join(first_vasopressor, by = "hospitalization_id") %>%
+  mutate(
+    hours_abx_to_vaso = as.numeric(
+      difftime(first_vasopressor_dttm, first_antibiotic_dttm, units = "hours")
+    ),
+    abx_before_vaso = hours_abx_to_vaso > 0
+  )
+
+# Summary
+timing_summary <- abx_vaso_timing %>%
+  summarize(
+    n = n(),
+    pct_abx_first = mean(abx_before_vaso, na.rm = TRUE) * 100,
+    median_hours = median(abs(hours_abx_to_vaso), na.rm = TRUE)
+  )
+
+print(timing_summary)
+```
+
+# Quality Metrics
+
+## Medication Appropriateness
+
+### Stress Ulcer Prophylaxis
+
+```{r eval=FALSE}
+# Check for PPI or H2 blocker administration
+sup_meds <- c("pantoprazole", "famotidine", "omeprazole")
+
+sup_patients <- med_intermittent$df %>%
+  filter(med_category %in% sup_meds) %>%
+  distinct(hospitalization_id)
+
+# Compare to mechanically ventilated patients
+# (Would require respiratory_support table)
+```
+
+### DVT Prophylaxis
+
+```{r eval=FALSE}
+# Check for anticoagulation
+dvt_ppx_meds <- c("heparin", "enoxaparin")
+
+dvt_ppx_patients <- med_intermittent$df %>%
+  filter(med_category %in% dvt_ppx_meds) %>%
+  distinct(hospitalization_id)
+
+cat(sprintf("%d patients received DVT prophylaxis\n",
+            nrow(dvt_ppx_patients)))
+```
+
+## Medication Timing Compliance
+
+### Scheduled Medication Administration
+
+```{r eval=FALSE}
+# Check if scheduled medications given on time
+# Example: Q6H medications
+
+# Identify medications documented as Q6H
+q6h_meds <- med_intermittent$df %>%
+  group_by(hospitalization_id, med_category) %>%
+  arrange(admin_dttm) %>%
+  mutate(
+    time_since_last = as.numeric(
+      difftime(admin_dttm, lag(admin_dttm), units = "hours")
+    )
+  ) %>%
+  filter(!is.na(time_since_last))
+
+# Check compliance (doses within ±1 hour of 6-hour schedule)
+compliance_6h <- q6h_meds %>%
+  summarize(
+    n_doses = n(),
+    pct_on_time = mean(abs(time_since_last - 6) <= 1, na.rm = TRUE) * 100,
+    .groups = "drop"
+  )
+
+summary(compliance_6h$pct_on_time)
+```
+
+# Visualization Examples
+
+## Vasopressor Timeline
+
+```{r eval=FALSE}
+# Visualize vasopressor use over time for one patient
+example_patient <- unique(norepi$hospitalization_id)[1]
+
+patient_vasopressors <- med_continuous$df %>%
+  filter(
+    hospitalization_id == example_patient,
+    med_group == "vasoactives"
+  )
+
+ggplot(patient_vasopressors, aes(x = recorded_dttm, y = dose, color = med_category)) +
+  geom_line(size = 1) +
+  geom_point() +
+  facet_wrap(~med_category, scales = "free_y", ncol = 1) +
+  labs(
+    title = paste("Vasopressor Timeline -", example_patient),
+    x = "Time",
+    y = "Dose",
+    color = "Vasopressor"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "none")
+```
+
+## Antibiotic Gantt Chart
+
+```{r eval=FALSE}
+# Create Gantt chart of antibiotic courses
+abx_courses <- antibiotics %>%
+  group_by(hospitalization_id, med_category) %>%
+  summarize(
+    start = min(admin_dttm),
+    end = max(admin_dttm),
+    .groups = "drop"
+  )
+
+# Select subset for visualization
+selected_patients <- unique(abx_courses$hospitalization_id)[1:10]
+
+abx_courses_subset <- abx_courses %>%
+  filter(hospitalization_id %in% selected_patients)
+
+ggplot(abx_courses_subset, aes(y = hospitalization_id)) +
+  geom_segment(
+    aes(x = start, xend = end, yend = hospitalization_id, color = med_category),
+    size = 4
+  ) +
+  labs(
+    title = "Antibiotic Treatment Courses",
+    x = "Time",
+    y = "Patient",
+    color = "Antibiotic"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+```
+
+# Summary
+
+This vignette covered:
+
+- Continuous medication analysis (vasopressors, sedation, insulin)
+- Intermittent medication analysis (antibiotics)
+- Time-to-treatment metrics
+- Medication duration calculations
+- Combined continuous/intermittent analysis
+- Quality metrics and compliance
+
+Medication data provides crucial insights into ICU management and serves as a foundation for many quality improvement initiatives!
+
+# Session Info
+
+```{r eval=FALSE}
+sessionInfo()
+```
