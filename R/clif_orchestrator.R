@@ -62,6 +62,33 @@ ClifOrchestrator <- R6::R6Class(
     #' @field respiratory_support RespiratorySupport table object
     respiratory_support = NULL,
 
+    #' @field code_status CodeStatus table object
+    code_status = NULL,
+
+    #' @field crrt_therapy CrrtTherapy table object
+    crrt_therapy = NULL,
+
+    #' @field ecmo_mcs EcmoMcs table object
+    ecmo_mcs = NULL,
+
+    #' @field microbiology_culture MicrobiologyCulture table object
+    microbiology_culture = NULL,
+
+    #' @field microbiology_nonculture MicrobiologyNonculture table object
+    microbiology_nonculture = NULL,
+
+    #' @field microbiology_susceptibility MicrobiologySusceptibility table object
+    microbiology_susceptibility = NULL,
+
+    #' @field patient_assessments PatientAssessments table object
+    patient_assessments = NULL,
+
+    #' @field patient_procedures PatientProcedures table object
+    patient_procedures = NULL,
+
+    #' @field position Position table object
+    position = NULL,
+
     #' @field encounter_mapping tibble mapping original to stitched IDs
     encounter_mapping = NULL,
 
@@ -183,6 +210,60 @@ ClifOrchestrator <- R6::R6Class(
           timezone = self$timezone,
           output_directory = self$output_directory
         ),
+        code_status = CodeStatus$new(
+          data_directory = self$data_directory,
+          filetype = self$filetype,
+          timezone = self$timezone,
+          output_directory = self$output_directory
+        ),
+        crrt_therapy = CrrtTherapy$new(
+          data_directory = self$data_directory,
+          filetype = self$filetype,
+          timezone = self$timezone,
+          output_directory = self$output_directory
+        ),
+        ecmo_mcs = EcmoMcs$new(
+          data_directory = self$data_directory,
+          filetype = self$filetype,
+          timezone = self$timezone,
+          output_directory = self$output_directory
+        ),
+        microbiology_culture = MicrobiologyCulture$new(
+          data_directory = self$data_directory,
+          filetype = self$filetype,
+          timezone = self$timezone,
+          output_directory = self$output_directory
+        ),
+        microbiology_nonculture = MicrobiologyNonculture$new(
+          data_directory = self$data_directory,
+          filetype = self$filetype,
+          timezone = self$timezone,
+          output_directory = self$output_directory
+        ),
+        microbiology_susceptibility = MicrobiologySusceptibility$new(
+          data_directory = self$data_directory,
+          filetype = self$filetype,
+          timezone = self$timezone,
+          output_directory = self$output_directory
+        ),
+        patient_assessments = PatientAssessments$new(
+          data_directory = self$data_directory,
+          filetype = self$filetype,
+          timezone = self$timezone,
+          output_directory = self$output_directory
+        ),
+        patient_procedures = PatientProcedures$new(
+          data_directory = self$data_directory,
+          filetype = self$filetype,
+          timezone = self$timezone,
+          output_directory = self$output_directory
+        ),
+        position = Position$new(
+          data_directory = self$data_directory,
+          filetype = self$filetype,
+          timezone = self$timezone,
+          output_directory = self$output_directory
+        ),
         {
           cli::cli_abort("Unknown table: {.val {table_name}}")
         }
@@ -260,7 +341,11 @@ ClifOrchestrator <- R6::R6Class(
       # All supported table names
       all_tables <- c("patient", "hospitalization", "adt", "vitals", "labs",
                      "hospital_diagnosis", "medication_admin_continuous",
-                     "medication_admin_intermittent", "respiratory_support")
+                     "medication_admin_intermittent", "respiratory_support",
+                     "code_status", "crrt_therapy", "ecmo_mcs",
+                     "microbiology_culture", "microbiology_nonculture",
+                     "microbiology_susceptibility", "patient_assessments",
+                     "patient_procedures", "position")
 
       for (table_name in all_tables) {
         table_obj <- self[[table_name]]
@@ -314,7 +399,11 @@ ClifOrchestrator <- R6::R6Class(
       # All supported table names
       all_tables <- c("patient", "hospitalization", "adt", "vitals", "labs",
                      "hospital_diagnosis", "medication_admin_continuous",
-                     "medication_admin_intermittent", "respiratory_support")
+                     "medication_admin_intermittent", "respiratory_support",
+                     "code_status", "crrt_therapy", "ecmo_mcs",
+                     "microbiology_culture", "microbiology_nonculture",
+                     "microbiology_susceptibility", "patient_assessments",
+                     "patient_procedures", "position")
 
       for (table_name in all_tables) {
         table_obj <- self[[table_name]]
@@ -367,7 +456,11 @@ ClifOrchestrator <- R6::R6Class(
       # All supported table names
       all_tables <- c("patient", "hospitalization", "adt", "vitals", "labs",
                      "hospital_diagnosis", "medication_admin_continuous",
-                     "medication_admin_intermittent", "respiratory_support")
+                     "medication_admin_intermittent", "respiratory_support",
+                     "code_status", "crrt_therapy", "ecmo_mcs",
+                     "microbiology_culture", "microbiology_nonculture",
+                     "microbiology_susceptibility", "patient_assessments",
+                     "patient_procedures", "position")
 
       for (table_name in all_tables) {
         table_obj <- self[[table_name]]
@@ -405,7 +498,11 @@ ClifOrchestrator <- R6::R6Class(
       # All supported table names
       all_tables <- c("patient", "hospitalization", "adt", "vitals", "labs",
                      "hospital_diagnosis", "medication_admin_continuous",
-                     "medication_admin_intermittent", "respiratory_support")
+                     "medication_admin_intermittent", "respiratory_support",
+                     "code_status", "crrt_therapy", "ecmo_mcs",
+                     "microbiology_culture", "microbiology_nonculture",
+                     "microbiology_susceptibility", "patient_assessments",
+                     "patient_procedures", "position")
 
       tables_loaded <- c()
       for (table_name in all_tables) {

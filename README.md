@@ -11,7 +11,7 @@ Transform heterogeneous ICU data into standardized, analysis-ready datasets with
 
 ## Features
 
-- **CLIF 2.0 Tables**: 9 core table classes implemented (Patient, Hospitalization, ADT, Vitals, Labs, Diagnoses, Medications, Respiratory Support)
+- **CLIF 2.0 Tables**: 18 core table classes implemented (Patient, Hospitalization, ADT, Vitals, Labs, Diagnoses, Medications, Respiratory Support, Code Status, CRRT, ECMO/MCS, Microbiology, Assessments, Procedures, Position)
 - **Schema Validation**: Automatic validation against CLIF specification
 - **Clinical Calculations**:
   - SOFA (Sequential Organ Failure Assessment) scores
