@@ -1,0 +1,21 @@
+2025-10-15 14:28:35,967 - clifpy.tables.adt - INFO - Initialized adt table
+2025-10-15 14:28:35,967 - clifpy.tables.adt - INFO - Data directory: tests/fixtures/synthetic_data
+2025-10-15 14:28:35,967 - clifpy.tables.adt - INFO - File type: csv
+2025-10-15 14:28:35,967 - clifpy.tables.adt - INFO - Timezone: America/New_York
+2025-10-15 14:28:35,967 - clifpy.tables.adt - INFO - Output directory: /Users/aartiksarma/Research/clifR/output
+2025-10-15 14:28:35,969 - clifpy.tables.adt - INFO - Loaded schema from /Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/clifpy/schemas/adt_schema.yaml
+2025-10-15 14:28:35,985 - clifpy.tables.adt - INFO - Loaded outlier configuration
+2025-10-15 14:28:35,985 - clifpy.tables.adt - INFO - Starting validation
+2025-10-15 14:28:35,985 - clifpy.tables.adt - INFO - Running schema validation
+2025-10-15 14:28:35,985 - clifpy.tables.adt - WARNING - Schema validation found 2 errors
+2025-10-15 14:28:35,985 - clifpy.tables.adt - INFO - Checking for duplicates on composite keys
+2025-10-15 14:28:35,986 - clifpy.tables.adt - INFO - Validating timezone for datetime columns: ['in_dttm', 'out_dttm']
+2025-10-15 14:28:35,986 - clifpy.tables.adt - INFO - Calculating missing data statistics
+2025-10-15 14:28:35,987 - clifpy.tables.adt - INFO - Saved missing data statistics to /Users/aartiksarma/Research/clifR/output/missing_data_stats_adt.csv
+2025-10-15 14:28:35,988 - clifpy.tables.adt - INFO - Missing data: 0.02% (3 cells)
+2025-10-15 14:28:35,988 - clifpy.tables.adt - WARNING - Found 1 categorical validation errors
+2025-10-15 14:28:35,988 - clifpy.tables.adt - INFO - Cohort sizes: {'hospitalization_id': 1500, 'hospitalization_id_with_nulls': np.int64(0), 'total_rows': 3750}
+2025-10-15 14:28:35,989 - clifpy.tables.adt - INFO - Validating numeric ranges for outliers
+2025-10-15 14:28:35,989 - clifpy.tables.adt - INFO - No outliers detected
+2025-10-15 14:28:35,989 - clifpy.tables.adt - WARNING - Validation completed with 5 error(s). See `errors` attribute.
+2025-10-15 14:28:35,989 - clifpy.tables.adt - INFO - Saved validation errors to /Users/aartiksarma/Research/clifR/output/validation_errors_adt.csv

@@ -1,0 +1,6 @@
+column,missing_count,missing_percent,total_rows
+out_dttm,3,0.08,3750
+hospitalization_id,0,0.0,3750
+in_dttm,0,0.0,3750
+location_name,0,0.0,3750
+location_category,0,0.0,3750

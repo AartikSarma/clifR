@@ -1,0 +1,12 @@
+column,missing_count,missing_percent,total_rows
+death_dttm,800,80.0,1000
+patient_id,0,0.0,1000
+birth_date,0,0.0,1000
+race_name,0,0.0,1000
+race_category,0,0.0,1000
+ethnicity_name,0,0.0,1000
+ethnicity_category,0,0.0,1000
+sex_name,0,0.0,1000
+sex_category,0,0.0,1000
+language_name,0,0.0,1000
+language_category,0,0.0,1000

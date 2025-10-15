@@ -1,0 +1,73 @@
+# History files
+.Rhistory
+.Rapp.history
+
+# Session Data files
+.RData
+.RDataTmp
+
+# User-specific files
+.Ruserdata
+
+# RStudio files
+.Rproj.user/
+*.Rproj
+
+# OAuth2 token
+.httr-oauth
+
+# knitr and R markdown default cache directories
+*_cache/
+/cache/
+
+# Temporary files
+*.utf8.md
+*.knit.md
+
+# R Environment Variables
+.Renviron
+
+# pkgdown site
+docs/
+
+# translation temp files
+po/*~
+
+# RStudio Connect folder
+rsconnect/
+
+# Mac
+.DS_Store
+
+# renv
+renv/library/
+renv/local/
+renv/staging/
+
+# Test artifacts
+tests/testthat/_snaps/
+
+# Data files (do keep fixtures)
+data-raw/*.csv
+data-raw/*.parquet
+!data-raw/README.md
+
+# Baseline comparison files (keep in version control)
+# tests/baseline/
+
+# Exclude large synthetic data files (keep generator script)
+tests/fixtures/synthetic_data/*.csv
+tests/fixtures/synthetic_data/*.parquet
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+*.egg-info/
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/

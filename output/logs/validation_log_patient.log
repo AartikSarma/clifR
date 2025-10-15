@@ -1,0 +1,21 @@
+2025-10-15 14:28:35,753 - clifpy.tables.patient - INFO - Initialized patient table
+2025-10-15 14:28:35,753 - clifpy.tables.patient - INFO - Data directory: tests/fixtures/synthetic_data
+2025-10-15 14:28:35,753 - clifpy.tables.patient - INFO - File type: csv
+2025-10-15 14:28:35,753 - clifpy.tables.patient - INFO - Timezone: America/New_York
+2025-10-15 14:28:35,753 - clifpy.tables.patient - INFO - Output directory: /Users/aartiksarma/Research/clifR/output
+2025-10-15 14:28:35,756 - clifpy.tables.patient - INFO - Loaded schema from /Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/clifpy/schemas/patient_schema.yaml
+2025-10-15 14:28:35,771 - clifpy.tables.patient - INFO - Loaded outlier configuration
+2025-10-15 14:28:35,771 - clifpy.tables.patient - INFO - Starting validation
+2025-10-15 14:28:35,771 - clifpy.tables.patient - INFO - Running schema validation
+2025-10-15 14:28:35,772 - clifpy.tables.patient - WARNING - Schema validation found 1 errors
+2025-10-15 14:28:35,772 - clifpy.tables.patient - INFO - Checking for duplicates on composite keys
+2025-10-15 14:28:35,773 - clifpy.tables.patient - INFO - Validating timezone for datetime columns: ['death_dttm']
+2025-10-15 14:28:35,773 - clifpy.tables.patient - INFO - Calculating missing data statistics
+2025-10-15 14:28:35,774 - clifpy.tables.patient - INFO - Saved missing data statistics to /Users/aartiksarma/Research/clifR/output/missing_data_stats_patient.csv
+2025-10-15 14:28:35,775 - clifpy.tables.patient - INFO - Missing data: 7.27% (800 cells)
+2025-10-15 14:28:35,775 - clifpy.tables.patient - WARNING - Found 4 categorical validation errors
+2025-10-15 14:28:35,776 - clifpy.tables.patient - INFO - Cohort sizes: {'patient_id': 1000, 'patient_id_with_nulls': np.int64(0), 'total_rows': 1000}
+2025-10-15 14:28:35,776 - clifpy.tables.patient - INFO - Validating numeric ranges for outliers
+2025-10-15 14:28:35,776 - clifpy.tables.patient - INFO - No outliers detected
+2025-10-15 14:28:35,776 - clifpy.tables.patient - WARNING - Validation completed with 6 error(s). See `errors` attribute.
+2025-10-15 14:28:35,776 - clifpy.tables.patient - INFO - Saved validation errors to /Users/aartiksarma/Research/clifR/output/validation_errors_patient.csv

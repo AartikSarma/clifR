@@ -1,0 +1,31 @@
+2025-10-15 14:28:35,893 - clifpy.tables.hospitalization - INFO - Initialized hospitalization table
+2025-10-15 14:28:35,893 - clifpy.tables.hospitalization - INFO - Data directory: tests/fixtures/synthetic_data
+2025-10-15 14:28:35,893 - clifpy.tables.hospitalization - INFO - File type: csv
+2025-10-15 14:28:35,893 - clifpy.tables.hospitalization - INFO - Timezone: America/New_York
+2025-10-15 14:28:35,893 - clifpy.tables.hospitalization - INFO - Output directory: /Users/aartiksarma/Research/clifR/output
+2025-10-15 14:28:35,896 - clifpy.tables.hospitalization - INFO - Loaded schema from /Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/clifpy/schemas/hospitalization_schema.yaml
+2025-10-15 14:28:35,912 - clifpy.tables.hospitalization - INFO - Loaded outlier configuration
+2025-10-15 14:28:35,912 - clifpy.tables.hospitalization - INFO - Starting validation
+2025-10-15 14:28:35,912 - clifpy.tables.hospitalization - INFO - Running schema validation
+2025-10-15 14:28:35,913 - clifpy.tables.hospitalization - WARNING - Schema validation found 1 errors
+2025-10-15 14:28:35,913 - clifpy.tables.hospitalization - INFO - Checking for duplicates on composite keys
+2025-10-15 14:28:35,913 - clifpy.tables.hospitalization - INFO - Validating timezone for datetime columns: ['admission_dttm', 'discharge_dttm']
+2025-10-15 14:28:35,913 - clifpy.tables.hospitalization - INFO - Calculating missing data statistics
+2025-10-15 14:28:35,915 - clifpy.tables.hospitalization - INFO - Saved missing data statistics to /Users/aartiksarma/Research/clifR/output/missing_data_stats_hospitalization.csv
+2025-10-15 14:28:35,915 - clifpy.tables.hospitalization - INFO - Missing data: 0.02% (3 cells)
+2025-10-15 14:28:35,915 - clifpy.tables.hospitalization - WARNING - Found 2 categorical validation errors
+2025-10-15 14:28:35,915 - clifpy.tables.hospitalization - INFO - Generating summary statistics for numeric columns
+2025-10-15 14:28:35,917 - clifpy.tables.hospitalization - INFO - Generated summary statistics
+2025-10-15 14:28:35,918 - clifpy.tables.hospitalization - INFO - Analyzed skewed distributions
+2025-10-15 14:28:35,918 - clifpy.tables.hospitalization - INFO - Cohort sizes: {'patient_id': 775, 'patient_id_with_nulls': np.int64(0), 'hospitalization_id': 1500, 'hospitalization_id_with_nulls': np.int64(0), 'total_rows': 1500}
+2025-10-15 14:28:35,919 - clifpy.tables.hospitalization - INFO - Validating numeric ranges for outliers
+2025-10-15 14:28:35,925 - clifpy.tables.hospitalization - INFO - No outliers detected
+2025-10-15 14:28:35,925 - clifpy.tables.hospitalization - WARNING - Validation completed with 5 error(s). See `errors` attribute.
+2025-10-15 14:28:35,925 - clifpy.tables.hospitalization - INFO - Saved validation errors to /Users/aartiksarma/Research/clifR/output/validation_errors_hospitalization.csv
+2025-10-15 14:28:39,155 - clifpy.tables.hospitalization - INFO - Initialized hospitalization table
+2025-10-15 14:28:39,155 - clifpy.tables.hospitalization - INFO - Data directory: tests/fixtures/synthetic_data
+2025-10-15 14:28:39,155 - clifpy.tables.hospitalization - INFO - File type: csv
+2025-10-15 14:28:39,155 - clifpy.tables.hospitalization - INFO - Timezone: America/New_York
+2025-10-15 14:28:39,155 - clifpy.tables.hospitalization - INFO - Output directory: /Users/aartiksarma/Research/clifR/output
+2025-10-15 14:28:39,158 - clifpy.tables.hospitalization - INFO - Loaded schema from /Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/clifpy/schemas/hospitalization_schema.yaml
+2025-10-15 14:28:39,174 - clifpy.tables.hospitalization - INFO - Loaded outlier configuration

@@ -1,0 +1,118 @@
+{
+  "table_name": "labs",
+  "n_rows": 290345,
+  "n_cols": 11,
+  "is_valid": null,
+  "errors": [
+    {
+      "type": "datatype_castable",
+      "column": "lab_value",
+      "expected": "VARCHAR",
+      "actual": "float64",
+      "message": "Column 'lab_value' has type float64 but can be cast to VARCHAR"
+    },
+    {
+      "type": "datetime_timezone",
+      "column": "lab_order_dttm",
+      "timezone": "America/New_York",
+      "expected": "UTC",
+      "status": "warning",
+      "message": "Column 'lab_order_dttm' has timezone 'America/New_York' but expected 'UTC'"
+    },
+    {
+      "type": "datetime_timezone",
+      "column": "lab_collect_dttm",
+      "timezone": "America/New_York",
+      "expected": "UTC",
+      "status": "warning",
+      "message": "Column 'lab_collect_dttm' has timezone 'America/New_York' but expected 'UTC'"
+    },
+    {
+      "type": "datetime_timezone",
+      "column": "lab_result_dttm",
+      "timezone": "America/New_York",
+      "expected": "UTC",
+      "status": "warning",
+      "message": "Column 'lab_result_dttm' has timezone 'America/New_York' but expected 'UTC'"
+    },
+    {
+      "type": "missing_categorical_values",
+      "column": "lab_order_category",
+      "missing_values": [
+        "coags",
+        "misc",
+        "lft",
+        "blood_gas"
+      ],
+      "total_missing": 4,
+      "message": "Column 'lab_order_category' is missing 4 expected category values: ['coags', 'misc', 'lft', 'blood_gas']"
+    },
+    {
+      "type": "missing_categorical_values",
+      "column": "lab_category",
+      "missing_values": [
+        "esr",
+        "glucose_fingerstick",
+        "magnesium",
+        "inr",
+        "bilirubin_total",
+        "calcium_total",
+        "phosphate",
+        "so2_central_venous",
+        "glucose_serum",
+        "basophils_percent",
+        "lymphocytes_absolute",
+        "pco2_arterial",
+        "troponin_t",
+        "ferritin",
+        "ast",
+        "monocytes_percent",
+        "lactate",
+        "so2_mixed_venous",
+        "calcium_ionized",
+        "neutrophils_percent",
+        "troponin_i",
+        "bilirubin_conjugated",
+        "albumin",
+        "monocytes_absolute",
+        "ptt",
+        "procalcitonin",
+        "crp",
+        "pt",
+        "pco2_venous",
+        "ldh",
+        "ph_venous",
+        "po2_arterial",
+        "platelet_count",
+        "lymphocytes_percent",
+        "alt",
+        "basophils_absolute",
+        "eosinophils_percent",
+        "eosinophils_absolute",
+        "alkaline_phosphatase",
+        "ph_arterial",
+        "bilirubin_unconjugated",
+        "so2_arterial",
+        "total_protein",
+        "neutrophils_absolute"
+      ],
+      "total_missing": 44,
+      "message": "Column 'lab_category' is missing 44 expected category values: ['esr', 'glucose_fingerstick', 'magnesium', 'inr', 'bilirubin_total', 'calcium_total', 'phosphate', 'so2_central_venous', 'glucose_serum', 'basophils_percent', 'lymphocytes_absolute', 'pco2_arterial', 'troponin_t', 'ferritin', 'ast', 'monocytes_percent', 'lactate', 'so2_mixed_venous', 'calcium_ionized', 'neutrophils_percent', 'troponin_i', 'bilirubin_conjugated', 'albumin', 'monocytes_absolute', 'ptt', 'procalcitonin', 'crp', 'pt', 'pco2_venous', 'ldh', 'ph_venous', 'po2_arterial', 'platelet_count', 'lymphocytes_percent', 'alt', 'basophils_absolute', 'eosinophils_percent', 'eosinophils_absolute', 'alkaline_phosphatase', 'ph_arterial', 'bilirubin_unconjugated', 'so2_arterial', 'total_protein', 'neutrophils_absolute']"
+    },
+    {
+      "type": "unit_validation",
+      "table": "labs",
+      "category": "wbc",
+      "expected_units": [
+        "10^3/\u03bcL",
+        "10^3/uL"
+      ],
+      "unexpected_units": [
+        "K/uL"
+      ],
+      "status": "warning",
+      "message": "Table 'labs' category 'wbc' has unexpected units: K/uL, expected: 10^3/\u03bcL, 10^3/uL"
+    }
+  ],
+  "warnings": {}
+}

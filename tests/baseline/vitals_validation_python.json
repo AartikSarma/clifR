@@ -1,0 +1,28 @@
+{
+  "table_name": "vitals",
+  "n_rows": 1412358,
+  "n_cols": 6,
+  "is_valid": null,
+  "errors": [
+    {
+      "type": "datetime_timezone",
+      "column": "recorded_dttm",
+      "timezone": "America/New_York",
+      "expected": "UTC",
+      "status": "warning",
+      "message": "Column 'recorded_dttm' has timezone 'America/New_York' but expected 'UTC'"
+    },
+    {
+      "type": "missing_categorical_values",
+      "column": "vital_category",
+      "missing_values": [
+        "height_cm",
+        "map",
+        "weight_kg"
+      ],
+      "total_missing": 3,
+      "message": "Column 'vital_category' is missing 3 expected category values: ['height_cm', 'map', 'weight_kg']"
+    }
+  ],
+  "warnings": {}
+}

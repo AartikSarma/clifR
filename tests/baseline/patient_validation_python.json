@@ -1,0 +1,105 @@
+{
+  "table_name": "patient",
+  "n_rows": 1000,
+  "n_cols": 11,
+  "is_valid": null,
+  "errors": [
+    {
+      "type": "null_values",
+      "column": "death_dttm",
+      "count": 800,
+      "percent": 80.0,
+      "message": "Column 'death_dttm' has 800 null values (80.00%) in required field"
+    },
+    {
+      "type": "datetime_timezone",
+      "column": "death_dttm",
+      "timezone": "America/New_York",
+      "expected": "UTC",
+      "status": "warning",
+      "message": "Column 'death_dttm' has timezone 'America/New_York' but expected 'UTC'"
+    },
+    {
+      "type": "missing_categorical_values",
+      "column": "race_category",
+      "missing_values": [
+        "Unknown",
+        "Black or African American",
+        "American Indian or Alaska Native",
+        "Native Hawaiian or Other Pacific Islander"
+      ],
+      "total_missing": 4,
+      "message": "Column 'race_category' is missing 4 expected category values: ['Unknown', 'Black or African American', 'American Indian or Alaska Native', 'Native Hawaiian or Other Pacific Islander']"
+    },
+    {
+      "type": "missing_categorical_values",
+      "column": "ethnicity_category",
+      "missing_values": [
+        "Unknown"
+      ],
+      "total_missing": 1,
+      "message": "Column 'ethnicity_category' is missing 1 expected category values: ['Unknown']"
+    },
+    {
+      "type": "missing_categorical_values",
+      "column": "sex_category",
+      "missing_values": [
+        "Unknown"
+      ],
+      "total_missing": 1,
+      "message": "Column 'sex_category' is missing 1 expected category values: ['Unknown']"
+    },
+    {
+      "type": "missing_categorical_values",
+      "column": "language_category",
+      "missing_values": [
+        "Nepali, Marathi, or other Indic languages",
+        "Yoruba, Twi, Igbo, or other languages of Western Africa",
+        "Other and unspecified languages",
+        "Chinese",
+        "Arabic",
+        "Gujarati",
+        "Serbo-Croatian",
+        "Swahili or other languages of Central, Eastern, and Southern Africa",
+        "Other languages of Asia",
+        "German",
+        "Tagalog",
+        "Hebrew",
+        "Other Asian Indo-European languages",
+        "Unknown or NA",
+        "Armenian",
+        "Khmer",
+        "Sign Language",
+        "Russian",
+        "Korean",
+        "Hindi",
+        "Navajo",
+        "Italian",
+        "Thai, Lao, or other Tai-Kadai languages",
+        "Punjabi",
+        "Portuguese",
+        "Greek",
+        "Vietnamese",
+        "Bengali",
+        "Ilocano, Samoan, Hawaiian, or other Austronesian languages",
+        "Telugu",
+        "Urdu",
+        "Tamil",
+        "French",
+        "Japanese",
+        "Amharic, Somali, or other Afro-Asiatic languages",
+        "Other Native languages of North America",
+        "Polish",
+        "Ukrainian or other Slavic languages",
+        "Other European Indo-European languages",
+        "Persian",
+        "Haitian Creole",
+        "Yiddish, Pennsylvania Dutch, or other West Germanic Languages",
+        "Malayalam, Kannada, or other Dravidian languages"
+      ],
+      "total_missing": 43,
+      "message": "Column 'language_category' is missing 43 expected category values: ['Nepali, Marathi, or other Indic languages', 'Yoruba, Twi, Igbo, or other languages of Western Africa', 'Other and unspecified languages', 'Chinese', 'Arabic', 'Gujarati', 'Serbo-Croatian', 'Swahili or other languages of Central, Eastern, and Southern Africa', 'Other languages of Asia', 'German', 'Tagalog', 'Hebrew', 'Other Asian Indo-European languages', 'Unknown or NA', 'Armenian', 'Khmer', 'Sign Language', 'Russian', 'Korean', 'Hindi', 'Navajo', 'Italian', 'Thai, Lao, or other Tai-Kadai languages', 'Punjabi', 'Portuguese', 'Greek', 'Vietnamese', 'Bengali', 'Ilocano, Samoan, Hawaiian, or other Austronesian languages', 'Telugu', 'Urdu', 'Tamil', 'French', 'Japanese', 'Amharic, Somali, or other Afro-Asiatic languages', 'Other Native languages of North America', 'Polish', 'Ukrainian or other Slavic languages', 'Other European Indo-European languages', 'Persian', 'Haitian Creole', 'Yiddish, Pennsylvania Dutch, or other West Germanic Languages', 'Malayalam, Kannada, or other Dravidian languages']"
+    }
+  ],
+  "warnings": {}
+}

@@ -1,0 +1,59 @@
+{
+  "table_name": "adt",
+  "n_rows": 3750,
+  "n_cols": 5,
+  "is_valid": null,
+  "errors": [
+    {
+      "type": "missing_columns",
+      "columns": [
+        "hospital_id",
+        "hospital_type",
+        "location_type"
+      ],
+      "message": "Missing required columns: hospital_id, hospital_type, location_type"
+    },
+    {
+      "type": "null_values",
+      "column": "out_dttm",
+      "count": 3,
+      "percent": 0.08,
+      "message": "Column 'out_dttm' has 3 null values (0.08%) in required field"
+    },
+    {
+      "type": "datetime_timezone",
+      "column": "in_dttm",
+      "timezone": "America/New_York",
+      "expected": "UTC",
+      "status": "warning",
+      "message": "Column 'in_dttm' has timezone 'America/New_York' but expected 'UTC'"
+    },
+    {
+      "type": "datetime_timezone",
+      "column": "out_dttm",
+      "timezone": "America/New_York",
+      "expected": "UTC",
+      "status": "warning",
+      "message": "Column 'out_dttm' has timezone 'America/New_York' but expected 'UTC'"
+    },
+    {
+      "type": "missing_categorical_values",
+      "column": "location_category",
+      "missing_values": [
+        "psych",
+        "radiology",
+        "dialysis",
+        "l&d",
+        "procedural",
+        "other",
+        "rehab",
+        "hospice",
+        "stepdown",
+        "ward"
+      ],
+      "total_missing": 10,
+      "message": "Column 'location_category' is missing 10 expected category values: ['psych', 'radiology', 'dialysis', 'l&d', 'procedural', 'other', 'rehab', 'hospice', 'stepdown', 'ward']"
+    }
+  ],
+  "warnings": {}
+}

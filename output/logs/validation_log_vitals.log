@@ -1,0 +1,30 @@
+2025-10-15 14:28:36,514 - clifpy.tables.vitals - INFO - Initialized vitals table
+2025-10-15 14:28:36,514 - clifpy.tables.vitals - INFO - Data directory: tests/fixtures/synthetic_data
+2025-10-15 14:28:36,514 - clifpy.tables.vitals - INFO - File type: csv
+2025-10-15 14:28:36,514 - clifpy.tables.vitals - INFO - Timezone: America/New_York
+2025-10-15 14:28:36,514 - clifpy.tables.vitals - INFO - Output directory: /Users/aartiksarma/Research/clifR/output
+2025-10-15 14:28:36,516 - clifpy.tables.vitals - INFO - Loaded schema from /Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/clifpy/schemas/vitals_schema.yaml
+2025-10-15 14:28:36,532 - clifpy.tables.vitals - INFO - Loaded outlier configuration
+2025-10-15 14:28:36,532 - clifpy.tables.vitals - INFO - Starting validation
+2025-10-15 14:28:36,532 - clifpy.tables.vitals - INFO - Running schema validation
+2025-10-15 14:28:36,593 - clifpy.tables.vitals - INFO - Schema validation passed
+2025-10-15 14:28:36,593 - clifpy.tables.vitals - INFO - Validating timezone for datetime columns: ['recorded_dttm']
+2025-10-15 14:28:36,593 - clifpy.tables.vitals - INFO - Calculating missing data statistics
+2025-10-15 14:28:36,753 - clifpy.tables.vitals - INFO - Saved missing data statistics to /Users/aartiksarma/Research/clifR/output/missing_data_stats_vitals.csv
+2025-10-15 14:28:36,965 - clifpy.tables.vitals - WARNING - Found 1 categorical validation errors
+2025-10-15 14:28:36,965 - clifpy.tables.vitals - INFO - Generating summary statistics for numeric columns
+2025-10-15 14:28:36,986 - clifpy.tables.vitals - INFO - Generated summary statistics
+2025-10-15 14:28:36,996 - clifpy.tables.vitals - INFO - Analyzed skewed distributions
+2025-10-15 14:28:36,996 - clifpy.tables.vitals - INFO - Validating units
+2025-10-15 14:28:37,377 - clifpy.tables.vitals - INFO - Cohort sizes: {'hospitalization_id': 1500, 'hospitalization_id_with_nulls': np.int64(0), 'total_rows': 1412358}
+2025-10-15 14:28:37,377 - clifpy.tables.vitals - INFO - Validating numeric ranges for outliers
+2025-10-15 14:28:38,147 - clifpy.tables.vitals - INFO - No outliers detected
+2025-10-15 14:28:38,147 - clifpy.tables.vitals - WARNING - Validation completed with 2 error(s). See `errors` attribute.
+2025-10-15 14:28:38,148 - clifpy.tables.vitals - INFO - Saved validation errors to /Users/aartiksarma/Research/clifR/output/validation_errors_vitals.csv
+2025-10-15 14:28:39,695 - clifpy.tables.vitals - INFO - Initialized vitals table
+2025-10-15 14:28:39,695 - clifpy.tables.vitals - INFO - Data directory: tests/fixtures/synthetic_data
+2025-10-15 14:28:39,695 - clifpy.tables.vitals - INFO - File type: csv
+2025-10-15 14:28:39,695 - clifpy.tables.vitals - INFO - Timezone: America/New_York
+2025-10-15 14:28:39,695 - clifpy.tables.vitals - INFO - Output directory: /Users/aartiksarma/Research/clifR/output
+2025-10-15 14:28:39,697 - clifpy.tables.vitals - INFO - Loaded schema from /Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/clifpy/schemas/vitals_schema.yaml
+2025-10-15 14:28:39,713 - clifpy.tables.vitals - INFO - Loaded outlier configuration

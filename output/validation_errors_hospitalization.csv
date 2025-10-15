@@ -1,0 +1,6 @@
+type,column,count,percent,message,timezone,expected,status,missing_values,total_missing
+null_values,discharge_dttm,3.0,0.2,Column 'discharge_dttm' has 3 null values (0.20%) in required field,,,,,
+datetime_timezone,admission_dttm,,,Column 'admission_dttm' has timezone 'America/New_York' but expected 'UTC',America/New_York,UTC,warning,,
+datetime_timezone,discharge_dttm,,,Column 'discharge_dttm' has timezone 'America/New_York' but expected 'UTC',America/New_York,UTC,warning,,
+missing_categorical_values,admission_type_category,,,"Column 'admission_type_category' is missing 3 expected category values: ['facility', 'other', 'elective']",,,,"['facility', 'other', 'elective']",3.0
+missing_categorical_values,discharge_category,,,"Column 'discharge_category' is missing 12 expected category values: ['Still Admitted', 'Chemical Dependency', 'Assisted Living', 'Group Home', 'Other', 'Missing', 'Hospice', 'Psychiatric Hospital', 'Jail', 'Shelter', 'Against Medical Advice (AMA)', 'Long Term Care Hospital (LTACH)']",,,,"['Still Admitted', 'Chemical Dependency', 'Assisted Living', 'Group Home', 'Other', 'Missing', 'Hospice', 'Psychiatric Hospital', 'Jail', 'Shelter', 'Against Medical Advice (AMA)', 'Long Term Care Hospital (LTACH)']",12.0

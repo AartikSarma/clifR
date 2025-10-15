@@ -1,0 +1,12 @@
+column,missing_count,missing_percent,total_rows
+hospitalization_id,0,0.0,290345
+lab_order_dttm,0,0.0,290345
+lab_collect_dttm,0,0.0,290345
+lab_result_dttm,0,0.0,290345
+lab_order_name,0,0.0,290345
+lab_order_category,0,0.0,290345
+lab_name,0,0.0,290345
+lab_category,0,0.0,290345
+lab_value,0,0.0,290345
+lab_units,0,0.0,290345
+reference_unit,0,0.0,290345

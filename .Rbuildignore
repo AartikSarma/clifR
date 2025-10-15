@@ -1,0 +1,16 @@
+^clifR\.Rproj$
+^\.Rproj\.user$
+^LICENSE\.md$
+^README\.Rmd$
+^\.github$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^\.Rprofile$
+^renv$
+^renv\.lock$
+^CLAUDE\.md$
+^data-raw$
+^tests/fixtures/generate_synthetic_data\.py$
+^tests/generate_baselines\.py$
+^\.DS_Store$

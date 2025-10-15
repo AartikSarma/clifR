@@ -1,0 +1,3 @@
+type,column,timezone,expected,status,message,missing_values,total_missing
+datetime_timezone,recorded_dttm,America/New_York,UTC,warning,Column 'recorded_dttm' has timezone 'America/New_York' but expected 'UTC',,
+missing_categorical_values,vital_category,,,,"Column 'vital_category' is missing 3 expected category values: ['height_cm', 'map', 'weight_kg']","['height_cm', 'map', 'weight_kg']",3.0

@@ -1,0 +1,2 @@
+column,skewness,kurtosis,skew_interpretation
+age_at_admission,0.0003936749521353154,-1.262441790918738,Approximately symmetric

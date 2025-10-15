@@ -1,0 +1,6 @@
+type,columns,message,column,count,percent,timezone,expected,status,missing_values,total_missing
+missing_columns,"['hospital_id', 'hospital_type', 'location_type']","Missing required columns: hospital_id, hospital_type, location_type",,,,,,,,
+null_values,,Column 'out_dttm' has 3 null values (0.08%) in required field,out_dttm,3.0,0.08,,,,,
+datetime_timezone,,Column 'in_dttm' has timezone 'America/New_York' but expected 'UTC',in_dttm,,,America/New_York,UTC,warning,,
+datetime_timezone,,Column 'out_dttm' has timezone 'America/New_York' but expected 'UTC',out_dttm,,,America/New_York,UTC,warning,,
+missing_categorical_values,,"Column 'location_category' is missing 10 expected category values: ['psych', 'radiology', 'dialysis', 'l&d', 'procedural', 'other', 'rehab', 'hospice', 'stepdown', 'ward']",location_category,,,,,,"['psych', 'radiology', 'dialysis', 'l&d', 'procedural', 'other', 'rehab', 'hospice', 'stepdown', 'ward']",10.0

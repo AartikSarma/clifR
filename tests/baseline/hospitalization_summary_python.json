@@ -1,0 +1,10 @@
+{
+  "n_hospitalizations": 1500,
+  "los_mean": 16.630149187263417,
+  "los_median": 16.375,
+  "los_std": 8.17972283018134,
+  "age_mean": 57.922,
+  "age_median": 58.0,
+  "n_expired": 141,
+  "mortality_rate": 0.094
+}

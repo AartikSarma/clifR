@@ -1,0 +1,28 @@
+2025-10-15 14:28:38,435 - clifpy.tables.labs - INFO - Initialized labs table
+2025-10-15 14:28:38,435 - clifpy.tables.labs - INFO - Data directory: tests/fixtures/synthetic_data
+2025-10-15 14:28:38,435 - clifpy.tables.labs - INFO - File type: csv
+2025-10-15 14:28:38,435 - clifpy.tables.labs - INFO - Timezone: America/New_York
+2025-10-15 14:28:38,435 - clifpy.tables.labs - INFO - Output directory: /Users/aartiksarma/Research/clifR/output
+2025-10-15 14:28:38,439 - clifpy.tables.labs - INFO - Loaded schema from /Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/clifpy/schemas/labs_schema.yaml
+2025-10-15 14:28:38,455 - clifpy.tables.labs - INFO - Loaded outlier configuration
+2025-10-15 14:28:38,493 - clifpy.tables.labs - INFO - Starting validation
+2025-10-15 14:28:38,493 - clifpy.tables.labs - INFO - Running schema validation
+2025-10-15 14:28:38,516 - clifpy.tables.labs - WARNING - Schema validation found 1 errors
+2025-10-15 14:28:38,516 - clifpy.tables.labs - INFO - Validating timezone for datetime columns: ['lab_order_dttm', 'lab_collect_dttm', 'lab_result_dttm']
+2025-10-15 14:28:38,517 - clifpy.tables.labs - INFO - Calculating missing data statistics
+2025-10-15 14:28:38,577 - clifpy.tables.labs - INFO - Saved missing data statistics to /Users/aartiksarma/Research/clifR/output/missing_data_stats_labs.csv
+2025-10-15 14:28:38,656 - clifpy.tables.labs - WARNING - Found 2 categorical validation errors
+2025-10-15 14:28:38,660 - clifpy.tables.labs - INFO - Analyzed skewed distributions
+2025-10-15 14:28:38,660 - clifpy.tables.labs - INFO - Validating units
+2025-10-15 14:28:39,000 - clifpy.tables.labs - INFO - Cohort sizes: {'hospitalization_id': 1497, 'hospitalization_id_with_nulls': np.int64(0), 'total_rows': 290345}
+2025-10-15 14:28:39,000 - clifpy.tables.labs - INFO - Validating numeric ranges for outliers
+2025-10-15 14:28:39,040 - clifpy.tables.labs - INFO - No outliers detected
+2025-10-15 14:28:39,040 - clifpy.tables.labs - WARNING - Validation completed with 7 error(s). See `errors` attribute.
+2025-10-15 14:28:39,041 - clifpy.tables.labs - INFO - Saved validation errors to /Users/aartiksarma/Research/clifR/output/validation_errors_labs.csv
+2025-10-15 14:28:40,291 - clifpy.tables.labs - INFO - Initialized labs table
+2025-10-15 14:28:40,291 - clifpy.tables.labs - INFO - Data directory: tests/fixtures/synthetic_data
+2025-10-15 14:28:40,291 - clifpy.tables.labs - INFO - File type: csv
+2025-10-15 14:28:40,291 - clifpy.tables.labs - INFO - Timezone: America/New_York
+2025-10-15 14:28:40,291 - clifpy.tables.labs - INFO - Output directory: /Users/aartiksarma/Research/clifR/output
+2025-10-15 14:28:40,296 - clifpy.tables.labs - INFO - Loaded schema from /Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/clifpy/schemas/labs_schema.yaml
+2025-10-15 14:28:40,312 - clifpy.tables.labs - INFO - Loaded outlier configuration

@@ -1,0 +1,11 @@
+column,missing_count,missing_percent,total_rows
+discharge_dttm,3,0.2,1500
+patient_id,0,0.0,1500
+hospitalization_id,0,0.0,1500
+hospitalization_joined_id,0,0.0,1500
+admission_dttm,0,0.0,1500
+age_at_admission,0,0.0,1500
+admission_type_name,0,0.0,1500
+admission_type_category,0,0.0,1500
+discharge_name,0,0.0,1500
+discharge_category,0,0.0,1500
