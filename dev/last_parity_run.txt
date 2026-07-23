@@ -1,0 +1,16 @@
+test-parity-ase.R                            p=39   f=0  e=0  s=0 
+test-parity-comorbidity.R                    p=72   f=0  e=0  s=0 
+test-parity-config.R                         p=13   f=0  e=0  s=0 
+test-parity-crosswalk.R                      p=44   f=0  e=0  s=0 
+test-parity-datetime-ecdf.R                  p=12   f=0  e=0  s=0 
+test-parity-mdro.R                           p=21   f=0  e=0  s=0 
+test-parity-query.R                          p=21   f=0  e=0  s=0 
+test-parity-report-generator.R               p=5852 f=0  e=0  s=0 
+test-parity-sofa.R                           p=137  f=0  e=0  s=0 
+test-parity-stitching-encounters.R           p=15   f=0  e=0  s=0 
+test-parity-stitching.R                      p=8    f=0  e=0  s=0 
+test-parity-unit-converter.R                 p=50   f=0  e=0  s=0 
+test-parity-validation.R                     p=248  f=0  e=0  s=0 
+test-parity-waterfall-outliers.R             p=80   f=0  e=0  s=0 
+test-parity-wide-dataset.R                   p=48   f=0  e=0  s=0 
+TOTAL                                        p=6660 f=0  e=0  s=0 

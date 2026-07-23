@@ -1,0 +1,781 @@
+{
+  "table_name": "microbiology_susceptibility",
+  "backend": "polars",
+  "conformance": {
+    "table_presence": {
+      "check_type": "table_presence",
+      "table_name": "microbiology_susceptibility",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Table 'microbiology_susceptibility' present with 357 rows and 6 columns",
+          "details": {}
+        }
+      ],
+      "metrics": {
+        "row_count": 357,
+        "column_count": 6
+      },
+      "atomic_total": 1,
+      "atomic_passed": 1
+    },
+    "required_columns": {
+      "check_type": "required_columns",
+      "table_name": "microbiology_susceptibility",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'organism_id': present",
+          "details": {
+            "column": "organism_id"
+          }
+        },
+        {
+          "message": "Column 'antimicrobial_category': present",
+          "details": {
+            "column": "antimicrobial_category"
+          }
+        },
+        {
+          "message": "Column 'susceptibility_category': present",
+          "details": {
+            "column": "susceptibility_category"
+          }
+        }
+      ],
+      "metrics": {
+        "total_required": 3,
+        "total_present": 3,
+        "total_missing": 0
+      },
+      "atomic_total": 3,
+      "atomic_passed": 3
+    },
+    "column_dtypes": {
+      "check_type": "column_dtypes",
+      "table_name": "microbiology_susceptibility",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'organism_id': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "organism_id",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'antimicrobial_name': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "antimicrobial_name",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'antimicrobial_category': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "antimicrobial_category",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'sensitivity_name': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "sensitivity_name",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'susceptibility_name': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "susceptibility_name",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'susceptibility_category': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "susceptibility_category",
+            "expected": "VARCHAR"
+          }
+        }
+      ],
+      "metrics": {
+        "columns_checked": 6,
+        "dtype_errors": 0,
+        "dtype_warnings": 0
+      },
+      "atomic_total": 6,
+      "atomic_passed": 6
+    },
+    "datetime_format": {
+      "check_type": "datetime_format",
+      "table_name": "microbiology_susceptibility",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [],
+      "metrics": {
+        "datetime_columns_checked": 0
+      },
+      "atomic_total": 0,
+      "atomic_passed": 0
+    },
+    "categorical_values": {
+      "check_type": "categorical_values",
+      "table_name": "microbiology_susceptibility",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'antimicrobial_category': all values match mCIDE permissible values",
+          "details": {
+            "column": "antimicrobial_category"
+          }
+        },
+        {
+          "message": "Column 'susceptibility_category': all values match mCIDE permissible values",
+          "details": {
+            "column": "susceptibility_category"
+          }
+        }
+      ],
+      "metrics": {
+        "category_columns_checked": 2,
+        "columns_with_invalid_values": 0
+      },
+      "atomic_total": 2,
+      "atomic_passed": 2
+    },
+    "category_group_mapping": {
+      "check_type": "category_group_mapping",
+      "table_name": "microbiology_susceptibility",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No category-to-group mappings defined in schema",
+          "details": {}
+        }
+      ],
+      "metrics": {},
+      "atomic_total": 0,
+      "atomic_passed": 0
+    }
+  },
+  "completeness": {
+    "missingness": {
+      "check_type": "missingness",
+      "table_name": "microbiology_susceptibility",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'organism_id': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "organism_id",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'antimicrobial_category': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "antimicrobial_category",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'susceptibility_category': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "susceptibility_category",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        }
+      ],
+      "metrics": {
+        "total_rows": 357,
+        "required_columns_checked": 3,
+        "missingness_stats": [
+          {
+            "column": "organism_id",
+            "null_count": 0,
+            "total_rows": 357,
+            "percent_missing": 0.0
+          },
+          {
+            "column": "antimicrobial_category",
+            "null_count": 0,
+            "total_rows": 357,
+            "percent_missing": 0.0
+          },
+          {
+            "column": "susceptibility_category",
+            "null_count": 0,
+            "total_rows": 357,
+            "percent_missing": 0.0
+          }
+        ]
+      },
+      "atomic_total": 3,
+      "atomic_passed": 3
+    },
+    "conditional_requirements": {
+      "check_type": "conditional_requirements",
+      "table_name": "microbiology_susceptibility",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No conditional requirements defined for this table",
+          "details": {}
+        }
+      ],
+      "metrics": {},
+      "atomic_total": 0,
+      "atomic_passed": 0
+    },
+    "mcide_value_coverage": {
+      "check_type": "mcide_value_coverage",
+      "table_name": "microbiology_susceptibility",
+      "passed": false,
+      "errors": [
+        {
+          "message": "Missing 154 mCIDE values: actinomycin_d, acyclovir, amikacin, amoxicillin, amoxicillin_clavulanate, amphotericin_b, anidulafungin, azithromycin, aztreonam, baloxavir_marboxil, bedaquiline, beta_lactams, capreomycin, caspofungin, cefaclor, cefadroxil, cefamandole, cefazolin, cefdinir, cefditoren, cefiderocol, cefixime, cefmetazole, cefonicid, cefoperazone, cefotaxime, cefotetan, cefoxitin, cefpodoxime, cefprozil, ceftaroline, ceftazidime, ceftazidime_avibactam, ceftazidime_clavulanate, ceftibuten, ceftizoxime, ceftolozane_tazobactam, cefuroxime, cephalexin, cephalothin, cephapirin, cephradine, chloramphenicol, ciclopirox, cidofovir, cinoxacin, clarithromycin, clindamycin, clofazimine, clotrimazole, cloxacillin, cycloserine, dalbavancin, delamanid, dicloxacillin, dolutegravir, doripenem, doxycycline, efavirenz, efinaconazole, emtricitabine, entecavir, ertapenem, erythromycin, ethambutol, ethionamide, famciclovir, fidaxomicin, fluconazole, flucytosine, foscarnet, fosfomycin, fosmidomycin, fusidic_acid, ganciclovir, gatifloxacin, glecaprevir, griseofulvin, imipenem, isavuconazole, isavuconazonium, isoniazid, itraconazole, kanamycin, ketoconazole, lamivudine, ledipasvir, levofloxacin, lincomycin, lopinavir, macrolides, meropenem_vaborbactam, methicillin, metronidazole, mezlocillin, micafungin, miconazole, minocycline, moxalactam, moxifloxacin, mupirocin, nafcillin, nitrofurantoin, norfloxacin, nystatin, ofloxacin, oritavancin, oseltamivir, para_aminosalicylic_acid, penicillin, peramivir, pibrentasvir, piperacillin, pivampicillin, polymyxin_b, posaconazole, pretomanid, pristinamycin, pyrazinamide, quinupristin_dalfopristin, raltegravir, ribavirin, rifabutin, rifampin, rifapentine, ritonavir, roxithromycin, sofosbuvir, spectinomycin, streptomycin, sulfadiazine, sulfamethoxazole, sulfisoxazole, tavaborole, tedizolid, telavancin, telithromycin, temocillin, tenofovir, terbinafine, tetracycline, ticarcillin, ticarcillin_clavulanate, tigecycline, tobramycin, trimethoprim, trimethoprim_sulfamethoxazole, tylosin, valacyclovir, valganciclovir, velpatasvir, voriconazole, zanamivir, zidovudine",
+          "details": {
+            "column": "antimicrobial_category",
+            "missing_values": [
+              "actinomycin_d",
+              "acyclovir",
+              "amikacin",
+              "amoxicillin",
+              "amoxicillin_clavulanate",
+              "amphotericin_b",
+              "anidulafungin",
+              "azithromycin",
+              "aztreonam",
+              "baloxavir_marboxil",
+              "bedaquiline",
+              "beta_lactams",
+              "capreomycin",
+              "caspofungin",
+              "cefaclor",
+              "cefadroxil",
+              "cefamandole",
+              "cefazolin",
+              "cefdinir",
+              "cefditoren",
+              "cefiderocol",
+              "cefixime",
+              "cefmetazole",
+              "cefonicid",
+              "cefoperazone",
+              "cefotaxime",
+              "cefotetan",
+              "cefoxitin",
+              "cefpodoxime",
+              "cefprozil",
+              "ceftaroline",
+              "ceftazidime",
+              "ceftazidime_avibactam",
+              "ceftazidime_clavulanate",
+              "ceftibuten",
+              "ceftizoxime",
+              "ceftolozane_tazobactam",
+              "cefuroxime",
+              "cephalexin",
+              "cephalothin",
+              "cephapirin",
+              "cephradine",
+              "chloramphenicol",
+              "ciclopirox",
+              "cidofovir",
+              "cinoxacin",
+              "clarithromycin",
+              "clindamycin",
+              "clofazimine",
+              "clotrimazole",
+              "cloxacillin",
+              "cycloserine",
+              "dalbavancin",
+              "delamanid",
+              "dicloxacillin",
+              "dolutegravir",
+              "doripenem",
+              "doxycycline",
+              "efavirenz",
+              "efinaconazole",
+              "emtricitabine",
+              "entecavir",
+              "ertapenem",
+              "erythromycin",
+              "ethambutol",
+              "ethionamide",
+              "famciclovir",
+              "fidaxomicin",
+              "fluconazole",
+              "flucytosine",
+              "foscarnet",
+              "fosfomycin",
+              "fosmidomycin",
+              "fusidic_acid",
+              "ganciclovir",
+              "gatifloxacin",
+              "glecaprevir",
+              "griseofulvin",
+              "imipenem",
+              "isavuconazole",
+              "isavuconazonium",
+              "isoniazid",
+              "itraconazole",
+              "kanamycin",
+              "ketoconazole",
+              "lamivudine",
+              "ledipasvir",
+              "levofloxacin",
+              "lincomycin",
+              "lopinavir",
+              "macrolides",
+              "meropenem_vaborbactam",
+              "methicillin",
+              "metronidazole",
+              "mezlocillin",
+              "micafungin",
+              "miconazole",
+              "minocycline",
+              "moxalactam",
+              "moxifloxacin",
+              "mupirocin",
+              "nafcillin",
+              "nitrofurantoin",
+              "norfloxacin",
+              "nystatin",
+              "ofloxacin",
+              "oritavancin",
+              "oseltamivir",
+              "para_aminosalicylic_acid",
+              "penicillin",
+              "peramivir",
+              "pibrentasvir",
+              "piperacillin",
+              "pivampicillin",
+              "polymyxin_b",
+              "posaconazole",
+              "pretomanid",
+              "pristinamycin",
+              "pyrazinamide",
+              "quinupristin_dalfopristin",
+              "raltegravir",
+              "ribavirin",
+              "rifabutin",
+              "rifampin",
+              "rifapentine",
+              "ritonavir",
+              "roxithromycin",
+              "sofosbuvir",
+              "spectinomycin",
+              "streptomycin",
+              "sulfadiazine",
+              "sulfamethoxazole",
+              "sulfisoxazole",
+              "tavaborole",
+              "tedizolid",
+              "telavancin",
+              "telithromycin",
+              "temocillin",
+              "tenofovir",
+              "terbinafine",
+              "tetracycline",
+              "ticarcillin",
+              "ticarcillin_clavulanate",
+              "tigecycline",
+              "tobramycin",
+              "trimethoprim",
+              "trimethoprim_sulfamethoxazole",
+              "tylosin",
+              "valacyclovir",
+              "valganciclovir",
+              "velpatasvir",
+              "voriconazole",
+              "zanamivir",
+              "zidovudine"
+            ],
+            "coverage_percent": 7.78
+          }
+        },
+        {
+          "message": "Missing 1 mCIDE values: na",
+          "details": {
+            "column": "susceptibility_category",
+            "missing_values": [
+              "na"
+            ],
+            "coverage_percent": 75.0
+          }
+        }
+      ],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'antimicrobial_category': 13/167 mCIDE values present",
+          "details": {
+            "column": "antimicrobial_category",
+            "found_values": 13,
+            "expected_values": 167,
+            "coverage_percent": 7.78,
+            "atomic_count": 13
+          }
+        },
+        {
+          "message": "Column 'susceptibility_category': 3/4 mCIDE values present",
+          "details": {
+            "column": "susceptibility_category",
+            "found_values": 3,
+            "expected_values": 4,
+            "coverage_percent": 75.0,
+            "atomic_count": 3
+          }
+        }
+      ],
+      "metrics": {
+        "category_columns_checked": 2,
+        "coverage_by_column": {
+          "antimicrobial_category": {
+            "expected_values": 167,
+            "found_values": 13,
+            "missing_values": [
+              "actinomycin_d",
+              "acyclovir",
+              "amikacin",
+              "amoxicillin",
+              "amoxicillin_clavulanate",
+              "amphotericin_b",
+              "anidulafungin",
+              "azithromycin",
+              "aztreonam",
+              "baloxavir_marboxil",
+              "bedaquiline",
+              "beta_lactams",
+              "capreomycin",
+              "caspofungin",
+              "cefaclor",
+              "cefadroxil",
+              "cefamandole",
+              "cefazolin",
+              "cefdinir",
+              "cefditoren",
+              "cefiderocol",
+              "cefixime",
+              "cefmetazole",
+              "cefonicid",
+              "cefoperazone",
+              "cefotaxime",
+              "cefotetan",
+              "cefoxitin",
+              "cefpodoxime",
+              "cefprozil",
+              "ceftaroline",
+              "ceftazidime",
+              "ceftazidime_avibactam",
+              "ceftazidime_clavulanate",
+              "ceftibuten",
+              "ceftizoxime",
+              "ceftolozane_tazobactam",
+              "cefuroxime",
+              "cephalexin",
+              "cephalothin",
+              "cephapirin",
+              "cephradine",
+              "chloramphenicol",
+              "ciclopirox",
+              "cidofovir",
+              "cinoxacin",
+              "clarithromycin",
+              "clindamycin",
+              "clofazimine",
+              "clotrimazole",
+              "cloxacillin",
+              "cycloserine",
+              "dalbavancin",
+              "delamanid",
+              "dicloxacillin",
+              "dolutegravir",
+              "doripenem",
+              "doxycycline",
+              "efavirenz",
+              "efinaconazole",
+              "emtricitabine",
+              "entecavir",
+              "ertapenem",
+              "erythromycin",
+              "ethambutol",
+              "ethionamide",
+              "famciclovir",
+              "fidaxomicin",
+              "fluconazole",
+              "flucytosine",
+              "foscarnet",
+              "fosfomycin",
+              "fosmidomycin",
+              "fusidic_acid",
+              "ganciclovir",
+              "gatifloxacin",
+              "glecaprevir",
+              "griseofulvin",
+              "imipenem",
+              "isavuconazole",
+              "isavuconazonium",
+              "isoniazid",
+              "itraconazole",
+              "kanamycin",
+              "ketoconazole",
+              "lamivudine",
+              "ledipasvir",
+              "levofloxacin",
+              "lincomycin",
+              "lopinavir",
+              "macrolides",
+              "meropenem_vaborbactam",
+              "methicillin",
+              "metronidazole",
+              "mezlocillin",
+              "micafungin",
+              "miconazole",
+              "minocycline",
+              "moxalactam",
+              "moxifloxacin",
+              "mupirocin",
+              "nafcillin",
+              "nitrofurantoin",
+              "norfloxacin",
+              "nystatin",
+              "ofloxacin",
+              "oritavancin",
+              "oseltamivir",
+              "para_aminosalicylic_acid",
+              "penicillin",
+              "peramivir",
+              "pibrentasvir",
+              "piperacillin",
+              "pivampicillin",
+              "polymyxin_b",
+              "posaconazole",
+              "pretomanid",
+              "pristinamycin",
+              "pyrazinamide",
+              "quinupristin_dalfopristin",
+              "raltegravir",
+              "ribavirin",
+              "rifabutin",
+              "rifampin",
+              "rifapentine",
+              "ritonavir",
+              "roxithromycin",
+              "sofosbuvir",
+              "spectinomycin",
+              "streptomycin",
+              "sulfadiazine",
+              "sulfamethoxazole",
+              "sulfisoxazole",
+              "tavaborole",
+              "tedizolid",
+              "telavancin",
+              "telithromycin",
+              "temocillin",
+              "tenofovir",
+              "terbinafine",
+              "tetracycline",
+              "ticarcillin",
+              "ticarcillin_clavulanate",
+              "tigecycline",
+              "tobramycin",
+              "trimethoprim",
+              "trimethoprim_sulfamethoxazole",
+              "tylosin",
+              "valacyclovir",
+              "valganciclovir",
+              "velpatasvir",
+              "voriconazole",
+              "zanamivir",
+              "zidovudine"
+            ],
+            "coverage_percent": 7.78
+          },
+          "susceptibility_category": {
+            "expected_values": 4,
+            "found_values": 3,
+            "missing_values": [
+              "na"
+            ],
+            "coverage_percent": 75.0
+          }
+        }
+      },
+      "atomic_total": 171,
+      "atomic_passed": 16
+    }
+  },
+  "relational": {},
+  "plausibility": {
+    "chronological_order": {
+      "check_type": "chronological_order",
+      "table_name": "microbiology_susceptibility",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No chronological order rules defined for this table",
+          "details": {}
+        }
+      ],
+      "metrics": {},
+      "atomic_total": 0,
+      "atomic_passed": 0
+    },
+    "numeric_range_plausibility": {
+      "check_type": "numeric_range_plausibility",
+      "table_name": "microbiology_susceptibility",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No numeric range configuration for this table",
+          "details": {}
+        }
+      ],
+      "metrics": {},
+      "atomic_total": 0,
+      "atomic_passed": 0
+    },
+    "field_plausibility": {
+      "check_type": "field_plausibility",
+      "table_name": "microbiology_susceptibility",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No field plausibility rules defined for this table",
+          "details": {}
+        }
+      ],
+      "metrics": {},
+      "atomic_total": 0,
+      "atomic_passed": 0
+    },
+    "category_temporal_consistency": {
+      "check_type": "category_temporal_consistency",
+      "table_name": "microbiology_susceptibility",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No suitable datetime column found for temporal consistency check",
+          "details": {}
+        }
+      ],
+      "metrics": {},
+      "atomic_total": 0,
+      "atomic_passed": 0
+    },
+    "duplicate_composite_keys": {
+      "check_type": "duplicate_composite_keys",
+      "table_name": "microbiology_susceptibility",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No duplicate composite keys found",
+          "details": {}
+        }
+      ],
+      "metrics": {
+        "composite_keys": [
+          "organism_id",
+          "antimicrobial_category"
+        ],
+        "total_records": 357,
+        "unique_records": 357,
+        "duplicate_records": 0,
+        "duplicate_percent": 0.0
+      },
+      "atomic_total": 1,
+      "atomic_passed": 1
+    }
+  },
+  "table_stats": [
+    {
+      "column": "organism_id",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 78,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "antimicrobial_name",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 13,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "antimicrobial_category",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 13,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "sensitivity_name",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 3,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "susceptibility_name",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 3,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "susceptibility_category",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 3,
+      "min": null,
+      "max": null
+    }
+  ],
+  "total_rows": 357
+}

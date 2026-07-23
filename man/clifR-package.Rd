@@ -6,7 +6,7 @@
 \alias{clifR-package}
 \title{clifR: Common Longitudinal ICU data Format Tools for R}
 \description{
-An R port of the Python library clifpy for standardizing and analyzing critical care (ICU) data using the Common Longitudinal ICU data Format (CLIF) version 2.0. Provides tools for data validation, unit conversion, clinical score calculation (SOFA, Charlson Comorbidity Index), wide dataset transformation, and encounter stitching. Designed for high-performance processing of large ICU datasets with built-in schema validation.
+An R port of the Python library clifpy for standardizing and analyzing critical care (ICU) data using the Common Longitudinal ICU data Format (CLIF), supporting schema versions 2.1 and 3.0. Provides tools for data quality assessment, unit conversion, clinical score calculation (SOFA, Charlson and Elixhauser comorbidity indices), wide dataset transformation, respiratory support waterfall processing, outlier handling, and encounter stitching. Results are cross-validated against the reference Python implementation. Designed for high-performance processing of large ICU datasets using DuckDB and Apache Arrow.
 }
 \seealso{
 Useful links:

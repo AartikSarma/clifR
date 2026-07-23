@@ -1,0 +1,873 @@
+{
+  "table_name": "crrt_therapy",
+  "backend": "polars",
+  "conformance": {
+    "table_presence": {
+      "check_type": "table_presence",
+      "table_name": "crrt_therapy",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Table 'crrt_therapy' present with 874 rows and 11 columns",
+          "details": {}
+        }
+      ],
+      "metrics": {
+        "row_count": 874,
+        "column_count": 11
+      },
+      "atomic_total": 1,
+      "atomic_passed": 1
+    },
+    "required_columns": {
+      "check_type": "required_columns",
+      "table_name": "crrt_therapy",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'hospitalization_id': present",
+          "details": {
+            "column": "hospitalization_id"
+          }
+        },
+        {
+          "message": "Column 'recorded_dttm': present",
+          "details": {
+            "column": "recorded_dttm"
+          }
+        },
+        {
+          "message": "Column 'crrt_mode_category': present",
+          "details": {
+            "column": "crrt_mode_category"
+          }
+        },
+        {
+          "message": "Column 'blood_flow_rate': present",
+          "details": {
+            "column": "blood_flow_rate"
+          }
+        },
+        {
+          "message": "Column 'pre_filter_replacement_fluid_rate': present",
+          "details": {
+            "column": "pre_filter_replacement_fluid_rate"
+          }
+        },
+        {
+          "message": "Column 'post_filter_replacement_fluid_rate': present",
+          "details": {
+            "column": "post_filter_replacement_fluid_rate"
+          }
+        },
+        {
+          "message": "Column 'dialysate_flow_rate': present",
+          "details": {
+            "column": "dialysate_flow_rate"
+          }
+        },
+        {
+          "message": "Column 'ultrafiltration_out': present",
+          "details": {
+            "column": "ultrafiltration_out"
+          }
+        }
+      ],
+      "metrics": {
+        "total_required": 8,
+        "total_present": 8,
+        "total_missing": 0
+      },
+      "atomic_total": 8,
+      "atomic_passed": 8
+    },
+    "column_dtypes": {
+      "check_type": "column_dtypes",
+      "table_name": "crrt_therapy",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'hospitalization_id': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "hospitalization_id",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'device_id': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "device_id",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'recorded_dttm': dtype matches schema (DATETIME)",
+          "details": {
+            "column": "recorded_dttm",
+            "expected": "DATETIME"
+          }
+        },
+        {
+          "message": "Column 'crrt_mode_name': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "crrt_mode_name",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'crrt_mode_category': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "crrt_mode_category",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'dialysis_machine_name': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "dialysis_machine_name",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'blood_flow_rate': dtype matches schema (DOUBLE)",
+          "details": {
+            "column": "blood_flow_rate",
+            "expected": "DOUBLE"
+          }
+        },
+        {
+          "message": "Column 'pre_filter_replacement_fluid_rate': dtype matches schema (DOUBLE)",
+          "details": {
+            "column": "pre_filter_replacement_fluid_rate",
+            "expected": "DOUBLE"
+          }
+        },
+        {
+          "message": "Column 'post_filter_replacement_fluid_rate': dtype matches schema (DOUBLE)",
+          "details": {
+            "column": "post_filter_replacement_fluid_rate",
+            "expected": "DOUBLE"
+          }
+        },
+        {
+          "message": "Column 'dialysate_flow_rate': dtype matches schema (DOUBLE)",
+          "details": {
+            "column": "dialysate_flow_rate",
+            "expected": "DOUBLE"
+          }
+        },
+        {
+          "message": "Column 'ultrafiltration_out': dtype matches schema (DOUBLE)",
+          "details": {
+            "column": "ultrafiltration_out",
+            "expected": "DOUBLE"
+          }
+        }
+      ],
+      "metrics": {
+        "columns_checked": 11,
+        "dtype_errors": 0,
+        "dtype_warnings": 0
+      },
+      "atomic_total": 11,
+      "atomic_passed": 11
+    },
+    "datetime_format": {
+      "check_type": "datetime_format",
+      "table_name": "crrt_therapy",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'recorded_dttm': datetime format valid",
+          "details": {
+            "column": "recorded_dttm"
+          }
+        }
+      ],
+      "metrics": {
+        "datetime_columns_checked": 1
+      },
+      "atomic_total": 1,
+      "atomic_passed": 1
+    },
+    "categorical_values": {
+      "check_type": "categorical_values",
+      "table_name": "crrt_therapy",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'crrt_mode_category': all values match mCIDE permissible values",
+          "details": {
+            "column": "crrt_mode_category"
+          }
+        }
+      ],
+      "metrics": {
+        "category_columns_checked": 1,
+        "columns_with_invalid_values": 0
+      },
+      "atomic_total": 1,
+      "atomic_passed": 1
+    },
+    "category_group_mapping": {
+      "check_type": "category_group_mapping",
+      "table_name": "crrt_therapy",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No category-to-group mappings defined in schema",
+          "details": {}
+        }
+      ],
+      "metrics": {},
+      "atomic_total": 0,
+      "atomic_passed": 0
+    }
+  },
+  "completeness": {
+    "missingness": {
+      "check_type": "missingness",
+      "table_name": "crrt_therapy",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'hospitalization_id': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "hospitalization_id",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'recorded_dttm': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "recorded_dttm",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'crrt_mode_category': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "crrt_mode_category",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'blood_flow_rate': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "blood_flow_rate",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'ultrafiltration_out': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "ultrafiltration_out",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        }
+      ],
+      "metrics": {
+        "total_rows": 874,
+        "required_columns_checked": 5,
+        "missingness_stats": [
+          {
+            "column": "hospitalization_id",
+            "null_count": 0,
+            "total_rows": 874,
+            "percent_missing": 0.0
+          },
+          {
+            "column": "recorded_dttm",
+            "null_count": 0,
+            "total_rows": 874,
+            "percent_missing": 0.0
+          },
+          {
+            "column": "crrt_mode_category",
+            "null_count": 0,
+            "total_rows": 874,
+            "percent_missing": 0.0
+          },
+          {
+            "column": "blood_flow_rate",
+            "null_count": 0,
+            "total_rows": 874,
+            "percent_missing": 0.0
+          },
+          {
+            "column": "ultrafiltration_out",
+            "null_count": 0,
+            "total_rows": 874,
+            "percent_missing": 0.0
+          }
+        ]
+      },
+      "atomic_total": 8,
+      "atomic_passed": 8
+    },
+    "conditional_requirements": {
+      "check_type": "conditional_requirements",
+      "table_name": "crrt_therapy",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Conditional requirement satisfied: CVVH and CVVHDF modes require pre- and post-filter replacement fluid rates \u2014 587/587 rows present (100%)",
+          "details": {
+            "column": "pre_filter_replacement_fluid_rate",
+            "condition": "crrt_mode_category IN ['cvvh', 'cvvhdf']",
+            "rows_meeting_condition": 587,
+            "rows_present": 587,
+            "percent_present": 100.0
+          }
+        },
+        {
+          "message": "Conditional requirement satisfied: CVVH and CVVHDF modes require pre- and post-filter replacement fluid rates \u2014 587/587 rows present (100%)",
+          "details": {
+            "column": "post_filter_replacement_fluid_rate",
+            "condition": "crrt_mode_category IN ['cvvh', 'cvvhdf']",
+            "rows_meeting_condition": 587,
+            "rows_present": 587,
+            "percent_present": 100.0
+          }
+        },
+        {
+          "message": "Conditional requirement satisfied: CVVHD and CVVHDF modes require dialysate flow rate \u2014 670/670 rows present (100%)",
+          "details": {
+            "column": "dialysate_flow_rate",
+            "condition": "crrt_mode_category IN ['cvvhd', 'cvvhdf']",
+            "rows_meeting_condition": 670,
+            "rows_present": 670,
+            "percent_present": 100.0
+          }
+        }
+      ],
+      "metrics": {},
+      "atomic_total": 3,
+      "atomic_passed": 3
+    },
+    "mcide_value_coverage": {
+      "check_type": "mcide_value_coverage",
+      "table_name": "crrt_therapy",
+      "passed": false,
+      "errors": [
+        {
+          "message": "Missing 2 mCIDE values: scuf, avvh",
+          "details": {
+            "column": "crrt_mode_category",
+            "missing_values": [
+              "scuf",
+              "avvh"
+            ],
+            "coverage_percent": 60.0
+          }
+        }
+      ],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'crrt_mode_category': 3/5 mCIDE values present",
+          "details": {
+            "column": "crrt_mode_category",
+            "found_values": 3,
+            "expected_values": 5,
+            "coverage_percent": 60.0,
+            "atomic_count": 3
+          }
+        }
+      ],
+      "metrics": {
+        "category_columns_checked": 1,
+        "coverage_by_column": {
+          "crrt_mode_category": {
+            "expected_values": 5,
+            "found_values": 3,
+            "missing_values": [
+              "scuf",
+              "avvh"
+            ],
+            "coverage_percent": 60.0
+          }
+        }
+      },
+      "atomic_total": 5,
+      "atomic_passed": 3
+    }
+  },
+  "relational": {},
+  "plausibility": {
+    "chronological_order": {
+      "check_type": "chronological_order",
+      "table_name": "crrt_therapy",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No chronological order rules defined for this table",
+          "details": {}
+        }
+      ],
+      "metrics": {},
+      "atomic_total": 0,
+      "atomic_passed": 0
+    },
+    "numeric_range_plausibility": {
+      "check_type": "numeric_range_plausibility",
+      "table_name": "crrt_therapy",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'blood_flow_rate': all 874 values within range [150, 300]",
+          "details": {
+            "column": "blood_flow_rate",
+            "total": 874,
+            "atomic_count": 1
+          }
+        },
+        {
+          "message": "Column 'pre_filter_replacement_fluid_rate': all 587 values within range [0, 10000]",
+          "details": {
+            "column": "pre_filter_replacement_fluid_rate",
+            "total": 587,
+            "atomic_count": 1
+          }
+        },
+        {
+          "message": "Column 'post_filter_replacement_fluid_rate': all 587 values within range [0, 10000]",
+          "details": {
+            "column": "post_filter_replacement_fluid_rate",
+            "total": 587,
+            "atomic_count": 1
+          }
+        },
+        {
+          "message": "Column 'dialysate_flow_rate': all 670 values within range [0, 10000]",
+          "details": {
+            "column": "dialysate_flow_rate",
+            "total": 670,
+            "atomic_count": 1
+          }
+        },
+        {
+          "message": "Column 'ultrafiltration_out': all 874 values within range [0, 500]",
+          "details": {
+            "column": "ultrafiltration_out",
+            "total": 874,
+            "atomic_count": 1
+          }
+        },
+        {
+          "message": "All numeric values within plausible ranges (blood_flow_rate, dialysate_flow_rate, post_filter_replacement_fluid_rate, pre_filter_replacement_fluid_rate, ultrafiltration_out)",
+          "details": {
+            "columns_checked": [
+              "blood_flow_rate",
+              "dialysate_flow_rate",
+              "post_filter_replacement_fluid_rate",
+              "pre_filter_replacement_fluid_rate",
+              "ultrafiltration_out"
+            ]
+          }
+        }
+      ],
+      "metrics": {
+        "columns_checked": 5,
+        "out_of_range_summary": {
+          "blood_flow_rate": {
+            "total_non_null": 874,
+            "out_of_range": 0,
+            "out_of_range_percent": 0.0,
+            "below_min": 0,
+            "above_max": 0,
+            "min": 150,
+            "max": 300
+          },
+          "pre_filter_replacement_fluid_rate": {
+            "total_non_null": 587,
+            "out_of_range": 0,
+            "out_of_range_percent": 0.0,
+            "below_min": 0,
+            "above_max": 0,
+            "min": 0,
+            "max": 10000
+          },
+          "post_filter_replacement_fluid_rate": {
+            "total_non_null": 587,
+            "out_of_range": 0,
+            "out_of_range_percent": 0.0,
+            "below_min": 0,
+            "above_max": 0,
+            "min": 0,
+            "max": 10000
+          },
+          "dialysate_flow_rate": {
+            "total_non_null": 670,
+            "out_of_range": 0,
+            "out_of_range_percent": 0.0,
+            "below_min": 0,
+            "above_max": 0,
+            "min": 0,
+            "max": 10000
+          },
+          "ultrafiltration_out": {
+            "total_non_null": 874,
+            "out_of_range": 0,
+            "out_of_range_percent": 0.0,
+            "below_min": 0,
+            "above_max": 0,
+            "min": 0,
+            "max": 500
+          }
+        }
+      },
+      "atomic_total": 5,
+      "atomic_passed": 5
+    },
+    "field_plausibility": {
+      "check_type": "field_plausibility",
+      "table_name": "crrt_therapy",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No field plausibility rules defined for this table",
+          "details": {}
+        }
+      ],
+      "metrics": {},
+      "atomic_total": 0,
+      "atomic_passed": 0
+    },
+    "category_temporal_consistency": {
+      "check_type": "category_temporal_consistency",
+      "table_name": "crrt_therapy",
+      "passed": true,
+      "errors": [],
+      "warnings": [
+        {
+          "message": "crrt_mode_category: cvvh absent in 3/6 years (2018-2023)",
+          "details": {
+            "column": "crrt_mode_category",
+            "value": "cvvh",
+            "absent_years": [
+              2020,
+              2022,
+              2023
+            ],
+            "total_years": 6,
+            "yearly_counts": {
+              "2018": 1,
+              "2019": 1,
+              "2020": 0,
+              "2021": 1,
+              "2022": 0,
+              "2023": 0
+            }
+          }
+        },
+        {
+          "message": "crrt_mode_category: cvvhd absent in 3/6 years (2018-2023)",
+          "details": {
+            "column": "crrt_mode_category",
+            "value": "cvvhd",
+            "absent_years": [
+              2019,
+              2020,
+              2021
+            ],
+            "total_years": 6,
+            "yearly_counts": {
+              "2018": 2,
+              "2019": 0,
+              "2020": 0,
+              "2021": 0,
+              "2022": 1,
+              "2023": 1
+            }
+          }
+        },
+        {
+          "message": "crrt_mode_category: cvvhdf absent in 3/6 years (2018-2023)",
+          "details": {
+            "column": "crrt_mode_category",
+            "value": "cvvhdf",
+            "absent_years": [
+              2018,
+              2021,
+              2022
+            ],
+            "total_years": 6,
+            "yearly_counts": {
+              "2018": 0,
+              "2019": 1,
+              "2020": 2,
+              "2021": 0,
+              "2022": 0,
+              "2023": 2
+            }
+          }
+        }
+      ],
+      "info": [],
+      "metrics": {
+        "category_columns_checked": 1,
+        "yearly_distributions": {
+          "crrt_mode_category": {
+            "2018": {
+              "cvvh": 1,
+              "cvvhd": 2
+            },
+            "2019": {
+              "cvvh": 1,
+              "cvvhdf": 1
+            },
+            "2020": {
+              "cvvhdf": 2
+            },
+            "2021": {
+              "cvvh": 1
+            },
+            "2022": {
+              "cvvhd": 1
+            },
+            "2023": {
+              "cvvhd": 1,
+              "cvvhdf": 2
+            }
+          }
+        },
+        "missing_in_years": {
+          "crrt_mode_category": {
+            "cvvhd": [
+              2019,
+              2020,
+              2021
+            ],
+            "cvvhdf": [
+              2018,
+              2021,
+              2022
+            ],
+            "cvvh": [
+              2020,
+              2022,
+              2023
+            ]
+          }
+        },
+        "monthly_trends": {
+          "crrt_mode_category": [
+            {
+              "month_year": "2018-01",
+              "crrt_mode_category": "cvvhd",
+              "n": 1
+            },
+            {
+              "month_year": "2018-08",
+              "crrt_mode_category": "cvvhd",
+              "n": 1
+            },
+            {
+              "month_year": "2018-09",
+              "crrt_mode_category": "cvvh",
+              "n": 1
+            },
+            {
+              "month_year": "2019-05",
+              "crrt_mode_category": "cvvhdf",
+              "n": 1
+            },
+            {
+              "month_year": "2019-10",
+              "crrt_mode_category": "cvvh",
+              "n": 1
+            },
+            {
+              "month_year": "2020-09",
+              "crrt_mode_category": "cvvhdf",
+              "n": 1
+            },
+            {
+              "month_year": "2020-11",
+              "crrt_mode_category": "cvvhdf",
+              "n": 1
+            },
+            {
+              "month_year": "2021-05",
+              "crrt_mode_category": "cvvh",
+              "n": 1
+            },
+            {
+              "month_year": "2022-09",
+              "crrt_mode_category": "cvvhd",
+              "n": 1
+            },
+            {
+              "month_year": "2023-02",
+              "crrt_mode_category": "cvvhdf",
+              "n": 1
+            },
+            {
+              "month_year": "2023-03",
+              "crrt_mode_category": "cvvhd",
+              "n": 1
+            },
+            {
+              "month_year": "2023-03",
+              "crrt_mode_category": "cvvhdf",
+              "n": 1
+            }
+          ]
+        }
+      },
+      "atomic_total": 3,
+      "atomic_passed": 3
+    },
+    "duplicate_composite_keys": {
+      "check_type": "duplicate_composite_keys",
+      "table_name": "crrt_therapy",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No composite keys defined for this table",
+          "details": {}
+        }
+      ],
+      "metrics": {},
+      "atomic_total": 0,
+      "atomic_passed": 0
+    }
+  },
+  "table_stats": [
+    {
+      "column": "hospitalization_id",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 12,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "device_id",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 836,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "recorded_dttm",
+      "dtype": "DATETIME",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 874,
+      "min": "2018-01-23 10:09",
+      "max": "2023-03-19 22:48"
+    },
+    {
+      "column": "crrt_mode_name",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 3,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "crrt_mode_category",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 3,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "dialysis_machine_name",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 4,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "blood_flow_rate",
+      "dtype": "DOUBLE",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 101,
+      "min": "150.0",
+      "max": "250.0"
+    },
+    {
+      "column": "pre_filter_replacement_fluid_rate",
+      "dtype": "DOUBLE",
+      "null_count": 287,
+      "null_pct": 32.8,
+      "unique": 444,
+      "min": "503.0",
+      "max": "1499.0"
+    },
+    {
+      "column": "post_filter_replacement_fluid_rate",
+      "dtype": "DOUBLE",
+      "null_count": 287,
+      "null_pct": 32.8,
+      "unique": 430,
+      "min": "505.0",
+      "max": "1498.0"
+    },
+    {
+      "column": "dialysate_flow_rate",
+      "dtype": "DOUBLE",
+      "null_count": 204,
+      "null_pct": 23.3,
+      "unique": 487,
+      "min": "1001.0",
+      "max": "1996.0"
+    },
+    {
+      "column": "ultrafiltration_out",
+      "dtype": "DOUBLE",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 151,
+      "min": "50.0",
+      "max": "200.0"
+    }
+  ],
+  "total_rows": 874
+}

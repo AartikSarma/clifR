@@ -1,0 +1,5655 @@
+{
+  "table_name": "respiratory_support",
+  "backend": "polars",
+  "conformance": {
+    "table_presence": {
+      "check_type": "table_presence",
+      "table_name": "respiratory_support",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Table 'respiratory_support' present with 37468 rows and 26 columns",
+          "details": {}
+        }
+      ],
+      "metrics": {
+        "row_count": 37468,
+        "column_count": 26
+      },
+      "atomic_total": 1,
+      "atomic_passed": 1
+    },
+    "required_columns": {
+      "check_type": "required_columns",
+      "table_name": "respiratory_support",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'hospitalization_id': present",
+          "details": {
+            "column": "hospitalization_id"
+          }
+        },
+        {
+          "message": "Column 'recorded_dttm': present",
+          "details": {
+            "column": "recorded_dttm"
+          }
+        },
+        {
+          "message": "Column 'device_category': present",
+          "details": {
+            "column": "device_category"
+          }
+        },
+        {
+          "message": "Column 'mode_category': present",
+          "details": {
+            "column": "mode_category"
+          }
+        },
+        {
+          "message": "Column 'tracheostomy': present",
+          "details": {
+            "column": "tracheostomy"
+          }
+        },
+        {
+          "message": "Column 'fio2_set': present",
+          "details": {
+            "column": "fio2_set"
+          }
+        },
+        {
+          "message": "Column 'lpm_set': present",
+          "details": {
+            "column": "lpm_set"
+          }
+        },
+        {
+          "message": "Column 'tidal_volume_set': present",
+          "details": {
+            "column": "tidal_volume_set"
+          }
+        },
+        {
+          "message": "Column 'resp_rate_set': present",
+          "details": {
+            "column": "resp_rate_set"
+          }
+        },
+        {
+          "message": "Column 'pressure_control_set': present",
+          "details": {
+            "column": "pressure_control_set"
+          }
+        },
+        {
+          "message": "Column 'pressure_support_set': present",
+          "details": {
+            "column": "pressure_support_set"
+          }
+        },
+        {
+          "message": "Column 'flow_rate_set': present",
+          "details": {
+            "column": "flow_rate_set"
+          }
+        },
+        {
+          "message": "Column 'peak_inspiratory_pressure_set': present",
+          "details": {
+            "column": "peak_inspiratory_pressure_set"
+          }
+        },
+        {
+          "message": "Column 'inspiratory_time_set': present",
+          "details": {
+            "column": "inspiratory_time_set"
+          }
+        },
+        {
+          "message": "Column 'peep_set': present",
+          "details": {
+            "column": "peep_set"
+          }
+        },
+        {
+          "message": "Column 'tidal_volume_obs': present",
+          "details": {
+            "column": "tidal_volume_obs"
+          }
+        },
+        {
+          "message": "Column 'resp_rate_obs': present",
+          "details": {
+            "column": "resp_rate_obs"
+          }
+        },
+        {
+          "message": "Column 'plateau_pressure_obs': present",
+          "details": {
+            "column": "plateau_pressure_obs"
+          }
+        },
+        {
+          "message": "Column 'peak_inspiratory_pressure_obs': present",
+          "details": {
+            "column": "peak_inspiratory_pressure_obs"
+          }
+        },
+        {
+          "message": "Column 'peep_obs': present",
+          "details": {
+            "column": "peep_obs"
+          }
+        },
+        {
+          "message": "Column 'minute_vent_obs': present",
+          "details": {
+            "column": "minute_vent_obs"
+          }
+        },
+        {
+          "message": "Column 'mean_airway_pressure_obs': present",
+          "details": {
+            "column": "mean_airway_pressure_obs"
+          }
+        }
+      ],
+      "metrics": {
+        "total_required": 22,
+        "total_present": 22,
+        "total_missing": 0
+      },
+      "atomic_total": 22,
+      "atomic_passed": 22
+    },
+    "column_dtypes": {
+      "check_type": "column_dtypes",
+      "table_name": "respiratory_support",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'hospitalization_id': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "hospitalization_id",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'recorded_dttm': dtype matches schema (DATETIME)",
+          "details": {
+            "column": "recorded_dttm",
+            "expected": "DATETIME"
+          }
+        },
+        {
+          "message": "Column 'device_name': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "device_name",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'device_id': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "device_id",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'device_category': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "device_category",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'vent_brand_name': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "vent_brand_name",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'mode_name': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "mode_name",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'mode_category': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "mode_category",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'tracheostomy': dtype matches schema (INT)",
+          "details": {
+            "column": "tracheostomy",
+            "expected": "INT"
+          }
+        },
+        {
+          "message": "Column 'fio2_set': dtype matches schema (DOUBLE)",
+          "details": {
+            "column": "fio2_set",
+            "expected": "DOUBLE"
+          }
+        },
+        {
+          "message": "Column 'lpm_set': dtype matches schema (DOUBLE)",
+          "details": {
+            "column": "lpm_set",
+            "expected": "DOUBLE"
+          }
+        },
+        {
+          "message": "Column 'tidal_volume_set': dtype matches schema (DOUBLE)",
+          "details": {
+            "column": "tidal_volume_set",
+            "expected": "DOUBLE"
+          }
+        },
+        {
+          "message": "Column 'resp_rate_set': dtype matches schema (DOUBLE)",
+          "details": {
+            "column": "resp_rate_set",
+            "expected": "DOUBLE"
+          }
+        },
+        {
+          "message": "Column 'pressure_control_set': dtype matches schema (DOUBLE)",
+          "details": {
+            "column": "pressure_control_set",
+            "expected": "DOUBLE"
+          }
+        },
+        {
+          "message": "Column 'pressure_support_set': dtype matches schema (DOUBLE)",
+          "details": {
+            "column": "pressure_support_set",
+            "expected": "DOUBLE"
+          }
+        },
+        {
+          "message": "Column 'flow_rate_set': dtype matches schema (DOUBLE)",
+          "details": {
+            "column": "flow_rate_set",
+            "expected": "DOUBLE"
+          }
+        },
+        {
+          "message": "Column 'peak_inspiratory_pressure_set': dtype matches schema (DOUBLE)",
+          "details": {
+            "column": "peak_inspiratory_pressure_set",
+            "expected": "DOUBLE"
+          }
+        },
+        {
+          "message": "Column 'inspiratory_time_set': dtype matches schema (DOUBLE)",
+          "details": {
+            "column": "inspiratory_time_set",
+            "expected": "DOUBLE"
+          }
+        },
+        {
+          "message": "Column 'peep_set': dtype matches schema (DOUBLE)",
+          "details": {
+            "column": "peep_set",
+            "expected": "DOUBLE"
+          }
+        },
+        {
+          "message": "Column 'tidal_volume_obs': dtype matches schema (DOUBLE)",
+          "details": {
+            "column": "tidal_volume_obs",
+            "expected": "DOUBLE"
+          }
+        },
+        {
+          "message": "Column 'resp_rate_obs': dtype matches schema (DOUBLE)",
+          "details": {
+            "column": "resp_rate_obs",
+            "expected": "DOUBLE"
+          }
+        },
+        {
+          "message": "Column 'plateau_pressure_obs': dtype matches schema (DOUBLE)",
+          "details": {
+            "column": "plateau_pressure_obs",
+            "expected": "DOUBLE"
+          }
+        },
+        {
+          "message": "Column 'peak_inspiratory_pressure_obs': dtype matches schema (DOUBLE)",
+          "details": {
+            "column": "peak_inspiratory_pressure_obs",
+            "expected": "DOUBLE"
+          }
+        },
+        {
+          "message": "Column 'peep_obs': dtype matches schema (DOUBLE)",
+          "details": {
+            "column": "peep_obs",
+            "expected": "DOUBLE"
+          }
+        },
+        {
+          "message": "Column 'minute_vent_obs': dtype matches schema (DOUBLE)",
+          "details": {
+            "column": "minute_vent_obs",
+            "expected": "DOUBLE"
+          }
+        },
+        {
+          "message": "Column 'mean_airway_pressure_obs': dtype matches schema (DOUBLE)",
+          "details": {
+            "column": "mean_airway_pressure_obs",
+            "expected": "DOUBLE"
+          }
+        }
+      ],
+      "metrics": {
+        "columns_checked": 26,
+        "dtype_errors": 0,
+        "dtype_warnings": 0
+      },
+      "atomic_total": 26,
+      "atomic_passed": 26
+    },
+    "datetime_format": {
+      "check_type": "datetime_format",
+      "table_name": "respiratory_support",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'recorded_dttm': datetime format valid",
+          "details": {
+            "column": "recorded_dttm"
+          }
+        }
+      ],
+      "metrics": {
+        "datetime_columns_checked": 1
+      },
+      "atomic_total": 1,
+      "atomic_passed": 1
+    },
+    "categorical_values": {
+      "check_type": "categorical_values",
+      "table_name": "respiratory_support",
+      "passed": true,
+      "errors": [],
+      "warnings": [
+        {
+          "message": "5 invalid categorical values",
+          "details": {
+            "column": "device_category",
+            "top_invalid": [
+              {
+                "value": "Room Air",
+                "count": 10800
+              },
+              {
+                "value": "Nasal Cannula",
+                "count": 3626
+              },
+              {
+                "value": "High Flow NC",
+                "count": 3558
+              },
+              {
+                "value": "Face Mask",
+                "count": 2957
+              },
+              {
+                "value": "Trach Collar",
+                "count": 394
+              }
+            ],
+            "permissible_values": [
+              "imv",
+              "nippv",
+              "cpap",
+              "hfnc",
+              "face_mask",
+              "trach_collar",
+              "t_piece",
+              "nasal_cannula",
+              "room_air",
+              "other"
+            ]
+          }
+        },
+        {
+          "message": "4 invalid categorical values",
+          "details": {
+            "column": "mode_category",
+            "top_invalid": [
+              {
+                "value": "Assist Control-Volume Control",
+                "count": 8057
+              },
+              {
+                "value": "Pressure Support/CPAP",
+                "count": 2548
+              },
+              {
+                "value": "Pressure-Regulated Volume Control",
+                "count": 2308
+              },
+              {
+                "value": "Pressure Control",
+                "count": 297
+              }
+            ],
+            "permissible_values": [
+              "acvc",
+              "pressure_control",
+              "prvc",
+              "simv",
+              "ps_or_cpap",
+              "volume_support",
+              "aprv",
+              "t_piece",
+              "blow_by",
+              "other"
+            ]
+          }
+        }
+      ],
+      "info": [
+        {
+          "message": "Column 'tracheostomy': all values match mCIDE permissible values",
+          "details": {
+            "column": "tracheostomy"
+          }
+        }
+      ],
+      "metrics": {
+        "category_columns_checked": 3,
+        "columns_with_invalid_values": 2
+      },
+      "atomic_total": 3,
+      "atomic_passed": 3
+    },
+    "category_group_mapping": {
+      "check_type": "category_group_mapping",
+      "table_name": "respiratory_support",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No category-to-group mappings defined in schema",
+          "details": {}
+        }
+      ],
+      "metrics": {},
+      "atomic_total": 0,
+      "atomic_passed": 0
+    }
+  },
+  "completeness": {
+    "missingness": {
+      "check_type": "missingness",
+      "table_name": "respiratory_support",
+      "passed": false,
+      "errors": [
+        {
+          "message": "Column 'flow_rate_set' has 90.5% missing values",
+          "details": {
+            "column": "flow_rate_set",
+            "percent_missing": 90.5,
+            "severity": "error"
+          }
+        },
+        {
+          "message": "Column 'plateau_pressure_obs' has 76.05% missing values",
+          "details": {
+            "column": "plateau_pressure_obs",
+            "percent_missing": 76.05,
+            "severity": "error"
+          }
+        },
+        {
+          "message": "Column 'peak_inspiratory_pressure_obs' has 65.99% missing values",
+          "details": {
+            "column": "peak_inspiratory_pressure_obs",
+            "percent_missing": 65.99,
+            "severity": "error"
+          }
+        },
+        {
+          "message": "Column 'peep_obs' has 65.99% missing values",
+          "details": {
+            "column": "peep_obs",
+            "percent_missing": 65.99,
+            "severity": "error"
+          }
+        },
+        {
+          "message": "Column 'minute_vent_obs' has 65.99% missing values",
+          "details": {
+            "column": "minute_vent_obs",
+            "percent_missing": 65.99,
+            "severity": "error"
+          }
+        },
+        {
+          "message": "Column 'mean_airway_pressure_obs' has 65.99% missing values",
+          "details": {
+            "column": "mean_airway_pressure_obs",
+            "percent_missing": 65.99,
+            "severity": "error"
+          }
+        }
+      ],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'hospitalization_id': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "hospitalization_id",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'recorded_dttm': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "recorded_dttm",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'device_category': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "device_category",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'tracheostomy': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "tracheostomy",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        }
+      ],
+      "metrics": {
+        "total_rows": 37468,
+        "required_columns_checked": 10,
+        "missingness_stats": [
+          {
+            "column": "flow_rate_set",
+            "null_count": 33910,
+            "total_rows": 37468,
+            "percent_missing": 90.5
+          },
+          {
+            "column": "plateau_pressure_obs",
+            "null_count": 28496,
+            "total_rows": 37468,
+            "percent_missing": 76.05
+          },
+          {
+            "column": "peak_inspiratory_pressure_obs",
+            "null_count": 24726,
+            "total_rows": 37468,
+            "percent_missing": 65.99
+          },
+          {
+            "column": "peep_obs",
+            "null_count": 24726,
+            "total_rows": 37468,
+            "percent_missing": 65.99
+          },
+          {
+            "column": "minute_vent_obs",
+            "null_count": 24726,
+            "total_rows": 37468,
+            "percent_missing": 65.99
+          },
+          {
+            "column": "mean_airway_pressure_obs",
+            "null_count": 24726,
+            "total_rows": 37468,
+            "percent_missing": 65.99
+          },
+          {
+            "column": "hospitalization_id",
+            "null_count": 0,
+            "total_rows": 37468,
+            "percent_missing": 0.0
+          },
+          {
+            "column": "recorded_dttm",
+            "null_count": 0,
+            "total_rows": 37468,
+            "percent_missing": 0.0
+          },
+          {
+            "column": "device_category",
+            "null_count": 0,
+            "total_rows": 37468,
+            "percent_missing": 0.0
+          },
+          {
+            "column": "tracheostomy",
+            "null_count": 0,
+            "total_rows": 37468,
+            "percent_missing": 0.0
+          }
+        ]
+      },
+      "atomic_total": 22,
+      "atomic_passed": 16
+    },
+    "conditional_requirements": {
+      "check_type": "conditional_requirements",
+      "table_name": "respiratory_support",
+      "passed": true,
+      "errors": [],
+      "warnings": [
+        {
+          "message": "Conditional requirement violated: High Flow NC requires fio2_set and lpm_set",
+          "details": {
+            "condition": "device_category IN ['High Flow NC']",
+            "required_column": "lpm_set",
+            "rows_meeting_condition": 3558,
+            "rows_with_missing": 3558,
+            "percent_missing": 100.0
+          }
+        },
+        {
+          "message": "Conditional requirement violated: Trach Collar requires lpm_set and fio2_set",
+          "details": {
+            "condition": "device_category IN ['Trach Collar']",
+            "required_column": "lpm_set",
+            "rows_meeting_condition": 394,
+            "rows_with_missing": 394,
+            "percent_missing": 100.0
+          }
+        },
+        {
+          "message": "Conditional requirement violated: NIPPV PS/CPAP requires fio2_set, peep_set, peak_inspiratory_pressure_set, resp_rate_set, and inspiratory_time_set",
+          "details": {
+            "condition": "device_category IN ['NIPPV'] AND mode_category IN ['Pressure Support/CPAP']",
+            "required_column": "peak_inspiratory_pressure_set",
+            "rows_meeting_condition": 1700,
+            "rows_with_missing": 1700,
+            "percent_missing": 100.0
+          }
+        },
+        {
+          "message": "Conditional requirement violated: NIPPV PS/CPAP requires fio2_set, peep_set, peak_inspiratory_pressure_set, resp_rate_set, and inspiratory_time_set",
+          "details": {
+            "condition": "device_category IN ['NIPPV'] AND mode_category IN ['Pressure Support/CPAP']",
+            "required_column": "resp_rate_set",
+            "rows_meeting_condition": 1700,
+            "rows_with_missing": 1700,
+            "percent_missing": 100.0
+          }
+        },
+        {
+          "message": "Conditional requirement violated: NIPPV PS/CPAP requires fio2_set, peep_set, peak_inspiratory_pressure_set, resp_rate_set, and inspiratory_time_set",
+          "details": {
+            "condition": "device_category IN ['NIPPV'] AND mode_category IN ['Pressure Support/CPAP']",
+            "required_column": "inspiratory_time_set",
+            "rows_meeting_condition": 1700,
+            "rows_with_missing": 1700,
+            "percent_missing": 100.0
+          }
+        }
+      ],
+      "info": [
+        {
+          "message": "Conditional requirement satisfied: IMV/NIPPV must have mode_category specified \u2014 16,133/16,133 rows present (100%)",
+          "details": {
+            "column": "mode_category",
+            "condition": "device_category IN ['IMV', 'NIPPV']",
+            "rows_meeting_condition": 16133,
+            "rows_present": 16133,
+            "percent_present": 100.0
+          }
+        },
+        {
+          "message": "Conditional requirement satisfied: Face Mask requires lpm_set \u2014 2,957/2,957 rows present (100%)",
+          "details": {
+            "column": "lpm_set",
+            "condition": "device_category IN ['Face Mask']",
+            "rows_meeting_condition": 2957,
+            "rows_present": 2957,
+            "percent_present": 100.0
+          }
+        },
+        {
+          "message": "Conditional requirement satisfied: High Flow NC requires fio2_set and lpm_set \u2014 3,558/3,558 rows present (100%)",
+          "details": {
+            "column": "fio2_set",
+            "condition": "device_category IN ['High Flow NC']",
+            "rows_meeting_condition": 3558,
+            "rows_present": 3558,
+            "percent_present": 100.0
+          }
+        },
+        {
+          "message": "Conditional requirement satisfied: Nasal Cannula requires lpm_set \u2014 3,626/3,626 rows present (100%)",
+          "details": {
+            "column": "lpm_set",
+            "condition": "device_category IN ['Nasal Cannula']",
+            "rows_meeting_condition": 3626,
+            "rows_present": 3626,
+            "percent_present": 100.0
+          }
+        },
+        {
+          "message": "Conditional requirement satisfied: Trach Collar requires lpm_set and fio2_set \u2014 394/394 rows present (100%)",
+          "details": {
+            "column": "fio2_set",
+            "condition": "device_category IN ['Trach Collar']",
+            "rows_meeting_condition": 394,
+            "rows_present": 394,
+            "percent_present": 100.0
+          }
+        },
+        {
+          "message": "Conditional requirement satisfied: NIPPV PS/CPAP requires fio2_set, peep_set, peak_inspiratory_pressure_set, resp_rate_set, and inspiratory_time_set \u2014 1,700/1,700 rows present (100%)",
+          "details": {
+            "column": "fio2_set",
+            "condition": "device_category IN ['NIPPV'] AND mode_category IN ['Pressure Support/CPAP']",
+            "rows_meeting_condition": 1700,
+            "rows_present": 1700,
+            "percent_present": 100.0
+          }
+        },
+        {
+          "message": "Conditional requirement satisfied: NIPPV PS/CPAP requires fio2_set, peep_set, peak_inspiratory_pressure_set, resp_rate_set, and inspiratory_time_set \u2014 1,700/1,700 rows present (100%)",
+          "details": {
+            "column": "peep_set",
+            "condition": "device_category IN ['NIPPV'] AND mode_category IN ['Pressure Support/CPAP']",
+            "rows_meeting_condition": 1700,
+            "rows_present": 1700,
+            "percent_present": 100.0
+          }
+        },
+        {
+          "message": "Conditional requirement satisfied: IMV requires fio2_set and peep_set for all modes \u2014 12,742/12,742 rows present (100%)",
+          "details": {
+            "column": "fio2_set",
+            "condition": "device_category IN ['IMV']",
+            "rows_meeting_condition": 12742,
+            "rows_present": 12742,
+            "percent_present": 100.0
+          }
+        },
+        {
+          "message": "Conditional requirement satisfied: IMV requires fio2_set and peep_set for all modes \u2014 12,742/12,742 rows present (100%)",
+          "details": {
+            "column": "peep_set",
+            "condition": "device_category IN ['IMV']",
+            "rows_meeting_condition": 12742,
+            "rows_present": 12742,
+            "percent_present": 100.0
+          }
+        },
+        {
+          "message": "Conditional requirement satisfied: IMV Assist Control-Volume Control requires tidal_volume_set and resp_rate_set \u2014 8,057/8,057 rows present (100%)",
+          "details": {
+            "column": "tidal_volume_set",
+            "condition": "device_category IN ['IMV'] AND mode_category IN ['Assist Control-Volume Control']",
+            "rows_meeting_condition": 8057,
+            "rows_present": 8057,
+            "percent_present": 100.0
+          }
+        },
+        {
+          "message": "Conditional requirement satisfied: IMV Assist Control-Volume Control requires tidal_volume_set and resp_rate_set \u2014 8,057/8,057 rows present (100%)",
+          "details": {
+            "column": "resp_rate_set",
+            "condition": "device_category IN ['IMV'] AND mode_category IN ['Assist Control-Volume Control']",
+            "rows_meeting_condition": 8057,
+            "rows_present": 8057,
+            "percent_present": 100.0
+          }
+        },
+        {
+          "message": "Conditional requirement satisfied: IMV Pressure Support/CPAP requires pressure_support_set \u2014 848/848 rows present (100%)",
+          "details": {
+            "column": "pressure_support_set",
+            "condition": "device_category IN ['IMV'] AND mode_category IN ['Pressure Support/CPAP']",
+            "rows_meeting_condition": 848,
+            "rows_present": 848,
+            "percent_present": 100.0
+          }
+        },
+        {
+          "message": "Conditional requirement satisfied: IMV Pressure Control requires resp_rate_set, pressure_control_set, and inspiratory_time_set \u2014 297/297 rows present (100%)",
+          "details": {
+            "column": "resp_rate_set",
+            "condition": "device_category IN ['IMV'] AND mode_category IN ['Pressure Control']",
+            "rows_meeting_condition": 297,
+            "rows_present": 297,
+            "percent_present": 100.0
+          }
+        },
+        {
+          "message": "Conditional requirement satisfied: IMV Pressure Control requires resp_rate_set, pressure_control_set, and inspiratory_time_set \u2014 297/297 rows present (100%)",
+          "details": {
+            "column": "pressure_control_set",
+            "condition": "device_category IN ['IMV'] AND mode_category IN ['Pressure Control']",
+            "rows_meeting_condition": 297,
+            "rows_present": 297,
+            "percent_present": 100.0
+          }
+        },
+        {
+          "message": "Conditional requirement satisfied: IMV Pressure Control requires resp_rate_set, pressure_control_set, and inspiratory_time_set \u2014 297/297 rows present (100%)",
+          "details": {
+            "column": "inspiratory_time_set",
+            "condition": "device_category IN ['IMV'] AND mode_category IN ['Pressure Control']",
+            "rows_meeting_condition": 297,
+            "rows_present": 297,
+            "percent_present": 100.0
+          }
+        },
+        {
+          "message": "Conditional requirement satisfied: IMV PRVC requires tidal_volume_set and resp_rate_set \u2014 2,308/2,308 rows present (100%)",
+          "details": {
+            "column": "tidal_volume_set",
+            "condition": "device_category IN ['IMV'] AND mode_category IN ['Pressure-Regulated Volume Control']",
+            "rows_meeting_condition": 2308,
+            "rows_present": 2308,
+            "percent_present": 100.0
+          }
+        },
+        {
+          "message": "Conditional requirement satisfied: IMV PRVC requires tidal_volume_set and resp_rate_set \u2014 2,308/2,308 rows present (100%)",
+          "details": {
+            "column": "resp_rate_set",
+            "condition": "device_category IN ['IMV'] AND mode_category IN ['Pressure-Regulated Volume Control']",
+            "rows_meeting_condition": 2308,
+            "rows_present": 2308,
+            "percent_present": 100.0
+          }
+        },
+        {
+          "message": "Conditional requirement satisfied: IMV SIMV requires resp_rate_set and pressure_support_set \u2014 1,232/1,232 rows present (100%)",
+          "details": {
+            "column": "resp_rate_set",
+            "condition": "device_category IN ['IMV'] AND mode_category IN ['SIMV']",
+            "rows_meeting_condition": 1232,
+            "rows_present": 1232,
+            "percent_present": 100.0
+          }
+        },
+        {
+          "message": "Conditional requirement satisfied: IMV SIMV requires resp_rate_set and pressure_support_set \u2014 1,232/1,232 rows present (100%)",
+          "details": {
+            "column": "pressure_support_set",
+            "condition": "device_category IN ['IMV'] AND mode_category IN ['SIMV']",
+            "rows_meeting_condition": 1232,
+            "rows_present": 1232,
+            "percent_present": 100.0
+          }
+        }
+      ],
+      "metrics": {},
+      "atomic_total": 34,
+      "atomic_passed": 34
+    },
+    "mcide_value_coverage": {
+      "check_type": "mcide_value_coverage",
+      "table_name": "respiratory_support",
+      "passed": false,
+      "errors": [
+        {
+          "message": "Missing 8 mCIDE values: cpap, hfnc, face_mask, trach_collar, t_piece, nasal_cannula, room_air, other",
+          "details": {
+            "column": "device_category",
+            "missing_values": [
+              "cpap",
+              "hfnc",
+              "face_mask",
+              "trach_collar",
+              "t_piece",
+              "nasal_cannula",
+              "room_air",
+              "other"
+            ],
+            "coverage_percent": 20.0
+          }
+        },
+        {
+          "message": "Missing 8 mCIDE values: acvc, pressure_control, prvc, ps_or_cpap, volume_support, aprv, t_piece, blow_by",
+          "details": {
+            "column": "mode_category",
+            "missing_values": [
+              "acvc",
+              "pressure_control",
+              "prvc",
+              "ps_or_cpap",
+              "volume_support",
+              "aprv",
+              "t_piece",
+              "blow_by"
+            ],
+            "coverage_percent": 20.0
+          }
+        }
+      ],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'device_category': 2/10 mCIDE values present",
+          "details": {
+            "column": "device_category",
+            "found_values": 2,
+            "expected_values": 10,
+            "coverage_percent": 20.0,
+            "atomic_count": 2
+          }
+        },
+        {
+          "message": "Column 'mode_category': 2/10 mCIDE values present",
+          "details": {
+            "column": "mode_category",
+            "found_values": 2,
+            "expected_values": 10,
+            "coverage_percent": 20.0,
+            "atomic_count": 2
+          }
+        },
+        {
+          "message": "Column 'tracheostomy': 2/2 mCIDE values present",
+          "details": {
+            "column": "tracheostomy",
+            "found_values": 2,
+            "expected_values": 2,
+            "coverage_percent": 100.0,
+            "atomic_count": 2
+          }
+        }
+      ],
+      "metrics": {
+        "category_columns_checked": 3,
+        "coverage_by_column": {
+          "device_category": {
+            "expected_values": 10,
+            "found_values": 2,
+            "missing_values": [
+              "cpap",
+              "hfnc",
+              "face_mask",
+              "trach_collar",
+              "t_piece",
+              "nasal_cannula",
+              "room_air",
+              "other"
+            ],
+            "coverage_percent": 20.0
+          },
+          "mode_category": {
+            "expected_values": 10,
+            "found_values": 2,
+            "missing_values": [
+              "acvc",
+              "pressure_control",
+              "prvc",
+              "ps_or_cpap",
+              "volume_support",
+              "aprv",
+              "t_piece",
+              "blow_by"
+            ],
+            "coverage_percent": 20.0
+          },
+          "tracheostomy": {
+            "expected_values": 2,
+            "found_values": 2,
+            "missing_values": [],
+            "coverage_percent": 100.0
+          }
+        }
+      },
+      "atomic_total": 22,
+      "atomic_passed": 6
+    }
+  },
+  "relational": {},
+  "plausibility": {
+    "chronological_order": {
+      "check_type": "chronological_order",
+      "table_name": "respiratory_support",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No chronological order rules defined for this table",
+          "details": {}
+        }
+      ],
+      "metrics": {},
+      "atomic_total": 0,
+      "atomic_passed": 0
+    },
+    "numeric_range_plausibility": {
+      "check_type": "numeric_range_plausibility",
+      "table_name": "respiratory_support",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'fio2_set': all 37,468 values within range [0.21, 1.0]",
+          "details": {
+            "column": "fio2_set",
+            "total": 37468,
+            "atomic_count": 1
+          }
+        },
+        {
+          "message": "Column 'lpm_set': all 6,583 values within range [0.0, 60.0]",
+          "details": {
+            "column": "lpm_set",
+            "total": 6583,
+            "atomic_count": 1
+          }
+        },
+        {
+          "message": "Column 'tidal_volume_set': all 12,742 values within range [100.0, 3000.0]",
+          "details": {
+            "column": "tidal_volume_set",
+            "total": 12742,
+            "atomic_count": 1
+          }
+        },
+        {
+          "message": "Column 'resp_rate_set': all 12,742 values within range [0, 200]",
+          "details": {
+            "column": "resp_rate_set",
+            "total": 12742,
+            "atomic_count": 1
+          }
+        },
+        {
+          "message": "Column 'pressure_control_set': all 297 values within range [-50.0, 50.0]",
+          "details": {
+            "column": "pressure_control_set",
+            "total": 297,
+            "atomic_count": 1
+          }
+        },
+        {
+          "message": "Column 'pressure_support_set': all 5,471 values within range [-50.0, 50.0]",
+          "details": {
+            "column": "pressure_support_set",
+            "total": 5471,
+            "atomic_count": 1
+          }
+        },
+        {
+          "message": "Column 'flow_rate_set': all 3,558 values within range [-50.0, 100.0]",
+          "details": {
+            "column": "flow_rate_set",
+            "total": 3558,
+            "atomic_count": 1
+          }
+        },
+        {
+          "message": "Column 'peak_inspiratory_pressure_set': all 12,742 values within range [-50.0, 100.0]",
+          "details": {
+            "column": "peak_inspiratory_pressure_set",
+            "total": 12742,
+            "atomic_count": 1
+          }
+        },
+        {
+          "message": "Column 'inspiratory_time_set': all 12,742 values within range [-1.0, 50.0]",
+          "details": {
+            "column": "inspiratory_time_set",
+            "total": 12742,
+            "atomic_count": 1
+          }
+        },
+        {
+          "message": "Column 'peep_set': all 16,133 values within range [0.0, 30.0]",
+          "details": {
+            "column": "peep_set",
+            "total": 16133,
+            "atomic_count": 1
+          }
+        },
+        {
+          "message": "Column 'tidal_volume_obs': all 12,742 values within range [100.0, 3000.0]",
+          "details": {
+            "column": "tidal_volume_obs",
+            "total": 12742,
+            "atomic_count": 1
+          }
+        },
+        {
+          "message": "Column 'resp_rate_obs': all 12,742 values within range [0, 200]",
+          "details": {
+            "column": "resp_rate_obs",
+            "total": 12742,
+            "atomic_count": 1
+          }
+        },
+        {
+          "message": "Column 'plateau_pressure_obs': all 8,972 values within range [0.0, 100.0]",
+          "details": {
+            "column": "plateau_pressure_obs",
+            "total": 8972,
+            "atomic_count": 1
+          }
+        },
+        {
+          "message": "Column 'peak_inspiratory_pressure_obs': all 12,742 values within range [-50.0, 100.0]",
+          "details": {
+            "column": "peak_inspiratory_pressure_obs",
+            "total": 12742,
+            "atomic_count": 1
+          }
+        },
+        {
+          "message": "Column 'peep_obs': all 12,742 values within range [0.0, 50.0]",
+          "details": {
+            "column": "peep_obs",
+            "total": 12742,
+            "atomic_count": 1
+          }
+        },
+        {
+          "message": "Column 'minute_vent_obs': all 12,742 values within range [0.0, 40.0]",
+          "details": {
+            "column": "minute_vent_obs",
+            "total": 12742,
+            "atomic_count": 1
+          }
+        },
+        {
+          "message": "Column 'mean_airway_pressure_obs': all 12,742 values within range [0.0, 50.0]",
+          "details": {
+            "column": "mean_airway_pressure_obs",
+            "total": 12742,
+            "atomic_count": 1
+          }
+        },
+        {
+          "message": "All numeric values within plausible ranges (fio2_set, flow_rate_set, inspiratory_time_set, lpm_set, mean_airway_pressure_obs, minute_vent_obs, peak_inspiratory_pressure_obs, peak_inspiratory_pressure_set, peep_obs, peep_set, plateau_pressure_obs, pressure_control_set, pressure_support_set, resp_rate_obs, resp_rate_set, tidal_volume_obs, tidal_volume_set)",
+          "details": {
+            "columns_checked": [
+              "fio2_set",
+              "flow_rate_set",
+              "inspiratory_time_set",
+              "lpm_set",
+              "mean_airway_pressure_obs",
+              "minute_vent_obs",
+              "peak_inspiratory_pressure_obs",
+              "peak_inspiratory_pressure_set",
+              "peep_obs",
+              "peep_set",
+              "plateau_pressure_obs",
+              "pressure_control_set",
+              "pressure_support_set",
+              "resp_rate_obs",
+              "resp_rate_set",
+              "tidal_volume_obs",
+              "tidal_volume_set"
+            ]
+          }
+        }
+      ],
+      "metrics": {
+        "columns_checked": 17,
+        "out_of_range_summary": {
+          "fio2_set": {
+            "total_non_null": 37468,
+            "out_of_range": 0,
+            "out_of_range_percent": 0.0,
+            "below_min": 0,
+            "above_max": 0,
+            "min": 0.21,
+            "max": 1.0
+          },
+          "lpm_set": {
+            "total_non_null": 6583,
+            "out_of_range": 0,
+            "out_of_range_percent": 0.0,
+            "below_min": 0,
+            "above_max": 0,
+            "min": 0.0,
+            "max": 60.0
+          },
+          "tidal_volume_set": {
+            "total_non_null": 12742,
+            "out_of_range": 0,
+            "out_of_range_percent": 0.0,
+            "below_min": 0,
+            "above_max": 0,
+            "min": 100.0,
+            "max": 3000.0
+          },
+          "resp_rate_set": {
+            "total_non_null": 12742,
+            "out_of_range": 0,
+            "out_of_range_percent": 0.0,
+            "below_min": 0,
+            "above_max": 0,
+            "min": 0,
+            "max": 200
+          },
+          "pressure_control_set": {
+            "total_non_null": 297,
+            "out_of_range": 0,
+            "out_of_range_percent": 0.0,
+            "below_min": 0,
+            "above_max": 0,
+            "min": -50.0,
+            "max": 50.0
+          },
+          "pressure_support_set": {
+            "total_non_null": 5471,
+            "out_of_range": 0,
+            "out_of_range_percent": 0.0,
+            "below_min": 0,
+            "above_max": 0,
+            "min": -50.0,
+            "max": 50.0
+          },
+          "flow_rate_set": {
+            "total_non_null": 3558,
+            "out_of_range": 0,
+            "out_of_range_percent": 0.0,
+            "below_min": 0,
+            "above_max": 0,
+            "min": -50.0,
+            "max": 100.0
+          },
+          "peak_inspiratory_pressure_set": {
+            "total_non_null": 12742,
+            "out_of_range": 0,
+            "out_of_range_percent": 0.0,
+            "below_min": 0,
+            "above_max": 0,
+            "min": -50.0,
+            "max": 100.0
+          },
+          "inspiratory_time_set": {
+            "total_non_null": 12742,
+            "out_of_range": 0,
+            "out_of_range_percent": 0.0,
+            "below_min": 0,
+            "above_max": 0,
+            "min": -1.0,
+            "max": 50.0
+          },
+          "peep_set": {
+            "total_non_null": 16133,
+            "out_of_range": 0,
+            "out_of_range_percent": 0.0,
+            "below_min": 0,
+            "above_max": 0,
+            "min": 0.0,
+            "max": 30.0
+          },
+          "tidal_volume_obs": {
+            "total_non_null": 12742,
+            "out_of_range": 0,
+            "out_of_range_percent": 0.0,
+            "below_min": 0,
+            "above_max": 0,
+            "min": 100.0,
+            "max": 3000.0
+          },
+          "resp_rate_obs": {
+            "total_non_null": 12742,
+            "out_of_range": 0,
+            "out_of_range_percent": 0.0,
+            "below_min": 0,
+            "above_max": 0,
+            "min": 0,
+            "max": 200
+          },
+          "plateau_pressure_obs": {
+            "total_non_null": 8972,
+            "out_of_range": 0,
+            "out_of_range_percent": 0.0,
+            "below_min": 0,
+            "above_max": 0,
+            "min": 0.0,
+            "max": 100.0
+          },
+          "peak_inspiratory_pressure_obs": {
+            "total_non_null": 12742,
+            "out_of_range": 0,
+            "out_of_range_percent": 0.0,
+            "below_min": 0,
+            "above_max": 0,
+            "min": -50.0,
+            "max": 100.0
+          },
+          "peep_obs": {
+            "total_non_null": 12742,
+            "out_of_range": 0,
+            "out_of_range_percent": 0.0,
+            "below_min": 0,
+            "above_max": 0,
+            "min": 0.0,
+            "max": 50.0
+          },
+          "minute_vent_obs": {
+            "total_non_null": 12742,
+            "out_of_range": 0,
+            "out_of_range_percent": 0.0,
+            "below_min": 0,
+            "above_max": 0,
+            "min": 0.0,
+            "max": 40.0
+          },
+          "mean_airway_pressure_obs": {
+            "total_non_null": 12742,
+            "out_of_range": 0,
+            "out_of_range_percent": 0.0,
+            "below_min": 0,
+            "above_max": 0,
+            "min": 0.0,
+            "max": 50.0
+          }
+        }
+      },
+      "atomic_total": 17,
+      "atomic_passed": 17
+    },
+    "field_plausibility": {
+      "check_type": "field_plausibility",
+      "table_name": "respiratory_support",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No field plausibility rules defined for this table",
+          "details": {}
+        }
+      ],
+      "metrics": {},
+      "atomic_total": 0,
+      "atomic_passed": 0
+    },
+    "category_temporal_consistency": {
+      "check_type": "category_temporal_consistency",
+      "table_name": "respiratory_support",
+      "passed": true,
+      "errors": [],
+      "warnings": [
+        {
+          "message": "device_category: face mask absent in 1/8 years (2018-2025)",
+          "details": {
+            "column": "device_category",
+            "value": "face mask",
+            "absent_years": [
+              2025
+            ],
+            "total_years": 8,
+            "yearly_counts": {
+              "2018": 5,
+              "2019": 3,
+              "2020": 7,
+              "2021": 6,
+              "2022": 6,
+              "2023": 4,
+              "2024": 7,
+              "2025": 0
+            }
+          }
+        },
+        {
+          "message": "device_category: high flow nc absent in 1/8 years (2018-2025)",
+          "details": {
+            "column": "device_category",
+            "value": "high flow nc",
+            "absent_years": [
+              2025
+            ],
+            "total_years": 8,
+            "yearly_counts": {
+              "2018": 6,
+              "2019": 8,
+              "2020": 13,
+              "2021": 10,
+              "2022": 4,
+              "2023": 7,
+              "2024": 10,
+              "2025": 0
+            }
+          }
+        },
+        {
+          "message": "device_category: imv absent in 1/8 years (2018-2025)",
+          "details": {
+            "column": "device_category",
+            "value": "imv",
+            "absent_years": [
+              2025
+            ],
+            "total_years": 8,
+            "yearly_counts": {
+              "2018": 7,
+              "2019": 11,
+              "2020": 6,
+              "2021": 8,
+              "2022": 8,
+              "2023": 8,
+              "2024": 9,
+              "2025": 0
+            }
+          }
+        },
+        {
+          "message": "device_category: nasal cannula absent in 1/8 years (2018-2025)",
+          "details": {
+            "column": "device_category",
+            "value": "nasal cannula",
+            "absent_years": [
+              2025
+            ],
+            "total_years": 8,
+            "yearly_counts": {
+              "2018": 10,
+              "2019": 12,
+              "2020": 14,
+              "2021": 8,
+              "2022": 12,
+              "2023": 7,
+              "2024": 11,
+              "2025": 0
+            }
+          }
+        },
+        {
+          "message": "device_category: nippv absent in 1/8 years (2018-2025)",
+          "details": {
+            "column": "device_category",
+            "value": "nippv",
+            "absent_years": [
+              2025
+            ],
+            "total_years": 8,
+            "yearly_counts": {
+              "2018": 6,
+              "2019": 8,
+              "2020": 9,
+              "2021": 8,
+              "2022": 5,
+              "2023": 4,
+              "2024": 5,
+              "2025": 0
+            }
+          }
+        },
+        {
+          "message": "device_category: trach collar absent in 7/8 years (2018-2025)",
+          "details": {
+            "column": "device_category",
+            "value": "trach collar",
+            "absent_years": [
+              2018,
+              2019,
+              2020,
+              2022,
+              2023,
+              2024,
+              2025
+            ],
+            "total_years": 8,
+            "yearly_counts": {
+              "2018": 0,
+              "2019": 0,
+              "2020": 0,
+              "2021": 1,
+              "2022": 0,
+              "2023": 0,
+              "2024": 0,
+              "2025": 0
+            }
+          }
+        }
+      ],
+      "info": [
+        {
+          "message": "device_category: room air present in 8/8 years (2018-2025)",
+          "details": {
+            "column": "device_category",
+            "value": "room air",
+            "yearly_counts": {
+              "2018": 12,
+              "2019": 13,
+              "2020": 13,
+              "2021": 10,
+              "2022": 12,
+              "2023": 7,
+              "2024": 12,
+              "2025": 1
+            }
+          }
+        },
+        {
+          "message": "mode_category: assist control-volume control present in 7/7 years (2018-2024)",
+          "details": {
+            "column": "mode_category",
+            "value": "assist control-volume control",
+            "yearly_counts": {
+              "2018": 7,
+              "2019": 11,
+              "2020": 6,
+              "2021": 8,
+              "2022": 8,
+              "2023": 8,
+              "2024": 9
+            }
+          }
+        },
+        {
+          "message": "mode_category: other present in 7/7 years (2018-2024)",
+          "details": {
+            "column": "mode_category",
+            "value": "other",
+            "yearly_counts": {
+              "2018": 6,
+              "2019": 8,
+              "2020": 9,
+              "2021": 8,
+              "2022": 5,
+              "2023": 4,
+              "2024": 5
+            }
+          }
+        },
+        {
+          "message": "mode_category: pressure control present in 7/7 years (2018-2024)",
+          "details": {
+            "column": "mode_category",
+            "value": "pressure control",
+            "yearly_counts": {
+              "2018": 6,
+              "2019": 7,
+              "2020": 1,
+              "2021": 5,
+              "2022": 8,
+              "2023": 4,
+              "2024": 8
+            }
+          }
+        },
+        {
+          "message": "mode_category: pressure support/cpap present in 7/7 years (2018-2024)",
+          "details": {
+            "column": "mode_category",
+            "value": "pressure support/cpap",
+            "yearly_counts": {
+              "2018": 9,
+              "2019": 13,
+              "2020": 12,
+              "2021": 11,
+              "2022": 10,
+              "2023": 9,
+              "2024": 12
+            }
+          }
+        },
+        {
+          "message": "mode_category: pressure-regulated volume control present in 7/7 years (2018-2024)",
+          "details": {
+            "column": "mode_category",
+            "value": "pressure-regulated volume control",
+            "yearly_counts": {
+              "2018": 7,
+              "2019": 10,
+              "2020": 6,
+              "2021": 8,
+              "2022": 8,
+              "2023": 8,
+              "2024": 9
+            }
+          }
+        },
+        {
+          "message": "mode_category: simv present in 7/7 years (2018-2024)",
+          "details": {
+            "column": "mode_category",
+            "value": "simv",
+            "yearly_counts": {
+              "2018": 7,
+              "2019": 8,
+              "2020": 5,
+              "2021": 8,
+              "2022": 8,
+              "2023": 8,
+              "2024": 9
+            }
+          }
+        },
+        {
+          "message": "tracheostomy: 0 present in 8/8 years (2018-2025)",
+          "details": {
+            "column": "tracheostomy",
+            "value": "0",
+            "yearly_counts": {
+              "2018": 29,
+              "2019": 38,
+              "2020": 32,
+              "2021": 21,
+              "2022": 31,
+              "2023": 26,
+              "2024": 28,
+              "2025": 1
+            }
+          }
+        },
+        {
+          "message": "tracheostomy: 1 present in 3/8 years (2018-2025)",
+          "details": {
+            "column": "tracheostomy",
+            "value": "1",
+            "yearly_counts": {
+              "2018": 0,
+              "2019": 0,
+              "2020": 1,
+              "2021": 1,
+              "2022": 0,
+              "2023": 0,
+              "2024": 2,
+              "2025": 0
+            }
+          }
+        }
+      ],
+      "metrics": {
+        "category_columns_checked": 3,
+        "yearly_distributions": {
+          "device_category": {
+            "2018": {
+              "face mask": 5,
+              "high flow nc": 6,
+              "imv": 7,
+              "nasal cannula": 10,
+              "nippv": 6,
+              "room air": 12
+            },
+            "2019": {
+              "face mask": 3,
+              "high flow nc": 8,
+              "imv": 11,
+              "nasal cannula": 12,
+              "nippv": 8,
+              "room air": 13
+            },
+            "2020": {
+              "face mask": 7,
+              "high flow nc": 13,
+              "imv": 6,
+              "nasal cannula": 14,
+              "nippv": 9,
+              "room air": 13
+            },
+            "2021": {
+              "face mask": 6,
+              "high flow nc": 10,
+              "imv": 8,
+              "nasal cannula": 8,
+              "nippv": 8,
+              "room air": 10,
+              "trach collar": 1
+            },
+            "2022": {
+              "face mask": 6,
+              "high flow nc": 4,
+              "imv": 8,
+              "nasal cannula": 12,
+              "nippv": 5,
+              "room air": 12
+            },
+            "2023": {
+              "face mask": 4,
+              "high flow nc": 7,
+              "imv": 8,
+              "nasal cannula": 7,
+              "nippv": 4,
+              "room air": 7
+            },
+            "2024": {
+              "face mask": 7,
+              "high flow nc": 10,
+              "imv": 9,
+              "nasal cannula": 11,
+              "nippv": 5,
+              "room air": 12
+            },
+            "2025": {
+              "room air": 1
+            }
+          },
+          "mode_category": {
+            "2018": {
+              "assist control-volume control": 7,
+              "other": 6,
+              "pressure control": 6,
+              "pressure support/cpap": 9,
+              "pressure-regulated volume control": 7,
+              "simv": 7
+            },
+            "2019": {
+              "assist control-volume control": 11,
+              "other": 8,
+              "pressure control": 7,
+              "pressure support/cpap": 13,
+              "pressure-regulated volume control": 10,
+              "simv": 8
+            },
+            "2020": {
+              "assist control-volume control": 6,
+              "other": 9,
+              "pressure control": 1,
+              "pressure support/cpap": 12,
+              "pressure-regulated volume control": 6,
+              "simv": 5
+            },
+            "2021": {
+              "assist control-volume control": 8,
+              "other": 8,
+              "pressure control": 5,
+              "pressure support/cpap": 11,
+              "pressure-regulated volume control": 8,
+              "simv": 8
+            },
+            "2022": {
+              "assist control-volume control": 8,
+              "other": 5,
+              "pressure control": 8,
+              "pressure support/cpap": 10,
+              "pressure-regulated volume control": 8,
+              "simv": 8
+            },
+            "2023": {
+              "assist control-volume control": 8,
+              "other": 4,
+              "pressure control": 4,
+              "pressure support/cpap": 9,
+              "pressure-regulated volume control": 8,
+              "simv": 8
+            },
+            "2024": {
+              "assist control-volume control": 9,
+              "other": 5,
+              "pressure control": 8,
+              "pressure support/cpap": 12,
+              "pressure-regulated volume control": 9,
+              "simv": 9
+            }
+          },
+          "tracheostomy": {
+            "2018": {
+              "0": 29
+            },
+            "2019": {
+              "0": 38
+            },
+            "2020": {
+              "0": 32,
+              "1": 1
+            },
+            "2021": {
+              "0": 21,
+              "1": 1
+            },
+            "2022": {
+              "0": 31
+            },
+            "2023": {
+              "0": 26
+            },
+            "2024": {
+              "0": 28,
+              "1": 2
+            },
+            "2025": {
+              "0": 1
+            }
+          }
+        },
+        "missing_in_years": {
+          "device_category": {
+            "imv": [
+              2025
+            ],
+            "trach collar": [
+              2018,
+              2019,
+              2020,
+              2022,
+              2023,
+              2024,
+              2025
+            ],
+            "face mask": [
+              2025
+            ],
+            "nasal cannula": [
+              2025
+            ],
+            "high flow nc": [
+              2025
+            ],
+            "nippv": [
+              2025
+            ]
+          },
+          "tracheostomy": {
+            "1": [
+              2018,
+              2019,
+              2022,
+              2023,
+              2025
+            ]
+          }
+        },
+        "monthly_trends": {
+          "device_category": [
+            {
+              "month_year": "2018-01",
+              "device_category": "imv",
+              "n": 1
+            },
+            {
+              "month_year": "2018-01",
+              "device_category": "nasal cannula",
+              "n": 1
+            },
+            {
+              "month_year": "2018-01",
+              "device_category": "room air",
+              "n": 3
+            },
+            {
+              "month_year": "2018-02",
+              "device_category": "face mask",
+              "n": 1
+            },
+            {
+              "month_year": "2018-02",
+              "device_category": "high flow nc",
+              "n": 1
+            },
+            {
+              "month_year": "2018-02",
+              "device_category": "imv",
+              "n": 1
+            },
+            {
+              "month_year": "2018-02",
+              "device_category": "nasal cannula",
+              "n": 1
+            },
+            {
+              "month_year": "2018-02",
+              "device_category": "room air",
+              "n": 1
+            },
+            {
+              "month_year": "2018-03",
+              "device_category": "high flow nc",
+              "n": 1
+            },
+            {
+              "month_year": "2018-03",
+              "device_category": "imv",
+              "n": 1
+            },
+            {
+              "month_year": "2018-03",
+              "device_category": "nippv",
+              "n": 1
+            },
+            {
+              "month_year": "2018-03",
+              "device_category": "room air",
+              "n": 2
+            },
+            {
+              "month_year": "2018-04",
+              "device_category": "face mask",
+              "n": 1
+            },
+            {
+              "month_year": "2018-04",
+              "device_category": "high flow nc",
+              "n": 1
+            },
+            {
+              "month_year": "2018-04",
+              "device_category": "imv",
+              "n": 1
+            },
+            {
+              "month_year": "2018-04",
+              "device_category": "nasal cannula",
+              "n": 2
+            },
+            {
+              "month_year": "2018-04",
+              "device_category": "nippv",
+              "n": 1
+            },
+            {
+              "month_year": "2018-04",
+              "device_category": "room air",
+              "n": 5
+            },
+            {
+              "month_year": "2018-05",
+              "device_category": "room air",
+              "n": 3
+            },
+            {
+              "month_year": "2018-06",
+              "device_category": "nasal cannula",
+              "n": 1
+            },
+            {
+              "month_year": "2018-06",
+              "device_category": "room air",
+              "n": 3
+            },
+            {
+              "month_year": "2018-07",
+              "device_category": "face mask",
+              "n": 1
+            },
+            {
+              "month_year": "2018-07",
+              "device_category": "high flow nc",
+              "n": 1
+            },
+            {
+              "month_year": "2018-07",
+              "device_category": "imv",
+              "n": 1
+            },
+            {
+              "month_year": "2018-07",
+              "device_category": "nasal cannula",
+              "n": 2
+            },
+            {
+              "month_year": "2018-07",
+              "device_category": "room air",
+              "n": 1
+            },
+            {
+              "month_year": "2018-08",
+              "device_category": "face mask",
+              "n": 1
+            },
+            {
+              "month_year": "2018-08",
+              "device_category": "high flow nc",
+              "n": 2
+            },
+            {
+              "month_year": "2018-08",
+              "device_category": "imv",
+              "n": 3
+            },
+            {
+              "month_year": "2018-08",
+              "device_category": "nasal cannula",
+              "n": 1
+            },
+            {
+              "month_year": "2018-08",
+              "device_category": "nippv",
+              "n": 3
+            },
+            {
+              "month_year": "2018-09",
+              "device_category": "face mask",
+              "n": 1
+            },
+            {
+              "month_year": "2018-09",
+              "device_category": "high flow nc",
+              "n": 2
+            },
+            {
+              "month_year": "2018-09",
+              "device_category": "imv",
+              "n": 2
+            },
+            {
+              "month_year": "2018-09",
+              "device_category": "nasal cannula",
+              "n": 1
+            },
+            {
+              "month_year": "2018-10",
+              "device_category": "imv",
+              "n": 2
+            },
+            {
+              "month_year": "2018-11",
+              "device_category": "high flow nc",
+              "n": 1
+            },
+            {
+              "month_year": "2018-11",
+              "device_category": "imv",
+              "n": 1
+            },
+            {
+              "month_year": "2018-11",
+              "device_category": "nasal cannula",
+              "n": 3
+            },
+            {
+              "month_year": "2018-11",
+              "device_category": "nippv",
+              "n": 1
+            },
+            {
+              "month_year": "2019-01",
+              "device_category": "imv",
+              "n": 2
+            },
+            {
+              "month_year": "2019-01",
+              "device_category": "nasal cannula",
+              "n": 3
+            },
+            {
+              "month_year": "2019-01",
+              "device_category": "nippv",
+              "n": 1
+            },
+            {
+              "month_year": "2019-02",
+              "device_category": "high flow nc",
+              "n": 1
+            },
+            {
+              "month_year": "2019-02",
+              "device_category": "imv",
+              "n": 2
+            },
+            {
+              "month_year": "2019-02",
+              "device_category": "nasal cannula",
+              "n": 1
+            },
+            {
+              "month_year": "2019-02",
+              "device_category": "nippv",
+              "n": 1
+            },
+            {
+              "month_year": "2019-02",
+              "device_category": "room air",
+              "n": 1
+            },
+            {
+              "month_year": "2019-03",
+              "device_category": "high flow nc",
+              "n": 1
+            },
+            {
+              "month_year": "2019-03",
+              "device_category": "nasal cannula",
+              "n": 3
+            },
+            {
+              "month_year": "2019-03",
+              "device_category": "nippv",
+              "n": 1
+            },
+            {
+              "month_year": "2019-03",
+              "device_category": "room air",
+              "n": 1
+            },
+            {
+              "month_year": "2019-04",
+              "device_category": "nippv",
+              "n": 1
+            },
+            {
+              "month_year": "2019-04",
+              "device_category": "room air",
+              "n": 1
+            },
+            {
+              "month_year": "2019-05",
+              "device_category": "high flow nc",
+              "n": 1
+            },
+            {
+              "month_year": "2019-05",
+              "device_category": "imv",
+              "n": 1
+            },
+            {
+              "month_year": "2019-05",
+              "device_category": "nasal cannula",
+              "n": 2
+            },
+            {
+              "month_year": "2019-05",
+              "device_category": "nippv",
+              "n": 1
+            },
+            {
+              "month_year": "2019-05",
+              "device_category": "room air",
+              "n": 3
+            },
+            {
+              "month_year": "2019-06",
+              "device_category": "face mask",
+              "n": 1
+            },
+            {
+              "month_year": "2019-06",
+              "device_category": "imv",
+              "n": 2
+            },
+            {
+              "month_year": "2019-06",
+              "device_category": "nasal cannula",
+              "n": 1
+            },
+            {
+              "month_year": "2019-06",
+              "device_category": "room air",
+              "n": 2
+            },
+            {
+              "month_year": "2019-07",
+              "device_category": "high flow nc",
+              "n": 1
+            },
+            {
+              "month_year": "2019-07",
+              "device_category": "imv",
+              "n": 2
+            },
+            {
+              "month_year": "2019-07",
+              "device_category": "nasal cannula",
+              "n": 1
+            },
+            {
+              "month_year": "2019-07",
+              "device_category": "nippv",
+              "n": 1
+            },
+            {
+              "month_year": "2019-07",
+              "device_category": "room air",
+              "n": 2
+            },
+            {
+              "month_year": "2019-08",
+              "device_category": "high flow nc",
+              "n": 1
+            },
+            {
+              "month_year": "2019-08",
+              "device_category": "nippv",
+              "n": 1
+            },
+            {
+              "month_year": "2019-08",
+              "device_category": "room air",
+              "n": 2
+            },
+            {
+              "month_year": "2019-09",
+              "device_category": "high flow nc",
+              "n": 1
+            },
+            {
+              "month_year": "2019-09",
+              "device_category": "imv",
+              "n": 1
+            },
+            {
+              "month_year": "2019-09",
+              "device_category": "room air",
+              "n": 1
+            },
+            {
+              "month_year": "2019-10",
+              "device_category": "high flow nc",
+              "n": 2
+            },
+            {
+              "month_year": "2019-10",
+              "device_category": "imv",
+              "n": 1
+            },
+            {
+              "month_year": "2019-11",
+              "device_category": "face mask",
+              "n": 1
+            },
+            {
+              "month_year": "2019-11",
+              "device_category": "high flow nc",
+              "n": 1
+            },
+            {
+              "month_year": "2019-11",
+              "device_category": "imv",
+              "n": 1
+            },
+            {
+              "month_year": "2019-11",
+              "device_category": "nasal cannula",
+              "n": 2
+            },
+            {
+              "month_year": "2019-11",
+              "device_category": "nippv",
+              "n": 1
+            },
+            {
+              "month_year": "2019-11",
+              "device_category": "room air",
+              "n": 2
+            },
+            {
+              "month_year": "2019-12",
+              "device_category": "face mask",
+              "n": 1
+            },
+            {
+              "month_year": "2019-12",
+              "device_category": "high flow nc",
+              "n": 1
+            },
+            {
+              "month_year": "2019-12",
+              "device_category": "imv",
+              "n": 1
+            },
+            {
+              "month_year": "2019-12",
+              "device_category": "nasal cannula",
+              "n": 2
+            },
+            {
+              "month_year": "2019-12",
+              "device_category": "nippv",
+              "n": 1
+            },
+            {
+              "month_year": "2019-12",
+              "device_category": "room air",
+              "n": 3
+            },
+            {
+              "month_year": "2020-01",
+              "device_category": "nasal cannula",
+              "n": 1
+            },
+            {
+              "month_year": "2020-01",
+              "device_category": "nippv",
+              "n": 1
+            },
+            {
+              "month_year": "2020-01",
+              "device_category": "room air",
+              "n": 2
+            },
+            {
+              "month_year": "2020-02",
+              "device_category": "face mask",
+              "n": 1
+            },
+            {
+              "month_year": "2020-02",
+              "device_category": "high flow nc",
+              "n": 1
+            },
+            {
+              "month_year": "2020-02",
+              "device_category": "nasal cannula",
+              "n": 2
+            },
+            {
+              "month_year": "2020-02",
+              "device_category": "nippv",
+              "n": 1
+            },
+            {
+              "month_year": "2020-02",
+              "device_category": "room air",
+              "n": 2
+            },
+            {
+              "month_year": "2020-03",
+              "device_category": "room air",
+              "n": 1
+            },
+            {
+              "month_year": "2020-04",
+              "device_category": "face mask",
+              "n": 1
+            },
+            {
+              "month_year": "2020-04",
+              "device_category": "high flow nc",
+              "n": 2
+            },
+            {
+              "month_year": "2020-04",
+              "device_category": "imv",
+              "n": 1
+            },
+            {
+              "month_year": "2020-04",
+              "device_category": "nasal cannula",
+              "n": 1
+            },
+            {
+              "month_year": "2020-04",
+              "device_category": "nippv",
+              "n": 1
+            },
+            {
+              "month_year": "2020-04",
+              "device_category": "room air",
+              "n": 1
+            },
+            {
+              "month_year": "2020-05",
+              "device_category": "high flow nc",
+              "n": 3
+            },
+            {
+              "month_year": "2020-05",
+              "device_category": "imv",
+              "n": 1
+            },
+            {
+              "month_year": "2020-05",
+              "device_category": "nasal cannula",
+              "n": 1
+            },
+            {
+              "month_year": "2020-05",
+              "device_category": "nippv",
+              "n": 1
+            },
+            {
+              "month_year": "2020-06",
+              "device_category": "face mask",
+              "n": 1
+            },
+            {
+              "month_year": "2020-06",
+              "device_category": "high flow nc",
+              "n": 1
+            },
+            {
+              "month_year": "2020-06",
+              "device_category": "imv",
+              "n": 1
+            },
+            {
+              "month_year": "2020-06",
+              "device_category": "nasal cannula",
+              "n": 3
+            },
+            {
+              "month_year": "2020-06",
+              "device_category": "nippv",
+              "n": 2
+            },
+            {
+              "month_year": "2020-06",
+              "device_category": "room air",
+              "n": 4
+            },
+            {
+              "month_year": "2020-07",
+              "device_category": "face mask",
+              "n": 2
+            },
+            {
+              "month_year": "2020-07",
+              "device_category": "high flow nc",
+              "n": 1
+            },
+            {
+              "month_year": "2020-07",
+              "device_category": "nasal cannula",
+              "n": 1
+            },
+            {
+              "month_year": "2020-07",
+              "device_category": "nippv",
+              "n": 1
+            },
+            {
+              "month_year": "2020-07",
+              "device_category": "room air",
+              "n": 3
+            },
+            {
+              "month_year": "2020-08",
+              "device_category": "high flow nc",
+              "n": 1
+            },
+            {
+              "month_year": "2020-08",
+              "device_category": "imv",
+              "n": 1
+            },
+            {
+              "month_year": "2020-08",
+              "device_category": "nasal cannula",
+              "n": 1
+            },
+            {
+              "month_year": "2020-08",
+              "device_category": "nippv",
+              "n": 1
+            },
+            {
+              "month_year": "2020-09",
+              "device_category": "face mask",
+              "n": 1
+            },
+            {
+              "month_year": "2020-09",
+              "device_category": "high flow nc",
+              "n": 1
+            },
+            {
+              "month_year": "2020-09",
+              "device_category": "imv",
+              "n": 1
+            },
+            {
+              "month_year": "2020-09",
+              "device_category": "nasal cannula",
+              "n": 1
+            },
+            {
+              "month_year": "2020-09",
+              "device_category": "room air",
+              "n": 2
+            },
+            {
+              "month_year": "2020-10",
+              "device_category": "face mask",
+              "n": 1
+            },
+            {
+              "month_year": "2020-10",
+              "device_category": "high flow nc",
+              "n": 3
+            },
+            {
+              "month_year": "2020-10",
+              "device_category": "imv",
+              "n": 2
+            },
+            {
+              "month_year": "2020-10",
+              "device_category": "nasal cannula",
+              "n": 1
+            },
+            {
+              "month_year": "2020-10",
+              "device_category": "nippv",
+              "n": 2
+            },
+            {
+              "month_year": "2020-11",
+              "device_category": "face mask",
+              "n": 1
+            },
+            {
+              "month_year": "2020-11",
+              "device_category": "high flow nc",
+              "n": 3
+            },
+            {
+              "month_year": "2020-11",
+              "device_category": "imv",
+              "n": 1
+            },
+            {
+              "month_year": "2020-11",
+              "device_category": "nasal cannula",
+              "n": 2
+            },
+            {
+              "month_year": "2020-11",
+              "device_category": "nippv",
+              "n": 1
+            },
+            {
+              "month_year": "2020-11",
+              "device_category": "room air",
+              "n": 1
+            },
+            {
+              "month_year": "2020-12",
+              "device_category": "nasal cannula",
+              "n": 1
+            },
+            {
+              "month_year": "2021-01",
+              "device_category": "face mask",
+              "n": 2
+            },
+            {
+              "month_year": "2021-01",
+              "device_category": "high flow nc",
+              "n": 1
+            },
+            {
+              "month_year": "2021-01",
+              "device_category": "nasal cannula",
+              "n": 1
+            },
+            {
+              "month_year": "2021-01",
+              "device_category": "nippv",
+              "n": 1
+            },
+            {
+              "month_year": "2021-02",
+              "device_category": "face mask",
+              "n": 2
+            },
+            {
+              "month_year": "2021-02",
+              "device_category": "high flow nc",
+              "n": 2
+            },
+            {
+              "month_year": "2021-02",
+              "device_category": "imv",
+              "n": 2
+            },
+            {
+              "month_year": "2021-02",
+              "device_category": "nasal cannula",
+              "n": 2
+            },
+            {
+              "month_year": "2021-02",
+              "device_category": "nippv",
+              "n": 1
+            },
+            {
+              "month_year": "2021-02",
+              "device_category": "room air",
+              "n": 2
+            },
+            {
+              "month_year": "2021-03",
+              "device_category": "face mask",
+              "n": 1
+            },
+            {
+              "month_year": "2021-03",
+              "device_category": "high flow nc",
+              "n": 2
+            },
+            {
+              "month_year": "2021-03",
+              "device_category": "imv",
+              "n": 2
+            },
+            {
+              "month_year": "2021-03",
+              "device_category": "nasal cannula",
+              "n": 1
+            },
+            {
+              "month_year": "2021-03",
+              "device_category": "nippv",
+              "n": 1
+            },
+            {
+              "month_year": "2021-03",
+              "device_category": "room air",
+              "n": 1
+            },
+            {
+              "month_year": "2021-03",
+              "device_category": "trach collar",
+              "n": 1
+            },
+            {
+              "month_year": "2021-04",
+              "device_category": "imv",
+              "n": 1
+            },
+            {
+              "month_year": "2021-04",
+              "device_category": "room air",
+              "n": 1
+            },
+            {
+              "month_year": "2021-05",
+              "device_category": "high flow nc",
+              "n": 1
+            },
+            {
+              "month_year": "2021-05",
+              "device_category": "imv",
+              "n": 1
+            },
+            {
+              "month_year": "2021-05",
+              "device_category": "room air",
+              "n": 1
+            },
+            {
+              "month_year": "2021-06",
+              "device_category": "face mask",
+              "n": 1
+            },
+            {
+              "month_year": "2021-06",
+              "device_category": "high flow nc",
+              "n": 1
+            },
+            {
+              "month_year": "2021-06",
+              "device_category": "imv",
+              "n": 1
+            },
+            {
+              "month_year": "2021-06",
+              "device_category": "nippv",
+              "n": 1
+            },
+            {
+              "month_year": "2021-07",
+              "device_category": "face mask",
+              "n": 1
+            },
+            {
+              "month_year": "2021-07",
+              "device_category": "imv",
+              "n": 1
+            },
+            {
+              "month_year": "2021-07",
+              "device_category": "nasal cannula",
+              "n": 2
+            },
+            {
+              "month_year": "2021-07",
+              "device_category": "nippv",
+              "n": 1
+            },
+            {
+              "month_year": "2021-07",
+              "device_category": "room air",
+              "n": 3
+            },
+            {
+              "month_year": "2021-08",
+              "device_category": "room air",
+              "n": 2
+            },
+            {
+              "month_year": "2021-09",
+              "device_category": "high flow nc",
+              "n": 1
+            },
+            {
+              "month_year": "2021-09",
+              "device_category": "imv",
+              "n": 1
+            },
+            {
+              "month_year": "2021-09",
+              "device_category": "nippv",
+              "n": 1
+            },
+            {
+              "month_year": "2021-09",
+              "device_category": "room air",
+              "n": 2
+            },
+            {
+              "month_year": "2021-10",
+              "device_category": "face mask",
+              "n": 2
+            },
+            {
+              "month_year": "2021-10",
+              "device_category": "high flow nc",
+              "n": 1
+            },
+            {
+              "month_year": "2021-10",
+              "device_category": "imv",
+              "n": 1
+            },
+            {
+              "month_year": "2021-10",
+              "device_category": "nasal cannula",
+              "n": 2
+            },
+            {
+              "month_year": "2021-10",
+              "device_category": "nippv",
+              "n": 1
+            },
+            {
+              "month_year": "2021-10",
+              "device_category": "room air",
+              "n": 1
+            },
+            {
+              "month_year": "2021-11",
+              "device_category": "face mask",
+              "n": 1
+            },
+            {
+              "month_year": "2021-11",
+              "device_category": "high flow nc",
+              "n": 2
+            },
+            {
+              "month_year": "2021-11",
+              "device_category": "nippv",
+              "n": 1
+            },
+            {
+              "month_year": "2021-11",
+              "device_category": "room air",
+              "n": 1
+            },
+            {
+              "month_year": "2021-12",
+              "device_category": "imv",
+              "n": 1
+            },
+            {
+              "month_year": "2021-12",
+              "device_category": "nippv",
+              "n": 1
+            },
+            {
+              "month_year": "2021-12",
+              "device_category": "room air",
+              "n": 1
+            },
+            {
+              "month_year": "2022-01",
+              "device_category": "imv",
+              "n": 1
+            },
+            {
+              "month_year": "2022-01",
+              "device_category": "nasal cannula",
+              "n": 1
+            },
+            {
+              "month_year": "2022-01",
+              "device_category": "room air",
+              "n": 3
+            },
+            {
+              "month_year": "2022-02",
+              "device_category": "nasal cannula",
+              "n": 2
+            },
+            {
+              "month_year": "2022-02",
+              "device_category": "room air",
+              "n": 1
+            },
+            {
+              "month_year": "2022-03",
+              "device_category": "face mask",
+              "n": 1
+            },
+            {
+              "month_year": "2022-03",
+              "device_category": "high flow nc",
+              "n": 1
+            },
+            {
+              "month_year": "2022-03",
+              "device_category": "nasal cannula",
+              "n": 2
+            },
+            {
+              "month_year": "2022-03",
+              "device_category": "room air",
+              "n": 4
+            },
+            {
+              "month_year": "2022-04",
+              "device_category": "face mask",
+              "n": 1
+            },
+            {
+              "month_year": "2022-04",
+              "device_category": "nasal cannula",
+              "n": 4
+            },
+            {
+              "month_year": "2022-04",
+              "device_category": "room air",
+              "n": 1
+            },
+            {
+              "month_year": "2022-05",
+              "device_category": "nasal cannula",
+              "n": 1
+            },
+            {
+              "month_year": "2022-05",
+              "device_category": "room air",
+              "n": 1
+            },
+            {
+              "month_year": "2022-06",
+              "device_category": "imv",
+              "n": 1
+            },
+            {
+              "month_year": "2022-06",
+              "device_category": "nasal cannula",
+              "n": 1
+            },
+            {
+              "month_year": "2022-06",
+              "device_category": "nippv",
+              "n": 1
+            },
+            {
+              "month_year": "2022-06",
+              "device_category": "room air",
+              "n": 2
+            },
+            {
+              "month_year": "2022-07",
+              "device_category": "imv",
+              "n": 2
+            },
+            {
+              "month_year": "2022-07",
+              "device_category": "nippv",
+              "n": 2
+            },
+            {
+              "month_year": "2022-07",
+              "device_category": "room air",
+              "n": 1
+            },
+            {
+              "month_year": "2022-08",
+              "device_category": "room air",
+              "n": 1
+            },
+            {
+              "month_year": "2022-09",
+              "device_category": "imv",
+              "n": 3
+            },
+            {
+              "month_year": "2022-09",
+              "device_category": "nasal cannula",
+              "n": 1
+            },
+            {
+              "month_year": "2022-09",
+              "device_category": "nippv",
+              "n": 1
+            },
+            {
+              "month_year": "2022-10",
+              "device_category": "imv",
+              "n": 3
+            },
+            {
+              "month_year": "2022-10",
+              "device_category": "room air",
+              "n": 1
+            },
+            {
+              "month_year": "2022-11",
+              "device_category": "face mask",
+              "n": 3
+            },
+            {
+              "month_year": "2022-11",
+              "device_category": "high flow nc",
+              "n": 2
+            },
+            {
+              "month_year": "2022-11",
+              "device_category": "imv",
+              "n": 2
+            },
+            {
+              "month_year": "2022-11",
+              "device_category": "nasal cannula",
+              "n": 2
+            },
+            {
+              "month_year": "2022-11",
+              "device_category": "nippv",
+              "n": 1
+            },
+            {
+              "month_year": "2022-12",
+              "device_category": "face mask",
+              "n": 2
+            },
+            {
+              "month_year": "2022-12",
+              "device_category": "high flow nc",
+              "n": 2
+            },
+            {
+              "month_year": "2022-12",
+              "device_category": "imv",
+              "n": 1
+            },
+            {
+              "month_year": "2022-12",
+              "device_category": "nasal cannula",
+              "n": 1
+            },
+            {
+              "month_year": "2022-12",
+              "device_category": "room air",
+              "n": 2
+            },
+            {
+              "month_year": "2023-01",
+              "device_category": "face mask",
+              "n": 2
+            },
+            {
+              "month_year": "2023-01",
+              "device_category": "high flow nc",
+              "n": 1
+            },
+            {
+              "month_year": "2023-01",
+              "device_category": "imv",
+              "n": 1
+            },
+            {
+              "month_year": "2023-01",
+              "device_category": "nasal cannula",
+              "n": 1
+            },
+            {
+              "month_year": "2023-01",
+              "device_category": "nippv",
+              "n": 1
+            },
+            {
+              "month_year": "2023-02",
+              "device_category": "high flow nc",
+              "n": 1
+            },
+            {
+              "month_year": "2023-02",
+              "device_category": "imv",
+              "n": 1
+            },
+            {
+              "month_year": "2023-03",
+              "device_category": "face mask",
+              "n": 1
+            },
+            {
+              "month_year": "2023-03",
+              "device_category": "high flow nc",
+              "n": 2
+            },
+            {
+              "month_year": "2023-03",
+              "device_category": "imv",
+              "n": 1
+            },
+            {
+              "month_year": "2023-04",
+              "device_category": "nasal cannula",
+              "n": 2
+            },
+            {
+              "month_year": "2023-04",
+              "device_category": "room air",
+              "n": 1
+            },
+            {
+              "month_year": "2023-05",
+              "device_category": "room air",
+              "n": 2
+            },
+            {
+              "month_year": "2023-07",
+              "device_category": "imv",
+              "n": 2
+            },
+            {
+              "month_year": "2023-07",
+              "device_category": "nasal cannula",
+              "n": 3
+            },
+            {
+              "month_year": "2023-07",
+              "device_category": "room air",
+              "n": 1
+            },
+            {
+              "month_year": "2023-08",
+              "device_category": "high flow nc",
+              "n": 2
+            },
+            {
+              "month_year": "2023-08",
+              "device_category": "imv",
+              "n": 1
+            },
+            {
+              "month_year": "2023-08",
+              "device_category": "nippv",
+              "n": 2
+            },
+            {
+              "month_year": "2023-08",
+              "device_category": "room air",
+              "n": 1
+            },
+            {
+              "month_year": "2023-09",
+              "device_category": "room air",
+              "n": 1
+            },
+            {
+              "month_year": "2023-10",
+              "device_category": "face mask",
+              "n": 1
+            },
+            {
+              "month_year": "2023-10",
+              "device_category": "nasal cannula",
+              "n": 1
+            },
+            {
+              "month_year": "2023-10",
+              "device_category": "room air",
+              "n": 3
+            },
+            {
+              "month_year": "2023-11",
+              "device_category": "face mask",
+              "n": 1
+            },
+            {
+              "month_year": "2023-11",
+              "device_category": "imv",
+              "n": 1
+            },
+            {
+              "month_year": "2023-12",
+              "device_category": "high flow nc",
+              "n": 1
+            },
+            {
+              "month_year": "2023-12",
+              "device_category": "imv",
+              "n": 1
+            },
+            {
+              "month_year": "2023-12",
+              "device_category": "nippv",
+              "n": 1
+            },
+            {
+              "month_year": "2024-01",
+              "device_category": "face mask",
+              "n": 1
+            },
+            {
+              "month_year": "2024-01",
+              "device_category": "nasal cannula",
+              "n": 1
+            },
+            {
+              "month_year": "2024-02",
+              "device_category": "face mask",
+              "n": 3
+            },
+            {
+              "month_year": "2024-02",
+              "device_category": "high flow nc",
+              "n": 2
+            },
+            {
+              "month_year": "2024-02",
+              "device_category": "nasal cannula",
+              "n": 1
+            },
+            {
+              "month_year": "2024-02",
+              "device_category": "nippv",
+              "n": 1
+            },
+            {
+              "month_year": "2024-03",
+              "device_category": "face mask",
+              "n": 2
+            },
+            {
+              "month_year": "2024-03",
+              "device_category": "high flow nc",
+              "n": 1
+            },
+            {
+              "month_year": "2024-03",
+              "device_category": "nasal cannula",
+              "n": 2
+            },
+            {
+              "month_year": "2024-03",
+              "device_category": "room air",
+              "n": 1
+            },
+            {
+              "month_year": "2024-04",
+              "device_category": "nasal cannula",
+              "n": 1
+            },
+            {
+              "month_year": "2024-04",
+              "device_category": "room air",
+              "n": 4
+            },
+            {
+              "month_year": "2024-05",
+              "device_category": "face mask",
+              "n": 1
+            },
+            {
+              "month_year": "2024-05",
+              "device_category": "high flow nc",
+              "n": 2
+            },
+            {
+              "month_year": "2024-05",
+              "device_category": "imv",
+              "n": 1
+            },
+            {
+              "month_year": "2024-05",
+              "device_category": "nasal cannula",
+              "n": 2
+            },
+            {
+              "month_year": "2024-05",
+              "device_category": "nippv",
+              "n": 1
+            },
+            {
+              "month_year": "2024-05",
+              "device_category": "room air",
+              "n": 4
+            },
+            {
+              "month_year": "2024-06",
+              "device_category": "imv",
+              "n": 1
+            },
+            {
+              "month_year": "2024-06",
+              "device_category": "room air",
+              "n": 2
+            },
+            {
+              "month_year": "2024-07",
+              "device_category": "imv",
+              "n": 3
+            },
+            {
+              "month_year": "2024-07",
+              "device_category": "nasal cannula",
+              "n": 1
+            },
+            {
+              "month_year": "2024-07",
+              "device_category": "nippv",
+              "n": 1
+            },
+            {
+              "month_year": "2024-07",
+              "device_category": "room air",
+              "n": 2
+            },
+            {
+              "month_year": "2024-08",
+              "device_category": "imv",
+              "n": 1
+            },
+            {
+              "month_year": "2024-08",
+              "device_category": "nasal cannula",
+              "n": 1
+            },
+            {
+              "month_year": "2024-08",
+              "device_category": "room air",
+              "n": 1
+            },
+            {
+              "month_year": "2024-09",
+              "device_category": "imv",
+              "n": 2
+            },
+            {
+              "month_year": "2024-10",
+              "device_category": "face mask",
+              "n": 2
+            },
+            {
+              "month_year": "2024-10",
+              "device_category": "high flow nc",
+              "n": 2
+            },
+            {
+              "month_year": "2024-10",
+              "device_category": "imv",
+              "n": 1
+            },
+            {
+              "month_year": "2024-10",
+              "device_category": "nasal cannula",
+              "n": 2
+            },
+            {
+              "month_year": "2024-10",
+              "device_category": "nippv",
+              "n": 1
+            },
+            {
+              "month_year": "2024-10",
+              "device_category": "room air",
+              "n": 1
+            },
+            {
+              "month_year": "2024-11",
+              "device_category": "face mask",
+              "n": 1
+            },
+            {
+              "month_year": "2024-11",
+              "device_category": "high flow nc",
+              "n": 2
+            },
+            {
+              "month_year": "2024-11",
+              "device_category": "imv",
+              "n": 2
+            },
+            {
+              "month_year": "2024-11",
+              "device_category": "nasal cannula",
+              "n": 1
+            },
+            {
+              "month_year": "2024-11",
+              "device_category": "nippv",
+              "n": 1
+            },
+            {
+              "month_year": "2024-11",
+              "device_category": "room air",
+              "n": 2
+            },
+            {
+              "month_year": "2024-12",
+              "device_category": "face mask",
+              "n": 1
+            },
+            {
+              "month_year": "2024-12",
+              "device_category": "high flow nc",
+              "n": 1
+            },
+            {
+              "month_year": "2024-12",
+              "device_category": "imv",
+              "n": 1
+            },
+            {
+              "month_year": "2024-12",
+              "device_category": "nasal cannula",
+              "n": 1
+            },
+            {
+              "month_year": "2024-12",
+              "device_category": "room air",
+              "n": 1
+            },
+            {
+              "month_year": "2025-01",
+              "device_category": "room air",
+              "n": 1
+            }
+          ],
+          "mode_category": [
+            {
+              "month_year": "2018-01",
+              "mode_category": "assist control-volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2018-01",
+              "mode_category": "pressure control",
+              "n": 1
+            },
+            {
+              "month_year": "2018-01",
+              "mode_category": "pressure support/cpap",
+              "n": 1
+            },
+            {
+              "month_year": "2018-01",
+              "mode_category": "pressure-regulated volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2018-01",
+              "mode_category": "simv",
+              "n": 1
+            },
+            {
+              "month_year": "2018-02",
+              "mode_category": "assist control-volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2018-02",
+              "mode_category": "pressure control",
+              "n": 1
+            },
+            {
+              "month_year": "2018-02",
+              "mode_category": "pressure support/cpap",
+              "n": 1
+            },
+            {
+              "month_year": "2018-02",
+              "mode_category": "pressure-regulated volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2018-02",
+              "mode_category": "simv",
+              "n": 1
+            },
+            {
+              "month_year": "2018-03",
+              "mode_category": "assist control-volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2018-03",
+              "mode_category": "other",
+              "n": 1
+            },
+            {
+              "month_year": "2018-03",
+              "mode_category": "pressure control",
+              "n": 1
+            },
+            {
+              "month_year": "2018-03",
+              "mode_category": "pressure support/cpap",
+              "n": 1
+            },
+            {
+              "month_year": "2018-03",
+              "mode_category": "pressure-regulated volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2018-03",
+              "mode_category": "simv",
+              "n": 1
+            },
+            {
+              "month_year": "2018-04",
+              "mode_category": "assist control-volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2018-04",
+              "mode_category": "other",
+              "n": 1
+            },
+            {
+              "month_year": "2018-04",
+              "mode_category": "pressure control",
+              "n": 1
+            },
+            {
+              "month_year": "2018-04",
+              "mode_category": "pressure support/cpap",
+              "n": 2
+            },
+            {
+              "month_year": "2018-04",
+              "mode_category": "pressure-regulated volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2018-04",
+              "mode_category": "simv",
+              "n": 1
+            },
+            {
+              "month_year": "2018-07",
+              "mode_category": "assist control-volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2018-07",
+              "mode_category": "pressure control",
+              "n": 1
+            },
+            {
+              "month_year": "2018-07",
+              "mode_category": "pressure support/cpap",
+              "n": 1
+            },
+            {
+              "month_year": "2018-07",
+              "mode_category": "pressure-regulated volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2018-07",
+              "mode_category": "simv",
+              "n": 1
+            },
+            {
+              "month_year": "2018-08",
+              "mode_category": "assist control-volume control",
+              "n": 3
+            },
+            {
+              "month_year": "2018-08",
+              "mode_category": "other",
+              "n": 3
+            },
+            {
+              "month_year": "2018-08",
+              "mode_category": "pressure control",
+              "n": 2
+            },
+            {
+              "month_year": "2018-08",
+              "mode_category": "pressure support/cpap",
+              "n": 4
+            },
+            {
+              "month_year": "2018-08",
+              "mode_category": "pressure-regulated volume control",
+              "n": 3
+            },
+            {
+              "month_year": "2018-08",
+              "mode_category": "simv",
+              "n": 3
+            },
+            {
+              "month_year": "2018-09",
+              "mode_category": "assist control-volume control",
+              "n": 2
+            },
+            {
+              "month_year": "2018-09",
+              "mode_category": "pressure control",
+              "n": 2
+            },
+            {
+              "month_year": "2018-09",
+              "mode_category": "pressure support/cpap",
+              "n": 2
+            },
+            {
+              "month_year": "2018-09",
+              "mode_category": "pressure-regulated volume control",
+              "n": 2
+            },
+            {
+              "month_year": "2018-09",
+              "mode_category": "simv",
+              "n": 2
+            },
+            {
+              "month_year": "2018-10",
+              "mode_category": "assist control-volume control",
+              "n": 2
+            },
+            {
+              "month_year": "2018-10",
+              "mode_category": "pressure control",
+              "n": 2
+            },
+            {
+              "month_year": "2018-10",
+              "mode_category": "pressure support/cpap",
+              "n": 2
+            },
+            {
+              "month_year": "2018-10",
+              "mode_category": "pressure-regulated volume control",
+              "n": 2
+            },
+            {
+              "month_year": "2018-10",
+              "mode_category": "simv",
+              "n": 2
+            },
+            {
+              "month_year": "2018-11",
+              "mode_category": "assist control-volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2018-11",
+              "mode_category": "other",
+              "n": 1
+            },
+            {
+              "month_year": "2018-11",
+              "mode_category": "pressure control",
+              "n": 1
+            },
+            {
+              "month_year": "2018-11",
+              "mode_category": "pressure support/cpap",
+              "n": 1
+            },
+            {
+              "month_year": "2018-11",
+              "mode_category": "pressure-regulated volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2018-11",
+              "mode_category": "simv",
+              "n": 1
+            },
+            {
+              "month_year": "2019-01",
+              "mode_category": "assist control-volume control",
+              "n": 2
+            },
+            {
+              "month_year": "2019-01",
+              "mode_category": "other",
+              "n": 1
+            },
+            {
+              "month_year": "2019-01",
+              "mode_category": "pressure control",
+              "n": 1
+            },
+            {
+              "month_year": "2019-01",
+              "mode_category": "pressure support/cpap",
+              "n": 2
+            },
+            {
+              "month_year": "2019-01",
+              "mode_category": "pressure-regulated volume control",
+              "n": 2
+            },
+            {
+              "month_year": "2019-01",
+              "mode_category": "simv",
+              "n": 1
+            },
+            {
+              "month_year": "2019-02",
+              "mode_category": "assist control-volume control",
+              "n": 2
+            },
+            {
+              "month_year": "2019-02",
+              "mode_category": "other",
+              "n": 1
+            },
+            {
+              "month_year": "2019-02",
+              "mode_category": "pressure control",
+              "n": 1
+            },
+            {
+              "month_year": "2019-02",
+              "mode_category": "pressure support/cpap",
+              "n": 2
+            },
+            {
+              "month_year": "2019-02",
+              "mode_category": "pressure-regulated volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2019-02",
+              "mode_category": "simv",
+              "n": 1
+            },
+            {
+              "month_year": "2019-03",
+              "mode_category": "other",
+              "n": 1
+            },
+            {
+              "month_year": "2019-03",
+              "mode_category": "pressure support/cpap",
+              "n": 1
+            },
+            {
+              "month_year": "2019-04",
+              "mode_category": "other",
+              "n": 1
+            },
+            {
+              "month_year": "2019-04",
+              "mode_category": "pressure support/cpap",
+              "n": 1
+            },
+            {
+              "month_year": "2019-05",
+              "mode_category": "assist control-volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2019-05",
+              "mode_category": "other",
+              "n": 1
+            },
+            {
+              "month_year": "2019-05",
+              "mode_category": "pressure control",
+              "n": 1
+            },
+            {
+              "month_year": "2019-05",
+              "mode_category": "pressure support/cpap",
+              "n": 1
+            },
+            {
+              "month_year": "2019-05",
+              "mode_category": "pressure-regulated volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2019-05",
+              "mode_category": "simv",
+              "n": 1
+            },
+            {
+              "month_year": "2019-06",
+              "mode_category": "assist control-volume control",
+              "n": 2
+            },
+            {
+              "month_year": "2019-06",
+              "mode_category": "pressure control",
+              "n": 2
+            },
+            {
+              "month_year": "2019-06",
+              "mode_category": "pressure support/cpap",
+              "n": 2
+            },
+            {
+              "month_year": "2019-06",
+              "mode_category": "pressure-regulated volume control",
+              "n": 2
+            },
+            {
+              "month_year": "2019-06",
+              "mode_category": "simv",
+              "n": 2
+            },
+            {
+              "month_year": "2019-07",
+              "mode_category": "assist control-volume control",
+              "n": 2
+            },
+            {
+              "month_year": "2019-07",
+              "mode_category": "other",
+              "n": 1
+            },
+            {
+              "month_year": "2019-07",
+              "mode_category": "pressure control",
+              "n": 2
+            },
+            {
+              "month_year": "2019-07",
+              "mode_category": "pressure support/cpap",
+              "n": 2
+            },
+            {
+              "month_year": "2019-07",
+              "mode_category": "pressure-regulated volume control",
+              "n": 2
+            },
+            {
+              "month_year": "2019-07",
+              "mode_category": "simv",
+              "n": 2
+            },
+            {
+              "month_year": "2019-08",
+              "mode_category": "other",
+              "n": 1
+            },
+            {
+              "month_year": "2019-09",
+              "mode_category": "assist control-volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2019-09",
+              "mode_category": "pressure control",
+              "n": 1
+            },
+            {
+              "month_year": "2019-09",
+              "mode_category": "pressure support/cpap",
+              "n": 1
+            },
+            {
+              "month_year": "2019-09",
+              "mode_category": "pressure-regulated volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2019-09",
+              "mode_category": "simv",
+              "n": 1
+            },
+            {
+              "month_year": "2019-10",
+              "mode_category": "assist control-volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2019-10",
+              "mode_category": "pressure support/cpap",
+              "n": 1
+            },
+            {
+              "month_year": "2019-10",
+              "mode_category": "pressure-regulated volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2019-11",
+              "mode_category": "assist control-volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2019-11",
+              "mode_category": "other",
+              "n": 1
+            },
+            {
+              "month_year": "2019-11",
+              "mode_category": "pressure support/cpap",
+              "n": 2
+            },
+            {
+              "month_year": "2019-11",
+              "mode_category": "pressure-regulated volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2019-11",
+              "mode_category": "simv",
+              "n": 1
+            },
+            {
+              "month_year": "2019-12",
+              "mode_category": "assist control-volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2019-12",
+              "mode_category": "other",
+              "n": 1
+            },
+            {
+              "month_year": "2019-12",
+              "mode_category": "pressure control",
+              "n": 1
+            },
+            {
+              "month_year": "2019-12",
+              "mode_category": "pressure support/cpap",
+              "n": 1
+            },
+            {
+              "month_year": "2019-12",
+              "mode_category": "pressure-regulated volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2019-12",
+              "mode_category": "simv",
+              "n": 1
+            },
+            {
+              "month_year": "2020-01",
+              "mode_category": "other",
+              "n": 1
+            },
+            {
+              "month_year": "2020-01",
+              "mode_category": "pressure support/cpap",
+              "n": 1
+            },
+            {
+              "month_year": "2020-02",
+              "mode_category": "other",
+              "n": 1
+            },
+            {
+              "month_year": "2020-02",
+              "mode_category": "pressure support/cpap",
+              "n": 1
+            },
+            {
+              "month_year": "2020-04",
+              "mode_category": "assist control-volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2020-04",
+              "mode_category": "other",
+              "n": 1
+            },
+            {
+              "month_year": "2020-04",
+              "mode_category": "pressure support/cpap",
+              "n": 2
+            },
+            {
+              "month_year": "2020-04",
+              "mode_category": "pressure-regulated volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2020-05",
+              "mode_category": "assist control-volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2020-05",
+              "mode_category": "other",
+              "n": 1
+            },
+            {
+              "month_year": "2020-05",
+              "mode_category": "pressure control",
+              "n": 1
+            },
+            {
+              "month_year": "2020-05",
+              "mode_category": "pressure support/cpap",
+              "n": 2
+            },
+            {
+              "month_year": "2020-05",
+              "mode_category": "pressure-regulated volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2020-05",
+              "mode_category": "simv",
+              "n": 1
+            },
+            {
+              "month_year": "2020-06",
+              "mode_category": "assist control-volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2020-06",
+              "mode_category": "other",
+              "n": 2
+            },
+            {
+              "month_year": "2020-06",
+              "mode_category": "pressure support/cpap",
+              "n": 2
+            },
+            {
+              "month_year": "2020-06",
+              "mode_category": "pressure-regulated volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2020-06",
+              "mode_category": "simv",
+              "n": 1
+            },
+            {
+              "month_year": "2020-07",
+              "mode_category": "other",
+              "n": 1
+            },
+            {
+              "month_year": "2020-07",
+              "mode_category": "pressure support/cpap",
+              "n": 1
+            },
+            {
+              "month_year": "2020-08",
+              "mode_category": "assist control-volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2020-08",
+              "mode_category": "other",
+              "n": 1
+            },
+            {
+              "month_year": "2020-08",
+              "mode_category": "pressure support/cpap",
+              "n": 1
+            },
+            {
+              "month_year": "2020-08",
+              "mode_category": "pressure-regulated volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2020-08",
+              "mode_category": "simv",
+              "n": 1
+            },
+            {
+              "month_year": "2020-09",
+              "mode_category": "assist control-volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2020-09",
+              "mode_category": "pressure support/cpap",
+              "n": 1
+            },
+            {
+              "month_year": "2020-09",
+              "mode_category": "pressure-regulated volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2020-09",
+              "mode_category": "simv",
+              "n": 1
+            },
+            {
+              "month_year": "2020-10",
+              "mode_category": "assist control-volume control",
+              "n": 2
+            },
+            {
+              "month_year": "2020-10",
+              "mode_category": "other",
+              "n": 2
+            },
+            {
+              "month_year": "2020-10",
+              "mode_category": "pressure support/cpap",
+              "n": 3
+            },
+            {
+              "month_year": "2020-10",
+              "mode_category": "pressure-regulated volume control",
+              "n": 2
+            },
+            {
+              "month_year": "2020-10",
+              "mode_category": "simv",
+              "n": 2
+            },
+            {
+              "month_year": "2020-11",
+              "mode_category": "assist control-volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2020-11",
+              "mode_category": "other",
+              "n": 1
+            },
+            {
+              "month_year": "2020-11",
+              "mode_category": "pressure support/cpap",
+              "n": 2
+            },
+            {
+              "month_year": "2020-11",
+              "mode_category": "pressure-regulated volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2020-11",
+              "mode_category": "simv",
+              "n": 1
+            },
+            {
+              "month_year": "2021-01",
+              "mode_category": "other",
+              "n": 1
+            },
+            {
+              "month_year": "2021-01",
+              "mode_category": "pressure support/cpap",
+              "n": 1
+            },
+            {
+              "month_year": "2021-02",
+              "mode_category": "assist control-volume control",
+              "n": 2
+            },
+            {
+              "month_year": "2021-02",
+              "mode_category": "other",
+              "n": 1
+            },
+            {
+              "month_year": "2021-02",
+              "mode_category": "pressure control",
+              "n": 1
+            },
+            {
+              "month_year": "2021-02",
+              "mode_category": "pressure support/cpap",
+              "n": 2
+            },
+            {
+              "month_year": "2021-02",
+              "mode_category": "pressure-regulated volume control",
+              "n": 2
+            },
+            {
+              "month_year": "2021-02",
+              "mode_category": "simv",
+              "n": 2
+            },
+            {
+              "month_year": "2021-03",
+              "mode_category": "assist control-volume control",
+              "n": 2
+            },
+            {
+              "month_year": "2021-03",
+              "mode_category": "other",
+              "n": 1
+            },
+            {
+              "month_year": "2021-03",
+              "mode_category": "pressure control",
+              "n": 2
+            },
+            {
+              "month_year": "2021-03",
+              "mode_category": "pressure support/cpap",
+              "n": 2
+            },
+            {
+              "month_year": "2021-03",
+              "mode_category": "pressure-regulated volume control",
+              "n": 2
+            },
+            {
+              "month_year": "2021-03",
+              "mode_category": "simv",
+              "n": 2
+            },
+            {
+              "month_year": "2021-04",
+              "mode_category": "assist control-volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2021-04",
+              "mode_category": "pressure control",
+              "n": 1
+            },
+            {
+              "month_year": "2021-04",
+              "mode_category": "pressure support/cpap",
+              "n": 1
+            },
+            {
+              "month_year": "2021-04",
+              "mode_category": "pressure-regulated volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2021-04",
+              "mode_category": "simv",
+              "n": 1
+            },
+            {
+              "month_year": "2021-05",
+              "mode_category": "assist control-volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2021-05",
+              "mode_category": "pressure control",
+              "n": 1
+            },
+            {
+              "month_year": "2021-05",
+              "mode_category": "pressure support/cpap",
+              "n": 1
+            },
+            {
+              "month_year": "2021-05",
+              "mode_category": "pressure-regulated volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2021-05",
+              "mode_category": "simv",
+              "n": 1
+            },
+            {
+              "month_year": "2021-06",
+              "mode_category": "assist control-volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2021-06",
+              "mode_category": "other",
+              "n": 1
+            },
+            {
+              "month_year": "2021-06",
+              "mode_category": "pressure support/cpap",
+              "n": 1
+            },
+            {
+              "month_year": "2021-06",
+              "mode_category": "pressure-regulated volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2021-06",
+              "mode_category": "simv",
+              "n": 1
+            },
+            {
+              "month_year": "2021-07",
+              "mode_category": "assist control-volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2021-07",
+              "mode_category": "other",
+              "n": 1
+            },
+            {
+              "month_year": "2021-07",
+              "mode_category": "pressure control",
+              "n": 1
+            },
+            {
+              "month_year": "2021-07",
+              "mode_category": "pressure support/cpap",
+              "n": 1
+            },
+            {
+              "month_year": "2021-07",
+              "mode_category": "pressure-regulated volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2021-07",
+              "mode_category": "simv",
+              "n": 1
+            },
+            {
+              "month_year": "2021-09",
+              "mode_category": "assist control-volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2021-09",
+              "mode_category": "other",
+              "n": 1
+            },
+            {
+              "month_year": "2021-09",
+              "mode_category": "pressure support/cpap",
+              "n": 2
+            },
+            {
+              "month_year": "2021-09",
+              "mode_category": "pressure-regulated volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2021-09",
+              "mode_category": "simv",
+              "n": 1
+            },
+            {
+              "month_year": "2021-10",
+              "mode_category": "assist control-volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2021-10",
+              "mode_category": "other",
+              "n": 1
+            },
+            {
+              "month_year": "2021-10",
+              "mode_category": "pressure control",
+              "n": 1
+            },
+            {
+              "month_year": "2021-10",
+              "mode_category": "pressure support/cpap",
+              "n": 2
+            },
+            {
+              "month_year": "2021-10",
+              "mode_category": "pressure-regulated volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2021-10",
+              "mode_category": "simv",
+              "n": 1
+            },
+            {
+              "month_year": "2021-11",
+              "mode_category": "other",
+              "n": 1
+            },
+            {
+              "month_year": "2021-11",
+              "mode_category": "pressure support/cpap",
+              "n": 1
+            },
+            {
+              "month_year": "2021-12",
+              "mode_category": "assist control-volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2021-12",
+              "mode_category": "other",
+              "n": 1
+            },
+            {
+              "month_year": "2021-12",
+              "mode_category": "pressure control",
+              "n": 1
+            },
+            {
+              "month_year": "2021-12",
+              "mode_category": "pressure support/cpap",
+              "n": 1
+            },
+            {
+              "month_year": "2021-12",
+              "mode_category": "pressure-regulated volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2021-12",
+              "mode_category": "simv",
+              "n": 1
+            },
+            {
+              "month_year": "2022-01",
+              "mode_category": "assist control-volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2022-01",
+              "mode_category": "pressure control",
+              "n": 1
+            },
+            {
+              "month_year": "2022-01",
+              "mode_category": "pressure support/cpap",
+              "n": 1
+            },
+            {
+              "month_year": "2022-01",
+              "mode_category": "pressure-regulated volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2022-01",
+              "mode_category": "simv",
+              "n": 1
+            },
+            {
+              "month_year": "2022-06",
+              "mode_category": "assist control-volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2022-06",
+              "mode_category": "other",
+              "n": 1
+            },
+            {
+              "month_year": "2022-06",
+              "mode_category": "pressure control",
+              "n": 1
+            },
+            {
+              "month_year": "2022-06",
+              "mode_category": "pressure support/cpap",
+              "n": 1
+            },
+            {
+              "month_year": "2022-06",
+              "mode_category": "pressure-regulated volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2022-06",
+              "mode_category": "simv",
+              "n": 1
+            },
+            {
+              "month_year": "2022-07",
+              "mode_category": "assist control-volume control",
+              "n": 2
+            },
+            {
+              "month_year": "2022-07",
+              "mode_category": "other",
+              "n": 2
+            },
+            {
+              "month_year": "2022-07",
+              "mode_category": "pressure control",
+              "n": 1
+            },
+            {
+              "month_year": "2022-07",
+              "mode_category": "pressure support/cpap",
+              "n": 3
+            },
+            {
+              "month_year": "2022-07",
+              "mode_category": "pressure-regulated volume control",
+              "n": 2
+            },
+            {
+              "month_year": "2022-07",
+              "mode_category": "simv",
+              "n": 2
+            },
+            {
+              "month_year": "2022-09",
+              "mode_category": "assist control-volume control",
+              "n": 3
+            },
+            {
+              "month_year": "2022-09",
+              "mode_category": "other",
+              "n": 1
+            },
+            {
+              "month_year": "2022-09",
+              "mode_category": "pressure control",
+              "n": 3
+            },
+            {
+              "month_year": "2022-09",
+              "mode_category": "pressure support/cpap",
+              "n": 4
+            },
+            {
+              "month_year": "2022-09",
+              "mode_category": "pressure-regulated volume control",
+              "n": 3
+            },
+            {
+              "month_year": "2022-09",
+              "mode_category": "simv",
+              "n": 3
+            },
+            {
+              "month_year": "2022-10",
+              "mode_category": "assist control-volume control",
+              "n": 3
+            },
+            {
+              "month_year": "2022-10",
+              "mode_category": "pressure control",
+              "n": 3
+            },
+            {
+              "month_year": "2022-10",
+              "mode_category": "pressure support/cpap",
+              "n": 3
+            },
+            {
+              "month_year": "2022-10",
+              "mode_category": "pressure-regulated volume control",
+              "n": 3
+            },
+            {
+              "month_year": "2022-10",
+              "mode_category": "simv",
+              "n": 3
+            },
+            {
+              "month_year": "2022-11",
+              "mode_category": "assist control-volume control",
+              "n": 2
+            },
+            {
+              "month_year": "2022-11",
+              "mode_category": "other",
+              "n": 1
+            },
+            {
+              "month_year": "2022-11",
+              "mode_category": "pressure control",
+              "n": 2
+            },
+            {
+              "month_year": "2022-11",
+              "mode_category": "pressure support/cpap",
+              "n": 2
+            },
+            {
+              "month_year": "2022-11",
+              "mode_category": "pressure-regulated volume control",
+              "n": 2
+            },
+            {
+              "month_year": "2022-11",
+              "mode_category": "simv",
+              "n": 2
+            },
+            {
+              "month_year": "2022-12",
+              "mode_category": "assist control-volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2022-12",
+              "mode_category": "pressure control",
+              "n": 1
+            },
+            {
+              "month_year": "2022-12",
+              "mode_category": "pressure support/cpap",
+              "n": 1
+            },
+            {
+              "month_year": "2022-12",
+              "mode_category": "pressure-regulated volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2022-12",
+              "mode_category": "simv",
+              "n": 1
+            },
+            {
+              "month_year": "2023-01",
+              "mode_category": "assist control-volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2023-01",
+              "mode_category": "other",
+              "n": 1
+            },
+            {
+              "month_year": "2023-01",
+              "mode_category": "pressure support/cpap",
+              "n": 1
+            },
+            {
+              "month_year": "2023-01",
+              "mode_category": "pressure-regulated volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2023-01",
+              "mode_category": "simv",
+              "n": 1
+            },
+            {
+              "month_year": "2023-02",
+              "mode_category": "assist control-volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2023-02",
+              "mode_category": "pressure control",
+              "n": 1
+            },
+            {
+              "month_year": "2023-02",
+              "mode_category": "pressure support/cpap",
+              "n": 1
+            },
+            {
+              "month_year": "2023-02",
+              "mode_category": "pressure-regulated volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2023-02",
+              "mode_category": "simv",
+              "n": 1
+            },
+            {
+              "month_year": "2023-03",
+              "mode_category": "assist control-volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2023-03",
+              "mode_category": "pressure control",
+              "n": 1
+            },
+            {
+              "month_year": "2023-03",
+              "mode_category": "pressure support/cpap",
+              "n": 1
+            },
+            {
+              "month_year": "2023-03",
+              "mode_category": "pressure-regulated volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2023-03",
+              "mode_category": "simv",
+              "n": 1
+            },
+            {
+              "month_year": "2023-07",
+              "mode_category": "assist control-volume control",
+              "n": 2
+            },
+            {
+              "month_year": "2023-07",
+              "mode_category": "pressure control",
+              "n": 1
+            },
+            {
+              "month_year": "2023-07",
+              "mode_category": "pressure support/cpap",
+              "n": 2
+            },
+            {
+              "month_year": "2023-07",
+              "mode_category": "pressure-regulated volume control",
+              "n": 2
+            },
+            {
+              "month_year": "2023-07",
+              "mode_category": "simv",
+              "n": 2
+            },
+            {
+              "month_year": "2023-08",
+              "mode_category": "assist control-volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2023-08",
+              "mode_category": "other",
+              "n": 2
+            },
+            {
+              "month_year": "2023-08",
+              "mode_category": "pressure control",
+              "n": 1
+            },
+            {
+              "month_year": "2023-08",
+              "mode_category": "pressure support/cpap",
+              "n": 2
+            },
+            {
+              "month_year": "2023-08",
+              "mode_category": "pressure-regulated volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2023-08",
+              "mode_category": "simv",
+              "n": 1
+            },
+            {
+              "month_year": "2023-11",
+              "mode_category": "assist control-volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2023-11",
+              "mode_category": "pressure support/cpap",
+              "n": 1
+            },
+            {
+              "month_year": "2023-11",
+              "mode_category": "pressure-regulated volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2023-11",
+              "mode_category": "simv",
+              "n": 1
+            },
+            {
+              "month_year": "2023-12",
+              "mode_category": "assist control-volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2023-12",
+              "mode_category": "other",
+              "n": 1
+            },
+            {
+              "month_year": "2023-12",
+              "mode_category": "pressure support/cpap",
+              "n": 1
+            },
+            {
+              "month_year": "2023-12",
+              "mode_category": "pressure-regulated volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2023-12",
+              "mode_category": "simv",
+              "n": 1
+            },
+            {
+              "month_year": "2024-02",
+              "mode_category": "other",
+              "n": 1
+            },
+            {
+              "month_year": "2024-02",
+              "mode_category": "pressure support/cpap",
+              "n": 1
+            },
+            {
+              "month_year": "2024-05",
+              "mode_category": "assist control-volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2024-05",
+              "mode_category": "other",
+              "n": 1
+            },
+            {
+              "month_year": "2024-05",
+              "mode_category": "pressure control",
+              "n": 1
+            },
+            {
+              "month_year": "2024-05",
+              "mode_category": "pressure support/cpap",
+              "n": 2
+            },
+            {
+              "month_year": "2024-05",
+              "mode_category": "pressure-regulated volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2024-05",
+              "mode_category": "simv",
+              "n": 1
+            },
+            {
+              "month_year": "2024-06",
+              "mode_category": "assist control-volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2024-06",
+              "mode_category": "pressure support/cpap",
+              "n": 1
+            },
+            {
+              "month_year": "2024-06",
+              "mode_category": "pressure-regulated volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2024-07",
+              "mode_category": "assist control-volume control",
+              "n": 3
+            },
+            {
+              "month_year": "2024-07",
+              "mode_category": "other",
+              "n": 1
+            },
+            {
+              "month_year": "2024-07",
+              "mode_category": "pressure control",
+              "n": 2
+            },
+            {
+              "month_year": "2024-07",
+              "mode_category": "pressure support/cpap",
+              "n": 3
+            },
+            {
+              "month_year": "2024-07",
+              "mode_category": "pressure-regulated volume control",
+              "n": 3
+            },
+            {
+              "month_year": "2024-07",
+              "mode_category": "simv",
+              "n": 3
+            },
+            {
+              "month_year": "2024-08",
+              "mode_category": "assist control-volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2024-08",
+              "mode_category": "pressure control",
+              "n": 1
+            },
+            {
+              "month_year": "2024-08",
+              "mode_category": "pressure support/cpap",
+              "n": 1
+            },
+            {
+              "month_year": "2024-08",
+              "mode_category": "pressure-regulated volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2024-08",
+              "mode_category": "simv",
+              "n": 1
+            },
+            {
+              "month_year": "2024-09",
+              "mode_category": "assist control-volume control",
+              "n": 2
+            },
+            {
+              "month_year": "2024-09",
+              "mode_category": "pressure control",
+              "n": 2
+            },
+            {
+              "month_year": "2024-09",
+              "mode_category": "pressure support/cpap",
+              "n": 2
+            },
+            {
+              "month_year": "2024-09",
+              "mode_category": "pressure-regulated volume control",
+              "n": 2
+            },
+            {
+              "month_year": "2024-09",
+              "mode_category": "simv",
+              "n": 2
+            },
+            {
+              "month_year": "2024-10",
+              "mode_category": "assist control-volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2024-10",
+              "mode_category": "other",
+              "n": 1
+            },
+            {
+              "month_year": "2024-10",
+              "mode_category": "pressure support/cpap",
+              "n": 2
+            },
+            {
+              "month_year": "2024-10",
+              "mode_category": "pressure-regulated volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2024-10",
+              "mode_category": "simv",
+              "n": 1
+            },
+            {
+              "month_year": "2024-11",
+              "mode_category": "assist control-volume control",
+              "n": 2
+            },
+            {
+              "month_year": "2024-11",
+              "mode_category": "other",
+              "n": 1
+            },
+            {
+              "month_year": "2024-11",
+              "mode_category": "pressure control",
+              "n": 1
+            },
+            {
+              "month_year": "2024-11",
+              "mode_category": "pressure support/cpap",
+              "n": 2
+            },
+            {
+              "month_year": "2024-11",
+              "mode_category": "pressure-regulated volume control",
+              "n": 2
+            },
+            {
+              "month_year": "2024-11",
+              "mode_category": "simv",
+              "n": 2
+            },
+            {
+              "month_year": "2024-12",
+              "mode_category": "assist control-volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2024-12",
+              "mode_category": "pressure control",
+              "n": 1
+            },
+            {
+              "month_year": "2024-12",
+              "mode_category": "pressure support/cpap",
+              "n": 1
+            },
+            {
+              "month_year": "2024-12",
+              "mode_category": "pressure-regulated volume control",
+              "n": 1
+            },
+            {
+              "month_year": "2024-12",
+              "mode_category": "simv",
+              "n": 1
+            }
+          ],
+          "tracheostomy": [
+            {
+              "month_year": "2018-01",
+              "tracheostomy": 0,
+              "n": 4
+            },
+            {
+              "month_year": "2018-02",
+              "tracheostomy": 0,
+              "n": 3
+            },
+            {
+              "month_year": "2018-03",
+              "tracheostomy": 0,
+              "n": 3
+            },
+            {
+              "month_year": "2018-04",
+              "tracheostomy": 0,
+              "n": 6
+            },
+            {
+              "month_year": "2018-05",
+              "tracheostomy": 0,
+              "n": 3
+            },
+            {
+              "month_year": "2018-06",
+              "tracheostomy": 0,
+              "n": 4
+            },
+            {
+              "month_year": "2018-07",
+              "tracheostomy": 0,
+              "n": 5
+            },
+            {
+              "month_year": "2018-08",
+              "tracheostomy": 0,
+              "n": 6
+            },
+            {
+              "month_year": "2018-09",
+              "tracheostomy": 0,
+              "n": 5
+            },
+            {
+              "month_year": "2018-10",
+              "tracheostomy": 0,
+              "n": 2
+            },
+            {
+              "month_year": "2018-11",
+              "tracheostomy": 0,
+              "n": 5
+            },
+            {
+              "month_year": "2019-01",
+              "tracheostomy": 0,
+              "n": 5
+            },
+            {
+              "month_year": "2019-02",
+              "tracheostomy": 0,
+              "n": 4
+            },
+            {
+              "month_year": "2019-03",
+              "tracheostomy": 0,
+              "n": 4
+            },
+            {
+              "month_year": "2019-04",
+              "tracheostomy": 0,
+              "n": 2
+            },
+            {
+              "month_year": "2019-05",
+              "tracheostomy": 0,
+              "n": 6
+            },
+            {
+              "month_year": "2019-06",
+              "tracheostomy": 0,
+              "n": 5
+            },
+            {
+              "month_year": "2019-07",
+              "tracheostomy": 0,
+              "n": 6
+            },
+            {
+              "month_year": "2019-08",
+              "tracheostomy": 0,
+              "n": 3
+            },
+            {
+              "month_year": "2019-09",
+              "tracheostomy": 0,
+              "n": 3
+            },
+            {
+              "month_year": "2019-10",
+              "tracheostomy": 0,
+              "n": 3
+            },
+            {
+              "month_year": "2019-11",
+              "tracheostomy": 0,
+              "n": 4
+            },
+            {
+              "month_year": "2019-12",
+              "tracheostomy": 0,
+              "n": 6
+            },
+            {
+              "month_year": "2020-01",
+              "tracheostomy": 0,
+              "n": 3
+            },
+            {
+              "month_year": "2020-02",
+              "tracheostomy": 0,
+              "n": 3
+            },
+            {
+              "month_year": "2020-03",
+              "tracheostomy": 0,
+              "n": 1
+            },
+            {
+              "month_year": "2020-04",
+              "tracheostomy": 0,
+              "n": 3
+            },
+            {
+              "month_year": "2020-05",
+              "tracheostomy": 0,
+              "n": 5
+            },
+            {
+              "month_year": "2020-05",
+              "tracheostomy": 1,
+              "n": 1
+            },
+            {
+              "month_year": "2020-06",
+              "tracheostomy": 0,
+              "n": 8
+            },
+            {
+              "month_year": "2020-07",
+              "tracheostomy": 0,
+              "n": 5
+            },
+            {
+              "month_year": "2020-08",
+              "tracheostomy": 0,
+              "n": 2
+            },
+            {
+              "month_year": "2020-09",
+              "tracheostomy": 0,
+              "n": 3
+            },
+            {
+              "month_year": "2020-10",
+              "tracheostomy": 0,
+              "n": 5
+            },
+            {
+              "month_year": "2020-11",
+              "tracheostomy": 0,
+              "n": 5
+            },
+            {
+              "month_year": "2020-12",
+              "tracheostomy": 0,
+              "n": 1
+            },
+            {
+              "month_year": "2021-01",
+              "tracheostomy": 0,
+              "n": 2
+            },
+            {
+              "month_year": "2021-02",
+              "tracheostomy": 0,
+              "n": 6
+            },
+            {
+              "month_year": "2021-03",
+              "tracheostomy": 0,
+              "n": 3
+            },
+            {
+              "month_year": "2021-03",
+              "tracheostomy": 1,
+              "n": 1
+            },
+            {
+              "month_year": "2021-04",
+              "tracheostomy": 0,
+              "n": 2
+            },
+            {
+              "month_year": "2021-05",
+              "tracheostomy": 0,
+              "n": 3
+            },
+            {
+              "month_year": "2021-06",
+              "tracheostomy": 0,
+              "n": 1
+            },
+            {
+              "month_year": "2021-07",
+              "tracheostomy": 0,
+              "n": 4
+            },
+            {
+              "month_year": "2021-08",
+              "tracheostomy": 0,
+              "n": 2
+            },
+            {
+              "month_year": "2021-09",
+              "tracheostomy": 0,
+              "n": 4
+            },
+            {
+              "month_year": "2021-10",
+              "tracheostomy": 0,
+              "n": 3
+            },
+            {
+              "month_year": "2021-11",
+              "tracheostomy": 0,
+              "n": 3
+            },
+            {
+              "month_year": "2021-12",
+              "tracheostomy": 0,
+              "n": 2
+            },
+            {
+              "month_year": "2022-01",
+              "tracheostomy": 0,
+              "n": 4
+            },
+            {
+              "month_year": "2022-02",
+              "tracheostomy": 0,
+              "n": 3
+            },
+            {
+              "month_year": "2022-03",
+              "tracheostomy": 0,
+              "n": 5
+            },
+            {
+              "month_year": "2022-04",
+              "tracheostomy": 0,
+              "n": 5
+            },
+            {
+              "month_year": "2022-05",
+              "tracheostomy": 0,
+              "n": 2
+            },
+            {
+              "month_year": "2022-06",
+              "tracheostomy": 0,
+              "n": 3
+            },
+            {
+              "month_year": "2022-07",
+              "tracheostomy": 0,
+              "n": 4
+            },
+            {
+              "month_year": "2022-08",
+              "tracheostomy": 0,
+              "n": 1
+            },
+            {
+              "month_year": "2022-09",
+              "tracheostomy": 0,
+              "n": 5
+            },
+            {
+              "month_year": "2022-10",
+              "tracheostomy": 0,
+              "n": 4
+            },
+            {
+              "month_year": "2022-11",
+              "tracheostomy": 0,
+              "n": 5
+            },
+            {
+              "month_year": "2022-12",
+              "tracheostomy": 0,
+              "n": 5
+            },
+            {
+              "month_year": "2023-01",
+              "tracheostomy": 0,
+              "n": 2
+            },
+            {
+              "month_year": "2023-02",
+              "tracheostomy": 0,
+              "n": 2
+            },
+            {
+              "month_year": "2023-03",
+              "tracheostomy": 0,
+              "n": 3
+            },
+            {
+              "month_year": "2023-04",
+              "tracheostomy": 0,
+              "n": 3
+            },
+            {
+              "month_year": "2023-05",
+              "tracheostomy": 0,
+              "n": 2
+            },
+            {
+              "month_year": "2023-07",
+              "tracheostomy": 0,
+              "n": 6
+            },
+            {
+              "month_year": "2023-08",
+              "tracheostomy": 0,
+              "n": 3
+            },
+            {
+              "month_year": "2023-09",
+              "tracheostomy": 0,
+              "n": 1
+            },
+            {
+              "month_year": "2023-10",
+              "tracheostomy": 0,
+              "n": 4
+            },
+            {
+              "month_year": "2023-11",
+              "tracheostomy": 0,
+              "n": 2
+            },
+            {
+              "month_year": "2023-12",
+              "tracheostomy": 0,
+              "n": 1
+            },
+            {
+              "month_year": "2024-01",
+              "tracheostomy": 0,
+              "n": 1
+            },
+            {
+              "month_year": "2024-02",
+              "tracheostomy": 0,
+              "n": 3
+            },
+            {
+              "month_year": "2024-03",
+              "tracheostomy": 0,
+              "n": 5
+            },
+            {
+              "month_year": "2024-04",
+              "tracheostomy": 0,
+              "n": 4
+            },
+            {
+              "month_year": "2024-05",
+              "tracheostomy": 0,
+              "n": 6
+            },
+            {
+              "month_year": "2024-06",
+              "tracheostomy": 0,
+              "n": 3
+            },
+            {
+              "month_year": "2024-07",
+              "tracheostomy": 0,
+              "n": 5
+            },
+            {
+              "month_year": "2024-07",
+              "tracheostomy": 1,
+              "n": 1
+            },
+            {
+              "month_year": "2024-08",
+              "tracheostomy": 0,
+              "n": 3
+            },
+            {
+              "month_year": "2024-09",
+              "tracheostomy": 0,
+              "n": 2
+            },
+            {
+              "month_year": "2024-10",
+              "tracheostomy": 0,
+              "n": 3
+            },
+            {
+              "month_year": "2024-11",
+              "tracheostomy": 0,
+              "n": 5
+            },
+            {
+              "month_year": "2024-12",
+              "tracheostomy": 0,
+              "n": 3
+            },
+            {
+              "month_year": "2024-12",
+              "tracheostomy": 1,
+              "n": 1
+            },
+            {
+              "month_year": "2025-01",
+              "tracheostomy": 0,
+              "n": 1
+            }
+          ]
+        }
+      },
+      "atomic_total": 15,
+      "atomic_passed": 15
+    },
+    "duplicate_composite_keys": {
+      "check_type": "duplicate_composite_keys",
+      "table_name": "respiratory_support",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No duplicate composite keys found",
+          "details": {}
+        }
+      ],
+      "metrics": {
+        "composite_keys": [
+          "hospitalization_id",
+          "recorded_dttm"
+        ],
+        "total_records": 37468,
+        "unique_records": 37468,
+        "duplicate_records": 0,
+        "duplicate_percent": 0.0
+      },
+      "atomic_total": 1,
+      "atomic_passed": 1
+    }
+  },
+  "table_stats": [
+    {
+      "column": "hospitalization_id",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 200,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "recorded_dttm",
+      "dtype": "DATETIME",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 37468,
+      "min": "2018-01-22 20:36",
+      "max": "2025-01-15 06:04"
+    },
+    {
+      "column": "device_name",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 7,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "device_id",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 8853,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "device_category",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 7,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "vent_brand_name",
+      "dtype": "VARCHAR",
+      "null_count": 24726,
+      "null_pct": 66.0,
+      "unique": 5,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "mode_name",
+      "dtype": "VARCHAR",
+      "null_count": 21335,
+      "null_pct": 56.9,
+      "unique": 6,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "mode_category",
+      "dtype": "VARCHAR",
+      "null_count": 21335,
+      "null_pct": 56.9,
+      "unique": 6,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "tracheostomy",
+      "dtype": "INT",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 2,
+      "min": "0",
+      "max": "1"
+    },
+    {
+      "column": "fio2_set",
+      "dtype": "DOUBLE",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 61,
+      "min": "0.21",
+      "max": "0.86"
+    },
+    {
+      "column": "lpm_set",
+      "dtype": "DOUBLE",
+      "null_count": 30885,
+      "null_pct": 82.4,
+      "unique": 15,
+      "min": "1.0",
+      "max": "15.0"
+    },
+    {
+      "column": "tidal_volume_set",
+      "dtype": "DOUBLE",
+      "null_count": 24726,
+      "null_pct": 66.0,
+      "unique": 201,
+      "min": "350.0",
+      "max": "550.0"
+    },
+    {
+      "column": "resp_rate_set",
+      "dtype": "DOUBLE",
+      "null_count": 24726,
+      "null_pct": 66.0,
+      "unique": 13,
+      "min": "12.0",
+      "max": "24.0"
+    },
+    {
+      "column": "pressure_control_set",
+      "dtype": "DOUBLE",
+      "null_count": 37171,
+      "null_pct": 99.2,
+      "unique": 21,
+      "min": "15.0",
+      "max": "35.0"
+    },
+    {
+      "column": "pressure_support_set",
+      "dtype": "DOUBLE",
+      "null_count": 31997,
+      "null_pct": 85.4,
+      "unique": 16,
+      "min": "5.0",
+      "max": "20.0"
+    },
+    {
+      "column": "flow_rate_set",
+      "dtype": "DOUBLE",
+      "null_count": 33910,
+      "null_pct": 90.5,
+      "unique": 41,
+      "min": "20.0",
+      "max": "60.0"
+    },
+    {
+      "column": "peak_inspiratory_pressure_set",
+      "dtype": "DOUBLE",
+      "null_count": 24726,
+      "null_pct": 66.0,
+      "unique": 26,
+      "min": "15.0",
+      "max": "40.0"
+    },
+    {
+      "column": "inspiratory_time_set",
+      "dtype": "DOUBLE",
+      "null_count": 24726,
+      "null_pct": 66.0,
+      "unique": 71,
+      "min": "0.8",
+      "max": "1.5"
+    },
+    {
+      "column": "peep_set",
+      "dtype": "DOUBLE",
+      "null_count": 21335,
+      "null_pct": 56.9,
+      "unique": 11,
+      "min": "5.0",
+      "max": "20.0"
+    },
+    {
+      "column": "tidal_volume_obs",
+      "dtype": "DOUBLE",
+      "null_count": 24726,
+      "null_pct": 66.0,
+      "unique": 338,
+      "min": "261.0",
+      "max": "647.0"
+    },
+    {
+      "column": "resp_rate_obs",
+      "dtype": "DOUBLE",
+      "null_count": 24726,
+      "null_pct": 66.0,
+      "unique": 32,
+      "min": "1.0",
+      "max": "34.0"
+    },
+    {
+      "column": "plateau_pressure_obs",
+      "dtype": "DOUBLE",
+      "null_count": 28496,
+      "null_pct": 76.1,
+      "unique": 19,
+      "min": "12.0",
+      "max": "30.0"
+    },
+    {
+      "column": "peak_inspiratory_pressure_obs",
+      "dtype": "DOUBLE",
+      "null_count": 24726,
+      "null_pct": 66.0,
+      "unique": 37,
+      "min": "9.0",
+      "max": "45.0"
+    },
+    {
+      "column": "peep_obs",
+      "dtype": "DOUBLE",
+      "null_count": 24726,
+      "null_pct": 66.0,
+      "unique": 19,
+      "min": "3.0",
+      "max": "21.0"
+    },
+    {
+      "column": "minute_vent_obs",
+      "dtype": "DOUBLE",
+      "null_count": 24726,
+      "null_pct": 66.0,
+      "unique": 101,
+      "min": "5.0",
+      "max": "15.0"
+    },
+    {
+      "column": "mean_airway_pressure_obs",
+      "dtype": "DOUBLE",
+      "null_count": 24726,
+      "null_pct": 66.0,
+      "unique": 18,
+      "min": "8.0",
+      "max": "25.0"
+    }
+  ],
+  "total_rows": 37468
+}

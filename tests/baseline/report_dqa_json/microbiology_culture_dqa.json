@@ -1,0 +1,4450 @@
+{
+  "table_name": "microbiology_culture",
+  "backend": "polars",
+  "conformance": {
+    "table_presence": {
+      "check_type": "table_presence",
+      "table_name": "microbiology_culture",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Table 'microbiology_culture' present with 299 rows and 14 columns",
+          "details": {}
+        }
+      ],
+      "metrics": {
+        "row_count": 299,
+        "column_count": 14
+      },
+      "atomic_total": 1,
+      "atomic_passed": 1
+    },
+    "required_columns": {
+      "check_type": "required_columns",
+      "table_name": "microbiology_culture",
+      "passed": false,
+      "errors": [
+        {
+          "message": "Column 'order_id': missing from data",
+          "details": {
+            "column": "order_id"
+          }
+        }
+      ],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'patient_id': present",
+          "details": {
+            "column": "patient_id"
+          }
+        },
+        {
+          "message": "Column 'hospitalization_id': present",
+          "details": {
+            "column": "hospitalization_id"
+          }
+        },
+        {
+          "message": "Column 'organism_id': present",
+          "details": {
+            "column": "organism_id"
+          }
+        },
+        {
+          "message": "Column 'order_dttm': present",
+          "details": {
+            "column": "order_dttm"
+          }
+        },
+        {
+          "message": "Column 'collect_dttm': present",
+          "details": {
+            "column": "collect_dttm"
+          }
+        },
+        {
+          "message": "Column 'result_dttm': present",
+          "details": {
+            "column": "result_dttm"
+          }
+        },
+        {
+          "message": "Column 'fluid_category': present",
+          "details": {
+            "column": "fluid_category"
+          }
+        },
+        {
+          "message": "Column 'method_category': present",
+          "details": {
+            "column": "method_category"
+          }
+        },
+        {
+          "message": "Column 'organism_category': present",
+          "details": {
+            "column": "organism_category"
+          }
+        },
+        {
+          "message": "Column 'organism_group': present",
+          "details": {
+            "column": "organism_group"
+          }
+        }
+      ],
+      "metrics": {
+        "total_required": 11,
+        "total_present": 10,
+        "total_missing": 1
+      },
+      "atomic_total": 11,
+      "atomic_passed": 10
+    },
+    "column_dtypes": {
+      "check_type": "column_dtypes",
+      "table_name": "microbiology_culture",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'patient_id': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "patient_id",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'hospitalization_id': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "hospitalization_id",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'order_id': not present in data (dtype check skipped)",
+          "details": {
+            "column": "order_id",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'organism_id': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "organism_id",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'order_dttm': dtype matches schema (DATETIME)",
+          "details": {
+            "column": "order_dttm",
+            "expected": "DATETIME"
+          }
+        },
+        {
+          "message": "Column 'collect_dttm': dtype matches schema (DATETIME)",
+          "details": {
+            "column": "collect_dttm",
+            "expected": "DATETIME"
+          }
+        },
+        {
+          "message": "Column 'result_dttm': dtype matches schema (DATETIME)",
+          "details": {
+            "column": "result_dttm",
+            "expected": "DATETIME"
+          }
+        },
+        {
+          "message": "Column 'fluid_name': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "fluid_name",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'fluid_category': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "fluid_category",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'method_name': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "method_name",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'method_category': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "method_category",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'organism_name': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "organism_name",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'organism_category': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "organism_category",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'organism_group': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "organism_group",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'lab_loinc_code': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "lab_loinc_code",
+            "expected": "VARCHAR"
+          }
+        }
+      ],
+      "metrics": {
+        "columns_checked": 15,
+        "dtype_errors": 0,
+        "dtype_warnings": 0
+      },
+      "atomic_total": 15,
+      "atomic_passed": 15
+    },
+    "datetime_format": {
+      "check_type": "datetime_format",
+      "table_name": "microbiology_culture",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'order_dttm': datetime format valid",
+          "details": {
+            "column": "order_dttm"
+          }
+        },
+        {
+          "message": "Column 'collect_dttm': datetime format valid",
+          "details": {
+            "column": "collect_dttm"
+          }
+        },
+        {
+          "message": "Column 'result_dttm': datetime format valid",
+          "details": {
+            "column": "result_dttm"
+          }
+        }
+      ],
+      "metrics": {
+        "datetime_columns_checked": 3
+      },
+      "atomic_total": 3,
+      "atomic_passed": 3
+    },
+    "categorical_values": {
+      "check_type": "categorical_values",
+      "table_name": "microbiology_culture",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'fluid_category': all values match mCIDE permissible values",
+          "details": {
+            "column": "fluid_category"
+          }
+        },
+        {
+          "message": "Column 'method_category': all values match mCIDE permissible values",
+          "details": {
+            "column": "method_category"
+          }
+        },
+        {
+          "message": "Column 'organism_category': all values match mCIDE permissible values",
+          "details": {
+            "column": "organism_category"
+          }
+        }
+      ],
+      "metrics": {
+        "category_columns_checked": 3,
+        "columns_with_invalid_values": 0
+      },
+      "atomic_total": 3,
+      "atomic_passed": 3
+    },
+    "category_group_mapping": {
+      "check_type": "category_group_mapping",
+      "table_name": "microbiology_culture",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No category-to-group mappings defined in schema",
+          "details": {}
+        }
+      ],
+      "metrics": {},
+      "atomic_total": 0,
+      "atomic_passed": 0
+    }
+  },
+  "completeness": {
+    "missingness": {
+      "check_type": "missingness",
+      "table_name": "microbiology_culture",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'patient_id': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "patient_id",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'hospitalization_id': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "hospitalization_id",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'organism_id': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "organism_id",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'order_dttm': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "order_dttm",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'collect_dttm': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "collect_dttm",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'result_dttm': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "result_dttm",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'fluid_category': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "fluid_category",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'method_category': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "method_category",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'organism_category': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "organism_category",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'organism_group': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "organism_group",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'order_id': not present in data (missingness check skipped)",
+          "details": {
+            "column": "order_id"
+          }
+        }
+      ],
+      "metrics": {
+        "total_rows": 299,
+        "required_columns_checked": 10,
+        "missingness_stats": [
+          {
+            "column": "patient_id",
+            "null_count": 0,
+            "total_rows": 299,
+            "percent_missing": 0.0
+          },
+          {
+            "column": "hospitalization_id",
+            "null_count": 0,
+            "total_rows": 299,
+            "percent_missing": 0.0
+          },
+          {
+            "column": "organism_id",
+            "null_count": 0,
+            "total_rows": 299,
+            "percent_missing": 0.0
+          },
+          {
+            "column": "order_dttm",
+            "null_count": 0,
+            "total_rows": 299,
+            "percent_missing": 0.0
+          },
+          {
+            "column": "collect_dttm",
+            "null_count": 0,
+            "total_rows": 299,
+            "percent_missing": 0.0
+          },
+          {
+            "column": "result_dttm",
+            "null_count": 0,
+            "total_rows": 299,
+            "percent_missing": 0.0
+          },
+          {
+            "column": "fluid_category",
+            "null_count": 0,
+            "total_rows": 299,
+            "percent_missing": 0.0
+          },
+          {
+            "column": "method_category",
+            "null_count": 0,
+            "total_rows": 299,
+            "percent_missing": 0.0
+          },
+          {
+            "column": "organism_category",
+            "null_count": 0,
+            "total_rows": 299,
+            "percent_missing": 0.0
+          },
+          {
+            "column": "organism_group",
+            "null_count": 0,
+            "total_rows": 299,
+            "percent_missing": 0.0
+          }
+        ]
+      },
+      "atomic_total": 11,
+      "atomic_passed": 10
+    },
+    "conditional_requirements": {
+      "check_type": "conditional_requirements",
+      "table_name": "microbiology_culture",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No conditional requirements defined for this table",
+          "details": {}
+        }
+      ],
+      "metrics": {},
+      "atomic_total": 0,
+      "atomic_passed": 0
+    },
+    "mcide_value_coverage": {
+      "check_type": "mcide_value_coverage",
+      "table_name": "microbiology_culture",
+      "passed": false,
+      "errors": [
+        {
+          "message": "Missing 40 mCIDE values: bone_cortex, bone_marrow, brain, cardiac, catheter_tip, central_nervous_system, ears, esophagus, eyes, fallopians_uterus_cervix, feces_stool, gallbladder_billary_pancreas, gastrointestinal_tract, genital_area, joints, kidneys_renal_pelvis_ureters_bladder, large_intestine, larynx, lips, liver, lymph_nodes, meninges_csf, muscle, nasopharynx_upperairway, oropharynx_tongue_oralcavity, other_unspecified, peritoneum, pleural_cavity_fluid, prostate, respiratory_tract_lower, sinuses, skin_disseminated_multiple_sites, skin_rash_pustules_abscesses, skin_unspecified, small_intestine, spinal_cord, spleen, stomach, testes, vagina",
+          "details": {
+            "column": "fluid_category",
+            "missing_values": [
+              "bone_cortex",
+              "bone_marrow",
+              "brain",
+              "cardiac",
+              "catheter_tip",
+              "central_nervous_system",
+              "ears",
+              "esophagus",
+              "eyes",
+              "fallopians_uterus_cervix",
+              "feces_stool",
+              "gallbladder_billary_pancreas",
+              "gastrointestinal_tract",
+              "genital_area",
+              "joints",
+              "kidneys_renal_pelvis_ureters_bladder",
+              "large_intestine",
+              "larynx",
+              "lips",
+              "liver",
+              "lymph_nodes",
+              "meninges_csf",
+              "muscle",
+              "nasopharynx_upperairway",
+              "oropharynx_tongue_oralcavity",
+              "other_unspecified",
+              "peritoneum",
+              "pleural_cavity_fluid",
+              "prostate",
+              "respiratory_tract_lower",
+              "sinuses",
+              "skin_disseminated_multiple_sites",
+              "skin_rash_pustules_abscesses",
+              "skin_unspecified",
+              "small_intestine",
+              "spinal_cord",
+              "spleen",
+              "stomach",
+              "testes",
+              "vagina"
+            ],
+            "coverage_percent": 9.09
+          }
+        },
+        {
+          "message": "Missing 531 mCIDE values: abiotrophia_defectiva, achromobacter_sp, achromobacter_xylosoxidans, acidaminococcus_sp, acinetobacter_johnsonii, acinetobacter_junii, acinetobacter_lwoffii, acinetobacter_pittii, acinetobacter_radioresistens, acinetobacter_sp, acinetobacter_ursingii, acremonium_sp, actinomyces_europaeus, actinomyces_meyeri, actinomyces_naeslundii, actinomyces_neuii, actinomyces_odontolyticus, actinomyces_radingae, actinomyces_sp, actinomyces_turicensis, actinomyces_viscosus, actinotignum_schaalii, actinotignum_sp, aerococcus_christensenii, aerococcus_sanguinicola, aerococcus_sp, aerococcus_urinae, aerococcus_viridans, aeromonas_caviae, aeromonas_hydrophila, aeromonas_sobria, aeromonas_sp, aggregatibacter_actinomycetemcomitans, aggregatibacter_aphrophilus, aggregatibacter_segnis, agrobacterium_radiobacter, alcaligenes_faecalis, alcaligenes_xylosoxidans, alistipes_finegoldii, alistipes_onderdonkii, alloiococcus_otitis, alloiococcus_sp, alternaria_alternata, alternaria_sp, anaerobic_sp, anaerococcus_sp, arcanobacterium_haemolyticum, arthrobacter_cumminsii, arthrobacter_sp, arthrographis_sp, aspergillus_flavus, aspergillus_fumigatus, aspergillus_nidulans, aspergillus_niger, aspergillus_ochraceus, aspergillus_sp, aspergillus_sydowii, aspergillus_terreus, aspergillus_versicolor, atopobium_parvulum, atopobium_sp, atopobium_vaginae, aureobasidium_sp, bacillus_cereus, bacillus_licheniformis, bacillus_megaterium, bacillus_simplex, bacillus_sp, bacillus_subtilis, bacteria_other, bacteroides_caccae, bacteroides_capillosus, bacteroides_eggerthii, bacteroides_faecis, bacteroides_fragilis, bacteroides_ovatus, bacteroides_pyogenes, bacteroides_sp, bacteroides_stercoris, bacteroides_thetaiotaomicron, bacteroides_uniformis, bacteroides_vulgatus, bacteroides_xylanisolvens, bifidobacterium_sp, bilophila_wadsworthia, blastomyces_dermatitidis, blastomyces_sp, bordetella_bronchiseptica, bordetella_hinzii, bordetella_sp, bordetella_trematum, brevibacillus_sp, brevibacterium_casei, brevibacterium_luteolum, brevibacterium_sp, brevundimonas_diminuta, brevundimonas_sp, brevundimonas_vesicularis, brucella_intermedia, burkholderia_cepacia, burkholderia_gladioli, burkholderia_sp, campylobacter_coli, campylobacter_jejuni, campylobacter_sp, campylobacter_ureolyticus, candida_auris, candida_colliculosa, candida_dubliniensis, candida_famata, candida_fermentati, candida_glabrata, candida_guilliermondii, candida_haemulonii, candida_intermedia, candida_kefyr, candida_krusei, candida_lambica, candida_lipolytica, candida_lusitaniae, candida_nivariensis, candida_orthopsilosis, candida_parapsilosis, candida_pararugosa, candida_pelliculosa, candida_pulcherrima, candida_rugosa, candida_sp, candida_tropicalis, candida_utilis, capnocytophaga_gingivalis, capnocytophaga_sp, cardiobacterium_hominis, cardiobacterium_sp, cellulosimicrobium_cellulans, chaetomium_sp, chryseobacterium_indologenes, chryseobacterium_sp, citrobacter_amalonaticus, citrobacter_farmeri, citrobacter_freundii, citrobacter_koseri, citrobacter_sp, cladosporium_sp, clostridioides_difficile, clostridium_bifermentans, clostridium_butyricum, clostridium_cadaveris, clostridium_clostridioforme, clostridium_innocuum, clostridium_paraputrificum, clostridium_perfringens, clostridium_ramosum, clostridium_septicum, clostridium_sordellii, clostridium_sp, clostridium_sporogenes, clostridium_tertium, cokeromyces_recurvatus, collinsella_aerofaciens, comamonas_testosteroni, corynebacterium_accolens, corynebacterium_afermentans, corynebacterium_amycolatum, corynebacterium_aurimucosum, corynebacterium_bovis, corynebacterium_coyleae, corynebacterium_diptheriae, corynebacterium_durum, corynebacterium_freneyi, corynebacterium_glucuronolyticum, corynebacterium_imitans, corynebacterium_jeikeium, corynebacterium_macginleyi, corynebacterium_propinquum, corynebacterium_pseudodiphtheriticum, corynebacterium_simulans, corynebacterium_sp, corynebacterium_striatum, corynebacterium_tuberculostearicum, corynebacterium_urealyticum, cronobacter_malonaticus, cronobacter_sakazakii, cronobacter_sp, cryptococcus_albidus, cryptococcus_neoformans, cunninghamella_sp, cupriavidus_pauculus, curtobacterium_sp, curvularia_sp, cutibacterium_acnes, cutibacterium_avidum, delftia_acidovorans, dematiaceous_sp, dermabacter_hominis, dermacoccus_nishinomiyaensis, desulfovibrio_sp, dialister_pneumosintes, dialister_sp, dietzia_cinnamea, dietzia_sp, dolosigranulum_pigrum, edwardsiella_tarda, eggerthella_lenta, eggerthella_lentum, eggerthella_sp, eggerthia_catenaformis, eikenella_corrodens, elizabethkingia_anophelis, elizabethkingia_meningoseptica, elizabethkingia_sp, enterobacter_aerogenes, enterobacter_amnigenus, enterobacter_cancerogenus, enterobacter_cloacae, enterobacter_sp, enterococcus_avium, enterococcus_casseliflavus, enterococcus_durans, enterococcus_faecium, enterococcus_gallinarum, enterococcus_hirae, enterococcus_raffinosus, enterococcus_saccharolyticus, enterococcus_sp, epicoccum_sp, erysipelothrix_rhusiopathiae, escherichia_hermannii, escherichia_sp, eubacterium_callanderi, eubacterium_sp, ewingella_americana, exiguobacterium_acetylicum, exophiala_dermatitidis, facklamia_hominis, facklamia_sp, finegoldia_magna, francisella_tularensis, fungus_other, fusarium_proliferatum, fusarium_solani, fusarium_sp, fusobacterium_gonidiaformans, fusobacterium_necrophorum, fusobacterium_nucleatum, fusobacterium_sp, gardnerella_vaginalis, gemella_morbillorum, gemella_sp, geotrichum_sp, globicatella_sanguinis, gordonia_bronchialis, gordonia_sp, gram_negative_diplococci, gram_negative_rod, gram_positive_cocci, gram_positive_rod, granulicatella_adiacens, granulicatella_elegans, haemophilus_haemolyticus, haemophilus_influenzae, haemophilus_parainfluenzae, haemophilus_sp, hafnia_alvei, hafnia_sp, histoplasma_capsulatum, kingella_denitrificans, klebsiella_aerogenes, klebsiella_oxytoca, klebsiella_sp, klebsiella_variicola, kloeckera_sp, kluyvera_sp, kocuria_palustris, kocuria_sp, kodamaea_ohmeri, lactobacillus_acidophilus, lactobacillus_fermentum, lactobacillus_sp, lactococcus_sp, leclercia_adecarboxylata, legionella_bozemanae, legionella_dumoffii, legionella_feeleii, legionella_pneumophila, legionella_sp, lelliottia_amigena, leptotrichia_buccalis, leuconostoc_sp, lichtheimia_sp, listeria_monocytogenes, lysinibacillus_fusiformis, lysinibacillus_sp, malassezia_furfur, malassezia_pachydermatis, microbacterium_flavescens, microbacterium_sp, micrococcus_luteus, micrococcus_sp, microsporum_gypseum, microsporum_sp, moraxella_catarrhalis, moraxella_nonliquefaciens, moraxella_osloensis, moraxella_sp, morganella_morganii, morganella_sp, mucor_circinelloides, mucor_sp, mycobacterium_abscessus, mycobacterium_avium, mycobacterium_chelonae, mycobacterium_farcinogenes, mycobacterium_fortuitum, mycobacterium_gordonae, mycobacterium_kansasii, mycobacterium_kubicae, mycobacterium_lentiflavum, mycobacterium_llatzerense, mycobacterium_malmoense, mycobacterium_marinum, mycobacterium_mucogenicum, mycobacterium_neoaurum, mycobacterium_paraffinicum, mycobacterium_scrofulaceum, mycobacterium_szulgai, mycobacterium_tuberculosis, mycobacterium_xenopi, mycoplasma_hominis, mycoplasma_sp, myroides_sp, neisseria_gonorrhoeae, neisseria_meningitidis, neisseria_mucosa, neisseria_sp, neisseria_subflava, nocardia_abscessus, nocardia_brasiliensis, nocardia_cyriacigeorgica, nocardia_farcinica, nocardia_nova, nocardia_sp, nocardia_thailandica, nocardia_veterana, nocardia_wallacei, ochraconis_sp, ochrobactrum_anthropi, ochrobactrum_intermedium, ochrobactrum_sp, odoribacter_splanchnicus, oligella_ureolytica, oligella_urethralis, paecilomyces_lilacinus, paecilomyces_sp, paenibacillus_sp, pandoraea_sp, pantoea_agglomerans, pantoea_sp, parabacteroides_distasonis, parabacteroides_merdae, parvimonas_micra, pasteurella_canis, pasteurella_multocida, pasteurella_sp, pediococcus_acidilactici, penicillium_sp, peptoniphilus_assacharolyticus, peptoniphilus_harei, peptoniphilus_sp, peptostreptococcus_anaerobius, peptostreptococcus_sp, pithomyces_sp, plasmodium_falciparum, plasmodium_sp, plesiomonas_shigelloides, pluralibacter_gergoviae, porphyromonas_asaccharolytica, porphyromonas_sp, prevotella_bivia, prevotella_buccae, prevotella_denticola, prevotella_disiens, prevotella_intermedia, prevotella_melaninogenica, prevotella_nigrescens, prevotella_oralis, prevotella_oris, prevotella_sp, propionibacterium_acnes, propionibacterium_avidum, propionibacterium_granulosum, propionibacterium_sp, proteus_penneri, proteus_sp, proteus_vulgaris, providencia_alcalifaciens, providencia_rettgeri, providencia_sp, providencia_stuartii, pseudallescheria_boydii, pseudoglutamicibacter_cumminsii, pseudomonas_alcaligenes, pseudomonas_fluorescens, pseudomonas_luteola, pseudomonas_mendocina, pseudomonas_oryzihabitans, pseudomonas_putida, pseudomonas_sp, pseudomonas_stutzeri, psychrobacter_phenylpyruvicus, psychrobacter_sp, purpureocillium_lilacinum, rahnella_aquatilis, rahnella_sp, ralstonia_mannitolilytica, ralstonia_pickettii, ralstonia_sp, raoultella_ornithinolytica, raoultella_planticola, raoultella_sp, rhinocladiella_sp, rhizobium_radiobacter, rhizobium_sp, rhizomucor_pusillus, rhizomucor_sp, rhizopus_sp, rhodococcus_sp, rhodotorula_mucilaginosa, rhodotorula_sp, roseomonas_sp, rothia_dentocariosa, rothia_mucilaginosa, rothia_sp, saccharomyces_cerevisiae, saccharomyces_sp, salmonella_enterica, salmonella_enteritidis, salmonella_paratyphi, salmonella_sp, saprochaete_capitata, saprochaete_sp, scedosporium_apiospermum, scopulariopsis_brevicaulis, scopulariopsis_sp, serratia_fonticola, serratia_liquefaciens, serratia_marcescens, serratia_odorifera, serratia_rubidaea, serratia_sp, shewanella_putrefaciens, shewanella_sp, shigella_sonnei, slackia_exigua, sphingomonas_paucimobilis, sphingomonas_sp, sporobolomyces_salmonicolor, staphylococcus_auricularis, staphylococcus_capitis, staphylococcus_caprae, staphylococcus_carnosus, staphylococcus_coagneg, staphylococcus_cohnii, staphylococcus_epidermidis, staphylococcus_haemolyticus, staphylococcus_hominis, staphylococcus_lugdunensis, staphylococcus_pasteuri, staphylococcus_pettenkoferi, staphylococcus_pseudintermedius, staphylococcus_saccharolyticus, staphylococcus_saprophyticus, staphylococcus_schleiferi, staphylococcus_sciuri, staphylococcus_simulans, staphylococcus_sp, staphylococcus_warneri, staphylococcus_xylosus, stenotrophomonas_maltophilia, stenotrophomonas_rhizophila, stenotrophomonas_sp, streptococcus_agalactiae, streptococcus_alphahemolytic, streptococcus_anginosus, streptococcus_bovis, streptococcus_canis, streptococcus_constellatus, streptococcus_cristatus, streptococcus_dysgalactiae, streptococcus_equinus, streptococcus_gallolyticus, streptococcus_gordonii, streptococcus_infantarius, streptococcus_intermedius, streptococcus_mitis, streptococcus_mutans, streptococcus_nonhemolytic, streptococcus_parasanguinis, streptococcus_pseudoporcinus, streptococcus_pyogenes, streptococcus_salivarius, streptococcus_sanguinis, streptococcus_sp, streptococcus_viridans, streptomyces_griseus, streptomyces_sp, sutterella_sp, syncephalastrum_sp, teichospora_sp, tissierella_praeacuta, trichoderma_sp, trichophyton_rubrum, trichophyton_tonsurans, trichosporon_asahii, trichosporon_sp, trueperella_bernardiae, trueperella_sp, tuberculosis_nos_afb_kochbacillus, turicella_otitidis, vagococcus_fluvialis, veillonella_sp, verticillium_sp, vibrio_sp, virus_other, weeksella_sp, weeksella_virosa, weissella_confusa, weissella_sp, xanthomonas_sp, yeast, zygomycete_sp",
+          "details": {
+            "column": "organism_category",
+            "missing_values": [
+              "abiotrophia_defectiva",
+              "achromobacter_sp",
+              "achromobacter_xylosoxidans",
+              "acidaminococcus_sp",
+              "acinetobacter_johnsonii",
+              "acinetobacter_junii",
+              "acinetobacter_lwoffii",
+              "acinetobacter_pittii",
+              "acinetobacter_radioresistens",
+              "acinetobacter_sp",
+              "acinetobacter_ursingii",
+              "acremonium_sp",
+              "actinomyces_europaeus",
+              "actinomyces_meyeri",
+              "actinomyces_naeslundii",
+              "actinomyces_neuii",
+              "actinomyces_odontolyticus",
+              "actinomyces_radingae",
+              "actinomyces_sp",
+              "actinomyces_turicensis",
+              "actinomyces_viscosus",
+              "actinotignum_schaalii",
+              "actinotignum_sp",
+              "aerococcus_christensenii",
+              "aerococcus_sanguinicola",
+              "aerococcus_sp",
+              "aerococcus_urinae",
+              "aerococcus_viridans",
+              "aeromonas_caviae",
+              "aeromonas_hydrophila",
+              "aeromonas_sobria",
+              "aeromonas_sp",
+              "aggregatibacter_actinomycetemcomitans",
+              "aggregatibacter_aphrophilus",
+              "aggregatibacter_segnis",
+              "agrobacterium_radiobacter",
+              "alcaligenes_faecalis",
+              "alcaligenes_xylosoxidans",
+              "alistipes_finegoldii",
+              "alistipes_onderdonkii",
+              "alloiococcus_otitis",
+              "alloiococcus_sp",
+              "alternaria_alternata",
+              "alternaria_sp",
+              "anaerobic_sp",
+              "anaerococcus_sp",
+              "arcanobacterium_haemolyticum",
+              "arthrobacter_cumminsii",
+              "arthrobacter_sp",
+              "arthrographis_sp",
+              "aspergillus_flavus",
+              "aspergillus_fumigatus",
+              "aspergillus_nidulans",
+              "aspergillus_niger",
+              "aspergillus_ochraceus",
+              "aspergillus_sp",
+              "aspergillus_sydowii",
+              "aspergillus_terreus",
+              "aspergillus_versicolor",
+              "atopobium_parvulum",
+              "atopobium_sp",
+              "atopobium_vaginae",
+              "aureobasidium_sp",
+              "bacillus_cereus",
+              "bacillus_licheniformis",
+              "bacillus_megaterium",
+              "bacillus_simplex",
+              "bacillus_sp",
+              "bacillus_subtilis",
+              "bacteria_other",
+              "bacteroides_caccae",
+              "bacteroides_capillosus",
+              "bacteroides_eggerthii",
+              "bacteroides_faecis",
+              "bacteroides_fragilis",
+              "bacteroides_ovatus",
+              "bacteroides_pyogenes",
+              "bacteroides_sp",
+              "bacteroides_stercoris",
+              "bacteroides_thetaiotaomicron",
+              "bacteroides_uniformis",
+              "bacteroides_vulgatus",
+              "bacteroides_xylanisolvens",
+              "bifidobacterium_sp",
+              "bilophila_wadsworthia",
+              "blastomyces_dermatitidis",
+              "blastomyces_sp",
+              "bordetella_bronchiseptica",
+              "bordetella_hinzii",
+              "bordetella_sp",
+              "bordetella_trematum",
+              "brevibacillus_sp",
+              "brevibacterium_casei",
+              "brevibacterium_luteolum",
+              "brevibacterium_sp",
+              "brevundimonas_diminuta",
+              "brevundimonas_sp",
+              "brevundimonas_vesicularis",
+              "brucella_intermedia",
+              "burkholderia_cepacia",
+              "burkholderia_gladioli",
+              "burkholderia_sp",
+              "campylobacter_coli",
+              "campylobacter_jejuni",
+              "campylobacter_sp",
+              "campylobacter_ureolyticus",
+              "candida_auris",
+              "candida_colliculosa",
+              "candida_dubliniensis",
+              "candida_famata",
+              "candida_fermentati",
+              "candida_glabrata",
+              "candida_guilliermondii",
+              "candida_haemulonii",
+              "candida_intermedia",
+              "candida_kefyr",
+              "candida_krusei",
+              "candida_lambica",
+              "candida_lipolytica",
+              "candida_lusitaniae",
+              "candida_nivariensis",
+              "candida_orthopsilosis",
+              "candida_parapsilosis",
+              "candida_pararugosa",
+              "candida_pelliculosa",
+              "candida_pulcherrima",
+              "candida_rugosa",
+              "candida_sp",
+              "candida_tropicalis",
+              "candida_utilis",
+              "capnocytophaga_gingivalis",
+              "capnocytophaga_sp",
+              "cardiobacterium_hominis",
+              "cardiobacterium_sp",
+              "cellulosimicrobium_cellulans",
+              "chaetomium_sp",
+              "chryseobacterium_indologenes",
+              "chryseobacterium_sp",
+              "citrobacter_amalonaticus",
+              "citrobacter_farmeri",
+              "citrobacter_freundii",
+              "citrobacter_koseri",
+              "citrobacter_sp",
+              "cladosporium_sp",
+              "clostridioides_difficile",
+              "clostridium_bifermentans",
+              "clostridium_butyricum",
+              "clostridium_cadaveris",
+              "clostridium_clostridioforme",
+              "clostridium_innocuum",
+              "clostridium_paraputrificum",
+              "clostridium_perfringens",
+              "clostridium_ramosum",
+              "clostridium_septicum",
+              "clostridium_sordellii",
+              "clostridium_sp",
+              "clostridium_sporogenes",
+              "clostridium_tertium",
+              "cokeromyces_recurvatus",
+              "collinsella_aerofaciens",
+              "comamonas_testosteroni",
+              "corynebacterium_accolens",
+              "corynebacterium_afermentans",
+              "corynebacterium_amycolatum",
+              "corynebacterium_aurimucosum",
+              "corynebacterium_bovis",
+              "corynebacterium_coyleae",
+              "corynebacterium_diptheriae",
+              "corynebacterium_durum",
+              "corynebacterium_freneyi",
+              "corynebacterium_glucuronolyticum",
+              "corynebacterium_imitans",
+              "corynebacterium_jeikeium",
+              "corynebacterium_macginleyi",
+              "corynebacterium_propinquum",
+              "corynebacterium_pseudodiphtheriticum",
+              "corynebacterium_simulans",
+              "corynebacterium_sp",
+              "corynebacterium_striatum",
+              "corynebacterium_tuberculostearicum",
+              "corynebacterium_urealyticum",
+              "cronobacter_malonaticus",
+              "cronobacter_sakazakii",
+              "cronobacter_sp",
+              "cryptococcus_albidus",
+              "cryptococcus_neoformans",
+              "cunninghamella_sp",
+              "cupriavidus_pauculus",
+              "curtobacterium_sp",
+              "curvularia_sp",
+              "cutibacterium_acnes",
+              "cutibacterium_avidum",
+              "delftia_acidovorans",
+              "dematiaceous_sp",
+              "dermabacter_hominis",
+              "dermacoccus_nishinomiyaensis",
+              "desulfovibrio_sp",
+              "dialister_pneumosintes",
+              "dialister_sp",
+              "dietzia_cinnamea",
+              "dietzia_sp",
+              "dolosigranulum_pigrum",
+              "edwardsiella_tarda",
+              "eggerthella_lenta",
+              "eggerthella_lentum",
+              "eggerthella_sp",
+              "eggerthia_catenaformis",
+              "eikenella_corrodens",
+              "elizabethkingia_anophelis",
+              "elizabethkingia_meningoseptica",
+              "elizabethkingia_sp",
+              "enterobacter_aerogenes",
+              "enterobacter_amnigenus",
+              "enterobacter_cancerogenus",
+              "enterobacter_cloacae",
+              "enterobacter_sp",
+              "enterococcus_avium",
+              "enterococcus_casseliflavus",
+              "enterococcus_durans",
+              "enterococcus_faecium",
+              "enterococcus_gallinarum",
+              "enterococcus_hirae",
+              "enterococcus_raffinosus",
+              "enterococcus_saccharolyticus",
+              "enterococcus_sp",
+              "epicoccum_sp",
+              "erysipelothrix_rhusiopathiae",
+              "escherichia_hermannii",
+              "escherichia_sp",
+              "eubacterium_callanderi",
+              "eubacterium_sp",
+              "ewingella_americana",
+              "exiguobacterium_acetylicum",
+              "exophiala_dermatitidis",
+              "facklamia_hominis",
+              "facklamia_sp",
+              "finegoldia_magna",
+              "francisella_tularensis",
+              "fungus_other",
+              "fusarium_proliferatum",
+              "fusarium_solani",
+              "fusarium_sp",
+              "fusobacterium_gonidiaformans",
+              "fusobacterium_necrophorum",
+              "fusobacterium_nucleatum",
+              "fusobacterium_sp",
+              "gardnerella_vaginalis",
+              "gemella_morbillorum",
+              "gemella_sp",
+              "geotrichum_sp",
+              "globicatella_sanguinis",
+              "gordonia_bronchialis",
+              "gordonia_sp",
+              "gram_negative_diplococci",
+              "gram_negative_rod",
+              "gram_positive_cocci",
+              "gram_positive_rod",
+              "granulicatella_adiacens",
+              "granulicatella_elegans",
+              "haemophilus_haemolyticus",
+              "haemophilus_influenzae",
+              "haemophilus_parainfluenzae",
+              "haemophilus_sp",
+              "hafnia_alvei",
+              "hafnia_sp",
+              "histoplasma_capsulatum",
+              "kingella_denitrificans",
+              "klebsiella_aerogenes",
+              "klebsiella_oxytoca",
+              "klebsiella_sp",
+              "klebsiella_variicola",
+              "kloeckera_sp",
+              "kluyvera_sp",
+              "kocuria_palustris",
+              "kocuria_sp",
+              "kodamaea_ohmeri",
+              "lactobacillus_acidophilus",
+              "lactobacillus_fermentum",
+              "lactobacillus_sp",
+              "lactococcus_sp",
+              "leclercia_adecarboxylata",
+              "legionella_bozemanae",
+              "legionella_dumoffii",
+              "legionella_feeleii",
+              "legionella_pneumophila",
+              "legionella_sp",
+              "lelliottia_amigena",
+              "leptotrichia_buccalis",
+              "leuconostoc_sp",
+              "lichtheimia_sp",
+              "listeria_monocytogenes",
+              "lysinibacillus_fusiformis",
+              "lysinibacillus_sp",
+              "malassezia_furfur",
+              "malassezia_pachydermatis",
+              "microbacterium_flavescens",
+              "microbacterium_sp",
+              "micrococcus_luteus",
+              "micrococcus_sp",
+              "microsporum_gypseum",
+              "microsporum_sp",
+              "moraxella_catarrhalis",
+              "moraxella_nonliquefaciens",
+              "moraxella_osloensis",
+              "moraxella_sp",
+              "morganella_morganii",
+              "morganella_sp",
+              "mucor_circinelloides",
+              "mucor_sp",
+              "mycobacterium_abscessus",
+              "mycobacterium_avium",
+              "mycobacterium_chelonae",
+              "mycobacterium_farcinogenes",
+              "mycobacterium_fortuitum",
+              "mycobacterium_gordonae",
+              "mycobacterium_kansasii",
+              "mycobacterium_kubicae",
+              "mycobacterium_lentiflavum",
+              "mycobacterium_llatzerense",
+              "mycobacterium_malmoense",
+              "mycobacterium_marinum",
+              "mycobacterium_mucogenicum",
+              "mycobacterium_neoaurum",
+              "mycobacterium_paraffinicum",
+              "mycobacterium_scrofulaceum",
+              "mycobacterium_szulgai",
+              "mycobacterium_tuberculosis",
+              "mycobacterium_xenopi",
+              "mycoplasma_hominis",
+              "mycoplasma_sp",
+              "myroides_sp",
+              "neisseria_gonorrhoeae",
+              "neisseria_meningitidis",
+              "neisseria_mucosa",
+              "neisseria_sp",
+              "neisseria_subflava",
+              "nocardia_abscessus",
+              "nocardia_brasiliensis",
+              "nocardia_cyriacigeorgica",
+              "nocardia_farcinica",
+              "nocardia_nova",
+              "nocardia_sp",
+              "nocardia_thailandica",
+              "nocardia_veterana",
+              "nocardia_wallacei",
+              "ochraconis_sp",
+              "ochrobactrum_anthropi",
+              "ochrobactrum_intermedium",
+              "ochrobactrum_sp",
+              "odoribacter_splanchnicus",
+              "oligella_ureolytica",
+              "oligella_urethralis",
+              "paecilomyces_lilacinus",
+              "paecilomyces_sp",
+              "paenibacillus_sp",
+              "pandoraea_sp",
+              "pantoea_agglomerans",
+              "pantoea_sp",
+              "parabacteroides_distasonis",
+              "parabacteroides_merdae",
+              "parvimonas_micra",
+              "pasteurella_canis",
+              "pasteurella_multocida",
+              "pasteurella_sp",
+              "pediococcus_acidilactici",
+              "penicillium_sp",
+              "peptoniphilus_assacharolyticus",
+              "peptoniphilus_harei",
+              "peptoniphilus_sp",
+              "peptostreptococcus_anaerobius",
+              "peptostreptococcus_sp",
+              "pithomyces_sp",
+              "plasmodium_falciparum",
+              "plasmodium_sp",
+              "plesiomonas_shigelloides",
+              "pluralibacter_gergoviae",
+              "porphyromonas_asaccharolytica",
+              "porphyromonas_sp",
+              "prevotella_bivia",
+              "prevotella_buccae",
+              "prevotella_denticola",
+              "prevotella_disiens",
+              "prevotella_intermedia",
+              "prevotella_melaninogenica",
+              "prevotella_nigrescens",
+              "prevotella_oralis",
+              "prevotella_oris",
+              "prevotella_sp",
+              "propionibacterium_acnes",
+              "propionibacterium_avidum",
+              "propionibacterium_granulosum",
+              "propionibacterium_sp",
+              "proteus_penneri",
+              "proteus_sp",
+              "proteus_vulgaris",
+              "providencia_alcalifaciens",
+              "providencia_rettgeri",
+              "providencia_sp",
+              "providencia_stuartii",
+              "pseudallescheria_boydii",
+              "pseudoglutamicibacter_cumminsii",
+              "pseudomonas_alcaligenes",
+              "pseudomonas_fluorescens",
+              "pseudomonas_luteola",
+              "pseudomonas_mendocina",
+              "pseudomonas_oryzihabitans",
+              "pseudomonas_putida",
+              "pseudomonas_sp",
+              "pseudomonas_stutzeri",
+              "psychrobacter_phenylpyruvicus",
+              "psychrobacter_sp",
+              "purpureocillium_lilacinum",
+              "rahnella_aquatilis",
+              "rahnella_sp",
+              "ralstonia_mannitolilytica",
+              "ralstonia_pickettii",
+              "ralstonia_sp",
+              "raoultella_ornithinolytica",
+              "raoultella_planticola",
+              "raoultella_sp",
+              "rhinocladiella_sp",
+              "rhizobium_radiobacter",
+              "rhizobium_sp",
+              "rhizomucor_pusillus",
+              "rhizomucor_sp",
+              "rhizopus_sp",
+              "rhodococcus_sp",
+              "rhodotorula_mucilaginosa",
+              "rhodotorula_sp",
+              "roseomonas_sp",
+              "rothia_dentocariosa",
+              "rothia_mucilaginosa",
+              "rothia_sp",
+              "saccharomyces_cerevisiae",
+              "saccharomyces_sp",
+              "salmonella_enterica",
+              "salmonella_enteritidis",
+              "salmonella_paratyphi",
+              "salmonella_sp",
+              "saprochaete_capitata",
+              "saprochaete_sp",
+              "scedosporium_apiospermum",
+              "scopulariopsis_brevicaulis",
+              "scopulariopsis_sp",
+              "serratia_fonticola",
+              "serratia_liquefaciens",
+              "serratia_marcescens",
+              "serratia_odorifera",
+              "serratia_rubidaea",
+              "serratia_sp",
+              "shewanella_putrefaciens",
+              "shewanella_sp",
+              "shigella_sonnei",
+              "slackia_exigua",
+              "sphingomonas_paucimobilis",
+              "sphingomonas_sp",
+              "sporobolomyces_salmonicolor",
+              "staphylococcus_auricularis",
+              "staphylococcus_capitis",
+              "staphylococcus_caprae",
+              "staphylococcus_carnosus",
+              "staphylococcus_coagneg",
+              "staphylococcus_cohnii",
+              "staphylococcus_epidermidis",
+              "staphylococcus_haemolyticus",
+              "staphylococcus_hominis",
+              "staphylococcus_lugdunensis",
+              "staphylococcus_pasteuri",
+              "staphylococcus_pettenkoferi",
+              "staphylococcus_pseudintermedius",
+              "staphylococcus_saccharolyticus",
+              "staphylococcus_saprophyticus",
+              "staphylococcus_schleiferi",
+              "staphylococcus_sciuri",
+              "staphylococcus_simulans",
+              "staphylococcus_sp",
+              "staphylococcus_warneri",
+              "staphylococcus_xylosus",
+              "stenotrophomonas_maltophilia",
+              "stenotrophomonas_rhizophila",
+              "stenotrophomonas_sp",
+              "streptococcus_agalactiae",
+              "streptococcus_alphahemolytic",
+              "streptococcus_anginosus",
+              "streptococcus_bovis",
+              "streptococcus_canis",
+              "streptococcus_constellatus",
+              "streptococcus_cristatus",
+              "streptococcus_dysgalactiae",
+              "streptococcus_equinus",
+              "streptococcus_gallolyticus",
+              "streptococcus_gordonii",
+              "streptococcus_infantarius",
+              "streptococcus_intermedius",
+              "streptococcus_mitis",
+              "streptococcus_mutans",
+              "streptococcus_nonhemolytic",
+              "streptococcus_parasanguinis",
+              "streptococcus_pseudoporcinus",
+              "streptococcus_pyogenes",
+              "streptococcus_salivarius",
+              "streptococcus_sanguinis",
+              "streptococcus_sp",
+              "streptococcus_viridans",
+              "streptomyces_griseus",
+              "streptomyces_sp",
+              "sutterella_sp",
+              "syncephalastrum_sp",
+              "teichospora_sp",
+              "tissierella_praeacuta",
+              "trichoderma_sp",
+              "trichophyton_rubrum",
+              "trichophyton_tonsurans",
+              "trichosporon_asahii",
+              "trichosporon_sp",
+              "trueperella_bernardiae",
+              "trueperella_sp",
+              "tuberculosis_nos_afb_kochbacillus",
+              "turicella_otitidis",
+              "vagococcus_fluvialis",
+              "veillonella_sp",
+              "verticillium_sp",
+              "vibrio_sp",
+              "virus_other",
+              "weeksella_sp",
+              "weeksella_virosa",
+              "weissella_confusa",
+              "weissella_sp",
+              "xanthomonas_sp",
+              "yeast",
+              "zygomycete_sp"
+            ],
+            "coverage_percent": 1.85
+          }
+        }
+      ],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'fluid_category': 4/44 mCIDE values present",
+          "details": {
+            "column": "fluid_category",
+            "found_values": 4,
+            "expected_values": 44,
+            "coverage_percent": 9.09,
+            "atomic_count": 4
+          }
+        },
+        {
+          "message": "Column 'method_category': 3/3 mCIDE values present",
+          "details": {
+            "column": "method_category",
+            "found_values": 3,
+            "expected_values": 3,
+            "coverage_percent": 100.0,
+            "atomic_count": 3
+          }
+        },
+        {
+          "message": "Column 'organism_category': 10/541 mCIDE values present",
+          "details": {
+            "column": "organism_category",
+            "found_values": 10,
+            "expected_values": 541,
+            "coverage_percent": 1.85,
+            "atomic_count": 10
+          }
+        }
+      ],
+      "metrics": {
+        "category_columns_checked": 3,
+        "coverage_by_column": {
+          "fluid_category": {
+            "expected_values": 44,
+            "found_values": 4,
+            "missing_values": [
+              "bone_cortex",
+              "bone_marrow",
+              "brain",
+              "cardiac",
+              "catheter_tip",
+              "central_nervous_system",
+              "ears",
+              "esophagus",
+              "eyes",
+              "fallopians_uterus_cervix",
+              "feces_stool",
+              "gallbladder_billary_pancreas",
+              "gastrointestinal_tract",
+              "genital_area",
+              "joints",
+              "kidneys_renal_pelvis_ureters_bladder",
+              "large_intestine",
+              "larynx",
+              "lips",
+              "liver",
+              "lymph_nodes",
+              "meninges_csf",
+              "muscle",
+              "nasopharynx_upperairway",
+              "oropharynx_tongue_oralcavity",
+              "other_unspecified",
+              "peritoneum",
+              "pleural_cavity_fluid",
+              "prostate",
+              "respiratory_tract_lower",
+              "sinuses",
+              "skin_disseminated_multiple_sites",
+              "skin_rash_pustules_abscesses",
+              "skin_unspecified",
+              "small_intestine",
+              "spinal_cord",
+              "spleen",
+              "stomach",
+              "testes",
+              "vagina"
+            ],
+            "coverage_percent": 9.09
+          },
+          "method_category": {
+            "expected_values": 3,
+            "found_values": 3,
+            "missing_values": [],
+            "coverage_percent": 100.0
+          },
+          "organism_category": {
+            "expected_values": 541,
+            "found_values": 10,
+            "missing_values": [
+              "abiotrophia_defectiva",
+              "achromobacter_sp",
+              "achromobacter_xylosoxidans",
+              "acidaminococcus_sp",
+              "acinetobacter_johnsonii",
+              "acinetobacter_junii",
+              "acinetobacter_lwoffii",
+              "acinetobacter_pittii",
+              "acinetobacter_radioresistens",
+              "acinetobacter_sp",
+              "acinetobacter_ursingii",
+              "acremonium_sp",
+              "actinomyces_europaeus",
+              "actinomyces_meyeri",
+              "actinomyces_naeslundii",
+              "actinomyces_neuii",
+              "actinomyces_odontolyticus",
+              "actinomyces_radingae",
+              "actinomyces_sp",
+              "actinomyces_turicensis",
+              "actinomyces_viscosus",
+              "actinotignum_schaalii",
+              "actinotignum_sp",
+              "aerococcus_christensenii",
+              "aerococcus_sanguinicola",
+              "aerococcus_sp",
+              "aerococcus_urinae",
+              "aerococcus_viridans",
+              "aeromonas_caviae",
+              "aeromonas_hydrophila",
+              "aeromonas_sobria",
+              "aeromonas_sp",
+              "aggregatibacter_actinomycetemcomitans",
+              "aggregatibacter_aphrophilus",
+              "aggregatibacter_segnis",
+              "agrobacterium_radiobacter",
+              "alcaligenes_faecalis",
+              "alcaligenes_xylosoxidans",
+              "alistipes_finegoldii",
+              "alistipes_onderdonkii",
+              "alloiococcus_otitis",
+              "alloiococcus_sp",
+              "alternaria_alternata",
+              "alternaria_sp",
+              "anaerobic_sp",
+              "anaerococcus_sp",
+              "arcanobacterium_haemolyticum",
+              "arthrobacter_cumminsii",
+              "arthrobacter_sp",
+              "arthrographis_sp",
+              "aspergillus_flavus",
+              "aspergillus_fumigatus",
+              "aspergillus_nidulans",
+              "aspergillus_niger",
+              "aspergillus_ochraceus",
+              "aspergillus_sp",
+              "aspergillus_sydowii",
+              "aspergillus_terreus",
+              "aspergillus_versicolor",
+              "atopobium_parvulum",
+              "atopobium_sp",
+              "atopobium_vaginae",
+              "aureobasidium_sp",
+              "bacillus_cereus",
+              "bacillus_licheniformis",
+              "bacillus_megaterium",
+              "bacillus_simplex",
+              "bacillus_sp",
+              "bacillus_subtilis",
+              "bacteria_other",
+              "bacteroides_caccae",
+              "bacteroides_capillosus",
+              "bacteroides_eggerthii",
+              "bacteroides_faecis",
+              "bacteroides_fragilis",
+              "bacteroides_ovatus",
+              "bacteroides_pyogenes",
+              "bacteroides_sp",
+              "bacteroides_stercoris",
+              "bacteroides_thetaiotaomicron",
+              "bacteroides_uniformis",
+              "bacteroides_vulgatus",
+              "bacteroides_xylanisolvens",
+              "bifidobacterium_sp",
+              "bilophila_wadsworthia",
+              "blastomyces_dermatitidis",
+              "blastomyces_sp",
+              "bordetella_bronchiseptica",
+              "bordetella_hinzii",
+              "bordetella_sp",
+              "bordetella_trematum",
+              "brevibacillus_sp",
+              "brevibacterium_casei",
+              "brevibacterium_luteolum",
+              "brevibacterium_sp",
+              "brevundimonas_diminuta",
+              "brevundimonas_sp",
+              "brevundimonas_vesicularis",
+              "brucella_intermedia",
+              "burkholderia_cepacia",
+              "burkholderia_gladioli",
+              "burkholderia_sp",
+              "campylobacter_coli",
+              "campylobacter_jejuni",
+              "campylobacter_sp",
+              "campylobacter_ureolyticus",
+              "candida_auris",
+              "candida_colliculosa",
+              "candida_dubliniensis",
+              "candida_famata",
+              "candida_fermentati",
+              "candida_glabrata",
+              "candida_guilliermondii",
+              "candida_haemulonii",
+              "candida_intermedia",
+              "candida_kefyr",
+              "candida_krusei",
+              "candida_lambica",
+              "candida_lipolytica",
+              "candida_lusitaniae",
+              "candida_nivariensis",
+              "candida_orthopsilosis",
+              "candida_parapsilosis",
+              "candida_pararugosa",
+              "candida_pelliculosa",
+              "candida_pulcherrima",
+              "candida_rugosa",
+              "candida_sp",
+              "candida_tropicalis",
+              "candida_utilis",
+              "capnocytophaga_gingivalis",
+              "capnocytophaga_sp",
+              "cardiobacterium_hominis",
+              "cardiobacterium_sp",
+              "cellulosimicrobium_cellulans",
+              "chaetomium_sp",
+              "chryseobacterium_indologenes",
+              "chryseobacterium_sp",
+              "citrobacter_amalonaticus",
+              "citrobacter_farmeri",
+              "citrobacter_freundii",
+              "citrobacter_koseri",
+              "citrobacter_sp",
+              "cladosporium_sp",
+              "clostridioides_difficile",
+              "clostridium_bifermentans",
+              "clostridium_butyricum",
+              "clostridium_cadaveris",
+              "clostridium_clostridioforme",
+              "clostridium_innocuum",
+              "clostridium_paraputrificum",
+              "clostridium_perfringens",
+              "clostridium_ramosum",
+              "clostridium_septicum",
+              "clostridium_sordellii",
+              "clostridium_sp",
+              "clostridium_sporogenes",
+              "clostridium_tertium",
+              "cokeromyces_recurvatus",
+              "collinsella_aerofaciens",
+              "comamonas_testosteroni",
+              "corynebacterium_accolens",
+              "corynebacterium_afermentans",
+              "corynebacterium_amycolatum",
+              "corynebacterium_aurimucosum",
+              "corynebacterium_bovis",
+              "corynebacterium_coyleae",
+              "corynebacterium_diptheriae",
+              "corynebacterium_durum",
+              "corynebacterium_freneyi",
+              "corynebacterium_glucuronolyticum",
+              "corynebacterium_imitans",
+              "corynebacterium_jeikeium",
+              "corynebacterium_macginleyi",
+              "corynebacterium_propinquum",
+              "corynebacterium_pseudodiphtheriticum",
+              "corynebacterium_simulans",
+              "corynebacterium_sp",
+              "corynebacterium_striatum",
+              "corynebacterium_tuberculostearicum",
+              "corynebacterium_urealyticum",
+              "cronobacter_malonaticus",
+              "cronobacter_sakazakii",
+              "cronobacter_sp",
+              "cryptococcus_albidus",
+              "cryptococcus_neoformans",
+              "cunninghamella_sp",
+              "cupriavidus_pauculus",
+              "curtobacterium_sp",
+              "curvularia_sp",
+              "cutibacterium_acnes",
+              "cutibacterium_avidum",
+              "delftia_acidovorans",
+              "dematiaceous_sp",
+              "dermabacter_hominis",
+              "dermacoccus_nishinomiyaensis",
+              "desulfovibrio_sp",
+              "dialister_pneumosintes",
+              "dialister_sp",
+              "dietzia_cinnamea",
+              "dietzia_sp",
+              "dolosigranulum_pigrum",
+              "edwardsiella_tarda",
+              "eggerthella_lenta",
+              "eggerthella_lentum",
+              "eggerthella_sp",
+              "eggerthia_catenaformis",
+              "eikenella_corrodens",
+              "elizabethkingia_anophelis",
+              "elizabethkingia_meningoseptica",
+              "elizabethkingia_sp",
+              "enterobacter_aerogenes",
+              "enterobacter_amnigenus",
+              "enterobacter_cancerogenus",
+              "enterobacter_cloacae",
+              "enterobacter_sp",
+              "enterococcus_avium",
+              "enterococcus_casseliflavus",
+              "enterococcus_durans",
+              "enterococcus_faecium",
+              "enterococcus_gallinarum",
+              "enterococcus_hirae",
+              "enterococcus_raffinosus",
+              "enterococcus_saccharolyticus",
+              "enterococcus_sp",
+              "epicoccum_sp",
+              "erysipelothrix_rhusiopathiae",
+              "escherichia_hermannii",
+              "escherichia_sp",
+              "eubacterium_callanderi",
+              "eubacterium_sp",
+              "ewingella_americana",
+              "exiguobacterium_acetylicum",
+              "exophiala_dermatitidis",
+              "facklamia_hominis",
+              "facklamia_sp",
+              "finegoldia_magna",
+              "francisella_tularensis",
+              "fungus_other",
+              "fusarium_proliferatum",
+              "fusarium_solani",
+              "fusarium_sp",
+              "fusobacterium_gonidiaformans",
+              "fusobacterium_necrophorum",
+              "fusobacterium_nucleatum",
+              "fusobacterium_sp",
+              "gardnerella_vaginalis",
+              "gemella_morbillorum",
+              "gemella_sp",
+              "geotrichum_sp",
+              "globicatella_sanguinis",
+              "gordonia_bronchialis",
+              "gordonia_sp",
+              "gram_negative_diplococci",
+              "gram_negative_rod",
+              "gram_positive_cocci",
+              "gram_positive_rod",
+              "granulicatella_adiacens",
+              "granulicatella_elegans",
+              "haemophilus_haemolyticus",
+              "haemophilus_influenzae",
+              "haemophilus_parainfluenzae",
+              "haemophilus_sp",
+              "hafnia_alvei",
+              "hafnia_sp",
+              "histoplasma_capsulatum",
+              "kingella_denitrificans",
+              "klebsiella_aerogenes",
+              "klebsiella_oxytoca",
+              "klebsiella_sp",
+              "klebsiella_variicola",
+              "kloeckera_sp",
+              "kluyvera_sp",
+              "kocuria_palustris",
+              "kocuria_sp",
+              "kodamaea_ohmeri",
+              "lactobacillus_acidophilus",
+              "lactobacillus_fermentum",
+              "lactobacillus_sp",
+              "lactococcus_sp",
+              "leclercia_adecarboxylata",
+              "legionella_bozemanae",
+              "legionella_dumoffii",
+              "legionella_feeleii",
+              "legionella_pneumophila",
+              "legionella_sp",
+              "lelliottia_amigena",
+              "leptotrichia_buccalis",
+              "leuconostoc_sp",
+              "lichtheimia_sp",
+              "listeria_monocytogenes",
+              "lysinibacillus_fusiformis",
+              "lysinibacillus_sp",
+              "malassezia_furfur",
+              "malassezia_pachydermatis",
+              "microbacterium_flavescens",
+              "microbacterium_sp",
+              "micrococcus_luteus",
+              "micrococcus_sp",
+              "microsporum_gypseum",
+              "microsporum_sp",
+              "moraxella_catarrhalis",
+              "moraxella_nonliquefaciens",
+              "moraxella_osloensis",
+              "moraxella_sp",
+              "morganella_morganii",
+              "morganella_sp",
+              "mucor_circinelloides",
+              "mucor_sp",
+              "mycobacterium_abscessus",
+              "mycobacterium_avium",
+              "mycobacterium_chelonae",
+              "mycobacterium_farcinogenes",
+              "mycobacterium_fortuitum",
+              "mycobacterium_gordonae",
+              "mycobacterium_kansasii",
+              "mycobacterium_kubicae",
+              "mycobacterium_lentiflavum",
+              "mycobacterium_llatzerense",
+              "mycobacterium_malmoense",
+              "mycobacterium_marinum",
+              "mycobacterium_mucogenicum",
+              "mycobacterium_neoaurum",
+              "mycobacterium_paraffinicum",
+              "mycobacterium_scrofulaceum",
+              "mycobacterium_szulgai",
+              "mycobacterium_tuberculosis",
+              "mycobacterium_xenopi",
+              "mycoplasma_hominis",
+              "mycoplasma_sp",
+              "myroides_sp",
+              "neisseria_gonorrhoeae",
+              "neisseria_meningitidis",
+              "neisseria_mucosa",
+              "neisseria_sp",
+              "neisseria_subflava",
+              "nocardia_abscessus",
+              "nocardia_brasiliensis",
+              "nocardia_cyriacigeorgica",
+              "nocardia_farcinica",
+              "nocardia_nova",
+              "nocardia_sp",
+              "nocardia_thailandica",
+              "nocardia_veterana",
+              "nocardia_wallacei",
+              "ochraconis_sp",
+              "ochrobactrum_anthropi",
+              "ochrobactrum_intermedium",
+              "ochrobactrum_sp",
+              "odoribacter_splanchnicus",
+              "oligella_ureolytica",
+              "oligella_urethralis",
+              "paecilomyces_lilacinus",
+              "paecilomyces_sp",
+              "paenibacillus_sp",
+              "pandoraea_sp",
+              "pantoea_agglomerans",
+              "pantoea_sp",
+              "parabacteroides_distasonis",
+              "parabacteroides_merdae",
+              "parvimonas_micra",
+              "pasteurella_canis",
+              "pasteurella_multocida",
+              "pasteurella_sp",
+              "pediococcus_acidilactici",
+              "penicillium_sp",
+              "peptoniphilus_assacharolyticus",
+              "peptoniphilus_harei",
+              "peptoniphilus_sp",
+              "peptostreptococcus_anaerobius",
+              "peptostreptococcus_sp",
+              "pithomyces_sp",
+              "plasmodium_falciparum",
+              "plasmodium_sp",
+              "plesiomonas_shigelloides",
+              "pluralibacter_gergoviae",
+              "porphyromonas_asaccharolytica",
+              "porphyromonas_sp",
+              "prevotella_bivia",
+              "prevotella_buccae",
+              "prevotella_denticola",
+              "prevotella_disiens",
+              "prevotella_intermedia",
+              "prevotella_melaninogenica",
+              "prevotella_nigrescens",
+              "prevotella_oralis",
+              "prevotella_oris",
+              "prevotella_sp",
+              "propionibacterium_acnes",
+              "propionibacterium_avidum",
+              "propionibacterium_granulosum",
+              "propionibacterium_sp",
+              "proteus_penneri",
+              "proteus_sp",
+              "proteus_vulgaris",
+              "providencia_alcalifaciens",
+              "providencia_rettgeri",
+              "providencia_sp",
+              "providencia_stuartii",
+              "pseudallescheria_boydii",
+              "pseudoglutamicibacter_cumminsii",
+              "pseudomonas_alcaligenes",
+              "pseudomonas_fluorescens",
+              "pseudomonas_luteola",
+              "pseudomonas_mendocina",
+              "pseudomonas_oryzihabitans",
+              "pseudomonas_putida",
+              "pseudomonas_sp",
+              "pseudomonas_stutzeri",
+              "psychrobacter_phenylpyruvicus",
+              "psychrobacter_sp",
+              "purpureocillium_lilacinum",
+              "rahnella_aquatilis",
+              "rahnella_sp",
+              "ralstonia_mannitolilytica",
+              "ralstonia_pickettii",
+              "ralstonia_sp",
+              "raoultella_ornithinolytica",
+              "raoultella_planticola",
+              "raoultella_sp",
+              "rhinocladiella_sp",
+              "rhizobium_radiobacter",
+              "rhizobium_sp",
+              "rhizomucor_pusillus",
+              "rhizomucor_sp",
+              "rhizopus_sp",
+              "rhodococcus_sp",
+              "rhodotorula_mucilaginosa",
+              "rhodotorula_sp",
+              "roseomonas_sp",
+              "rothia_dentocariosa",
+              "rothia_mucilaginosa",
+              "rothia_sp",
+              "saccharomyces_cerevisiae",
+              "saccharomyces_sp",
+              "salmonella_enterica",
+              "salmonella_enteritidis",
+              "salmonella_paratyphi",
+              "salmonella_sp",
+              "saprochaete_capitata",
+              "saprochaete_sp",
+              "scedosporium_apiospermum",
+              "scopulariopsis_brevicaulis",
+              "scopulariopsis_sp",
+              "serratia_fonticola",
+              "serratia_liquefaciens",
+              "serratia_marcescens",
+              "serratia_odorifera",
+              "serratia_rubidaea",
+              "serratia_sp",
+              "shewanella_putrefaciens",
+              "shewanella_sp",
+              "shigella_sonnei",
+              "slackia_exigua",
+              "sphingomonas_paucimobilis",
+              "sphingomonas_sp",
+              "sporobolomyces_salmonicolor",
+              "staphylococcus_auricularis",
+              "staphylococcus_capitis",
+              "staphylococcus_caprae",
+              "staphylococcus_carnosus",
+              "staphylococcus_coagneg",
+              "staphylococcus_cohnii",
+              "staphylococcus_epidermidis",
+              "staphylococcus_haemolyticus",
+              "staphylococcus_hominis",
+              "staphylococcus_lugdunensis",
+              "staphylococcus_pasteuri",
+              "staphylococcus_pettenkoferi",
+              "staphylococcus_pseudintermedius",
+              "staphylococcus_saccharolyticus",
+              "staphylococcus_saprophyticus",
+              "staphylococcus_schleiferi",
+              "staphylococcus_sciuri",
+              "staphylococcus_simulans",
+              "staphylococcus_sp",
+              "staphylococcus_warneri",
+              "staphylococcus_xylosus",
+              "stenotrophomonas_maltophilia",
+              "stenotrophomonas_rhizophila",
+              "stenotrophomonas_sp",
+              "streptococcus_agalactiae",
+              "streptococcus_alphahemolytic",
+              "streptococcus_anginosus",
+              "streptococcus_bovis",
+              "streptococcus_canis",
+              "streptococcus_constellatus",
+              "streptococcus_cristatus",
+              "streptococcus_dysgalactiae",
+              "streptococcus_equinus",
+              "streptococcus_gallolyticus",
+              "streptococcus_gordonii",
+              "streptococcus_infantarius",
+              "streptococcus_intermedius",
+              "streptococcus_mitis",
+              "streptococcus_mutans",
+              "streptococcus_nonhemolytic",
+              "streptococcus_parasanguinis",
+              "streptococcus_pseudoporcinus",
+              "streptococcus_pyogenes",
+              "streptococcus_salivarius",
+              "streptococcus_sanguinis",
+              "streptococcus_sp",
+              "streptococcus_viridans",
+              "streptomyces_griseus",
+              "streptomyces_sp",
+              "sutterella_sp",
+              "syncephalastrum_sp",
+              "teichospora_sp",
+              "tissierella_praeacuta",
+              "trichoderma_sp",
+              "trichophyton_rubrum",
+              "trichophyton_tonsurans",
+              "trichosporon_asahii",
+              "trichosporon_sp",
+              "trueperella_bernardiae",
+              "trueperella_sp",
+              "tuberculosis_nos_afb_kochbacillus",
+              "turicella_otitidis",
+              "vagococcus_fluvialis",
+              "veillonella_sp",
+              "verticillium_sp",
+              "vibrio_sp",
+              "virus_other",
+              "weeksella_sp",
+              "weeksella_virosa",
+              "weissella_confusa",
+              "weissella_sp",
+              "xanthomonas_sp",
+              "yeast",
+              "zygomycete_sp"
+            ],
+            "coverage_percent": 1.85
+          }
+        }
+      },
+      "atomic_total": 588,
+      "atomic_passed": 17
+    }
+  },
+  "relational": {},
+  "plausibility": {
+    "chronological_order": {
+      "check_type": "chronological_order",
+      "table_name": "microbiology_culture",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Chronological order satisfied: Culture order must be before or equal to collection \u2014 299/299 rows valid (100%)",
+          "details": {
+            "column": "order_dttm, collect_dttm",
+            "rows_checked": 299,
+            "rows_valid": 299,
+            "percent_valid": 100.0
+          }
+        },
+        {
+          "message": "Chronological order satisfied: Culture collection must be before or equal to result \u2014 299/299 rows valid (100%)",
+          "details": {
+            "column": "collect_dttm, result_dttm",
+            "rows_checked": 299,
+            "rows_valid": 299,
+            "percent_valid": 100.0
+          }
+        }
+      ],
+      "metrics": {
+        "pairs_checked": 2,
+        "violations_by_pair": {
+          "order_dttm->collect_dttm": {
+            "total_applicable": 299,
+            "violations": 0,
+            "violation_percent": 0.0,
+            "description": "Culture order must be before or equal to collection"
+          },
+          "collect_dttm->result_dttm": {
+            "total_applicable": 299,
+            "violations": 0,
+            "violation_percent": 0.0,
+            "description": "Culture collection must be before or equal to result"
+          }
+        }
+      },
+      "atomic_total": 2,
+      "atomic_passed": 2
+    },
+    "numeric_range_plausibility": {
+      "check_type": "numeric_range_plausibility",
+      "table_name": "microbiology_culture",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No numeric range configuration for this table",
+          "details": {}
+        }
+      ],
+      "metrics": {},
+      "atomic_total": 0,
+      "atomic_passed": 0
+    },
+    "field_plausibility": {
+      "check_type": "field_plausibility",
+      "table_name": "microbiology_culture",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No field plausibility rules defined for this table",
+          "details": {}
+        }
+      ],
+      "metrics": {},
+      "atomic_total": 0,
+      "atomic_passed": 0
+    },
+    "category_temporal_consistency": {
+      "check_type": "category_temporal_consistency",
+      "table_name": "microbiology_culture",
+      "passed": true,
+      "errors": [],
+      "warnings": [
+        {
+          "message": "method_category: smear absent in 2/7 years (2018-2024)",
+          "details": {
+            "column": "method_category",
+            "value": "smear",
+            "absent_years": [
+              2018,
+              2023
+            ],
+            "total_years": 7,
+            "yearly_counts": {
+              "2018": 0,
+              "2019": 8,
+              "2020": 5,
+              "2021": 2,
+              "2022": 1,
+              "2023": 0,
+              "2024": 1
+            }
+          }
+        }
+      ],
+      "info": [
+        {
+          "message": "fluid_category: blood_buffy present in 7/7 years (2018-2024)",
+          "details": {
+            "column": "fluid_category",
+            "value": "blood_buffy",
+            "yearly_counts": {
+              "2018": 14,
+              "2019": 14,
+              "2020": 12,
+              "2021": 13,
+              "2022": 12,
+              "2023": 7,
+              "2024": 9
+            }
+          }
+        },
+        {
+          "message": "fluid_category: genito_urinary_tract present in 7/7 years (2018-2024)",
+          "details": {
+            "column": "fluid_category",
+            "value": "genito_urinary_tract",
+            "yearly_counts": {
+              "2018": 10,
+              "2019": 12,
+              "2020": 7,
+              "2021": 7,
+              "2022": 10,
+              "2023": 8,
+              "2024": 7
+            }
+          }
+        },
+        {
+          "message": "fluid_category: respiratory_tract present in 7/7 years (2018-2024)",
+          "details": {
+            "column": "fluid_category",
+            "value": "respiratory_tract",
+            "yearly_counts": {
+              "2018": 6,
+              "2019": 7,
+              "2020": 8,
+              "2021": 8,
+              "2022": 6,
+              "2023": 5,
+              "2024": 6
+            }
+          }
+        },
+        {
+          "message": "fluid_category: woundsite present in 7/7 years (2018-2024)",
+          "details": {
+            "column": "fluid_category",
+            "value": "woundsite",
+            "yearly_counts": {
+              "2018": 2,
+              "2019": 3,
+              "2020": 3,
+              "2021": 6,
+              "2022": 2,
+              "2023": 3,
+              "2024": 6
+            }
+          }
+        },
+        {
+          "message": "method_category: culture present in 7/7 years (2018-2024)",
+          "details": {
+            "column": "method_category",
+            "value": "culture",
+            "yearly_counts": {
+              "2018": 15,
+              "2019": 14,
+              "2020": 14,
+              "2021": 13,
+              "2022": 14,
+              "2023": 12,
+              "2024": 10
+            }
+          }
+        },
+        {
+          "message": "method_category: gram_stain present in 7/7 years (2018-2024)",
+          "details": {
+            "column": "method_category",
+            "value": "gram_stain",
+            "yearly_counts": {
+              "2018": 11,
+              "2019": 7,
+              "2020": 3,
+              "2021": 6,
+              "2022": 5,
+              "2023": 6,
+              "2024": 6
+            }
+          }
+        },
+        {
+          "message": "organism_category: acinetobacter_baumannii absent in 6/7 years (2018-2024)",
+          "details": {
+            "column": "organism_category",
+            "value": "acinetobacter_baumannii",
+            "absent_years": [
+              2018,
+              2019,
+              2020,
+              2022,
+              2023,
+              2024
+            ],
+            "total_years": 7,
+            "yearly_counts": {
+              "2018": 0,
+              "2019": 0,
+              "2020": 0,
+              "2021": 1,
+              "2022": 0,
+              "2023": 0,
+              "2024": 0
+            }
+          }
+        },
+        {
+          "message": "organism_category: candida_albicans absent in 2/7 years (2018-2024)",
+          "details": {
+            "column": "organism_category",
+            "value": "candida_albicans",
+            "absent_years": [
+              2018,
+              2020
+            ],
+            "total_years": 7,
+            "yearly_counts": {
+              "2018": 0,
+              "2019": 1,
+              "2020": 0,
+              "2021": 1,
+              "2022": 1,
+              "2023": 1,
+              "2024": 1
+            }
+          }
+        },
+        {
+          "message": "organism_category: enterococcus_faecalis absent in 2/7 years (2018-2024)",
+          "details": {
+            "column": "organism_category",
+            "value": "enterococcus_faecalis",
+            "absent_years": [
+              2018,
+              2020
+            ],
+            "total_years": 7,
+            "yearly_counts": {
+              "2018": 0,
+              "2019": 2,
+              "2020": 0,
+              "2021": 3,
+              "2022": 2,
+              "2023": 2,
+              "2024": 2
+            }
+          }
+        },
+        {
+          "message": "organism_category: escherichia_coli absent in 2/7 years (2018-2024)",
+          "details": {
+            "column": "organism_category",
+            "value": "escherichia_coli",
+            "absent_years": [
+              2022,
+              2023
+            ],
+            "total_years": 7,
+            "yearly_counts": {
+              "2018": 3,
+              "2019": 2,
+              "2020": 1,
+              "2021": 2,
+              "2022": 0,
+              "2023": 0,
+              "2024": 1
+            }
+          }
+        },
+        {
+          "message": "organism_category: klebsiella_pneumoniae absent in 1/7 years (2018-2024)",
+          "details": {
+            "column": "organism_category",
+            "value": "klebsiella_pneumoniae",
+            "absent_years": [
+              2023
+            ],
+            "total_years": 7,
+            "yearly_counts": {
+              "2018": 5,
+              "2019": 2,
+              "2020": 3,
+              "2021": 2,
+              "2022": 1,
+              "2023": 0,
+              "2024": 2
+            }
+          }
+        },
+        {
+          "message": "organism_category: no_growth present in 7/7 years (2018-2024)",
+          "details": {
+            "column": "organism_category",
+            "value": "no_growth",
+            "yearly_counts": {
+              "2018": 15,
+              "2019": 16,
+              "2020": 14,
+              "2021": 12,
+              "2022": 13,
+              "2023": 12,
+              "2024": 11
+            }
+          }
+        },
+        {
+          "message": "organism_category: proteus_mirabilis absent in 6/7 years (2018-2024)",
+          "details": {
+            "column": "organism_category",
+            "value": "proteus_mirabilis",
+            "absent_years": [
+              2018,
+              2019,
+              2020,
+              2021,
+              2023,
+              2024
+            ],
+            "total_years": 7,
+            "yearly_counts": {
+              "2018": 0,
+              "2019": 0,
+              "2020": 0,
+              "2021": 0,
+              "2022": 1,
+              "2023": 0,
+              "2024": 0
+            }
+          }
+        },
+        {
+          "message": "organism_category: pseudomonas_aeruginosa present in 7/7 years (2018-2024)",
+          "details": {
+            "column": "organism_category",
+            "value": "pseudomonas_aeruginosa",
+            "yearly_counts": {
+              "2018": 4,
+              "2019": 3,
+              "2020": 3,
+              "2021": 3,
+              "2022": 1,
+              "2023": 2,
+              "2024": 1
+            }
+          }
+        },
+        {
+          "message": "organism_category: staphylococcus_aureus present in 7/7 years (2018-2024)",
+          "details": {
+            "column": "organism_category",
+            "value": "staphylococcus_aureus",
+            "yearly_counts": {
+              "2018": 4,
+              "2019": 1,
+              "2020": 3,
+              "2021": 3,
+              "2022": 5,
+              "2023": 3,
+              "2024": 1
+            }
+          }
+        },
+        {
+          "message": "organism_category: streptococcus_pneumoniae absent in 4/7 years (2018-2024)",
+          "details": {
+            "column": "organism_category",
+            "value": "streptococcus_pneumoniae",
+            "absent_years": [
+              2018,
+              2021,
+              2022,
+              2024
+            ],
+            "total_years": 7,
+            "yearly_counts": {
+              "2018": 0,
+              "2019": 1,
+              "2020": 2,
+              "2021": 0,
+              "2022": 0,
+              "2023": 1,
+              "2024": 0
+            }
+          }
+        }
+      ],
+      "metrics": {
+        "category_columns_checked": 3,
+        "yearly_distributions": {
+          "fluid_category": {
+            "2018": {
+              "blood_buffy": 14,
+              "genito_urinary_tract": 10,
+              "respiratory_tract": 6,
+              "woundsite": 2
+            },
+            "2019": {
+              "blood_buffy": 14,
+              "genito_urinary_tract": 12,
+              "respiratory_tract": 7,
+              "woundsite": 3
+            },
+            "2020": {
+              "blood_buffy": 12,
+              "genito_urinary_tract": 7,
+              "respiratory_tract": 8,
+              "woundsite": 3
+            },
+            "2021": {
+              "blood_buffy": 13,
+              "genito_urinary_tract": 7,
+              "respiratory_tract": 8,
+              "woundsite": 6
+            },
+            "2022": {
+              "blood_buffy": 12,
+              "genito_urinary_tract": 10,
+              "respiratory_tract": 6,
+              "woundsite": 2
+            },
+            "2023": {
+              "blood_buffy": 7,
+              "genito_urinary_tract": 8,
+              "respiratory_tract": 5,
+              "woundsite": 3
+            },
+            "2024": {
+              "blood_buffy": 9,
+              "genito_urinary_tract": 7,
+              "respiratory_tract": 6,
+              "woundsite": 6
+            }
+          },
+          "method_category": {
+            "2018": {
+              "culture": 15,
+              "gram_stain": 11
+            },
+            "2019": {
+              "culture": 14,
+              "gram_stain": 7,
+              "smear": 8
+            },
+            "2020": {
+              "culture": 14,
+              "gram_stain": 3,
+              "smear": 5
+            },
+            "2021": {
+              "culture": 13,
+              "gram_stain": 6,
+              "smear": 2
+            },
+            "2022": {
+              "culture": 14,
+              "gram_stain": 5,
+              "smear": 1
+            },
+            "2023": {
+              "culture": 12,
+              "gram_stain": 6
+            },
+            "2024": {
+              "culture": 10,
+              "gram_stain": 6,
+              "smear": 1
+            }
+          },
+          "organism_category": {
+            "2018": {
+              "escherichia_coli": 3,
+              "klebsiella_pneumoniae": 5,
+              "no_growth": 15,
+              "pseudomonas_aeruginosa": 4,
+              "staphylococcus_aureus": 4
+            },
+            "2019": {
+              "candida_albicans": 1,
+              "enterococcus_faecalis": 2,
+              "escherichia_coli": 2,
+              "klebsiella_pneumoniae": 2,
+              "no_growth": 16,
+              "pseudomonas_aeruginosa": 3,
+              "staphylococcus_aureus": 1,
+              "streptococcus_pneumoniae": 1
+            },
+            "2020": {
+              "escherichia_coli": 1,
+              "klebsiella_pneumoniae": 3,
+              "no_growth": 14,
+              "pseudomonas_aeruginosa": 3,
+              "staphylococcus_aureus": 3,
+              "streptococcus_pneumoniae": 2
+            },
+            "2021": {
+              "acinetobacter_baumannii": 1,
+              "candida_albicans": 1,
+              "enterococcus_faecalis": 3,
+              "escherichia_coli": 2,
+              "klebsiella_pneumoniae": 2,
+              "no_growth": 12,
+              "pseudomonas_aeruginosa": 3,
+              "staphylococcus_aureus": 3
+            },
+            "2022": {
+              "candida_albicans": 1,
+              "enterococcus_faecalis": 2,
+              "klebsiella_pneumoniae": 1,
+              "no_growth": 13,
+              "proteus_mirabilis": 1,
+              "pseudomonas_aeruginosa": 1,
+              "staphylococcus_aureus": 5
+            },
+            "2023": {
+              "candida_albicans": 1,
+              "enterococcus_faecalis": 2,
+              "no_growth": 12,
+              "pseudomonas_aeruginosa": 2,
+              "staphylococcus_aureus": 3,
+              "streptococcus_pneumoniae": 1
+            },
+            "2024": {
+              "candida_albicans": 1,
+              "enterococcus_faecalis": 2,
+              "escherichia_coli": 1,
+              "klebsiella_pneumoniae": 2,
+              "no_growth": 11,
+              "pseudomonas_aeruginosa": 1,
+              "staphylococcus_aureus": 1
+            }
+          }
+        },
+        "missing_in_years": {
+          "method_category": {
+            "smear": [
+              2018,
+              2023
+            ]
+          },
+          "organism_category": {
+            "enterococcus_faecalis": [
+              2018,
+              2020
+            ],
+            "acinetobacter_baumannii": [
+              2018,
+              2019,
+              2020,
+              2022,
+              2023,
+              2024
+            ],
+            "streptococcus_pneumoniae": [
+              2018,
+              2021,
+              2022,
+              2024
+            ],
+            "proteus_mirabilis": [
+              2018,
+              2019,
+              2020,
+              2021,
+              2023,
+              2024
+            ],
+            "candida_albicans": [
+              2018,
+              2020
+            ],
+            "escherichia_coli": [
+              2022,
+              2023
+            ],
+            "klebsiella_pneumoniae": [
+              2023
+            ]
+          }
+        },
+        "monthly_trends": {
+          "fluid_category": [
+            {
+              "month_year": "2018-01",
+              "fluid_category": "blood_buffy",
+              "n": 1
+            },
+            {
+              "month_year": "2018-01",
+              "fluid_category": "genito_urinary_tract",
+              "n": 2
+            },
+            {
+              "month_year": "2018-01",
+              "fluid_category": "woundsite",
+              "n": 1
+            },
+            {
+              "month_year": "2018-04",
+              "fluid_category": "blood_buffy",
+              "n": 3
+            },
+            {
+              "month_year": "2018-04",
+              "fluid_category": "genito_urinary_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2018-04",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2018-04",
+              "fluid_category": "woundsite",
+              "n": 1
+            },
+            {
+              "month_year": "2018-06",
+              "fluid_category": "blood_buffy",
+              "n": 1
+            },
+            {
+              "month_year": "2018-06",
+              "fluid_category": "genito_urinary_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2018-06",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2018-07",
+              "fluid_category": "blood_buffy",
+              "n": 1
+            },
+            {
+              "month_year": "2018-07",
+              "fluid_category": "genito_urinary_tract",
+              "n": 2
+            },
+            {
+              "month_year": "2018-07",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2018-08",
+              "fluid_category": "blood_buffy",
+              "n": 3
+            },
+            {
+              "month_year": "2018-08",
+              "fluid_category": "genito_urinary_tract",
+              "n": 2
+            },
+            {
+              "month_year": "2018-08",
+              "fluid_category": "respiratory_tract",
+              "n": 3
+            },
+            {
+              "month_year": "2018-10",
+              "fluid_category": "blood_buffy",
+              "n": 1
+            },
+            {
+              "month_year": "2018-10",
+              "fluid_category": "genito_urinary_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2018-11",
+              "fluid_category": "blood_buffy",
+              "n": 4
+            },
+            {
+              "month_year": "2018-11",
+              "fluid_category": "genito_urinary_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2019-01",
+              "fluid_category": "blood_buffy",
+              "n": 1
+            },
+            {
+              "month_year": "2019-01",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2019-03",
+              "fluid_category": "genito_urinary_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2019-05",
+              "fluid_category": "blood_buffy",
+              "n": 2
+            },
+            {
+              "month_year": "2019-05",
+              "fluid_category": "genito_urinary_tract",
+              "n": 2
+            },
+            {
+              "month_year": "2019-05",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2019-05",
+              "fluid_category": "woundsite",
+              "n": 1
+            },
+            {
+              "month_year": "2019-06",
+              "fluid_category": "blood_buffy",
+              "n": 1
+            },
+            {
+              "month_year": "2019-06",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2019-07",
+              "fluid_category": "blood_buffy",
+              "n": 3
+            },
+            {
+              "month_year": "2019-07",
+              "fluid_category": "genito_urinary_tract",
+              "n": 2
+            },
+            {
+              "month_year": "2019-07",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2019-07",
+              "fluid_category": "woundsite",
+              "n": 2
+            },
+            {
+              "month_year": "2019-08",
+              "fluid_category": "blood_buffy",
+              "n": 1
+            },
+            {
+              "month_year": "2019-08",
+              "fluid_category": "genito_urinary_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2019-09",
+              "fluid_category": "blood_buffy",
+              "n": 1
+            },
+            {
+              "month_year": "2019-09",
+              "fluid_category": "genito_urinary_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2019-09",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2019-11",
+              "fluid_category": "blood_buffy",
+              "n": 3
+            },
+            {
+              "month_year": "2019-11",
+              "fluid_category": "genito_urinary_tract",
+              "n": 3
+            },
+            {
+              "month_year": "2019-11",
+              "fluid_category": "respiratory_tract",
+              "n": 2
+            },
+            {
+              "month_year": "2019-12",
+              "fluid_category": "blood_buffy",
+              "n": 2
+            },
+            {
+              "month_year": "2019-12",
+              "fluid_category": "genito_urinary_tract",
+              "n": 2
+            },
+            {
+              "month_year": "2020-02",
+              "fluid_category": "blood_buffy",
+              "n": 1
+            },
+            {
+              "month_year": "2020-02",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2020-03",
+              "fluid_category": "blood_buffy",
+              "n": 1
+            },
+            {
+              "month_year": "2020-03",
+              "fluid_category": "genito_urinary_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2020-05",
+              "fluid_category": "blood_buffy",
+              "n": 1
+            },
+            {
+              "month_year": "2020-05",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2020-06",
+              "fluid_category": "blood_buffy",
+              "n": 2
+            },
+            {
+              "month_year": "2020-06",
+              "fluid_category": "genito_urinary_tract",
+              "n": 2
+            },
+            {
+              "month_year": "2020-06",
+              "fluid_category": "respiratory_tract",
+              "n": 2
+            },
+            {
+              "month_year": "2020-07",
+              "fluid_category": "blood_buffy",
+              "n": 2
+            },
+            {
+              "month_year": "2020-07",
+              "fluid_category": "genito_urinary_tract",
+              "n": 2
+            },
+            {
+              "month_year": "2020-07",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2020-07",
+              "fluid_category": "woundsite",
+              "n": 1
+            },
+            {
+              "month_year": "2020-10",
+              "fluid_category": "blood_buffy",
+              "n": 2
+            },
+            {
+              "month_year": "2020-10",
+              "fluid_category": "genito_urinary_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2020-10",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2020-10",
+              "fluid_category": "woundsite",
+              "n": 2
+            },
+            {
+              "month_year": "2020-11",
+              "fluid_category": "blood_buffy",
+              "n": 2
+            },
+            {
+              "month_year": "2020-11",
+              "fluid_category": "genito_urinary_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2020-11",
+              "fluid_category": "respiratory_tract",
+              "n": 2
+            },
+            {
+              "month_year": "2020-12",
+              "fluid_category": "blood_buffy",
+              "n": 1
+            },
+            {
+              "month_year": "2021-02",
+              "fluid_category": "blood_buffy",
+              "n": 2
+            },
+            {
+              "month_year": "2021-02",
+              "fluid_category": "genito_urinary_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2021-02",
+              "fluid_category": "respiratory_tract",
+              "n": 2
+            },
+            {
+              "month_year": "2021-02",
+              "fluid_category": "woundsite",
+              "n": 1
+            },
+            {
+              "month_year": "2021-03",
+              "fluid_category": "blood_buffy",
+              "n": 1
+            },
+            {
+              "month_year": "2021-03",
+              "fluid_category": "genito_urinary_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2021-03",
+              "fluid_category": "woundsite",
+              "n": 1
+            },
+            {
+              "month_year": "2021-05",
+              "fluid_category": "blood_buffy",
+              "n": 1
+            },
+            {
+              "month_year": "2021-05",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2021-06",
+              "fluid_category": "blood_buffy",
+              "n": 1
+            },
+            {
+              "month_year": "2021-06",
+              "fluid_category": "genito_urinary_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2021-06",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2021-07",
+              "fluid_category": "blood_buffy",
+              "n": 2
+            },
+            {
+              "month_year": "2021-07",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2021-07",
+              "fluid_category": "woundsite",
+              "n": 2
+            },
+            {
+              "month_year": "2021-09",
+              "fluid_category": "blood_buffy",
+              "n": 2
+            },
+            {
+              "month_year": "2021-09",
+              "fluid_category": "woundsite",
+              "n": 1
+            },
+            {
+              "month_year": "2021-10",
+              "fluid_category": "blood_buffy",
+              "n": 3
+            },
+            {
+              "month_year": "2021-10",
+              "fluid_category": "genito_urinary_tract",
+              "n": 3
+            },
+            {
+              "month_year": "2021-10",
+              "fluid_category": "respiratory_tract",
+              "n": 2
+            },
+            {
+              "month_year": "2021-10",
+              "fluid_category": "woundsite",
+              "n": 1
+            },
+            {
+              "month_year": "2021-12",
+              "fluid_category": "blood_buffy",
+              "n": 1
+            },
+            {
+              "month_year": "2021-12",
+              "fluid_category": "genito_urinary_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2021-12",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2022-01",
+              "fluid_category": "blood_buffy",
+              "n": 1
+            },
+            {
+              "month_year": "2022-01",
+              "fluid_category": "genito_urinary_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2022-01",
+              "fluid_category": "woundsite",
+              "n": 1
+            },
+            {
+              "month_year": "2022-02",
+              "fluid_category": "blood_buffy",
+              "n": 1
+            },
+            {
+              "month_year": "2022-02",
+              "fluid_category": "genito_urinary_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2022-03",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2022-04",
+              "fluid_category": "blood_buffy",
+              "n": 1
+            },
+            {
+              "month_year": "2022-04",
+              "fluid_category": "genito_urinary_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2022-05",
+              "fluid_category": "blood_buffy",
+              "n": 1
+            },
+            {
+              "month_year": "2022-05",
+              "fluid_category": "genito_urinary_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2022-09",
+              "fluid_category": "blood_buffy",
+              "n": 4
+            },
+            {
+              "month_year": "2022-09",
+              "fluid_category": "genito_urinary_tract",
+              "n": 2
+            },
+            {
+              "month_year": "2022-09",
+              "fluid_category": "respiratory_tract",
+              "n": 2
+            },
+            {
+              "month_year": "2022-09",
+              "fluid_category": "woundsite",
+              "n": 1
+            },
+            {
+              "month_year": "2022-10",
+              "fluid_category": "blood_buffy",
+              "n": 1
+            },
+            {
+              "month_year": "2022-10",
+              "fluid_category": "genito_urinary_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2022-10",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2022-11",
+              "fluid_category": "blood_buffy",
+              "n": 2
+            },
+            {
+              "month_year": "2022-11",
+              "fluid_category": "genito_urinary_tract",
+              "n": 2
+            },
+            {
+              "month_year": "2022-11",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2022-12",
+              "fluid_category": "blood_buffy",
+              "n": 3
+            },
+            {
+              "month_year": "2022-12",
+              "fluid_category": "genito_urinary_tract",
+              "n": 2
+            },
+            {
+              "month_year": "2022-12",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2023-01",
+              "fluid_category": "genito_urinary_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2023-03",
+              "fluid_category": "blood_buffy",
+              "n": 2
+            },
+            {
+              "month_year": "2023-03",
+              "fluid_category": "genito_urinary_tract",
+              "n": 2
+            },
+            {
+              "month_year": "2023-03",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2023-03",
+              "fluid_category": "woundsite",
+              "n": 1
+            },
+            {
+              "month_year": "2023-06",
+              "fluid_category": "blood_buffy",
+              "n": 1
+            },
+            {
+              "month_year": "2023-07",
+              "fluid_category": "blood_buffy",
+              "n": 1
+            },
+            {
+              "month_year": "2023-07",
+              "fluid_category": "genito_urinary_tract",
+              "n": 2
+            },
+            {
+              "month_year": "2023-07",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2023-08",
+              "fluid_category": "blood_buffy",
+              "n": 1
+            },
+            {
+              "month_year": "2023-08",
+              "fluid_category": "genito_urinary_tract",
+              "n": 2
+            },
+            {
+              "month_year": "2023-08",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2023-08",
+              "fluid_category": "woundsite",
+              "n": 1
+            },
+            {
+              "month_year": "2023-10",
+              "fluid_category": "blood_buffy",
+              "n": 1
+            },
+            {
+              "month_year": "2023-10",
+              "fluid_category": "genito_urinary_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2023-10",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2023-11",
+              "fluid_category": "woundsite",
+              "n": 1
+            },
+            {
+              "month_year": "2023-12",
+              "fluid_category": "blood_buffy",
+              "n": 1
+            },
+            {
+              "month_year": "2023-12",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2024-02",
+              "fluid_category": "blood_buffy",
+              "n": 1
+            },
+            {
+              "month_year": "2024-02",
+              "fluid_category": "genito_urinary_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2024-02",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2024-02",
+              "fluid_category": "woundsite",
+              "n": 1
+            },
+            {
+              "month_year": "2024-04",
+              "fluid_category": "blood_buffy",
+              "n": 2
+            },
+            {
+              "month_year": "2024-04",
+              "fluid_category": "genito_urinary_tract",
+              "n": 2
+            },
+            {
+              "month_year": "2024-04",
+              "fluid_category": "respiratory_tract",
+              "n": 2
+            },
+            {
+              "month_year": "2024-04",
+              "fluid_category": "woundsite",
+              "n": 1
+            },
+            {
+              "month_year": "2024-05",
+              "fluid_category": "blood_buffy",
+              "n": 1
+            },
+            {
+              "month_year": "2024-05",
+              "fluid_category": "genito_urinary_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2024-05",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2024-07",
+              "fluid_category": "blood_buffy",
+              "n": 1
+            },
+            {
+              "month_year": "2024-07",
+              "fluid_category": "genito_urinary_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2024-07",
+              "fluid_category": "woundsite",
+              "n": 1
+            },
+            {
+              "month_year": "2024-08",
+              "fluid_category": "blood_buffy",
+              "n": 2
+            },
+            {
+              "month_year": "2024-08",
+              "fluid_category": "woundsite",
+              "n": 1
+            },
+            {
+              "month_year": "2024-09",
+              "fluid_category": "blood_buffy",
+              "n": 1
+            },
+            {
+              "month_year": "2024-09",
+              "fluid_category": "genito_urinary_tract",
+              "n": 2
+            },
+            {
+              "month_year": "2024-09",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2024-09",
+              "fluid_category": "woundsite",
+              "n": 2
+            },
+            {
+              "month_year": "2024-11",
+              "fluid_category": "blood_buffy",
+              "n": 1
+            },
+            {
+              "month_year": "2024-11",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            }
+          ],
+          "method_category": [
+            {
+              "month_year": "2018-01",
+              "method_category": "culture",
+              "n": 2
+            },
+            {
+              "month_year": "2018-01",
+              "method_category": "gram_stain",
+              "n": 1
+            },
+            {
+              "month_year": "2018-04",
+              "method_category": "culture",
+              "n": 3
+            },
+            {
+              "month_year": "2018-04",
+              "method_category": "gram_stain",
+              "n": 3
+            },
+            {
+              "month_year": "2018-06",
+              "method_category": "culture",
+              "n": 1
+            },
+            {
+              "month_year": "2018-06",
+              "method_category": "gram_stain",
+              "n": 1
+            },
+            {
+              "month_year": "2018-07",
+              "method_category": "culture",
+              "n": 2
+            },
+            {
+              "month_year": "2018-07",
+              "method_category": "gram_stain",
+              "n": 1
+            },
+            {
+              "month_year": "2018-08",
+              "method_category": "culture",
+              "n": 3
+            },
+            {
+              "month_year": "2018-08",
+              "method_category": "gram_stain",
+              "n": 2
+            },
+            {
+              "month_year": "2018-10",
+              "method_category": "culture",
+              "n": 1
+            },
+            {
+              "month_year": "2018-11",
+              "method_category": "culture",
+              "n": 3
+            },
+            {
+              "month_year": "2018-11",
+              "method_category": "gram_stain",
+              "n": 3
+            },
+            {
+              "month_year": "2019-01",
+              "method_category": "culture",
+              "n": 1
+            },
+            {
+              "month_year": "2019-01",
+              "method_category": "gram_stain",
+              "n": 1
+            },
+            {
+              "month_year": "2019-01",
+              "method_category": "smear",
+              "n": 2
+            },
+            {
+              "month_year": "2019-03",
+              "method_category": "smear",
+              "n": 1
+            },
+            {
+              "month_year": "2019-05",
+              "method_category": "culture",
+              "n": 2
+            },
+            {
+              "month_year": "2019-05",
+              "method_category": "gram_stain",
+              "n": 1
+            },
+            {
+              "month_year": "2019-05",
+              "method_category": "smear",
+              "n": 1
+            },
+            {
+              "month_year": "2019-06",
+              "method_category": "culture",
+              "n": 1
+            },
+            {
+              "month_year": "2019-06",
+              "method_category": "gram_stain",
+              "n": 1
+            },
+            {
+              "month_year": "2019-07",
+              "method_category": "culture",
+              "n": 3
+            },
+            {
+              "month_year": "2019-07",
+              "method_category": "gram_stain",
+              "n": 2
+            },
+            {
+              "month_year": "2019-07",
+              "method_category": "smear",
+              "n": 1
+            },
+            {
+              "month_year": "2019-08",
+              "method_category": "culture",
+              "n": 1
+            },
+            {
+              "month_year": "2019-09",
+              "method_category": "culture",
+              "n": 1
+            },
+            {
+              "month_year": "2019-09",
+              "method_category": "gram_stain",
+              "n": 1
+            },
+            {
+              "month_year": "2019-11",
+              "method_category": "culture",
+              "n": 3
+            },
+            {
+              "month_year": "2019-11",
+              "method_category": "gram_stain",
+              "n": 1
+            },
+            {
+              "month_year": "2019-11",
+              "method_category": "smear",
+              "n": 1
+            },
+            {
+              "month_year": "2019-12",
+              "method_category": "culture",
+              "n": 2
+            },
+            {
+              "month_year": "2019-12",
+              "method_category": "smear",
+              "n": 2
+            },
+            {
+              "month_year": "2020-02",
+              "method_category": "culture",
+              "n": 1
+            },
+            {
+              "month_year": "2020-03",
+              "method_category": "culture",
+              "n": 1
+            },
+            {
+              "month_year": "2020-05",
+              "method_category": "culture",
+              "n": 1
+            },
+            {
+              "month_year": "2020-05",
+              "method_category": "gram_stain",
+              "n": 1
+            },
+            {
+              "month_year": "2020-05",
+              "method_category": "smear",
+              "n": 1
+            },
+            {
+              "month_year": "2020-06",
+              "method_category": "culture",
+              "n": 2
+            },
+            {
+              "month_year": "2020-06",
+              "method_category": "smear",
+              "n": 2
+            },
+            {
+              "month_year": "2020-07",
+              "method_category": "culture",
+              "n": 3
+            },
+            {
+              "month_year": "2020-07",
+              "method_category": "gram_stain",
+              "n": 1
+            },
+            {
+              "month_year": "2020-10",
+              "method_category": "culture",
+              "n": 2
+            },
+            {
+              "month_year": "2020-10",
+              "method_category": "gram_stain",
+              "n": 1
+            },
+            {
+              "month_year": "2020-10",
+              "method_category": "smear",
+              "n": 1
+            },
+            {
+              "month_year": "2020-11",
+              "method_category": "culture",
+              "n": 3
+            },
+            {
+              "month_year": "2020-11",
+              "method_category": "smear",
+              "n": 1
+            },
+            {
+              "month_year": "2020-12",
+              "method_category": "culture",
+              "n": 1
+            },
+            {
+              "month_year": "2021-02",
+              "method_category": "culture",
+              "n": 2
+            },
+            {
+              "month_year": "2021-02",
+              "method_category": "gram_stain",
+              "n": 1
+            },
+            {
+              "month_year": "2021-03",
+              "method_category": "culture",
+              "n": 1
+            },
+            {
+              "month_year": "2021-03",
+              "method_category": "gram_stain",
+              "n": 1
+            },
+            {
+              "month_year": "2021-05",
+              "method_category": "culture",
+              "n": 1
+            },
+            {
+              "month_year": "2021-05",
+              "method_category": "smear",
+              "n": 1
+            },
+            {
+              "month_year": "2021-06",
+              "method_category": "culture",
+              "n": 1
+            },
+            {
+              "month_year": "2021-06",
+              "method_category": "gram_stain",
+              "n": 1
+            },
+            {
+              "month_year": "2021-07",
+              "method_category": "culture",
+              "n": 2
+            },
+            {
+              "month_year": "2021-07",
+              "method_category": "gram_stain",
+              "n": 1
+            },
+            {
+              "month_year": "2021-09",
+              "method_category": "culture",
+              "n": 2
+            },
+            {
+              "month_year": "2021-10",
+              "method_category": "culture",
+              "n": 3
+            },
+            {
+              "month_year": "2021-10",
+              "method_category": "gram_stain",
+              "n": 1
+            },
+            {
+              "month_year": "2021-12",
+              "method_category": "culture",
+              "n": 1
+            },
+            {
+              "month_year": "2021-12",
+              "method_category": "gram_stain",
+              "n": 1
+            },
+            {
+              "month_year": "2021-12",
+              "method_category": "smear",
+              "n": 1
+            },
+            {
+              "month_year": "2022-01",
+              "method_category": "culture",
+              "n": 1
+            },
+            {
+              "month_year": "2022-01",
+              "method_category": "gram_stain",
+              "n": 1
+            },
+            {
+              "month_year": "2022-02",
+              "method_category": "culture",
+              "n": 1
+            },
+            {
+              "month_year": "2022-02",
+              "method_category": "smear",
+              "n": 1
+            },
+            {
+              "month_year": "2022-03",
+              "method_category": "culture",
+              "n": 1
+            },
+            {
+              "month_year": "2022-04",
+              "method_category": "culture",
+              "n": 1
+            },
+            {
+              "month_year": "2022-04",
+              "method_category": "gram_stain",
+              "n": 1
+            },
+            {
+              "month_year": "2022-05",
+              "method_category": "culture",
+              "n": 1
+            },
+            {
+              "month_year": "2022-05",
+              "method_category": "gram_stain",
+              "n": 1
+            },
+            {
+              "month_year": "2022-09",
+              "method_category": "culture",
+              "n": 4
+            },
+            {
+              "month_year": "2022-09",
+              "method_category": "gram_stain",
+              "n": 1
+            },
+            {
+              "month_year": "2022-10",
+              "method_category": "culture",
+              "n": 2
+            },
+            {
+              "month_year": "2022-11",
+              "method_category": "culture",
+              "n": 2
+            },
+            {
+              "month_year": "2022-12",
+              "method_category": "culture",
+              "n": 3
+            },
+            {
+              "month_year": "2022-12",
+              "method_category": "gram_stain",
+              "n": 1
+            },
+            {
+              "month_year": "2023-01",
+              "method_category": "culture",
+              "n": 1
+            },
+            {
+              "month_year": "2023-03",
+              "method_category": "culture",
+              "n": 2
+            },
+            {
+              "month_year": "2023-03",
+              "method_category": "gram_stain",
+              "n": 1
+            },
+            {
+              "month_year": "2023-06",
+              "method_category": "culture",
+              "n": 1
+            },
+            {
+              "month_year": "2023-07",
+              "method_category": "culture",
+              "n": 2
+            },
+            {
+              "month_year": "2023-07",
+              "method_category": "gram_stain",
+              "n": 1
+            },
+            {
+              "month_year": "2023-08",
+              "method_category": "culture",
+              "n": 2
+            },
+            {
+              "month_year": "2023-08",
+              "method_category": "gram_stain",
+              "n": 2
+            },
+            {
+              "month_year": "2023-10",
+              "method_category": "culture",
+              "n": 2
+            },
+            {
+              "month_year": "2023-10",
+              "method_category": "gram_stain",
+              "n": 1
+            },
+            {
+              "month_year": "2023-11",
+              "method_category": "culture",
+              "n": 1
+            },
+            {
+              "month_year": "2023-12",
+              "method_category": "culture",
+              "n": 1
+            },
+            {
+              "month_year": "2023-12",
+              "method_category": "gram_stain",
+              "n": 1
+            },
+            {
+              "month_year": "2024-02",
+              "method_category": "culture",
+              "n": 1
+            },
+            {
+              "month_year": "2024-04",
+              "method_category": "culture",
+              "n": 3
+            },
+            {
+              "month_year": "2024-04",
+              "method_category": "gram_stain",
+              "n": 1
+            },
+            {
+              "month_year": "2024-04",
+              "method_category": "smear",
+              "n": 1
+            },
+            {
+              "month_year": "2024-05",
+              "method_category": "culture",
+              "n": 1
+            },
+            {
+              "month_year": "2024-05",
+              "method_category": "gram_stain",
+              "n": 1
+            },
+            {
+              "month_year": "2024-07",
+              "method_category": "culture",
+              "n": 1
+            },
+            {
+              "month_year": "2024-08",
+              "method_category": "culture",
+              "n": 1
+            },
+            {
+              "month_year": "2024-08",
+              "method_category": "gram_stain",
+              "n": 1
+            },
+            {
+              "month_year": "2024-09",
+              "method_category": "culture",
+              "n": 2
+            },
+            {
+              "month_year": "2024-09",
+              "method_category": "gram_stain",
+              "n": 2
+            },
+            {
+              "month_year": "2024-11",
+              "method_category": "culture",
+              "n": 1
+            },
+            {
+              "month_year": "2024-11",
+              "method_category": "gram_stain",
+              "n": 1
+            }
+          ],
+          "organism_category": [
+            {
+              "month_year": "2018-01",
+              "organism_category": "escherichia_coli",
+              "n": 1
+            },
+            {
+              "month_year": "2018-01",
+              "organism_category": "no_growth",
+              "n": 2
+            },
+            {
+              "month_year": "2018-01",
+              "organism_category": "staphylococcus_aureus",
+              "n": 1
+            },
+            {
+              "month_year": "2018-04",
+              "organism_category": "escherichia_coli",
+              "n": 1
+            },
+            {
+              "month_year": "2018-04",
+              "organism_category": "klebsiella_pneumoniae",
+              "n": 1
+            },
+            {
+              "month_year": "2018-04",
+              "organism_category": "no_growth",
+              "n": 3
+            },
+            {
+              "month_year": "2018-04",
+              "organism_category": "pseudomonas_aeruginosa",
+              "n": 2
+            },
+            {
+              "month_year": "2018-04",
+              "organism_category": "staphylococcus_aureus",
+              "n": 1
+            },
+            {
+              "month_year": "2018-06",
+              "organism_category": "klebsiella_pneumoniae",
+              "n": 1
+            },
+            {
+              "month_year": "2018-06",
+              "organism_category": "no_growth",
+              "n": 1
+            },
+            {
+              "month_year": "2018-06",
+              "organism_category": "staphylococcus_aureus",
+              "n": 1
+            },
+            {
+              "month_year": "2018-07",
+              "organism_category": "escherichia_coli",
+              "n": 1
+            },
+            {
+              "month_year": "2018-07",
+              "organism_category": "klebsiella_pneumoniae",
+              "n": 1
+            },
+            {
+              "month_year": "2018-07",
+              "organism_category": "no_growth",
+              "n": 2
+            },
+            {
+              "month_year": "2018-07",
+              "organism_category": "pseudomonas_aeruginosa",
+              "n": 1
+            },
+            {
+              "month_year": "2018-08",
+              "organism_category": "klebsiella_pneumoniae",
+              "n": 1
+            },
+            {
+              "month_year": "2018-08",
+              "organism_category": "no_growth",
+              "n": 3
+            },
+            {
+              "month_year": "2018-08",
+              "organism_category": "pseudomonas_aeruginosa",
+              "n": 1
+            },
+            {
+              "month_year": "2018-10",
+              "organism_category": "klebsiella_pneumoniae",
+              "n": 1
+            },
+            {
+              "month_year": "2018-10",
+              "organism_category": "staphylococcus_aureus",
+              "n": 1
+            },
+            {
+              "month_year": "2018-11",
+              "organism_category": "no_growth",
+              "n": 4
+            },
+            {
+              "month_year": "2019-01",
+              "organism_category": "no_growth",
+              "n": 2
+            },
+            {
+              "month_year": "2019-01",
+              "organism_category": "pseudomonas_aeruginosa",
+              "n": 1
+            },
+            {
+              "month_year": "2019-03",
+              "organism_category": "no_growth",
+              "n": 1
+            },
+            {
+              "month_year": "2019-05",
+              "organism_category": "escherichia_coli",
+              "n": 1
+            },
+            {
+              "month_year": "2019-05",
+              "organism_category": "klebsiella_pneumoniae",
+              "n": 1
+            },
+            {
+              "month_year": "2019-05",
+              "organism_category": "no_growth",
+              "n": 2
+            },
+            {
+              "month_year": "2019-05",
+              "organism_category": "staphylococcus_aureus",
+              "n": 1
+            },
+            {
+              "month_year": "2019-06",
+              "organism_category": "no_growth",
+              "n": 1
+            },
+            {
+              "month_year": "2019-07",
+              "organism_category": "candida_albicans",
+              "n": 1
+            },
+            {
+              "month_year": "2019-07",
+              "organism_category": "no_growth",
+              "n": 3
+            },
+            {
+              "month_year": "2019-07",
+              "organism_category": "pseudomonas_aeruginosa",
+              "n": 1
+            },
+            {
+              "month_year": "2019-08",
+              "organism_category": "no_growth",
+              "n": 1
+            },
+            {
+              "month_year": "2019-09",
+              "organism_category": "no_growth",
+              "n": 1
+            },
+            {
+              "month_year": "2019-11",
+              "organism_category": "enterococcus_faecalis",
+              "n": 2
+            },
+            {
+              "month_year": "2019-11",
+              "organism_category": "no_growth",
+              "n": 3
+            },
+            {
+              "month_year": "2019-11",
+              "organism_category": "pseudomonas_aeruginosa",
+              "n": 1
+            },
+            {
+              "month_year": "2019-11",
+              "organism_category": "streptococcus_pneumoniae",
+              "n": 1
+            },
+            {
+              "month_year": "2019-12",
+              "organism_category": "escherichia_coli",
+              "n": 1
+            },
+            {
+              "month_year": "2019-12",
+              "organism_category": "klebsiella_pneumoniae",
+              "n": 1
+            },
+            {
+              "month_year": "2019-12",
+              "organism_category": "no_growth",
+              "n": 2
+            },
+            {
+              "month_year": "2020-02",
+              "organism_category": "no_growth",
+              "n": 1
+            },
+            {
+              "month_year": "2020-03",
+              "organism_category": "klebsiella_pneumoniae",
+              "n": 1
+            },
+            {
+              "month_year": "2020-03",
+              "organism_category": "no_growth",
+              "n": 1
+            },
+            {
+              "month_year": "2020-03",
+              "organism_category": "pseudomonas_aeruginosa",
+              "n": 1
+            },
+            {
+              "month_year": "2020-05",
+              "organism_category": "klebsiella_pneumoniae",
+              "n": 1
+            },
+            {
+              "month_year": "2020-05",
+              "organism_category": "no_growth",
+              "n": 1
+            },
+            {
+              "month_year": "2020-06",
+              "organism_category": "escherichia_coli",
+              "n": 1
+            },
+            {
+              "month_year": "2020-06",
+              "organism_category": "no_growth",
+              "n": 2
+            },
+            {
+              "month_year": "2020-06",
+              "organism_category": "pseudomonas_aeruginosa",
+              "n": 1
+            },
+            {
+              "month_year": "2020-06",
+              "organism_category": "staphylococcus_aureus",
+              "n": 2
+            },
+            {
+              "month_year": "2020-06",
+              "organism_category": "streptococcus_pneumoniae",
+              "n": 1
+            },
+            {
+              "month_year": "2020-07",
+              "organism_category": "no_growth",
+              "n": 3
+            },
+            {
+              "month_year": "2020-10",
+              "organism_category": "klebsiella_pneumoniae",
+              "n": 1
+            },
+            {
+              "month_year": "2020-10",
+              "organism_category": "no_growth",
+              "n": 2
+            },
+            {
+              "month_year": "2020-10",
+              "organism_category": "pseudomonas_aeruginosa",
+              "n": 1
+            },
+            {
+              "month_year": "2020-11",
+              "organism_category": "no_growth",
+              "n": 3
+            },
+            {
+              "month_year": "2020-11",
+              "organism_category": "staphylococcus_aureus",
+              "n": 1
+            },
+            {
+              "month_year": "2020-11",
+              "organism_category": "streptococcus_pneumoniae",
+              "n": 1
+            },
+            {
+              "month_year": "2020-12",
+              "organism_category": "no_growth",
+              "n": 1
+            },
+            {
+              "month_year": "2021-02",
+              "organism_category": "enterococcus_faecalis",
+              "n": 1
+            },
+            {
+              "month_year": "2021-02",
+              "organism_category": "no_growth",
+              "n": 2
+            },
+            {
+              "month_year": "2021-02",
+              "organism_category": "pseudomonas_aeruginosa",
+              "n": 1
+            },
+            {
+              "month_year": "2021-02",
+              "organism_category": "staphylococcus_aureus",
+              "n": 1
+            },
+            {
+              "month_year": "2021-03",
+              "organism_category": "no_growth",
+              "n": 1
+            },
+            {
+              "month_year": "2021-03",
+              "organism_category": "pseudomonas_aeruginosa",
+              "n": 1
+            },
+            {
+              "month_year": "2021-05",
+              "organism_category": "no_growth",
+              "n": 1
+            },
+            {
+              "month_year": "2021-06",
+              "organism_category": "klebsiella_pneumoniae",
+              "n": 1
+            },
+            {
+              "month_year": "2021-06",
+              "organism_category": "no_growth",
+              "n": 1
+            },
+            {
+              "month_year": "2021-07",
+              "organism_category": "candida_albicans",
+              "n": 1
+            },
+            {
+              "month_year": "2021-07",
+              "organism_category": "klebsiella_pneumoniae",
+              "n": 1
+            },
+            {
+              "month_year": "2021-07",
+              "organism_category": "no_growth",
+              "n": 2
+            },
+            {
+              "month_year": "2021-09",
+              "organism_category": "no_growth",
+              "n": 2
+            },
+            {
+              "month_year": "2021-10",
+              "organism_category": "acinetobacter_baumannii",
+              "n": 1
+            },
+            {
+              "month_year": "2021-10",
+              "organism_category": "enterococcus_faecalis",
+              "n": 1
+            },
+            {
+              "month_year": "2021-10",
+              "organism_category": "escherichia_coli",
+              "n": 1
+            },
+            {
+              "month_year": "2021-10",
+              "organism_category": "no_growth",
+              "n": 2
+            },
+            {
+              "month_year": "2021-10",
+              "organism_category": "pseudomonas_aeruginosa",
+              "n": 1
+            },
+            {
+              "month_year": "2021-10",
+              "organism_category": "staphylococcus_aureus",
+              "n": 2
+            },
+            {
+              "month_year": "2021-12",
+              "organism_category": "enterococcus_faecalis",
+              "n": 1
+            },
+            {
+              "month_year": "2021-12",
+              "organism_category": "escherichia_coli",
+              "n": 1
+            },
+            {
+              "month_year": "2021-12",
+              "organism_category": "no_growth",
+              "n": 1
+            },
+            {
+              "month_year": "2022-01",
+              "organism_category": "no_growth",
+              "n": 1
+            },
+            {
+              "month_year": "2022-01",
+              "organism_category": "staphylococcus_aureus",
+              "n": 1
+            },
+            {
+              "month_year": "2022-02",
+              "organism_category": "no_growth",
+              "n": 1
+            },
+            {
+              "month_year": "2022-02",
+              "organism_category": "staphylococcus_aureus",
+              "n": 1
+            },
+            {
+              "month_year": "2022-03",
+              "organism_category": "staphylococcus_aureus",
+              "n": 1
+            },
+            {
+              "month_year": "2022-04",
+              "organism_category": "no_growth",
+              "n": 1
+            },
+            {
+              "month_year": "2022-04",
+              "organism_category": "proteus_mirabilis",
+              "n": 1
+            },
+            {
+              "month_year": "2022-05",
+              "organism_category": "no_growth",
+              "n": 1
+            },
+            {
+              "month_year": "2022-09",
+              "organism_category": "enterococcus_faecalis",
+              "n": 1
+            },
+            {
+              "month_year": "2022-09",
+              "organism_category": "klebsiella_pneumoniae",
+              "n": 1
+            },
+            {
+              "month_year": "2022-09",
+              "organism_category": "no_growth",
+              "n": 3
+            },
+            {
+              "month_year": "2022-09",
+              "organism_category": "staphylococcus_aureus",
+              "n": 1
+            },
+            {
+              "month_year": "2022-10",
+              "organism_category": "enterococcus_faecalis",
+              "n": 1
+            },
+            {
+              "month_year": "2022-10",
+              "organism_category": "no_growth",
+              "n": 2
+            },
+            {
+              "month_year": "2022-11",
+              "organism_category": "no_growth",
+              "n": 2
+            },
+            {
+              "month_year": "2022-12",
+              "organism_category": "candida_albicans",
+              "n": 1
+            },
+            {
+              "month_year": "2022-12",
+              "organism_category": "no_growth",
+              "n": 3
+            },
+            {
+              "month_year": "2022-12",
+              "organism_category": "pseudomonas_aeruginosa",
+              "n": 1
+            },
+            {
+              "month_year": "2022-12",
+              "organism_category": "staphylococcus_aureus",
+              "n": 1
+            },
+            {
+              "month_year": "2023-01",
+              "organism_category": "no_growth",
+              "n": 1
+            },
+            {
+              "month_year": "2023-03",
+              "organism_category": "candida_albicans",
+              "n": 1
+            },
+            {
+              "month_year": "2023-03",
+              "organism_category": "no_growth",
+              "n": 2
+            },
+            {
+              "month_year": "2023-03",
+              "organism_category": "staphylococcus_aureus",
+              "n": 1
+            },
+            {
+              "month_year": "2023-06",
+              "organism_category": "no_growth",
+              "n": 1
+            },
+            {
+              "month_year": "2023-07",
+              "organism_category": "enterococcus_faecalis",
+              "n": 1
+            },
+            {
+              "month_year": "2023-07",
+              "organism_category": "no_growth",
+              "n": 2
+            },
+            {
+              "month_year": "2023-07",
+              "organism_category": "pseudomonas_aeruginosa",
+              "n": 1
+            },
+            {
+              "month_year": "2023-07",
+              "organism_category": "streptococcus_pneumoniae",
+              "n": 1
+            },
+            {
+              "month_year": "2023-08",
+              "organism_category": "no_growth",
+              "n": 2
+            },
+            {
+              "month_year": "2023-10",
+              "organism_category": "enterococcus_faecalis",
+              "n": 1
+            },
+            {
+              "month_year": "2023-10",
+              "organism_category": "no_growth",
+              "n": 2
+            },
+            {
+              "month_year": "2023-10",
+              "organism_category": "pseudomonas_aeruginosa",
+              "n": 1
+            },
+            {
+              "month_year": "2023-10",
+              "organism_category": "staphylococcus_aureus",
+              "n": 1
+            },
+            {
+              "month_year": "2023-11",
+              "organism_category": "no_growth",
+              "n": 1
+            },
+            {
+              "month_year": "2023-12",
+              "organism_category": "no_growth",
+              "n": 1
+            },
+            {
+              "month_year": "2023-12",
+              "organism_category": "staphylococcus_aureus",
+              "n": 1
+            },
+            {
+              "month_year": "2024-02",
+              "organism_category": "no_growth",
+              "n": 1
+            },
+            {
+              "month_year": "2024-04",
+              "organism_category": "enterococcus_faecalis",
+              "n": 1
+            },
+            {
+              "month_year": "2024-04",
+              "organism_category": "escherichia_coli",
+              "n": 1
+            },
+            {
+              "month_year": "2024-04",
+              "organism_category": "klebsiella_pneumoniae",
+              "n": 1
+            },
+            {
+              "month_year": "2024-04",
+              "organism_category": "no_growth",
+              "n": 3
+            },
+            {
+              "month_year": "2024-05",
+              "organism_category": "enterococcus_faecalis",
+              "n": 1
+            },
+            {
+              "month_year": "2024-05",
+              "organism_category": "no_growth",
+              "n": 1
+            },
+            {
+              "month_year": "2024-05",
+              "organism_category": "pseudomonas_aeruginosa",
+              "n": 1
+            },
+            {
+              "month_year": "2024-07",
+              "organism_category": "candida_albicans",
+              "n": 1
+            },
+            {
+              "month_year": "2024-07",
+              "organism_category": "no_growth",
+              "n": 1
+            },
+            {
+              "month_year": "2024-08",
+              "organism_category": "no_growth",
+              "n": 2
+            },
+            {
+              "month_year": "2024-08",
+              "organism_category": "staphylococcus_aureus",
+              "n": 1
+            },
+            {
+              "month_year": "2024-09",
+              "organism_category": "klebsiella_pneumoniae",
+              "n": 1
+            },
+            {
+              "month_year": "2024-09",
+              "organism_category": "no_growth",
+              "n": 2
+            },
+            {
+              "month_year": "2024-11",
+              "organism_category": "no_growth",
+              "n": 1
+            }
+          ]
+        }
+      },
+      "atomic_total": 17,
+      "atomic_passed": 17
+    },
+    "duplicate_composite_keys": {
+      "check_type": "duplicate_composite_keys",
+      "table_name": "microbiology_culture",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No duplicate composite keys found",
+          "details": {}
+        }
+      ],
+      "metrics": {
+        "composite_keys": [
+          "hospitalization_id",
+          "collect_dttm",
+          "organism_category",
+          "result_dttm"
+        ],
+        "total_records": 299,
+        "unique_records": 299,
+        "duplicate_records": 0,
+        "duplicate_percent": 0.0
+      },
+      "atomic_total": 1,
+      "atomic_passed": 1
+    }
+  },
+  "table_stats": [
+    {
+      "column": "patient_id",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 85,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "hospitalization_id",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 97,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "organism_id",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 299,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "order_dttm",
+      "dtype": "DATETIME",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 299,
+      "min": "2018-01-25 17:50",
+      "max": "2024-11-11 01:58"
+    },
+    {
+      "column": "collect_dttm",
+      "dtype": "DATETIME",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 299,
+      "min": "2018-01-25 18:09",
+      "max": "2024-11-11 02:47"
+    },
+    {
+      "column": "result_dttm",
+      "dtype": "DATETIME",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 299,
+      "min": "2018-01-27 06:02",
+      "max": "2024-11-13 23:47"
+    },
+    {
+      "column": "fluid_name",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 4,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "fluid_category",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 4,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "method_name",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 3,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "method_category",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 3,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "organism_name",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 10,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "organism_category",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 10,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "organism_group",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 10,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "lab_loinc_code",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 4,
+      "min": null,
+      "max": null
+    }
+  ],
+  "total_rows": 299
+}

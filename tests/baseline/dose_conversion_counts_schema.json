@@ -1,0 +1,27 @@
+{
+  "artifact": "dose_conversion_counts",
+  "columns": [
+    "_base_unit",
+    "_clean_unit",
+    "_convert_status",
+    "_preferred_unit",
+    "_unit_class",
+    "count",
+    "med_category",
+    "med_dose_unit",
+    "med_dose_unit_converted"
+  ],
+  "dtypes": {
+    "_base_unit": "str",
+    "_clean_unit": "str",
+    "_convert_status": "str",
+    "_preferred_unit": "str",
+    "_unit_class": "str",
+    "count": "int64",
+    "med_category": "str",
+    "med_dose_unit": "str",
+    "med_dose_unit_converted": "str"
+  },
+  "n_columns": 9,
+  "n_rows": 16
+}

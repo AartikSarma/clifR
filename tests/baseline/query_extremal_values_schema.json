@@ -1,0 +1,39 @@
+{
+  "artifact": "query_extremal_values",
+  "columns": [
+    "end_dttm",
+    "heart_rate_latest",
+    "heart_rate_max",
+    "heart_rate_min",
+    "hospitalization_id",
+    "spo2_latest",
+    "spo2_max",
+    "spo2_min",
+    "start_dttm",
+    "temp_c_latest",
+    "temp_c_max",
+    "temp_c_min",
+    "weight_kg_latest",
+    "weight_kg_max",
+    "weight_kg_min"
+  ],
+  "dtypes": {
+    "end_dttm": "datetime64[us, America/Los_Angeles]",
+    "heart_rate_latest": "float64",
+    "heart_rate_max": "float64",
+    "heart_rate_min": "float64",
+    "hospitalization_id": "str",
+    "spo2_latest": "float64",
+    "spo2_max": "float64",
+    "spo2_min": "float64",
+    "start_dttm": "datetime64[us, America/Los_Angeles]",
+    "temp_c_latest": "float64",
+    "temp_c_max": "float64",
+    "temp_c_min": "float64",
+    "weight_kg_latest": "float64",
+    "weight_kg_max": "float64",
+    "weight_kg_min": "float64"
+  },
+  "n_columns": 15,
+  "n_rows": 25
+}

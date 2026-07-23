@@ -1,0 +1,4386 @@
+{
+  "adt": {
+    "columns": [
+      "hospital_id",
+      "hospital_type",
+      "hospitalization_id",
+      "in_dttm",
+      "location_category",
+      "location_name",
+      "location_type",
+      "out_dttm"
+    ],
+    "errors": [
+      {
+        "category": "data_quality",
+        "description": "location_type: burn_icu absent in 2/7 years (2018-2024)",
+        "details": {
+          "absent_years": [
+            2020,
+            2021
+          ],
+          "column": "location_type",
+          "total_years": 7,
+          "value": "burn_icu",
+          "yearly_counts": {
+            "2018": 1,
+            "2019": 3,
+            "2020": 0,
+            "2021": 0,
+            "2022": 1,
+            "2023": 1,
+            "2024": 2
+          }
+        },
+        "severity": "warning",
+        "type": "Category Distribution Shift"
+      },
+      {
+        "category": "data_quality",
+        "description": "location_type: cardiothoracic_surgical_icu absent in 4/7 years (2018-2024)",
+        "details": {
+          "absent_years": [
+            2018,
+            2021,
+            2023,
+            2024
+          ],
+          "column": "location_type",
+          "total_years": 7,
+          "value": "cardiothoracic_surgical_icu",
+          "yearly_counts": {
+            "2018": 0,
+            "2019": 1,
+            "2020": 1,
+            "2021": 0,
+            "2022": 1,
+            "2023": 0,
+            "2024": 0
+          }
+        },
+        "severity": "warning",
+        "type": "Category Distribution Shift"
+      },
+      {
+        "category": "data_quality",
+        "description": "location_type: mixed_neuro_icu absent in 4/7 years (2018-2024)",
+        "details": {
+          "absent_years": [
+            2018,
+            2019,
+            2020,
+            2023
+          ],
+          "column": "location_type",
+          "total_years": 7,
+          "value": "mixed_neuro_icu",
+          "yearly_counts": {
+            "2018": 0,
+            "2019": 0,
+            "2020": 0,
+            "2021": 1,
+            "2022": 1,
+            "2023": 0,
+            "2024": 1
+          }
+        },
+        "severity": "warning",
+        "type": "Category Distribution Shift"
+      },
+      {
+        "category": "data_quality",
+        "description": "location_type: neuro_icu absent in 2/7 years (2018-2024)",
+        "details": {
+          "absent_years": [
+            2018,
+            2022
+          ],
+          "column": "location_type",
+          "total_years": 7,
+          "value": "neuro_icu",
+          "yearly_counts": {
+            "2018": 0,
+            "2019": 5,
+            "2020": 3,
+            "2021": 3,
+            "2022": 0,
+            "2023": 4,
+            "2024": 2
+          }
+        },
+        "severity": "warning",
+        "type": "Category Distribution Shift"
+      },
+      {
+        "category": "data_quality",
+        "description": "location_type: neurosurgical_icu absent in 3/7 years (2018-2024)",
+        "details": {
+          "absent_years": [
+            2018,
+            2019,
+            2023
+          ],
+          "column": "location_type",
+          "total_years": 7,
+          "value": "neurosurgical_icu",
+          "yearly_counts": {
+            "2018": 0,
+            "2019": 0,
+            "2020": 2,
+            "2021": 1,
+            "2022": 1,
+            "2023": 0,
+            "2024": 2
+          }
+        },
+        "severity": "warning",
+        "type": "Category Distribution Shift"
+      },
+      {
+        "category": "data_quality",
+        "description": "Missing 8 mCIDE values: procedural, l_and_d, hospice, psych, rehab, radiology, dialysis, other",
+        "details": {
+          "column": "location_category",
+          "coverage_percent": 33.33,
+          "missing_values": [
+            "procedural",
+            "l_and_d",
+            "hospice",
+            "psych",
+            "rehab",
+            "radiology",
+            "dialysis",
+            "other"
+          ]
+        },
+        "severity": null,
+        "type": "mCIDE Coverage Gap"
+      }
+    ],
+    "is_valid": false,
+    "n_columns": 8,
+    "n_errors": 6,
+    "n_rows": 552,
+    "status": "loaded"
+  },
+  "code_status": {
+    "columns": [
+      "code_status_category",
+      "code_status_name",
+      "patient_id",
+      "start_dttm"
+    ],
+    "errors": [
+      {
+        "category": "data_quality",
+        "description": "code_status_category: dnr absent in 2/7 years (2018-2024)",
+        "details": {
+          "absent_years": [
+            2018,
+            2021
+          ],
+          "column": "code_status_category",
+          "total_years": 7,
+          "value": "dnr",
+          "yearly_counts": {
+            "2018": 0,
+            "2019": 3,
+            "2020": 1,
+            "2021": 0,
+            "2022": 2,
+            "2023": 1,
+            "2024": 2
+          }
+        },
+        "severity": "warning",
+        "type": "Category Distribution Shift"
+      },
+      {
+        "category": "data_quality",
+        "description": "code_status_category: dnr/dni absent in 1/7 years (2018-2024)",
+        "details": {
+          "absent_years": [
+            2020
+          ],
+          "column": "code_status_category",
+          "total_years": 7,
+          "value": "dnr/dni",
+          "yearly_counts": {
+            "2018": 2,
+            "2019": 2,
+            "2020": 0,
+            "2021": 1,
+            "2022": 2,
+            "2023": 1,
+            "2024": 1
+          }
+        },
+        "severity": "warning",
+        "type": "Category Distribution Shift"
+      },
+      {
+        "category": "data_quality",
+        "description": "code_status_category: other absent in 6/7 years (2018-2024)",
+        "details": {
+          "absent_years": [
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023
+          ],
+          "column": "code_status_category",
+          "total_years": 7,
+          "value": "other",
+          "yearly_counts": {
+            "2018": 0,
+            "2019": 0,
+            "2020": 0,
+            "2021": 0,
+            "2022": 0,
+            "2023": 0,
+            "2024": 1
+          }
+        },
+        "severity": "warning",
+        "type": "Category Distribution Shift"
+      },
+      {
+        "category": "data_quality",
+        "description": "code_status_category: presume full absent in 1/7 years (2018-2024)",
+        "details": {
+          "absent_years": [
+            2020
+          ],
+          "column": "code_status_category",
+          "total_years": 7,
+          "value": "presume full",
+          "yearly_counts": {
+            "2018": 7,
+            "2019": 2,
+            "2020": 0,
+            "2021": 3,
+            "2022": 1,
+            "2023": 2,
+            "2024": 3
+          }
+        },
+        "severity": "warning",
+        "type": "Category Distribution Shift"
+      },
+      {
+        "category": "data_quality",
+        "description": "2 invalid categorical values",
+        "details": {
+          "column": "code_status_category",
+          "permissible_values": [
+            "dnr",
+            "dnar",
+            "udnr",
+            "dnr_or_dni",
+            "dnar_or_dni",
+            "dni_only",
+            "and",
+            "full",
+            "presume_full",
+            "other"
+          ],
+          "top_invalid": [
+            {
+              "count": 18,
+              "value": "Presume Full"
+            },
+            {
+              "count": 9,
+              "value": "DNR/DNI"
+            }
+          ]
+        },
+        "severity": "warning",
+        "type": "Invalid Categorical Values"
+      },
+      {
+        "category": "data_quality",
+        "description": "Missing 7 mCIDE values: dnar, udnr, dnr_or_dni, dnar_or_dni, dni_only, and, presume_full",
+        "details": {
+          "column": "code_status_category",
+          "coverage_percent": 30.0,
+          "missing_values": [
+            "dnar",
+            "udnr",
+            "dnr_or_dni",
+            "dnar_or_dni",
+            "dni_only",
+            "and",
+            "presume_full"
+          ]
+        },
+        "severity": null,
+        "type": "mCIDE Coverage Gap"
+      }
+    ],
+    "is_valid": false,
+    "n_columns": 4,
+    "n_errors": 6,
+    "n_rows": 204,
+    "status": "loaded"
+  },
+  "crrt_therapy": {
+    "columns": [
+      "blood_flow_rate",
+      "crrt_mode_category",
+      "crrt_mode_name",
+      "device_id",
+      "dialysate_flow_rate",
+      "dialysis_machine_name",
+      "hospitalization_id",
+      "post_filter_replacement_fluid_rate",
+      "pre_filter_replacement_fluid_rate",
+      "recorded_dttm",
+      "ultrafiltration_out"
+    ],
+    "errors": [
+      {
+        "category": "data_quality",
+        "description": "crrt_mode_category: cvvh absent in 3/6 years (2018-2023)",
+        "details": {
+          "absent_years": [
+            2020,
+            2022,
+            2023
+          ],
+          "column": "crrt_mode_category",
+          "total_years": 6,
+          "value": "cvvh",
+          "yearly_counts": {
+            "2018": 1,
+            "2019": 1,
+            "2020": 0,
+            "2021": 1,
+            "2022": 0,
+            "2023": 0
+          }
+        },
+        "severity": "warning",
+        "type": "Category Distribution Shift"
+      },
+      {
+        "category": "data_quality",
+        "description": "crrt_mode_category: cvvhd absent in 3/6 years (2018-2023)",
+        "details": {
+          "absent_years": [
+            2019,
+            2020,
+            2021
+          ],
+          "column": "crrt_mode_category",
+          "total_years": 6,
+          "value": "cvvhd",
+          "yearly_counts": {
+            "2018": 2,
+            "2019": 0,
+            "2020": 0,
+            "2021": 0,
+            "2022": 1,
+            "2023": 1
+          }
+        },
+        "severity": "warning",
+        "type": "Category Distribution Shift"
+      },
+      {
+        "category": "data_quality",
+        "description": "crrt_mode_category: cvvhdf absent in 3/6 years (2018-2023)",
+        "details": {
+          "absent_years": [
+            2018,
+            2021,
+            2022
+          ],
+          "column": "crrt_mode_category",
+          "total_years": 6,
+          "value": "cvvhdf",
+          "yearly_counts": {
+            "2018": 0,
+            "2019": 1,
+            "2020": 2,
+            "2021": 0,
+            "2022": 0,
+            "2023": 2
+          }
+        },
+        "severity": "warning",
+        "type": "Category Distribution Shift"
+      },
+      {
+        "category": "data_quality",
+        "description": "Missing 2 mCIDE values: scuf, avvh",
+        "details": {
+          "column": "crrt_mode_category",
+          "coverage_percent": 60.0,
+          "missing_values": [
+            "scuf",
+            "avvh"
+          ]
+        },
+        "severity": null,
+        "type": "mCIDE Coverage Gap"
+      }
+    ],
+    "is_valid": false,
+    "n_columns": 11,
+    "n_errors": 4,
+    "n_rows": 874,
+    "status": "loaded"
+  },
+  "ecmo_mcs": {
+    "columns": [
+      "control_parameter_category",
+      "control_parameter_name",
+      "control_parameter_value",
+      "device_category",
+      "device_name",
+      "ecmo_configuration_category",
+      "fdO2_set",
+      "flow",
+      "hospitalization_id",
+      "mcs_group",
+      "recorded_dttm",
+      "sweep_set"
+    ],
+    "errors": [
+      {
+        "category": "data_quality",
+        "description": "device_category: va_ecmo absent in 1/2 years (2018-2022)",
+        "details": {
+          "absent_years": [
+            2022
+          ],
+          "column": "device_category",
+          "total_years": 2,
+          "value": "va_ecmo",
+          "yearly_counts": {
+            "2018": 1,
+            "2022": 0
+          }
+        },
+        "severity": "warning",
+        "type": "Category Distribution Shift"
+      },
+      {
+        "category": "data_quality",
+        "description": "device_category: vv_ecmo absent in 1/2 years (2018-2022)",
+        "details": {
+          "absent_years": [
+            2018
+          ],
+          "column": "device_category",
+          "total_years": 2,
+          "value": "vv_ecmo",
+          "yearly_counts": {
+            "2018": 0,
+            "2022": 1
+          }
+        },
+        "severity": "warning",
+        "type": "Category Distribution Shift"
+      },
+      {
+        "category": "data_quality",
+        "description": "2 invalid categorical values",
+        "details": {
+          "column": "device_category",
+          "permissible_values": [
+            "cardiohelp",
+            "rotaflow",
+            "centrimag",
+            "tandemheart",
+            "impella",
+            "durable"
+          ],
+          "top_invalid": [
+            {
+              "count": 198,
+              "value": "VV_ECMO"
+            },
+            {
+              "count": 73,
+              "value": "VA_ECMO"
+            }
+          ]
+        },
+        "severity": "warning",
+        "type": "Invalid Categorical Values"
+      },
+      {
+        "category": "schema",
+        "description": "Column 'config_category': missing from data",
+        "details": {
+          "column": "config_category"
+        },
+        "severity": null,
+        "type": "Missing Required Columns"
+      },
+      {
+        "category": "schema",
+        "description": "Column 'setting_category': missing from data",
+        "details": {
+          "column": "setting_category"
+        },
+        "severity": null,
+        "type": "Missing Required Columns"
+      },
+      {
+        "category": "schema",
+        "description": "Column 'setting_value': missing from data",
+        "details": {
+          "column": "setting_value"
+        },
+        "severity": null,
+        "type": "Missing Required Columns"
+      },
+      {
+        "category": "schema",
+        "description": "Column 'support_category': missing from data",
+        "details": {
+          "column": "support_category"
+        },
+        "severity": null,
+        "type": "Missing Required Columns"
+      },
+      {
+        "category": "data_quality",
+        "description": "Missing 6 mCIDE values: cardiohelp, rotaflow, centrimag, tandemheart, impella, durable",
+        "details": {
+          "column": "device_category",
+          "coverage_percent": 0.0,
+          "missing_values": [
+            "cardiohelp",
+            "rotaflow",
+            "centrimag",
+            "tandemheart",
+            "impella",
+            "durable"
+          ]
+        },
+        "severity": null,
+        "type": "mCIDE Coverage Gap"
+      }
+    ],
+    "is_valid": false,
+    "n_columns": 12,
+    "n_errors": 8,
+    "n_rows": 271,
+    "status": "loaded"
+  },
+  "hospital_diagnosis": {
+    "columns": [
+      "diagnosis_code",
+      "diagnosis_code_format",
+      "diagnosis_primary",
+      "hospitalization_id",
+      "poa_present"
+    ],
+    "errors": [],
+    "is_valid": true,
+    "n_columns": 5,
+    "n_errors": 0,
+    "n_rows": 740,
+    "status": "loaded"
+  },
+  "hospitalization": {
+    "columns": [
+      "admission_dttm",
+      "admission_type_category",
+      "admission_type_name",
+      "age_at_admission",
+      "census_block_code",
+      "census_block_group_code",
+      "census_tract",
+      "county_code",
+      "discharge_category",
+      "discharge_dttm",
+      "discharge_name",
+      "fips_version",
+      "hospitalization_id",
+      "hospitalization_joined_id",
+      "patient_id",
+      "state_code",
+      "zipcode_five_digit",
+      "zipcode_nine_digit"
+    ],
+    "errors": [
+      {
+        "category": "data_quality",
+        "description": "admission_type_category: elective absent in 1/7 years (2018-2024)",
+        "details": {
+          "absent_years": [
+            2021
+          ],
+          "column": "admission_type_category",
+          "total_years": 7,
+          "value": "elective",
+          "yearly_counts": {
+            "2018": 3,
+            "2019": 5,
+            "2020": 4,
+            "2021": 0,
+            "2022": 3,
+            "2023": 1,
+            "2024": 3
+          }
+        },
+        "severity": "warning",
+        "type": "Category Distribution Shift"
+      },
+      {
+        "category": "data_quality",
+        "description": "admission_type_category: other absent in 2/7 years (2018-2024)",
+        "details": {
+          "absent_years": [
+            2021,
+            2023
+          ],
+          "column": "admission_type_category",
+          "total_years": 7,
+          "value": "other",
+          "yearly_counts": {
+            "2018": 1,
+            "2019": 2,
+            "2020": 3,
+            "2021": 0,
+            "2022": 2,
+            "2023": 0,
+            "2024": 3
+          }
+        },
+        "severity": "warning",
+        "type": "Category Distribution Shift"
+      },
+      {
+        "category": "data_quality",
+        "description": "discharge_category: acute care hospital absent in 4/7 years (2018-2024)",
+        "details": {
+          "absent_years": [
+            2018,
+            2020,
+            2021,
+            2023
+          ],
+          "column": "discharge_category",
+          "total_years": 7,
+          "value": "acute care hospital",
+          "yearly_counts": {
+            "2018": 0,
+            "2019": 1,
+            "2020": 0,
+            "2021": 0,
+            "2022": 2,
+            "2023": 0,
+            "2024": 2
+          }
+        },
+        "severity": "warning",
+        "type": "Category Distribution Shift"
+      },
+      {
+        "category": "data_quality",
+        "description": "discharge_category: against medical advice (ama) absent in 2/7 years (2018-2024)",
+        "details": {
+          "absent_years": [
+            2020,
+            2024
+          ],
+          "column": "discharge_category",
+          "total_years": 7,
+          "value": "against medical advice (ama)",
+          "yearly_counts": {
+            "2018": 2,
+            "2019": 1,
+            "2020": 0,
+            "2021": 1,
+            "2022": 1,
+            "2023": 2,
+            "2024": 0
+          }
+        },
+        "severity": "warning",
+        "type": "Category Distribution Shift"
+      },
+      {
+        "category": "data_quality",
+        "description": "discharge_category: assisted living absent in 4/7 years (2018-2024)",
+        "details": {
+          "absent_years": [
+            2018,
+            2019,
+            2020,
+            2023
+          ],
+          "column": "discharge_category",
+          "total_years": 7,
+          "value": "assisted living",
+          "yearly_counts": {
+            "2018": 0,
+            "2019": 0,
+            "2020": 0,
+            "2021": 1,
+            "2022": 1,
+            "2023": 0,
+            "2024": 1
+          }
+        },
+        "severity": "warning",
+        "type": "Category Distribution Shift"
+      },
+      {
+        "category": "data_quality",
+        "description": "discharge_category: chemical dependency absent in 3/7 years (2018-2024)",
+        "details": {
+          "absent_years": [
+            2018,
+            2019,
+            2021
+          ],
+          "column": "discharge_category",
+          "total_years": 7,
+          "value": "chemical dependency",
+          "yearly_counts": {
+            "2018": 0,
+            "2019": 0,
+            "2020": 1,
+            "2021": 0,
+            "2022": 1,
+            "2023": 1,
+            "2024": 1
+          }
+        },
+        "severity": "warning",
+        "type": "Category Distribution Shift"
+      },
+      {
+        "category": "data_quality",
+        "description": "discharge_category: expired absent in 6/7 years (2018-2024)",
+        "details": {
+          "absent_years": [
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023
+          ],
+          "column": "discharge_category",
+          "total_years": 7,
+          "value": "expired",
+          "yearly_counts": {
+            "2018": 0,
+            "2019": 0,
+            "2020": 0,
+            "2021": 0,
+            "2022": 0,
+            "2023": 0,
+            "2024": 1
+          }
+        },
+        "severity": "warning",
+        "type": "Category Distribution Shift"
+      },
+      {
+        "category": "data_quality",
+        "description": "discharge_category: group home absent in 4/7 years (2018-2024)",
+        "details": {
+          "absent_years": [
+            2018,
+            2020,
+            2022,
+            2023
+          ],
+          "column": "discharge_category",
+          "total_years": 7,
+          "value": "group home",
+          "yearly_counts": {
+            "2018": 0,
+            "2019": 1,
+            "2020": 0,
+            "2021": 2,
+            "2022": 0,
+            "2023": 0,
+            "2024": 2
+          }
+        },
+        "severity": "warning",
+        "type": "Category Distribution Shift"
+      },
+      {
+        "category": "data_quality",
+        "description": "discharge_category: hospice absent in 1/7 years (2018-2024)",
+        "details": {
+          "absent_years": [
+            2024
+          ],
+          "column": "discharge_category",
+          "total_years": 7,
+          "value": "hospice",
+          "yearly_counts": {
+            "2018": 1,
+            "2019": 2,
+            "2020": 3,
+            "2021": 1,
+            "2022": 2,
+            "2023": 1,
+            "2024": 0
+          }
+        },
+        "severity": "warning",
+        "type": "Category Distribution Shift"
+      },
+      {
+        "category": "data_quality",
+        "description": "discharge_category: jail absent in 6/7 years (2018-2024)",
+        "details": {
+          "absent_years": [
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "column": "discharge_category",
+          "total_years": 7,
+          "value": "jail",
+          "yearly_counts": {
+            "2018": 1,
+            "2019": 0,
+            "2020": 0,
+            "2021": 0,
+            "2022": 0,
+            "2023": 0,
+            "2024": 0
+          }
+        },
+        "severity": "warning",
+        "type": "Category Distribution Shift"
+      },
+      {
+        "category": "data_quality",
+        "description": "discharge_category: long term care hospital (ltach) absent in 2/7 years (2018-2024)",
+        "details": {
+          "absent_years": [
+            2019,
+            2023
+          ],
+          "column": "discharge_category",
+          "total_years": 7,
+          "value": "long term care hospital (ltach)",
+          "yearly_counts": {
+            "2018": 1,
+            "2019": 0,
+            "2020": 1,
+            "2021": 2,
+            "2022": 2,
+            "2023": 0,
+            "2024": 1
+          }
+        },
+        "severity": "warning",
+        "type": "Category Distribution Shift"
+      },
+      {
+        "category": "data_quality",
+        "description": "discharge_category: missing absent in 1/7 years (2018-2024)",
+        "details": {
+          "absent_years": [
+            2020
+          ],
+          "column": "discharge_category",
+          "total_years": 7,
+          "value": "missing",
+          "yearly_counts": {
+            "2018": 1,
+            "2019": 1,
+            "2020": 0,
+            "2021": 1,
+            "2022": 1,
+            "2023": 5,
+            "2024": 1
+          }
+        },
+        "severity": "warning",
+        "type": "Category Distribution Shift"
+      },
+      {
+        "category": "data_quality",
+        "description": "discharge_category: other absent in 3/7 years (2018-2024)",
+        "details": {
+          "absent_years": [
+            2021,
+            2022,
+            2023
+          ],
+          "column": "discharge_category",
+          "total_years": 7,
+          "value": "other",
+          "yearly_counts": {
+            "2018": 1,
+            "2019": 3,
+            "2020": 1,
+            "2021": 0,
+            "2022": 0,
+            "2023": 0,
+            "2024": 1
+          }
+        },
+        "severity": "warning",
+        "type": "Category Distribution Shift"
+      },
+      {
+        "category": "data_quality",
+        "description": "discharge_category: shelter absent in 5/7 years (2018-2024)",
+        "details": {
+          "absent_years": [
+            2018,
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "column": "discharge_category",
+          "total_years": 7,
+          "value": "shelter",
+          "yearly_counts": {
+            "2018": 0,
+            "2019": 1,
+            "2020": 1,
+            "2021": 0,
+            "2022": 0,
+            "2023": 0,
+            "2024": 0
+          }
+        },
+        "severity": "warning",
+        "type": "Category Distribution Shift"
+      },
+      {
+        "category": "data_quality",
+        "description": "discharge_category: still admitted absent in 4/7 years (2018-2024)",
+        "details": {
+          "absent_years": [
+            2019,
+            2022,
+            2023,
+            2024
+          ],
+          "column": "discharge_category",
+          "total_years": 7,
+          "value": "still admitted",
+          "yearly_counts": {
+            "2018": 1,
+            "2019": 0,
+            "2020": 1,
+            "2021": 1,
+            "2022": 0,
+            "2023": 0,
+            "2024": 0
+          }
+        },
+        "severity": "warning",
+        "type": "Category Distribution Shift"
+      },
+      {
+        "category": "data_quality",
+        "description": "Field plausibility violation: Discharged patients (discharge_dttm not null) should not have discharge_category 'Still Admitted' \u2014 3/200 rows (1.5%)",
+        "details": {
+          "percent": 1.5,
+          "rule": "Discharged patients (discharge_dttm not null) should not have discharge_category 'Still Admitted'",
+          "total": 200,
+          "violations": 3
+        },
+        "severity": "warning",
+        "type": "Field Plausibility Violation"
+      },
+      {
+        "category": "data_quality",
+        "description": "9 invalid categorical values",
+        "details": {
+          "column": "discharge_category",
+          "permissible_values": [
+            "home",
+            "snf",
+            "expired",
+            "acute_ip_rehab",
+            "hospice",
+            "ltach",
+            "acute_care_hosp",
+            "group_home",
+            "chemical_dependency",
+            "ama",
+            "assisted_living",
+            "still_admitted",
+            "missing",
+            "other",
+            "mental_health_hosp",
+            "shelter",
+            "jail"
+          ],
+          "top_invalid": [
+            {
+              "count": 23,
+              "value": "Skilled Nursing Facility (SNF)"
+            },
+            {
+              "count": 15,
+              "value": "Acute Inpatient Rehab Facility"
+            },
+            {
+              "count": 7,
+              "value": "Long Term Care Hospital (LTACH)"
+            },
+            {
+              "count": 7,
+              "value": "Against Medical Advice (AMA)"
+            },
+            {
+              "count": 5,
+              "value": "Group Home"
+            },
+            {
+              "count": 5,
+              "value": "Acute Care Hospital"
+            },
+            {
+              "count": 4,
+              "value": "Chemical Dependency"
+            },
+            {
+              "count": 3,
+              "value": "Assisted Living"
+            },
+            {
+              "count": 3,
+              "value": "Still Admitted"
+            }
+          ]
+        },
+        "severity": "warning",
+        "type": "Invalid Categorical Values"
+      },
+      {
+        "category": "data_quality",
+        "description": "Missing 10 mCIDE values: snf, acute_ip_rehab, ltach, acute_care_hosp, group_home, chemical_dependency, ama, assisted_living, still_admitted, mental_health_hosp",
+        "details": {
+          "column": "discharge_category",
+          "coverage_percent": 41.18,
+          "missing_values": [
+            "snf",
+            "acute_ip_rehab",
+            "ltach",
+            "acute_care_hosp",
+            "group_home",
+            "chemical_dependency",
+            "ama",
+            "assisted_living",
+            "still_admitted",
+            "mental_health_hosp"
+          ]
+        },
+        "severity": null,
+        "type": "mCIDE Coverage Gap"
+      }
+    ],
+    "is_valid": false,
+    "n_columns": 18,
+    "n_errors": 18,
+    "n_rows": 200,
+    "status": "loaded"
+  },
+  "labs": {
+    "columns": [
+      "hospitalization_id",
+      "lab_category",
+      "lab_collect_dttm",
+      "lab_loinc_code",
+      "lab_name",
+      "lab_order_category",
+      "lab_order_dttm",
+      "lab_order_name",
+      "lab_result_dttm",
+      "lab_specimen_category",
+      "lab_specimen_name",
+      "lab_value",
+      "lab_value_numeric",
+      "reference_unit"
+    ],
+    "errors": [
+      {
+        "category": "data_quality",
+        "description": "lab_category: albumin absent in 1/8 years (2018-2025)",
+        "details": {
+          "absent_years": [
+            2025
+          ],
+          "column": "lab_category",
+          "total_years": 8,
+          "value": "albumin",
+          "yearly_counts": {
+            "2018": 29,
+            "2019": 38,
+            "2020": 30,
+            "2021": 21,
+            "2022": 29,
+            "2023": 25,
+            "2024": 28,
+            "2025": 0
+          }
+        },
+        "severity": "warning",
+        "type": "Category Distribution Shift"
+      },
+      {
+        "category": "data_quality",
+        "description": "lab_category: alkaline_phosphatase absent in 1/8 years (2018-2025)",
+        "details": {
+          "absent_years": [
+            2025
+          ],
+          "column": "lab_category",
+          "total_years": 8,
+          "value": "alkaline_phosphatase",
+          "yearly_counts": {
+            "2018": 29,
+            "2019": 38,
+            "2020": 30,
+            "2021": 21,
+            "2022": 29,
+            "2023": 25,
+            "2024": 28,
+            "2025": 0
+          }
+        },
+        "severity": "warning",
+        "type": "Category Distribution Shift"
+      },
+      {
+        "category": "data_quality",
+        "description": "lab_category: alt absent in 1/8 years (2018-2025)",
+        "details": {
+          "absent_years": [
+            2025
+          ],
+          "column": "lab_category",
+          "total_years": 8,
+          "value": "alt",
+          "yearly_counts": {
+            "2018": 29,
+            "2019": 38,
+            "2020": 30,
+            "2021": 21,
+            "2022": 29,
+            "2023": 25,
+            "2024": 28,
+            "2025": 0
+          }
+        },
+        "severity": "warning",
+        "type": "Category Distribution Shift"
+      },
+      {
+        "category": "data_quality",
+        "description": "lab_category: ast absent in 1/8 years (2018-2025)",
+        "details": {
+          "absent_years": [
+            2025
+          ],
+          "column": "lab_category",
+          "total_years": 8,
+          "value": "ast",
+          "yearly_counts": {
+            "2018": 29,
+            "2019": 38,
+            "2020": 30,
+            "2021": 21,
+            "2022": 29,
+            "2023": 25,
+            "2024": 28,
+            "2025": 0
+          }
+        },
+        "severity": "warning",
+        "type": "Category Distribution Shift"
+      },
+      {
+        "category": "data_quality",
+        "description": "lab_category: bilirubin_total absent in 1/8 years (2018-2025)",
+        "details": {
+          "absent_years": [
+            2025
+          ],
+          "column": "lab_category",
+          "total_years": 8,
+          "value": "bilirubin_total",
+          "yearly_counts": {
+            "2018": 29,
+            "2019": 38,
+            "2020": 30,
+            "2021": 21,
+            "2022": 29,
+            "2023": 25,
+            "2024": 28,
+            "2025": 0
+          }
+        },
+        "severity": "warning",
+        "type": "Category Distribution Shift"
+      },
+      {
+        "category": "data_quality",
+        "description": "lab_category: calcium_total absent in 1/8 years (2018-2025)",
+        "details": {
+          "absent_years": [
+            2025
+          ],
+          "column": "lab_category",
+          "total_years": 8,
+          "value": "calcium_total",
+          "yearly_counts": {
+            "2018": 29,
+            "2019": 38,
+            "2020": 30,
+            "2021": 21,
+            "2022": 29,
+            "2023": 25,
+            "2024": 28,
+            "2025": 0
+          }
+        },
+        "severity": "warning",
+        "type": "Category Distribution Shift"
+      },
+      {
+        "category": "data_quality",
+        "description": "lab_category: total_protein absent in 1/8 years (2018-2025)",
+        "details": {
+          "absent_years": [
+            2025
+          ],
+          "column": "lab_category",
+          "total_years": 8,
+          "value": "total_protein",
+          "yearly_counts": {
+            "2018": 29,
+            "2019": 38,
+            "2020": 30,
+            "2021": 21,
+            "2022": 29,
+            "2023": 25,
+            "2024": 28,
+            "2025": 0
+          }
+        },
+        "severity": "warning",
+        "type": "Category Distribution Shift"
+      },
+      {
+        "category": "data_quality",
+        "description": "lab_order_category: lft absent in 1/8 years (2018-2025)",
+        "details": {
+          "absent_years": [
+            2025
+          ],
+          "column": "lab_order_category",
+          "total_years": 8,
+          "value": "lft",
+          "yearly_counts": {
+            "2018": 29,
+            "2019": 38,
+            "2020": 30,
+            "2021": 21,
+            "2022": 29,
+            "2023": 25,
+            "2024": 28,
+            "2025": 0
+          }
+        },
+        "severity": "warning",
+        "type": "Category Distribution Shift"
+      },
+      {
+        "category": "data_quality",
+        "description": "1 invalid categorical values",
+        "details": {
+          "column": "lab_specimen_category",
+          "permissible_values": [
+            "plasma_blood",
+            "pleural",
+            "peritoneal",
+            "urine",
+            "bal"
+          ],
+          "top_invalid": [
+            {
+              "count": 39465,
+              "value": "blood"
+            }
+          ]
+        },
+        "severity": "warning",
+        "type": "Invalid Categorical Values"
+      },
+      {
+        "category": "data_quality",
+        "description": "Lab category 'troponin_i': non-standard units found",
+        "details": {
+          "accepted_variant_count": 3,
+          "accepted_variants_sample": [
+            "nanograms per liter",
+            "ng per l",
+            "ng/l"
+          ],
+          "canonical_unit": "ng/l",
+          "column": "troponin_i",
+          "invalid_records": 900,
+          "matched_canonical_records": 0,
+          "matched_via_variant_records": 0,
+          "top_invalid_units": [
+            {
+              "count": 900,
+              "expected_units": [
+                "nanograms per liter",
+                "ng per l",
+                "ng/l"
+              ],
+              "reference_unit": "ng/mL"
+            }
+          ],
+          "variant_lookup_used": true
+        },
+        "severity": "warning",
+        "type": "Lab Unit Mismatch"
+      },
+      {
+        "category": "data_quality",
+        "description": "Missing 11 mCIDE values: aki_biomarkers, bal_panel, cardiac, inflammatory, mixed_venous_blood_gas, peritoneal_fluid_panel, pleural_fluid_panel, poc, tft, urine_chemistry, urine_toxicology",
+        "details": {
+          "column": "lab_order_category",
+          "coverage_percent": 35.29,
+          "missing_values": [
+            "aki_biomarkers",
+            "bal_panel",
+            "cardiac",
+            "inflammatory",
+            "mixed_venous_blood_gas",
+            "peritoneal_fluid_panel",
+            "pleural_fluid_panel",
+            "poc",
+            "tft",
+            "urine_chemistry",
+            "urine_toxicology"
+          ]
+        },
+        "severity": null,
+        "type": "mCIDE Coverage Gap"
+      },
+      {
+        "category": "data_quality",
+        "description": "Missing 5 mCIDE values: plasma_blood, pleural, peritoneal, urine, bal",
+        "details": {
+          "column": "lab_specimen_category",
+          "coverage_percent": 0.0,
+          "missing_values": [
+            "plasma_blood",
+            "pleural",
+            "peritoneal",
+            "urine",
+            "bal"
+          ]
+        },
+        "severity": null,
+        "type": "mCIDE Coverage Gap"
+      },
+      {
+        "category": "data_quality",
+        "description": "Missing 79 mCIDE values: ada, albumin_to_creatinine_ratio, amphetamine, amylase, barbiturate, basophils_absolute, basophils_percent, benzodiazepine, bilirubin, bilirubin_conjugated, bilirubin_unconjugated, bnp, calcium_ionized, cholesterol, ckmb, co2, cocaine, crp, cystatin_c, d_dimer, eosinophils_absolute, eosinophils_percent, esr, ethanol, fentanyl, ferritin, fibrinogen, free_t3, free_t4, glucose, hematocrit, hematocrit_percent, igfbp7, interleukin_01, interleukin_02, interleukin_02_receptor_soluble, interleukin_05, interleukin_06, interleukin_08, interleukin_10, interleukin_13, interleukin_18, kim_1, ldh, lipase, lymphocytes_absolute, lymphocytes_percent, macrophages_percent, magnesium, mesothelial, methadone, monocytes_absolute, monocytes_percent, nag, neutrophils_absolute, neutrophils_percent, ngal, nt_pro_bnp, opiate, other_absolute, oxycodone, pcp, phosphate, plasma_absolute, po2_mixed_venous, probnp, protein, protein_to_creatinine_ratio, rbc, rbc_absolute, so2_arterial, so2_mixed_venous, timp_2, timp_2_igfbp7, toxic_granulation, triglycerides, troponin_t, tsh, wbc_absolute",
+        "details": {
+          "column": "lab_category",
+          "coverage_percent": 26.85,
+          "missing_values": [
+            "ada",
+            "albumin_to_creatinine_ratio",
+            "amphetamine",
+            "amylase",
+            "barbiturate",
+            "basophils_absolute",
+            "basophils_percent",
+            "benzodiazepine",
+            "bilirubin",
+            "bilirubin_conjugated",
+            "bilirubin_unconjugated",
+            "bnp",
+            "calcium_ionized",
+            "cholesterol",
+            "ckmb",
+            "co2",
+            "cocaine",
+            "crp",
+            "cystatin_c",
+            "d_dimer",
+            "eosinophils_absolute",
+            "eosinophils_percent",
+            "esr",
+            "ethanol",
+            "fentanyl",
+            "ferritin",
+            "fibrinogen",
+            "free_t3",
+            "free_t4",
+            "glucose",
+            "hematocrit",
+            "hematocrit_percent",
+            "igfbp7",
+            "interleukin_01",
+            "interleukin_02",
+            "interleukin_02_receptor_soluble",
+            "interleukin_05",
+            "interleukin_06",
+            "interleukin_08",
+            "interleukin_10",
+            "interleukin_13",
+            "interleukin_18",
+            "kim_1",
+            "ldh",
+            "lipase",
+            "lymphocytes_absolute",
+            "lymphocytes_percent",
+            "macrophages_percent",
+            "magnesium",
+            "mesothelial",
+            "methadone",
+            "monocytes_absolute",
+            "monocytes_percent",
+            "nag",
+            "neutrophils_absolute",
+            "neutrophils_percent",
+            "ngal",
+            "nt_pro_bnp",
+            "opiate",
+            "other_absolute",
+            "oxycodone",
+            "pcp",
+            "phosphate",
+            "plasma_absolute",
+            "po2_mixed_venous",
+            "probnp",
+            "protein",
+            "protein_to_creatinine_ratio",
+            "rbc",
+            "rbc_absolute",
+            "so2_arterial",
+            "so2_mixed_venous",
+            "timp_2",
+            "timp_2_igfbp7",
+            "toxic_granulation",
+            "triglycerides",
+            "troponin_t",
+            "tsh",
+            "wbc_absolute"
+          ]
+        },
+        "severity": null,
+        "type": "mCIDE Coverage Gap"
+      }
+    ],
+    "is_valid": false,
+    "n_columns": 14,
+    "n_errors": 13,
+    "n_rows": 39465,
+    "status": "loaded"
+  },
+  "medication_admin_continuous": {
+    "columns": [
+      "admin_dttm",
+      "hospitalization_id",
+      "mar_action_category",
+      "mar_action_group",
+      "mar_action_name",
+      "med_category",
+      "med_dose",
+      "med_dose_unit",
+      "med_group",
+      "med_name",
+      "med_order_id",
+      "med_route_category",
+      "med_route_name"
+    ],
+    "errors": [
+      {
+        "category": "data_quality",
+        "description": "med_category: dobutamine absent in 3/7 years (2018-2024)",
+        "details": {
+          "absent_years": [
+            2021,
+            2022,
+            2024
+          ],
+          "column": "med_category",
+          "total_years": 7,
+          "value": "dobutamine",
+          "yearly_counts": {
+            "2018": 1,
+            "2019": 2,
+            "2020": 1,
+            "2021": 0,
+            "2022": 0,
+            "2023": 1,
+            "2024": 0
+          }
+        },
+        "severity": "warning",
+        "type": "Category Distribution Shift"
+      },
+      {
+        "category": "data_quality",
+        "description": "med_category: dopamine absent in 1/7 years (2018-2024)",
+        "details": {
+          "absent_years": [
+            2022
+          ],
+          "column": "med_category",
+          "total_years": 7,
+          "value": "dopamine",
+          "yearly_counts": {
+            "2018": 1,
+            "2019": 2,
+            "2020": 2,
+            "2021": 2,
+            "2022": 0,
+            "2023": 1,
+            "2024": 1
+          }
+        },
+        "severity": "warning",
+        "type": "Category Distribution Shift"
+      },
+      {
+        "category": "data_quality",
+        "description": "med_category: epinephrine absent in 1/7 years (2018-2024)",
+        "details": {
+          "absent_years": [
+            2023
+          ],
+          "column": "med_category",
+          "total_years": 7,
+          "value": "epinephrine",
+          "yearly_counts": {
+            "2018": 2,
+            "2019": 1,
+            "2020": 1,
+            "2021": 1,
+            "2022": 3,
+            "2023": 0,
+            "2024": 1
+          }
+        },
+        "severity": "warning",
+        "type": "Category Distribution Shift"
+      },
+      {
+        "category": "data_quality",
+        "description": "med_category: phenylephrine absent in 1/7 years (2018-2024)",
+        "details": {
+          "absent_years": [
+            2024
+          ],
+          "column": "med_category",
+          "total_years": 7,
+          "value": "phenylephrine",
+          "yearly_counts": {
+            "2018": 2,
+            "2019": 1,
+            "2020": 1,
+            "2021": 1,
+            "2022": 1,
+            "2023": 2,
+            "2024": 0
+          }
+        },
+        "severity": "warning",
+        "type": "Category Distribution Shift"
+      },
+      {
+        "category": "data_quality",
+        "description": "med_category: vasopressin absent in 2/7 years (2018-2024)",
+        "details": {
+          "absent_years": [
+            2020,
+            2023
+          ],
+          "column": "med_category",
+          "total_years": 7,
+          "value": "vasopressin",
+          "yearly_counts": {
+            "2018": 2,
+            "2019": 2,
+            "2020": 0,
+            "2021": 3,
+            "2022": 2,
+            "2023": 0,
+            "2024": 4
+          }
+        },
+        "severity": "warning",
+        "type": "Category Distribution Shift"
+      },
+      {
+        "category": "data_quality",
+        "description": "Missing 1 mCIDE values: other",
+        "details": {
+          "column": "mar_action_category",
+          "coverage_percent": 83.33,
+          "missing_values": [
+            "other"
+          ]
+        },
+        "severity": null,
+        "type": "mCIDE Coverage Gap"
+      },
+      {
+        "category": "data_quality",
+        "description": "Missing 2 mCIDE values: im, inhaled",
+        "details": {
+          "column": "med_route_category",
+          "coverage_percent": 33.33,
+          "missing_values": [
+            "im",
+            "inhaled"
+          ]
+        },
+        "severity": null,
+        "type": "mCIDE Coverage Gap"
+      },
+      {
+        "category": "data_quality",
+        "description": "Missing 64 mCIDE values: albumin_5, albumin_25, albuterol, alprostadil, aminocaproic_acid, aminophylline, amiodarone, angiotensin, argatroban, baclofen, bivalirudin, bumetanide, bupivacaine, cangrelor, cisatracurium, clevidipine, dextrose_10_water, dextrose_5_water, dextrose_other, diltiazem, epoprostenol, eptifibatide, esmolol, esomeprazole, furosemide, hydromorphone, ipratropium, isoproterenol, ketamine, labetalol, lactated_ringers_solution, levothyroxine, lidocaine, liothyronine, lorazepam, magnesium_sulfate, midazolam, milrinone, naloxone, nicardipine, nitric_oxide, nitroglycerin, nitroprusside, octreotide, oxytocin, pantoprazole, papaverine, pentobarbital, phentolamine, pitocin, plasma_lyte, procainamide, remifentanil, rocuronium, ropivacaine, sodium_bicarbonate, sodium_chloride, tacrolimus, terbutaline, torsemide, tpn, treprostinil, vecuronium, zidovudine",
+        "details": {
+          "column": "med_category",
+          "coverage_percent": 15.79,
+          "missing_values": [
+            "albumin_5",
+            "albumin_25",
+            "albuterol",
+            "alprostadil",
+            "aminocaproic_acid",
+            "aminophylline",
+            "amiodarone",
+            "angiotensin",
+            "argatroban",
+            "baclofen",
+            "bivalirudin",
+            "bumetanide",
+            "bupivacaine",
+            "cangrelor",
+            "cisatracurium",
+            "clevidipine",
+            "dextrose_10_water",
+            "dextrose_5_water",
+            "dextrose_other",
+            "diltiazem",
+            "epoprostenol",
+            "eptifibatide",
+            "esmolol",
+            "esomeprazole",
+            "furosemide",
+            "hydromorphone",
+            "ipratropium",
+            "isoproterenol",
+            "ketamine",
+            "labetalol",
+            "lactated_ringers_solution",
+            "levothyroxine",
+            "lidocaine",
+            "liothyronine",
+            "lorazepam",
+            "magnesium_sulfate",
+            "midazolam",
+            "milrinone",
+            "naloxone",
+            "nicardipine",
+            "nitric_oxide",
+            "nitroglycerin",
+            "nitroprusside",
+            "octreotide",
+            "oxytocin",
+            "pantoprazole",
+            "papaverine",
+            "pentobarbital",
+            "phentolamine",
+            "pitocin",
+            "plasma_lyte",
+            "procainamide",
+            "remifentanil",
+            "rocuronium",
+            "ropivacaine",
+            "sodium_bicarbonate",
+            "sodium_chloride",
+            "tacrolimus",
+            "terbutaline",
+            "torsemide",
+            "tpn",
+            "treprostinil",
+            "vecuronium",
+            "zidovudine"
+          ]
+        },
+        "severity": null,
+        "type": "mCIDE Coverage Gap"
+      }
+    ],
+    "is_valid": false,
+    "n_columns": 13,
+    "n_errors": 8,
+    "n_rows": 10660,
+    "status": "loaded"
+  },
+  "medication_admin_intermittent": {
+    "columns": [
+      "admin_dttm",
+      "hospitalization_id",
+      "mar_action_category",
+      "mar_action_group",
+      "mar_action_name",
+      "med_category",
+      "med_dose",
+      "med_dose_unit",
+      "med_group",
+      "med_name",
+      "med_order_id",
+      "med_route_category",
+      "med_route_name"
+    ],
+    "errors": [
+      {
+        "category": "data_quality",
+        "description": "med_category: acetaminophen absent in 1/8 years (2018-2025)",
+        "details": {
+          "absent_years": [
+            2025
+          ],
+          "column": "med_category",
+          "total_years": 8,
+          "value": "acetaminophen",
+          "yearly_counts": {
+            "2018": 25,
+            "2019": 33,
+            "2020": 29,
+            "2021": 15,
+            "2022": 26,
+            "2023": 24,
+            "2024": 23,
+            "2025": 0
+          }
+        },
+        "severity": "warning",
+        "type": "Category Distribution Shift"
+      },
+      {
+        "category": "data_quality",
+        "description": "med_category: cefepime absent in 1/8 years (2018-2025)",
+        "details": {
+          "absent_years": [
+            2025
+          ],
+          "column": "med_category",
+          "total_years": 8,
+          "value": "cefepime",
+          "yearly_counts": {
+            "2018": 5,
+            "2019": 6,
+            "2020": 6,
+            "2021": 4,
+            "2022": 1,
+            "2023": 4,
+            "2024": 3,
+            "2025": 0
+          }
+        },
+        "severity": "warning",
+        "type": "Category Distribution Shift"
+      },
+      {
+        "category": "data_quality",
+        "description": "med_category: hydromorphone absent in 1/8 years (2018-2025)",
+        "details": {
+          "absent_years": [
+            2025
+          ],
+          "column": "med_category",
+          "total_years": 8,
+          "value": "hydromorphone",
+          "yearly_counts": {
+            "2018": 9,
+            "2019": 11,
+            "2020": 10,
+            "2021": 5,
+            "2022": 10,
+            "2023": 7,
+            "2024": 6,
+            "2025": 0
+          }
+        },
+        "severity": "warning",
+        "type": "Category Distribution Shift"
+      },
+      {
+        "category": "data_quality",
+        "description": "med_category: meropenem absent in 1/8 years (2018-2025)",
+        "details": {
+          "absent_years": [
+            2025
+          ],
+          "column": "med_category",
+          "total_years": 8,
+          "value": "meropenem",
+          "yearly_counts": {
+            "2018": 5,
+            "2019": 5,
+            "2020": 2,
+            "2021": 5,
+            "2022": 5,
+            "2023": 4,
+            "2024": 2,
+            "2025": 0
+          }
+        },
+        "severity": "warning",
+        "type": "Category Distribution Shift"
+      },
+      {
+        "category": "data_quality",
+        "description": "med_category: piperacillin_tazobactam absent in 1/8 years (2018-2025)",
+        "details": {
+          "absent_years": [
+            2025
+          ],
+          "column": "med_category",
+          "total_years": 8,
+          "value": "piperacillin_tazobactam",
+          "yearly_counts": {
+            "2018": 6,
+            "2019": 4,
+            "2020": 6,
+            "2021": 2,
+            "2022": 7,
+            "2023": 5,
+            "2024": 6,
+            "2025": 0
+          }
+        },
+        "severity": "warning",
+        "type": "Category Distribution Shift"
+      },
+      {
+        "category": "data_quality",
+        "description": "med_category: vancomycin absent in 1/8 years (2018-2025)",
+        "details": {
+          "absent_years": [
+            2025
+          ],
+          "column": "med_category",
+          "total_years": 8,
+          "value": "vancomycin",
+          "yearly_counts": {
+            "2018": 6,
+            "2019": 4,
+            "2020": 6,
+            "2021": 2,
+            "2022": 7,
+            "2023": 5,
+            "2024": 6,
+            "2025": 0
+          }
+        },
+        "severity": "warning",
+        "type": "Category Distribution Shift"
+      },
+      {
+        "category": "data_quality",
+        "description": "med_route_category: enteral absent in 1/8 years (2018-2025)",
+        "details": {
+          "absent_years": [
+            2025
+          ],
+          "column": "med_route_category",
+          "total_years": 8,
+          "value": "enteral",
+          "yearly_counts": {
+            "2018": 25,
+            "2019": 33,
+            "2020": 29,
+            "2021": 15,
+            "2022": 26,
+            "2023": 24,
+            "2024": 23,
+            "2025": 0
+          }
+        },
+        "severity": "warning",
+        "type": "Category Distribution Shift"
+      },
+      {
+        "category": "data_quality",
+        "description": "Category 'acetaminophen': group mismatch (expected 'analgesia')",
+        "details": {
+          "category_column": "med_category",
+          "column": "acetaminophen",
+          "group_column": "med_group",
+          "mismatched_pairs": [
+            {
+              "actual_group": "other",
+              "category": "acetaminophen",
+              "count": 10072,
+              "expected_group": "analgesia"
+            }
+          ]
+        },
+        "severity": "warning",
+        "type": "Category Group Mapping"
+      },
+      {
+        "category": "data_quality",
+        "description": "Category 'hydromorphone': group mismatch (expected 'analgesia')",
+        "details": {
+          "category_column": "med_category",
+          "column": "hydromorphone",
+          "group_column": "med_group",
+          "mismatched_pairs": [
+            {
+              "actual_group": "other",
+              "category": "hydromorphone",
+              "count": 4794,
+              "expected_group": "analgesia"
+            }
+          ]
+        },
+        "severity": "warning",
+        "type": "Category Group Mapping"
+      },
+      {
+        "category": "data_quality",
+        "description": "Category 'ketamine': group mismatch (expected 'sedation')",
+        "details": {
+          "category_column": "med_category",
+          "column": "ketamine",
+          "group_column": "med_group",
+          "mismatched_pairs": [
+            {
+              "actual_group": "other",
+              "category": "ketamine",
+              "count": 1366,
+              "expected_group": "sedation"
+            }
+          ]
+        },
+        "severity": "warning",
+        "type": "Category Group Mapping"
+      },
+      {
+        "category": "schema",
+        "description": "Column 'administering_provider_id': missing from data",
+        "details": {
+          "column": "administering_provider_id"
+        },
+        "severity": null,
+        "type": "Missing Required Columns"
+      },
+      {
+        "category": "data_quality",
+        "description": "Missing 228 mCIDE values: acyclovir, alteplase, amikacin, amoxicillin, amoxicillin_clavulanate, amphotericin_b, ampicillin, ampicillin_sulbactam, anakinra, anidulafungin, atracurium, axicabtagene_ciloleucel, azilsartan, azithromycin, aztreonam, baricitinib, benazepril, benazepril_hctz, betamethasone, blinatumomab, brexucabtagene_autoleucel, candesartan, candesartan_hctz, captopril, caspofungin, cefaclor, cefadroxil, cefamandole, cefazolin, cefdinir, cefiderocol, cefixime, cefmetazole, cefonicid, cefoperazone, cefotaxime, cefotetan, cefoxitin, cefpodoxime, cefprozil, ceftaroline, ceftazidime, ceftazidime_avibactam, ceftazidime_clavulanate, ceftibuten, ceftizoxime, ceftolozane_tazobactam, ceftriaxone, cefuroxime, cephalexin, cephalothin, cephapirin, cephradine, chloramphenicol, cidofovir, ciltacabtagene_autoleucel, cinoxacin, ciprofloxacin, cisatracurium, clarithromycin, clindamycin, cloxacillin, colistin, dalbavancin, daptomycin, delafloxacin, dexamethasone, diatrizoate, diazepam, dicloxacillin, doripenem, dornase_alfa, doxycycline, elratanamab, enalapril, enalapril_hctz, epcoritamab, epinephrine, eprosartan, eravacycline, ertapenem, erythromycin, etomidate, fentanyl, fidaxomicin, fluconazole, fludrocortisone, foscarnet, fosfomycin, fosinopril, gadobenate, gadobutrol, gadodiamide, gadopentetate, gadoterate, gadoteridol, gadoxetate, ganciclovir, gatifloxacin, gentamicin, glofitamab, haloperidol, hydrocortisone, hydroxocobalamin, hypertonic_saline_20, hypertonic_saline_23.4, hypertonic_saline_3, hypertonic_saline_7, hypertonic_saline_7.5, idecabtagene_vicleucel, imipenem, imipenem_relebactam, iobitridol, iodixanol, iohexol, iomeprol, iopamidol, ioversol, ioxaglate, irbesartan, irbesartan_hctz, isavuconazole, isavuconazonium, itraconazole, kanamycin, lefamulin, levofloxacin, lincomycin, linezolid, linvoseltamab, lisinopril, lisinopril_hctz, lisocabtagene_maraleucel, lorazepam, losartan, losartan_hctz, magnesium_repletion, mannitol, maribavir, meropenem_vaborbactam, methicillin, methylene_blue, methylprednisolone, metrizamide, metronidazole, mezlocillin, micafungin, micafungin_posaconazole_voriconazole, midazolam, minocycline, moexipril, morphine, mosunetuzumab, moxifloxacin, nafcillin, naloxone, nitrofurantoin, norfloxacin, nystatin, ofloxacin, olanzapine, olmesartan, olmesartan_hctz, omadacycline, oritavancin, oseltamivir, oxacillin, oxycodone, penicillin, peramivir, perindopril, perindopril_amlodipine, phosphate_repletion, pivampicillin, plazomicin, polymyxin_b, posaconazole, potassium_repletion, prednisolone, prednisone, promethazine, propofol, quetiapine, quinapril, quinupristin_dalfopristin, ramipril, ramipril_amlodipine, remdesivir, rezafungin, ribavirin, rifampin, risperidone, rocuronium, sacubitril_valsartan, siltuximab, streptomycin, succinylcholine, sulbactam_durlobactam, sulfadiazine, sulfadiazine_trimethoprim, sulfisoxazole, talquetamab, tarlatamab, tebentafusp, teclistamab, tedizolid, telavancin, telithromycin, telmisartan, telmisartan_amlodipine, tetracycline, ticarcillin, ticarcillin_clavulanate, tigecycline, tisagenlecleucel, tobramycin, tocilizumab, trandolapril, trimethoprim, trimethoprim_sulfamethoxazole, valacyclovir, valganciclovir, valproate, valsartan, valsartan_amlodipine, valsartan_hctz, vecuronium, voriconazole",
+        "details": {
+          "column": "med_category",
+          "coverage_percent": 3.39,
+          "missing_values": [
+            "acyclovir",
+            "alteplase",
+            "amikacin",
+            "amoxicillin",
+            "amoxicillin_clavulanate",
+            "amphotericin_b",
+            "ampicillin",
+            "ampicillin_sulbactam",
+            "anakinra",
+            "anidulafungin",
+            "atracurium",
+            "axicabtagene_ciloleucel",
+            "azilsartan",
+            "azithromycin",
+            "aztreonam",
+            "baricitinib",
+            "benazepril",
+            "benazepril_hctz",
+            "betamethasone",
+            "blinatumomab",
+            "brexucabtagene_autoleucel",
+            "candesartan",
+            "candesartan_hctz",
+            "captopril",
+            "caspofungin",
+            "cefaclor",
+            "cefadroxil",
+            "cefamandole",
+            "cefazolin",
+            "cefdinir",
+            "cefiderocol",
+            "cefixime",
+            "cefmetazole",
+            "cefonicid",
+            "cefoperazone",
+            "cefotaxime",
+            "cefotetan",
+            "cefoxitin",
+            "cefpodoxime",
+            "cefprozil",
+            "ceftaroline",
+            "ceftazidime",
+            "ceftazidime_avibactam",
+            "ceftazidime_clavulanate",
+            "ceftibuten",
+            "ceftizoxime",
+            "ceftolozane_tazobactam",
+            "ceftriaxone",
+            "cefuroxime",
+            "cephalexin",
+            "cephalothin",
+            "cephapirin",
+            "cephradine",
+            "chloramphenicol",
+            "cidofovir",
+            "ciltacabtagene_autoleucel",
+            "cinoxacin",
+            "ciprofloxacin",
+            "cisatracurium",
+            "clarithromycin",
+            "clindamycin",
+            "cloxacillin",
+            "colistin",
+            "dalbavancin",
+            "daptomycin",
+            "delafloxacin",
+            "dexamethasone",
+            "diatrizoate",
+            "diazepam",
+            "dicloxacillin",
+            "doripenem",
+            "dornase_alfa",
+            "doxycycline",
+            "elratanamab",
+            "enalapril",
+            "enalapril_hctz",
+            "epcoritamab",
+            "epinephrine",
+            "eprosartan",
+            "eravacycline",
+            "ertapenem",
+            "erythromycin",
+            "etomidate",
+            "fentanyl",
+            "fidaxomicin",
+            "fluconazole",
+            "fludrocortisone",
+            "foscarnet",
+            "fosfomycin",
+            "fosinopril",
+            "gadobenate",
+            "gadobutrol",
+            "gadodiamide",
+            "gadopentetate",
+            "gadoterate",
+            "gadoteridol",
+            "gadoxetate",
+            "ganciclovir",
+            "gatifloxacin",
+            "gentamicin",
+            "glofitamab",
+            "haloperidol",
+            "hydrocortisone",
+            "hydroxocobalamin",
+            "hypertonic_saline_20",
+            "hypertonic_saline_23.4",
+            "hypertonic_saline_3",
+            "hypertonic_saline_7",
+            "hypertonic_saline_7.5",
+            "idecabtagene_vicleucel",
+            "imipenem",
+            "imipenem_relebactam",
+            "iobitridol",
+            "iodixanol",
+            "iohexol",
+            "iomeprol",
+            "iopamidol",
+            "ioversol",
+            "ioxaglate",
+            "irbesartan",
+            "irbesartan_hctz",
+            "isavuconazole",
+            "isavuconazonium",
+            "itraconazole",
+            "kanamycin",
+            "lefamulin",
+            "levofloxacin",
+            "lincomycin",
+            "linezolid",
+            "linvoseltamab",
+            "lisinopril",
+            "lisinopril_hctz",
+            "lisocabtagene_maraleucel",
+            "lorazepam",
+            "losartan",
+            "losartan_hctz",
+            "magnesium_repletion",
+            "mannitol",
+            "maribavir",
+            "meropenem_vaborbactam",
+            "methicillin",
+            "methylene_blue",
+            "methylprednisolone",
+            "metrizamide",
+            "metronidazole",
+            "mezlocillin",
+            "micafungin",
+            "micafungin_posaconazole_voriconazole",
+            "midazolam",
+            "minocycline",
+            "moexipril",
+            "morphine",
+            "mosunetuzumab",
+            "moxifloxacin",
+            "nafcillin",
+            "naloxone",
+            "nitrofurantoin",
+            "norfloxacin",
+            "nystatin",
+            "ofloxacin",
+            "olanzapine",
+            "olmesartan",
+            "olmesartan_hctz",
+            "omadacycline",
+            "oritavancin",
+            "oseltamivir",
+            "oxacillin",
+            "oxycodone",
+            "penicillin",
+            "peramivir",
+            "perindopril",
+            "perindopril_amlodipine",
+            "phosphate_repletion",
+            "pivampicillin",
+            "plazomicin",
+            "polymyxin_b",
+            "posaconazole",
+            "potassium_repletion",
+            "prednisolone",
+            "prednisone",
+            "promethazine",
+            "propofol",
+            "quetiapine",
+            "quinapril",
+            "quinupristin_dalfopristin",
+            "ramipril",
+            "ramipril_amlodipine",
+            "remdesivir",
+            "rezafungin",
+            "ribavirin",
+            "rifampin",
+            "risperidone",
+            "rocuronium",
+            "sacubitril_valsartan",
+            "siltuximab",
+            "streptomycin",
+            "succinylcholine",
+            "sulbactam_durlobactam",
+            "sulfadiazine",
+            "sulfadiazine_trimethoprim",
+            "sulfisoxazole",
+            "talquetamab",
+            "tarlatamab",
+            "tebentafusp",
+            "teclistamab",
+            "tedizolid",
+            "telavancin",
+            "telithromycin",
+            "telmisartan",
+            "telmisartan_amlodipine",
+            "tetracycline",
+            "ticarcillin",
+            "ticarcillin_clavulanate",
+            "tigecycline",
+            "tisagenlecleucel",
+            "tobramycin",
+            "tocilizumab",
+            "trandolapril",
+            "trimethoprim",
+            "trimethoprim_sulfamethoxazole",
+            "valacyclovir",
+            "valganciclovir",
+            "valproate",
+            "valsartan",
+            "valsartan_amlodipine",
+            "valsartan_hctz",
+            "vecuronium",
+            "voriconazole"
+          ]
+        },
+        "severity": null,
+        "type": "mCIDE Coverage Gap"
+      },
+      {
+        "category": "data_quality",
+        "description": "Missing 3 mCIDE values: buccal_sublingual, im, intrapleural",
+        "details": {
+          "column": "med_route_category",
+          "coverage_percent": 40.0,
+          "missing_values": [
+            "buccal_sublingual",
+            "im",
+            "intrapleural"
+          ]
+        },
+        "severity": null,
+        "type": "mCIDE Coverage Gap"
+      }
+    ],
+    "is_valid": false,
+    "n_columns": 13,
+    "n_errors": 13,
+    "n_rows": 24450,
+    "status": "loaded"
+  },
+  "microbiology_culture": {
+    "columns": [
+      "collect_dttm",
+      "fluid_category",
+      "fluid_name",
+      "hospitalization_id",
+      "lab_loinc_code",
+      "method_category",
+      "method_name",
+      "order_dttm",
+      "organism_category",
+      "organism_group",
+      "organism_id",
+      "organism_name",
+      "patient_id",
+      "result_dttm"
+    ],
+    "errors": [
+      {
+        "category": "data_quality",
+        "description": "method_category: smear absent in 2/7 years (2018-2024)",
+        "details": {
+          "absent_years": [
+            2018,
+            2023
+          ],
+          "column": "method_category",
+          "total_years": 7,
+          "value": "smear",
+          "yearly_counts": {
+            "2018": 0,
+            "2019": 8,
+            "2020": 5,
+            "2021": 2,
+            "2022": 1,
+            "2023": 0,
+            "2024": 1
+          }
+        },
+        "severity": "warning",
+        "type": "Category Distribution Shift"
+      },
+      {
+        "category": "schema",
+        "description": "Column 'order_id': missing from data",
+        "details": {
+          "column": "order_id"
+        },
+        "severity": null,
+        "type": "Missing Required Columns"
+      },
+      {
+        "category": "data_quality",
+        "description": "Missing 40 mCIDE values: bone_cortex, bone_marrow, brain, cardiac, catheter_tip, central_nervous_system, ears, esophagus, eyes, fallopians_uterus_cervix, feces_stool, gallbladder_billary_pancreas, gastrointestinal_tract, genital_area, joints, kidneys_renal_pelvis_ureters_bladder, large_intestine, larynx, lips, liver, lymph_nodes, meninges_csf, muscle, nasopharynx_upperairway, oropharynx_tongue_oralcavity, other_unspecified, peritoneum, pleural_cavity_fluid, prostate, respiratory_tract_lower, sinuses, skin_disseminated_multiple_sites, skin_rash_pustules_abscesses, skin_unspecified, small_intestine, spinal_cord, spleen, stomach, testes, vagina",
+        "details": {
+          "column": "fluid_category",
+          "coverage_percent": 9.09,
+          "missing_values": [
+            "bone_cortex",
+            "bone_marrow",
+            "brain",
+            "cardiac",
+            "catheter_tip",
+            "central_nervous_system",
+            "ears",
+            "esophagus",
+            "eyes",
+            "fallopians_uterus_cervix",
+            "feces_stool",
+            "gallbladder_billary_pancreas",
+            "gastrointestinal_tract",
+            "genital_area",
+            "joints",
+            "kidneys_renal_pelvis_ureters_bladder",
+            "large_intestine",
+            "larynx",
+            "lips",
+            "liver",
+            "lymph_nodes",
+            "meninges_csf",
+            "muscle",
+            "nasopharynx_upperairway",
+            "oropharynx_tongue_oralcavity",
+            "other_unspecified",
+            "peritoneum",
+            "pleural_cavity_fluid",
+            "prostate",
+            "respiratory_tract_lower",
+            "sinuses",
+            "skin_disseminated_multiple_sites",
+            "skin_rash_pustules_abscesses",
+            "skin_unspecified",
+            "small_intestine",
+            "spinal_cord",
+            "spleen",
+            "stomach",
+            "testes",
+            "vagina"
+          ]
+        },
+        "severity": null,
+        "type": "mCIDE Coverage Gap"
+      },
+      {
+        "category": "data_quality",
+        "description": "Missing 531 mCIDE values: abiotrophia_defectiva, achromobacter_sp, achromobacter_xylosoxidans, acidaminococcus_sp, acinetobacter_johnsonii, acinetobacter_junii, acinetobacter_lwoffii, acinetobacter_pittii, acinetobacter_radioresistens, acinetobacter_sp, acinetobacter_ursingii, acremonium_sp, actinomyces_europaeus, actinomyces_meyeri, actinomyces_naeslundii, actinomyces_neuii, actinomyces_odontolyticus, actinomyces_radingae, actinomyces_sp, actinomyces_turicensis, actinomyces_viscosus, actinotignum_schaalii, actinotignum_sp, aerococcus_christensenii, aerococcus_sanguinicola, aerococcus_sp, aerococcus_urinae, aerococcus_viridans, aeromonas_caviae, aeromonas_hydrophila, aeromonas_sobria, aeromonas_sp, aggregatibacter_actinomycetemcomitans, aggregatibacter_aphrophilus, aggregatibacter_segnis, agrobacterium_radiobacter, alcaligenes_faecalis, alcaligenes_xylosoxidans, alistipes_finegoldii, alistipes_onderdonkii, alloiococcus_otitis, alloiococcus_sp, alternaria_alternata, alternaria_sp, anaerobic_sp, anaerococcus_sp, arcanobacterium_haemolyticum, arthrobacter_cumminsii, arthrobacter_sp, arthrographis_sp, aspergillus_flavus, aspergillus_fumigatus, aspergillus_nidulans, aspergillus_niger, aspergillus_ochraceus, aspergillus_sp, aspergillus_sydowii, aspergillus_terreus, aspergillus_versicolor, atopobium_parvulum, atopobium_sp, atopobium_vaginae, aureobasidium_sp, bacillus_cereus, bacillus_licheniformis, bacillus_megaterium, bacillus_simplex, bacillus_sp, bacillus_subtilis, bacteria_other, bacteroides_caccae, bacteroides_capillosus, bacteroides_eggerthii, bacteroides_faecis, bacteroides_fragilis, bacteroides_ovatus, bacteroides_pyogenes, bacteroides_sp, bacteroides_stercoris, bacteroides_thetaiotaomicron, bacteroides_uniformis, bacteroides_vulgatus, bacteroides_xylanisolvens, bifidobacterium_sp, bilophila_wadsworthia, blastomyces_dermatitidis, blastomyces_sp, bordetella_bronchiseptica, bordetella_hinzii, bordetella_sp, bordetella_trematum, brevibacillus_sp, brevibacterium_casei, brevibacterium_luteolum, brevibacterium_sp, brevundimonas_diminuta, brevundimonas_sp, brevundimonas_vesicularis, brucella_intermedia, burkholderia_cepacia, burkholderia_gladioli, burkholderia_sp, campylobacter_coli, campylobacter_jejuni, campylobacter_sp, campylobacter_ureolyticus, candida_auris, candida_colliculosa, candida_dubliniensis, candida_famata, candida_fermentati, candida_glabrata, candida_guilliermondii, candida_haemulonii, candida_intermedia, candida_kefyr, candida_krusei, candida_lambica, candida_lipolytica, candida_lusitaniae, candida_nivariensis, candida_orthopsilosis, candida_parapsilosis, candida_pararugosa, candida_pelliculosa, candida_pulcherrima, candida_rugosa, candida_sp, candida_tropicalis, candida_utilis, capnocytophaga_gingivalis, capnocytophaga_sp, cardiobacterium_hominis, cardiobacterium_sp, cellulosimicrobium_cellulans, chaetomium_sp, chryseobacterium_indologenes, chryseobacterium_sp, citrobacter_amalonaticus, citrobacter_farmeri, citrobacter_freundii, citrobacter_koseri, citrobacter_sp, cladosporium_sp, clostridioides_difficile, clostridium_bifermentans, clostridium_butyricum, clostridium_cadaveris, clostridium_clostridioforme, clostridium_innocuum, clostridium_paraputrificum, clostridium_perfringens, clostridium_ramosum, clostridium_septicum, clostridium_sordellii, clostridium_sp, clostridium_sporogenes, clostridium_tertium, cokeromyces_recurvatus, collinsella_aerofaciens, comamonas_testosteroni, corynebacterium_accolens, corynebacterium_afermentans, corynebacterium_amycolatum, corynebacterium_aurimucosum, corynebacterium_bovis, corynebacterium_coyleae, corynebacterium_diptheriae, corynebacterium_durum, corynebacterium_freneyi, corynebacterium_glucuronolyticum, corynebacterium_imitans, corynebacterium_jeikeium, corynebacterium_macginleyi, corynebacterium_propinquum, corynebacterium_pseudodiphtheriticum, corynebacterium_simulans, corynebacterium_sp, corynebacterium_striatum, corynebacterium_tuberculostearicum, corynebacterium_urealyticum, cronobacter_malonaticus, cronobacter_sakazakii, cronobacter_sp, cryptococcus_albidus, cryptococcus_neoformans, cunninghamella_sp, cupriavidus_pauculus, curtobacterium_sp, curvularia_sp, cutibacterium_acnes, cutibacterium_avidum, delftia_acidovorans, dematiaceous_sp, dermabacter_hominis, dermacoccus_nishinomiyaensis, desulfovibrio_sp, dialister_pneumosintes, dialister_sp, dietzia_cinnamea, dietzia_sp, dolosigranulum_pigrum, edwardsiella_tarda, eggerthella_lenta, eggerthella_lentum, eggerthella_sp, eggerthia_catenaformis, eikenella_corrodens, elizabethkingia_anophelis, elizabethkingia_meningoseptica, elizabethkingia_sp, enterobacter_aerogenes, enterobacter_amnigenus, enterobacter_cancerogenus, enterobacter_cloacae, enterobacter_sp, enterococcus_avium, enterococcus_casseliflavus, enterococcus_durans, enterococcus_faecium, enterococcus_gallinarum, enterococcus_hirae, enterococcus_raffinosus, enterococcus_saccharolyticus, enterococcus_sp, epicoccum_sp, erysipelothrix_rhusiopathiae, escherichia_hermannii, escherichia_sp, eubacterium_callanderi, eubacterium_sp, ewingella_americana, exiguobacterium_acetylicum, exophiala_dermatitidis, facklamia_hominis, facklamia_sp, finegoldia_magna, francisella_tularensis, fungus_other, fusarium_proliferatum, fusarium_solani, fusarium_sp, fusobacterium_gonidiaformans, fusobacterium_necrophorum, fusobacterium_nucleatum, fusobacterium_sp, gardnerella_vaginalis, gemella_morbillorum, gemella_sp, geotrichum_sp, globicatella_sanguinis, gordonia_bronchialis, gordonia_sp, gram_negative_diplococci, gram_negative_rod, gram_positive_cocci, gram_positive_rod, granulicatella_adiacens, granulicatella_elegans, haemophilus_haemolyticus, haemophilus_influenzae, haemophilus_parainfluenzae, haemophilus_sp, hafnia_alvei, hafnia_sp, histoplasma_capsulatum, kingella_denitrificans, klebsiella_aerogenes, klebsiella_oxytoca, klebsiella_sp, klebsiella_variicola, kloeckera_sp, kluyvera_sp, kocuria_palustris, kocuria_sp, kodamaea_ohmeri, lactobacillus_acidophilus, lactobacillus_fermentum, lactobacillus_sp, lactococcus_sp, leclercia_adecarboxylata, legionella_bozemanae, legionella_dumoffii, legionella_feeleii, legionella_pneumophila, legionella_sp, lelliottia_amigena, leptotrichia_buccalis, leuconostoc_sp, lichtheimia_sp, listeria_monocytogenes, lysinibacillus_fusiformis, lysinibacillus_sp, malassezia_furfur, malassezia_pachydermatis, microbacterium_flavescens, microbacterium_sp, micrococcus_luteus, micrococcus_sp, microsporum_gypseum, microsporum_sp, moraxella_catarrhalis, moraxella_nonliquefaciens, moraxella_osloensis, moraxella_sp, morganella_morganii, morganella_sp, mucor_circinelloides, mucor_sp, mycobacterium_abscessus, mycobacterium_avium, mycobacterium_chelonae, mycobacterium_farcinogenes, mycobacterium_fortuitum, mycobacterium_gordonae, mycobacterium_kansasii, mycobacterium_kubicae, mycobacterium_lentiflavum, mycobacterium_llatzerense, mycobacterium_malmoense, mycobacterium_marinum, mycobacterium_mucogenicum, mycobacterium_neoaurum, mycobacterium_paraffinicum, mycobacterium_scrofulaceum, mycobacterium_szulgai, mycobacterium_tuberculosis, mycobacterium_xenopi, mycoplasma_hominis, mycoplasma_sp, myroides_sp, neisseria_gonorrhoeae, neisseria_meningitidis, neisseria_mucosa, neisseria_sp, neisseria_subflava, nocardia_abscessus, nocardia_brasiliensis, nocardia_cyriacigeorgica, nocardia_farcinica, nocardia_nova, nocardia_sp, nocardia_thailandica, nocardia_veterana, nocardia_wallacei, ochraconis_sp, ochrobactrum_anthropi, ochrobactrum_intermedium, ochrobactrum_sp, odoribacter_splanchnicus, oligella_ureolytica, oligella_urethralis, paecilomyces_lilacinus, paecilomyces_sp, paenibacillus_sp, pandoraea_sp, pantoea_agglomerans, pantoea_sp, parabacteroides_distasonis, parabacteroides_merdae, parvimonas_micra, pasteurella_canis, pasteurella_multocida, pasteurella_sp, pediococcus_acidilactici, penicillium_sp, peptoniphilus_assacharolyticus, peptoniphilus_harei, peptoniphilus_sp, peptostreptococcus_anaerobius, peptostreptococcus_sp, pithomyces_sp, plasmodium_falciparum, plasmodium_sp, plesiomonas_shigelloides, pluralibacter_gergoviae, porphyromonas_asaccharolytica, porphyromonas_sp, prevotella_bivia, prevotella_buccae, prevotella_denticola, prevotella_disiens, prevotella_intermedia, prevotella_melaninogenica, prevotella_nigrescens, prevotella_oralis, prevotella_oris, prevotella_sp, propionibacterium_acnes, propionibacterium_avidum, propionibacterium_granulosum, propionibacterium_sp, proteus_penneri, proteus_sp, proteus_vulgaris, providencia_alcalifaciens, providencia_rettgeri, providencia_sp, providencia_stuartii, pseudallescheria_boydii, pseudoglutamicibacter_cumminsii, pseudomonas_alcaligenes, pseudomonas_fluorescens, pseudomonas_luteola, pseudomonas_mendocina, pseudomonas_oryzihabitans, pseudomonas_putida, pseudomonas_sp, pseudomonas_stutzeri, psychrobacter_phenylpyruvicus, psychrobacter_sp, purpureocillium_lilacinum, rahnella_aquatilis, rahnella_sp, ralstonia_mannitolilytica, ralstonia_pickettii, ralstonia_sp, raoultella_ornithinolytica, raoultella_planticola, raoultella_sp, rhinocladiella_sp, rhizobium_radiobacter, rhizobium_sp, rhizomucor_pusillus, rhizomucor_sp, rhizopus_sp, rhodococcus_sp, rhodotorula_mucilaginosa, rhodotorula_sp, roseomonas_sp, rothia_dentocariosa, rothia_mucilaginosa, rothia_sp, saccharomyces_cerevisiae, saccharomyces_sp, salmonella_enterica, salmonella_enteritidis, salmonella_paratyphi, salmonella_sp, saprochaete_capitata, saprochaete_sp, scedosporium_apiospermum, scopulariopsis_brevicaulis, scopulariopsis_sp, serratia_fonticola, serratia_liquefaciens, serratia_marcescens, serratia_odorifera, serratia_rubidaea, serratia_sp, shewanella_putrefaciens, shewanella_sp, shigella_sonnei, slackia_exigua, sphingomonas_paucimobilis, sphingomonas_sp, sporobolomyces_salmonicolor, staphylococcus_auricularis, staphylococcus_capitis, staphylococcus_caprae, staphylococcus_carnosus, staphylococcus_coagneg, staphylococcus_cohnii, staphylococcus_epidermidis, staphylococcus_haemolyticus, staphylococcus_hominis, staphylococcus_lugdunensis, staphylococcus_pasteuri, staphylococcus_pettenkoferi, staphylococcus_pseudintermedius, staphylococcus_saccharolyticus, staphylococcus_saprophyticus, staphylococcus_schleiferi, staphylococcus_sciuri, staphylococcus_simulans, staphylococcus_sp, staphylococcus_warneri, staphylococcus_xylosus, stenotrophomonas_maltophilia, stenotrophomonas_rhizophila, stenotrophomonas_sp, streptococcus_agalactiae, streptococcus_alphahemolytic, streptococcus_anginosus, streptococcus_bovis, streptococcus_canis, streptococcus_constellatus, streptococcus_cristatus, streptococcus_dysgalactiae, streptococcus_equinus, streptococcus_gallolyticus, streptococcus_gordonii, streptococcus_infantarius, streptococcus_intermedius, streptococcus_mitis, streptococcus_mutans, streptococcus_nonhemolytic, streptococcus_parasanguinis, streptococcus_pseudoporcinus, streptococcus_pyogenes, streptococcus_salivarius, streptococcus_sanguinis, streptococcus_sp, streptococcus_viridans, streptomyces_griseus, streptomyces_sp, sutterella_sp, syncephalastrum_sp, teichospora_sp, tissierella_praeacuta, trichoderma_sp, trichophyton_rubrum, trichophyton_tonsurans, trichosporon_asahii, trichosporon_sp, trueperella_bernardiae, trueperella_sp, tuberculosis_nos_afb_kochbacillus, turicella_otitidis, vagococcus_fluvialis, veillonella_sp, verticillium_sp, vibrio_sp, virus_other, weeksella_sp, weeksella_virosa, weissella_confusa, weissella_sp, xanthomonas_sp, yeast, zygomycete_sp",
+        "details": {
+          "column": "organism_category",
+          "coverage_percent": 1.85,
+          "missing_values": [
+            "abiotrophia_defectiva",
+            "achromobacter_sp",
+            "achromobacter_xylosoxidans",
+            "acidaminococcus_sp",
+            "acinetobacter_johnsonii",
+            "acinetobacter_junii",
+            "acinetobacter_lwoffii",
+            "acinetobacter_pittii",
+            "acinetobacter_radioresistens",
+            "acinetobacter_sp",
+            "acinetobacter_ursingii",
+            "acremonium_sp",
+            "actinomyces_europaeus",
+            "actinomyces_meyeri",
+            "actinomyces_naeslundii",
+            "actinomyces_neuii",
+            "actinomyces_odontolyticus",
+            "actinomyces_radingae",
+            "actinomyces_sp",
+            "actinomyces_turicensis",
+            "actinomyces_viscosus",
+            "actinotignum_schaalii",
+            "actinotignum_sp",
+            "aerococcus_christensenii",
+            "aerococcus_sanguinicola",
+            "aerococcus_sp",
+            "aerococcus_urinae",
+            "aerococcus_viridans",
+            "aeromonas_caviae",
+            "aeromonas_hydrophila",
+            "aeromonas_sobria",
+            "aeromonas_sp",
+            "aggregatibacter_actinomycetemcomitans",
+            "aggregatibacter_aphrophilus",
+            "aggregatibacter_segnis",
+            "agrobacterium_radiobacter",
+            "alcaligenes_faecalis",
+            "alcaligenes_xylosoxidans",
+            "alistipes_finegoldii",
+            "alistipes_onderdonkii",
+            "alloiococcus_otitis",
+            "alloiococcus_sp",
+            "alternaria_alternata",
+            "alternaria_sp",
+            "anaerobic_sp",
+            "anaerococcus_sp",
+            "arcanobacterium_haemolyticum",
+            "arthrobacter_cumminsii",
+            "arthrobacter_sp",
+            "arthrographis_sp",
+            "aspergillus_flavus",
+            "aspergillus_fumigatus",
+            "aspergillus_nidulans",
+            "aspergillus_niger",
+            "aspergillus_ochraceus",
+            "aspergillus_sp",
+            "aspergillus_sydowii",
+            "aspergillus_terreus",
+            "aspergillus_versicolor",
+            "atopobium_parvulum",
+            "atopobium_sp",
+            "atopobium_vaginae",
+            "aureobasidium_sp",
+            "bacillus_cereus",
+            "bacillus_licheniformis",
+            "bacillus_megaterium",
+            "bacillus_simplex",
+            "bacillus_sp",
+            "bacillus_subtilis",
+            "bacteria_other",
+            "bacteroides_caccae",
+            "bacteroides_capillosus",
+            "bacteroides_eggerthii",
+            "bacteroides_faecis",
+            "bacteroides_fragilis",
+            "bacteroides_ovatus",
+            "bacteroides_pyogenes",
+            "bacteroides_sp",
+            "bacteroides_stercoris",
+            "bacteroides_thetaiotaomicron",
+            "bacteroides_uniformis",
+            "bacteroides_vulgatus",
+            "bacteroides_xylanisolvens",
+            "bifidobacterium_sp",
+            "bilophila_wadsworthia",
+            "blastomyces_dermatitidis",
+            "blastomyces_sp",
+            "bordetella_bronchiseptica",
+            "bordetella_hinzii",
+            "bordetella_sp",
+            "bordetella_trematum",
+            "brevibacillus_sp",
+            "brevibacterium_casei",
+            "brevibacterium_luteolum",
+            "brevibacterium_sp",
+            "brevundimonas_diminuta",
+            "brevundimonas_sp",
+            "brevundimonas_vesicularis",
+            "brucella_intermedia",
+            "burkholderia_cepacia",
+            "burkholderia_gladioli",
+            "burkholderia_sp",
+            "campylobacter_coli",
+            "campylobacter_jejuni",
+            "campylobacter_sp",
+            "campylobacter_ureolyticus",
+            "candida_auris",
+            "candida_colliculosa",
+            "candida_dubliniensis",
+            "candida_famata",
+            "candida_fermentati",
+            "candida_glabrata",
+            "candida_guilliermondii",
+            "candida_haemulonii",
+            "candida_intermedia",
+            "candida_kefyr",
+            "candida_krusei",
+            "candida_lambica",
+            "candida_lipolytica",
+            "candida_lusitaniae",
+            "candida_nivariensis",
+            "candida_orthopsilosis",
+            "candida_parapsilosis",
+            "candida_pararugosa",
+            "candida_pelliculosa",
+            "candida_pulcherrima",
+            "candida_rugosa",
+            "candida_sp",
+            "candida_tropicalis",
+            "candida_utilis",
+            "capnocytophaga_gingivalis",
+            "capnocytophaga_sp",
+            "cardiobacterium_hominis",
+            "cardiobacterium_sp",
+            "cellulosimicrobium_cellulans",
+            "chaetomium_sp",
+            "chryseobacterium_indologenes",
+            "chryseobacterium_sp",
+            "citrobacter_amalonaticus",
+            "citrobacter_farmeri",
+            "citrobacter_freundii",
+            "citrobacter_koseri",
+            "citrobacter_sp",
+            "cladosporium_sp",
+            "clostridioides_difficile",
+            "clostridium_bifermentans",
+            "clostridium_butyricum",
+            "clostridium_cadaveris",
+            "clostridium_clostridioforme",
+            "clostridium_innocuum",
+            "clostridium_paraputrificum",
+            "clostridium_perfringens",
+            "clostridium_ramosum",
+            "clostridium_septicum",
+            "clostridium_sordellii",
+            "clostridium_sp",
+            "clostridium_sporogenes",
+            "clostridium_tertium",
+            "cokeromyces_recurvatus",
+            "collinsella_aerofaciens",
+            "comamonas_testosteroni",
+            "corynebacterium_accolens",
+            "corynebacterium_afermentans",
+            "corynebacterium_amycolatum",
+            "corynebacterium_aurimucosum",
+            "corynebacterium_bovis",
+            "corynebacterium_coyleae",
+            "corynebacterium_diptheriae",
+            "corynebacterium_durum",
+            "corynebacterium_freneyi",
+            "corynebacterium_glucuronolyticum",
+            "corynebacterium_imitans",
+            "corynebacterium_jeikeium",
+            "corynebacterium_macginleyi",
+            "corynebacterium_propinquum",
+            "corynebacterium_pseudodiphtheriticum",
+            "corynebacterium_simulans",
+            "corynebacterium_sp",
+            "corynebacterium_striatum",
+            "corynebacterium_tuberculostearicum",
+            "corynebacterium_urealyticum",
+            "cronobacter_malonaticus",
+            "cronobacter_sakazakii",
+            "cronobacter_sp",
+            "cryptococcus_albidus",
+            "cryptococcus_neoformans",
+            "cunninghamella_sp",
+            "cupriavidus_pauculus",
+            "curtobacterium_sp",
+            "curvularia_sp",
+            "cutibacterium_acnes",
+            "cutibacterium_avidum",
+            "delftia_acidovorans",
+            "dematiaceous_sp",
+            "dermabacter_hominis",
+            "dermacoccus_nishinomiyaensis",
+            "desulfovibrio_sp",
+            "dialister_pneumosintes",
+            "dialister_sp",
+            "dietzia_cinnamea",
+            "dietzia_sp",
+            "dolosigranulum_pigrum",
+            "edwardsiella_tarda",
+            "eggerthella_lenta",
+            "eggerthella_lentum",
+            "eggerthella_sp",
+            "eggerthia_catenaformis",
+            "eikenella_corrodens",
+            "elizabethkingia_anophelis",
+            "elizabethkingia_meningoseptica",
+            "elizabethkingia_sp",
+            "enterobacter_aerogenes",
+            "enterobacter_amnigenus",
+            "enterobacter_cancerogenus",
+            "enterobacter_cloacae",
+            "enterobacter_sp",
+            "enterococcus_avium",
+            "enterococcus_casseliflavus",
+            "enterococcus_durans",
+            "enterococcus_faecium",
+            "enterococcus_gallinarum",
+            "enterococcus_hirae",
+            "enterococcus_raffinosus",
+            "enterococcus_saccharolyticus",
+            "enterococcus_sp",
+            "epicoccum_sp",
+            "erysipelothrix_rhusiopathiae",
+            "escherichia_hermannii",
+            "escherichia_sp",
+            "eubacterium_callanderi",
+            "eubacterium_sp",
+            "ewingella_americana",
+            "exiguobacterium_acetylicum",
+            "exophiala_dermatitidis",
+            "facklamia_hominis",
+            "facklamia_sp",
+            "finegoldia_magna",
+            "francisella_tularensis",
+            "fungus_other",
+            "fusarium_proliferatum",
+            "fusarium_solani",
+            "fusarium_sp",
+            "fusobacterium_gonidiaformans",
+            "fusobacterium_necrophorum",
+            "fusobacterium_nucleatum",
+            "fusobacterium_sp",
+            "gardnerella_vaginalis",
+            "gemella_morbillorum",
+            "gemella_sp",
+            "geotrichum_sp",
+            "globicatella_sanguinis",
+            "gordonia_bronchialis",
+            "gordonia_sp",
+            "gram_negative_diplococci",
+            "gram_negative_rod",
+            "gram_positive_cocci",
+            "gram_positive_rod",
+            "granulicatella_adiacens",
+            "granulicatella_elegans",
+            "haemophilus_haemolyticus",
+            "haemophilus_influenzae",
+            "haemophilus_parainfluenzae",
+            "haemophilus_sp",
+            "hafnia_alvei",
+            "hafnia_sp",
+            "histoplasma_capsulatum",
+            "kingella_denitrificans",
+            "klebsiella_aerogenes",
+            "klebsiella_oxytoca",
+            "klebsiella_sp",
+            "klebsiella_variicola",
+            "kloeckera_sp",
+            "kluyvera_sp",
+            "kocuria_palustris",
+            "kocuria_sp",
+            "kodamaea_ohmeri",
+            "lactobacillus_acidophilus",
+            "lactobacillus_fermentum",
+            "lactobacillus_sp",
+            "lactococcus_sp",
+            "leclercia_adecarboxylata",
+            "legionella_bozemanae",
+            "legionella_dumoffii",
+            "legionella_feeleii",
+            "legionella_pneumophila",
+            "legionella_sp",
+            "lelliottia_amigena",
+            "leptotrichia_buccalis",
+            "leuconostoc_sp",
+            "lichtheimia_sp",
+            "listeria_monocytogenes",
+            "lysinibacillus_fusiformis",
+            "lysinibacillus_sp",
+            "malassezia_furfur",
+            "malassezia_pachydermatis",
+            "microbacterium_flavescens",
+            "microbacterium_sp",
+            "micrococcus_luteus",
+            "micrococcus_sp",
+            "microsporum_gypseum",
+            "microsporum_sp",
+            "moraxella_catarrhalis",
+            "moraxella_nonliquefaciens",
+            "moraxella_osloensis",
+            "moraxella_sp",
+            "morganella_morganii",
+            "morganella_sp",
+            "mucor_circinelloides",
+            "mucor_sp",
+            "mycobacterium_abscessus",
+            "mycobacterium_avium",
+            "mycobacterium_chelonae",
+            "mycobacterium_farcinogenes",
+            "mycobacterium_fortuitum",
+            "mycobacterium_gordonae",
+            "mycobacterium_kansasii",
+            "mycobacterium_kubicae",
+            "mycobacterium_lentiflavum",
+            "mycobacterium_llatzerense",
+            "mycobacterium_malmoense",
+            "mycobacterium_marinum",
+            "mycobacterium_mucogenicum",
+            "mycobacterium_neoaurum",
+            "mycobacterium_paraffinicum",
+            "mycobacterium_scrofulaceum",
+            "mycobacterium_szulgai",
+            "mycobacterium_tuberculosis",
+            "mycobacterium_xenopi",
+            "mycoplasma_hominis",
+            "mycoplasma_sp",
+            "myroides_sp",
+            "neisseria_gonorrhoeae",
+            "neisseria_meningitidis",
+            "neisseria_mucosa",
+            "neisseria_sp",
+            "neisseria_subflava",
+            "nocardia_abscessus",
+            "nocardia_brasiliensis",
+            "nocardia_cyriacigeorgica",
+            "nocardia_farcinica",
+            "nocardia_nova",
+            "nocardia_sp",
+            "nocardia_thailandica",
+            "nocardia_veterana",
+            "nocardia_wallacei",
+            "ochraconis_sp",
+            "ochrobactrum_anthropi",
+            "ochrobactrum_intermedium",
+            "ochrobactrum_sp",
+            "odoribacter_splanchnicus",
+            "oligella_ureolytica",
+            "oligella_urethralis",
+            "paecilomyces_lilacinus",
+            "paecilomyces_sp",
+            "paenibacillus_sp",
+            "pandoraea_sp",
+            "pantoea_agglomerans",
+            "pantoea_sp",
+            "parabacteroides_distasonis",
+            "parabacteroides_merdae",
+            "parvimonas_micra",
+            "pasteurella_canis",
+            "pasteurella_multocida",
+            "pasteurella_sp",
+            "pediococcus_acidilactici",
+            "penicillium_sp",
+            "peptoniphilus_assacharolyticus",
+            "peptoniphilus_harei",
+            "peptoniphilus_sp",
+            "peptostreptococcus_anaerobius",
+            "peptostreptococcus_sp",
+            "pithomyces_sp",
+            "plasmodium_falciparum",
+            "plasmodium_sp",
+            "plesiomonas_shigelloides",
+            "pluralibacter_gergoviae",
+            "porphyromonas_asaccharolytica",
+            "porphyromonas_sp",
+            "prevotella_bivia",
+            "prevotella_buccae",
+            "prevotella_denticola",
+            "prevotella_disiens",
+            "prevotella_intermedia",
+            "prevotella_melaninogenica",
+            "prevotella_nigrescens",
+            "prevotella_oralis",
+            "prevotella_oris",
+            "prevotella_sp",
+            "propionibacterium_acnes",
+            "propionibacterium_avidum",
+            "propionibacterium_granulosum",
+            "propionibacterium_sp",
+            "proteus_penneri",
+            "proteus_sp",
+            "proteus_vulgaris",
+            "providencia_alcalifaciens",
+            "providencia_rettgeri",
+            "providencia_sp",
+            "providencia_stuartii",
+            "pseudallescheria_boydii",
+            "pseudoglutamicibacter_cumminsii",
+            "pseudomonas_alcaligenes",
+            "pseudomonas_fluorescens",
+            "pseudomonas_luteola",
+            "pseudomonas_mendocina",
+            "pseudomonas_oryzihabitans",
+            "pseudomonas_putida",
+            "pseudomonas_sp",
+            "pseudomonas_stutzeri",
+            "psychrobacter_phenylpyruvicus",
+            "psychrobacter_sp",
+            "purpureocillium_lilacinum",
+            "rahnella_aquatilis",
+            "rahnella_sp",
+            "ralstonia_mannitolilytica",
+            "ralstonia_pickettii",
+            "ralstonia_sp",
+            "raoultella_ornithinolytica",
+            "raoultella_planticola",
+            "raoultella_sp",
+            "rhinocladiella_sp",
+            "rhizobium_radiobacter",
+            "rhizobium_sp",
+            "rhizomucor_pusillus",
+            "rhizomucor_sp",
+            "rhizopus_sp",
+            "rhodococcus_sp",
+            "rhodotorula_mucilaginosa",
+            "rhodotorula_sp",
+            "roseomonas_sp",
+            "rothia_dentocariosa",
+            "rothia_mucilaginosa",
+            "rothia_sp",
+            "saccharomyces_cerevisiae",
+            "saccharomyces_sp",
+            "salmonella_enterica",
+            "salmonella_enteritidis",
+            "salmonella_paratyphi",
+            "salmonella_sp",
+            "saprochaete_capitata",
+            "saprochaete_sp",
+            "scedosporium_apiospermum",
+            "scopulariopsis_brevicaulis",
+            "scopulariopsis_sp",
+            "serratia_fonticola",
+            "serratia_liquefaciens",
+            "serratia_marcescens",
+            "serratia_odorifera",
+            "serratia_rubidaea",
+            "serratia_sp",
+            "shewanella_putrefaciens",
+            "shewanella_sp",
+            "shigella_sonnei",
+            "slackia_exigua",
+            "sphingomonas_paucimobilis",
+            "sphingomonas_sp",
+            "sporobolomyces_salmonicolor",
+            "staphylococcus_auricularis",
+            "staphylococcus_capitis",
+            "staphylococcus_caprae",
+            "staphylococcus_carnosus",
+            "staphylococcus_coagneg",
+            "staphylococcus_cohnii",
+            "staphylococcus_epidermidis",
+            "staphylococcus_haemolyticus",
+            "staphylococcus_hominis",
+            "staphylococcus_lugdunensis",
+            "staphylococcus_pasteuri",
+            "staphylococcus_pettenkoferi",
+            "staphylococcus_pseudintermedius",
+            "staphylococcus_saccharolyticus",
+            "staphylococcus_saprophyticus",
+            "staphylococcus_schleiferi",
+            "staphylococcus_sciuri",
+            "staphylococcus_simulans",
+            "staphylococcus_sp",
+            "staphylococcus_warneri",
+            "staphylococcus_xylosus",
+            "stenotrophomonas_maltophilia",
+            "stenotrophomonas_rhizophila",
+            "stenotrophomonas_sp",
+            "streptococcus_agalactiae",
+            "streptococcus_alphahemolytic",
+            "streptococcus_anginosus",
+            "streptococcus_bovis",
+            "streptococcus_canis",
+            "streptococcus_constellatus",
+            "streptococcus_cristatus",
+            "streptococcus_dysgalactiae",
+            "streptococcus_equinus",
+            "streptococcus_gallolyticus",
+            "streptococcus_gordonii",
+            "streptococcus_infantarius",
+            "streptococcus_intermedius",
+            "streptococcus_mitis",
+            "streptococcus_mutans",
+            "streptococcus_nonhemolytic",
+            "streptococcus_parasanguinis",
+            "streptococcus_pseudoporcinus",
+            "streptococcus_pyogenes",
+            "streptococcus_salivarius",
+            "streptococcus_sanguinis",
+            "streptococcus_sp",
+            "streptococcus_viridans",
+            "streptomyces_griseus",
+            "streptomyces_sp",
+            "sutterella_sp",
+            "syncephalastrum_sp",
+            "teichospora_sp",
+            "tissierella_praeacuta",
+            "trichoderma_sp",
+            "trichophyton_rubrum",
+            "trichophyton_tonsurans",
+            "trichosporon_asahii",
+            "trichosporon_sp",
+            "trueperella_bernardiae",
+            "trueperella_sp",
+            "tuberculosis_nos_afb_kochbacillus",
+            "turicella_otitidis",
+            "vagococcus_fluvialis",
+            "veillonella_sp",
+            "verticillium_sp",
+            "vibrio_sp",
+            "virus_other",
+            "weeksella_sp",
+            "weeksella_virosa",
+            "weissella_confusa",
+            "weissella_sp",
+            "xanthomonas_sp",
+            "yeast",
+            "zygomycete_sp"
+          ]
+        },
+        "severity": null,
+        "type": "mCIDE Coverage Gap"
+      }
+    ],
+    "is_valid": false,
+    "n_columns": 14,
+    "n_errors": 4,
+    "n_rows": 299,
+    "status": "loaded"
+  },
+  "microbiology_nonculture": {
+    "columns": [
+      "collect_dttm",
+      "fluid_category",
+      "fluid_name",
+      "hospitalization_id",
+      "lab_loinc_code",
+      "method_category",
+      "method_name",
+      "micro_order_name",
+      "order_dttm",
+      "organism_category",
+      "organism_group",
+      "patient_id",
+      "reference_high",
+      "reference_low",
+      "result_category",
+      "result_dttm",
+      "result_name",
+      "result_units"
+    ],
+    "errors": [
+      {
+        "category": "data_quality",
+        "description": "Missing 1 mCIDE values: indeterminate",
+        "details": {
+          "column": "result_category",
+          "coverage_percent": 66.67,
+          "missing_values": [
+            "indeterminate"
+          ]
+        },
+        "severity": null,
+        "type": "mCIDE Coverage Gap"
+      },
+      {
+        "category": "data_quality",
+        "description": "Missing 21 mCIDE values: adenovirus, bordetella_parapertussis, bordetella_pertussis, chlamydia_pneumoniae, coronavirus_229e, coronavirus_hku1, coronavirus_nl63, coronavirus_oc43, human_metapneumovirus, human_rhinovirus_enterovirus, influenza_a, influenza_a_h1, influenza_a_h1_2009, influenza_a_h3, influenza_b, mycoplasma_pneumoniae, parainfluenza_1, parainfluenza_2, parainfluenza_3, parainfluenza_4, pneumocystis_jirovecii",
+        "details": {
+          "column": "organism_category",
+          "coverage_percent": 12.5,
+          "missing_values": [
+            "adenovirus",
+            "bordetella_parapertussis",
+            "bordetella_pertussis",
+            "chlamydia_pneumoniae",
+            "coronavirus_229e",
+            "coronavirus_hku1",
+            "coronavirus_nl63",
+            "coronavirus_oc43",
+            "human_metapneumovirus",
+            "human_rhinovirus_enterovirus",
+            "influenza_a",
+            "influenza_a_h1",
+            "influenza_a_h1_2009",
+            "influenza_a_h3",
+            "influenza_b",
+            "mycoplasma_pneumoniae",
+            "parainfluenza_1",
+            "parainfluenza_2",
+            "parainfluenza_3",
+            "parainfluenza_4",
+            "pneumocystis_jirovecii"
+          ]
+        },
+        "severity": null,
+        "type": "mCIDE Coverage Gap"
+      },
+      {
+        "category": "data_quality",
+        "description": "Missing 41 mCIDE values: blood_buffy, bone_cortex, bone_marrow, brain, cardiac, catheter_tip, central_nervous_system, ears, esophagus, eyes, fallopians_uterus_cervix, gallbladder_billary_pancreas, gastrointestinal_tract, genital_area, genito_urinary_tract, joints, kidneys_renal_pelvis_ureters_bladder, large_intestine, larynx, lips, liver, lymph_nodes, meninges_csf, muscle, oropharynx_tongue_oralcavity, other_unspecified, peritoneum, pleural_cavity_fluid, prostate, respiratory_tract_lower, sinuses, skin_disseminated_multiple_sites, skin_rash_pustules_abscesses, skin_unspecified, small_intestine, spinal_cord, spleen, stomach, testes, vagina, woundsite",
+        "details": {
+          "column": "fluid_category",
+          "coverage_percent": 6.82,
+          "missing_values": [
+            "blood_buffy",
+            "bone_cortex",
+            "bone_marrow",
+            "brain",
+            "cardiac",
+            "catheter_tip",
+            "central_nervous_system",
+            "ears",
+            "esophagus",
+            "eyes",
+            "fallopians_uterus_cervix",
+            "gallbladder_billary_pancreas",
+            "gastrointestinal_tract",
+            "genital_area",
+            "genito_urinary_tract",
+            "joints",
+            "kidneys_renal_pelvis_ureters_bladder",
+            "large_intestine",
+            "larynx",
+            "lips",
+            "liver",
+            "lymph_nodes",
+            "meninges_csf",
+            "muscle",
+            "oropharynx_tongue_oralcavity",
+            "other_unspecified",
+            "peritoneum",
+            "pleural_cavity_fluid",
+            "prostate",
+            "respiratory_tract_lower",
+            "sinuses",
+            "skin_disseminated_multiple_sites",
+            "skin_rash_pustules_abscesses",
+            "skin_unspecified",
+            "small_intestine",
+            "spinal_cord",
+            "spleen",
+            "stomach",
+            "testes",
+            "vagina",
+            "woundsite"
+          ]
+        },
+        "severity": null,
+        "type": "mCIDE Coverage Gap"
+      }
+    ],
+    "is_valid": false,
+    "n_columns": 18,
+    "n_errors": 3,
+    "n_rows": 381,
+    "status": "loaded"
+  },
+  "microbiology_susceptibility": {
+    "columns": [
+      "antimicrobial_category",
+      "antimicrobial_name",
+      "organism_id",
+      "sensitivity_name",
+      "susceptibility_category",
+      "susceptibility_name"
+    ],
+    "errors": [
+      {
+        "category": "data_quality",
+        "description": "Missing 1 mCIDE values: na",
+        "details": {
+          "column": "susceptibility_category",
+          "coverage_percent": 75.0,
+          "missing_values": [
+            "na"
+          ]
+        },
+        "severity": null,
+        "type": "mCIDE Coverage Gap"
+      },
+      {
+        "category": "data_quality",
+        "description": "Missing 154 mCIDE values: actinomycin_d, acyclovir, amikacin, amoxicillin, amoxicillin_clavulanate, amphotericin_b, anidulafungin, azithromycin, aztreonam, baloxavir_marboxil, bedaquiline, beta_lactams, capreomycin, caspofungin, cefaclor, cefadroxil, cefamandole, cefazolin, cefdinir, cefditoren, cefiderocol, cefixime, cefmetazole, cefonicid, cefoperazone, cefotaxime, cefotetan, cefoxitin, cefpodoxime, cefprozil, ceftaroline, ceftazidime, ceftazidime_avibactam, ceftazidime_clavulanate, ceftibuten, ceftizoxime, ceftolozane_tazobactam, cefuroxime, cephalexin, cephalothin, cephapirin, cephradine, chloramphenicol, ciclopirox, cidofovir, cinoxacin, clarithromycin, clindamycin, clofazimine, clotrimazole, cloxacillin, cycloserine, dalbavancin, delamanid, dicloxacillin, dolutegravir, doripenem, doxycycline, efavirenz, efinaconazole, emtricitabine, entecavir, ertapenem, erythromycin, ethambutol, ethionamide, famciclovir, fidaxomicin, fluconazole, flucytosine, foscarnet, fosfomycin, fosmidomycin, fusidic_acid, ganciclovir, gatifloxacin, glecaprevir, griseofulvin, imipenem, isavuconazole, isavuconazonium, isoniazid, itraconazole, kanamycin, ketoconazole, lamivudine, ledipasvir, levofloxacin, lincomycin, lopinavir, macrolides, meropenem_vaborbactam, methicillin, metronidazole, mezlocillin, micafungin, miconazole, minocycline, moxalactam, moxifloxacin, mupirocin, nafcillin, nitrofurantoin, norfloxacin, nystatin, ofloxacin, oritavancin, oseltamivir, para_aminosalicylic_acid, penicillin, peramivir, pibrentasvir, piperacillin, pivampicillin, polymyxin_b, posaconazole, pretomanid, pristinamycin, pyrazinamide, quinupristin_dalfopristin, raltegravir, ribavirin, rifabutin, rifampin, rifapentine, ritonavir, roxithromycin, sofosbuvir, spectinomycin, streptomycin, sulfadiazine, sulfamethoxazole, sulfisoxazole, tavaborole, tedizolid, telavancin, telithromycin, temocillin, tenofovir, terbinafine, tetracycline, ticarcillin, ticarcillin_clavulanate, tigecycline, tobramycin, trimethoprim, trimethoprim_sulfamethoxazole, tylosin, valacyclovir, valganciclovir, velpatasvir, voriconazole, zanamivir, zidovudine",
+        "details": {
+          "column": "antimicrobial_category",
+          "coverage_percent": 7.78,
+          "missing_values": [
+            "actinomycin_d",
+            "acyclovir",
+            "amikacin",
+            "amoxicillin",
+            "amoxicillin_clavulanate",
+            "amphotericin_b",
+            "anidulafungin",
+            "azithromycin",
+            "aztreonam",
+            "baloxavir_marboxil",
+            "bedaquiline",
+            "beta_lactams",
+            "capreomycin",
+            "caspofungin",
+            "cefaclor",
+            "cefadroxil",
+            "cefamandole",
+            "cefazolin",
+            "cefdinir",
+            "cefditoren",
+            "cefiderocol",
+            "cefixime",
+            "cefmetazole",
+            "cefonicid",
+            "cefoperazone",
+            "cefotaxime",
+            "cefotetan",
+            "cefoxitin",
+            "cefpodoxime",
+            "cefprozil",
+            "ceftaroline",
+            "ceftazidime",
+            "ceftazidime_avibactam",
+            "ceftazidime_clavulanate",
+            "ceftibuten",
+            "ceftizoxime",
+            "ceftolozane_tazobactam",
+            "cefuroxime",
+            "cephalexin",
+            "cephalothin",
+            "cephapirin",
+            "cephradine",
+            "chloramphenicol",
+            "ciclopirox",
+            "cidofovir",
+            "cinoxacin",
+            "clarithromycin",
+            "clindamycin",
+            "clofazimine",
+            "clotrimazole",
+            "cloxacillin",
+            "cycloserine",
+            "dalbavancin",
+            "delamanid",
+            "dicloxacillin",
+            "dolutegravir",
+            "doripenem",
+            "doxycycline",
+            "efavirenz",
+            "efinaconazole",
+            "emtricitabine",
+            "entecavir",
+            "ertapenem",
+            "erythromycin",
+            "ethambutol",
+            "ethionamide",
+            "famciclovir",
+            "fidaxomicin",
+            "fluconazole",
+            "flucytosine",
+            "foscarnet",
+            "fosfomycin",
+            "fosmidomycin",
+            "fusidic_acid",
+            "ganciclovir",
+            "gatifloxacin",
+            "glecaprevir",
+            "griseofulvin",
+            "imipenem",
+            "isavuconazole",
+            "isavuconazonium",
+            "isoniazid",
+            "itraconazole",
+            "kanamycin",
+            "ketoconazole",
+            "lamivudine",
+            "ledipasvir",
+            "levofloxacin",
+            "lincomycin",
+            "lopinavir",
+            "macrolides",
+            "meropenem_vaborbactam",
+            "methicillin",
+            "metronidazole",
+            "mezlocillin",
+            "micafungin",
+            "miconazole",
+            "minocycline",
+            "moxalactam",
+            "moxifloxacin",
+            "mupirocin",
+            "nafcillin",
+            "nitrofurantoin",
+            "norfloxacin",
+            "nystatin",
+            "ofloxacin",
+            "oritavancin",
+            "oseltamivir",
+            "para_aminosalicylic_acid",
+            "penicillin",
+            "peramivir",
+            "pibrentasvir",
+            "piperacillin",
+            "pivampicillin",
+            "polymyxin_b",
+            "posaconazole",
+            "pretomanid",
+            "pristinamycin",
+            "pyrazinamide",
+            "quinupristin_dalfopristin",
+            "raltegravir",
+            "ribavirin",
+            "rifabutin",
+            "rifampin",
+            "rifapentine",
+            "ritonavir",
+            "roxithromycin",
+            "sofosbuvir",
+            "spectinomycin",
+            "streptomycin",
+            "sulfadiazine",
+            "sulfamethoxazole",
+            "sulfisoxazole",
+            "tavaborole",
+            "tedizolid",
+            "telavancin",
+            "telithromycin",
+            "temocillin",
+            "tenofovir",
+            "terbinafine",
+            "tetracycline",
+            "ticarcillin",
+            "ticarcillin_clavulanate",
+            "tigecycline",
+            "tobramycin",
+            "trimethoprim",
+            "trimethoprim_sulfamethoxazole",
+            "tylosin",
+            "valacyclovir",
+            "valganciclovir",
+            "velpatasvir",
+            "voriconazole",
+            "zanamivir",
+            "zidovudine"
+          ]
+        },
+        "severity": null,
+        "type": "mCIDE Coverage Gap"
+      }
+    ],
+    "is_valid": false,
+    "n_columns": 6,
+    "n_errors": 2,
+    "n_rows": 357,
+    "status": "loaded"
+  },
+  "patient": {
+    "columns": [
+      "birth_date",
+      "death_dttm",
+      "ethnicity_category",
+      "ethnicity_name",
+      "language_category",
+      "language_name",
+      "patient_id",
+      "race_category",
+      "race_name",
+      "sex_category",
+      "sex_name"
+    ],
+    "errors": [
+      {
+        "category": "schema",
+        "description": "Column 'birth_date' has type Datetime(time_unit='us', time_zone=None), cannot cast to DATE",
+        "details": {
+          "actual": "Datetime(time_unit='us', time_zone=None)",
+          "castable": false,
+          "column": "birth_date",
+          "expected": "DATE"
+        },
+        "severity": null,
+        "type": "Data Type Mismatch"
+      },
+      {
+        "category": "data_quality",
+        "description": "1 invalid categorical values",
+        "details": {
+          "column": "ethnicity_category",
+          "permissible_values": [
+            "hispanic",
+            "non_hispanic",
+            "unknown"
+          ],
+          "top_invalid": [
+            {
+              "count": 134,
+              "value": "Non-Hispanic"
+            }
+          ]
+        },
+        "severity": "warning",
+        "type": "Invalid Categorical Values"
+      },
+      {
+        "category": "data_quality",
+        "description": "2 invalid categorical values",
+        "details": {
+          "column": "race_category",
+          "permissible_values": [
+            "black_or_african_american",
+            "white",
+            "american_indian_or_alaska_native",
+            "asian",
+            "native_hawaiian_or_other_pacific_islander",
+            "middle_eastern_or_north_african",
+            "unknown",
+            "other"
+          ],
+          "top_invalid": [
+            {
+              "count": 28,
+              "value": "Black or African American"
+            },
+            {
+              "count": 2,
+              "value": "American Indian or Alaska Native"
+            }
+          ]
+        },
+        "severity": "warning",
+        "type": "Invalid Categorical Values"
+      },
+      {
+        "category": "data_quality",
+        "description": "3 invalid categorical values",
+        "details": {
+          "column": "language_category",
+          "permissible_values": [
+            "english",
+            "spanish",
+            "french",
+            "haitian_creole",
+            "italian",
+            "portuguese",
+            "german",
+            "yiddish_pennsylvania_dutch_or_other_west_germanic_languages",
+            "greek",
+            "russian",
+            "polish",
+            "serbo_croatian",
+            "ukrainian_or_other_slavic_languages",
+            "armenian",
+            "persian",
+            "gujarati",
+            "hindi",
+            "urdu",
+            "punjabi",
+            "bengali",
+            "nepali_marathi_or_other_indic_languages",
+            "other_european_indo_european_languages",
+            "other_asian_indo_european_languages",
+            "telugu",
+            "tamil",
+            "malayalam_kannada_or_other_dravidian_languages",
+            "chinese",
+            "japanese",
+            "korean",
+            "vietnamese",
+            "khmer",
+            "thai_lao_or_other_tai_kadai_languages",
+            "other_languages_of_asia",
+            "tagalog",
+            "ilocano_samoan_hawaiian_or_other_austronesian_languages",
+            "arabic",
+            "hebrew",
+            "amharic_somali_or_other_afro_asiatic_languages",
+            "yoruba_twi_igbo_or_other_languages_of_western_africa",
+            "swahili_or_other_languages_of_central_eastern_and_southern_africa",
+            "navajo",
+            "other_native_languages_of_north_america",
+            "other_and_unspecified_languages",
+            "sign_language",
+            "unknown"
+          ],
+          "top_invalid": [
+            {
+              "count": 2,
+              "value": "Sign Language"
+            },
+            {
+              "count": 1,
+              "value": "Unknown or NA"
+            },
+            {
+              "count": 1,
+              "value": "Haitian Creole"
+            }
+          ]
+        },
+        "severity": "warning",
+        "type": "Invalid Categorical Values"
+      },
+      {
+        "category": "data_quality",
+        "description": "Missing 1 mCIDE values: non_hispanic",
+        "details": {
+          "column": "ethnicity_category",
+          "coverage_percent": 66.67,
+          "missing_values": [
+            "non_hispanic"
+          ]
+        },
+        "severity": null,
+        "type": "mCIDE Coverage Gap"
+      },
+      {
+        "category": "data_quality",
+        "description": "Missing 1 mCIDE values: unknown",
+        "details": {
+          "column": "sex_category",
+          "coverage_percent": 66.67,
+          "missing_values": [
+            "unknown"
+          ]
+        },
+        "severity": null,
+        "type": "mCIDE Coverage Gap"
+      },
+      {
+        "category": "data_quality",
+        "description": "Missing 37 mCIDE values: french, haitian_creole, portuguese, yiddish_pennsylvania_dutch_or_other_west_germanic_languages, greek, russian, polish, serbo_croatian, ukrainian_or_other_slavic_languages, armenian, persian, gujarati, hindi, urdu, punjabi, bengali, nepali_marathi_or_other_indic_languages, other_european_indo_european_languages, other_asian_indo_european_languages, telugu, tamil, malayalam_kannada_or_other_dravidian_languages, japanese, khmer, thai_lao_or_other_tai_kadai_languages, other_languages_of_asia, tagalog, ilocano_samoan_hawaiian_or_other_austronesian_languages, hebrew, amharic_somali_or_other_afro_asiatic_languages, yoruba_twi_igbo_or_other_languages_of_western_africa, swahili_or_other_languages_of_central_eastern_and_southern_africa, navajo, other_native_languages_of_north_america, other_and_unspecified_languages, sign_language, unknown",
+        "details": {
+          "column": "language_category",
+          "coverage_percent": 17.78,
+          "missing_values": [
+            "french",
+            "haitian_creole",
+            "portuguese",
+            "yiddish_pennsylvania_dutch_or_other_west_germanic_languages",
+            "greek",
+            "russian",
+            "polish",
+            "serbo_croatian",
+            "ukrainian_or_other_slavic_languages",
+            "armenian",
+            "persian",
+            "gujarati",
+            "hindi",
+            "urdu",
+            "punjabi",
+            "bengali",
+            "nepali_marathi_or_other_indic_languages",
+            "other_european_indo_european_languages",
+            "other_asian_indo_european_languages",
+            "telugu",
+            "tamil",
+            "malayalam_kannada_or_other_dravidian_languages",
+            "japanese",
+            "khmer",
+            "thai_lao_or_other_tai_kadai_languages",
+            "other_languages_of_asia",
+            "tagalog",
+            "ilocano_samoan_hawaiian_or_other_austronesian_languages",
+            "hebrew",
+            "amharic_somali_or_other_afro_asiatic_languages",
+            "yoruba_twi_igbo_or_other_languages_of_western_africa",
+            "swahili_or_other_languages_of_central_eastern_and_southern_africa",
+            "navajo",
+            "other_native_languages_of_north_america",
+            "other_and_unspecified_languages",
+            "sign_language",
+            "unknown"
+          ]
+        },
+        "severity": null,
+        "type": "mCIDE Coverage Gap"
+      },
+      {
+        "category": "data_quality",
+        "description": "Missing 4 mCIDE values: black_or_african_american, american_indian_or_alaska_native, native_hawaiian_or_other_pacific_islander, middle_eastern_or_north_african",
+        "details": {
+          "column": "race_category",
+          "coverage_percent": 50.0,
+          "missing_values": [
+            "black_or_african_american",
+            "american_indian_or_alaska_native",
+            "native_hawaiian_or_other_pacific_islander",
+            "middle_eastern_or_north_african"
+          ]
+        },
+        "severity": null,
+        "type": "mCIDE Coverage Gap"
+      }
+    ],
+    "is_valid": false,
+    "n_columns": 11,
+    "n_errors": 8,
+    "n_rows": 157,
+    "status": "loaded"
+  },
+  "patient_assessments": {
+    "columns": [
+      "assessment_category",
+      "assessment_group",
+      "assessment_name",
+      "categorical_value",
+      "hospitalization_id",
+      "numerical_value",
+      "recorded_dttm",
+      "text_value"
+    ],
+    "errors": [
+      {
+        "category": "data_quality",
+        "description": "Category 'braden_total': group mismatch (expected 'nursing_risk')",
+        "details": {
+          "category_column": "assessment_category",
+          "column": "braden_total",
+          "group_column": "assessment_group",
+          "mismatched_pairs": [
+            {
+              "actual_group": "skin",
+              "category": "braden_total",
+              "count": 2461,
+              "expected_group": "nursing_risk"
+            }
+          ]
+        },
+        "severity": "warning",
+        "type": "Category Group Mapping"
+      },
+      {
+        "category": "data_quality",
+        "description": "Category 'gcs_eye': group mismatch (expected 'neurological')",
+        "details": {
+          "category_column": "assessment_category",
+          "column": "gcs_eye",
+          "group_column": "assessment_group",
+          "mismatched_pairs": [
+            {
+              "actual_group": "gcs",
+              "category": "gcs_eye",
+              "count": 17819,
+              "expected_group": "neurological"
+            }
+          ]
+        },
+        "severity": "warning",
+        "type": "Category Group Mapping"
+      },
+      {
+        "category": "data_quality",
+        "description": "Category 'gcs_motor': group mismatch (expected 'neurological')",
+        "details": {
+          "category_column": "assessment_category",
+          "column": "gcs_motor",
+          "group_column": "assessment_group",
+          "mismatched_pairs": [
+            {
+              "actual_group": "gcs",
+              "category": "gcs_motor",
+              "count": 17819,
+              "expected_group": "neurological"
+            }
+          ]
+        },
+        "severity": "warning",
+        "type": "Category Group Mapping"
+      },
+      {
+        "category": "data_quality",
+        "description": "Category 'gcs_total': group mismatch (expected 'neurological')",
+        "details": {
+          "category_column": "assessment_category",
+          "column": "gcs_total",
+          "group_column": "assessment_group",
+          "mismatched_pairs": [
+            {
+              "actual_group": "gcs",
+              "category": "gcs_total",
+              "count": 17819,
+              "expected_group": "neurological"
+            }
+          ]
+        },
+        "severity": "warning",
+        "type": "Category Group Mapping"
+      },
+      {
+        "category": "data_quality",
+        "description": "Category 'gcs_verbal': group mismatch (expected 'neurological')",
+        "details": {
+          "category_column": "assessment_category",
+          "column": "gcs_verbal",
+          "group_column": "assessment_group",
+          "mismatched_pairs": [
+            {
+              "actual_group": "gcs",
+              "category": "gcs_verbal",
+              "count": 17819,
+              "expected_group": "neurological"
+            }
+          ]
+        },
+        "severity": "warning",
+        "type": "Category Group Mapping"
+      },
+      {
+        "category": "data_quality",
+        "description": "Category 'rass': group mismatch (expected 'sedation_or_agitation')",
+        "details": {
+          "category_column": "assessment_category",
+          "column": "rass",
+          "group_column": "assessment_group",
+          "mismatched_pairs": [
+            {
+              "actual_group": "sedation",
+              "category": "rass",
+              "count": 11805,
+              "expected_group": "sedation_or_agitation"
+            }
+          ]
+        },
+        "severity": "warning",
+        "type": "Category Group Mapping"
+      },
+      {
+        "category": "data_quality",
+        "description": "Column 'categorical_value' has 96.46% missing values",
+        "details": {
+          "column": "categorical_value",
+          "percent_missing": 96.46,
+          "severity": "warning"
+        },
+        "severity": "warning",
+        "type": "High Missingness"
+      },
+      {
+        "category": "data_quality",
+        "description": "Column 'text_value' has 100.0% missing values",
+        "details": {
+          "column": "text_value",
+          "percent_missing": 100.0,
+          "severity": "warning"
+        },
+        "severity": "warning",
+        "type": "High Missingness"
+      },
+      {
+        "category": "data_quality",
+        "description": "1 invalid categorical values",
+        "details": {
+          "column": "assessment_category",
+          "permissible_values": [
+            "am_pac",
+            "ams",
+            "apgar",
+            "avpu",
+            "bps",
+            "braden_activity",
+            "braden_friction",
+            "braden_mobility",
+            "braden_moisture",
+            "braden_nutrition",
+            "braden_sensory",
+            "braden_total",
+            "cam_inattention",
+            "cam_loc",
+            "cam_mental",
+            "cam_thinking",
+            "cam_total",
+            "ciwa",
+            "cows",
+            "cpot_body",
+            "cpot_facial",
+            "cpot_intubated",
+            "cpot_muscle",
+            "cpot_total",
+            "cpot_vocalization",
+            "dvprs",
+            "gcs_eye",
+            "gcs_motor",
+            "gcs_total",
+            "gcs_verbal",
+            "icans",
+            "icsdc",
+            "icsdc_agitation",
+            "icsdc_disorientation",
+            "icsdc_hallucination",
+            "icsdc_inattention",
+            "icsdc_loc",
+            "icsdc_sleep",
+            "icsdc_speech",
+            "icsdc_symptoms",
+            "icsdc_total",
+            "ims",
+            "minds",
+            "morse_fall_scale",
+            "npi_l",
+            "npi_r",
+            "nrs",
+            "nvps",
+            "painad",
+            "pupil_reactive_l",
+            "pupil_reactive_r",
+            "pupil_size_l",
+            "pupil_size_r",
+            "rass",
+            "sas",
+            "sat_delivery_pass_fail",
+            "sat_delivery_performed",
+            "sat_escalating_sedation",
+            "sat_intracranial_pressure",
+            "sat_myocardial_ischemia",
+            "sat_neuromuscular_blockers",
+            "sat_screen_pass_fail",
+            "sat_screen_performed",
+            "sat_sedative_infusion",
+            "sbt_agitation",
+            "sbt_delivery_pass_fail",
+            "sbt_delivery_performed",
+            "sbt_fail_reason",
+            "sbt_inadequate_oxygenation",
+            "sbt_intracranial_pressure",
+            "sbt_no_spontaneous_effort",
+            "sbt_screen_pass_fail",
+            "sbt_screen_performed",
+            "sbt_vasopressor_use",
+            "tof",
+            "vas",
+            "wat"
+          ],
+          "top_invalid": [
+            {
+              "count": 2461,
+              "value": "Morse Fall Scale"
+            }
+          ]
+        },
+        "severity": "warning",
+        "type": "Invalid Categorical Values"
+      },
+      {
+        "category": "data_quality",
+        "description": "Missing 69 mCIDE values: am_pac, ams, apgar, avpu, bps, braden_activity, braden_friction, braden_mobility, braden_moisture, braden_nutrition, braden_sensory, cam_inattention, cam_loc, cam_mental, cam_thinking, ciwa, cows, cpot_body, cpot_facial, cpot_intubated, cpot_muscle, cpot_total, cpot_vocalization, dvprs, icans, icsdc, icsdc_agitation, icsdc_disorientation, icsdc_hallucination, icsdc_inattention, icsdc_loc, icsdc_sleep, icsdc_speech, icsdc_symptoms, icsdc_total, ims, minds, morse_fall_scale, npi_l, npi_r, nvps, painad, pupil_reactive_l, pupil_reactive_r, pupil_size_l, pupil_size_r, sas, sat_delivery_pass_fail, sat_delivery_performed, sat_escalating_sedation, sat_intracranial_pressure, sat_myocardial_ischemia, sat_neuromuscular_blockers, sat_screen_pass_fail, sat_screen_performed, sat_sedative_infusion, sbt_agitation, sbt_delivery_pass_fail, sbt_delivery_performed, sbt_fail_reason, sbt_inadequate_oxygenation, sbt_intracranial_pressure, sbt_no_spontaneous_effort, sbt_screen_pass_fail, sbt_screen_performed, sbt_vasopressor_use, tof, vas, wat",
+        "details": {
+          "column": "assessment_category",
+          "coverage_percent": 10.39,
+          "missing_values": [
+            "am_pac",
+            "ams",
+            "apgar",
+            "avpu",
+            "bps",
+            "braden_activity",
+            "braden_friction",
+            "braden_mobility",
+            "braden_moisture",
+            "braden_nutrition",
+            "braden_sensory",
+            "cam_inattention",
+            "cam_loc",
+            "cam_mental",
+            "cam_thinking",
+            "ciwa",
+            "cows",
+            "cpot_body",
+            "cpot_facial",
+            "cpot_intubated",
+            "cpot_muscle",
+            "cpot_total",
+            "cpot_vocalization",
+            "dvprs",
+            "icans",
+            "icsdc",
+            "icsdc_agitation",
+            "icsdc_disorientation",
+            "icsdc_hallucination",
+            "icsdc_inattention",
+            "icsdc_loc",
+            "icsdc_sleep",
+            "icsdc_speech",
+            "icsdc_symptoms",
+            "icsdc_total",
+            "ims",
+            "minds",
+            "morse_fall_scale",
+            "npi_l",
+            "npi_r",
+            "nvps",
+            "painad",
+            "pupil_reactive_l",
+            "pupil_reactive_r",
+            "pupil_size_l",
+            "pupil_size_r",
+            "sas",
+            "sat_delivery_pass_fail",
+            "sat_delivery_performed",
+            "sat_escalating_sedation",
+            "sat_intracranial_pressure",
+            "sat_myocardial_ischemia",
+            "sat_neuromuscular_blockers",
+            "sat_screen_pass_fail",
+            "sat_screen_performed",
+            "sat_sedative_infusion",
+            "sbt_agitation",
+            "sbt_delivery_pass_fail",
+            "sbt_delivery_performed",
+            "sbt_fail_reason",
+            "sbt_inadequate_oxygenation",
+            "sbt_intracranial_pressure",
+            "sbt_no_spontaneous_effort",
+            "sbt_screen_pass_fail",
+            "sbt_screen_performed",
+            "sbt_vasopressor_use",
+            "tof",
+            "vas",
+            "wat"
+          ]
+        },
+        "severity": null,
+        "type": "mCIDE Coverage Gap"
+      }
+    ],
+    "is_valid": false,
+    "n_columns": 8,
+    "n_errors": 10,
+    "n_rows": 109813,
+    "status": "loaded"
+  },
+  "patient_procedures": {
+    "columns": [
+      "billing_provider_id",
+      "hospitalization_id",
+      "performing_provider_id",
+      "procedure_billed_dttm",
+      "procedure_code",
+      "procedure_code_format"
+    ],
+    "errors": [],
+    "is_valid": true,
+    "n_columns": 6,
+    "n_errors": 0,
+    "n_rows": 299,
+    "status": "loaded"
+  },
+  "position": {
+    "columns": [
+      "hospitalization_id",
+      "position_category",
+      "position_name",
+      "recorded_dttm"
+    ],
+    "errors": [
+      {
+        "category": "data_quality",
+        "description": "position_category: prone absent in 4/8 years (2018-2025)",
+        "details": {
+          "absent_years": [
+            2020,
+            2021,
+            2023,
+            2025
+          ],
+          "column": "position_category",
+          "total_years": 8,
+          "value": "prone",
+          "yearly_counts": {
+            "2018": 1,
+            "2019": 2,
+            "2020": 0,
+            "2021": 0,
+            "2022": 3,
+            "2023": 0,
+            "2024": 1,
+            "2025": 0
+          }
+        },
+        "severity": "warning",
+        "type": "Category Distribution Shift"
+      }
+    ],
+    "is_valid": false,
+    "n_columns": 4,
+    "n_errors": 1,
+    "n_rows": 34563,
+    "status": "loaded"
+  },
+  "respiratory_support": {
+    "columns": [
+      "device_category",
+      "device_id",
+      "device_name",
+      "fio2_set",
+      "flow_rate_set",
+      "hospitalization_id",
+      "inspiratory_time_set",
+      "lpm_set",
+      "mean_airway_pressure_obs",
+      "minute_vent_obs",
+      "mode_category",
+      "mode_name",
+      "peak_inspiratory_pressure_obs",
+      "peak_inspiratory_pressure_set",
+      "peep_obs",
+      "peep_set",
+      "plateau_pressure_obs",
+      "pressure_control_set",
+      "pressure_support_set",
+      "recorded_dttm",
+      "resp_rate_obs",
+      "resp_rate_set",
+      "tidal_volume_obs",
+      "tidal_volume_set",
+      "tracheostomy",
+      "vent_brand_name"
+    ],
+    "errors": [
+      {
+        "category": "data_quality",
+        "description": "device_category: face mask absent in 1/8 years (2018-2025)",
+        "details": {
+          "absent_years": [
+            2025
+          ],
+          "column": "device_category",
+          "total_years": 8,
+          "value": "face mask",
+          "yearly_counts": {
+            "2018": 5,
+            "2019": 3,
+            "2020": 7,
+            "2021": 6,
+            "2022": 6,
+            "2023": 4,
+            "2024": 7,
+            "2025": 0
+          }
+        },
+        "severity": "warning",
+        "type": "Category Distribution Shift"
+      },
+      {
+        "category": "data_quality",
+        "description": "device_category: high flow nc absent in 1/8 years (2018-2025)",
+        "details": {
+          "absent_years": [
+            2025
+          ],
+          "column": "device_category",
+          "total_years": 8,
+          "value": "high flow nc",
+          "yearly_counts": {
+            "2018": 6,
+            "2019": 8,
+            "2020": 13,
+            "2021": 10,
+            "2022": 4,
+            "2023": 7,
+            "2024": 10,
+            "2025": 0
+          }
+        },
+        "severity": "warning",
+        "type": "Category Distribution Shift"
+      },
+      {
+        "category": "data_quality",
+        "description": "device_category: imv absent in 1/8 years (2018-2025)",
+        "details": {
+          "absent_years": [
+            2025
+          ],
+          "column": "device_category",
+          "total_years": 8,
+          "value": "imv",
+          "yearly_counts": {
+            "2018": 7,
+            "2019": 11,
+            "2020": 6,
+            "2021": 8,
+            "2022": 8,
+            "2023": 8,
+            "2024": 9,
+            "2025": 0
+          }
+        },
+        "severity": "warning",
+        "type": "Category Distribution Shift"
+      },
+      {
+        "category": "data_quality",
+        "description": "device_category: nasal cannula absent in 1/8 years (2018-2025)",
+        "details": {
+          "absent_years": [
+            2025
+          ],
+          "column": "device_category",
+          "total_years": 8,
+          "value": "nasal cannula",
+          "yearly_counts": {
+            "2018": 10,
+            "2019": 12,
+            "2020": 14,
+            "2021": 8,
+            "2022": 12,
+            "2023": 7,
+            "2024": 11,
+            "2025": 0
+          }
+        },
+        "severity": "warning",
+        "type": "Category Distribution Shift"
+      },
+      {
+        "category": "data_quality",
+        "description": "device_category: nippv absent in 1/8 years (2018-2025)",
+        "details": {
+          "absent_years": [
+            2025
+          ],
+          "column": "device_category",
+          "total_years": 8,
+          "value": "nippv",
+          "yearly_counts": {
+            "2018": 6,
+            "2019": 8,
+            "2020": 9,
+            "2021": 8,
+            "2022": 5,
+            "2023": 4,
+            "2024": 5,
+            "2025": 0
+          }
+        },
+        "severity": "warning",
+        "type": "Category Distribution Shift"
+      },
+      {
+        "category": "data_quality",
+        "description": "device_category: trach collar absent in 7/8 years (2018-2025)",
+        "details": {
+          "absent_years": [
+            2018,
+            2019,
+            2020,
+            2022,
+            2023,
+            2024,
+            2025
+          ],
+          "column": "device_category",
+          "total_years": 8,
+          "value": "trach collar",
+          "yearly_counts": {
+            "2018": 0,
+            "2019": 0,
+            "2020": 0,
+            "2021": 1,
+            "2022": 0,
+            "2023": 0,
+            "2024": 0,
+            "2025": 0
+          }
+        },
+        "severity": "warning",
+        "type": "Category Distribution Shift"
+      },
+      {
+        "category": "data_quality",
+        "description": "Conditional requirement violated: High Flow NC requires fio2_set and lpm_set",
+        "details": {
+          "condition": "device_category IN ['High Flow NC']",
+          "percent_missing": 100.0,
+          "required_column": "lpm_set",
+          "rows_meeting_condition": 3558,
+          "rows_with_missing": 3558
+        },
+        "severity": "warning",
+        "type": "Conditional Requirement Violation"
+      },
+      {
+        "category": "data_quality",
+        "description": "Conditional requirement violated: NIPPV PS/CPAP requires fio2_set, peep_set, peak_inspiratory_pressure_set, resp_rate_set, and inspiratory_time_set",
+        "details": {
+          "condition": "device_category IN ['NIPPV'] AND mode_category IN ['Pressure Support/CPAP']",
+          "percent_missing": 100.0,
+          "required_column": "inspiratory_time_set",
+          "rows_meeting_condition": 1700,
+          "rows_with_missing": 1700
+        },
+        "severity": "warning",
+        "type": "Conditional Requirement Violation"
+      },
+      {
+        "category": "data_quality",
+        "description": "Conditional requirement violated: NIPPV PS/CPAP requires fio2_set, peep_set, peak_inspiratory_pressure_set, resp_rate_set, and inspiratory_time_set",
+        "details": {
+          "condition": "device_category IN ['NIPPV'] AND mode_category IN ['Pressure Support/CPAP']",
+          "percent_missing": 100.0,
+          "required_column": "peak_inspiratory_pressure_set",
+          "rows_meeting_condition": 1700,
+          "rows_with_missing": 1700
+        },
+        "severity": "warning",
+        "type": "Conditional Requirement Violation"
+      },
+      {
+        "category": "data_quality",
+        "description": "Conditional requirement violated: NIPPV PS/CPAP requires fio2_set, peep_set, peak_inspiratory_pressure_set, resp_rate_set, and inspiratory_time_set",
+        "details": {
+          "condition": "device_category IN ['NIPPV'] AND mode_category IN ['Pressure Support/CPAP']",
+          "percent_missing": 100.0,
+          "required_column": "resp_rate_set",
+          "rows_meeting_condition": 1700,
+          "rows_with_missing": 1700
+        },
+        "severity": "warning",
+        "type": "Conditional Requirement Violation"
+      },
+      {
+        "category": "data_quality",
+        "description": "Conditional requirement violated: Trach Collar requires lpm_set and fio2_set",
+        "details": {
+          "condition": "device_category IN ['Trach Collar']",
+          "percent_missing": 100.0,
+          "required_column": "lpm_set",
+          "rows_meeting_condition": 394,
+          "rows_with_missing": 394
+        },
+        "severity": "warning",
+        "type": "Conditional Requirement Violation"
+      },
+      {
+        "category": "data_quality",
+        "description": "Column 'flow_rate_set' has 90.5% missing values",
+        "details": {
+          "column": "flow_rate_set",
+          "percent_missing": 90.5,
+          "severity": "error"
+        },
+        "severity": null,
+        "type": "High Missingness"
+      },
+      {
+        "category": "data_quality",
+        "description": "Column 'mean_airway_pressure_obs' has 65.99% missing values",
+        "details": {
+          "column": "mean_airway_pressure_obs",
+          "percent_missing": 65.99,
+          "severity": "error"
+        },
+        "severity": null,
+        "type": "High Missingness"
+      },
+      {
+        "category": "data_quality",
+        "description": "Column 'minute_vent_obs' has 65.99% missing values",
+        "details": {
+          "column": "minute_vent_obs",
+          "percent_missing": 65.99,
+          "severity": "error"
+        },
+        "severity": null,
+        "type": "High Missingness"
+      },
+      {
+        "category": "data_quality",
+        "description": "Column 'peak_inspiratory_pressure_obs' has 65.99% missing values",
+        "details": {
+          "column": "peak_inspiratory_pressure_obs",
+          "percent_missing": 65.99,
+          "severity": "error"
+        },
+        "severity": null,
+        "type": "High Missingness"
+      },
+      {
+        "category": "data_quality",
+        "description": "Column 'peep_obs' has 65.99% missing values",
+        "details": {
+          "column": "peep_obs",
+          "percent_missing": 65.99,
+          "severity": "error"
+        },
+        "severity": null,
+        "type": "High Missingness"
+      },
+      {
+        "category": "data_quality",
+        "description": "Column 'plateau_pressure_obs' has 76.05% missing values",
+        "details": {
+          "column": "plateau_pressure_obs",
+          "percent_missing": 76.05,
+          "severity": "error"
+        },
+        "severity": null,
+        "type": "High Missingness"
+      },
+      {
+        "category": "data_quality",
+        "description": "4 invalid categorical values",
+        "details": {
+          "column": "mode_category",
+          "permissible_values": [
+            "acvc",
+            "pressure_control",
+            "prvc",
+            "simv",
+            "ps_or_cpap",
+            "volume_support",
+            "aprv",
+            "t_piece",
+            "blow_by",
+            "other"
+          ],
+          "top_invalid": [
+            {
+              "count": 8057,
+              "value": "Assist Control-Volume Control"
+            },
+            {
+              "count": 2548,
+              "value": "Pressure Support/CPAP"
+            },
+            {
+              "count": 2308,
+              "value": "Pressure-Regulated Volume Control"
+            },
+            {
+              "count": 297,
+              "value": "Pressure Control"
+            }
+          ]
+        },
+        "severity": "warning",
+        "type": "Invalid Categorical Values"
+      },
+      {
+        "category": "data_quality",
+        "description": "5 invalid categorical values",
+        "details": {
+          "column": "device_category",
+          "permissible_values": [
+            "imv",
+            "nippv",
+            "cpap",
+            "hfnc",
+            "face_mask",
+            "trach_collar",
+            "t_piece",
+            "nasal_cannula",
+            "room_air",
+            "other"
+          ],
+          "top_invalid": [
+            {
+              "count": 10800,
+              "value": "Room Air"
+            },
+            {
+              "count": 3626,
+              "value": "Nasal Cannula"
+            },
+            {
+              "count": 3558,
+              "value": "High Flow NC"
+            },
+            {
+              "count": 2957,
+              "value": "Face Mask"
+            },
+            {
+              "count": 394,
+              "value": "Trach Collar"
+            }
+          ]
+        },
+        "severity": "warning",
+        "type": "Invalid Categorical Values"
+      },
+      {
+        "category": "data_quality",
+        "description": "Missing 8 mCIDE values: acvc, pressure_control, prvc, ps_or_cpap, volume_support, aprv, t_piece, blow_by",
+        "details": {
+          "column": "mode_category",
+          "coverage_percent": 20.0,
+          "missing_values": [
+            "acvc",
+            "pressure_control",
+            "prvc",
+            "ps_or_cpap",
+            "volume_support",
+            "aprv",
+            "t_piece",
+            "blow_by"
+          ]
+        },
+        "severity": null,
+        "type": "mCIDE Coverage Gap"
+      },
+      {
+        "category": "data_quality",
+        "description": "Missing 8 mCIDE values: cpap, hfnc, face_mask, trach_collar, t_piece, nasal_cannula, room_air, other",
+        "details": {
+          "column": "device_category",
+          "coverage_percent": 20.0,
+          "missing_values": [
+            "cpap",
+            "hfnc",
+            "face_mask",
+            "trach_collar",
+            "t_piece",
+            "nasal_cannula",
+            "room_air",
+            "other"
+          ]
+        },
+        "severity": null,
+        "type": "mCIDE Coverage Gap"
+      }
+    ],
+    "is_valid": false,
+    "n_columns": 26,
+    "n_errors": 21,
+    "n_rows": 37468,
+    "status": "loaded"
+  },
+  "vitals": {
+    "columns": [
+      "hospitalization_id",
+      "meas_site_name",
+      "recorded_dttm",
+      "vital_category",
+      "vital_name",
+      "vital_value"
+    ],
+    "errors": [
+      {
+        "category": "data_quality",
+        "description": "vital_category: height_cm absent in 1/8 years (2018-2025)",
+        "details": {
+          "absent_years": [
+            2025
+          ],
+          "column": "vital_category",
+          "total_years": 8,
+          "value": "height_cm",
+          "yearly_counts": {
+            "2018": 29,
+            "2019": 38,
+            "2020": 30,
+            "2021": 21,
+            "2022": 29,
+            "2023": 25,
+            "2024": 28,
+            "2025": 0
+          }
+        },
+        "severity": "warning",
+        "type": "Category Distribution Shift"
+      },
+      {
+        "category": "data_quality",
+        "description": "vital_category: weight_kg absent in 1/8 years (2018-2025)",
+        "details": {
+          "absent_years": [
+            2025
+          ],
+          "column": "vital_category",
+          "total_years": 8,
+          "value": "weight_kg",
+          "yearly_counts": {
+            "2018": 29,
+            "2019": 38,
+            "2020": 30,
+            "2021": 21,
+            "2022": 29,
+            "2023": 25,
+            "2024": 28,
+            "2025": 0
+          }
+        },
+        "severity": "warning",
+        "type": "Category Distribution Shift"
+      },
+      {
+        "category": "data_quality",
+        "description": "Missing 2 mCIDE values: intracranial_pressure, pulse_pressure_variation",
+        "details": {
+          "column": "vital_category",
+          "coverage_percent": 81.82,
+          "missing_values": [
+            "intracranial_pressure",
+            "pulse_pressure_variation"
+          ]
+        },
+        "severity": null,
+        "type": "mCIDE Coverage Gap"
+      }
+    ],
+    "is_valid": false,
+    "n_columns": 6,
+    "n_errors": 3,
+    "n_rows": 314376,
+    "status": "loaded"
+  }
+}

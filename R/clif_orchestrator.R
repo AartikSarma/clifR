@@ -1,694 +1,692 @@
-#' CLIF Orchestrator Class
+#' ClifOrchestrator: unified interface across CLIF tables
 #'
-#' @description
-#' Main orchestration class for managing multiple CLIF tables and coordinating
-#' operations across them. Provides a unified interface for loading, validating,
-#' and analyzing CLIF data.
+#' Centralized entry point for loading, validating and analysing multiple CLIF tables
+#' with one shared configuration. Ported from `clifpy/clif_orchestrator.py`; method
+#' names and argument defaults follow the Python original.
+#'
+#' @details
+#' Configuration is resolved with the same priority clifpy uses: explicit arguments
+#' first, then a config file, then auto-detection of `config.json` in the working
+#' directory. Arguments always override config file values.
+#'
+#' Each CLIF table is exposed as a field of the same name, so `orchestrator$vitals`
+#' is the [Vitals] object once loaded and `NULL` before that.
 #'
 #' @export
 #' @importFrom R6 R6Class
 ClifOrchestrator <- R6::R6Class(
   classname = "ClifOrchestrator",
-
   public = list(
-    #' @field config_path Character path to configuration file
-    config_path = NULL,
-
-    #' @field config List containing configuration
-    config = NULL,
-
-    #' @field data_directory Character path to data directory
+    #' @field data_directory Directory containing the CLIF data files.
     data_directory = NULL,
-
-    #' @field filetype Character file type ("csv" or "parquet")
+    #' @field filetype Either `"csv"` or `"parquet"`.
     filetype = NULL,
-
-    #' @field timezone Character timezone for datetime columns
+    #' @field timezone Olson timezone used for datetime columns.
     timezone = NULL,
-
-    #' @field output_directory Character path for output files
+    #' @field clif_version CLIF schema version used when loading tables.
+    clif_version = NULL,
+    #' @field output_directory Directory for logs and outputs.
     output_directory = NULL,
+    #' @field stitch_encounter Whether to stitch encounters after loading.
+    stitch_encounter = NULL,
+    #' @field stitch_time_interval Hours between discharge and next admission that
+    #'   still count as one encounter.
+    stitch_time_interval = NULL,
+    #' @field encounter_mapping Mapping of hospitalization_id to encounter_block.
+    encounter_mapping = NULL,
+    #' @field wide_df Wide dataset produced by `create_wide_dataset()`.
+    wide_df = NULL,
+    #' @field wide_df_sofa Wide dataset built specifically for SOFA computation.
+    wide_df_sofa = NULL,
+    #' @field sofa_df SOFA scores produced by `compute_sofa_scores()`.
+    sofa_df = NULL,
 
-    #' @field stitch_encounter Logical whether to stitch encounters
-    stitch_encounter = FALSE,
-
-    #' @field stitch_time_interval Numeric hours between encounters for stitching
-    stitch_time_interval = 24,
-
-    #' @field patient Patient table object
+    #' @field patient Patient table object.
     patient = NULL,
-
-    #' @field hospitalization Hospitalization table object
+    #' @field hospitalization Hospitalization table object.
     hospitalization = NULL,
-
-    #' @field adt ADT table object
+    #' @field adt ADT table object.
     adt = NULL,
-
-    #' @field vitals Vitals table object
-    vitals = NULL,
-
-    #' @field labs Labs table object
+    #' @field labs Labs table object.
     labs = NULL,
-
-    #' @field hospital_diagnosis HospitalDiagnosis table object
-    hospital_diagnosis = NULL,
-
-    #' @field medication_admin_continuous MedicationAdminContinuous table object
+    #' @field vitals Vitals table object.
+    vitals = NULL,
+    #' @field medication_admin_continuous Continuous medication administration table object.
     medication_admin_continuous = NULL,
-
-    #' @field medication_admin_intermittent MedicationAdminIntermittent table object
+    #' @field medication_admin_intermittent Intermittent medication administration table object.
     medication_admin_intermittent = NULL,
-
-    #' @field respiratory_support RespiratorySupport table object
+    #' @field patient_assessments Patient assessments table object.
+    patient_assessments = NULL,
+    #' @field respiratory_support Respiratory support table object.
     respiratory_support = NULL,
-
-    #' @field code_status CodeStatus table object
+    #' @field position Position table object.
+    position = NULL,
+    #' @field hospital_diagnosis Hospital diagnosis table object.
+    hospital_diagnosis = NULL,
+    #' @field microbiology_culture Microbiology culture table object.
+    microbiology_culture = NULL,
+    #' @field crrt_therapy CRRT therapy table object.
+    crrt_therapy = NULL,
+    #' @field patient_procedures Patient procedures table object.
+    patient_procedures = NULL,
+    #' @field microbiology_susceptibility Microbiology susceptibility table object.
+    microbiology_susceptibility = NULL,
+    #' @field ecmo_mcs ECMO/MCS table object.
+    ecmo_mcs = NULL,
+    #' @field microbiology_nonculture Microbiology non-culture table object.
+    microbiology_nonculture = NULL,
+    #' @field code_status Code status table object.
     code_status = NULL,
 
-    #' @field crrt_therapy CrrtTherapy table object
-    crrt_therapy = NULL,
-
-    #' @field ecmo_mcs EcmoMcs table object
-    ecmo_mcs = NULL,
-
-    #' @field microbiology_culture MicrobiologyCulture table object
-    microbiology_culture = NULL,
-
-    #' @field microbiology_nonculture MicrobiologyNonculture table object
-    microbiology_nonculture = NULL,
-
-    #' @field microbiology_susceptibility MicrobiologySusceptibility table object
-    microbiology_susceptibility = NULL,
-
-    #' @field patient_assessments PatientAssessments table object
-    patient_assessments = NULL,
-
-    #' @field patient_procedures PatientProcedures table object
-    patient_procedures = NULL,
-
-    #' @field position Position table object
-    position = NULL,
-
-    #' @field encounter_mapping tibble mapping original to stitched IDs
-    encounter_mapping = NULL,
-
-    #' @description
-    #' Initialize ClifOrchestrator
-    #'
-    #' @param config_path Character. Path to configuration YAML file (optional).
-    #' @param data_directory Character. Path to directory containing CLIF data files.
-    #' @param filetype Character. File type: "csv" or "parquet" (default: "csv").
-    #' @param timezone Character. Timezone for datetime columns (default: "UTC").
-    #' @param output_directory Character. Path for saving outputs (default: NULL).
-    #' @param stitch_encounter Logical. Whether to stitch related encounters (default: FALSE).
-    #' @param stitch_time_interval Numeric. Hours between encounters to stitch (default: 24).
+    #' @description Create an orchestrator.
+    #' @param config_path Optional path to a JSON or YAML config file.
+    #' @param data_directory Directory containing the CLIF data files.
+    #' @param filetype Either `"csv"` or `"parquet"`.
+    #' @param timezone Olson timezone for datetime columns.
+    #' @param output_directory Directory for logs and outputs. Defaults to
+    #'   `output/` under the working directory.
+    #' @param stitch_encounter Whether to stitch encounters during `initialize_tables()`.
+    #' @param stitch_time_interval Hours between encounters to treat as linked.
+    #'   Defaults to 6, matching clifpy.
+    #' @param clif_version CLIF schema version. Defaults to [DEFAULT_CLIF_VERSION].
     #'
     #' @return A new ClifOrchestrator instance.
     initialize = function(config_path = NULL,
                           data_directory = NULL,
-                          filetype = "csv",
-                          timezone = "UTC",
+                          filetype = NULL,
+                          timezone = NULL,
                           output_directory = NULL,
                           stitch_encounter = FALSE,
-                          stitch_time_interval = 24) {
+                          stitch_time_interval = 6,
+                          clif_version = NULL) {
+      resolved_config <- get_config_or_params(
+        config_path = config_path,
+        data_directory = data_directory,
+        filetype = filetype,
+        timezone = timezone,
+        output_directory = output_directory
+      )
 
-      # Load configuration if provided
-      if (!is.null(config_path)) {
-        self$config_path <- config_path
-        self$config <- load_config(config_path)
+      self$data_directory <- resolved_config$data_directory
+      self$filetype <- resolved_config$filetype
+      self$timezone <- resolved_config$timezone
+      self$clif_version <- clif_version %||% resolved_config$clif_version %||% DEFAULT_CLIF_VERSION
 
-        # Override with config values
-        self$data_directory <- self$config$data_directory %||% data_directory
-        self$filetype <- self$config$filetype %||% filetype
-        self$timezone <- self$config$timezone %||% timezone
-        self$output_directory <- self$config$output_directory %||% output_directory
-        self$stitch_encounter <- self$config$stitch_encounter %||% stitch_encounter
-        self$stitch_time_interval <- self$config$stitch_time_interval %||% stitch_time_interval
-      } else {
-        self$data_directory <- data_directory
-        self$filetype <- filetype
-        self$timezone <- timezone
-        self$output_directory <- output_directory
-        self$stitch_encounter <- stitch_encounter
-        self$stitch_time_interval <- stitch_time_interval
+      self$output_directory <- resolved_config$output_directory %||% file.path(getwd(), "output")
+      if (!dir.exists(self$output_directory)) {
+        dir.create(self$output_directory, recursive = TRUE, showWarnings = FALSE)
       }
 
-      # Validate required parameters
-      if (is.null(self$data_directory)) {
-        cli::cli_abort("data_directory must be specified")
-      }
-
-      cli::cli_h1("Initializing CLIF Orchestrator")
-      cli::cli_text("Data directory: {.file {self$data_directory}}")
-      cli::cli_text("File type: {.val {self$filetype}}")
-      cli::cli_text("Timezone: {.val {self$timezone}}")
+      self$stitch_encounter <- stitch_encounter
+      self$stitch_time_interval <- stitch_time_interval
+      self$encounter_mapping <- NULL
 
       invisible(self)
     },
 
-    #' @description
-    #' Load a specific CLIF table
-    #'
-    #' @param table_name Character. Name of table to load.
-    #'
+    #' @description Load one CLIF table and store it on the orchestrator.
+    #' @param table_name snake_case CLIF table name.
+    #' @param sample_size Optional maximum number of rows to read.
+    #' @param columns Optional character vector of columns to read.
+    #' @param filters Optional named list of equality filters applied at read time.
     #' @return The loaded table object.
-    load_table = function(table_name) {
-      cli::cli_alert_info("Loading {.field {table_name}} table")
-
-      table_obj <- switch(table_name,
-        patient = Patient$new(
-          data_directory = self$data_directory,
-          filetype = self$filetype,
-          timezone = self$timezone,
-          output_directory = self$output_directory
-        ),
-        hospitalization = Hospitalization$new(
-          data_directory = self$data_directory,
-          filetype = self$filetype,
-          timezone = self$timezone,
-          output_directory = self$output_directory
-        ),
-        adt = Adt$new(
-          data_directory = self$data_directory,
-          filetype = self$filetype,
-          timezone = self$timezone,
-          output_directory = self$output_directory
-        ),
-        vitals = Vitals$new(
-          data_directory = self$data_directory,
-          filetype = self$filetype,
-          timezone = self$timezone,
-          output_directory = self$output_directory
-        ),
-        labs = Labs$new(
-          data_directory = self$data_directory,
-          filetype = self$filetype,
-          timezone = self$timezone,
-          output_directory = self$output_directory
-        ),
-        hospital_diagnosis = HospitalDiagnosis$new(
-          data_directory = self$data_directory,
-          filetype = self$filetype,
-          timezone = self$timezone,
-          output_directory = self$output_directory
-        ),
-        medication_admin_continuous = MedicationAdminContinuous$new(
-          data_directory = self$data_directory,
-          filetype = self$filetype,
-          timezone = self$timezone,
-          output_directory = self$output_directory
-        ),
-        medication_admin_intermittent = MedicationAdminIntermittent$new(
-          data_directory = self$data_directory,
-          filetype = self$filetype,
-          timezone = self$timezone,
-          output_directory = self$output_directory
-        ),
-        respiratory_support = RespiratorySupport$new(
-          data_directory = self$data_directory,
-          filetype = self$filetype,
-          timezone = self$timezone,
-          output_directory = self$output_directory
-        ),
-        code_status = CodeStatus$new(
-          data_directory = self$data_directory,
-          filetype = self$filetype,
-          timezone = self$timezone,
-          output_directory = self$output_directory
-        ),
-        crrt_therapy = CrrtTherapy$new(
-          data_directory = self$data_directory,
-          filetype = self$filetype,
-          timezone = self$timezone,
-          output_directory = self$output_directory
-        ),
-        ecmo_mcs = EcmoMcs$new(
-          data_directory = self$data_directory,
-          filetype = self$filetype,
-          timezone = self$timezone,
-          output_directory = self$output_directory
-        ),
-        microbiology_culture = MicrobiologyCulture$new(
-          data_directory = self$data_directory,
-          filetype = self$filetype,
-          timezone = self$timezone,
-          output_directory = self$output_directory
-        ),
-        microbiology_nonculture = MicrobiologyNonculture$new(
-          data_directory = self$data_directory,
-          filetype = self$filetype,
-          timezone = self$timezone,
-          output_directory = self$output_directory
-        ),
-        microbiology_susceptibility = MicrobiologySusceptibility$new(
-          data_directory = self$data_directory,
-          filetype = self$filetype,
-          timezone = self$timezone,
-          output_directory = self$output_directory
-        ),
-        patient_assessments = PatientAssessments$new(
-          data_directory = self$data_directory,
-          filetype = self$filetype,
-          timezone = self$timezone,
-          output_directory = self$output_directory
-        ),
-        patient_procedures = PatientProcedures$new(
-          data_directory = self$data_directory,
-          filetype = self$filetype,
-          timezone = self$timezone,
-          output_directory = self$output_directory
-        ),
-        position = Position$new(
-          data_directory = self$data_directory,
-          filetype = self$filetype,
-          timezone = self$timezone,
-          output_directory = self$output_directory
-        ),
-        {
-          cli::cli_abort("Unknown table: {.val {table_name}}")
-        }
-      )
-
-      # Store in appropriate field
-      self[[table_name]] <- table_obj
-
-      return(table_obj)
-    },
-
-    #' @description
-    #' Initialize and load multiple tables
-    #'
-    #' @param tables Character vector of table names to load. If NULL, loads all available.
-    #' @param validate Logical. Whether to validate after loading (default: TRUE).
-    #'
-    #' @return Invisible self.
-    initialize_tables = function(tables = NULL, validate = TRUE) {
-
-      # Default tables to load
-      if (is.null(tables)) {
-        tables <- c("patient", "hospitalization", "adt", "vitals", "labs")
+    load_table = function(table_name, sample_size = NULL, columns = NULL, filters = NULL) {
+      if (!table_name %in% CLIF_TABLE_NAMES) {
+        cli::cli_abort(c(
+          "Unknown table: {.val {table_name}}",
+          "i" = "Available tables: {.val {CLIF_TABLE_NAMES}}"
+        ))
       }
 
-      cli::cli_h2("Loading Tables")
-
-      # Load each table
-      for (table_name in tables) {
-        file_path <- file.path(
-          self$data_directory,
-          paste0(table_name, ".", self$filetype)
-        )
-
-        if (file.exists(file_path)) {
-          tryCatch({
-            self$load_table(table_name)
-          }, error = function(e) {
-            cli::cli_alert_warning(
-              "Failed to load {.field {table_name}}: {e$message}"
-            )
-          })
-        } else {
-          cli::cli_alert_warning(
-            "Table {.field {table_name}} not found, skipping"
-          )
-        }
-      }
-
-      # Apply encounter stitching if requested
-      if (self$stitch_encounter && !is.null(self$hospitalization)) {
-        cli::cli_h2("Stitching Encounters")
-        self$apply_stitching()
-      }
-
-      # Validate if requested
-      if (validate) {
-        self$validate_all()
-      }
-
-      invisible(self)
-    },
-
-    #' @description
-    #' Validate all loaded tables
-    #'
-    #' @param verbose Logical. Print validation details (default: TRUE).
-    #'
-    #' @return List of validation results for each table.
-    validate_all = function(verbose = TRUE) {
-      cli::cli_h2("Validating All Tables")
-
-      validation_results <- list()
-
-      # All supported table names
-      all_tables <- c("patient", "hospitalization", "adt", "vitals", "labs",
-                     "hospital_diagnosis", "medication_admin_continuous",
-                     "medication_admin_intermittent", "respiratory_support",
-                     "code_status", "crrt_therapy", "ecmo_mcs",
-                     "microbiology_culture", "microbiology_nonculture",
-                     "microbiology_susceptibility", "patient_assessments",
-                     "patient_procedures", "position")
-
-      for (table_name in all_tables) {
-        table_obj <- self[[table_name]]
-
-        if (!is.null(table_obj)) {
-          cli::cli_rule(table_name)
-          validation_results[[table_name]] <- table_obj$validate(verbose = verbose)
-        }
-      }
-
-      return(validation_results)
-    },
-
-    #' @description
-    #' Apply encounter stitching to hospitalization data
-    #'
-    #' @return Invisible self.
-    apply_stitching = function() {
-      if (is.null(self$hospitalization)) {
-        cli::cli_abort("Hospitalization table not loaded")
-      }
-
-      # Get stitching mapping
-      self$encounter_mapping <- stitch_encounters(
-        self$hospitalization,
-        time_interval_hours = self$stitch_time_interval
-      )
-
-      # Update hospitalization data
-      self$hospitalization$df <- apply_encounter_stitching(
-        self$hospitalization,
-        time_interval_hours = self$stitch_time_interval
-      )
-
-      invisible(self)
-    },
-
-    #' @description
-    #' Get summary of all loaded tables
-    #'
-    #' @return List of summary information.
-    summary = function() {
-      cli::cli_h1("CLIF Data Summary")
-
-      summary_info <- list(
+      table_object <- clif_table_from_file(
+        table_name = table_name,
         data_directory = self$data_directory,
+        filetype = self$filetype,
         timezone = self$timezone,
-        tables_loaded = list()
+        output_directory = self$output_directory,
+        sample_size = sample_size,
+        columns = columns,
+        filters = filters,
+        clif_version = self$clif_version
       )
 
-      # All supported table names
-      all_tables <- c("patient", "hospitalization", "adt", "vitals", "labs",
-                     "hospital_diagnosis", "medication_admin_continuous",
-                     "medication_admin_intermittent", "respiratory_support",
-                     "code_status", "crrt_therapy", "ecmo_mcs",
-                     "microbiology_culture", "microbiology_nonculture",
-                     "microbiology_susceptibility", "patient_assessments",
-                     "patient_procedures", "position")
+      self[[table_name]] <- table_object
+      table_object
+    },
 
-      for (table_name in all_tables) {
-        table_obj <- self[[table_name]]
+    #' @description Load several tables at once.
+    #'
+    #' Runs encounter stitching afterwards when `stitch_encounter` is `TRUE`.
+    #' @param tables Character vector of table names. Defaults to `"patient"`.
+    #' @param sample_size Optional maximum number of rows per table.
+    #' @param columns Optional named list mapping table names to column vectors.
+    #' @param filters Optional named list mapping table names to filter lists.
+    #' @return The orchestrator, invisibly.
+    initialize_tables = function(tables = NULL, sample_size = NULL, columns = NULL, filters = NULL) {
+      if (is.null(tables)) {
+        tables <- "patient"
+      }
 
-        if (!is.null(table_obj)) {
-          cli::cli_h2(table_name)
-          summary_info$tables_loaded[[table_name]] <- list(
-            n_rows = nrow(table_obj$df),
-            n_cols = ncol(table_obj$df),
-            is_valid = table_obj$is_valid()
-          )
+      for (table_name in tables) {
+        table_columns <- if (!is.null(columns)) columns[[table_name]] else NULL
+        table_filters <- if (!is.null(filters)) filters[[table_name]] else NULL
 
-          cli::cli_text("Rows: {.val {nrow(table_obj$df)}}")
-          cli::cli_text("Columns: {.val {ncol(table_obj$df)}}")
-
-          if (!is.null(table_obj$validation_results)) {
-            status <- if (table_obj$validation_results$is_valid) {
-              cli::col_green("Valid")
-            } else {
-              cli::col_red("Invalid")
-            }
-            cli::cli_text("Status: {status}")
+        tryCatch(
+          self$load_table(table_name, sample_size, table_columns, table_filters),
+          error = function(condition) {
+            cli::cli_alert_warning("Could not load {.val {table_name}}: {conditionMessage(condition)}")
           }
-          cli::cli_text("")
-        }
-      }
-
-      return(invisible(summary_info))
-    },
-
-    #' @description
-    #' Export all validation reports
-    #'
-    #' @param output_dir Character. Directory for reports (default: uses self$output_directory).
-    #'
-    #' @return Invisible self.
-    export_validation_reports = function(output_dir = NULL) {
-      out_dir <- output_dir %||% self$output_directory
-
-      if (is.null(out_dir)) {
-        cli::cli_abort("No output directory specified")
-      }
-
-      if (!dir.exists(out_dir)) {
-        dir.create(out_dir, recursive = TRUE)
-      }
-
-      cli::cli_h2("Exporting Validation Reports")
-
-      # All supported table names
-      all_tables <- c("patient", "hospitalization", "adt", "vitals", "labs",
-                     "hospital_diagnosis", "medication_admin_continuous",
-                     "medication_admin_intermittent", "respiratory_support",
-                     "code_status", "crrt_therapy", "ecmo_mcs",
-                     "microbiology_culture", "microbiology_nonculture",
-                     "microbiology_susceptibility", "patient_assessments",
-                     "patient_procedures", "position")
-
-      for (table_name in all_tables) {
-        table_obj <- self[[table_name]]
-
-        if (!is.null(table_obj)) {
-          output_file <- file.path(
-            out_dir,
-            paste0(table_name, "_validation_report.md")
-          )
-          table_obj$export_validation_report(output_file)
-        }
-      }
-
-      cli::cli_alert_success("Reports exported to {.file {out_dir}}")
-
-      invisible(self)
-    },
-
-    #' @description
-    #' Print method
-    print = function() {
-      cli::cli_h1("CLIF Orchestrator")
-
-      cli::cli_text("Data directory: {.file {self$data_directory}}")
-      cli::cli_text("Timezone: {.val {self$timezone}}")
-
-      if (self$stitch_encounter) {
-        cli::cli_text(
-          "Encounter stitching: ENABLED ({self$stitch_time_interval} hours)"
         )
       }
 
-      cli::cli_rule("Loaded Tables")
-
-      # All supported table names
-      all_tables <- c("patient", "hospitalization", "adt", "vitals", "labs",
-                     "hospital_diagnosis", "medication_admin_continuous",
-                     "medication_admin_intermittent", "respiratory_support",
-                     "code_status", "crrt_therapy", "ecmo_mcs",
-                     "microbiology_culture", "microbiology_nonculture",
-                     "microbiology_susceptibility", "patient_assessments",
-                     "patient_procedures", "position")
-
-      tables_loaded <- c()
-      for (table_name in all_tables) {
-        if (!is.null(self[[table_name]])) {
-          tables_loaded <- c(tables_loaded, table_name)
-          cli::cli_text(
-            "  {cli::symbol$tick} {.field {table_name}} ({nrow(self[[table_name]]$df)} rows)"
-          )
-        }
-      }
-
-      if (length(tables_loaded) == 0) {
-        cli::cli_text("  {cli::col_silver('No tables loaded yet')}")
-        cli::cli_text("  {cli::col_silver('Use $initialize_tables() to load data')}")
+      if (isTRUE(self$stitch_encounter)) {
+        self$run_stitch_encounters()
       }
 
       invisible(self)
     },
 
-    #' @description
-    #' Create wide dataset from vitals and labs
+    #' @description Link hospitalizations that belong to one continuous encounter.
     #'
-    #' @param time_resolution Character. Time resolution: "hour", "4hour", "day" (default: "hour").
-    #' @param id_col Character. ID column name (default: "hospitalization_id").
-    #'
-    #' @return tibble in wide format.
-    create_wide_dataset = function(time_resolution = "hour",
-                                   id_col = "hospitalization_id") {
-
-      if (is.null(self$vitals) && is.null(self$labs)) {
-        cli::cli_abort("At least one of vitals or labs must be loaded")
+    #' Updates `hospitalization$df` and `adt$df` in place and stores the mapping in
+    #' `encounter_mapping`.
+    #' @return The orchestrator, invisibly.
+    run_stitch_encounters = function() {
+      if (is.null(self$hospitalization) || is.null(self$adt)) {
+        self$load_table("hospitalization")
+        self$load_table("adt")
       }
 
-      wide_data <- create_wide_dataset(
-        vitals_data = if (!is.null(self$vitals)) self$vitals$df else NULL,
-        labs_data = if (!is.null(self$labs)) self$labs$df else NULL,
-        hospitalization_data = if (!is.null(self$hospitalization)) self$hospitalization$df else NULL,
-        time_resolution = time_resolution,
-        id_col = id_col
+      stitched <- stitch_encounters(
+        self$hospitalization$df,
+        self$adt$df,
+        time_interval = self$stitch_time_interval
       )
 
-      return(wide_data)
+      self$hospitalization$df <- stitched$hospitalization
+      self$adt$df <- stitched$adt
+      self$encounter_mapping <- stitched$encounter_mapping
+
+      invisible(self)
     },
 
-    #' @description
-    #' Calculate SOFA scores from wide dataset
-    #'
-    #' @param wide_data tibble. Wide format data (optional, will create if not provided).
-    #' @param time_resolution Character. Time resolution if creating wide data (default: "hour").
-    #' @param ... Additional arguments passed to calculate_sofa_time_series().
-    #'
-    #' @return tibble with SOFA scores.
-    calculate_sofa_scores = function(wide_data = NULL,
-                                     time_resolution = "hour",
-                                     ...) {
-
-      if (is.null(wide_data)) {
-        cli::cli_alert_info("Creating wide dataset for SOFA calculation...")
-        wide_data <- self$create_wide_dataset(time_resolution = time_resolution)
-      }
-
-      sofa_data <- calculate_sofa_time_series(
-        wide_data = wide_data,
-        id_col = "hospitalization_id",
-        time_col = "time_rounded",
-        ...
-      )
-
-      return(sofa_data)
+    #' @description Names of the tables currently loaded.
+    #' @return Character vector of table names, in registry order.
+    get_loaded_tables = function() {
+      Filter(function(table_name) !is.null(self[[table_name]]), CLIF_TABLE_NAMES)
     },
 
-    #' @description
-    #' Calculate Charlson Comorbidity Index for patients
-    #'
-    #' @param diagnosis_data tibble. Diagnosis data with ICD codes (required).
-    #' @param patient_id_col Character. Patient ID column (default: "hospitalization_id").
-    #' @param icd_code_col Character. ICD code column (default: "icd_code").
-    #' @param icd_version_col Character. ICD version column (optional).
-    #' @param age_col Character. Age column (optional).
-    #' @param default_icd_version Character. Default ICD version (default: "10").
-    #'
-    #' @return tibble with CCI scores.
-    calculate_charlson_scores = function(diagnosis_data,
-                                        patient_id_col = "hospitalization_id",
-                                        icd_code_col = "icd_code",
-                                        icd_version_col = NULL,
-                                        age_col = NULL,
-                                        default_icd_version = "10") {
-
-      cci_data <- calculate_charlson_scores(
-        data = diagnosis_data,
-        patient_id_col = patient_id_col,
-        icd_code_col = icd_code_col,
-        icd_version_col = icd_version_col,
-        age_col = age_col,
-        default_icd_version = default_icd_version
+    #' @description The loaded table objects.
+    #' @return A named list of table objects, in registry order.
+    get_tables_obj_list = function() {
+      loaded_table_names <- self$get_loaded_tables()
+      stats::setNames(
+        lapply(loaded_table_names, function(table_name) self[[table_name]]),
+        loaded_table_names
       )
-
-      return(cci_data)
     },
 
-    #' @description
-    #' Convert medication doses to standard units
-    #'
-    #' @param target_units Named list. Target units by medication name.
-    #' @param dose_col Character. Dose column name (default: "dose").
-    #' @param unit_col Character. Unit column name (default: "dose_unit").
-    #' @param medication_col Character. Medication name column (default: "medication_name").
-    #' @param weight_col Character. Weight column name (default: "weight_kg").
-    #'
-    #' @return tibble with converted medication doses.
-    convert_medication_doses = function(target_units,
-                                       dose_col = "dose",
-                                       unit_col = "dose_unit",
-                                       medication_col = "medication_name",
-                                       weight_col = "weight_kg") {
-
-      if (is.null(self$medication_admin_continuous)) {
-        cli::cli_abort("Medication administration table not loaded")
+    #' @description The encounter mapping, computing it if needed.
+    #' @return A tibble mapping hospitalization_id to encounter_block.
+    get_encounter_mapping = function() {
+      if (is.null(self$encounter_mapping)) {
+        self$run_stitch_encounters()
       }
-
-      converted_data <- convert_medication_doses(
-        med_data = self$medication_admin_continuous$df,
-        dose_col = dose_col,
-        unit_col = unit_col,
-        target_units = target_units,
-        weight_col = weight_col,
-        medication_col = medication_col
-      )
-
-      return(converted_data)
+      self$encounter_mapping
     },
 
-    #' @description
-    #' Generate comprehensive analysis report
-    #'
-    #' @param include_sofa Logical. Include SOFA scores (default: FALSE).
-    #' @param include_charlson Logical. Include Charlson scores (default: FALSE).
-    #' @param diagnosis_data tibble. Diagnosis data for Charlson (required if include_charlson = TRUE).
-    #' @param output_file Character. Output file path (optional).
-    #'
-    #' @return List with analysis results.
-    generate_analysis_report = function(include_sofa = FALSE,
-                                        include_charlson = FALSE,
-                                        diagnosis_data = NULL,
-                                        output_file = NULL) {
+    #' @description Validate every loaded table.
+    #' @param verbose Whether to print per-table results.
+    #' @return The orchestrator, invisibly.
+    validate_all = function(verbose = TRUE) {
+      loaded_table_names <- self$get_loaded_tables()
 
-      cli::cli_h1("Generating Analysis Report")
+      if (length(loaded_table_names) == 0) {
+        cli::cli_alert_info("No tables loaded to validate")
+        return(invisible(self))
+      }
 
-      report <- list(
-        summary = self$summary(),
-        validation = self$validate_all(verbose = FALSE)
+      for (table_name in loaded_table_names) {
+        self[[table_name]]$validate(verbose = verbose)
+      }
+
+      invisible(self)
+    },
+
+    #' @description Build a wide, time-aligned dataset across tables.
+    #'
+    #' Delegates to [create_wide_dataset()] and stores the result in `wide_df`.
+    #' @param tables_to_load Character vector of tables to include.
+    #' @param category_filters Named list of filters. For pivot-type tables the values
+    #'   are category values; for wide-type tables they are column names.
+    #' @param sample Whether to sample hospitalizations.
+    #' @param hospitalization_ids Optional character vector of hospitalizations to include.
+    #' @param encounter_blocks Optional character vector of encounter blocks to include.
+    #' @param cohort_df Optional cohort data frame restricting rows by time window.
+    #' @param output_format Either `"dataframe"` or a file format to save.
+    #' @param save_to_data_location Whether to write the result next to the input data.
+    #' @param output_filename Optional output file name.
+    #' @param return_dataframe Whether to return the result as well as storing it.
+    #' @param batch_size Hospitalizations processed per batch.
+    #' @param memory_limit Optional DuckDB memory limit, e.g. `"4GB"`.
+    #' @param threads Optional DuckDB thread count.
+    #' @param show_progress Whether to show a progress bar.
+    #' @return The wide dataset as a tibble.
+    create_wide_dataset = function(tables_to_load = NULL,
+                                   category_filters = NULL,
+                                   sample = FALSE,
+                                   hospitalization_ids = NULL,
+                                   encounter_blocks = NULL,
+                                   cohort_df = NULL,
+                                   output_format = "dataframe",
+                                   save_to_data_location = FALSE,
+                                   output_filename = NULL,
+                                   return_dataframe = TRUE,
+                                   batch_size = 1000,
+                                   memory_limit = NULL,
+                                   threads = NULL,
+                                   show_progress = TRUE) {
+      # Encounter blocks are resolved to hospitalization ids up front, since the
+      # underlying CLIF tables are keyed by hospitalization rather than encounter.
+      if (!is.null(encounter_blocks)) {
+        encounter_mapping <- self$get_encounter_mapping()
+        matching_rows <- encounter_mapping$encounter_block %in% encounter_blocks
+        hospitalization_ids <- unique(encounter_mapping$hospitalization_id[matching_rows])
+      }
+
+      # clifpy builds the coalesced assessment_value column in the orchestrator,
+      # before the wide engine runs, because the wide config expects that column to
+      # already exist. Skipping this leaves patient_assessments unpivotable and
+      # silently drops every assessment row from the result.
+      assessment_requested <-
+        (!is.null(tables_to_load) && "patient_assessments" %in% tables_to_load) ||
+        (!is.null(category_filters) && "patient_assessments" %in% names(category_filters))
+      if (assessment_requested) {
+        private$prepare_patient_assessment_value()
+      }
+
+      wide_dataset <- create_wide_dataset(
+        clif_instance = self,
+        optional_tables = tables_to_load,
+        category_filters = category_filters,
+        sample = sample,
+        hospitalization_ids = hospitalization_ids,
+        cohort_df = cohort_df,
+        output_format = output_format,
+        save_to_data_location = save_to_data_location,
+        output_filename = output_filename,
+        return_dataframe = return_dataframe,
+        batch_size = batch_size,
+        memory_limit = memory_limit,
+        threads = threads,
+        show_progress = show_progress
       )
 
-      # Add SOFA scores if requested
-      if (include_sofa && (!is.null(self$vitals) || !is.null(self$labs))) {
-        cli::cli_h2("Calculating SOFA Scores")
-        tryCatch({
-          report$sofa <- self$calculate_sofa_scores()
-          report$sofa_summary <- attr(report$sofa, "summary")
-        }, error = function(e) {
-          cli::cli_alert_warning("SOFA calculation failed: {e$message}")
-          report$sofa <- NULL
-        })
+      if (assessment_requested && !is.null(wide_dataset)) {
+        wide_dataset <- private$optimize_assessment_column_types(wide_dataset, category_filters)
       }
 
-      # Add Charlson scores if requested
-      if (include_charlson && !is.null(diagnosis_data)) {
-        cli::cli_h2("Calculating Charlson Comorbidity Index")
-        tryCatch({
-          report$charlson <- self$calculate_charlson_scores(diagnosis_data)
-        }, error = function(e) {
-          cli::cli_alert_warning("Charlson calculation failed: {e$message}")
-          report$charlson <- NULL
-        })
+      self$wide_df <- wide_dataset
+
+      if (return_dataframe) wide_dataset else invisible(wide_dataset)
+    },
+
+    #' @description Aggregate a wide dataset into fixed-width time windows.
+    #' @param aggregation_config Named list mapping aggregation method to column names.
+    #'   Methods: `mean`, `max`, `min`, `median`, `first`, `last`, `boolean`, `one_hot_encode`.
+    #' @param wide_df Wide dataset to aggregate. Defaults to `self$wide_df`.
+    #' @param id_name Grouping column, e.g. `"hospitalization_id"`.
+    #' @param hourly_window Window width in hours.
+    #' @param fill_gaps Whether to emit rows for windows with no observations.
+    #' @param memory_limit Optional DuckDB memory limit.
+    #' @param temp_directory Optional DuckDB spill directory.
+    #' @param batch_size Optional batch size.
+    #' @return An aggregated tibble.
+    convert_wide_to_hourly = function(aggregation_config,
+                                      wide_df = NULL,
+                                      id_name = "hospitalization_id",
+                                      hourly_window = 1,
+                                      fill_gaps = FALSE,
+                                      memory_limit = "4GB",
+                                      temp_directory = NULL,
+                                      batch_size = NULL) {
+      wide_dataset <- wide_df %||% self$wide_df
+      if (is.null(wide_dataset)) {
+        cli::cli_abort(c(
+          "No wide dataset available.",
+          "i" = "Call {.fn create_wide_dataset} first or pass {.arg wide_df}."
+        ))
       }
 
-      # Save report if output file specified
-      if (!is.null(output_file)) {
-        cli::cli_alert_info("Saving report to {.file {output_file}}")
-        saveRDS(report, output_file)
+      convert_wide_to_hourly(
+        wide_df = wide_dataset,
+        aggregation_config = aggregation_config,
+        id_name = id_name,
+        hourly_window = hourly_window,
+        fill_gaps = fill_gaps,
+        memory_limit = memory_limit,
+        temp_directory = temp_directory,
+        batch_size = batch_size,
+        timezone = self$timezone
+      )
+    },
+
+    #' @description Convert continuous medication doses to preferred units.
+    #'
+    #' Loads the medication and weight data it needs, then stores the converted data
+    #' on the medication table as `df_converted` with `conversion_counts` alongside.
+    #' @param preferred_units Named list mapping medication category to target unit.
+    #' @param vitals_df Optional vitals data frame supplying `weight_kg`.
+    #' @param hospitalization_ids Optional character vector to restrict processing.
+    #' @param show_intermediate Whether to keep intermediate calculation columns.
+    #' @param override Whether to continue past unacceptable target units.
+    #' @param save_to_table Whether to store results on the table object.
+    #' @return A named list with `converted` and `counts` when `save_to_table` is
+    #'   `FALSE`; otherwise the orchestrator, invisibly.
+    convert_dose_units_for_continuous_meds = function(preferred_units,
+                                                      vitals_df = NULL,
+                                                      hospitalization_ids = NULL,
+                                                      show_intermediate = FALSE,
+                                                      override = FALSE,
+                                                      save_to_table = TRUE) {
+      private$convert_dose_units_for_table(
+        table_name = "medication_admin_continuous",
+        preferred_units = preferred_units,
+        vitals_df = vitals_df,
+        hospitalization_ids = hospitalization_ids,
+        show_intermediate = show_intermediate,
+        override = override,
+        save_to_table = save_to_table
+      )
+    },
+
+    #' @description Convert intermittent medication doses to preferred units.
+    #' @param preferred_units Named list mapping medication category to target unit.
+    #' @param vitals_df Optional vitals data frame supplying `weight_kg`.
+    #' @param hospitalization_ids Optional character vector to restrict processing.
+    #' @param show_intermediate Whether to keep intermediate calculation columns.
+    #' @param override Whether to continue past unacceptable target units.
+    #' @param save_to_table Whether to store results on the table object.
+    #' @return A named list with `converted` and `counts` when `save_to_table` is
+    #'   `FALSE`; otherwise the orchestrator, invisibly.
+    convert_dose_units_for_intermittent_meds = function(preferred_units,
+                                                        vitals_df = NULL,
+                                                        hospitalization_ids = NULL,
+                                                        show_intermediate = FALSE,
+                                                        override = FALSE,
+                                                        save_to_table = TRUE) {
+      private$convert_dose_units_for_table(
+        table_name = "medication_admin_intermittent",
+        preferred_units = preferred_units,
+        vitals_df = vitals_df,
+        hospitalization_ids = hospitalization_ids,
+        show_intermediate = show_intermediate,
+        override = override,
+        save_to_table = save_to_table
+      )
+    },
+
+    #' @description Compute SOFA scores.
+    #'
+    #' Builds the wide dataset SOFA needs when one is not supplied, then delegates to
+    #' [compute_sofa()]. Results are stored in `sofa_df`.
+    #' @param wide_df Optional pre-built wide dataset.
+    #' @param cohort_df Optional cohort restricting observations by time window.
+    #' @param extremal_type `"worst"` (default) or `"latest"`.
+    #' @param id_name Grouping column: `"encounter_block"` or `"hospitalization_id"`.
+    #' @param fill_na_scores_with_zero Whether missing component scores default to 0.
+    #' @param remove_outliers Whether to nullify out-of-range values first.
+    #' @param create_new_wide_df Whether to build a fresh wide dataset for SOFA.
+    #' @return A tibble of SOFA component scores and totals per ID.
+    compute_sofa_scores = function(wide_df = NULL,
+                                   cohort_df = NULL,
+                                   extremal_type = "worst",
+                                   id_name = "encounter_block",
+                                   fill_na_scores_with_zero = TRUE,
+                                   remove_outliers = TRUE,
+                                   create_new_wide_df = TRUE) {
+      if (!is.null(cohort_df) && !id_name %in% names(cohort_df)) {
+        cli::cli_abort("{.arg id_name} {.val {id_name}} not found in {.arg cohort_df} columns")
       }
 
-      cli::cli_alert_success("Analysis report complete")
+      if (!is.null(wide_df)) {
+        sofa_input <- wide_df
+      } else if (create_new_wide_df) {
+        sofa_input <- self$create_wide_dataset(
+          tables_to_load = names(REQUIRED_SOFA_CATEGORIES_BY_TABLE),
+          category_filters = REQUIRED_SOFA_CATEGORIES_BY_TABLE,
+          cohort_df = cohort_df,
+          return_dataframe = TRUE
+        )
+        self$wide_df_sofa <- sofa_input
+      } else if (!is.null(self$wide_df)) {
+        sofa_input <- self$wide_df
+      } else {
+        sofa_input <- self$create_wide_dataset(
+          tables_to_load = names(REQUIRED_SOFA_CATEGORIES_BY_TABLE),
+          category_filters = REQUIRED_SOFA_CATEGORIES_BY_TABLE,
+          cohort_df = cohort_df,
+          return_dataframe = TRUE
+        )
+      }
 
-      return(report)
+      if (!id_name %in% names(sofa_input)) {
+        if (is.null(self$encounter_mapping)) {
+          self$run_stitch_encounters()
+        }
+        sofa_input <- dplyr::left_join(sofa_input, self$encounter_mapping, by = "hospitalization_id")
+        self$wide_df <- sofa_input
+      }
+
+      sofa_scores <- compute_sofa(
+        wide_df = sofa_input,
+        cohort_df = cohort_df,
+        extremal_type = extremal_type,
+        id_name = id_name,
+        fill_na_scores_with_zero = fill_na_scores_with_zero,
+        remove_outliers = remove_outliers
+      )
+
+      self$sofa_df <- sofa_scores
+      sofa_scores
+    },
+
+    #' @description Charlson Comorbidity Index for the loaded diagnosis table.
+    #' @param hierarchy Whether to apply the comorbidity hierarchy rules.
+    #' @return A tibble of per-hospitalization condition flags and `cci_score`.
+    compute_cci_scores = function(hierarchy = TRUE) {
+      if (is.null(self$hospital_diagnosis)) {
+        self$load_table("hospital_diagnosis")
+      }
+      calculate_cci(self$hospital_diagnosis, hierarchy = hierarchy)
+    },
+
+    #' @description Elixhauser comorbidity index for the loaded diagnosis table.
+    #' @param hierarchy Whether to apply the comorbidity hierarchy rules.
+    #' @return A tibble of per-hospitalization condition flags and `elix_score`.
+    compute_elix_scores = function(hierarchy = TRUE) {
+      if (is.null(self$hospital_diagnosis)) {
+        self$load_table("hospital_diagnosis")
+      }
+      calculate_elix(self$hospital_diagnosis, hierarchy = hierarchy)
+    },
+
+    #' @description System resource information.
+    #' @param print_summary Whether to print a human-readable summary.
+    #' @return A named list with logical and physical CPU counts.
+    get_sys_resource_info = function(print_summary = TRUE) {
+      resource_info <- list(
+        cpu_count = parallel::detectCores(logical = TRUE),
+        cpu_count_physical = parallel::detectCores(logical = FALSE)
+      )
+
+      if (print_summary) {
+        cli::cli_h3("System resources")
+        cli::cli_li("Logical CPUs: {.val {resource_info$cpu_count}}")
+        cli::cli_li("Physical CPUs: {.val {resource_info$cpu_count_physical}}")
+      }
+
+      resource_info
+    },
+
+    #' @description Print an overview of the orchestrator state.
+    #' @param ... Unused; present for print compatibility.
+    #' @return The orchestrator, invisibly.
+    print = function(...) {
+      cli::cli_h2("ClifOrchestrator (CLIF {self$clif_version})")
+      cli::cli_li("Data directory: {.file {self$data_directory}}")
+      cli::cli_li("Filetype: {.val {self$filetype}}")
+      cli::cli_li("Timezone: {.val {self$timezone}}")
+
+      loaded_table_names <- self$get_loaded_tables()
+      if (length(loaded_table_names) == 0) {
+        cli::cli_alert_info("No tables loaded")
+      } else {
+        cli::cli_h3("Loaded tables")
+        for (table_name in loaded_table_names) {
+          table_object <- self[[table_name]]
+          cli::cli_li("{table_name}: {.val {nrow(table_object$df)}} rows")
+        }
+      }
+      invisible(self)
+    }
+  ),
+  private = list(
+    # Coalesce patient_assessments numerical_value and categorical_value into a
+    # single string assessment_value column, the form the wide config pivots on.
+    # numerical_value wins where both are present, matching clifpy's Polars coalesce.
+    # The wide engine cannot pivot patient_assessments without this column, so it must
+    # run before create_wide_dataset() delegates.
+    prepare_patient_assessment_value = function() {
+      if (is.null(self$patient_assessments)) {
+        self$load_table("patient_assessments")
+      }
+
+      assessments_table <- self$patient_assessments
+      if (is.null(assessments_table) || is.null(assessments_table$df)) {
+        return(invisible(NULL))
+      }
+
+      assessment_frame <- assessments_table$df
+      has_source_columns <- all(c("numerical_value", "categorical_value") %in% names(assessment_frame))
+      already_prepared <- "assessment_value" %in% names(assessment_frame)
+      if (!has_source_columns || already_prepared) {
+        return(invisible(NULL))
+      }
+
+      coalesced_value <- ifelse(
+        is.na(assessment_frame$numerical_value),
+        as.character(assessment_frame$categorical_value),
+        as.character(assessment_frame$numerical_value)
+      )
+      assessment_frame$assessment_value <- coalesced_value
+      assessments_table$df <- assessment_frame
+
+      invisible(NULL)
+    },
+
+    # After the wide dataset is built, an assessment column that is overwhelmingly
+    # numeric is converted from string to numeric; a column with meaningful text
+    # values is left as-is. clifpy uses a 95% parse-success threshold, so a handful
+    # of stray text values in an otherwise-numeric column does not block conversion.
+    optimize_assessment_column_types = function(wide_dataset, category_filters) {
+      if (!is.null(category_filters) && !is.null(category_filters[["patient_assessments"]])) {
+        candidate_columns <- category_filters[["patient_assessments"]]
+      } else if (!is.null(self$patient_assessments) && !is.null(self$patient_assessments$schema)) {
+        candidate_columns <- schema_permissible_values(
+          self$patient_assessments$schema, "assessment_category"
+        )
+      } else {
+        candidate_columns <- character(0)
+      }
+      candidate_columns <- intersect(candidate_columns, names(wide_dataset))
+
+      for (column_name in candidate_columns) {
+        column_values <- wide_dataset[[column_name]]
+        if (is.numeric(column_values)) {
+          next
+        }
+        non_missing_count <- sum(!is.na(column_values))
+        if (non_missing_count == 0) {
+          next
+        }
+        parsed_values <- suppressWarnings(as.numeric(as.character(column_values)))
+        parsed_count <- sum(!is.na(parsed_values))
+        if (parsed_count / non_missing_count >= 0.95) {
+          wide_dataset[[column_name]] <- parsed_values
+        }
+      }
+
+      wide_dataset
+    },
+
+    # Both medication conversion entry points differ only in which table they read,
+    # so the loading and delegation logic lives here once.
+    convert_dose_units_for_table = function(table_name,
+                                            preferred_units,
+                                            vitals_df,
+                                            hospitalization_ids,
+                                            show_intermediate,
+                                            override,
+                                            save_to_table) {
+      if (is.null(self[[table_name]])) {
+        if (!is.null(hospitalization_ids)) {
+          self$load_table(table_name, filters = list(hospitalization_id = hospitalization_ids))
+        } else {
+          self$load_table(table_name)
+        }
+      }
+
+      medication_table <- self[[table_name]]
+
+      if (is.null(hospitalization_ids)) {
+        hospitalization_ids <- unique(medication_table$df$hospitalization_id)
+      }
+
+      if (is.null(vitals_df)) {
+        if (is.null(self$vitals) || is.null(self$vitals$df)) {
+          self$load_table(
+            "vitals",
+            filters = list(
+              hospitalization_id = hospitalization_ids,
+              vital_category = "weight_kg"
+            )
+          )
+        }
+        vitals_df <- self$vitals$df
+      }
+
+      conversion_result <- convert_dose_units_by_med_category(
+        med_df = medication_table$df,
+        vitals_df = vitals_df,
+        preferred_units = preferred_units,
+        show_intermediate = show_intermediate,
+        override = override
+      )
+
+      if (save_to_table) {
+        medication_table$df_converted <- conversion_result$converted
+        medication_table$conversion_counts <- conversion_result$counts
+        invisible(self)
+      } else {
+        conversion_result
+      }
     }
   )
 )
+
+#' Create an orchestrator from a config file
+#'
+#' Convenience wrapper matching clifpy's `ClifOrchestrator.from_config` classmethod.
+#'
+#' @param config_path Path to a JSON or YAML config file.
+#' @return A [ClifOrchestrator] instance.
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' orchestrator <- clif_orchestrator_from_config("config.json")
+#' }
+clif_orchestrator_from_config <- function(config_path = "./config.json") {
+  ClifOrchestrator$new(config_path = config_path)
+}

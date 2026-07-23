@@ -1,0 +1,899 @@
+{
+  "adt": {
+    "columns": [
+      "hospitalization_id",
+      "hospital_id",
+      "hospital_type",
+      "in_dttm",
+      "out_dttm",
+      "location_name",
+      "location_category",
+      "location_type"
+    ],
+    "is_valid": false,
+    "missing_data": {
+      "location_type": 381
+    },
+    "num_columns": 8,
+    "num_rows": 552,
+    "table_name": "adt",
+    "validation_errors": null,
+    "validation_run": false
+  },
+  "code_status": {
+    "columns": [
+      "patient_id",
+      "start_dttm",
+      "code_status_category",
+      "code_status_name"
+    ],
+    "is_valid": false,
+    "num_columns": 4,
+    "num_rows": 204,
+    "table_name": "code_status",
+    "validation_errors": null,
+    "validation_run": false
+  },
+  "crrt_therapy": {
+    "columns": [
+      "hospitalization_id",
+      "recorded_dttm",
+      "device_id",
+      "crrt_mode_category",
+      "crrt_mode_name",
+      "dialysis_machine_name",
+      "blood_flow_rate",
+      "pre_filter_replacement_fluid_rate",
+      "post_filter_replacement_fluid_rate",
+      "dialysate_flow_rate",
+      "ultrafiltration_out"
+    ],
+    "is_valid": false,
+    "missing_data": {
+      "dialysate_flow_rate": 204,
+      "post_filter_replacement_fluid_rate": 287,
+      "pre_filter_replacement_fluid_rate": 287
+    },
+    "num_columns": 11,
+    "num_rows": 874,
+    "numeric_columns": [
+      "blood_flow_rate",
+      "pre_filter_replacement_fluid_rate",
+      "post_filter_replacement_fluid_rate",
+      "dialysate_flow_rate",
+      "ultrafiltration_out"
+    ],
+    "numeric_stats": {
+      "blood_flow_rate": {
+        "25%": 175.0,
+        "50%": 202.0,
+        "75%": 226.0,
+        "count": 874.0,
+        "max": 250.0,
+        "mean": 200.83867276887872,
+        "min": 150.0,
+        "std": 29.10580794220285
+      },
+      "dialysate_flow_rate": {
+        "25%": 1246.25,
+        "50%": 1463.0,
+        "75%": 1743.0,
+        "count": 670.0,
+        "max": 1996.0,
+        "mean": 1484.0194029850745,
+        "min": 1001.0,
+        "std": 290.63830774845167
+      },
+      "post_filter_replacement_fluid_rate": {
+        "25%": 753.5,
+        "50%": 1000.0,
+        "75%": 1254.0,
+        "count": 587.0,
+        "max": 1498.0,
+        "mean": 1001.190800681431,
+        "min": 505.0,
+        "std": 290.0563574470191
+      },
+      "pre_filter_replacement_fluid_rate": {
+        "25%": 769.5,
+        "50%": 1017.0,
+        "75%": 1259.5,
+        "count": 587.0,
+        "max": 1499.0,
+        "mean": 1009.1260647359455,
+        "min": 503.0,
+        "std": 285.4151896745242
+      },
+      "ultrafiltration_out": {
+        "25%": 87.0,
+        "50%": 128.0,
+        "75%": 161.0,
+        "count": 874.0,
+        "max": 200.0,
+        "mean": 124.91990846681922,
+        "min": 50.0,
+        "std": 43.15905203696321
+      }
+    },
+    "table_name": "crrt_therapy",
+    "validation_errors": null,
+    "validation_run": false
+  },
+  "ecmo_mcs": {
+    "columns": [
+      "hospitalization_id",
+      "recorded_dttm",
+      "device_name",
+      "device_category",
+      "mcs_group",
+      "sweep_set",
+      "flow",
+      "fdO2_set",
+      "ecmo_configuration_category",
+      "control_parameter_name",
+      "control_parameter_category",
+      "control_parameter_value"
+    ],
+    "is_valid": false,
+    "num_columns": 12,
+    "num_rows": 271,
+    "numeric_columns": [
+      "sweep_set",
+      "flow",
+      "fdO2_set",
+      "control_parameter_value"
+    ],
+    "numeric_stats": {
+      "control_parameter_value": {
+        "25%": 2868.5,
+        "50%": 3231.0,
+        "75%": 3644.5,
+        "count": 271.0,
+        "max": 3990.0,
+        "mean": 3243.9741697416976,
+        "min": 2502.0,
+        "std": 444.8102084626081
+      },
+      "fdO2_set": {
+        "25%": 0.605,
+        "50%": 0.73,
+        "75%": 0.84,
+        "count": 271.0,
+        "max": 0.99,
+        "mean": 0.7293357933579336,
+        "min": 0.5,
+        "std": 0.13940455971612273
+      },
+      "flow": {
+        "25%": 3.8,
+        "50%": 4.6,
+        "75%": 5.25,
+        "count": 271.0,
+        "max": 6.0,
+        "mean": 4.580073800738008,
+        "min": 3.0,
+        "std": 0.8523440413962247
+      },
+      "sweep_set": {
+        "25%": 3.8499999999999996,
+        "50%": 5.4,
+        "75%": 6.6,
+        "count": 271.0,
+        "max": 8.0,
+        "mean": 5.246863468634687,
+        "min": 2.0,
+        "std": 1.64462630445039
+      }
+    },
+    "table_name": "ecmo_mcs",
+    "validation_errors": null,
+    "validation_run": false
+  },
+  "hospital_diagnosis": {
+    "columns": [
+      "hospitalization_id",
+      "diagnosis_code",
+      "diagnosis_code_format",
+      "diagnosis_primary",
+      "poa_present"
+    ],
+    "is_valid": false,
+    "num_columns": 5,
+    "num_rows": 740,
+    "numeric_columns": [
+      "diagnosis_primary",
+      "poa_present"
+    ],
+    "numeric_stats": {
+      "diagnosis_primary": {
+        "25%": 0.0,
+        "50%": 0.0,
+        "75%": 1.0,
+        "count": 740.0,
+        "max": 1.0,
+        "mean": 0.2662162162162162,
+        "min": 0.0,
+        "std": 0.44227760464927096
+      },
+      "poa_present": {
+        "25%": 0.0,
+        "50%": 1.0,
+        "75%": 1.0,
+        "count": 740.0,
+        "max": 1.0,
+        "mean": 0.7121621621621622,
+        "min": 0.0,
+        "std": 0.453061366200382
+      }
+    },
+    "table_name": "hospital_diagnosis",
+    "validation_errors": null,
+    "validation_run": false
+  },
+  "hospitalization": {
+    "columns": [
+      "hospitalization_id",
+      "hospitalization_joined_id",
+      "patient_id",
+      "admission_dttm",
+      "discharge_dttm",
+      "age_at_admission",
+      "admission_type_category",
+      "admission_type_name",
+      "discharge_name",
+      "discharge_category",
+      "zipcode_five_digit",
+      "zipcode_nine_digit",
+      "census_block_code",
+      "census_block_group_code",
+      "census_tract",
+      "state_code",
+      "county_code",
+      "fips_version"
+    ],
+    "is_valid": false,
+    "missing_data": {
+      "admission_type_category": 4,
+      "age_at_admission": 2,
+      "discharge_name": 2
+    },
+    "num_columns": 18,
+    "num_rows": 200,
+    "numeric_columns": [
+      "age_at_admission"
+    ],
+    "numeric_stats": {
+      "age_at_admission": {
+        "25%": 49.25,
+        "50%": 64.0,
+        "75%": 76.0,
+        "count": 198.0,
+        "max": 96.0,
+        "mean": 61.85858585858586,
+        "min": 16.0,
+        "std": 18.53273142390678
+      }
+    },
+    "table_name": "hospitalization",
+    "validation_errors": null,
+    "validation_run": false
+  },
+  "labs": {
+    "columns": [
+      "hospitalization_id",
+      "lab_order_dttm",
+      "lab_collect_dttm",
+      "lab_result_dttm",
+      "lab_order_category",
+      "lab_order_name",
+      "lab_category",
+      "lab_name",
+      "lab_value",
+      "lab_value_numeric",
+      "reference_unit",
+      "lab_loinc_code",
+      "lab_specimen_name",
+      "lab_specimen_category"
+    ],
+    "is_valid": false,
+    "missing_data": {
+      "lab_order_dttm": 759,
+      "lab_value_numeric": 2025
+    },
+    "num_columns": 14,
+    "num_rows": 39465,
+    "numeric_columns": [
+      "lab_value_numeric"
+    ],
+    "numeric_stats": {
+      "lab_value_numeric": {
+        "25%": 4.2,
+        "50%": 18.4,
+        "75%": 98.2,
+        "count": 37440.0,
+        "max": 458.0,
+        "mean": 49.95468189102564,
+        "min": 0.0,
+        "std": 65.96322066005409
+      }
+    },
+    "table_name": "labs",
+    "validation_errors": null,
+    "validation_run": false
+  },
+  "medication_admin_continuous": {
+    "columns": [
+      "hospitalization_id",
+      "med_order_id",
+      "admin_dttm",
+      "med_category",
+      "med_name",
+      "med_group",
+      "med_dose",
+      "med_dose_unit",
+      "med_route_category",
+      "med_route_name",
+      "mar_action_category",
+      "mar_action_name",
+      "mar_action_group"
+    ],
+    "is_valid": false,
+    "num_columns": 13,
+    "num_rows": 10660,
+    "numeric_columns": [
+      "med_dose"
+    ],
+    "numeric_stats": {
+      "med_dose": {
+        "25%": 0.645,
+        "50%": 7.4719999999999995,
+        "75%": 80.0,
+        "count": 10660.0,
+        "max": 1674.672,
+        "mean": 167.9071447467167,
+        "min": 0.01,
+        "std": 355.0337818752759
+      }
+    },
+    "table_name": "medication_admin_continuous",
+    "validation_errors": null,
+    "validation_run": false
+  },
+  "medication_admin_intermittent": {
+    "columns": [
+      "hospitalization_id",
+      "med_order_id",
+      "admin_dttm",
+      "med_category",
+      "med_name",
+      "med_group",
+      "med_dose",
+      "med_dose_unit",
+      "med_route_category",
+      "med_route_name",
+      "mar_action_category",
+      "mar_action_name",
+      "mar_action_group"
+    ],
+    "is_valid": false,
+    "num_columns": 13,
+    "num_rows": 24450,
+    "numeric_columns": [
+      "med_dose"
+    ],
+    "numeric_stats": {
+      "med_dose": {
+        "25%": 26.0,
+        "50%": 500.0,
+        "75%": 834.0,
+        "count": 24450.0,
+        "max": 4463.0,
+        "mean": 538.4633128834356,
+        "min": 1.0,
+        "std": 783.1870758709878
+      }
+    },
+    "table_name": "medication_admin_intermittent",
+    "validation_errors": null,
+    "validation_run": false
+  },
+  "microbiology_culture": {
+    "columns": [
+      "patient_id",
+      "hospitalization_id",
+      "organism_id",
+      "order_dttm",
+      "collect_dttm",
+      "result_dttm",
+      "fluid_category",
+      "fluid_name",
+      "method_category",
+      "method_name",
+      "organism_category",
+      "organism_name",
+      "organism_group",
+      "lab_loinc_code"
+    ],
+    "is_valid": true,
+    "num_columns": 14,
+    "num_rows": 299,
+    "table_name": "microbiology_culture",
+    "validation_errors": null,
+    "validation_run": false
+  },
+  "microbiology_nonculture": {
+    "columns": [
+      "patient_id",
+      "hospitalization_id",
+      "order_dttm",
+      "collect_dttm",
+      "result_dttm",
+      "fluid_category",
+      "fluid_name",
+      "method_category",
+      "method_name",
+      "organism_category",
+      "organism_group",
+      "result_category",
+      "result_name",
+      "micro_order_name",
+      "reference_low",
+      "reference_high",
+      "result_units",
+      "lab_loinc_code"
+    ],
+    "is_valid": false,
+    "missing_data": {
+      "reference_high": 381,
+      "reference_low": 381,
+      "result_units": 381
+    },
+    "num_columns": 18,
+    "num_rows": 381,
+    "numeric_columns": [
+      "reference_low",
+      "reference_high",
+      "result_units"
+    ],
+    "numeric_stats": {
+      "reference_high": {
+        "25%": null,
+        "50%": null,
+        "75%": null,
+        "count": 0.0,
+        "max": null,
+        "mean": null,
+        "min": null,
+        "std": null
+      },
+      "reference_low": {
+        "25%": null,
+        "50%": null,
+        "75%": null,
+        "count": 0.0,
+        "max": null,
+        "mean": null,
+        "min": null,
+        "std": null
+      },
+      "result_units": {
+        "25%": null,
+        "50%": null,
+        "75%": null,
+        "count": 0.0,
+        "max": null,
+        "mean": null,
+        "min": null,
+        "std": null
+      }
+    },
+    "table_name": "microbiology_nonculture",
+    "validation_errors": null,
+    "validation_run": false
+  },
+  "microbiology_susceptibility": {
+    "columns": [
+      "organism_id",
+      "antimicrobial_name",
+      "antimicrobial_category",
+      "susceptibility_category",
+      "sensitivity_name",
+      "susceptibility_name"
+    ],
+    "is_valid": false,
+    "num_columns": 6,
+    "num_rows": 357,
+    "table_name": "microbiology_susceptibility",
+    "validation_errors": null,
+    "validation_run": false
+  },
+  "patient": {
+    "columns": [
+      "patient_id",
+      "birth_date",
+      "death_dttm",
+      "race_category",
+      "ethnicity_category",
+      "sex_category",
+      "language_category",
+      "race_name",
+      "sex_name",
+      "ethnicity_name",
+      "language_name"
+    ],
+    "is_valid": false,
+    "missing_data": {
+      "death_dttm": 117,
+      "ethnicity_category": 3,
+      "language_category": 9,
+      "race_category": 5
+    },
+    "num_columns": 11,
+    "num_rows": 157,
+    "table_name": "patient",
+    "validation_errors": null,
+    "validation_run": false
+  },
+  "patient_assessments": {
+    "columns": [
+      "hospitalization_id",
+      "recorded_dttm",
+      "assessment_category",
+      "assessment_name",
+      "assessment_group",
+      "numerical_value",
+      "categorical_value",
+      "text_value"
+    ],
+    "is_valid": false,
+    "missing_data": {
+      "categorical_value": 105924,
+      "numerical_value": 1136,
+      "text_value": 109813
+    },
+    "num_columns": 8,
+    "num_rows": 109813,
+    "numeric_columns": [
+      "numerical_value"
+    ],
+    "numeric_stats": {
+      "numerical_value": {
+        "25%": 1.0,
+        "50%": 4.0,
+        "75%": 6.0,
+        "count": 108677.0,
+        "max": 74.0,
+        "mean": 5.353138198514865,
+        "min": -4.0,
+        "std": 7.9834217040312065
+      }
+    },
+    "table_name": "patient_assessments",
+    "validation_errors": null,
+    "validation_run": false
+  },
+  "patient_procedures": {
+    "columns": [
+      "hospitalization_id",
+      "procedure_billed_dttm",
+      "procedure_code",
+      "procedure_code_format",
+      "billing_provider_id",
+      "performing_provider_id"
+    ],
+    "is_valid": false,
+    "num_columns": 6,
+    "num_rows": 299,
+    "table_name": "patient_procedures",
+    "validation_errors": null,
+    "validation_run": false
+  },
+  "position": {
+    "columns": [
+      "hospitalization_id",
+      "recorded_dttm",
+      "position_category",
+      "position_name"
+    ],
+    "is_valid": false,
+    "num_columns": 4,
+    "num_rows": 34563,
+    "table_name": "position",
+    "validation_errors": null,
+    "validation_run": false
+  },
+  "respiratory_support": {
+    "columns": [
+      "hospitalization_id",
+      "recorded_dttm",
+      "device_id",
+      "device_name",
+      "device_category",
+      "vent_brand_name",
+      "mode_name",
+      "mode_category",
+      "tracheostomy",
+      "fio2_set",
+      "lpm_set",
+      "tidal_volume_set",
+      "resp_rate_set",
+      "pressure_control_set",
+      "pressure_support_set",
+      "flow_rate_set",
+      "peak_inspiratory_pressure_set",
+      "inspiratory_time_set",
+      "peep_set",
+      "tidal_volume_obs",
+      "resp_rate_obs",
+      "plateau_pressure_obs",
+      "peak_inspiratory_pressure_obs",
+      "peep_obs",
+      "minute_vent_obs",
+      "mean_airway_pressure_obs"
+    ],
+    "is_valid": false,
+    "missing_data": {
+      "flow_rate_set": 33910,
+      "inspiratory_time_set": 24726,
+      "lpm_set": 30885,
+      "mean_airway_pressure_obs": 24726,
+      "minute_vent_obs": 24726,
+      "mode_category": 21335,
+      "mode_name": 21335,
+      "peak_inspiratory_pressure_obs": 24726,
+      "peak_inspiratory_pressure_set": 24726,
+      "peep_obs": 24726,
+      "peep_set": 21335,
+      "plateau_pressure_obs": 28496,
+      "pressure_control_set": 37171,
+      "pressure_support_set": 31997,
+      "resp_rate_obs": 24726,
+      "resp_rate_set": 24726,
+      "tidal_volume_obs": 24726,
+      "tidal_volume_set": 24726,
+      "vent_brand_name": 24726
+    },
+    "num_columns": 26,
+    "num_rows": 37468,
+    "numeric_columns": [
+      "tracheostomy",
+      "fio2_set",
+      "lpm_set",
+      "tidal_volume_set",
+      "resp_rate_set",
+      "pressure_control_set",
+      "pressure_support_set",
+      "flow_rate_set",
+      "peak_inspiratory_pressure_set",
+      "inspiratory_time_set",
+      "peep_set",
+      "tidal_volume_obs",
+      "resp_rate_obs",
+      "plateau_pressure_obs",
+      "peak_inspiratory_pressure_obs",
+      "peep_obs",
+      "minute_vent_obs",
+      "mean_airway_pressure_obs"
+    ],
+    "numeric_stats": {
+      "fio2_set": {
+        "25%": 0.21,
+        "50%": 0.36,
+        "75%": 0.45,
+        "count": 37468.0,
+        "max": 0.86,
+        "mean": 0.3657603821928045,
+        "min": 0.21,
+        "std": 0.1343834693173807
+      },
+      "flow_rate_set": {
+        "25%": 30.0,
+        "50%": 40.0,
+        "75%": 50.0,
+        "count": 3558.0,
+        "max": 60.0,
+        "mean": 39.81478358628443,
+        "min": 20.0,
+        "std": 11.497086726656901
+      },
+      "inspiratory_time_set": {
+        "25%": 0.97,
+        "50%": 1.15,
+        "75%": 1.33,
+        "count": 12742.0,
+        "max": 1.5,
+        "mean": 1.1499482027939099,
+        "min": 0.8,
+        "std": 0.202745956971649
+      },
+      "lpm_set": {
+        "25%": 3.0,
+        "50%": 6.0,
+        "75%": 10.0,
+        "count": 6583.0,
+        "max": 15.0,
+        "mean": 6.617195807382652,
+        "min": 1.0,
+        "std": 4.030183397634212
+      },
+      "mean_airway_pressure_obs": {
+        "25%": 12.0,
+        "50%": 17.0,
+        "75%": 21.0,
+        "count": 12742.0,
+        "max": 25.0,
+        "mean": 16.497096217234343,
+        "min": 8.0,
+        "std": 4.92933657224421
+      },
+      "minute_vent_obs": {
+        "25%": 7.5,
+        "50%": 10.0,
+        "75%": 12.5,
+        "count": 12742.0,
+        "max": 15.0,
+        "mean": 10.010783236540574,
+        "min": 5.0,
+        "std": 2.8940569051634246
+      },
+      "peak_inspiratory_pressure_obs": {
+        "25%": 21.0,
+        "50%": 28.0,
+        "75%": 34.0,
+        "count": 12742.0,
+        "max": 45.0,
+        "mean": 27.60414377648721,
+        "min": 9.0,
+        "std": 7.46053794962604
+      },
+      "peak_inspiratory_pressure_set": {
+        "25%": 21.0,
+        "50%": 28.0,
+        "75%": 34.0,
+        "count": 12742.0,
+        "max": 40.0,
+        "mean": 27.58813373096845,
+        "min": 15.0,
+        "std": 7.197269264205727
+      },
+      "peep_obs": {
+        "25%": 5.0,
+        "50%": 6.0,
+        "75%": 8.0,
+        "count": 12742.0,
+        "max": 21.0,
+        "mean": 7.080128708209072,
+        "min": 3.0,
+        "std": 3.2382949710962423
+      },
+      "peep_set": {
+        "25%": 5.0,
+        "50%": 6.0,
+        "75%": 8.0,
+        "count": 16133.0,
+        "max": 20.0,
+        "mean": 7.1673588297278865,
+        "min": 5.0,
+        "std": 2.9236941191307855
+      },
+      "plateau_pressure_obs": {
+        "25%": 17.0,
+        "50%": 21.0,
+        "75%": 26.0,
+        "count": 8972.0,
+        "max": 30.0,
+        "mean": 21.090838163174322,
+        "min": 12.0,
+        "std": 5.221682145582636
+      },
+      "pressure_control_set": {
+        "25%": 21.0,
+        "50%": 27.0,
+        "75%": 32.0,
+        "count": 297.0,
+        "max": 35.0,
+        "mean": 26.265993265993266,
+        "min": 15.0,
+        "std": 5.91093424841993
+      },
+      "pressure_support_set": {
+        "25%": 10.0,
+        "50%": 13.0,
+        "75%": 17.0,
+        "count": 5471.0,
+        "max": 20.0,
+        "mean": 13.398281849753245,
+        "min": 5.0,
+        "std": 3.878717626936014
+      },
+      "resp_rate_obs": {
+        "25%": 17.0,
+        "50%": 20.0,
+        "75%": 23.0,
+        "count": 12742.0,
+        "max": 34.0,
+        "mean": 20.006121487992466,
+        "min": 1.0,
+        "std": 4.621889769766165
+      },
+      "resp_rate_set": {
+        "25%": 15.0,
+        "50%": 18.0,
+        "75%": 21.0,
+        "count": 12742.0,
+        "max": 24.0,
+        "mean": 18.053052895934705,
+        "min": 12.0,
+        "std": 3.5012206628548026
+      },
+      "tidal_volume_obs": {
+        "25%": 400.0,
+        "50%": 450.0,
+        "75%": 501.0,
+        "count": 12742.0,
+        "max": 647.0,
+        "mean": 450.39938785120074,
+        "min": 261.0,
+        "std": 65.28049067324972
+      },
+      "tidal_volume_set": {
+        "25%": 401.0,
+        "50%": 449.0,
+        "75%": 500.0,
+        "count": 12742.0,
+        "max": 550.0,
+        "mean": 449.7962643227123,
+        "min": 350.0,
+        "std": 57.62970622152404
+      },
+      "tracheostomy": {
+        "25%": 0.0,
+        "50%": 0.0,
+        "75%": 0.0,
+        "count": 37468.0,
+        "max": 1.0,
+        "mean": 0.027516814348243834,
+        "min": 0.0,
+        "std": 0.16358592083446988
+      }
+    },
+    "table_name": "respiratory_support",
+    "validation_errors": null,
+    "validation_run": false
+  },
+  "vitals": {
+    "columns": [
+      "hospitalization_id",
+      "recorded_dttm",
+      "vital_category",
+      "vital_value",
+      "meas_site_name",
+      "vital_name"
+    ],
+    "is_valid": true,
+    "missing_data": {
+      "meas_site_name": 276868,
+      "vital_value": 15602
+    },
+    "num_columns": 6,
+    "num_rows": 314376,
+    "numeric_columns": [
+      "vital_value"
+    ],
+    "numeric_stats": {
+      "vital_value": {
+        "25%": 65.0,
+        "50%": 86.0,
+        "75%": 98.0,
+        "count": 298774.0,
+        "max": 261.95525966771856,
+        "mean": 77.65493790019785,
+        "min": 0.0,
+        "std": 34.69839666602795
+      }
+    },
+    "table_name": "vitals",
+    "validation_errors": null,
+    "validation_run": false
+  }
+}
