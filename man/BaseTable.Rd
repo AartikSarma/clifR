@@ -2,29 +2,44 @@
 % Please edit documentation in R/base_table.R
 \name{BaseTable}
 \alias{BaseTable}
-\title{Base Table Class for CLIF Data}
+\title{BaseTable: foundation class for all CLIF tables}
 \description{
-R6 class providing common functionality for all CLIF table types.
-All specific table classes (Patient, Vitals, Labs, etc.) inherit from this base class.
+BaseTable: foundation class for all CLIF tables
+
+BaseTable: foundation class for all CLIF tables
+}
+\details{
+Provides data loading, schema resolution, validation and summary reporting shared
+by every CLIF table class. Ported from \code{clifpy/tables/base_table.py}; field and
+method names follow the Python original so results and call sites line up across
+the two implementations.
+
+The \code{table_name} is derived from the class name, so \code{RespiratorySupport} resolves
+to \code{respiratory_support} and loads \code{respiratory_support_schema.yaml} for the
+configured CLIF version.
 }
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
-\item{\code{df}}{tibble containing the table data}
+\item{\code{data_directory}}{Directory containing the CLIF data files.}
 
-\item{\code{schema}}{List containing the YAML schema definition}
+\item{\code{filetype}}{Either \code{"csv"} or \code{"parquet"}.}
 
-\item{\code{table_name}}{Character name of the table}
+\item{\code{timezone}}{Olson timezone used for datetime columns.}
 
-\item{\code{validation_results}}{List containing validation results}
+\item{\code{clif_version}}{CLIF schema version this table validates against.}
 
-\item{\code{timezone}}{Character timezone for datetime columns}
+\item{\code{output_directory}}{Directory for logs, summaries and validation output.}
 
-\item{\code{data_directory}}{Character path to data directory}
+\item{\code{table_name}}{snake_case CLIF table name derived from the class name.}
 
-\item{\code{filetype}}{Character file type ("csv" or "parquet")}
+\item{\code{df}}{The loaded data as a tibble.}
 
-\item{\code{output_directory}}{Character path for output files}
+\item{\code{schema}}{Parsed YAML schema for this table.}
+
+\item{\code{errors}}{List of validation errors from the last validation run.}
+
+\item{\code{outlier_config}}{Parsed outlier configuration.}
 }
 \if{html}{\out{</div>}}
 }
@@ -32,18 +47,11 @@ All specific table classes (Patient, Vitals, Labs, etc.) inherit from this base 
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-BaseTable-new}{\code{BaseTable$new()}}
-\item \href{#method-BaseTable-load_data}{\code{BaseTable$load_data()}}
 \item \href{#method-BaseTable-validate}{\code{BaseTable$validate()}}
-\item \href{#method-BaseTable-is_valid}{\code{BaseTable$is_valid()}}
-\item \href{#method-BaseTable-get_errors}{\code{BaseTable$get_errors()}}
-\item \href{#method-BaseTable-get_warnings}{\code{BaseTable$get_warnings()}}
-\item \href{#method-BaseTable-summarize}{\code{BaseTable$summarize()}}
-\item \href{#method-BaseTable-get_datetime_range}{\code{BaseTable$get_datetime_range()}}
-\item \href{#method-BaseTable-save}{\code{BaseTable$save()}}
-\item \href{#method-BaseTable-export_validation_report}{\code{BaseTable$export_validation_report()}}
-\item \href{#method-BaseTable-get_unique_values}{\code{BaseTable$get_unique_values()}}
-\item \href{#method-BaseTable-filter_data}{\code{BaseTable$filter_data()}}
-\item \href{#method-BaseTable-get_columns_by_type}{\code{BaseTable$get_columns_by_type()}}
+\item \href{#method-BaseTable-isvalid}{\code{BaseTable$isvalid()}}
+\item \href{#method-BaseTable-get_summary}{\code{BaseTable$get_summary()}}
+\item \href{#method-BaseTable-save_summary}{\code{BaseTable$save_summary()}}
+\item \href{#method-BaseTable-analyze_categorical_distributions}{\code{BaseTable$analyze_categorical_distributions()}}
 \item \href{#method-BaseTable-print}{\code{BaseTable$print()}}
 \item \href{#method-BaseTable-clone}{\code{BaseTable$clone()}}
 }
@@ -52,57 +60,51 @@ All specific table classes (Patient, Vitals, Labs, etc.) inherit from this base 
 \if{html}{\out{<a id="method-BaseTable-new"></a>}}
 \if{latex}{\out{\hypertarget{method-BaseTable-new}{}}}
 \subsection{Method \code{new()}}{
-Initialize a BaseTable instance
+Create a table instance.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{BaseTable$new(
-  table_name,
   data_directory = NULL,
-  filetype = "csv",
+  filetype = NULL,
   timezone = "UTC",
   output_directory = NULL,
   data = NULL,
-  schema_dir = NULL
+  clif_version = DEFAULT_CLIF_VERSION,
+  table_name = NULL
 )}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{table_name}}{Character. Name of the CLIF table.}
+\item{\code{data_directory}}{Directory containing the CLIF data files.}
 
-\item{\code{data_directory}}{Character. Path to directory containing data files.}
+\item{\code{filetype}}{Either \code{"csv"} or \code{"parquet"}.}
 
-\item{\code{filetype}}{Character. File type: "csv" or "parquet" (default: "csv").}
+\item{\code{timezone}}{Olson timezone for datetime columns.}
 
-\item{\code{timezone}}{Character. Timezone for datetime columns (default: "UTC").}
+\item{\code{output_directory}}{Directory for logs and outputs. Defaults to
+\verb{<data_directory>/output}.}
 
-\item{\code{output_directory}}{Character. Path for saving outputs (default: NULL).}
+\item{\code{data}}{Optional pre-loaded data frame. When supplied, no file is read.}
 
-\item{\code{data}}{Optional tibble. Pre-loaded data (if NULL, loads from file).}
+\item{\code{clif_version}}{CLIF schema version. Defaults to \link{DEFAULT_CLIF_VERSION}.}
 
-\item{\code{schema_dir}}{Character. Custom schema directory (default: NULL uses package default).}
+\item{\code{table_name}}{Optional explicit table name; normally derived from the class.}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A new BaseTable instance.
+A new table instance.
 }
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-BaseTable-load_data"></a>}}
-\if{latex}{\out{\hypertarget{method-BaseTable-load_data}{}}}
-\subsection{Method \code{load_data()}}{
-Load data from file
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{BaseTable$load_data()}\if{html}{\out{</div>}}
-}
-
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-BaseTable-validate"></a>}}
 \if{latex}{\out{\hypertarget{method-BaseTable-validate}{}}}
 \subsection{Method \code{validate()}}{
-Validate table data against schema
+Run validation against the table schema.
+
+Populates \verb{$errors} with schema and data-quality findings, then runs any
+table-specific checks a subclass defines.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{BaseTable$validate(verbose = TRUE)}\if{html}{\out{</div>}}
 }
@@ -110,196 +112,96 @@ Validate table data against schema
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{verbose}}{Logical. Print validation details (default: TRUE).}
+\item{\code{verbose}}{Whether to print a summary of the results.}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-List of validation results.
+The table object, invisibly.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-BaseTable-is_valid"></a>}}
-\if{latex}{\out{\hypertarget{method-BaseTable-is_valid}{}}}
-\subsection{Method \code{is_valid()}}{
-Check if table is valid
+\if{html}{\out{<a id="method-BaseTable-isvalid"></a>}}
+\if{latex}{\out{\hypertarget{method-BaseTable-isvalid}{}}}
+\subsection{Method \code{isvalid()}}{
+Whether the last validation run found no errors.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{BaseTable$is_valid()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{BaseTable$isvalid()}\if{html}{\out{</div>}}
 }
 
 \subsection{Returns}{
-Logical. TRUE if valid, FALSE otherwise.
+\code{TRUE} when validation has run and produced no errors.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-BaseTable-get_errors"></a>}}
-\if{latex}{\out{\hypertarget{method-BaseTable-get_errors}{}}}
-\subsection{Method \code{get_errors()}}{
-Get validation errors
+\if{html}{\out{<a id="method-BaseTable-get_summary"></a>}}
+\if{latex}{\out{\hypertarget{method-BaseTable-get_summary}{}}}
+\subsection{Method \code{get_summary()}}{
+Summary statistics for the table.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{BaseTable$get_errors()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{BaseTable$get_summary()}\if{html}{\out{</div>}}
 }
 
 \subsection{Returns}{
-List of errors.
+A named list describing shape, memory use, validation state,
+numeric summaries and missing-data counts.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-BaseTable-get_warnings"></a>}}
-\if{latex}{\out{\hypertarget{method-BaseTable-get_warnings}{}}}
-\subsection{Method \code{get_warnings()}}{
-Get validation warnings
+\if{html}{\out{<a id="method-BaseTable-save_summary"></a>}}
+\if{latex}{\out{\hypertarget{method-BaseTable-save_summary}{}}}
+\subsection{Method \code{save_summary()}}{
+Write the table summary to \verb{summary_<table>.json}.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{BaseTable$get_warnings()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{BaseTable$save_summary()}\if{html}{\out{</div>}}
 }
 
 \subsection{Returns}{
-List of warnings.
+Path to the written file, invisibly.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-BaseTable-summarize"></a>}}
-\if{latex}{\out{\hypertarget{method-BaseTable-summarize}{}}}
-\subsection{Method \code{summarize()}}{
-Generate summary statistics
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{BaseTable$summarize()}\if{html}{\out{</div>}}
-}
+\if{html}{\out{<a id="method-BaseTable-analyze_categorical_distributions"></a>}}
+\if{latex}{\out{\hypertarget{method-BaseTable-analyze_categorical_distributions}{}}}
+\subsection{Method \code{analyze_categorical_distributions()}}{
+Distribution of each categorical column by unique encounter.
 
-\subsection{Returns}{
-List of summary statistics.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-BaseTable-get_datetime_range"></a>}}
-\if{latex}{\out{\hypertarget{method-BaseTable-get_datetime_range}{}}}
-\subsection{Method \code{get_datetime_range()}}{
-Get datetime column range
+Counts distinct \code{hospitalization_id} (or \code{patient_id} when the former is
+absent) per category value, matching clifpy's denominator choice.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{BaseTable$get_datetime_range()}\if{html}{\out{</div>}}
-}
-
-\subsection{Returns}{
-List with min and max datetime, or NULL if no datetime columns.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-BaseTable-save"></a>}}
-\if{latex}{\out{\hypertarget{method-BaseTable-save}{}}}
-\subsection{Method \code{save()}}{
-Save table data to file
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{BaseTable$save(file_path = NULL, filetype = NULL, overwrite = FALSE)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{BaseTable$analyze_categorical_distributions(save = TRUE)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{file_path}}{Character. Output file path. If NULL, uses output_directory and table_name.}
-
-\item{\code{filetype}}{Character. File type: "csv" or "parquet". If NULL, uses self$filetype.}
-
-\item{\code{overwrite}}{Logical. Whether to overwrite existing file (default: FALSE).}
+\item{\code{save}}{Whether to write one CSV per categorical column.}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-Invisible self.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-BaseTable-export_validation_report"></a>}}
-\if{latex}{\out{\hypertarget{method-BaseTable-export_validation_report}{}}}
-\subsection{Method \code{export_validation_report()}}{
-Export validation results to markdown report
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{BaseTable$export_validation_report(output_file = NULL)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{output_file}}{Character. Path to output file.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-Invisible self.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-BaseTable-get_unique_values"></a>}}
-\if{latex}{\out{\hypertarget{method-BaseTable-get_unique_values}{}}}
-\subsection{Method \code{get_unique_values()}}{
-Get unique values for a categorical column
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{BaseTable$get_unique_values(column_name, include_na = FALSE)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{column_name}}{Character. Name of column.}
-
-\item{\code{include_na}}{Logical. Include NA values (default: FALSE).}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-tibble with unique values and counts.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-BaseTable-filter_data"></a>}}
-\if{latex}{\out{\hypertarget{method-BaseTable-filter_data}{}}}
-\subsection{Method \code{filter_data()}}{
-Filter table by criteria
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{BaseTable$filter_data(...)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{...}}{Filter expressions passed to dplyr::filter().}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-New BaseTable instance with filtered data.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-BaseTable-get_columns_by_type"></a>}}
-\if{latex}{\out{\hypertarget{method-BaseTable-get_columns_by_type}{}}}
-\subsection{Method \code{get_columns_by_type()}}{
-Get column names by type
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{BaseTable$get_columns_by_type(
-  type = c("category", "datetime", "numeric", "character")
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{type}}{Character. Column type: "category", "datetime", "numeric", etc.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-Character vector of column names.
+A named list of tibbles, one per categorical column.
 }
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-BaseTable-print"></a>}}
 \if{latex}{\out{\hypertarget{method-BaseTable-print}{}}}
 \subsection{Method \code{print()}}{
-Print method
+Print a short description of the table.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{BaseTable$print()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{BaseTable$print(...)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{...}}{Unused; present for print compatibility.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+The table object, invisibly.
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-BaseTable-clone"></a>}}

@@ -1,479 +1,319 @@
-#' SOFA Score Calculation
+#' SOFA score computation from a wide dataset
 #'
-#' @description
-#' Calculate Sequential Organ Failure Assessment (SOFA) scores for ICU patients.
-#' SOFA assesses organ dysfunction across 6 systems: respiratory, coagulation,
-#' hepatic, cardiovascular, renal, and neurological.
+#' Port of `clifpy/utils/sofa.py`. The Python implementation is a chain of DuckDB
+#' queries, so this port runs the same SQL through R's `duckdb` package rather
+#' than reimplementing the logic in dplyr: the aggregation, the `CASE` ladders and
+#' the null semantics then behave identically in both languages.
+#'
+#' The pipeline is order-sensitive:
+#' 1. outlier clamping (`po2_arterial`, `fio2_set`, `spo2`),
+#' 2. PaO2 imputation from SpO2 (Severinghaus, only where `spo2 < 97`),
+#' 3. extremal (worst) aggregation per ID,
+#' 4. component scoring from the aggregated values.
+#'
+#' @name clif-sofa
+NULL
 
-#' Calculate SOFA score from clinical parameters
+#' Categories required from each CLIF table for SOFA scoring
 #'
-#' @description
-#' Calculate total SOFA score and component scores from clinical measurements.
+#' Named list mirroring clifpy's `REQUIRED_SOFA_CATEGORIES_BY_TABLE`; used as the
+#' `category_filters` argument when building a wide dataset for SOFA.
 #'
-#' @param pao2_fio2 Numeric. PaO2/FiO2 ratio in mmHg (respiratory).
-#' @param platelets Numeric. Platelet count in 10^3/μL (coagulation).
-#' @param bilirubin Numeric. Total bilirubin in mg/dL (hepatic).
-#' @param map Numeric. Mean arterial pressure in mmHg (cardiovascular).
-#' @param vasopressor Logical or character. Vasopressor use (cardiovascular).
-#' @param dopamine_dose Numeric. Dopamine dose in mcg/kg/min.
-#' @param dobutamine_dose Numeric. Dobutamine dose in mcg/kg/min.
-#' @param epinephrine_dose Numeric. Epinephrine dose in mcg/kg/min.
-#' @param norepinephrine_dose Numeric. Norepinephrine dose in mcg/kg/min.
-#' @param creatinine Numeric. Serum creatinine in mg/dL (renal).
-#' @param urine_output Numeric. Urine output in mL/day (renal).
-#' @param gcs Numeric. Glasgow Coma Scale score (neurological).
-#' @param mechanical_vent Logical. Whether patient is mechanically ventilated.
+#' @export
+REQUIRED_SOFA_CATEGORIES_BY_TABLE <- list(
+  labs = c("creatinine", "platelet_count", "po2_arterial", "bilirubin_total"),
+  vitals = c("map", "spo2"),
+  patient_assessments = c("gcs_total"),
+  medication_admin_continuous = c("norepinephrine", "epinephrine", "dopamine", "dobutamine"),
+  respiratory_support = c("device_category", "fio2_set")
+)
+
+#' Wide-dataset columns aggregated with MAX when taking the worst value
+#' @export
+MAX_ITEMS <- c(
+  "norepinephrine_mcg_kg_min", "epinephrine_mcg_kg_min",
+  "dopamine_mcg_kg_min", "dobutamine_mcg_kg_min",
+  "fio2_set", "creatinine", "bilirubin_total"
+)
+
+#' Wide-dataset columns aggregated with MIN when taking the worst value
+#' @export
+MIN_ITEMS <- c("map", "spo2", "po2_arterial", "pao2_imputed", "platelet_count", "gcs_total")
+
+#' Respiratory device severity ranks (lower rank = more support)
+#' @export
+DEVICE_RANK_DICT <- c(
+  "IMV" = 1L,
+  "NIPPV" = 2L,
+  "CPAP" = 3L,
+  "High Flow NC" = 4L,
+  "Face Mask" = 5L,
+  "Trach Collar" = 6L,
+  "Nasal Cannula" = 7L,
+  "Other" = 8L,
+  "Room Air" = 9L
+)
+
+#' Device rank lookup table
 #'
-#' @return List with total SOFA score and component scores.
+#' Tibble form of [DEVICE_RANK_DICT], joined onto the wide dataset so that the
+#' worst (lowest-ranked) device per ID can be recovered after aggregation.
 #'
+#' @export
+DEVICE_RANK_MAPPING <- tibble::tibble(
+  device_category = names(DEVICE_RANK_DICT),
+  device_rank = unname(DEVICE_RANK_DICT)
+)
+
+#' Format a character vector as a DuckDB list literal
+#'
+#' @param values Character vector.
+#' @return A single string such as `['a', 'b']`.
+#' @keywords internal
+sql_list_literal <- function(values) {
+  paste0("[", paste(sql_quote_value(values), collapse = ", "), "]")
+}
+
+#' Impute PaO2 from SpO2 using the Severinghaus equation
+#'
+#' Adds a `pao2_imputed` column, populated only where `spo2 < 97` because the
+#' oxygen dissociation curve is too flat above that to invert reliably.
+#'
+#' @param connection An open DuckDB connection.
+#' @param source_table Name of the table to read from.
+#' @param target_table Name of the temp table to create.
+#' @return The target table name, invisibly.
+#' @keywords internal
+impute_pao2_from_spo2 <- function(connection, source_table, target_table) {
+  query <- sprintf(
+    "CREATE OR REPLACE TEMP TABLE %s AS
+     FROM %s
+     SELECT *
+        , _s: spo2 / 100
+        , _a: 11700.0 / ( (1/_s) - 1 )
+        , _b: sqrt(50^3 + (_a)^2)
+        , pao2_imputed: CASE
+            WHEN spo2 < 97 THEN ( _b + _a)^(1.0/3.0) - (_b - _a)^(1.0/3.0)
+            END",
+    target_table, source_table
+  )
+  DBI::dbExecute(connection, query)
+  invisible(target_table)
+}
+
+#' Aggregate extremal (worst) values by ID
+#'
+#' MAX for the variables that are worse when higher ([MAX_ITEMS]), MIN for those
+#' that are worse when lower ([MIN_ITEMS]), plus the lowest device rank seen.
+#'
+#' @param connection An open DuckDB connection.
+#' @param source_table Name of the table to read from.
+#' @param target_table Name of the temp table to create.
+#' @param extremal_type Either `"worst"` or `"latest"` (not implemented).
+#' @param id_name Grouping column.
+#' @return The target table name, invisibly.
+#' @keywords internal
+agg_extremal_values_by_id <- function(connection, source_table, target_table,
+                                      extremal_type, id_name) {
+  if (identical(extremal_type, "latest")) {
+    cli::cli_abort("This is a future feature and currently unavailable.")
+  }
+  if (!identical(extremal_type, "worst")) {
+    cli::cli_abort("Invalid extremal type: {.val {extremal_type}}")
+  }
+
+  query <- sprintf(
+    'CREATE OR REPLACE TEMP TABLE %s AS
+     FROM %s
+     LEFT JOIN DEVICE_RANK_MAPPING USING (device_category)
+     SELECT "%s"
+        , MAX(COLUMNS(%s))
+        , MIN(COLUMNS(%s))
+        , device_rank: MIN(device_rank)
+     GROUP BY "%s"',
+    target_table, source_table, id_name,
+    sql_list_literal(MAX_ITEMS), sql_list_literal(MIN_ITEMS), id_name
+  )
+  DBI::dbExecute(connection, query)
+  invisible(target_table)
+}
+
+#' Compute the six SOFA component scores from aggregated extremal values
+#'
+#' @param connection An open DuckDB connection.
+#' @param source_table Table holding one row per ID of extremal values.
+#' @param id_name Grouping column.
+#' @return A data frame of component scores and the total.
+#' @keywords internal
+compute_sofa_from_extremal_values <- function(connection, source_table, id_name) {
+  query <- sprintf(
+    'FROM %s df
+     LEFT JOIN DEVICE_RANK_MAPPING m on df.device_rank = m.device_rank
+     SELECT "%s"
+        , p_f: po2_arterial / fio2_set
+        , p_f_imputed: pao2_imputed / fio2_set
+        , sofa_cv_97: CASE
+            WHEN dopamine_mcg_kg_min > 15 OR epinephrine_mcg_kg_min > 0.1 OR norepinephrine_mcg_kg_min > 0.1 THEN 4
+            WHEN dopamine_mcg_kg_min > 5 OR epinephrine_mcg_kg_min <= 0.1 OR norepinephrine_mcg_kg_min <= 0.1 THEN 3
+            WHEN dopamine_mcg_kg_min <= 5 OR dobutamine_mcg_kg_min > 0 THEN 2
+            WHEN map < 70 THEN 1
+            WHEN map >= 70 THEN 0 END
+        , sofa_coag: CASE WHEN platelet_count < 20 THEN 4
+            WHEN platelet_count < 50 THEN 3
+            WHEN platelet_count < 100 THEN 2
+            WHEN platelet_count < 150 THEN 1
+            WHEN platelet_count >= 150 THEN 0 END
+        , sofa_liver: CASE WHEN bilirubin_total >= 12 THEN 4
+            WHEN bilirubin_total < 12 AND bilirubin_total >= 6 THEN 3
+            WHEN bilirubin_total < 6 AND bilirubin_total >= 2 THEN 2
+            WHEN bilirubin_total < 2 AND bilirubin_total >= 1.2 THEN 1
+            WHEN bilirubin_total < 1.2 THEN 0 END
+        , sofa_resp: CASE WHEN p_f < 100 AND m.device_category IN (\'IMV\', \'NIPPV\', \'CPAP\') THEN 4
+            WHEN p_f >= 100 and p_f < 200 AND m.device_category IN (\'IMV\', \'NIPPV\', \'CPAP\') THEN 3
+            WHEN p_f >= 200 AND p_f < 300 THEN 2
+            WHEN p_f >= 300 AND p_f < 400 THEN 1
+            WHEN p_f >= 400 THEN 0 END
+        , sofa_cns: CASE WHEN gcs_total < 6 THEN 4
+            WHEN gcs_total >= 6 AND gcs_total <= 9 THEN 3
+            WHEN gcs_total >= 10 AND gcs_total <= 12 THEN 2
+            WHEN gcs_total >= 13 AND gcs_total <= 14 THEN 1
+            WHEN gcs_total == 15 THEN 0 END
+        , sofa_renal: CASE WHEN creatinine >= 5 THEN 4
+            WHEN creatinine < 5 AND creatinine >= 3.5 THEN 3
+            WHEN creatinine < 3.5 AND creatinine >= 2 THEN 2
+            WHEN creatinine < 2 AND creatinine >= 1.2 THEN 1
+            WHEN creatinine < 1.2 THEN 0 END
+        , sofa_total: sofa_cv_97 + sofa_coag + sofa_liver + sofa_resp + sofa_renal + sofa_cns',
+    source_table, id_name
+  )
+  DBI::dbGetQuery(connection, query)
+}
+
+#' Names of the six SOFA component score columns
+#' @keywords internal
+SOFA_SUBSCORE_COLUMNS <- c(
+  "sofa_cv_97", "sofa_coag", "sofa_renal", "sofa_liver", "sofa_resp", "sofa_cns"
+)
+
+#' Fill missing SOFA component scores with zero
+#'
+#' The total is first recomputed ignoring missing components (a missing component
+#' contributes nothing), then the components themselves are filled with 0.
+#'
+#' @param sofa_scores Data frame of component scores.
+#' @return The data frame with filled components and a recomputed total.
+#' @keywords internal
+fill_na_scores <- function(sofa_scores) {
+  subscore_matrix <- as.matrix(sofa_scores[, SOFA_SUBSCORE_COLUMNS, drop = FALSE])
+  sofa_scores[["sofa_total"]] <- as.integer(rowSums(subscore_matrix, na.rm = TRUE))
+
+  for (column_name in SOFA_SUBSCORE_COLUMNS) {
+    column_values <- sofa_scores[[column_name]]
+    column_values[is.na(column_values)] <- 0L
+    sofa_scores[[column_name]] <- as.integer(column_values)
+  }
+  sofa_scores
+}
+
+#' Compute SOFA scores from a wide dataset
+#'
+#' Port of `clifpy.utils.sofa.compute_sofa`. Takes an already-built wide dataset
+#' and reduces it to one worst-value row per ID, then scores the six SOFA
+#' components. Medication columns must already be converted to standard units
+#' (e.g. `norepinephrine_mcg_kg_min` rather than `norepinephrine`).
+#'
+#' @param wide_df Wide dataset (one row per ID/time point) containing the SOFA
+#'   variables: `po2_arterial`, `fio2_set`, `spo2`, `map`, `platelet_count`,
+#'   `bilirubin_total`, `creatinine`, `gcs_total`, `device_category` and the four
+#'   `*_mcg_kg_min` vasoactive columns.
+#' @param cohort_df Optional data frame with columns `id_name`, `start_time` and
+#'   `end_time`; observations outside those windows are dropped.
+#' @param extremal_type `"worst"` (default). `"latest"` is not implemented,
+#'   matching clifpy.
+#' @param id_name Grouping column, e.g. `"encounter_block"` or
+#'   `"hospitalization_id"`.
+#' @param fill_na_scores_with_zero If `TRUE` (default), missing component scores
+#'   are treated as 0 and the total is the sum of the observed components.
+#' @param remove_outliers If `TRUE` (default), clamp `po2_arterial` to
+#'   `[0, 700]`, `fio2_set` to `[0.21, 1]` and `spo2` to `[50, 100]`, setting
+#'   out-of-range values to missing before scoring.
+#'
+#' @return A tibble with one row per ID: the ID column, `p_f`, `p_f_imputed`, the
+#'   six component scores and `sofa_total`.
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' calculate_sofa(
-#'   pao2_fio2 = 250,
-#'   platelets = 120,
-#'   bilirubin = 1.5,
-#'   map = 65,
-#'   creatinine = 1.8,
-#'   gcs = 13
-#' )
+#' wide_dataset <- arrow::read_parquet("wide_df.parquet")
+#' sofa_scores <- compute_sofa(wide_dataset, id_name = "hospitalization_id")
 #' }
-calculate_sofa <- function(pao2_fio2 = NA,
-                          platelets = NA,
-                          bilirubin = NA,
-                          map = NA,
-                          vasopressor = FALSE,
-                          dopamine_dose = 0,
-                          dobutamine_dose = 0,
-                          epinephrine_dose = 0,
-                          norepinephrine_dose = 0,
-                          creatinine = NA,
-                          urine_output = NA,
-                          gcs = NA,
-                          mechanical_vent = FALSE) {
-
-  # Calculate component scores
-  resp_score <- calculate_sofa_respiratory(pao2_fio2, mechanical_vent)
-  coag_score <- calculate_sofa_coagulation(platelets)
-  hepatic_score <- calculate_sofa_hepatic(bilirubin)
-  cardio_score <- calculate_sofa_cardiovascular(
-    map, dopamine_dose, dobutamine_dose,
-    epinephrine_dose, norepinephrine_dose
-  )
-  renal_score <- calculate_sofa_renal(creatinine, urine_output)
-  neuro_score <- calculate_sofa_neurological(gcs)
-
-  # Calculate total (exclude NA)
-  scores <- c(resp_score, coag_score, hepatic_score,
-              cardio_score, renal_score, neuro_score)
-  total_score <- sum(scores, na.rm = TRUE)
-  n_components <- sum(!is.na(scores))
-
-  list(
-    total_sofa = total_score,
-    n_components = n_components,
-    respiratory = resp_score,
-    coagulation = coag_score,
-    hepatic = hepatic_score,
-    cardiovascular = cardio_score,
-    renal = renal_score,
-    neurological = neuro_score
-  )
-}
-
-#' Calculate respiratory SOFA component
-#'
-#' @keywords internal
-calculate_sofa_respiratory <- function(pao2_fio2, mechanical_vent = FALSE) {
-  if (is.na(pao2_fio2)) {
-    return(NA_integer_)
+compute_sofa <- function(wide_df,
+                         cohort_df = NULL,
+                         extremal_type = "worst",
+                         id_name = "encounter_block",
+                         fill_na_scores_with_zero = TRUE,
+                         remove_outliers = TRUE) {
+  if (!extremal_type %in% c("worst", "latest")) {
+    cli::cli_abort("extremal_type must be {.val worst} or {.val latest}, got {.val {extremal_type}}")
+  }
+  if (!id_name %in% names(wide_df)) {
+    cli::cli_abort("id_name {.val {id_name}} not found in wide_df columns")
   }
 
-  # Score based on PaO2/FiO2 ratio
-  if (pao2_fio2 >= 400) {
-    score <- 0
-  } else if (pao2_fio2 >= 300) {
-    score <- 1
-  } else if (pao2_fio2 >= 200) {
-    score <- 2
-  } else if (pao2_fio2 >= 100) {
-    score <- 3
-  } else {
-    score <- 4
-  }
+  connection <- duckdb_connect()
+  on.exit(DBI::dbDisconnect(connection, shutdown = TRUE), add = TRUE)
 
-  # Scores 3-4 require mechanical ventilation
-  if (score >= 3 && !mechanical_vent) {
-    score <- 2
-  }
+  duckdb::duckdb_register(connection, "wide_df", as.data.frame(wide_df))
+  duckdb::duckdb_register(connection, "DEVICE_RANK_MAPPING", as.data.frame(DEVICE_RANK_MAPPING))
 
-  return(score)
-}
+  current_table <- "wide_df"
 
-#' Calculate coagulation SOFA component
-#'
-#' @keywords internal
-calculate_sofa_coagulation <- function(platelets) {
-  if (is.na(platelets)) {
-    return(NA_integer_)
-  }
-
-  if (platelets >= 150) {
-    return(0L)
-  } else if (platelets >= 100) {
-    return(1L)
-  } else if (platelets >= 50) {
-    return(2L)
-  } else if (platelets >= 20) {
-    return(3L)
-  } else {
-    return(4L)
-  }
-}
-
-#' Calculate hepatic SOFA component
-#'
-#' @keywords internal
-calculate_sofa_hepatic <- function(bilirubin) {
-  if (is.na(bilirubin)) {
-    return(NA_integer_)
-  }
-
-  if (bilirubin < 1.2) {
-    return(0L)
-  } else if (bilirubin < 2.0) {
-    return(1L)
-  } else if (bilirubin < 6.0) {
-    return(2L)
-  } else if (bilirubin < 12.0) {
-    return(3L)
-  } else {
-    return(4L)
-  }
-}
-
-#' Calculate cardiovascular SOFA component
-#'
-#' @keywords internal
-calculate_sofa_cardiovascular <- function(map,
-                                         dopamine_dose = 0,
-                                         dobutamine_dose = 0,
-                                         epinephrine_dose = 0,
-                                         norepinephrine_dose = 0) {
-
-  # Check vasopressor doses
-  high_dose_vasopressor <- (dopamine_dose > 15 ||
-                           epinephrine_dose > 0.1 ||
-                           norepinephrine_dose > 0.1)
-
-  moderate_dose_vasopressor <- (dopamine_dose > 5 ||
-                               (epinephrine_dose > 0 && epinephrine_dose <= 0.1) ||
-                               (norepinephrine_dose > 0 && norepinephrine_dose <= 0.1))
-
-  low_dose_vasopressor <- (dopamine_dose > 0 && dopamine_dose <= 5) ||
-                          dobutamine_dose > 0
-
-  # Score based on MAP and vasopressor use
-  if (high_dose_vasopressor) {
-    return(4L)
-  } else if (moderate_dose_vasopressor) {
-    return(3L)
-  } else if (low_dose_vasopressor) {
-    return(2L)
-  } else if (!is.na(map)) {
-    if (map >= 70) {
-      return(0L)
-    } else {
-      return(1L)
-    }
-  } else {
-    return(NA_integer_)
-  }
-}
-
-#' Calculate renal SOFA component
-#'
-#' @keywords internal
-calculate_sofa_renal <- function(creatinine, urine_output = NA) {
-  # Score based on creatinine
-  creat_score <- if (!is.na(creatinine)) {
-    if (creatinine < 1.2) {
-      0L
-    } else if (creatinine < 2.0) {
-      1L
-    } else if (creatinine < 3.5) {
-      2L
-    } else if (creatinine < 5.0) {
-      3L
-    } else {
-      4L
-    }
-  } else {
-    NA_integer_
-  }
-
-  # Score based on urine output
-  uo_score <- if (!is.na(urine_output)) {
-    if (urine_output >= 500) {
-      0L
-    } else if (urine_output >= 200) {
-      3L
-    } else {
-      4L
-    }
-  } else {
-    NA_integer_
-  }
-
-  # Return worst score
-  if (is.na(creat_score) && is.na(uo_score)) {
-    return(NA_integer_)
-  } else if (is.na(creat_score)) {
-    return(uo_score)
-  } else if (is.na(uo_score)) {
-    return(creat_score)
-  } else {
-    return(max(creat_score, uo_score))
-  }
-}
-
-#' Calculate neurological SOFA component
-#'
-#' @keywords internal
-calculate_sofa_neurological <- function(gcs) {
-  if (is.na(gcs)) {
-    return(NA_integer_)
-  }
-
-  if (gcs == 15) {
-    return(0L)
-  } else if (gcs >= 13) {
-    return(1L)
-  } else if (gcs >= 10) {
-    return(2L)
-  } else if (gcs >= 6) {
-    return(3L)
-  } else {
-    return(4L)
-  }
-}
-
-#' Calculate SOFA scores for a dataframe
-#'
-#' @description
-#' Batch calculate SOFA scores for multiple observations (e.g., time series).
-#'
-#' @param data tibble with clinical measurements.
-#' @param pao2_fio2_col Character name of PaO2/FiO2 column.
-#' @param platelets_col Character name of platelets column.
-#' @param bilirubin_col Character name of bilirubin column.
-#' @param map_col Character name of MAP column.
-#' @param creatinine_col Character name of creatinine column.
-#' @param urine_output_col Character name of urine output column.
-#' @param gcs_col Character name of GCS column.
-#' @param mechanical_vent_col Character name of mechanical ventilation column.
-#' @param dopamine_col Character name of dopamine dose column.
-#' @param dobutamine_col Character name of dobutamine dose column.
-#' @param epinephrine_col Character name of epinephrine dose column.
-#' @param norepinephrine_col Character name of norepinephrine dose column.
-#' @param include_components Logical. Include component scores (default: TRUE).
-#'
-#' @return tibble with SOFA scores added.
-#'
-#' @export
-calculate_sofa_scores <- function(data,
-                                  pao2_fio2_col = "pao2_fio2",
-                                  platelets_col = "platelets",
-                                  bilirubin_col = "bilirubin",
-                                  map_col = "map",
-                                  creatinine_col = "creatinine",
-                                  urine_output_col = "urine_output",
-                                  gcs_col = "gcs",
-                                  mechanical_vent_col = "mechanical_vent",
-                                  dopamine_col = "dopamine_dose",
-                                  dobutamine_col = "dobutamine_dose",
-                                  epinephrine_col = "epinephrine_dose",
-                                  norepinephrine_col = "norepinephrine_dose",
-                                  include_components = TRUE) {
-
-  cli::cli_alert_info("Calculating SOFA scores for {nrow(data)} observations")
-
-  # Extract columns (use NA if column doesn't exist)
-  get_col <- function(col_name) {
-    if (col_name %in% names(data)) {
-      data[[col_name]]
-    } else {
-      rep(NA, nrow(data))
-    }
-  }
-
-  pao2_fio2_vals <- get_col(pao2_fio2_col)
-  platelets_vals <- get_col(platelets_col)
-  bilirubin_vals <- get_col(bilirubin_col)
-  map_vals <- get_col(map_col)
-  creatinine_vals <- get_col(creatinine_col)
-  urine_output_vals <- get_col(urine_output_col)
-  gcs_vals <- get_col(gcs_col)
-  mechanical_vent_vals <- get_col(mechanical_vent_col)
-  dopamine_vals <- get_col(dopamine_col)
-  dobutamine_vals <- get_col(dobutamine_col)
-  epinephrine_vals <- get_col(epinephrine_col)
-  norepinephrine_vals <- get_col(norepinephrine_col)
-
-  # Replace NA with defaults for boolean/numeric dose columns
-  mechanical_vent_vals[is.na(mechanical_vent_vals)] <- FALSE
-  dopamine_vals[is.na(dopamine_vals)] <- 0
-  dobutamine_vals[is.na(dobutamine_vals)] <- 0
-  epinephrine_vals[is.na(epinephrine_vals)] <- 0
-  norepinephrine_vals[is.na(norepinephrine_vals)] <- 0
-
-  # Calculate scores for each row
-  sofa_results <- purrr::pmap(
-    list(
-      pao2_fio2 = pao2_fio2_vals,
-      platelets = platelets_vals,
-      bilirubin = bilirubin_vals,
-      map = map_vals,
-      creatinine = creatinine_vals,
-      urine_output = urine_output_vals,
-      gcs = gcs_vals,
-      mechanical_vent = mechanical_vent_vals,
-      dopamine_dose = dopamine_vals,
-      dobutamine_dose = dobutamine_vals,
-      epinephrine_dose = epinephrine_vals,
-      norepinephrine_dose = norepinephrine_vals
-    ),
-    calculate_sofa
-  )
-
-  # Extract results into columns
-  result <- data %>%
-    dplyr::mutate(
-      sofa_total = purrr::map_int(sofa_results, ~.x$total_sofa),
-      sofa_n_components = purrr::map_int(sofa_results, ~.x$n_components)
-    )
-
-  if (include_components) {
-    result <- result %>%
-      dplyr::mutate(
-        sofa_respiratory = purrr::map_int(sofa_results, ~.x$respiratory %||% NA_integer_),
-        sofa_coagulation = purrr::map_int(sofa_results, ~.x$coagulation %||% NA_integer_),
-        sofa_hepatic = purrr::map_int(sofa_results, ~.x$hepatic %||% NA_integer_),
-        sofa_cardiovascular = purrr::map_int(sofa_results, ~.x$cardiovascular %||% NA_integer_),
-        sofa_renal = purrr::map_int(sofa_results, ~.x$renal %||% NA_integer_),
-        sofa_neurological = purrr::map_int(sofa_results, ~.x$neurological %||% NA_integer_)
+  if (!is.null(cohort_df)) {
+    required_columns <- c(id_name, "start_time", "end_time")
+    missing_columns <- setdiff(required_columns, names(cohort_df))
+    if (length(missing_columns) > 0) {
+      cli::cli_abort(
+        "cohort_df must contain columns {.val {required_columns}}. Missing: {.val {missing_columns}}"
       )
+    }
+    duckdb::duckdb_register(connection, "cohort_df", as.data.frame(cohort_df))
+    DBI::dbExecute(connection, sprintf(
+      'CREATE OR REPLACE TEMP TABLE sofa_cohort_filtered AS
+       FROM %s w
+       INNER JOIN cohort_df c
+           ON w."%s" = c."%s"
+           AND c.start_time <= w.event_time
+           AND c.end_time >= w.event_time
+       SELECT w.*',
+      current_table, id_name, id_name
+    ))
+    current_table <- "sofa_cohort_filtered"
   }
 
-  cli::cli_alert_success("SOFA calculation complete")
-
-  return(result)
-}
-
-#' Calculate SOFA scores over time
-#'
-#' @description
-#' Calculate SOFA scores for time-series data (e.g., hourly or daily).
-#' Requires wide format data with time points.
-#'
-#' @param wide_data tibble in wide format with measurements.
-#' @param id_col Character. ID column name (default: "hospitalization_id").
-#' @param time_col Character. Time column name (default: "time_rounded").
-#' @param ... Additional arguments passed to calculate_sofa_scores().
-#'
-#' @return tibble with SOFA scores over time.
-#'
-#' @export
-calculate_sofa_time_series <- function(wide_data,
-                                       id_col = "hospitalization_id",
-                                       time_col = "time_rounded",
-                                       ...) {
-
-  if (!(id_col %in% names(wide_data))) {
-    cli::cli_abort("ID column {id_col} not found")
+  if (remove_outliers) {
+    cli::cli_alert_info("Removing outliers from wide dataset")
+    DBI::dbExecute(connection, sprintf(
+      "CREATE OR REPLACE TEMP TABLE sofa_outliers_removed AS
+       FROM %s
+       SELECT * REPLACE (
+         CASE WHEN po2_arterial BETWEEN 0 AND 700 THEN po2_arterial END AS po2_arterial,
+         CASE WHEN fio2_set BETWEEN 0.21 AND 1 THEN fio2_set END AS fio2_set,
+         CASE WHEN spo2 BETWEEN 50 AND 100 THEN spo2 END AS spo2
+       )",
+      current_table
+    ))
+    current_table <- "sofa_outliers_removed"
   }
 
-  if (!(time_col %in% names(wide_data))) {
-    cli::cli_abort("Time column {time_col} not found")
+  impute_pao2_from_spo2(connection, current_table, "sofa_pao2_imputed")
+  agg_extremal_values_by_id(
+    connection, "sofa_pao2_imputed", "sofa_extremal_values", extremal_type, id_name
+  )
+  sofa_scores <- compute_sofa_from_extremal_values(connection, "sofa_extremal_values", id_name)
+
+  if (fill_na_scores_with_zero) {
+    sofa_scores <- fill_na_scores(sofa_scores)
   }
 
-  cli::cli_h2("Calculating Time-Series SOFA Scores")
-  cli::cli_alert_info("Data: {nrow(wide_data)} time points")
-
-  # Calculate SOFA scores
-  result <- calculate_sofa_scores(wide_data, ...)
-
-  # Summarize by patient
-  sofa_summary <- result %>%
-    dplyr::group_by(.data[[id_col]]) %>%
-    dplyr::summarize(
-      n_timepoints = dplyr::n(),
-      mean_sofa = mean(sofa_total, na.rm = TRUE),
-      max_sofa = max(sofa_total, na.rm = TRUE),
-      min_sofa = min(sofa_total, na.rm = TRUE),
-      admission_sofa = dplyr::first(sofa_total),
-      discharge_sofa = dplyr::last(sofa_total),
-      delta_sofa = discharge_sofa - admission_sofa,
-      .groups = "drop"
-    )
-
-  cli::cli_alert_success("Time-series SOFA calculation complete")
-  cli::cli_text("Summary statistics:")
-  cli::cli_text("  Mean SOFA: {round(mean(sofa_summary$mean_sofa, na.rm = TRUE), 1)}")
-  cli::cli_text("  Max SOFA: {round(max(sofa_summary$max_sofa, na.rm = TRUE), 1)}")
-
-  attr(result, "summary") <- sofa_summary
-
-  return(result)
-}
-
-#' Calculate delta SOFA (change from baseline)
-#'
-#' @description
-#' Calculate change in SOFA score from admission or baseline measurement.
-#'
-#' @param sofa_data tibble with SOFA scores over time.
-#' @param id_col Character. ID column name.
-#' @param time_col Character. Time column name.
-#' @param sofa_col Character. SOFA score column name (default: "sofa_total").
-#' @param baseline Character. Baseline method: "first", "min", "mean" (default: "first").
-#'
-#' @return tibble with delta SOFA scores.
-#'
-#' @export
-calculate_delta_sofa <- function(sofa_data,
-                                 id_col = "hospitalization_id",
-                                 time_col = "time_rounded",
-                                 sofa_col = "sofa_total",
-                                 baseline = "first") {
-
-  cli::cli_alert_info("Calculating delta SOFA (baseline: {baseline})")
-
-  # Calculate baseline for each patient
-  baseline_sofa <- sofa_data %>%
-    dplyr::group_by(.data[[id_col]]) %>%
-    dplyr::summarize(
-      baseline_sofa = switch(baseline,
-        first = dplyr::first(.data[[sofa_col]]),
-        min = min(.data[[sofa_col]], na.rm = TRUE),
-        mean = mean(.data[[sofa_col]], na.rm = TRUE),
-        {
-          cli::cli_warn("Unknown baseline method {baseline}, using first")
-          dplyr::first(.data[[sofa_col]])
-        }
-      ),
-      .groups = "drop"
-    )
-
-  # Join baseline and calculate delta
-  result <- sofa_data %>%
-    dplyr::left_join(baseline_sofa, by = id_col) %>%
-    dplyr::mutate(
-      delta_sofa = .data[[sofa_col]] - baseline_sofa
-    )
-
-  cli::cli_alert_success("Delta SOFA calculation complete")
-
-  return(result)
+  dplyr::as_tibble(sofa_scores)
 }

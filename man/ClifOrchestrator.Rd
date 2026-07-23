@@ -2,42 +2,85 @@
 % Please edit documentation in R/clif_orchestrator.R
 \name{ClifOrchestrator}
 \alias{ClifOrchestrator}
-\title{CLIF Orchestrator Class}
+\title{ClifOrchestrator: unified interface across CLIF tables}
 \description{
-Main orchestration class for managing multiple CLIF tables and coordinating
-operations across them. Provides a unified interface for loading, validating,
-and analyzing CLIF data.
+ClifOrchestrator: unified interface across CLIF tables
+
+ClifOrchestrator: unified interface across CLIF tables
+}
+\details{
+Centralized entry point for loading, validating and analysing multiple CLIF tables
+with one shared configuration. Ported from \code{clifpy/clif_orchestrator.py}; method
+names and argument defaults follow the Python original.
+
+Configuration is resolved with the same priority clifpy uses: explicit arguments
+first, then a config file, then auto-detection of \code{config.json} in the working
+directory. Arguments always override config file values.
+
+Each CLIF table is exposed as a field of the same name, so \code{orchestrator$vitals}
+is the \link{Vitals} object once loaded and \code{NULL} before that.
 }
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
-\item{\code{config_path}}{Character path to configuration file}
+\item{\code{data_directory}}{Directory containing the CLIF data files.}
 
-\item{\code{config}}{List containing configuration}
+\item{\code{filetype}}{Either \code{"csv"} or \code{"parquet"}.}
 
-\item{\code{data_directory}}{Character path to data directory}
+\item{\code{timezone}}{Olson timezone used for datetime columns.}
 
-\item{\code{filetype}}{Character file type ("csv" or "parquet")}
+\item{\code{clif_version}}{CLIF schema version used when loading tables.}
 
-\item{\code{timezone}}{Character timezone for datetime columns}
+\item{\code{output_directory}}{Directory for logs and outputs.}
 
-\item{\code{output_directory}}{Character path for output files}
+\item{\code{stitch_encounter}}{Whether to stitch encounters after loading.}
 
-\item{\code{stitch_encounter}}{Logical whether to stitch encounters}
+\item{\code{stitch_time_interval}}{Hours between discharge and next admission that
+still count as one encounter.}
 
-\item{\code{stitch_time_interval}}{Numeric hours between encounters for stitching}
+\item{\code{encounter_mapping}}{Mapping of hospitalization_id to encounter_block.}
 
-\item{\code{patient}}{Patient table object}
+\item{\code{wide_df}}{Wide dataset produced by \code{create_wide_dataset()}.}
 
-\item{\code{hospitalization}}{Hospitalization table object}
+\item{\code{wide_df_sofa}}{Wide dataset built specifically for SOFA computation.}
 
-\item{\code{adt}}{ADT table object}
+\item{\code{sofa_df}}{SOFA scores produced by \code{compute_sofa_scores()}.}
 
-\item{\code{vitals}}{Vitals table object}
+\item{\code{patient}}{Patient table object.}
 
-\item{\code{labs}}{Labs table object}
+\item{\code{hospitalization}}{Hospitalization table object.}
 
-\item{\code{encounter_mapping}}{tibble mapping original to stitched IDs}
+\item{\code{adt}}{ADT table object.}
+
+\item{\code{labs}}{Labs table object.}
+
+\item{\code{vitals}}{Vitals table object.}
+
+\item{\code{medication_admin_continuous}}{Continuous medication administration table object.}
+
+\item{\code{medication_admin_intermittent}}{Intermittent medication administration table object.}
+
+\item{\code{patient_assessments}}{Patient assessments table object.}
+
+\item{\code{respiratory_support}}{Respiratory support table object.}
+
+\item{\code{position}}{Position table object.}
+
+\item{\code{hospital_diagnosis}}{Hospital diagnosis table object.}
+
+\item{\code{microbiology_culture}}{Microbiology culture table object.}
+
+\item{\code{crrt_therapy}}{CRRT therapy table object.}
+
+\item{\code{patient_procedures}}{Patient procedures table object.}
+
+\item{\code{microbiology_susceptibility}}{Microbiology susceptibility table object.}
+
+\item{\code{ecmo_mcs}}{ECMO/MCS table object.}
+
+\item{\code{microbiology_nonculture}}{Microbiology non-culture table object.}
+
+\item{\code{code_status}}{Code status table object.}
 }
 \if{html}{\out{</div>}}
 }
@@ -47,16 +90,20 @@ and analyzing CLIF data.
 \item \href{#method-ClifOrchestrator-new}{\code{ClifOrchestrator$new()}}
 \item \href{#method-ClifOrchestrator-load_table}{\code{ClifOrchestrator$load_table()}}
 \item \href{#method-ClifOrchestrator-initialize_tables}{\code{ClifOrchestrator$initialize_tables()}}
+\item \href{#method-ClifOrchestrator-run_stitch_encounters}{\code{ClifOrchestrator$run_stitch_encounters()}}
+\item \href{#method-ClifOrchestrator-get_loaded_tables}{\code{ClifOrchestrator$get_loaded_tables()}}
+\item \href{#method-ClifOrchestrator-get_tables_obj_list}{\code{ClifOrchestrator$get_tables_obj_list()}}
+\item \href{#method-ClifOrchestrator-get_encounter_mapping}{\code{ClifOrchestrator$get_encounter_mapping()}}
 \item \href{#method-ClifOrchestrator-validate_all}{\code{ClifOrchestrator$validate_all()}}
-\item \href{#method-ClifOrchestrator-apply_stitching}{\code{ClifOrchestrator$apply_stitching()}}
-\item \href{#method-ClifOrchestrator-summary}{\code{ClifOrchestrator$summary()}}
-\item \href{#method-ClifOrchestrator-export_validation_reports}{\code{ClifOrchestrator$export_validation_reports()}}
-\item \href{#method-ClifOrchestrator-print}{\code{ClifOrchestrator$print()}}
 \item \href{#method-ClifOrchestrator-create_wide_dataset}{\code{ClifOrchestrator$create_wide_dataset()}}
-\item \href{#method-ClifOrchestrator-calculate_sofa_scores}{\code{ClifOrchestrator$calculate_sofa_scores()}}
-\item \href{#method-ClifOrchestrator-calculate_charlson_scores}{\code{ClifOrchestrator$calculate_charlson_scores()}}
-\item \href{#method-ClifOrchestrator-convert_medication_doses}{\code{ClifOrchestrator$convert_medication_doses()}}
-\item \href{#method-ClifOrchestrator-generate_analysis_report}{\code{ClifOrchestrator$generate_analysis_report()}}
+\item \href{#method-ClifOrchestrator-convert_wide_to_hourly}{\code{ClifOrchestrator$convert_wide_to_hourly()}}
+\item \href{#method-ClifOrchestrator-convert_dose_units_for_continuous_meds}{\code{ClifOrchestrator$convert_dose_units_for_continuous_meds()}}
+\item \href{#method-ClifOrchestrator-convert_dose_units_for_intermittent_meds}{\code{ClifOrchestrator$convert_dose_units_for_intermittent_meds()}}
+\item \href{#method-ClifOrchestrator-compute_sofa_scores}{\code{ClifOrchestrator$compute_sofa_scores()}}
+\item \href{#method-ClifOrchestrator-compute_cci_scores}{\code{ClifOrchestrator$compute_cci_scores()}}
+\item \href{#method-ClifOrchestrator-compute_elix_scores}{\code{ClifOrchestrator$compute_elix_scores()}}
+\item \href{#method-ClifOrchestrator-get_sys_resource_info}{\code{ClifOrchestrator$get_sys_resource_info()}}
+\item \href{#method-ClifOrchestrator-print}{\code{ClifOrchestrator$print()}}
 \item \href{#method-ClifOrchestrator-clone}{\code{ClifOrchestrator$clone()}}
 }
 }
@@ -64,35 +111,40 @@ and analyzing CLIF data.
 \if{html}{\out{<a id="method-ClifOrchestrator-new"></a>}}
 \if{latex}{\out{\hypertarget{method-ClifOrchestrator-new}{}}}
 \subsection{Method \code{new()}}{
-Initialize ClifOrchestrator
+Create an orchestrator.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{ClifOrchestrator$new(
   config_path = NULL,
   data_directory = NULL,
-  filetype = "csv",
-  timezone = "UTC",
+  filetype = NULL,
+  timezone = NULL,
   output_directory = NULL,
   stitch_encounter = FALSE,
-  stitch_time_interval = 24
+  stitch_time_interval = 6,
+  clif_version = NULL
 )}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{config_path}}{Character. Path to configuration YAML file (optional).}
+\item{\code{config_path}}{Optional path to a JSON or YAML config file.}
 
-\item{\code{data_directory}}{Character. Path to directory containing CLIF data files.}
+\item{\code{data_directory}}{Directory containing the CLIF data files.}
 
-\item{\code{filetype}}{Character. File type: "csv" or "parquet" (default: "csv").}
+\item{\code{filetype}}{Either \code{"csv"} or \code{"parquet"}.}
 
-\item{\code{timezone}}{Character. Timezone for datetime columns (default: "UTC").}
+\item{\code{timezone}}{Olson timezone for datetime columns.}
 
-\item{\code{output_directory}}{Character. Path for saving outputs (default: NULL).}
+\item{\code{output_directory}}{Directory for logs and outputs. Defaults to
+\verb{output/} under the working directory.}
 
-\item{\code{stitch_encounter}}{Logical. Whether to stitch related encounters (default: FALSE).}
+\item{\code{stitch_encounter}}{Whether to stitch encounters during \code{initialize_tables()}.}
 
-\item{\code{stitch_time_interval}}{Numeric. Hours between encounters to stitch (default: 24).}
+\item{\code{stitch_time_interval}}{Hours between encounters to treat as linked.
+Defaults to 6, matching clifpy.}
+
+\item{\code{clif_version}}{CLIF schema version. Defaults to \link{DEFAULT_CLIF_VERSION}.}
 }
 \if{html}{\out{</div>}}
 }
@@ -104,15 +156,26 @@ A new ClifOrchestrator instance.
 \if{html}{\out{<a id="method-ClifOrchestrator-load_table"></a>}}
 \if{latex}{\out{\hypertarget{method-ClifOrchestrator-load_table}{}}}
 \subsection{Method \code{load_table()}}{
-Load a specific CLIF table
+Load one CLIF table and store it on the orchestrator.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ClifOrchestrator$load_table(table_name)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{ClifOrchestrator$load_table(
+  table_name,
+  sample_size = NULL,
+  columns = NULL,
+  filters = NULL
+)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{table_name}}{Character. Name of table to load.}
+\item{\code{table_name}}{snake_case CLIF table name.}
+
+\item{\code{sample_size}}{Optional maximum number of rows to read.}
+
+\item{\code{columns}}{Optional character vector of columns to read.}
+
+\item{\code{filters}}{Optional named list of equality filters applied at read time.}
 }
 \if{html}{\out{</div>}}
 }
@@ -124,29 +187,95 @@ The loaded table object.
 \if{html}{\out{<a id="method-ClifOrchestrator-initialize_tables"></a>}}
 \if{latex}{\out{\hypertarget{method-ClifOrchestrator-initialize_tables}{}}}
 \subsection{Method \code{initialize_tables()}}{
-Initialize and load multiple tables
+Load several tables at once.
+
+Runs encounter stitching afterwards when \code{stitch_encounter} is \code{TRUE}.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ClifOrchestrator$initialize_tables(tables = NULL, validate = TRUE)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{ClifOrchestrator$initialize_tables(
+  tables = NULL,
+  sample_size = NULL,
+  columns = NULL,
+  filters = NULL
+)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{tables}}{Character vector of table names to load. If NULL, loads all available.}
+\item{\code{tables}}{Character vector of table names. Defaults to \code{"patient"}.}
 
-\item{\code{validate}}{Logical. Whether to validate after loading (default: TRUE).}
+\item{\code{sample_size}}{Optional maximum number of rows per table.}
+
+\item{\code{columns}}{Optional named list mapping table names to column vectors.}
+
+\item{\code{filters}}{Optional named list mapping table names to filter lists.}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-Invisible self.
+The orchestrator, invisibly.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ClifOrchestrator-run_stitch_encounters"></a>}}
+\if{latex}{\out{\hypertarget{method-ClifOrchestrator-run_stitch_encounters}{}}}
+\subsection{Method \code{run_stitch_encounters()}}{
+Link hospitalizations that belong to one continuous encounter.
+
+Updates \code{hospitalization$df} and \code{adt$df} in place and stores the mapping in
+\code{encounter_mapping}.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ClifOrchestrator$run_stitch_encounters()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+The orchestrator, invisibly.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ClifOrchestrator-get_loaded_tables"></a>}}
+\if{latex}{\out{\hypertarget{method-ClifOrchestrator-get_loaded_tables}{}}}
+\subsection{Method \code{get_loaded_tables()}}{
+Names of the tables currently loaded.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ClifOrchestrator$get_loaded_tables()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+Character vector of table names, in registry order.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ClifOrchestrator-get_tables_obj_list"></a>}}
+\if{latex}{\out{\hypertarget{method-ClifOrchestrator-get_tables_obj_list}{}}}
+\subsection{Method \code{get_tables_obj_list()}}{
+The loaded table objects.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ClifOrchestrator$get_tables_obj_list()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+A named list of table objects, in registry order.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ClifOrchestrator-get_encounter_mapping"></a>}}
+\if{latex}{\out{\hypertarget{method-ClifOrchestrator-get_encounter_mapping}{}}}
+\subsection{Method \code{get_encounter_mapping()}}{
+The encounter mapping, computing it if needed.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ClifOrchestrator$get_encounter_mapping()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+A tibble mapping hospitalization_id to encounter_block.
 }
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-ClifOrchestrator-validate_all"></a>}}
 \if{latex}{\out{\hypertarget{method-ClifOrchestrator-validate_all}{}}}
 \subsection{Method \code{validate_all()}}{
-Validate all loaded tables
+Validate every loaded table.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{ClifOrchestrator$validate_all(verbose = TRUE)}\if{html}{\out{</div>}}
 }
@@ -154,223 +283,322 @@ Validate all loaded tables
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{verbose}}{Logical. Print validation details (default: TRUE).}
+\item{\code{verbose}}{Whether to print per-table results.}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-List of validation results for each table.
+The orchestrator, invisibly.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-ClifOrchestrator-apply_stitching"></a>}}
-\if{latex}{\out{\hypertarget{method-ClifOrchestrator-apply_stitching}{}}}
-\subsection{Method \code{apply_stitching()}}{
-Apply encounter stitching to hospitalization data
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ClifOrchestrator$apply_stitching()}\if{html}{\out{</div>}}
-}
+\if{html}{\out{<a id="method-ClifOrchestrator-create_wide_dataset"></a>}}
+\if{latex}{\out{\hypertarget{method-ClifOrchestrator-create_wide_dataset}{}}}
+\subsection{Method \code{create_wide_dataset()}}{
+Build a wide, time-aligned dataset across tables.
 
-\subsection{Returns}{
-Invisible self.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-ClifOrchestrator-summary"></a>}}
-\if{latex}{\out{\hypertarget{method-ClifOrchestrator-summary}{}}}
-\subsection{Method \code{summary()}}{
-Get summary of all loaded tables
+Delegates to \code{\link[=create_wide_dataset]{create_wide_dataset()}} and stores the result in \code{wide_df}.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ClifOrchestrator$summary()}\if{html}{\out{</div>}}
-}
-
-\subsection{Returns}{
-List of summary information.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-ClifOrchestrator-export_validation_reports"></a>}}
-\if{latex}{\out{\hypertarget{method-ClifOrchestrator-export_validation_reports}{}}}
-\subsection{Method \code{export_validation_reports()}}{
-Export all validation reports
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ClifOrchestrator$export_validation_reports(output_dir = NULL)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{ClifOrchestrator$create_wide_dataset(
+  tables_to_load = NULL,
+  category_filters = NULL,
+  sample = FALSE,
+  hospitalization_ids = NULL,
+  encounter_blocks = NULL,
+  cohort_df = NULL,
+  output_format = "dataframe",
+  save_to_data_location = FALSE,
+  output_filename = NULL,
+  return_dataframe = TRUE,
+  batch_size = 1000,
+  memory_limit = NULL,
+  threads = NULL,
+  show_progress = TRUE
+)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{output_dir}}{Character. Directory for reports (default: uses self$output_directory).}
+\item{\code{tables_to_load}}{Character vector of tables to include.}
+
+\item{\code{category_filters}}{Named list of filters. For pivot-type tables the values
+are category values; for wide-type tables they are column names.}
+
+\item{\code{sample}}{Whether to sample hospitalizations.}
+
+\item{\code{hospitalization_ids}}{Optional character vector of hospitalizations to include.}
+
+\item{\code{encounter_blocks}}{Optional character vector of encounter blocks to include.}
+
+\item{\code{cohort_df}}{Optional cohort data frame restricting rows by time window.}
+
+\item{\code{output_format}}{Either \code{"dataframe"} or a file format to save.}
+
+\item{\code{save_to_data_location}}{Whether to write the result next to the input data.}
+
+\item{\code{output_filename}}{Optional output file name.}
+
+\item{\code{return_dataframe}}{Whether to return the result as well as storing it.}
+
+\item{\code{batch_size}}{Hospitalizations processed per batch.}
+
+\item{\code{memory_limit}}{Optional DuckDB memory limit, e.g. \code{"4GB"}.}
+
+\item{\code{threads}}{Optional DuckDB thread count.}
+
+\item{\code{show_progress}}{Whether to show a progress bar.}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-Invisible self.
+The wide dataset as a tibble.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ClifOrchestrator-convert_wide_to_hourly"></a>}}
+\if{latex}{\out{\hypertarget{method-ClifOrchestrator-convert_wide_to_hourly}{}}}
+\subsection{Method \code{convert_wide_to_hourly()}}{
+Aggregate a wide dataset into fixed-width time windows.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ClifOrchestrator$convert_wide_to_hourly(
+  aggregation_config,
+  wide_df = NULL,
+  id_name = "hospitalization_id",
+  hourly_window = 1,
+  fill_gaps = FALSE,
+  memory_limit = "4GB",
+  temp_directory = NULL,
+  batch_size = NULL
+)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{aggregation_config}}{Named list mapping aggregation method to column names.
+Methods: \code{mean}, \code{max}, \code{min}, \code{median}, \code{first}, \code{last}, \code{boolean}, \code{one_hot_encode}.}
+
+\item{\code{wide_df}}{Wide dataset to aggregate. Defaults to \code{self$wide_df}.}
+
+\item{\code{id_name}}{Grouping column, e.g. \code{"hospitalization_id"}.}
+
+\item{\code{hourly_window}}{Window width in hours.}
+
+\item{\code{fill_gaps}}{Whether to emit rows for windows with no observations.}
+
+\item{\code{memory_limit}}{Optional DuckDB memory limit.}
+
+\item{\code{temp_directory}}{Optional DuckDB spill directory.}
+
+\item{\code{batch_size}}{Optional batch size.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+An aggregated tibble.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ClifOrchestrator-convert_dose_units_for_continuous_meds"></a>}}
+\if{latex}{\out{\hypertarget{method-ClifOrchestrator-convert_dose_units_for_continuous_meds}{}}}
+\subsection{Method \code{convert_dose_units_for_continuous_meds()}}{
+Convert continuous medication doses to preferred units.
+
+Loads the medication and weight data it needs, then stores the converted data
+on the medication table as \code{df_converted} with \code{conversion_counts} alongside.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ClifOrchestrator$convert_dose_units_for_continuous_meds(
+  preferred_units,
+  vitals_df = NULL,
+  hospitalization_ids = NULL,
+  show_intermediate = FALSE,
+  override = FALSE,
+  save_to_table = TRUE
+)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{preferred_units}}{Named list mapping medication category to target unit.}
+
+\item{\code{vitals_df}}{Optional vitals data frame supplying \code{weight_kg}.}
+
+\item{\code{hospitalization_ids}}{Optional character vector to restrict processing.}
+
+\item{\code{show_intermediate}}{Whether to keep intermediate calculation columns.}
+
+\item{\code{override}}{Whether to continue past unacceptable target units.}
+
+\item{\code{save_to_table}}{Whether to store results on the table object.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+A named list with \code{converted} and \code{counts} when \code{save_to_table} is
+\code{FALSE}; otherwise the orchestrator, invisibly.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ClifOrchestrator-convert_dose_units_for_intermittent_meds"></a>}}
+\if{latex}{\out{\hypertarget{method-ClifOrchestrator-convert_dose_units_for_intermittent_meds}{}}}
+\subsection{Method \code{convert_dose_units_for_intermittent_meds()}}{
+Convert intermittent medication doses to preferred units.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ClifOrchestrator$convert_dose_units_for_intermittent_meds(
+  preferred_units,
+  vitals_df = NULL,
+  hospitalization_ids = NULL,
+  show_intermediate = FALSE,
+  override = FALSE,
+  save_to_table = TRUE
+)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{preferred_units}}{Named list mapping medication category to target unit.}
+
+\item{\code{vitals_df}}{Optional vitals data frame supplying \code{weight_kg}.}
+
+\item{\code{hospitalization_ids}}{Optional character vector to restrict processing.}
+
+\item{\code{show_intermediate}}{Whether to keep intermediate calculation columns.}
+
+\item{\code{override}}{Whether to continue past unacceptable target units.}
+
+\item{\code{save_to_table}}{Whether to store results on the table object.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+A named list with \code{converted} and \code{counts} when \code{save_to_table} is
+\code{FALSE}; otherwise the orchestrator, invisibly.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ClifOrchestrator-compute_sofa_scores"></a>}}
+\if{latex}{\out{\hypertarget{method-ClifOrchestrator-compute_sofa_scores}{}}}
+\subsection{Method \code{compute_sofa_scores()}}{
+Compute SOFA scores.
+
+Builds the wide dataset SOFA needs when one is not supplied, then delegates to
+\code{\link[=compute_sofa]{compute_sofa()}}. Results are stored in \code{sofa_df}.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ClifOrchestrator$compute_sofa_scores(
+  wide_df = NULL,
+  cohort_df = NULL,
+  extremal_type = "worst",
+  id_name = "encounter_block",
+  fill_na_scores_with_zero = TRUE,
+  remove_outliers = TRUE,
+  create_new_wide_df = TRUE
+)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{wide_df}}{Optional pre-built wide dataset.}
+
+\item{\code{cohort_df}}{Optional cohort restricting observations by time window.}
+
+\item{\code{extremal_type}}{\code{"worst"} (default) or \code{"latest"}.}
+
+\item{\code{id_name}}{Grouping column: \code{"encounter_block"} or \code{"hospitalization_id"}.}
+
+\item{\code{fill_na_scores_with_zero}}{Whether missing component scores default to 0.}
+
+\item{\code{remove_outliers}}{Whether to nullify out-of-range values first.}
+
+\item{\code{create_new_wide_df}}{Whether to build a fresh wide dataset for SOFA.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+A tibble of SOFA component scores and totals per ID.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ClifOrchestrator-compute_cci_scores"></a>}}
+\if{latex}{\out{\hypertarget{method-ClifOrchestrator-compute_cci_scores}{}}}
+\subsection{Method \code{compute_cci_scores()}}{
+Charlson Comorbidity Index for the loaded diagnosis table.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ClifOrchestrator$compute_cci_scores(hierarchy = TRUE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{hierarchy}}{Whether to apply the comorbidity hierarchy rules.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+A tibble of per-hospitalization condition flags and \code{cci_score}.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ClifOrchestrator-compute_elix_scores"></a>}}
+\if{latex}{\out{\hypertarget{method-ClifOrchestrator-compute_elix_scores}{}}}
+\subsection{Method \code{compute_elix_scores()}}{
+Elixhauser comorbidity index for the loaded diagnosis table.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ClifOrchestrator$compute_elix_scores(hierarchy = TRUE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{hierarchy}}{Whether to apply the comorbidity hierarchy rules.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+A tibble of per-hospitalization condition flags and \code{elix_score}.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ClifOrchestrator-get_sys_resource_info"></a>}}
+\if{latex}{\out{\hypertarget{method-ClifOrchestrator-get_sys_resource_info}{}}}
+\subsection{Method \code{get_sys_resource_info()}}{
+System resource information.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ClifOrchestrator$get_sys_resource_info(print_summary = TRUE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{print_summary}}{Whether to print a human-readable summary.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+A named list with logical and physical CPU counts.
 }
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-ClifOrchestrator-print"></a>}}
 \if{latex}{\out{\hypertarget{method-ClifOrchestrator-print}{}}}
 \subsection{Method \code{print()}}{
-Print method
+Print an overview of the orchestrator state.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ClifOrchestrator$print()}\if{html}{\out{</div>}}
-}
-
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-ClifOrchestrator-create_wide_dataset"></a>}}
-\if{latex}{\out{\hypertarget{method-ClifOrchestrator-create_wide_dataset}{}}}
-\subsection{Method \code{create_wide_dataset()}}{
-Create wide dataset from vitals and labs
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ClifOrchestrator$create_wide_dataset(
-  time_resolution = "hour",
-  id_col = "hospitalization_id"
-)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{ClifOrchestrator$print(...)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{time_resolution}}{Character. Time resolution: "hour", "4hour", "day" (default: "hour").}
-
-\item{\code{id_col}}{Character. ID column name (default: "hospitalization_id").}
+\item{\code{...}}{Unused; present for print compatibility.}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-tibble in wide format.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-ClifOrchestrator-calculate_sofa_scores"></a>}}
-\if{latex}{\out{\hypertarget{method-ClifOrchestrator-calculate_sofa_scores}{}}}
-\subsection{Method \code{calculate_sofa_scores()}}{
-Calculate SOFA scores from wide dataset
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ClifOrchestrator$calculate_sofa_scores(
-  wide_data = NULL,
-  time_resolution = "hour",
-  ...
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{wide_data}}{tibble. Wide format data (optional, will create if not provided).}
-
-\item{\code{time_resolution}}{Character. Time resolution if creating wide data (default: "hour").}
-
-\item{\code{...}}{Additional arguments passed to calculate_sofa_time_series().}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-tibble with SOFA scores.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-ClifOrchestrator-calculate_charlson_scores"></a>}}
-\if{latex}{\out{\hypertarget{method-ClifOrchestrator-calculate_charlson_scores}{}}}
-\subsection{Method \code{calculate_charlson_scores()}}{
-Calculate Charlson Comorbidity Index for patients
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ClifOrchestrator$calculate_charlson_scores(
-  diagnosis_data,
-  patient_id_col = "hospitalization_id",
-  icd_code_col = "icd_code",
-  icd_version_col = NULL,
-  age_col = NULL,
-  default_icd_version = "10"
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{diagnosis_data}}{tibble. Diagnosis data with ICD codes (required).}
-
-\item{\code{patient_id_col}}{Character. Patient ID column (default: "hospitalization_id").}
-
-\item{\code{icd_code_col}}{Character. ICD code column (default: "icd_code").}
-
-\item{\code{icd_version_col}}{Character. ICD version column (optional).}
-
-\item{\code{age_col}}{Character. Age column (optional).}
-
-\item{\code{default_icd_version}}{Character. Default ICD version (default: "10").}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-tibble with CCI scores.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-ClifOrchestrator-convert_medication_doses"></a>}}
-\if{latex}{\out{\hypertarget{method-ClifOrchestrator-convert_medication_doses}{}}}
-\subsection{Method \code{convert_medication_doses()}}{
-Convert medication doses to standard units
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ClifOrchestrator$convert_medication_doses(
-  target_units,
-  dose_col = "dose",
-  unit_col = "dose_unit",
-  medication_col = "medication_name",
-  weight_col = "weight_kg"
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{target_units}}{Named list. Target units by medication name.}
-
-\item{\code{dose_col}}{Character. Dose column name (default: "dose").}
-
-\item{\code{unit_col}}{Character. Unit column name (default: "dose_unit").}
-
-\item{\code{medication_col}}{Character. Medication name column (default: "medication_name").}
-
-\item{\code{weight_col}}{Character. Weight column name (default: "weight_kg").}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-tibble with converted medication doses.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-ClifOrchestrator-generate_analysis_report"></a>}}
-\if{latex}{\out{\hypertarget{method-ClifOrchestrator-generate_analysis_report}{}}}
-\subsection{Method \code{generate_analysis_report()}}{
-Generate comprehensive analysis report
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ClifOrchestrator$generate_analysis_report(
-  include_sofa = FALSE,
-  include_charlson = FALSE,
-  diagnosis_data = NULL,
-  output_file = NULL
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{include_sofa}}{Logical. Include SOFA scores (default: FALSE).}
-
-\item{\code{include_charlson}}{Logical. Include Charlson scores (default: FALSE).}
-
-\item{\code{diagnosis_data}}{tibble. Diagnosis data for Charlson (required if include_charlson = TRUE).}
-
-\item{\code{output_file}}{Character. Output file path (optional).}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-List with analysis results.
+The orchestrator, invisibly.
 }
 }
 \if{html}{\out{<hr>}}

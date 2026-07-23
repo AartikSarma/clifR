@@ -1,0 +1,16 @@
+{
+  "hospitalization_id": 39465,
+  "lab_category": 39465,
+  "lab_collect_dttm": 39465,
+  "lab_loinc_code": 39465,
+  "lab_name": 39465,
+  "lab_order_category": 39465,
+  "lab_order_dttm": 38706,
+  "lab_order_name": 39465,
+  "lab_result_dttm": 39465,
+  "lab_specimen_category": 39465,
+  "lab_specimen_name": 39465,
+  "lab_value": 39465,
+  "lab_value_numeric": 37440,
+  "reference_unit": 39465
+}

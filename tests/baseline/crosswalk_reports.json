@@ -1,0 +1,95 @@
+{
+  "adt": {
+    "columns": {
+      "hospital_type": {
+        "ambiguous": [],
+        "n_values_converted": 33,
+        "unresolved": []
+      },
+      "location_category": {
+        "ambiguous": [],
+        "n_values_converted": 0,
+        "unresolved": []
+      },
+      "location_type": {
+        "ambiguous": [],
+        "n_values_converted": 0,
+        "unresolved": []
+      }
+    },
+    "from_version": "2.1",
+    "is_complete": true,
+    "table": "adt",
+    "to_version": "3.0"
+  },
+  "labs": {
+    "columns": {
+      "lab_category": {
+        "ambiguous": [],
+        "n_values_converted": 0,
+        "unresolved": []
+      },
+      "lab_order_category": {
+        "ambiguous": [],
+        "n_values_converted": 0,
+        "unresolved": []
+      },
+      "lab_specimen_category": {
+        "ambiguous": [],
+        "n_values_converted": 0,
+        "unresolved": [
+          {
+            "count": 39465,
+            "original": "blood",
+            "produced": "blood"
+          }
+        ]
+      }
+    },
+    "from_version": "2.1",
+    "is_complete": false,
+    "table": "labs",
+    "to_version": "3.0"
+  },
+  "patient": {
+    "columns": {
+      "ethnicity_category": {
+        "ambiguous": [],
+        "n_values_converted": 154,
+        "unresolved": []
+      },
+      "language_category": {
+        "ambiguous": [],
+        "n_values_converted": 148,
+        "unresolved": []
+      },
+      "race_category": {
+        "ambiguous": [],
+        "n_values_converted": 152,
+        "unresolved": []
+      },
+      "sex_category": {
+        "ambiguous": [],
+        "n_values_converted": 157,
+        "unresolved": []
+      }
+    },
+    "from_version": "2.1",
+    "is_complete": true,
+    "table": "patient",
+    "to_version": "3.0"
+  },
+  "vitals": {
+    "columns": {
+      "vital_category": {
+        "ambiguous": [],
+        "n_values_converted": 0,
+        "unresolved": []
+      }
+    },
+    "from_version": "2.1",
+    "is_complete": true,
+    "table": "vitals",
+    "to_version": "3.0"
+  }
+}

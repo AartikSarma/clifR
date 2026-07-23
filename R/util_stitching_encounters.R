@@ -1,164 +1,199 @@
-#' Stitch Related Hospital Encounters
+#' Encounter stitching utilities
 #'
-#' @description
-#' Link related hospital encounters based on time proximity.
-#' Encounters within a specified time window are grouped together.
+#' Port of `clifpy/utils/stitching_encounters.py` (clifpy 0.5.0). Groups
+#' hospitalizations that occur within a configurable number of hours of each
+#' other into a single `encounter_block`, so that rapid discharge/readmission
+#' sequences (e.g. ED to inpatient transfers) can be analyzed as one continuous
+#' encounter.
 #'
-#' @param hospitalizations tibble or Hospitalization object. Hospital encounter data.
-#' @param time_interval_hours Numeric. Maximum hours between discharge and
-#'   next admission to consider encounters related (default: 24).
-#' @param patient_id_col Character. Name of patient ID column (default: "patient_id").
-#' @param hosp_id_col Character. Name of hospitalization ID column (default: "hospitalization_id").
-#' @param admission_col Character. Name of admission datetime column (default: "admission_dttm").
-#' @param discharge_col Character. Name of discharge datetime column (default: "discharge_dttm").
+#' @name clif-stitching-encounters
+NULL
+
+# Extract a tibble from either a BaseTable-derived R6 object or a data frame.
+resolve_stitching_input <- function(table_input, argument_name) {
+  if (inherits(table_input, "R6") && !is.null(table_input$df)) {
+    return(dplyr::as_tibble(table_input$df))
+  }
+  if (is.data.frame(table_input)) {
+    return(dplyr::as_tibble(table_input))
+  }
+  cli::cli_abort(
+    "{.arg {argument_name}} must be a CLIF table object or a data frame."
+  )
+}
+
+#' Stitch together related hospital encounters
 #'
-#' @return tibble with original hospitalization_id and new stitched hospitalization_joined_id.
+#' Identifies and groups hospitalizations that occur within a specified time
+#' window of each other (default 6 hours), treating them as a single continuous
+#' encounter. If a patient is readmitted within `time_interval` hours of a
+#' discharge, the two hospitalizations receive the same `encounter_block`.
+#' Chains of linked hospitalizations share one block, and blocks are numbered
+#' by the row index (within the patient/admission-time sort) of the last
+#' hospitalization in each chain, matching clifpy exactly.
 #'
+#' @param hospitalization A `Hospitalization` table object or data frame with
+#'   required columns `patient_id`, `hospitalization_id`, `admission_dttm`,
+#'   `discharge_dttm`, `age_at_admission`, `admission_type_category` and
+#'   `discharge_category`.
+#' @param adt An `Adt` table object or data frame with required columns
+#'   `hospitalization_id`, `in_dttm`, `out_dttm`, `location_category` and
+#'   `hospital_id`.
+#' @param time_interval Integer, default `6`. Number of hours between discharge
+#'   and the next admission for the encounters to be considered linked.
+#'
+#' @return A named list with three tibbles (clifpy returns the same three
+#'   objects as a tuple):
+#'   \describe{
+#'     \item{hospitalization}{The input hospitalization data with an added
+#'       `encounter_block` column.}
+#'     \item{adt}{The input ADT data with an added `encounter_block` column.}
+#'     \item{encounter_mapping}{Mapping of `hospitalization_id` to
+#'       `encounter_block`.}
+#'   }
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' # Stitch encounters within 24 hours
-#' stitched <- stitch_encounters(hospitalizations, time_interval_hours = 24)
-#'
-#' # Stitch encounters within 48 hours
-#' stitched <- stitch_encounters(hospitalizations, time_interval_hours = 48)
+#' stitched <- stitch_encounters(hospitalization_data, adt_data, time_interval = 12)
+#' stitched$hospitalization
+#' stitched$adt
+#' stitched$encounter_mapping
 #' }
-stitch_encounters <- function(hospitalizations,
-                               time_interval_hours = 24,
-                               patient_id_col = "patient_id",
-                               hosp_id_col = "hospitalization_id",
-                               admission_col = "admission_dttm",
-                               discharge_col = "discharge_dttm") {
+stitch_encounters <- function(hospitalization, adt, time_interval = 6) {
+  hospitalization_data <- resolve_stitching_input(hospitalization, "hospitalization")
+  adt_data <- resolve_stitching_input(adt, "adt")
 
-  # Extract data if Hospitalization object
-  if (inherits(hospitalizations, "Hospitalization")) {
-    hosp_df <- hospitalizations$df
-  } else {
-    hosp_df <- hospitalizations
+  # Validate required columns, mirroring clifpy's ValueError messages.
+  hospitalization_required_columns <- c(
+    "patient_id", "hospitalization_id", "admission_dttm",
+    "discharge_dttm", "age_at_admission", "admission_type_category",
+    "discharge_category"
+  )
+  adt_required_columns <- c(
+    "hospitalization_id", "in_dttm", "out_dttm",
+    "location_category", "hospital_id"
+  )
+
+  missing_hospitalization_columns <- setdiff(
+    hospitalization_required_columns, names(hospitalization_data)
+  )
+  if (length(missing_hospitalization_columns) > 0) {
+    cli::cli_abort(
+      "Missing required columns in hospitalization data frame: {.field {missing_hospitalization_columns}}"
+    )
   }
 
-  # Validate required columns
-  required_cols <- c(patient_id_col, hosp_id_col, admission_col, discharge_col)
-  missing_cols <- setdiff(required_cols, names(hosp_df))
-
-  if (length(missing_cols) > 0) {
-    cli::cli_abort(c(
-      "Missing required columns for encounter stitching:",
-      "x" = "Missing: {.field {missing_cols}}"
-    ))
+  missing_adt_columns <- setdiff(adt_required_columns, names(adt_data))
+  if (length(missing_adt_columns) > 0) {
+    cli::cli_abort(
+      "Missing required columns in ADT data frame: {.field {missing_adt_columns}}"
+    )
   }
 
-  cli::cli_alert_info("Stitching encounters with {time_interval_hours} hour window")
+  hospitalization_filtered <- hospitalization_data |>
+    dplyr::select(dplyr::all_of(hospitalization_required_columns))
 
-  # Sort by patient and admission time
-  hosp_sorted <- hosp_df %>%
-    dplyr::arrange(
-      .data[[patient_id_col]],
-      .data[[admission_col]]
-    )
-
-  # Initialize stitched IDs
-  hosp_sorted <- hosp_sorted %>%
-    dplyr::mutate(
-      hospitalization_joined_id = .data[[hosp_id_col]],
-      .row_number = dplyr::row_number()
-    )
-
-  # Track groupings
-  current_group_id <- NULL
-  group_assignments <- rep(NA_character_, nrow(hosp_sorted))
-
-  # Iterate through each patient's hospitalizations
-  for (i in seq_len(nrow(hosp_sorted))) {
-    current_patient <- hosp_sorted[[patient_id_col]][i]
-    current_admission <- hosp_sorted[[admission_col]][i]
-    current_hosp_id <- hosp_sorted[[hosp_id_col]][i]
-
-    # Check if this is the first hospitalization or a new patient
-    if (i == 1 || hosp_sorted[[patient_id_col]][i - 1] != current_patient) {
-      # Start new group
-      current_group_id <- current_hosp_id
-      group_assignments[i] <- current_group_id
-      next
-    }
-
-    # Check time gap from previous discharge
-    prev_discharge <- hosp_sorted[[discharge_col]][i - 1]
-    time_gap_hours <- as.numeric(
-      difftime(current_admission, prev_discharge, units = "hours")
-    )
-
-    # If within time window, assign to same group
-    if (!is.na(time_gap_hours) && time_gap_hours <= time_interval_hours) {
-      group_assignments[i] <- current_group_id
-    } else {
-      # Start new group
-      current_group_id <- current_hosp_id
-      group_assignments[i] <- current_group_id
-    }
-  }
-
-  # Create result
-  result <- hosp_sorted %>%
-    dplyr::mutate(hospitalization_joined_id = group_assignments) %>%
+  # Join hospitalization stays to their ADT segments (left join, so
+  # hospitalizations without ADT rows are retained).
+  hospitalization_adt_join <- hospitalization_filtered |>
     dplyr::select(
-      dplyr::all_of(c(hosp_id_col, "hospitalization_joined_id"))
+      "patient_id", "hospitalization_id", "age_at_admission",
+      "admission_type_category", "admission_dttm", "discharge_dttm",
+      "discharge_category"
+    ) |>
+    dplyr::left_join(
+      adt_data |>
+        dplyr::select(
+          "hospitalization_id", "in_dttm", "out_dttm",
+          "location_category", "hospital_id"
+        ),
+      by = "hospitalization_id",
+      relationship = "many-to-many"
     )
 
-  # Count stitched groups
-  n_original <- length(unique(result[[hosp_id_col]]))
-  n_stitched <- length(unique(result$hospitalization_joined_id))
-  n_combined <- n_original - n_stitched
+  adt_segment_lookup <- hospitalization_adt_join |>
+    dplyr::select("hospitalization_id", "in_dttm", "out_dttm", "hospital_id")
 
-  cli::cli_alert_success(
-    "Stitched {n_original} encounters into {n_stitched} groups ({n_combined} combined)"
-  )
+  # Step 1: one row per hospitalization, sorted by patient and admission time.
+  hospital_block <- hospitalization_adt_join |>
+    dplyr::select(
+      "patient_id", "hospitalization_id", "admission_dttm", "discharge_dttm",
+      "age_at_admission", "discharge_category", "admission_type_category"
+    ) |>
+    dplyr::distinct() |>
+    dplyr::arrange(.data$patient_id, .data$admission_dttm)
 
-  return(result)
-}
+  # Step 2: hours from each discharge to the patient's next admission.
+  hospital_block <- hospital_block |>
+    dplyr::group_by(.data$patient_id) |>
+    dplyr::mutate(next_admission_dttm = dplyr::lead(.data$admission_dttm)) |>
+    dplyr::ungroup() |>
+    dplyr::mutate(
+      discharge_to_next_admission_hrs = as.numeric(
+        difftime(.data$next_admission_dttm, .data$discharge_dttm, units = "secs")
+      ) / 3600
+    )
 
-#' Apply encounter stitching to hospitalization data
-#'
-#' @description
-#' Update hospitalization data with stitched encounter IDs.
-#'
-#' @param hospitalizations tibble or Hospitalization object. Hospital encounter data.
-#' @param time_interval_hours Numeric. Maximum hours between encounters (default: 24).
-#'
-#' @return Updated tibble with hospitalization_joined_id column.
-#'
-#' @export
-apply_encounter_stitching <- function(hospitalizations,
-                                       time_interval_hours = 24) {
+  # Step 3: flag linked encounters, with a tiny tolerance for float rounding
+  # (same epsilon as clifpy).
+  float_rounding_epsilon <- 1e-6
+  hospital_block <- hospital_block |>
+    dplyr::mutate(
+      linked_hrs = dplyr::coalesce(
+        .data$discharge_to_next_admission_hrs <= time_interval + float_rounding_epsilon,
+        FALSE
+      )
+    ) |>
+    dplyr::arrange(.data$patient_id, .data$admission_dttm)
 
-  # Get stitching mapping
-  stitching_map <- stitch_encounters(
-    hospitalizations,
-    time_interval_hours = time_interval_hours
-  )
+  # Initialize encounter_block with row indices + 1, then iteratively propagate
+  # the next row's block backwards along linked chains until a fixed point is
+  # reached — the exact algorithm clifpy uses, so block numbering matches.
+  encounter_block_values <- as.numeric(seq_len(nrow(hospital_block)))
+  patient_identifiers <- hospital_block$patient_id
+  next_patient_identifiers <- dplyr::lead(patient_identifiers)
+  propagation_mask <- hospital_block$linked_hrs &
+    !is.na(next_patient_identifiers) &
+    patient_identifiers == next_patient_identifiers
 
-  # Extract data
-  if (inherits(hospitalizations, "Hospitalization")) {
-    hosp_df <- hospitalizations$df
-  } else {
-    hosp_df <- hospitalizations
+  repeat {
+    shifted_block_values <- dplyr::lead(encounter_block_values)
+    previous_block_values <- encounter_block_values
+    encounter_block_values[propagation_mask] <- shifted_block_values[propagation_mask]
+    if (identical(encounter_block_values, previous_block_values)) {
+      break
+    }
   }
 
-  # Apply stitching
-  result <- hosp_df %>%
-    dplyr::left_join(
-      stitching_map,
-      by = "hospitalization_id"
-    ) %>%
-    dplyr::mutate(
-      hospitalization_joined_id = dplyr::coalesce(
-        hospitalization_joined_id.y,
-        hospitalization_joined_id.x,
-        hospitalization_id
-      )
-    ) %>%
-    dplyr::select(-dplyr::ends_with(".x"), -dplyr::ends_with(".y"))
+  hospital_block$encounter_block <- as.integer(encounter_block_values)
 
-  return(result)
+  # Attach ADT segments and de-duplicate, matching clifpy's ordering.
+  hospital_block <- hospital_block |>
+    dplyr::left_join(
+      adt_segment_lookup,
+      by = "hospitalization_id",
+      relationship = "many-to-many"
+    ) |>
+    dplyr::arrange(
+      .data$patient_id, .data$admission_dttm, .data$in_dttm, .data$out_dttm
+    ) |>
+    dplyr::distinct()
+
+  # Mapping of hospitalization_id to encounter_block.
+  encounter_mapping <- hospital_block |>
+    dplyr::select("hospitalization_id", "encounter_block") |>
+    dplyr::distinct()
+
+  hospitalization_stitched <- hospitalization_data |>
+    dplyr::left_join(encounter_mapping, by = "hospitalization_id")
+
+  adt_stitched <- adt_data |>
+    dplyr::left_join(encounter_mapping, by = "hospitalization_id")
+
+  list(
+    hospitalization = hospitalization_stitched,
+    adt = adt_stitched,
+    encounter_mapping = encounter_mapping
+  )
 }

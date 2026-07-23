@@ -1,369 +1,480 @@
-#' Base Table Class for CLIF Data
+#' BaseTable: foundation class for all CLIF tables
 #'
-#' @description
-#' R6 class providing common functionality for all CLIF table types.
-#' All specific table classes (Patient, Vitals, Labs, etc.) inherit from this base class.
+#' Provides data loading, schema resolution, validation and summary reporting shared
+#' by every CLIF table class. Ported from `clifpy/tables/base_table.py`; field and
+#' method names follow the Python original so results and call sites line up across
+#' the two implementations.
+#'
+#' @details
+#' The `table_name` is derived from the class name, so `RespiratorySupport` resolves
+#' to `respiratory_support` and loads `respiratory_support_schema.yaml` for the
+#' configured CLIF version.
 #'
 #' @export
 #' @importFrom R6 R6Class
 BaseTable <- R6::R6Class(
   classname = "BaseTable",
-
   public = list(
-    #' @field df tibble containing the table data
-    df = NULL,
-
-    #' @field schema List containing the YAML schema definition
-    schema = NULL,
-
-    #' @field table_name Character name of the table
-    table_name = NULL,
-
-    #' @field validation_results List containing validation results
-    validation_results = NULL,
-
-    #' @field timezone Character timezone for datetime columns
-    timezone = NULL,
-
-    #' @field data_directory Character path to data directory
+    #' @field data_directory Directory containing the CLIF data files.
     data_directory = NULL,
-
-    #' @field filetype Character file type ("csv" or "parquet")
+    #' @field filetype Either `"csv"` or `"parquet"`.
     filetype = NULL,
-
-    #' @field output_directory Character path for output files
+    #' @field timezone Olson timezone used for datetime columns.
+    timezone = NULL,
+    #' @field clif_version CLIF schema version this table validates against.
+    clif_version = NULL,
+    #' @field output_directory Directory for logs, summaries and validation output.
     output_directory = NULL,
+    #' @field table_name snake_case CLIF table name derived from the class name.
+    table_name = NULL,
+    #' @field df The loaded data as a tibble.
+    df = NULL,
+    #' @field schema Parsed YAML schema for this table.
+    schema = NULL,
+    #' @field errors List of validation errors from the last validation run.
+    errors = NULL,
+    #' @field outlier_config Parsed outlier configuration.
+    outlier_config = NULL,
 
-    #' @description
-    #' Initialize a BaseTable instance
+    #' @description Create a table instance.
+    #' @param data_directory Directory containing the CLIF data files.
+    #' @param filetype Either `"csv"` or `"parquet"`.
+    #' @param timezone Olson timezone for datetime columns.
+    #' @param output_directory Directory for logs and outputs. Defaults to
+    #'   `<data_directory>/output`.
+    #' @param data Optional pre-loaded data frame. When supplied, no file is read.
+    #' @param clif_version CLIF schema version. Defaults to [DEFAULT_CLIF_VERSION].
+    #' @param table_name Optional explicit table name; normally derived from the class.
     #'
-    #' @param table_name Character. Name of the CLIF table.
-    #' @param data_directory Character. Path to directory containing data files.
-    #' @param filetype Character. File type: "csv" or "parquet" (default: "csv").
-    #' @param timezone Character. Timezone for datetime columns (default: "UTC").
-    #' @param output_directory Character. Path for saving outputs (default: NULL).
-    #' @param data Optional tibble. Pre-loaded data (if NULL, loads from file).
-    #' @param schema_dir Character. Custom schema directory (default: NULL uses package default).
-    #'
-    #' @return A new BaseTable instance.
-    initialize = function(table_name,
-                          data_directory = NULL,
-                          filetype = "csv",
+    #' @return A new table instance.
+    initialize = function(data_directory = NULL,
+                          filetype = NULL,
                           timezone = "UTC",
                           output_directory = NULL,
                           data = NULL,
-                          schema_dir = NULL) {
+                          clif_version = DEFAULT_CLIF_VERSION,
+                          table_name = NULL) {
+      # clifpy allows constructing purely from an in-memory frame; the directory and
+      # filetype then carry placeholder values rather than being required.
+      if (is.null(data_directory) && is.null(filetype) && !is.null(data)) {
+        data_directory <- "."
+        filetype <- "parquet"
+      }
 
-      self$table_name <- table_name
+      self$table_name <- table_name %||% pascal_to_snake_case(class(self)[1])
       self$data_directory <- data_directory
       self$filetype <- filetype
       self$timezone <- timezone
-      self$output_directory <- output_directory
+      self$clif_version <- clif_version
+      self$output_directory <- output_directory %||% file.path(data_directory %||% ".", "output")
+      self$errors <- list()
+      private$has_been_validated <- FALSE
 
-      # Load schema
-      self$schema <- load_schema(table_name, schema_dir = schema_dir)
+      if (!dir.exists(self$output_directory)) {
+        dir.create(self$output_directory, recursive = TRUE, showWarnings = FALSE)
+      }
 
-      # Load or set data
+      self$schema <- load_schema(self$table_name, self$clif_version)
+      self$outlier_config <- tryCatch(
+        load_shared_config("outlier_config.yaml"),
+        error = function(condition) NULL
+      )
+
       if (!is.null(data)) {
         self$df <- dplyr::as_tibble(data)
-        cli::cli_alert_info(
-          "Loaded {.val {nrow(self$df)}} rows for {.field {table_name}} table from provided data"
+      } else if (!is.null(data_directory) && !is.null(filetype)) {
+        self$df <- load_data(
+          table_name = self$table_name,
+          table_path = data_directory,
+          table_format_type = filetype,
+          site_tz = timezone
         )
-      } else {
-        self$load_data()
       }
 
       invisible(self)
     },
 
-    #' @description
-    #' Load data from file
-    load_data = function() {
-      if (is.null(self$data_directory)) {
-        cli::cli_abort("No data directory specified and no data provided")
-      }
-
-      file_path <- file.path(
-        self$data_directory,
-        paste0(self$table_name, ".", self$filetype)
-      )
-
-      self$df <- load_clif_data(
-        file_path,
-        filetype = self$filetype,
-        timezone = self$timezone,
-        schema = self$schema
-      )
-
-      invisible(self)
-    },
-
-    #' @description
-    #' Validate table data against schema
+    #' @description Run validation against the table schema.
     #'
-    #' @param verbose Logical. Print validation details (default: TRUE).
-    #'
-    #' @return List of validation results.
+    #' Populates `$errors` with schema and data-quality findings, then runs any
+    #' table-specific checks a subclass defines.
+    #' @param verbose Whether to print a summary of the results.
+    #' @return The table object, invisibly.
     validate = function(verbose = TRUE) {
+      if (is.null(self$df)) {
+        cli::cli_alert_warning("No dataframe to validate")
+        return(invisible(self))
+      }
+
+      self$errors <- list()
+      private$has_been_validated <- TRUE
+
+      if (!is.null(self$schema)) {
+        schema_errors <- validate_dataframe(self$df, self$schema, self$table_name)
+        self$errors <- c(self$errors, schema_errors)
+      }
+
+      table_specific_errors <- private$run_table_specific_validations()
+      if (length(table_specific_errors) > 0) {
+        self$errors <- c(self$errors, table_specific_errors)
+      }
+
       if (verbose) {
-        cli::cli_h2("Validating {self$table_name} table")
-      }
-
-      self$validation_results <- validate_table(
-        data = self$df,
-        schema = self$schema,
-        table_name = self$table_name
-      )
-
-      return(self$validation_results)
-    },
-
-    #' @description
-    #' Check if table is valid
-    #'
-    #' @return Logical. TRUE if valid, FALSE otherwise.
-    is_valid = function() {
-      if (is.null(self$validation_results)) {
-        self$validate(verbose = FALSE)
-      }
-
-      return(self$validation_results$is_valid)
-    },
-
-    #' @description
-    #' Get validation errors
-    #'
-    #' @return List of errors.
-    get_errors = function() {
-      if (is.null(self$validation_results)) {
-        self$validate(verbose = FALSE)
-      }
-
-      return(self$validation_results$errors)
-    },
-
-    #' @description
-    #' Get validation warnings
-    #'
-    #' @return List of warnings.
-    get_warnings = function() {
-      if (is.null(self$validation_results)) {
-        self$validate(verbose = FALSE)
-      }
-
-      return(self$validation_results$warnings)
-    },
-
-    #' @description
-    #' Generate summary statistics
-    #'
-    #' @return List of summary statistics.
-    summarize = function() {
-      cli::cli_h2("Summary: {self$table_name}")
-
-      summary_stats <- list(
-        table_name = self$table_name,
-        n_rows = nrow(self$df),
-        n_cols = ncol(self$df),
-        columns = names(self$df),
-        memory_size = object.size(self$df),
-        datetime_range = self$get_datetime_range()
-      )
-
-      cli::cli_text("Rows: {.val {summary_stats$n_rows}}")
-      cli::cli_text("Columns: {.val {summary_stats$n_cols}}")
-      cli::cli_text("Memory: {.val {format(summary_stats$memory_size, units = 'MB')}}")
-
-      if (!is.null(summary_stats$datetime_range)) {
-        cli::cli_text(
-          "Date range: {.val {summary_stats$datetime_range$min}} to {.val {summary_stats$datetime_range$max}}"
-        )
-      }
-
-      return(invisible(summary_stats))
-    },
-
-    #' @description
-    #' Get datetime column range
-    #'
-    #' @return List with min and max datetime, or NULL if no datetime columns.
-    get_datetime_range = function() {
-      datetime_cols <- purrr::map_lgl(self$df, lubridate::is.POSIXct)
-
-      if (!any(datetime_cols)) {
-        return(NULL)
-      }
-
-      # Get first datetime column for range
-      first_datetime_col <- names(self$df)[datetime_cols][1]
-
-      list(
-        min = min(self$df[[first_datetime_col]], na.rm = TRUE),
-        max = max(self$df[[first_datetime_col]], na.rm = TRUE),
-        column = first_datetime_col
-      )
-    },
-
-    #' @description
-    #' Save table data to file
-    #'
-    #' @param file_path Character. Output file path. If NULL, uses output_directory and table_name.
-    #' @param filetype Character. File type: "csv" or "parquet". If NULL, uses self$filetype.
-    #' @param overwrite Logical. Whether to overwrite existing file (default: FALSE).
-    #'
-    #' @return Invisible self.
-    save = function(file_path = NULL, filetype = NULL, overwrite = FALSE) {
-      if (is.null(file_path)) {
-        if (is.null(self$output_directory)) {
-          cli::cli_abort("No output directory specified")
-        }
-
-        ft <- filetype %||% self$filetype
-        file_path <- file.path(
-          self$output_directory,
-          paste0(self$table_name, ".", ft)
-        )
-      }
-
-      ft <- filetype %||% self$filetype
-
-      save_clif_data(
-        data = self$df,
-        file_path = file_path,
-        filetype = ft,
-        overwrite = overwrite
-      )
-
-      invisible(self)
-    },
-
-    #' @description
-    #' Export validation results to markdown report
-    #'
-    #' @param output_file Character. Path to output file.
-    #'
-    #' @return Invisible self.
-    export_validation_report = function(output_file = NULL) {
-      if (is.null(self$validation_results)) {
-        self$validate()
-      }
-
-      if (is.null(output_file)) {
-        if (is.null(self$output_directory)) {
-          cli::cli_abort("No output directory specified")
-        }
-
-        output_file <- file.path(
-          self$output_directory,
-          paste0(self$table_name, "_validation_report.md")
-        )
-      }
-
-      generate_validation_report(self$validation_results, output_file)
-
-      invisible(self)
-    },
-
-    #' @description
-    #' Get unique values for a categorical column
-    #'
-    #' @param column_name Character. Name of column.
-    #' @param include_na Logical. Include NA values (default: FALSE).
-    #'
-    #' @return tibble with unique values and counts.
-    get_unique_values = function(column_name, include_na = FALSE) {
-      if (!(column_name %in% names(self$df))) {
-        cli::cli_abort("Column {.field {column_name}} not found in table")
-      }
-
-      result <- self$df %>%
-        dplyr::count(.data[[column_name]], name = "n") %>%
-        dplyr::arrange(dplyr::desc(n))
-
-      if (!include_na) {
-        result <- result %>%
-          dplyr::filter(!is.na(.data[[column_name]]))
-      }
-
-      return(result)
-    },
-
-    #' @description
-    #' Filter table by criteria
-    #'
-    #' @param ... Filter expressions passed to dplyr::filter().
-    #'
-    #' @return New BaseTable instance with filtered data.
-    filter_data = function(...) {
-      filtered_df <- self$df %>%
-        dplyr::filter(...)
-
-      # Create new instance with filtered data
-      new_instance <- self$clone()
-      new_instance$df <- filtered_df
-      new_instance$validation_results <- NULL  # Reset validation
-
-      return(new_instance)
-    },
-
-    #' @description
-    #' Get column names by type
-    #'
-    #' @param type Character. Column type: "category", "datetime", "numeric", etc.
-    #'
-    #' @return Character vector of column names.
-    get_columns_by_type = function(type = c("category", "datetime", "numeric", "character")) {
-      type <- match.arg(type)
-
-      switch(type,
-        category = {
-          category_flags <- purrr::map_lgl(
-            self$schema$columns,
-            ~.x$is_category_column
-          )
-          purrr::map_chr(self$schema$columns[category_flags], ~.x$name)
-        },
-        datetime = {
-          datetime_flags <- purrr::map_lgl(
-            self$schema$columns,
-            ~.x$data_type == "DATETIME"
-          )
-          purrr::map_chr(self$schema$columns[datetime_flags], ~.x$name)
-        },
-        numeric = {
-          names(self$df)[purrr::map_lgl(self$df, is.numeric)]
-        },
-        character = {
-          names(self$df)[purrr::map_lgl(self$df, is.character)]
-        }
-      )
-    },
-
-    #' @description
-    #' Print method
-    print = function() {
-      cli::cli_h2("{self$table_name} Table")
-      cli::cli_text("Rows: {.val {nrow(self$df)}}")
-      cli::cli_text("Columns: {.val {ncol(self$df)}}")
-
-      if (!is.null(self$validation_results)) {
-        status <- if (self$validation_results$is_valid) {
-          cli::col_green("\u2713 Valid")
+        if (length(self$errors) == 0) {
+          cli::cli_alert_success("Validation completed successfully for {.val {self$table_name}}")
         } else {
-          cli::col_red("\u2717 Invalid")
+          cli::cli_alert_warning(
+            "Validation completed with {.val {length(self$errors)}} error(s) for {.val {self$table_name}}"
+          )
         }
-        cli::cli_text("Validation: {status}")
-      } else {
-        cli::cli_text("Validation: {.emph Not yet validated}")
       }
 
-      cli::cli_rule()
-      print(self$df)
+      if (length(self$errors) > 0) {
+        private$save_validation_errors()
+      }
 
       invisible(self)
+    },
+
+    #' @description Whether the last validation run found no errors.
+    #' @return `TRUE` when validation has run and produced no errors.
+    isvalid = function() {
+      if (!private$has_been_validated) {
+        cli::cli_alert_warning("Validation has not been run yet. Please call validate() first.")
+        return(FALSE)
+      }
+      length(self$errors) == 0
+    },
+
+    #' @description Summary statistics for the table.
+    #' @return A named list describing shape, memory use, validation state,
+    #'   numeric summaries and missing-data counts.
+    get_summary = function() {
+      if (is.null(self$df)) {
+        return(list(status = "No data loaded"))
+      }
+
+      summary_result <- list(
+        table_name = self$table_name,
+        num_rows = nrow(self$df),
+        num_columns = ncol(self$df),
+        columns = names(self$df),
+        memory_usage_mb = as.numeric(utils::object.size(self$df)) / 1024 / 1024,
+        validation_run = private$has_been_validated,
+        validation_errors = if (private$has_been_validated) length(self$errors) else NULL,
+        is_valid = private$has_been_validated && length(self$errors) == 0
+      )
+
+      numeric_column_names <- names(self$df)[vapply(self$df, is.numeric, logical(1))]
+      if (length(numeric_column_names) > 0) {
+        summary_result$numeric_columns <- numeric_column_names
+        summary_result$numeric_stats <- lapply(
+          stats::setNames(numeric_column_names, numeric_column_names),
+          function(column_name) describe_numeric_column(self$df[[column_name]])
+        )
+      }
+
+      missing_counts <- vapply(self$df, function(column) sum(is.na(column)), numeric(1))
+      missing_counts <- missing_counts[missing_counts > 0]
+      if (length(missing_counts) > 0) {
+        summary_result$missing_data <- as.list(missing_counts)
+      }
+
+      summary_result
+    },
+
+    #' @description Write the table summary to `summary_<table>.json`.
+    #' @return Path to the written file, invisibly.
+    save_summary = function() {
+      summary_file <- file.path(self$output_directory, paste0("summary_", self$table_name, ".json"))
+      jsonlite::write_json(
+        self$get_summary(),
+        summary_file,
+        auto_unbox = TRUE,
+        pretty = TRUE,
+        digits = NA,
+        na = "null"
+      )
+      invisible(summary_file)
+    },
+
+    #' @description Distribution of each categorical column by unique encounter.
+    #'
+    #' Counts distinct `hospitalization_id` (or `patient_id` when the former is
+    #' absent) per category value, matching clifpy's denominator choice.
+    #' @param save Whether to write one CSV per categorical column.
+    #' @return A named list of tibbles, one per categorical column.
+    analyze_categorical_distributions = function(save = TRUE) {
+      if (is.null(self$df) || is.null(self$schema)) {
+        return(list())
+      }
+
+      categorical_columns <- intersect(schema_category_columns(self$schema), names(self$df))
+      if (length(categorical_columns) == 0) {
+        return(list())
+      }
+
+      id_column <- if ("hospitalization_id" %in% names(self$df)) {
+        "hospitalization_id"
+      } else if ("patient_id" %in% names(self$df)) {
+        "patient_id"
+      } else {
+        NULL
+      }
+
+      distributions <- list()
+      for (column_name in categorical_columns) {
+        if (is.null(id_column)) {
+          distribution <- dplyr::count(self$df, .data[[column_name]], name = "count")
+        } else {
+          distribution <- self$df |>
+            dplyr::group_by(.data[[column_name]]) |>
+            dplyr::summarise(count = dplyr::n_distinct(.data[[id_column]]), .groups = "drop")
+        }
+        distribution <- distribution |>
+          dplyr::mutate(percentage = 100 * .data$count / sum(.data$count)) |>
+          dplyr::arrange(dplyr::desc(.data$count))
+
+        distributions[[column_name]] <- distribution
+
+        if (save) {
+          readr::write_csv(
+            distribution,
+            file.path(self$output_directory, sprintf("distribution_%s_%s.csv", self$table_name, column_name))
+          )
+        }
+      }
+
+      distributions
+    },
+
+    #' @description Print a short description of the table.
+    #' @param ... Unused; present for print compatibility.
+    #' @return The table object, invisibly.
+    print = function(...) {
+      cli::cli_h3("CLIF table: {self$table_name} (CLIF {self$clif_version})")
+      if (is.null(self$df)) {
+        cli::cli_text("No data loaded")
+      } else {
+        cli::cli_text("{.val {nrow(self$df)}} rows x {.val {ncol(self$df)}} columns")
+        if (private$has_been_validated) {
+          if (length(self$errors) == 0) {
+            cli::cli_alert_success("Validated: no errors")
+          } else {
+            cli::cli_alert_warning("Validated: {.val {length(self$errors)}} error(s)")
+          }
+        } else {
+          cli::cli_text("Not yet validated")
+        }
+      }
+      invisible(self)
+    }
+  ),
+  private = list(
+    has_been_validated = FALSE,
+
+    # Overridden by subclasses needing checks beyond the schema, for example
+    # MicrobiologyCulture's timestamp ordering. Returns a list of error records.
+    run_table_specific_validations = function() {
+      list()
+    },
+
+    save_validation_errors = function() {
+      if (length(self$errors) == 0) {
+        return(invisible(NULL))
+      }
+      # The output directory is created in the constructor, but it can disappear
+      # between construction and validation (a caller passing a temp dir, a cleanup
+      # hook), so re-create it rather than letting the write abort a validation whose
+      # results are otherwise complete.
+      if (!dir.exists(self$output_directory)) {
+        dir.create(self$output_directory, recursive = TRUE, showWarnings = FALSE)
+      }
+      errors_frame <- validation_errors_to_frame(self$errors)
+      error_file <- file.path(
+        self$output_directory,
+        paste0("validation_errors_", self$table_name, ".csv")
+      )
+      readr::write_csv(errors_frame, error_file)
+      invisible(error_file)
     }
   )
 )
 
-# Helper operator for NULL defaults
-`%||%` <- function(x, y) if (is.null(x)) y else x
+#' Load a CLIF table from file
+#'
+#' Mirrors clifpy's `Table.from_file` classmethod. Resolves configuration from
+#' explicit arguments, then a config file, then package defaults, loads the data and
+#' returns the corresponding table object.
+#'
+#' @param table_name snake_case CLIF table name, e.g. `"labs"`.
+#' @param data_directory Directory containing the CLIF data files.
+#' @param filetype Either `"csv"` or `"parquet"`.
+#' @param timezone Olson timezone for datetime columns.
+#' @param config_path Optional path to a JSON or YAML config file.
+#' @param output_directory Directory for logs and outputs.
+#' @param sample_size Optional maximum number of rows to read.
+#' @param columns Optional character vector of columns to read.
+#' @param filters Optional named list of equality filters applied at read time.
+#' @param verbose Whether to emit loading messages.
+#' @param clif_version CLIF schema version. Overrides any value in the config file.
+#'
+#' @return A table object of the class matching `table_name`.
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' labs <- clif_table_from_file("labs", "data/clif", "parquet", "US/Central")
+#' }
+clif_table_from_file <- function(table_name,
+                                 data_directory = NULL,
+                                 filetype = NULL,
+                                 timezone = NULL,
+                                 config_path = NULL,
+                                 output_directory = NULL,
+                                 sample_size = NULL,
+                                 columns = NULL,
+                                 filters = NULL,
+                                 verbose = FALSE,
+                                 clif_version = NULL) {
+  resolved_config <- get_config_or_params(
+    config_path = config_path,
+    data_directory = data_directory,
+    filetype = filetype,
+    timezone = timezone,
+    output_directory = output_directory
+  )
+
+  resolved_version <- clif_version %||% resolved_config$clif_version %||% DEFAULT_CLIF_VERSION
+
+  loaded_data <- load_data(
+    table_name = table_name,
+    table_path = resolved_config$data_directory,
+    table_format_type = resolved_config$filetype,
+    sample_size = sample_size,
+    columns = columns,
+    filters = filters,
+    site_tz = resolved_config$timezone,
+    verbose = verbose
+  )
+
+  table_generator <- get_table_class(table_name)
+  table_generator$new(
+    data_directory = resolved_config$data_directory,
+    filetype = resolved_config$filetype,
+    timezone = resolved_config$timezone,
+    output_directory = resolved_config$output_directory %||% output_directory,
+    data = loaded_data,
+    clif_version = resolved_version
+  )
+}
+
+#' Column names flagged as categorical in a schema
+#'
+#' @param schema Parsed table schema.
+#' @return Character vector of category column names.
+#' @keywords internal
+schema_category_columns <- function(schema) {
+  if (!is.null(schema$category_columns) && length(schema$category_columns) > 0) {
+    return(unlist(schema$category_columns, use.names = FALSE))
+  }
+  if (is.null(schema$columns)) {
+    return(character(0))
+  }
+  is_category <- vapply(
+    schema$columns,
+    function(column) isTRUE(column$is_category_column),
+    logical(1)
+  )
+  vapply(schema$columns[is_category], function(column) column$name, character(1))
+}
+
+#' Permissible values declared for a schema column
+#'
+#' @param schema Parsed table schema.
+#' @param column_name Name of the column whose permissible values are wanted.
+#' @return Character vector of permissible values, empty when the column is absent
+#'   or declares none.
+#' @keywords internal
+schema_permissible_values <- function(schema, column_name) {
+  if (is.null(schema$columns)) {
+    return(character(0))
+  }
+  for (column_definition in schema$columns) {
+    if (identical(column_definition$name, column_name)) {
+      return(unlist(column_definition$permissible_values, use.names = FALSE) %||% character(0))
+    }
+  }
+  character(0)
+}
+
+#' Numeric summary matching pandas describe()
+#'
+#' Produces the same fields pandas' `describe()` returns so summaries compare
+#' directly against the Python baselines.
+#'
+#' @param values A numeric vector.
+#' @return A named list with count, mean, std, min, 25%, 50%, 75% and max.
+#' @keywords internal
+describe_numeric_column <- function(values) {
+  non_missing_values <- values[!is.na(values)]
+  if (length(non_missing_values) == 0) {
+    return(list(
+      count = 0, mean = NA_real_, std = NA_real_, min = NA_real_,
+      `25%` = NA_real_, `50%` = NA_real_, `75%` = NA_real_, max = NA_real_
+    ))
+  }
+  quantile_values <- stats::quantile(
+    non_missing_values,
+    probs = c(0.25, 0.5, 0.75),
+    names = FALSE,
+    type = 7
+  )
+  list(
+    count = length(non_missing_values),
+    mean = mean(non_missing_values),
+    std = stats::sd(non_missing_values),
+    min = min(non_missing_values),
+    `25%` = quantile_values[1],
+    `50%` = quantile_values[2],
+    `75%` = quantile_values[3],
+    max = max(non_missing_values)
+  )
+}
+
+#' Flatten validation error records into a data frame
+#'
+#' Nested `details` are serialized to JSON so the CSV round-trips without losing
+#' information, matching how clifpy writes its error CSV.
+#'
+#' @param errors List of validation error records.
+#' @return A tibble with one row per error.
+#' @keywords internal
+validation_errors_to_frame <- function(errors) {
+  if (length(errors) == 0) {
+    return(dplyr::tibble())
+  }
+  dplyr::bind_rows(lapply(errors, function(error_record) {
+    flattened <- lapply(error_record, function(field_value) {
+      if (is.null(field_value)) {
+        NA_character_
+      } else if (is.list(field_value) || length(field_value) > 1) {
+        as.character(jsonlite::toJSON(field_value, auto_unbox = TRUE, null = "null"))
+      } else {
+        as.character(field_value)
+      }
+    })
+    dplyr::as_tibble(flattened)
+  }))
+}
+
+#' Null-coalescing operator
+#'
+#' @param lhs Value to use when not `NULL`.
+#' @param rhs Fallback value.
+#' @return `lhs` when it is not `NULL`, otherwise `rhs`.
+#' @name null-coalesce
+#' @keywords internal
+`%||%` <- function(lhs, rhs) {
+  if (is.null(lhs)) rhs else lhs
+}

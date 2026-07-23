@@ -1,0 +1,99 @@
+{
+  "clif_version": "3.0",
+  "clifpy_version": "0.5.0",
+  "components": {
+    "cci": {
+      "artifacts": [
+        "cci_scores.parquet"
+      ],
+      "status": "ok"
+    },
+    "crosswalk": {
+      "artifacts": [
+        "crosswalk_normalize_category_value.json",
+        "crosswalk_reports.json"
+      ],
+      "status": "ok"
+    },
+    "elix": {
+      "artifacts": [
+        "elix_scores.parquet"
+      ],
+      "status": "ok"
+    },
+    "hourly": {
+      "artifacts": [
+        "hourly_dataset.parquet"
+      ],
+      "status": "ok"
+    },
+    "mdro": {
+      "artifacts": [
+        "mdro_pseudomonas.parquet"
+      ],
+      "status": "ok"
+    },
+    "outliers": {
+      "artifacts": [
+        "outlier_applied_nonnull_vitals.json",
+        "outlier_applied_nonnull_labs.json",
+        "outlier_applied_nonnull_respiratory_support.json"
+      ],
+      "status": "ok"
+    },
+    "query": {
+      "artifacts": [
+        "query_windows.parquet",
+        "query_extremal_values.parquet"
+      ],
+      "status": "ok"
+    },
+    "sofa": {
+      "artifacts": [
+        "sofa_scores.parquet",
+        "sofa_wide_input.parquet"
+      ],
+      "status": "ok"
+    },
+    "stitching": {
+      "artifacts": [
+        "encounter_mapping.parquet"
+      ],
+      "status": "ok"
+    },
+    "table_summaries": {
+      "artifacts": [
+        "table_summaries.json"
+      ],
+      "status": "ok"
+    },
+    "unit_conversion": {
+      "artifacts": [
+        "dose_conversion.parquet",
+        "dose_conversion_counts.parquet"
+      ],
+      "status": "ok"
+    },
+    "validation": {
+      "artifacts": [
+        "validation_by_table.json"
+      ],
+      "status": "ok"
+    },
+    "waterfall": {
+      "artifacts": [
+        "resp_support_waterfall.parquet"
+      ],
+      "status": "ok"
+    },
+    "wide_dataset": {
+      "artifacts": [
+        "wide_dataset.parquet"
+      ],
+      "status": "ok"
+    }
+  },
+  "fixture_directory": "/Users/aartiksarma/Research/clifR/tests/fixtures/cohort",
+  "python_version": "3.12.12",
+  "timezone": "US/Central"
+}

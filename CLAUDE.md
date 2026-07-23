@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**clifR** is an R port of the Python library [clifpy](https://github.com/Common-Longitudinal-ICU-data-Format/clifpy), designed to standardize and analyze critical care (ICU) data using the Common Longitudinal ICU data Format (CLIF) version 2.0.
+**clifR** is an R port of the Python library [clifpy](https://github.com/Common-Longitudinal-ICU-data-Format/clifpy) (targeting **clifpy 0.5.0**), designed to standardize and analyze critical care (ICU) data using the Common Longitudinal ICU data Format (CLIF), supporting schema versions **2.1 and 3.0**.
 
 **Primary Goal**: Transform heterogeneous ICU data into standardized, analysis-ready datasets with built-in validation, clinical calculations, and high-performance data processing.
 
@@ -230,83 +230,53 @@ Patient <- R6Class("Patient",
 
 ## Implementation Status
 
-### ✅ Completed Features
+clifR targets **clifpy 0.5.0** and supports CLIF schema versions **2.1 and 3.0**
+(default 2.1, matching clifpy). Every ported component is verified against clifpy
+0.5.0 by the cross-language parity suite; the current status is generated into
+`tests/CROSS_VALIDATION_RESULTS.md` by `Rscript dev/run_parity_report.R`.
 
-**Core Infrastructure**:
-- ✅ Package structure (DESCRIPTION, NAMESPACE)
-- ✅ All 20 YAML schemas ported from Python
-- ✅ BaseTable R6 class foundation
-- ✅ ClifOrchestrator main orchestration class
-- ✅ Data I/O utilities (CSV/Parquet support)
-- ✅ Configuration management
-- ✅ Logging infrastructure
+**As of the 0.5.0 parity port: 757 parity assertions pass, 0 failures.**
 
-**Table Classes** (5 of 20):
-- ✅ Patient
-- ✅ Hospitalization
-- ✅ ADT (Admission/Discharge/Transfer)
-- ✅ Vitals
-- ✅ Labs
+### ✅ Completed and parity-verified
 
-**Validation & Quality**:
-- ✅ Schema validation against YAML definitions
-- ✅ Data type checking
-- ✅ Categorical value validation
-- ✅ Missing data analysis
-- ✅ Duplicate detection
-- ✅ Timezone validation
+**Core infrastructure**: versioned schema registry (`R/schemas.R`, CLIF 2.1 + 3.0,
+copied verbatim from the released clifpy package), DuckDB-backed I/O (`R/util_io.R`),
+`BaseTable` and all 18 table classes, `ClifOrchestrator`, table registry
+(`R/table_registry.R`), config/logging, and the bundled demo dataset (`R/demo_data.R`).
 
-**Advanced Features**:
-- ✅ Unit conversion (medications, temperature, pressure, labs)
-- ✅ Wide dataset transformation (narrow to wide format)
-- ✅ Time-series aggregation (hourly, 4-hour, daily)
-- ✅ Missing value imputation (forward/backward fill)
-- ✅ SOFA score calculation (all 6 components)
-- ✅ Charlson Comorbidity Index (ICD-9 and ICD-10)
-- ✅ Encounter stitching (link related hospitalizations)
+**All 18 table classes** inherit `BaseTable` and implement clifpy's table-specific
+methods: Patient, Hospitalization, Adt, Labs, Vitals, MedicationAdminContinuous,
+MedicationAdminIntermittent, PatientAssessments, RespiratorySupport, Position,
+HospitalDiagnosis, MicrobiologyCulture, CrrtTherapy, PatientProcedures,
+MicrobiologySusceptibility, EcmoMcs, MicrobiologyNonculture, CodeStatus.
 
-**Testing Infrastructure**:
-- ✅ Synthetic data generator (with reproducible seed)
-- ✅ Python baseline generator for cross-validation
-- ✅ Cross-validation test helpers
-- ✅ Automated comparison tests
+**Utilities** (`R/util_*.R`): the full DQA validation engine (conformance,
+completeness, plausibility), wide dataset construction and hourly aggregation,
+medication dose unit conversion, both SOFA implementations (`compute_sofa` and the
+self-contained `compute_sofa_direct`), Charlson and Elixhauser comorbidity indices,
+encounter stitching, respiratory support waterfall, outlier handling, the 2.1→3.0
+crosswalk, extremal-value query, and MDRO flags.
 
-**ClifOrchestrator Methods**:
-- ✅ `initialize_tables()`: Load multiple tables
-- ✅ `validate_all()`: Comprehensive validation
-- ✅ `create_wide_dataset()`: Wide format transformation
-- ✅ `calculate_sofa_scores()`: SOFA calculation
-- ✅ `calculate_charlson_scores()`: CCI calculation
-- ✅ `convert_medication_doses()`: Unit conversion
-- ✅ `generate_analysis_report()`: Comprehensive analysis
-- ✅ `summary()`: Summary statistics
+### Notes and intentional divergences
 
-### ⏳ Pending Features
+- **`compute_sofa` requires converted medication units** (e.g. `norepinephrine_mcg_kg_min`);
+  run dose conversion before building the wide dataset, as in clifpy.
+- **Comorbidity functions omit hospitalizations with no ICD-10-CM rows** rather than
+  emitting a zero-score row — faithful to clifpy, but a site with ICD-9 or
+  mixed-format data will get fewer rows than its hospitalization count.
+- **Upstream bugs reproduced or worked around** (see `tests/README.md`): clifpy's
+  `get_outlier_summary()` is broken in 0.5.0 (clifR implements it correctly);
+  `Labs.get_lab_specimen_stats()` guards on a misspelled column (clifR uses the
+  correct spelling, noted in roxygen); the waterfall's trach-collar branch erases
+  data upstream, reproduced for parity with an explanatory comment.
 
-**Additional Table Classes** (15 remaining):
-- ⏳ RespiratorySupport
-- ⏳ MedicationAdminContinuous
-- ⏳ MedicationAdminIntermittent
-- ⏳ HospitalDiagnosis
-- ⏳ CodeStatus
-- ⏳ CrrtTherapy
-- ⏳ EcmoMcs
-- ⏳ MicrobiologyCulture
-- ⏳ MicrobiologyNonculture
-- ⏳ MicrobiologySusceptibility
-- ⏳ PatientAssessments
-- ⏳ PatientProcedures
-- ⏳ Position
-- ⏳ (and others as needed)
+### ⏳ Not yet ported
 
-**Additional Features**:
-- ⏳ Outlier detection and handling
-- ⏳ Respiratory support waterfall
-- ⏳ Additional clinical scores (APACHE, qSOFA)
-- ⏳ Visualization functions
-- ⏳ Export to analysis-ready formats
-- ⏳ Performance optimization for large datasets
-- ⏳ Full cross-language validation against Python baselines
+- Polars-specific datetime helpers (the R port uses one backend per function).
+- `ase.py` (CDC Adult Sepsis Event), `report_generator.py` (PDF/CSV DQA reports),
+  and `migrate_versions_2_1_to_3.py` (whole-folder migration runner).
+- Vignettes still document the pre-port API and use `eval = FALSE`; they need updating
+  to the current function names.
 
 ## Key Features Implementation Details
 
