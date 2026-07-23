@@ -109,7 +109,7 @@ passing_finding <- function(rule_code, partial = FALSE) {
 
 #' Extract the affected column name from an issue record
 #'
-#' Priority: `details$column` > `details$extra_columns` > parse from message >
+#' Priority: `details[["column"]]` > `details[["extra_columns"]]` > parse from message >
 #' `"NA"`. Mirrors `rule_codes.extract_column_field` in clifpy.
 #'
 #' @param issue A named list with (at least) `details` and `message` entries.
@@ -119,7 +119,7 @@ passing_finding <- function(rule_code, partial = FALSE) {
 #' @examples
 #' extract_column_field(list(details = list(column = "vital_category")))
 extract_column_field <- function(issue) {
-  details <- issue$details
+  details <- issue[["details"]]
   if (!is.list(details)) {
     return("NA")
   }
@@ -128,36 +128,46 @@ extract_column_field <- function(issue) {
     paste(vapply(utils::head(values, limit), as.character, character(1)), collapse = ", ")
   }
 
-  if (!is.null(details$column) && !identical(details$column, "")) {
-    return(as.character(details$column))
+  # clifpy returns str(col), so a scalar stays as-is but a list becomes its Python
+  # repr, e.g. c("a", "b") -> "['a', 'b']". Matching this keeps the report text
+  # byte-identical when a column field holds multiple names.
+  python_str <- function(value) {
+    if (length(value) <= 1) {
+      return(as.character(value))
+    }
+    paste0("[", paste0("'", as.character(value), "'", collapse = ", "), "]")
   }
-  if (is.vector(details$extra_columns) && length(details$extra_columns) > 0) {
-    return(join_first(details$extra_columns, 3))
+
+  if (!is.null(details[["column"]]) && !identical(details[["column"]], "")) {
+    return(python_str(details[["column"]]))
   }
-  if (!is.null(details$required_column) && !identical(details$required_column, "")) {
-    return(as.character(details$required_column))
+  if (is.vector(details[["extra_columns"]]) && length(details[["extra_columns"]]) > 0) {
+    return(join_first(details[["extra_columns"]], 3))
   }
-  if (is.vector(details$columns_checked) && length(details$columns_checked) > 0) {
-    return(join_first(details$columns_checked, 3))
+  if (!is.null(details[["required_column"]]) && !identical(details[["required_column"]], "")) {
+    return(as.character(details[["required_column"]]))
   }
-  if (is.vector(details$missing_columns) && length(details$missing_columns) > 0) {
-    return(join_first(details$missing_columns, 3))
+  if (is.vector(details[["columns_checked"]]) && length(details[["columns_checked"]]) > 0) {
+    return(join_first(details[["columns_checked"]], 3))
   }
-  if (is.vector(details$keys) && length(details$keys) > 0) {
-    return(join_first(details$keys, length(details$keys)))
+  if (is.vector(details[["missing_columns"]]) && length(details[["missing_columns"]]) > 0) {
+    return(join_first(details[["missing_columns"]], 3))
   }
-  if (!is.null(details$category_column) && !is.null(details$group_column)) {
-    return(paste0(details$category_column, ", ", details$group_column))
+  if (is.vector(details[["keys"]]) && length(details[["keys"]]) > 0) {
+    return(join_first(details[["keys"]], length(details[["keys"]])))
   }
-  invalid_values <- details$invalid_values
+  if (!is.null(details[["category_column"]]) && !is.null(details[["group_column"]])) {
+    return(paste0(details[["category_column"]], ", ", details[["group_column"]]))
+  }
+  invalid_values <- details[["invalid_values"]]
   if (is.list(invalid_values) && length(invalid_values) > 0 && is.list(invalid_values[[1]])) {
     first_column_name <- invalid_values[[1]]$column
     if (!is.null(first_column_name)) {
-      return(as.character(first_column_name))
+      return(python_str(first_column_name))
     }
   }
 
-  message_text <- issue$message %||% ""
+  message_text <- issue[["message"]] %||% ""
   column_match <- regmatches(
     message_text,
     regexec("[Cc]olumn\\s+'([^']+)'", message_text)
@@ -198,18 +208,46 @@ build_finding <- function(message, details) {
   finding_parts <- list(message)
   replaced_message <- FALSE
 
+  # Mirror Python's str() for a detail entry that does not match a known shape,
+  # so the fallback stays a single string byte-identical to clifpy's `str(it)`
+  # (a dict repr for named lists, a list repr otherwise) rather than an R vector.
+  python_repr <- function(value) {
+    if (is.list(value)) {
+      element_names <- names(value)
+      if (!is.null(element_names) && all(nzchar(element_names))) {
+        rendered <- vapply(seq_along(value), function(index) {
+          sprintf("'%s': %s", element_names[index], python_repr(value[[index]]))
+        }, character(1))
+        return(paste0("{", paste(rendered, collapse = ", "), "}"))
+      }
+      rendered <- vapply(value, python_repr, character(1))
+      return(paste0("[", paste(rendered, collapse = ", "), "]"))
+    }
+    if (length(value) != 1) {
+      rendered <- vapply(value, python_repr, character(1))
+      return(paste0("[", paste(rendered, collapse = ", "), "]"))
+    }
+    if (is.character(value)) {
+      return(sprintf("'%s'", value))
+    }
+    if (is.logical(value)) {
+      return(if (isTRUE(value)) "True" else "False")
+    }
+    format(value, scientific = FALSE, trim = TRUE)
+  }
+
   # Categorical: top invalid values with counts (replaces generic message)
-  top_invalid <- details$top_invalid
+  top_invalid <- details[["top_invalid"]]
   if (is.list(top_invalid) && length(top_invalid) > 0) {
     items <- vapply(utils::head(top_invalid, 5), function(entry) {
-      if (is.list(entry) && !is.null(entry$value)) {
-        if (!is.null(entry$count)) {
-          sprintf("'%s' (%s rows)", entry$value, py_int_comma(entry$count))
+      if (is.list(entry) && !is.null(entry[["value"]])) {
+        if (!is.null(entry[["count"]])) {
+          sprintf("'%s' (%s rows)", entry[["value"]], py_int_comma(entry[["count"]]))
         } else {
-          sprintf("'%s'", entry$value)
+          sprintf("'%s'", entry[["value"]])
         }
       } else {
-        as.character(entry)
+        python_repr(entry)
       }
     }, character(1))
     suffix <- if (length(top_invalid) > 5) sprintf(" ... (%d total)", length(top_invalid)) else ""
@@ -218,7 +256,7 @@ build_finding <- function(message, details) {
   }
 
   # Missing columns — skip if the base message already lists them
-  missing_columns <- details$missing_columns
+  missing_columns <- details[["missing_columns"]]
   if (is.vector(missing_columns) && length(missing_columns) > 0 &&
       !grepl("required columns", message, fixed = TRUE)) {
     listed_columns <- paste(
@@ -230,28 +268,28 @@ build_finding <- function(message, details) {
   }
 
   # Lab reference: top invalid units
-  top_invalid_units <- details$top_invalid_units
+  top_invalid_units <- details[["top_invalid_units"]]
   if (is.list(top_invalid_units) && length(top_invalid_units) > 0) {
     items <- vapply(utils::head(top_invalid_units, 5), function(entry) {
       if (is.list(entry)) {
-        category_label <- entry$lab_category %||% entry$category %||% "?"
-        unit_label <- entry$unit %||% entry$reference_unit %||% "?"
+        category_label <- entry[["lab_category"]] %||% entry[["category"]] %||% "?"
+        unit_label <- entry[["unit"]] %||% entry[["reference_unit"]] %||% "?"
         sprintf("%s: '%s'", category_label, unit_label)
       } else {
-        as.character(entry)
+        python_repr(entry)
       }
     }, character(1))
     finding_parts <- c(finding_parts, sprintf("Units: %s", paste(items, collapse = ", ")))
   }
 
   # Category-group mapping: mismatched pairs (replaces generic message)
-  mismatched_pairs <- details$mismatched_pairs
+  mismatched_pairs <- details[["mismatched_pairs"]]
   if (is.list(mismatched_pairs) && length(mismatched_pairs) > 0) {
     items <- vapply(utils::head(mismatched_pairs, 3), function(entry) {
       if (is.list(entry)) {
-        category_label <- entry$category %||% "?"
-        actual_group <- entry$actual_group %||% "?"
-        expected_group <- entry$expected_group %||% "?"
+        category_label <- entry[["category"]] %||% "?"
+        actual_group <- entry[["actual_group"]] %||% "?"
+        expected_group <- entry[["expected_group"]] %||% "?"
         expected_display <- if (length(expected_group) > 1) {
           paste(sprintf("'%s'", expected_group), collapse = " or ")
         } else {
@@ -259,7 +297,7 @@ build_finding <- function(message, details) {
         }
         sprintf("%s: found '%s', expected %s", category_label, actual_group, expected_display)
       } else {
-        as.character(entry)
+        python_repr(entry)
       }
     }, character(1))
     suffix <- if (length(mismatched_pairs) > 3) sprintf(" ... (%d total)", length(mismatched_pairs)) else ""
@@ -268,11 +306,11 @@ build_finding <- function(message, details) {
   }
 
   # Conditional requirements: missing counts
-  rows_with_missing <- details$rows_with_missing
+  rows_with_missing <- details[["rows_with_missing"]]
   if (!is.null(rows_with_missing)) {
-    rows_meeting_condition <- details$rows_meeting_condition %||% 0L
-    percent_missing <- details$percent_missing %||% 0
-    required_column <- details$required_column %||% ""
+    rows_meeting_condition <- details[["rows_meeting_condition"]] %||% 0L
+    percent_missing <- details[["percent_missing"]] %||% 0
+    required_column <- details[["required_column"]] %||% ""
     finding_parts <- c(finding_parts, sprintf(
       "%s: %s/%s rows missing (%s%%)",
       required_column,
@@ -323,41 +361,41 @@ truncate_comment <- function(message, max_len = 400) {
 #'                   message = "Column 'x' has 12% missing values",
 #'                   details = list(column = "x")))
 enrich_issue <- function(issue, check_key = NULL) {
-  if (identical(issue$severity, "info")) {
-    message_text <- issue$message %||% ""
+  if (identical(issue[["severity"]], "info")) {
+    message_text <- issue[["message"]] %||% ""
     if (any(startsWith(message_text, NOT_APPLICABLE_PREFIXES))) {
       return(NULL)
     }
   }
 
-  rule_key <- paste0(issue$category %||% "", "|", issue$check_type %||% "")
+  rule_key <- paste0(issue[["category"]] %||% "", "|", issue[["check_type"]] %||% "")
   rule_entry <- RULE_CODES[[rule_key]] %||% c("", "")
 
-  issue$rule_code <- rule_entry[1]
-  issue$rule_description <- rule_entry[2]
-  issue$column_field <- extract_column_field(issue)
-  issue$finding <- build_finding(issue$message %||% "", issue$details %||% list())
-  issue$atomic_count <- extract_atomic_count(issue)
+  issue[["rule_code"]] <- rule_entry[1]
+  issue[["rule_description"]] <- rule_entry[2]
+  issue[["column_field"]] <- extract_column_field(issue)
+  issue[["finding"]] <- build_finding(issue[["message"]] %||% "", issue[["details"]] %||% list())
+  issue[["atomic_count"]] <- extract_atomic_count(issue)
 
   # For relational checks, the check_key IS the FK column
-  if (identical(issue$check_type, "relational_integrity") &&
-      !is.null(check_key) && identical(issue$column_field, "NA")) {
-    issue$column_field <- check_key
+  if (identical(issue[["check_type"]], "relational_integrity") &&
+      !is.null(check_key) && identical(issue[["column_field"]], "NA")) {
+    issue[["column_field"]] <- check_key
   }
 
   issue
 }
 
 # Infer how many atomic checks a single enriched issue row represents.
-# Priority: explicit details$atomic_count, then the length of a known list
+# Priority: explicit details[["atomic_count"]], then the length of a known list
 # field whose items correspond one-to-one with atoms, then 1.
 extract_atomic_count <- function(issue) {
-  details <- issue$details
+  details <- issue[["details"]]
   if (!is.list(details)) {
     return(1L)
   }
 
-  explicit_count <- details$atomic_count
+  explicit_count <- details[["atomic_count"]]
   # Accept explicit 0 as well — an informational row (e.g. the reverse
   # direction of a K.4 relational check) wants to display but not contribute
   # to the atomic sum.

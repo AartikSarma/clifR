@@ -45,7 +45,7 @@ SOFA_DIRECT_UNIT_VARIANTS <- c(
   "u" = "u(nits|nit)?",
   "m" = "milli-?",
   "l" = "l(iters|itres|itre|iter)?",
-  "mcg" = "^(u|µ|μ)g",
+  "mcg" = "^(u|\u00b5|\u03bc)g",
   "g" = "^g(rams|ram)?"
 )
 
@@ -88,7 +88,7 @@ max_or_na <- function(values) {
 #' @param datetime_columns Columns to relabel.
 #' @return The data frame with relabelled datetime columns.
 #' @keywords internal
-standardize_datetime_columns <- function(data, timezone, datetime_columns) {
+sofa_localize_datetime_columns <- function(data, timezone, datetime_columns) {
   if (is.null(timezone)) {
     return(data)
   }
@@ -286,7 +286,7 @@ load_labs_direct <- function(data_directory, filetype, hospitalization_ids, coho
       .data$lab_category %in% REQUIRED_LABS,
       .data$hospitalization_id %in% hospitalization_ids
     ) |>
-    standardize_datetime_columns(timezone, "lab_result_dttm") |>
+    sofa_localize_datetime_columns(timezone, "lab_result_dttm") |>
     dplyr::inner_join(cohort_local, by = "hospitalization_id") |>
     dplyr::filter(
       .data$lab_result_dttm >= .data$start_dttm,
@@ -317,7 +317,7 @@ load_vitals_direct <- function(data_directory, filetype, hospitalization_ids, co
       .data$vital_category %in% REQUIRED_VITALS,
       .data$hospitalization_id %in% hospitalization_ids
     ) |>
-    standardize_datetime_columns(timezone, "recorded_dttm") |>
+    sofa_localize_datetime_columns(timezone, "recorded_dttm") |>
     dplyr::inner_join(cohort_local, by = "hospitalization_id") |>
     dplyr::filter(
       .data$recorded_dttm >= .data$start_dttm,
@@ -355,7 +355,7 @@ load_patient_assessments_direct <- function(data_directory, filetype, hospitaliz
       .data$assessment_category %in% REQUIRED_ASSESSMENTS,
       .data$hospitalization_id %in% hospitalization_ids
     ) |>
-    standardize_datetime_columns(timezone, "recorded_dttm") |>
+    sofa_localize_datetime_columns(timezone, "recorded_dttm") |>
     dplyr::inner_join(cohort_local, by = "hospitalization_id") |>
     dplyr::filter(
       .data$recorded_dttm >= .data$start_dttm,
@@ -405,7 +405,7 @@ load_respiratory_support_direct <- function(data_directory, filetype, hospitaliz
   respiratory_data <- respiratory_data |>
     dplyr::mutate(hospitalization_id = as.character(.data$hospitalization_id)) |>
     dplyr::filter(.data$hospitalization_id %in% hospitalization_ids) |>
-    standardize_datetime_columns(timezone, "recorded_dttm") |>
+    sofa_localize_datetime_columns(timezone, "recorded_dttm") |>
     dplyr::inner_join(cohort_with_lookback, by = "hospitalization_id") |>
     dplyr::filter(
       .data$recorded_dttm >= .data$start_dttm_lookback,
@@ -475,7 +475,7 @@ load_and_convert_medications_direct <- function(data_directory, filetype, hospit
       .data$med_category %in% REQUIRED_MEDS,
       .data$hospitalization_id %in% hospitalization_ids
     ) |>
-    standardize_datetime_columns(timezone, "admin_dttm") |>
+    sofa_localize_datetime_columns(timezone, "admin_dttm") |>
     dplyr::inner_join(cohort_local, by = "hospitalization_id") |>
     dplyr::filter(
       .data$admin_dttm >= .data$start_dttm,
@@ -499,7 +499,7 @@ load_and_convert_medications_direct <- function(data_directory, filetype, hospit
       ) |>
       dplyr::select(dplyr::all_of(c("hospitalization_id", "recorded_dttm", "vital_value"))) |>
       dplyr::rename(weight_kg = "vital_value") |>
-      standardize_datetime_columns(timezone, "recorded_dttm")
+      sofa_localize_datetime_columns(timezone, "recorded_dttm")
   }
 
   medications_data <- medications_data |>
@@ -770,7 +770,7 @@ compute_sofa_direct <- function(data_directory,
 
   cohort_local <- cohort_df |>
     dplyr::as_tibble() |>
-    standardize_datetime_columns(timezone, c("start_dttm", "end_dttm")) |>
+    sofa_localize_datetime_columns(timezone, c("start_dttm", "end_dttm")) |>
     dplyr::mutate(hospitalization_id = as.character(.data$hospitalization_id))
 
   identifier_columns <- setdiff(names(cohort_local), c("start_dttm", "end_dttm"))

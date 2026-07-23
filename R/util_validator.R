@@ -1420,7 +1420,7 @@ check_conditional_requirements <- function(df, table_name, conditions = NULL) {
         result <- add_info(
           result,
           sprintf(
-            "Conditional requirement satisfied: %s — %s/%s rows present (100%%)",
+            "Conditional requirement satisfied: %s \u2014 %s/%s rows present (100%%)",
             description, py_int_comma(total_matching), py_int_comma(total_matching)
           ),
           list(
@@ -1733,7 +1733,7 @@ check_chronological_order <- function(df, table_name, chronological_rules = NULL
     )
 
     violation_message <- sprintf(
-      "Chronological order violation: %s — %s/%s rows (%s%%)",
+      "Chronological order violation: %s \u2014 %s/%s rows (%s%%)",
       description, py_int_str(violation_count), py_int_str(total_applicable), py_pct1(violation_percent)
     )
     violation_details <- list(
@@ -1752,7 +1752,7 @@ check_chronological_order <- function(df, table_name, chronological_rules = NULL
       result <- add_info(
         result,
         sprintf(
-          "Chronological order satisfied: %s — %s/%s rows valid (100%%)",
+          "Chronological order satisfied: %s \u2014 %s/%s rows valid (100%%)",
           description, py_int_comma(total_applicable), py_int_comma(total_applicable)
         ),
         list(
@@ -2077,7 +2077,7 @@ check_field_plausibility <- function(df, table_name, rules = NULL) {
         result <- add_warning(
           result,
           sprintf(
-            "Field plausibility violation: %s — %s/%s rows (%s%%)",
+            "Field plausibility violation: %s \u2014 %s/%s rows (%s%%)",
             description, py_int_str(violation_count), py_int_str(total_applicable), py_pct1(violation_percent)
           ),
           list(rule = description, violations = as.integer(violation_count),
@@ -2087,7 +2087,7 @@ check_field_plausibility <- function(df, table_name, rules = NULL) {
         result <- add_info(
           result,
           sprintf(
-            "Field plausibility satisfied: %s — %s/%s rows valid (100%%)",
+            "Field plausibility satisfied: %s \u2014 %s/%s rows valid (100%%)",
             description, py_int_comma(total_applicable), py_int_comma(total_applicable)
           ),
           list(column = then_column, rows_checked = as.integer(total_applicable),
@@ -2121,7 +2121,7 @@ check_field_plausibility <- function(df, table_name, rules = NULL) {
         result <- add_warning(
           result,
           sprintf(
-            "Field plausibility violation: %s — %s/%s rows (%s%%)",
+            "Field plausibility violation: %s \u2014 %s/%s rows (%s%%)",
             description, py_int_str(non_null_count), py_int_str(total_applicable), py_pct1(violation_percent)
           ),
           list(rule = description, violations = as.integer(non_null_count),
@@ -2131,7 +2131,7 @@ check_field_plausibility <- function(df, table_name, rules = NULL) {
         result <- add_info(
           result,
           sprintf(
-            "Field plausibility satisfied: %s — %s/%s rows valid (100%%)",
+            "Field plausibility satisfied: %s \u2014 %s/%s rows valid (100%%)",
             description, py_int_comma(total_applicable), py_int_comma(total_applicable)
           ),
           list(column = check_column, rows_checked = as.integer(total_applicable),
@@ -2409,7 +2409,7 @@ check_overlapping_periods <- function(df, table_name, entity_col = "hospitalizat
     result <- add_info(
       result,
       sprintf(
-        "No overlapping time periods detected for %s on %s/%s — %s records checked",
+        "No overlapping time periods detected for %s on %s/%s \u2014 %s records checked",
         entity_col, start_col, end_col, py_int_comma(total_records)
       ),
       list(column = paste0(start_col, ", ", end_col), entity_col = entity_col,
@@ -3391,7 +3391,7 @@ build_absent_table_dqa_result <- function(table_name, clif_version = DEFAULT_CLI
     passed = FALSE,
     errors = list(list(
       message = sprintf(
-        "Table not present in dataset — %d conformance atoms could not be evaluated",
+        "Table not present in dataset \u2014 %d conformance atoms could not be evaluated",
         expected_conformance
       ),
       details = list(atomic_count = expected_conformance, reason = "table_absent")
@@ -3529,7 +3529,7 @@ validate_dataframe <- function(df, schema, table_name = NULL, plausibility_thres
 format_clifpy_error <- function(error, row_count, table_name) {
   formatted <- list(
     type = error$type %||% "Unknown Error",
-    description = error$description %||% paste(utils::capture.output(str(error)), collapse = " "),
+    description = error$description %||% paste(utils::capture.output(utils::str(error)), collapse = " "),
     category = error$category %||% "other",
     details = error$details %||% list(),
     table_name = table_name,
@@ -3689,7 +3689,7 @@ get_validation_summary <- function(validation_results) {
   other_count <- length(errors$other_errors %||% list())
   total_count <- schema_count + data_quality_count + other_count
 
-  status_symbols <- list(complete = "✓", partial = "⚠", incomplete = "✗")
+  status_symbols <- list(complete = "\u2713", partial = "\u26a0", incomplete = "\u2717")
   summary_parts <- sprintf(
     "Status: %s %s", status_symbols[[status]] %||% "?", toupper(status)
   )

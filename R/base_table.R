@@ -248,6 +248,129 @@ BaseTable <- R6::R6Class(
       distributions
     },
 
+    #' @description Bar plots of each categorical column's distribution by encounter.
+    #'
+    #' Counts distinct `hospitalization_id` (or `patient_id`) per category value and
+    #' draws one bar plot per categorical column. Ports clifpy's
+    #' `plot_categorical_distributions`; uses ggplot2 with the viridis palette.
+    #' @param columns Optional character vector restricting which categorical columns
+    #'   to plot.
+    #' @param save Whether to write one PNG per column to the output directory.
+    #' @param width,height Plot dimensions in inches.
+    #' @param dpi Resolution for saved plots.
+    #' @return A named list of ggplot objects, one per categorical column.
+    plot_categorical_distributions = function(columns = NULL, save = TRUE,
+                                              width = 10, height = 6, dpi = 300) {
+      if (!requireNamespace("ggplot2", quietly = TRUE)) {
+        cli::cli_abort("Package {.pkg ggplot2} is required for plotting. Install it first.")
+      }
+      distributions <- self$analyze_categorical_distributions(save = FALSE)
+      if (!is.null(columns)) {
+        distributions <- distributions[intersect(names(distributions), columns)]
+      }
+      if (length(distributions) == 0) {
+        return(list())
+      }
+
+      plots <- list()
+      for (column_name in names(distributions)) {
+        distribution <- distributions[[column_name]]
+        distribution[[column_name]] <- factor(
+          as.character(distribution[[column_name]]),
+          levels = as.character(distribution[[column_name]])
+        )
+
+        plot_object <- ggplot2::ggplot(
+          distribution,
+          ggplot2::aes(x = .data[[column_name]], y = .data$count, fill = .data$count)
+        ) +
+          ggplot2::geom_col(width = 0.8) +
+          ggplot2::scale_fill_viridis_c(option = "cividis", guide = "none") +
+          ggplot2::labs(
+            title = sprintf("Distribution of %s", column_name),
+            x = "Category",
+            y = "Unique encounter count"
+          ) +
+          ggplot2::theme_minimal() +
+          ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45, hjust = 1))
+
+        plots[[column_name]] <- plot_object
+
+        if (save) {
+          plot_path <- file.path(
+            self$output_directory,
+            sprintf("categorical_dist_%s_%s.png", self$table_name, column_name)
+          )
+          ggplot2::ggsave(plot_path, plot_object, width = width, height = height, dpi = dpi)
+        }
+      }
+
+      plots
+    },
+
+    #' @description Empirical CDF of a numeric column stratified by category.
+    #'
+    #' For each category value, computes the ECDF of `value_column`: sorted values
+    #' paired with `rank / n` cumulative probabilities. Ports clifpy's
+    #' `calculate_stratified_ecdf`.
+    #' @param value_column Numeric column to compute the ECDF for.
+    #' @param category_column Categorical column to stratify by.
+    #' @param category_values Optional character vector of categories to include.
+    #'   Defaults to the schema's permissible values, or all observed values.
+    #' @param save Whether to write the combined ECDF to a CSV.
+    #' @return A named list of tibbles, one per category, or `NULL` when no data.
+    calculate_stratified_ecdf = function(value_column, category_column,
+                                         category_values = NULL, save = TRUE) {
+      if (is.null(self$df)) {
+        cli::cli_alert_warning("No dataframe available for ECDF calculation")
+        return(NULL)
+      }
+      if (!value_column %in% names(self$df) || !category_column %in% names(self$df)) {
+        cli::cli_alert_warning("Value or category column not found in data")
+        return(NULL)
+      }
+
+      if (is.null(category_values)) {
+        category_values <- schema_permissible_values(self$schema, category_column)
+        if (length(category_values) == 0) {
+          category_values <- unique(self$df[[category_column]][!is.na(self$df[[category_column]])])
+        }
+      }
+
+      ecdf_by_category <- list()
+      for (category in category_values) {
+        category_values_vector <- self$df[[value_column]][
+          !is.na(self$df[[category_column]]) & self$df[[category_column]] == category
+        ]
+        category_values_vector <- sort(category_values_vector[!is.na(category_values_vector)])
+        observation_count <- length(category_values_vector)
+        if (observation_count == 0) {
+          next
+        }
+        ecdf_by_category[[as.character(category)]] <- dplyr::tibble(
+          !!value_column := category_values_vector,
+          cumulative_probability = seq_len(observation_count) / observation_count,
+          !!category_column := category
+        )
+      }
+
+      if (length(ecdf_by_category) == 0) {
+        cli::cli_alert_warning("No valid ECDF data for any category")
+        return(NULL)
+      }
+
+      if (save) {
+        combined_ecdf <- dplyr::bind_rows(ecdf_by_category)
+        csv_path <- file.path(
+          self$output_directory,
+          sprintf("ecdf_%s_%s_by_%s.csv", self$table_name, value_column, category_column)
+        )
+        readr::write_csv(combined_ecdf, csv_path)
+      }
+
+      ecdf_by_category
+    },
+
     #' @description Print a short description of the table.
     #' @param ... Unused; present for print compatibility.
     #' @return The table object, invisibly.

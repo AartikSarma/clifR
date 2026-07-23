@@ -1,0 +1,1156 @@
+{
+  "table_name": "code_status",
+  "backend": "polars",
+  "conformance": {
+    "table_presence": {
+      "check_type": "table_presence",
+      "table_name": "code_status",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Table 'code_status' present with 204 rows and 4 columns",
+          "details": {}
+        }
+      ],
+      "metrics": {
+        "row_count": 204,
+        "column_count": 4
+      },
+      "atomic_total": 1,
+      "atomic_passed": 1
+    },
+    "required_columns": {
+      "check_type": "required_columns",
+      "table_name": "code_status",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'patient_id': present",
+          "details": {
+            "column": "patient_id"
+          }
+        },
+        {
+          "message": "Column 'start_dttm': present",
+          "details": {
+            "column": "start_dttm"
+          }
+        },
+        {
+          "message": "Column 'code_status_category': present",
+          "details": {
+            "column": "code_status_category"
+          }
+        }
+      ],
+      "metrics": {
+        "total_required": 3,
+        "total_present": 3,
+        "total_missing": 0
+      },
+      "atomic_total": 3,
+      "atomic_passed": 3
+    },
+    "column_dtypes": {
+      "check_type": "column_dtypes",
+      "table_name": "code_status",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'patient_id': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "patient_id",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'start_dttm': dtype matches schema (DATETIME)",
+          "details": {
+            "column": "start_dttm",
+            "expected": "DATETIME"
+          }
+        },
+        {
+          "message": "Column 'code_status_name': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "code_status_name",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'code_status_category': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "code_status_category",
+            "expected": "VARCHAR"
+          }
+        }
+      ],
+      "metrics": {
+        "columns_checked": 4,
+        "dtype_errors": 0,
+        "dtype_warnings": 0
+      },
+      "atomic_total": 4,
+      "atomic_passed": 4
+    },
+    "datetime_format": {
+      "check_type": "datetime_format",
+      "table_name": "code_status",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'start_dttm': datetime format valid",
+          "details": {
+            "column": "start_dttm"
+          }
+        }
+      ],
+      "metrics": {
+        "datetime_columns_checked": 1
+      },
+      "atomic_total": 1,
+      "atomic_passed": 1
+    },
+    "categorical_values": {
+      "check_type": "categorical_values",
+      "table_name": "code_status",
+      "passed": true,
+      "errors": [],
+      "warnings": [
+        {
+          "message": "2 invalid categorical values",
+          "details": {
+            "column": "code_status_category",
+            "top_invalid": [
+              {
+                "value": "Presume Full",
+                "count": 18
+              },
+              {
+                "value": "DNR/DNI",
+                "count": 9
+              }
+            ],
+            "permissible_values": [
+              "dnr",
+              "dnar",
+              "udnr",
+              "dnr_or_dni",
+              "dnar_or_dni",
+              "dni_only",
+              "and",
+              "full",
+              "presume_full",
+              "other"
+            ]
+          }
+        }
+      ],
+      "info": [],
+      "metrics": {
+        "category_columns_checked": 1,
+        "columns_with_invalid_values": 1
+      },
+      "atomic_total": 1,
+      "atomic_passed": 1
+    },
+    "category_group_mapping": {
+      "check_type": "category_group_mapping",
+      "table_name": "code_status",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No category-to-group mappings defined in schema",
+          "details": {}
+        }
+      ],
+      "metrics": {},
+      "atomic_total": 0,
+      "atomic_passed": 0
+    }
+  },
+  "completeness": {
+    "missingness": {
+      "check_type": "missingness",
+      "table_name": "code_status",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'patient_id': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "patient_id",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'start_dttm': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "start_dttm",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'code_status_category': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "code_status_category",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        }
+      ],
+      "metrics": {
+        "total_rows": 204,
+        "required_columns_checked": 3,
+        "missingness_stats": [
+          {
+            "column": "patient_id",
+            "null_count": 0,
+            "total_rows": 204,
+            "percent_missing": 0.0
+          },
+          {
+            "column": "start_dttm",
+            "null_count": 0,
+            "total_rows": 204,
+            "percent_missing": 0.0
+          },
+          {
+            "column": "code_status_category",
+            "null_count": 0,
+            "total_rows": 204,
+            "percent_missing": 0.0
+          }
+        ]
+      },
+      "atomic_total": 3,
+      "atomic_passed": 3
+    },
+    "conditional_requirements": {
+      "check_type": "conditional_requirements",
+      "table_name": "code_status",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No conditional requirements defined for this table",
+          "details": {}
+        }
+      ],
+      "metrics": {},
+      "atomic_total": 0,
+      "atomic_passed": 0
+    },
+    "mcide_value_coverage": {
+      "check_type": "mcide_value_coverage",
+      "table_name": "code_status",
+      "passed": false,
+      "errors": [
+        {
+          "message": "Missing 7 mCIDE values: dnar, udnr, dnr_or_dni, dnar_or_dni, dni_only, and, presume_full",
+          "details": {
+            "column": "code_status_category",
+            "missing_values": [
+              "dnar",
+              "udnr",
+              "dnr_or_dni",
+              "dnar_or_dni",
+              "dni_only",
+              "and",
+              "presume_full"
+            ],
+            "coverage_percent": 30.0
+          }
+        }
+      ],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'code_status_category': 3/10 mCIDE values present",
+          "details": {
+            "column": "code_status_category",
+            "found_values": 3,
+            "expected_values": 10,
+            "coverage_percent": 30.0,
+            "atomic_count": 3
+          }
+        }
+      ],
+      "metrics": {
+        "category_columns_checked": 1,
+        "coverage_by_column": {
+          "code_status_category": {
+            "expected_values": 10,
+            "found_values": 3,
+            "missing_values": [
+              "dnar",
+              "udnr",
+              "dnr_or_dni",
+              "dnar_or_dni",
+              "dni_only",
+              "and",
+              "presume_full"
+            ],
+            "coverage_percent": 30.0
+          }
+        }
+      },
+      "atomic_total": 10,
+      "atomic_passed": 3
+    }
+  },
+  "relational": {},
+  "plausibility": {
+    "chronological_order": {
+      "check_type": "chronological_order",
+      "table_name": "code_status",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No chronological order rules defined for this table",
+          "details": {}
+        }
+      ],
+      "metrics": {},
+      "atomic_total": 0,
+      "atomic_passed": 0
+    },
+    "numeric_range_plausibility": {
+      "check_type": "numeric_range_plausibility",
+      "table_name": "code_status",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No numeric range configuration for this table",
+          "details": {}
+        }
+      ],
+      "metrics": {},
+      "atomic_total": 0,
+      "atomic_passed": 0
+    },
+    "field_plausibility": {
+      "check_type": "field_plausibility",
+      "table_name": "code_status",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No field plausibility rules defined for this table",
+          "details": {}
+        }
+      ],
+      "metrics": {},
+      "atomic_total": 0,
+      "atomic_passed": 0
+    },
+    "category_temporal_consistency": {
+      "check_type": "category_temporal_consistency",
+      "table_name": "code_status",
+      "passed": true,
+      "errors": [],
+      "warnings": [
+        {
+          "message": "code_status_category: dnr absent in 2/7 years (2018-2024)",
+          "details": {
+            "column": "code_status_category",
+            "value": "dnr",
+            "absent_years": [
+              2018,
+              2021
+            ],
+            "total_years": 7,
+            "yearly_counts": {
+              "2018": 0,
+              "2019": 3,
+              "2020": 1,
+              "2021": 0,
+              "2022": 2,
+              "2023": 1,
+              "2024": 2
+            }
+          }
+        },
+        {
+          "message": "code_status_category: dnr/dni absent in 1/7 years (2018-2024)",
+          "details": {
+            "column": "code_status_category",
+            "value": "dnr/dni",
+            "absent_years": [
+              2020
+            ],
+            "total_years": 7,
+            "yearly_counts": {
+              "2018": 2,
+              "2019": 2,
+              "2020": 0,
+              "2021": 1,
+              "2022": 2,
+              "2023": 1,
+              "2024": 1
+            }
+          }
+        },
+        {
+          "message": "code_status_category: other absent in 6/7 years (2018-2024)",
+          "details": {
+            "column": "code_status_category",
+            "value": "other",
+            "absent_years": [
+              2018,
+              2019,
+              2020,
+              2021,
+              2022,
+              2023
+            ],
+            "total_years": 7,
+            "yearly_counts": {
+              "2018": 0,
+              "2019": 0,
+              "2020": 0,
+              "2021": 0,
+              "2022": 0,
+              "2023": 0,
+              "2024": 1
+            }
+          }
+        },
+        {
+          "message": "code_status_category: presume full absent in 1/7 years (2018-2024)",
+          "details": {
+            "column": "code_status_category",
+            "value": "presume full",
+            "absent_years": [
+              2020
+            ],
+            "total_years": 7,
+            "yearly_counts": {
+              "2018": 7,
+              "2019": 2,
+              "2020": 0,
+              "2021": 3,
+              "2022": 1,
+              "2023": 2,
+              "2024": 3
+            }
+          }
+        }
+      ],
+      "info": [
+        {
+          "message": "code_status_category: full present in 7/7 years (2018-2024)",
+          "details": {
+            "column": "code_status_category",
+            "value": "full",
+            "yearly_counts": {
+              "2018": 19,
+              "2019": 32,
+              "2020": 27,
+              "2021": 16,
+              "2022": 23,
+              "2023": 21,
+              "2024": 22
+            }
+          }
+        }
+      ],
+      "metrics": {
+        "category_columns_checked": 1,
+        "yearly_distributions": {
+          "code_status_category": {
+            "2018": {
+              "dnr/dni": 2,
+              "full": 19,
+              "presume full": 7
+            },
+            "2019": {
+              "dnr": 3,
+              "dnr/dni": 2,
+              "full": 32,
+              "presume full": 2
+            },
+            "2020": {
+              "dnr": 1,
+              "full": 27
+            },
+            "2021": {
+              "dnr/dni": 1,
+              "full": 16,
+              "presume full": 3
+            },
+            "2022": {
+              "dnr": 2,
+              "dnr/dni": 2,
+              "full": 23,
+              "presume full": 1
+            },
+            "2023": {
+              "dnr": 1,
+              "dnr/dni": 1,
+              "full": 21,
+              "presume full": 2
+            },
+            "2024": {
+              "dnr": 2,
+              "dnr/dni": 1,
+              "full": 22,
+              "other": 1,
+              "presume full": 3
+            }
+          }
+        },
+        "missing_in_years": {
+          "code_status_category": {
+            "dnr": [
+              2018,
+              2021
+            ],
+            "other": [
+              2018,
+              2019,
+              2020,
+              2021,
+              2022,
+              2023
+            ],
+            "presume full": [
+              2020
+            ],
+            "dnr/dni": [
+              2020
+            ]
+          }
+        },
+        "monthly_trends": {
+          "code_status_category": [
+            {
+              "month_year": "2018-01",
+              "code_status_category": "full",
+              "n": 4
+            },
+            {
+              "month_year": "2018-03",
+              "code_status_category": "full",
+              "n": 2
+            },
+            {
+              "month_year": "2018-04",
+              "code_status_category": "full",
+              "n": 2
+            },
+            {
+              "month_year": "2018-04",
+              "code_status_category": "presume full",
+              "n": 2
+            },
+            {
+              "month_year": "2018-05",
+              "code_status_category": "full",
+              "n": 1
+            },
+            {
+              "month_year": "2018-05",
+              "code_status_category": "presume full",
+              "n": 1
+            },
+            {
+              "month_year": "2018-06",
+              "code_status_category": "full",
+              "n": 2
+            },
+            {
+              "month_year": "2018-07",
+              "code_status_category": "dnr/dni",
+              "n": 1
+            },
+            {
+              "month_year": "2018-07",
+              "code_status_category": "full",
+              "n": 2
+            },
+            {
+              "month_year": "2018-08",
+              "code_status_category": "full",
+              "n": 3
+            },
+            {
+              "month_year": "2018-08",
+              "code_status_category": "presume full",
+              "n": 1
+            },
+            {
+              "month_year": "2018-09",
+              "code_status_category": "full",
+              "n": 2
+            },
+            {
+              "month_year": "2018-10",
+              "code_status_category": "presume full",
+              "n": 1
+            },
+            {
+              "month_year": "2018-11",
+              "code_status_category": "dnr/dni",
+              "n": 1
+            },
+            {
+              "month_year": "2018-11",
+              "code_status_category": "full",
+              "n": 2
+            },
+            {
+              "month_year": "2018-11",
+              "code_status_category": "presume full",
+              "n": 2
+            },
+            {
+              "month_year": "2019-01",
+              "code_status_category": "dnr/dni",
+              "n": 1
+            },
+            {
+              "month_year": "2019-01",
+              "code_status_category": "full",
+              "n": 4
+            },
+            {
+              "month_year": "2019-02",
+              "code_status_category": "full",
+              "n": 3
+            },
+            {
+              "month_year": "2019-03",
+              "code_status_category": "full",
+              "n": 2
+            },
+            {
+              "month_year": "2019-03",
+              "code_status_category": "presume full",
+              "n": 1
+            },
+            {
+              "month_year": "2019-04",
+              "code_status_category": "dnr",
+              "n": 1
+            },
+            {
+              "month_year": "2019-05",
+              "code_status_category": "dnr/dni",
+              "n": 1
+            },
+            {
+              "month_year": "2019-05",
+              "code_status_category": "full",
+              "n": 5
+            },
+            {
+              "month_year": "2019-06",
+              "code_status_category": "full",
+              "n": 2
+            },
+            {
+              "month_year": "2019-07",
+              "code_status_category": "full",
+              "n": 5
+            },
+            {
+              "month_year": "2019-07",
+              "code_status_category": "presume full",
+              "n": 1
+            },
+            {
+              "month_year": "2019-08",
+              "code_status_category": "full",
+              "n": 1
+            },
+            {
+              "month_year": "2019-09",
+              "code_status_category": "full",
+              "n": 2
+            },
+            {
+              "month_year": "2019-10",
+              "code_status_category": "dnr",
+              "n": 1
+            },
+            {
+              "month_year": "2019-10",
+              "code_status_category": "full",
+              "n": 1
+            },
+            {
+              "month_year": "2019-11",
+              "code_status_category": "full",
+              "n": 4
+            },
+            {
+              "month_year": "2019-12",
+              "code_status_category": "dnr",
+              "n": 1
+            },
+            {
+              "month_year": "2019-12",
+              "code_status_category": "full",
+              "n": 4
+            },
+            {
+              "month_year": "2020-01",
+              "code_status_category": "full",
+              "n": 1
+            },
+            {
+              "month_year": "2020-02",
+              "code_status_category": "full",
+              "n": 1
+            },
+            {
+              "month_year": "2020-03",
+              "code_status_category": "full",
+              "n": 1
+            },
+            {
+              "month_year": "2020-04",
+              "code_status_category": "full",
+              "n": 3
+            },
+            {
+              "month_year": "2020-05",
+              "code_status_category": "full",
+              "n": 5
+            },
+            {
+              "month_year": "2020-06",
+              "code_status_category": "full",
+              "n": 7
+            },
+            {
+              "month_year": "2020-07",
+              "code_status_category": "dnr",
+              "n": 1
+            },
+            {
+              "month_year": "2020-07",
+              "code_status_category": "full",
+              "n": 1
+            },
+            {
+              "month_year": "2020-08",
+              "code_status_category": "full",
+              "n": 1
+            },
+            {
+              "month_year": "2020-09",
+              "code_status_category": "full",
+              "n": 2
+            },
+            {
+              "month_year": "2020-10",
+              "code_status_category": "full",
+              "n": 4
+            },
+            {
+              "month_year": "2020-11",
+              "code_status_category": "full",
+              "n": 2
+            },
+            {
+              "month_year": "2020-12",
+              "code_status_category": "full",
+              "n": 1
+            },
+            {
+              "month_year": "2021-01",
+              "code_status_category": "full",
+              "n": 2
+            },
+            {
+              "month_year": "2021-02",
+              "code_status_category": "full",
+              "n": 3
+            },
+            {
+              "month_year": "2021-02",
+              "code_status_category": "presume full",
+              "n": 1
+            },
+            {
+              "month_year": "2021-03",
+              "code_status_category": "full",
+              "n": 1
+            },
+            {
+              "month_year": "2021-04",
+              "code_status_category": "full",
+              "n": 1
+            },
+            {
+              "month_year": "2021-05",
+              "code_status_category": "full",
+              "n": 2
+            },
+            {
+              "month_year": "2021-06",
+              "code_status_category": "full",
+              "n": 1
+            },
+            {
+              "month_year": "2021-07",
+              "code_status_category": "dnr/dni",
+              "n": 1
+            },
+            {
+              "month_year": "2021-07",
+              "code_status_category": "full",
+              "n": 1
+            },
+            {
+              "month_year": "2021-07",
+              "code_status_category": "presume full",
+              "n": 1
+            },
+            {
+              "month_year": "2021-09",
+              "code_status_category": "full",
+              "n": 2
+            },
+            {
+              "month_year": "2021-10",
+              "code_status_category": "full",
+              "n": 3
+            },
+            {
+              "month_year": "2021-11",
+              "code_status_category": "presume full",
+              "n": 1
+            },
+            {
+              "month_year": "2021-12",
+              "code_status_category": "full",
+              "n": 1
+            },
+            {
+              "month_year": "2022-01",
+              "code_status_category": "full",
+              "n": 2
+            },
+            {
+              "month_year": "2022-02",
+              "code_status_category": "full",
+              "n": 2
+            },
+            {
+              "month_year": "2022-03",
+              "code_status_category": "full",
+              "n": 4
+            },
+            {
+              "month_year": "2022-04",
+              "code_status_category": "dnr/dni",
+              "n": 1
+            },
+            {
+              "month_year": "2022-04",
+              "code_status_category": "full",
+              "n": 3
+            },
+            {
+              "month_year": "2022-05",
+              "code_status_category": "full",
+              "n": 2
+            },
+            {
+              "month_year": "2022-06",
+              "code_status_category": "presume full",
+              "n": 1
+            },
+            {
+              "month_year": "2022-07",
+              "code_status_category": "dnr/dni",
+              "n": 1
+            },
+            {
+              "month_year": "2022-07",
+              "code_status_category": "full",
+              "n": 1
+            },
+            {
+              "month_year": "2022-09",
+              "code_status_category": "dnr",
+              "n": 1
+            },
+            {
+              "month_year": "2022-09",
+              "code_status_category": "full",
+              "n": 4
+            },
+            {
+              "month_year": "2022-10",
+              "code_status_category": "full",
+              "n": 2
+            },
+            {
+              "month_year": "2022-11",
+              "code_status_category": "dnr",
+              "n": 1
+            },
+            {
+              "month_year": "2022-11",
+              "code_status_category": "full",
+              "n": 3
+            },
+            {
+              "month_year": "2022-12",
+              "code_status_category": "full",
+              "n": 2
+            },
+            {
+              "month_year": "2023-01",
+              "code_status_category": "full",
+              "n": 1
+            },
+            {
+              "month_year": "2023-02",
+              "code_status_category": "full",
+              "n": 1
+            },
+            {
+              "month_year": "2023-02",
+              "code_status_category": "presume full",
+              "n": 1
+            },
+            {
+              "month_year": "2023-03",
+              "code_status_category": "full",
+              "n": 3
+            },
+            {
+              "month_year": "2023-04",
+              "code_status_category": "full",
+              "n": 3
+            },
+            {
+              "month_year": "2023-05",
+              "code_status_category": "full",
+              "n": 1
+            },
+            {
+              "month_year": "2023-07",
+              "code_status_category": "full",
+              "n": 5
+            },
+            {
+              "month_year": "2023-07",
+              "code_status_category": "presume full",
+              "n": 1
+            },
+            {
+              "month_year": "2023-08",
+              "code_status_category": "full",
+              "n": 3
+            },
+            {
+              "month_year": "2023-10",
+              "code_status_category": "dnr",
+              "n": 1
+            },
+            {
+              "month_year": "2023-10",
+              "code_status_category": "dnr/dni",
+              "n": 1
+            },
+            {
+              "month_year": "2023-10",
+              "code_status_category": "full",
+              "n": 2
+            },
+            {
+              "month_year": "2023-11",
+              "code_status_category": "full",
+              "n": 1
+            },
+            {
+              "month_year": "2023-12",
+              "code_status_category": "full",
+              "n": 1
+            },
+            {
+              "month_year": "2024-01",
+              "code_status_category": "full",
+              "n": 1
+            },
+            {
+              "month_year": "2024-02",
+              "code_status_category": "dnr/dni",
+              "n": 1
+            },
+            {
+              "month_year": "2024-02",
+              "code_status_category": "full",
+              "n": 1
+            },
+            {
+              "month_year": "2024-03",
+              "code_status_category": "full",
+              "n": 2
+            },
+            {
+              "month_year": "2024-04",
+              "code_status_category": "dnr",
+              "n": 1
+            },
+            {
+              "month_year": "2024-04",
+              "code_status_category": "full",
+              "n": 1
+            },
+            {
+              "month_year": "2024-05",
+              "code_status_category": "full",
+              "n": 4
+            },
+            {
+              "month_year": "2024-05",
+              "code_status_category": "other",
+              "n": 1
+            },
+            {
+              "month_year": "2024-06",
+              "code_status_category": "full",
+              "n": 1
+            },
+            {
+              "month_year": "2024-06",
+              "code_status_category": "presume full",
+              "n": 1
+            },
+            {
+              "month_year": "2024-07",
+              "code_status_category": "full",
+              "n": 2
+            },
+            {
+              "month_year": "2024-07",
+              "code_status_category": "presume full",
+              "n": 1
+            },
+            {
+              "month_year": "2024-08",
+              "code_status_category": "full",
+              "n": 3
+            },
+            {
+              "month_year": "2024-09",
+              "code_status_category": "full",
+              "n": 2
+            },
+            {
+              "month_year": "2024-10",
+              "code_status_category": "full",
+              "n": 1
+            },
+            {
+              "month_year": "2024-10",
+              "code_status_category": "presume full",
+              "n": 1
+            },
+            {
+              "month_year": "2024-11",
+              "code_status_category": "dnr",
+              "n": 1
+            },
+            {
+              "month_year": "2024-11",
+              "code_status_category": "full",
+              "n": 3
+            },
+            {
+              "month_year": "2024-12",
+              "code_status_category": "full",
+              "n": 1
+            }
+          ]
+        }
+      },
+      "atomic_total": 5,
+      "atomic_passed": 5
+    },
+    "duplicate_composite_keys": {
+      "check_type": "duplicate_composite_keys",
+      "table_name": "code_status",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No composite keys defined for this table",
+          "details": {}
+        }
+      ],
+      "metrics": {},
+      "atomic_total": 0,
+      "atomic_passed": 0
+    }
+  },
+  "table_stats": [
+    {
+      "column": "patient_id",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 157,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "start_dttm",
+      "dtype": "DATETIME",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 204,
+      "min": "2018-01-22 20:36",
+      "max": "2024-12-15 19:20"
+    },
+    {
+      "column": "code_status_name",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 5,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "code_status_category",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 5,
+      "min": null,
+      "max": null
+    }
+  ],
+  "total_rows": 204
+}

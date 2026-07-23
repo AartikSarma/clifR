@@ -4,10 +4,10 @@
 ## usethis namespace: start
 #' @importFrom R6 R6Class
 #' @import rlang
-#' @importFrom dplyr %>%
 #' @importFrom rlang .data
 #' @importFrom stats setNames quantile sd median
-#' @importFrom utils object.size head packageVersion
+#' @importFrom utils object.size head packageVersion str
+#' @importFrom parallel detectCores
 ## usethis namespace: end
 NULL
 

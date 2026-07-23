@@ -1,0 +1,3949 @@
+{
+  "table_name": "adt",
+  "backend": "polars",
+  "conformance": {
+    "table_presence": {
+      "check_type": "table_presence",
+      "table_name": "adt",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Table 'adt' present with 552 rows and 8 columns",
+          "details": {}
+        }
+      ],
+      "metrics": {
+        "row_count": 552,
+        "column_count": 8
+      },
+      "atomic_total": 1,
+      "atomic_passed": 1
+    },
+    "required_columns": {
+      "check_type": "required_columns",
+      "table_name": "adt",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'hospitalization_id': present",
+          "details": {
+            "column": "hospitalization_id"
+          }
+        },
+        {
+          "message": "Column 'hospital_id': present",
+          "details": {
+            "column": "hospital_id"
+          }
+        },
+        {
+          "message": "Column 'hospital_type': present",
+          "details": {
+            "column": "hospital_type"
+          }
+        },
+        {
+          "message": "Column 'in_dttm': present",
+          "details": {
+            "column": "in_dttm"
+          }
+        },
+        {
+          "message": "Column 'out_dttm': present",
+          "details": {
+            "column": "out_dttm"
+          }
+        },
+        {
+          "message": "Column 'location_category': present",
+          "details": {
+            "column": "location_category"
+          }
+        },
+        {
+          "message": "Column 'location_type': present",
+          "details": {
+            "column": "location_type"
+          }
+        }
+      ],
+      "metrics": {
+        "total_required": 7,
+        "total_present": 7,
+        "total_missing": 0
+      },
+      "atomic_total": 7,
+      "atomic_passed": 7
+    },
+    "column_dtypes": {
+      "check_type": "column_dtypes",
+      "table_name": "adt",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'hospitalization_id': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "hospitalization_id",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'hospital_id': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "hospital_id",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'hospital_type': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "hospital_type",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'in_dttm': dtype matches schema (DATETIME)",
+          "details": {
+            "column": "in_dttm",
+            "expected": "DATETIME"
+          }
+        },
+        {
+          "message": "Column 'out_dttm': dtype matches schema (DATETIME)",
+          "details": {
+            "column": "out_dttm",
+            "expected": "DATETIME"
+          }
+        },
+        {
+          "message": "Column 'location_name': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "location_name",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'location_category': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "location_category",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'location_type': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "location_type",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'room_id': not present in data (dtype check skipped)",
+          "details": {
+            "column": "room_id",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'bed_id': not present in data (dtype check skipped)",
+          "details": {
+            "column": "bed_id",
+            "expected": "VARCHAR"
+          }
+        }
+      ],
+      "metrics": {
+        "columns_checked": 10,
+        "dtype_errors": 0,
+        "dtype_warnings": 0
+      },
+      "atomic_total": 10,
+      "atomic_passed": 10
+    },
+    "datetime_format": {
+      "check_type": "datetime_format",
+      "table_name": "adt",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'in_dttm': datetime format valid",
+          "details": {
+            "column": "in_dttm"
+          }
+        },
+        {
+          "message": "Column 'out_dttm': datetime format valid",
+          "details": {
+            "column": "out_dttm"
+          }
+        }
+      ],
+      "metrics": {
+        "datetime_columns_checked": 2
+      },
+      "atomic_total": 2,
+      "atomic_passed": 2
+    },
+    "categorical_values": {
+      "check_type": "categorical_values",
+      "table_name": "adt",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'hospital_type': all values match mCIDE permissible values",
+          "details": {
+            "column": "hospital_type"
+          }
+        },
+        {
+          "message": "Column 'location_category': all values match mCIDE permissible values",
+          "details": {
+            "column": "location_category"
+          }
+        },
+        {
+          "message": "Column 'location_type': all values match mCIDE permissible values",
+          "details": {
+            "column": "location_type"
+          }
+        }
+      ],
+      "metrics": {
+        "category_columns_checked": 3,
+        "columns_with_invalid_values": 0
+      },
+      "atomic_total": 3,
+      "atomic_passed": 3
+    },
+    "category_group_mapping": {
+      "check_type": "category_group_mapping",
+      "table_name": "adt",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No category-to-group mappings defined in schema",
+          "details": {}
+        }
+      ],
+      "metrics": {},
+      "atomic_total": 0,
+      "atomic_passed": 0
+    }
+  },
+  "completeness": {
+    "missingness": {
+      "check_type": "missingness",
+      "table_name": "adt",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'hospitalization_id': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "hospitalization_id",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'hospital_id': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "hospital_id",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'hospital_type': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "hospital_type",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'in_dttm': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "in_dttm",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'out_dttm': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "out_dttm",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'location_category': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "location_category",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        }
+      ],
+      "metrics": {
+        "total_rows": 552,
+        "required_columns_checked": 6,
+        "missingness_stats": [
+          {
+            "column": "hospitalization_id",
+            "null_count": 0,
+            "total_rows": 552,
+            "percent_missing": 0.0
+          },
+          {
+            "column": "hospital_id",
+            "null_count": 0,
+            "total_rows": 552,
+            "percent_missing": 0.0
+          },
+          {
+            "column": "hospital_type",
+            "null_count": 0,
+            "total_rows": 552,
+            "percent_missing": 0.0
+          },
+          {
+            "column": "in_dttm",
+            "null_count": 0,
+            "total_rows": 552,
+            "percent_missing": 0.0
+          },
+          {
+            "column": "out_dttm",
+            "null_count": 0,
+            "total_rows": 552,
+            "percent_missing": 0.0
+          },
+          {
+            "column": "location_category",
+            "null_count": 0,
+            "total_rows": 552,
+            "percent_missing": 0.0
+          }
+        ]
+      },
+      "atomic_total": 7,
+      "atomic_passed": 7
+    },
+    "conditional_requirements": {
+      "check_type": "conditional_requirements",
+      "table_name": "adt",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Conditional requirement satisfied: ICU locations must have location_type specified \u2014 171/171 rows present (100%)",
+          "details": {
+            "column": "location_type",
+            "condition": "location_category IN ['icu']",
+            "rows_meeting_condition": 171,
+            "rows_present": 171,
+            "percent_present": 100.0
+          }
+        }
+      ],
+      "metrics": {},
+      "atomic_total": 1,
+      "atomic_passed": 1
+    },
+    "mcide_value_coverage": {
+      "check_type": "mcide_value_coverage",
+      "table_name": "adt",
+      "passed": false,
+      "errors": [
+        {
+          "message": "Missing 8 mCIDE values: procedural, l_and_d, hospice, psych, rehab, radiology, dialysis, other",
+          "details": {
+            "column": "location_category",
+            "missing_values": [
+              "procedural",
+              "l_and_d",
+              "hospice",
+              "psych",
+              "rehab",
+              "radiology",
+              "dialysis",
+              "other"
+            ],
+            "coverage_percent": 33.33
+          }
+        }
+      ],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'hospital_type': 3/3 mCIDE values present",
+          "details": {
+            "column": "hospital_type",
+            "found_values": 3,
+            "expected_values": 3,
+            "coverage_percent": 100.0,
+            "atomic_count": 3
+          }
+        },
+        {
+          "message": "Column 'location_category': 4/12 mCIDE values present",
+          "details": {
+            "column": "location_category",
+            "found_values": 4,
+            "expected_values": 12,
+            "coverage_percent": 33.33,
+            "atomic_count": 4
+          }
+        },
+        {
+          "message": "Column 'location_type': 10/10 mCIDE values present",
+          "details": {
+            "column": "location_type",
+            "found_values": 10,
+            "expected_values": 10,
+            "coverage_percent": 100.0,
+            "atomic_count": 10
+          }
+        }
+      ],
+      "metrics": {
+        "category_columns_checked": 3,
+        "coverage_by_column": {
+          "hospital_type": {
+            "expected_values": 3,
+            "found_values": 3,
+            "missing_values": [],
+            "coverage_percent": 100.0
+          },
+          "location_category": {
+            "expected_values": 12,
+            "found_values": 4,
+            "missing_values": [
+              "procedural",
+              "l_and_d",
+              "hospice",
+              "psych",
+              "rehab",
+              "radiology",
+              "dialysis",
+              "other"
+            ],
+            "coverage_percent": 33.33
+          },
+          "location_type": {
+            "expected_values": 10,
+            "found_values": 10,
+            "missing_values": [],
+            "coverage_percent": 100.0
+          }
+        }
+      },
+      "atomic_total": 25,
+      "atomic_passed": 17
+    }
+  },
+  "relational": {},
+  "plausibility": {
+    "chronological_order": {
+      "check_type": "chronological_order",
+      "table_name": "adt",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Chronological order satisfied: ADT in_dttm must be strictly before out_dttm \u2014 552/552 rows valid (100%)",
+          "details": {
+            "column": "in_dttm, out_dttm",
+            "rows_checked": 552,
+            "rows_valid": 552,
+            "percent_valid": 100.0
+          }
+        }
+      ],
+      "metrics": {
+        "pairs_checked": 1,
+        "violations_by_pair": {
+          "in_dttm->out_dttm": {
+            "total_applicable": 552,
+            "violations": 0,
+            "violation_percent": 0.0,
+            "description": "ADT in_dttm must be strictly before out_dttm"
+          }
+        }
+      },
+      "atomic_total": 1,
+      "atomic_passed": 1
+    },
+    "numeric_range_plausibility": {
+      "check_type": "numeric_range_plausibility",
+      "table_name": "adt",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No numeric range configuration for this table",
+          "details": {}
+        }
+      ],
+      "metrics": {},
+      "atomic_total": 0,
+      "atomic_passed": 0
+    },
+    "field_plausibility": {
+      "check_type": "field_plausibility",
+      "table_name": "adt",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Field plausibility satisfied: Non-ICU locations should not have ICU location_type \u2014 381/381 rows valid (100%)",
+          "details": {
+            "column": "location_type",
+            "rows_checked": 381,
+            "rows_valid": 381,
+            "percent_valid": 100.0
+          }
+        }
+      ],
+      "metrics": {
+        "rules_checked": 1,
+        "violations_by_rule": {}
+      },
+      "atomic_total": 1,
+      "atomic_passed": 1
+    },
+    "overlapping_periods": {
+      "check_type": "overlapping_periods",
+      "table_name": "adt",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No overlapping time periods detected for hospitalization_id on in_dttm/out_dttm \u2014 552 records checked",
+          "details": {
+            "column": "in_dttm, out_dttm",
+            "entity_col": "hospitalization_id",
+            "records_checked": 552,
+            "entities_checked": 200
+          }
+        }
+      ],
+      "metrics": {
+        "total_records": 552,
+        "entities_checked": 200,
+        "overlapping_records": 0,
+        "overlap_percent": 0.0
+      },
+      "atomic_total": 1,
+      "atomic_passed": 1
+    },
+    "category_temporal_consistency": {
+      "check_type": "category_temporal_consistency",
+      "table_name": "adt",
+      "passed": true,
+      "errors": [],
+      "warnings": [
+        {
+          "message": "location_type: burn_icu absent in 2/7 years (2018-2024)",
+          "details": {
+            "column": "location_type",
+            "value": "burn_icu",
+            "absent_years": [
+              2020,
+              2021
+            ],
+            "total_years": 7,
+            "yearly_counts": {
+              "2018": 1,
+              "2019": 3,
+              "2020": 0,
+              "2021": 0,
+              "2022": 1,
+              "2023": 1,
+              "2024": 2
+            }
+          }
+        },
+        {
+          "message": "location_type: cardiothoracic_surgical_icu absent in 4/7 years (2018-2024)",
+          "details": {
+            "column": "location_type",
+            "value": "cardiothoracic_surgical_icu",
+            "absent_years": [
+              2018,
+              2021,
+              2023,
+              2024
+            ],
+            "total_years": 7,
+            "yearly_counts": {
+              "2018": 0,
+              "2019": 1,
+              "2020": 1,
+              "2021": 0,
+              "2022": 1,
+              "2023": 0,
+              "2024": 0
+            }
+          }
+        },
+        {
+          "message": "location_type: mixed_neuro_icu absent in 4/7 years (2018-2024)",
+          "details": {
+            "column": "location_type",
+            "value": "mixed_neuro_icu",
+            "absent_years": [
+              2018,
+              2019,
+              2020,
+              2023
+            ],
+            "total_years": 7,
+            "yearly_counts": {
+              "2018": 0,
+              "2019": 0,
+              "2020": 0,
+              "2021": 1,
+              "2022": 1,
+              "2023": 0,
+              "2024": 1
+            }
+          }
+        },
+        {
+          "message": "location_type: neuro_icu absent in 2/7 years (2018-2024)",
+          "details": {
+            "column": "location_type",
+            "value": "neuro_icu",
+            "absent_years": [
+              2018,
+              2022
+            ],
+            "total_years": 7,
+            "yearly_counts": {
+              "2018": 0,
+              "2019": 5,
+              "2020": 3,
+              "2021": 3,
+              "2022": 0,
+              "2023": 4,
+              "2024": 2
+            }
+          }
+        },
+        {
+          "message": "location_type: neurosurgical_icu absent in 3/7 years (2018-2024)",
+          "details": {
+            "column": "location_type",
+            "value": "neurosurgical_icu",
+            "absent_years": [
+              2018,
+              2019,
+              2023
+            ],
+            "total_years": 7,
+            "yearly_counts": {
+              "2018": 0,
+              "2019": 0,
+              "2020": 2,
+              "2021": 1,
+              "2022": 1,
+              "2023": 0,
+              "2024": 2
+            }
+          }
+        }
+      ],
+      "info": [
+        {
+          "message": "hospital_type: academic present in 7/7 years (2018-2024)",
+          "details": {
+            "column": "hospital_type",
+            "value": "academic",
+            "yearly_counts": {
+              "2018": 14,
+              "2019": 28,
+              "2020": 20,
+              "2021": 10,
+              "2022": 18,
+              "2023": 13,
+              "2024": 21
+            }
+          }
+        },
+        {
+          "message": "hospital_type: community present in 7/7 years (2018-2024)",
+          "details": {
+            "column": "hospital_type",
+            "value": "community",
+            "yearly_counts": {
+              "2018": 13,
+              "2019": 9,
+              "2020": 9,
+              "2021": 10,
+              "2022": 11,
+              "2023": 10,
+              "2024": 5
+            }
+          }
+        },
+        {
+          "message": "hospital_type: ltach present in 7/7 years (2018-2024)",
+          "details": {
+            "column": "hospital_type",
+            "value": "ltach",
+            "yearly_counts": {
+              "2018": 2,
+              "2019": 1,
+              "2020": 3,
+              "2021": 1,
+              "2022": 1,
+              "2023": 2,
+              "2024": 2
+            }
+          }
+        },
+        {
+          "message": "location_category: ed present in 7/7 years (2018-2024)",
+          "details": {
+            "column": "location_category",
+            "value": "ed",
+            "yearly_counts": {
+              "2018": 17,
+              "2019": 23,
+              "2020": 9,
+              "2021": 10,
+              "2022": 21,
+              "2023": 11,
+              "2024": 14
+            }
+          }
+        },
+        {
+          "message": "location_category: icu present in 7/7 years (2018-2024)",
+          "details": {
+            "column": "location_category",
+            "value": "icu",
+            "yearly_counts": {
+              "2018": 23,
+              "2019": 30,
+              "2020": 28,
+              "2021": 19,
+              "2022": 22,
+              "2023": 23,
+              "2024": 26
+            }
+          }
+        },
+        {
+          "message": "location_category: stepdown present in 7/7 years (2018-2024)",
+          "details": {
+            "column": "location_category",
+            "value": "stepdown",
+            "yearly_counts": {
+              "2018": 17,
+              "2019": 25,
+              "2020": 22,
+              "2021": 14,
+              "2022": 18,
+              "2023": 15,
+              "2024": 23
+            }
+          }
+        },
+        {
+          "message": "location_category: ward present in 7/7 years (2018-2024)",
+          "details": {
+            "column": "location_category",
+            "value": "ward",
+            "yearly_counts": {
+              "2018": 20,
+              "2019": 21,
+              "2020": 24,
+              "2021": 17,
+              "2022": 23,
+              "2023": 14,
+              "2024": 23
+            }
+          }
+        },
+        {
+          "message": "location_type: cardiac_icu present in 7/7 years (2018-2024)",
+          "details": {
+            "column": "location_type",
+            "value": "cardiac_icu",
+            "yearly_counts": {
+              "2018": 5,
+              "2019": 4,
+              "2020": 5,
+              "2021": 1,
+              "2022": 3,
+              "2023": 3,
+              "2024": 4
+            }
+          }
+        },
+        {
+          "message": "location_type: general_icu present in 7/7 years (2018-2024)",
+          "details": {
+            "column": "location_type",
+            "value": "general_icu",
+            "yearly_counts": {
+              "2018": 7,
+              "2019": 6,
+              "2020": 4,
+              "2021": 3,
+              "2022": 4,
+              "2023": 5,
+              "2024": 5
+            }
+          }
+        },
+        {
+          "message": "location_type: medical_icu present in 7/7 years (2018-2024)",
+          "details": {
+            "column": "location_type",
+            "value": "medical_icu",
+            "yearly_counts": {
+              "2018": 5,
+              "2019": 3,
+              "2020": 3,
+              "2021": 4,
+              "2022": 4,
+              "2023": 6,
+              "2024": 5
+            }
+          }
+        },
+        {
+          "message": "location_type: mixed_cardiothoracic_icu present in 7/7 years (2018-2024)",
+          "details": {
+            "column": "location_type",
+            "value": "mixed_cardiothoracic_icu",
+            "yearly_counts": {
+              "2018": 1,
+              "2019": 2,
+              "2020": 2,
+              "2021": 4,
+              "2022": 2,
+              "2023": 2,
+              "2024": 2
+            }
+          }
+        },
+        {
+          "message": "location_type: surgical_icu present in 7/7 years (2018-2024)",
+          "details": {
+            "column": "location_type",
+            "value": "surgical_icu",
+            "yearly_counts": {
+              "2018": 4,
+              "2019": 6,
+              "2020": 8,
+              "2021": 2,
+              "2022": 5,
+              "2023": 2,
+              "2024": 3
+            }
+          }
+        }
+      ],
+      "metrics": {
+        "category_columns_checked": 3,
+        "yearly_distributions": {
+          "hospital_type": {
+            "2018": {
+              "academic": 14,
+              "community": 13,
+              "ltach": 2
+            },
+            "2019": {
+              "academic": 28,
+              "community": 9,
+              "ltach": 1
+            },
+            "2020": {
+              "academic": 20,
+              "community": 9,
+              "ltach": 3
+            },
+            "2021": {
+              "academic": 10,
+              "community": 10,
+              "ltach": 1
+            },
+            "2022": {
+              "academic": 18,
+              "community": 11,
+              "ltach": 1
+            },
+            "2023": {
+              "academic": 13,
+              "community": 10,
+              "ltach": 2
+            },
+            "2024": {
+              "academic": 21,
+              "community": 5,
+              "ltach": 2
+            }
+          },
+          "location_category": {
+            "2018": {
+              "ed": 17,
+              "icu": 23,
+              "stepdown": 17,
+              "ward": 20
+            },
+            "2019": {
+              "ed": 23,
+              "icu": 30,
+              "stepdown": 25,
+              "ward": 21
+            },
+            "2020": {
+              "ed": 9,
+              "icu": 28,
+              "stepdown": 22,
+              "ward": 24
+            },
+            "2021": {
+              "ed": 10,
+              "icu": 19,
+              "stepdown": 14,
+              "ward": 17
+            },
+            "2022": {
+              "ed": 21,
+              "icu": 22,
+              "stepdown": 18,
+              "ward": 23
+            },
+            "2023": {
+              "ed": 11,
+              "icu": 23,
+              "stepdown": 15,
+              "ward": 14
+            },
+            "2024": {
+              "ed": 14,
+              "icu": 26,
+              "stepdown": 23,
+              "ward": 23
+            }
+          },
+          "location_type": {
+            "2018": {
+              "burn_icu": 1,
+              "cardiac_icu": 5,
+              "general_icu": 7,
+              "medical_icu": 5,
+              "mixed_cardiothoracic_icu": 1,
+              "surgical_icu": 4
+            },
+            "2019": {
+              "burn_icu": 3,
+              "cardiac_icu": 4,
+              "cardiothoracic_surgical_icu": 1,
+              "general_icu": 6,
+              "medical_icu": 3,
+              "mixed_cardiothoracic_icu": 2,
+              "neuro_icu": 5,
+              "surgical_icu": 6
+            },
+            "2020": {
+              "cardiac_icu": 5,
+              "cardiothoracic_surgical_icu": 1,
+              "general_icu": 4,
+              "medical_icu": 3,
+              "mixed_cardiothoracic_icu": 2,
+              "neuro_icu": 3,
+              "neurosurgical_icu": 2,
+              "surgical_icu": 8
+            },
+            "2021": {
+              "cardiac_icu": 1,
+              "general_icu": 3,
+              "medical_icu": 4,
+              "mixed_cardiothoracic_icu": 4,
+              "mixed_neuro_icu": 1,
+              "neuro_icu": 3,
+              "neurosurgical_icu": 1,
+              "surgical_icu": 2
+            },
+            "2022": {
+              "burn_icu": 1,
+              "cardiac_icu": 3,
+              "cardiothoracic_surgical_icu": 1,
+              "general_icu": 4,
+              "medical_icu": 4,
+              "mixed_cardiothoracic_icu": 2,
+              "mixed_neuro_icu": 1,
+              "neurosurgical_icu": 1,
+              "surgical_icu": 5
+            },
+            "2023": {
+              "burn_icu": 1,
+              "cardiac_icu": 3,
+              "general_icu": 5,
+              "medical_icu": 6,
+              "mixed_cardiothoracic_icu": 2,
+              "neuro_icu": 4,
+              "surgical_icu": 2
+            },
+            "2024": {
+              "burn_icu": 2,
+              "cardiac_icu": 4,
+              "general_icu": 5,
+              "medical_icu": 5,
+              "mixed_cardiothoracic_icu": 2,
+              "mixed_neuro_icu": 1,
+              "neuro_icu": 2,
+              "neurosurgical_icu": 2,
+              "surgical_icu": 3
+            }
+          }
+        },
+        "missing_in_years": {
+          "location_type": {
+            "neurosurgical_icu": [
+              2018,
+              2019,
+              2023
+            ],
+            "cardiothoracic_surgical_icu": [
+              2018,
+              2021,
+              2023,
+              2024
+            ],
+            "burn_icu": [
+              2020,
+              2021
+            ],
+            "neuro_icu": [
+              2018,
+              2022
+            ],
+            "mixed_neuro_icu": [
+              2018,
+              2019,
+              2020,
+              2023
+            ]
+          }
+        },
+        "monthly_trends": {
+          "hospital_type": [
+            {
+              "month_year": "2018-01",
+              "hospital_type": "academic",
+              "n": 3
+            },
+            {
+              "month_year": "2018-01",
+              "hospital_type": "community",
+              "n": 1
+            },
+            {
+              "month_year": "2018-02",
+              "hospital_type": "academic",
+              "n": 1
+            },
+            {
+              "month_year": "2018-02",
+              "hospital_type": "community",
+              "n": 1
+            },
+            {
+              "month_year": "2018-03",
+              "hospital_type": "academic",
+              "n": 3
+            },
+            {
+              "month_year": "2018-04",
+              "hospital_type": "academic",
+              "n": 4
+            },
+            {
+              "month_year": "2018-04",
+              "hospital_type": "community",
+              "n": 1
+            },
+            {
+              "month_year": "2018-05",
+              "hospital_type": "academic",
+              "n": 1
+            },
+            {
+              "month_year": "2018-05",
+              "hospital_type": "community",
+              "n": 2
+            },
+            {
+              "month_year": "2018-06",
+              "hospital_type": "academic",
+              "n": 2
+            },
+            {
+              "month_year": "2018-06",
+              "hospital_type": "community",
+              "n": 2
+            },
+            {
+              "month_year": "2018-07",
+              "hospital_type": "community",
+              "n": 3
+            },
+            {
+              "month_year": "2018-08",
+              "hospital_type": "academic",
+              "n": 2
+            },
+            {
+              "month_year": "2018-08",
+              "hospital_type": "community",
+              "n": 2
+            },
+            {
+              "month_year": "2018-08",
+              "hospital_type": "ltach",
+              "n": 1
+            },
+            {
+              "month_year": "2018-09",
+              "hospital_type": "academic",
+              "n": 2
+            },
+            {
+              "month_year": "2018-09",
+              "hospital_type": "community",
+              "n": 1
+            },
+            {
+              "month_year": "2018-10",
+              "hospital_type": "community",
+              "n": 1
+            },
+            {
+              "month_year": "2018-11",
+              "hospital_type": "academic",
+              "n": 1
+            },
+            {
+              "month_year": "2018-11",
+              "hospital_type": "community",
+              "n": 3
+            },
+            {
+              "month_year": "2018-11",
+              "hospital_type": "ltach",
+              "n": 1
+            },
+            {
+              "month_year": "2019-01",
+              "hospital_type": "academic",
+              "n": 4
+            },
+            {
+              "month_year": "2019-01",
+              "hospital_type": "community",
+              "n": 1
+            },
+            {
+              "month_year": "2019-02",
+              "hospital_type": "academic",
+              "n": 3
+            },
+            {
+              "month_year": "2019-03",
+              "hospital_type": "academic",
+              "n": 3
+            },
+            {
+              "month_year": "2019-03",
+              "hospital_type": "community",
+              "n": 1
+            },
+            {
+              "month_year": "2019-04",
+              "hospital_type": "academic",
+              "n": 1
+            },
+            {
+              "month_year": "2019-05",
+              "hospital_type": "academic",
+              "n": 4
+            },
+            {
+              "month_year": "2019-05",
+              "hospital_type": "community",
+              "n": 2
+            },
+            {
+              "month_year": "2019-06",
+              "hospital_type": "academic",
+              "n": 4
+            },
+            {
+              "month_year": "2019-06",
+              "hospital_type": "community",
+              "n": 1
+            },
+            {
+              "month_year": "2019-07",
+              "hospital_type": "academic",
+              "n": 6
+            },
+            {
+              "month_year": "2019-08",
+              "hospital_type": "academic",
+              "n": 2
+            },
+            {
+              "month_year": "2019-08",
+              "hospital_type": "community",
+              "n": 1
+            },
+            {
+              "month_year": "2019-09",
+              "hospital_type": "academic",
+              "n": 1
+            },
+            {
+              "month_year": "2019-09",
+              "hospital_type": "community",
+              "n": 1
+            },
+            {
+              "month_year": "2019-10",
+              "hospital_type": "academic",
+              "n": 2
+            },
+            {
+              "month_year": "2019-10",
+              "hospital_type": "ltach",
+              "n": 1
+            },
+            {
+              "month_year": "2019-11",
+              "hospital_type": "academic",
+              "n": 4
+            },
+            {
+              "month_year": "2019-12",
+              "hospital_type": "academic",
+              "n": 3
+            },
+            {
+              "month_year": "2019-12",
+              "hospital_type": "community",
+              "n": 3
+            },
+            {
+              "month_year": "2020-01",
+              "hospital_type": "academic",
+              "n": 3
+            },
+            {
+              "month_year": "2020-02",
+              "hospital_type": "academic",
+              "n": 1
+            },
+            {
+              "month_year": "2020-03",
+              "hospital_type": "academic",
+              "n": 1
+            },
+            {
+              "month_year": "2020-04",
+              "hospital_type": "academic",
+              "n": 1
+            },
+            {
+              "month_year": "2020-04",
+              "hospital_type": "community",
+              "n": 2
+            },
+            {
+              "month_year": "2020-05",
+              "hospital_type": "academic",
+              "n": 4
+            },
+            {
+              "month_year": "2020-05",
+              "hospital_type": "community",
+              "n": 1
+            },
+            {
+              "month_year": "2020-06",
+              "hospital_type": "academic",
+              "n": 6
+            },
+            {
+              "month_year": "2020-06",
+              "hospital_type": "community",
+              "n": 1
+            },
+            {
+              "month_year": "2020-06",
+              "hospital_type": "ltach",
+              "n": 1
+            },
+            {
+              "month_year": "2020-07",
+              "hospital_type": "academic",
+              "n": 3
+            },
+            {
+              "month_year": "2020-07",
+              "hospital_type": "community",
+              "n": 1
+            },
+            {
+              "month_year": "2020-08",
+              "hospital_type": "community",
+              "n": 2
+            },
+            {
+              "month_year": "2020-09",
+              "hospital_type": "community",
+              "n": 1
+            },
+            {
+              "month_year": "2020-09",
+              "hospital_type": "ltach",
+              "n": 1
+            },
+            {
+              "month_year": "2020-10",
+              "hospital_type": "academic",
+              "n": 3
+            },
+            {
+              "month_year": "2020-10",
+              "hospital_type": "ltach",
+              "n": 1
+            },
+            {
+              "month_year": "2020-11",
+              "hospital_type": "academic",
+              "n": 3
+            },
+            {
+              "month_year": "2020-11",
+              "hospital_type": "community",
+              "n": 1
+            },
+            {
+              "month_year": "2020-12",
+              "hospital_type": "community",
+              "n": 1
+            },
+            {
+              "month_year": "2021-01",
+              "hospital_type": "academic",
+              "n": 1
+            },
+            {
+              "month_year": "2021-01",
+              "hospital_type": "community",
+              "n": 1
+            },
+            {
+              "month_year": "2021-02",
+              "hospital_type": "academic",
+              "n": 4
+            },
+            {
+              "month_year": "2021-02",
+              "hospital_type": "community",
+              "n": 2
+            },
+            {
+              "month_year": "2021-03",
+              "hospital_type": "community",
+              "n": 2
+            },
+            {
+              "month_year": "2021-04",
+              "hospital_type": "academic",
+              "n": 1
+            },
+            {
+              "month_year": "2021-04",
+              "hospital_type": "community",
+              "n": 1
+            },
+            {
+              "month_year": "2021-05",
+              "hospital_type": "academic",
+              "n": 1
+            },
+            {
+              "month_year": "2021-05",
+              "hospital_type": "community",
+              "n": 1
+            },
+            {
+              "month_year": "2021-06",
+              "hospital_type": "community",
+              "n": 1
+            },
+            {
+              "month_year": "2021-07",
+              "hospital_type": "academic",
+              "n": 3
+            },
+            {
+              "month_year": "2021-07",
+              "hospital_type": "community",
+              "n": 1
+            },
+            {
+              "month_year": "2021-08",
+              "hospital_type": "community",
+              "n": 1
+            },
+            {
+              "month_year": "2021-09",
+              "hospital_type": "academic",
+              "n": 1
+            },
+            {
+              "month_year": "2021-09",
+              "hospital_type": "community",
+              "n": 1
+            },
+            {
+              "month_year": "2021-10",
+              "hospital_type": "academic",
+              "n": 1
+            },
+            {
+              "month_year": "2021-10",
+              "hospital_type": "community",
+              "n": 1
+            },
+            {
+              "month_year": "2021-10",
+              "hospital_type": "ltach",
+              "n": 1
+            },
+            {
+              "month_year": "2021-11",
+              "hospital_type": "academic",
+              "n": 1
+            },
+            {
+              "month_year": "2021-11",
+              "hospital_type": "community",
+              "n": 1
+            },
+            {
+              "month_year": "2021-12",
+              "hospital_type": "academic",
+              "n": 1
+            },
+            {
+              "month_year": "2021-12",
+              "hospital_type": "community",
+              "n": 1
+            },
+            {
+              "month_year": "2022-01",
+              "hospital_type": "academic",
+              "n": 2
+            },
+            {
+              "month_year": "2022-01",
+              "hospital_type": "community",
+              "n": 1
+            },
+            {
+              "month_year": "2022-02",
+              "hospital_type": "academic",
+              "n": 2
+            },
+            {
+              "month_year": "2022-03",
+              "hospital_type": "academic",
+              "n": 3
+            },
+            {
+              "month_year": "2022-03",
+              "hospital_type": "community",
+              "n": 2
+            },
+            {
+              "month_year": "2022-04",
+              "hospital_type": "academic",
+              "n": 4
+            },
+            {
+              "month_year": "2022-04",
+              "hospital_type": "community",
+              "n": 1
+            },
+            {
+              "month_year": "2022-05",
+              "hospital_type": "academic",
+              "n": 1
+            },
+            {
+              "month_year": "2022-05",
+              "hospital_type": "community",
+              "n": 1
+            },
+            {
+              "month_year": "2022-06",
+              "hospital_type": "academic",
+              "n": 2
+            },
+            {
+              "month_year": "2022-06",
+              "hospital_type": "community",
+              "n": 1
+            },
+            {
+              "month_year": "2022-07",
+              "hospital_type": "community",
+              "n": 3
+            },
+            {
+              "month_year": "2022-09",
+              "hospital_type": "academic",
+              "n": 4
+            },
+            {
+              "month_year": "2022-09",
+              "hospital_type": "community",
+              "n": 1
+            },
+            {
+              "month_year": "2022-10",
+              "hospital_type": "academic",
+              "n": 1
+            },
+            {
+              "month_year": "2022-10",
+              "hospital_type": "community",
+              "n": 1
+            },
+            {
+              "month_year": "2022-10",
+              "hospital_type": "ltach",
+              "n": 1
+            },
+            {
+              "month_year": "2022-11",
+              "hospital_type": "academic",
+              "n": 3
+            },
+            {
+              "month_year": "2022-11",
+              "hospital_type": "community",
+              "n": 2
+            },
+            {
+              "month_year": "2022-12",
+              "hospital_type": "academic",
+              "n": 2
+            },
+            {
+              "month_year": "2022-12",
+              "hospital_type": "community",
+              "n": 1
+            },
+            {
+              "month_year": "2023-01",
+              "hospital_type": "community",
+              "n": 1
+            },
+            {
+              "month_year": "2023-02",
+              "hospital_type": "academic",
+              "n": 2
+            },
+            {
+              "month_year": "2023-03",
+              "hospital_type": "academic",
+              "n": 1
+            },
+            {
+              "month_year": "2023-03",
+              "hospital_type": "community",
+              "n": 1
+            },
+            {
+              "month_year": "2023-03",
+              "hospital_type": "ltach",
+              "n": 1
+            },
+            {
+              "month_year": "2023-04",
+              "hospital_type": "academic",
+              "n": 3
+            },
+            {
+              "month_year": "2023-05",
+              "hospital_type": "academic",
+              "n": 1
+            },
+            {
+              "month_year": "2023-05",
+              "hospital_type": "community",
+              "n": 1
+            },
+            {
+              "month_year": "2023-07",
+              "hospital_type": "academic",
+              "n": 2
+            },
+            {
+              "month_year": "2023-07",
+              "hospital_type": "community",
+              "n": 3
+            },
+            {
+              "month_year": "2023-07",
+              "hospital_type": "ltach",
+              "n": 1
+            },
+            {
+              "month_year": "2023-08",
+              "hospital_type": "academic",
+              "n": 1
+            },
+            {
+              "month_year": "2023-08",
+              "hospital_type": "community",
+              "n": 2
+            },
+            {
+              "month_year": "2023-10",
+              "hospital_type": "academic",
+              "n": 3
+            },
+            {
+              "month_year": "2023-10",
+              "hospital_type": "community",
+              "n": 1
+            },
+            {
+              "month_year": "2023-11",
+              "hospital_type": "academic",
+              "n": 2
+            },
+            {
+              "month_year": "2023-12",
+              "hospital_type": "community",
+              "n": 1
+            },
+            {
+              "month_year": "2024-01",
+              "hospital_type": "academic",
+              "n": 1
+            },
+            {
+              "month_year": "2024-02",
+              "hospital_type": "academic",
+              "n": 3
+            },
+            {
+              "month_year": "2024-03",
+              "hospital_type": "academic",
+              "n": 4
+            },
+            {
+              "month_year": "2024-04",
+              "hospital_type": "academic",
+              "n": 4
+            },
+            {
+              "month_year": "2024-05",
+              "hospital_type": "academic",
+              "n": 2
+            },
+            {
+              "month_year": "2024-05",
+              "hospital_type": "community",
+              "n": 1
+            },
+            {
+              "month_year": "2024-05",
+              "hospital_type": "ltach",
+              "n": 2
+            },
+            {
+              "month_year": "2024-06",
+              "hospital_type": "academic",
+              "n": 2
+            },
+            {
+              "month_year": "2024-06",
+              "hospital_type": "community",
+              "n": 1
+            },
+            {
+              "month_year": "2024-07",
+              "hospital_type": "academic",
+              "n": 4
+            },
+            {
+              "month_year": "2024-08",
+              "hospital_type": "academic",
+              "n": 1
+            },
+            {
+              "month_year": "2024-08",
+              "hospital_type": "community",
+              "n": 2
+            },
+            {
+              "month_year": "2024-09",
+              "hospital_type": "academic",
+              "n": 2
+            },
+            {
+              "month_year": "2024-10",
+              "hospital_type": "academic",
+              "n": 1
+            },
+            {
+              "month_year": "2024-10",
+              "hospital_type": "community",
+              "n": 1
+            },
+            {
+              "month_year": "2024-11",
+              "hospital_type": "academic",
+              "n": 5
+            },
+            {
+              "month_year": "2024-12",
+              "hospital_type": "academic",
+              "n": 3
+            }
+          ],
+          "location_category": [
+            {
+              "month_year": "2018-01",
+              "location_category": "ed",
+              "n": 2
+            },
+            {
+              "month_year": "2018-01",
+              "location_category": "icu",
+              "n": 4
+            },
+            {
+              "month_year": "2018-01",
+              "location_category": "stepdown",
+              "n": 1
+            },
+            {
+              "month_year": "2018-01",
+              "location_category": "ward",
+              "n": 1
+            },
+            {
+              "month_year": "2018-02",
+              "location_category": "stepdown",
+              "n": 1
+            },
+            {
+              "month_year": "2018-02",
+              "location_category": "ward",
+              "n": 1
+            },
+            {
+              "month_year": "2018-03",
+              "location_category": "icu",
+              "n": 2
+            },
+            {
+              "month_year": "2018-03",
+              "location_category": "stepdown",
+              "n": 1
+            },
+            {
+              "month_year": "2018-03",
+              "location_category": "ward",
+              "n": 2
+            },
+            {
+              "month_year": "2018-04",
+              "location_category": "ed",
+              "n": 4
+            },
+            {
+              "month_year": "2018-04",
+              "location_category": "icu",
+              "n": 3
+            },
+            {
+              "month_year": "2018-04",
+              "location_category": "stepdown",
+              "n": 1
+            },
+            {
+              "month_year": "2018-04",
+              "location_category": "ward",
+              "n": 1
+            },
+            {
+              "month_year": "2018-05",
+              "location_category": "icu",
+              "n": 2
+            },
+            {
+              "month_year": "2018-05",
+              "location_category": "stepdown",
+              "n": 2
+            },
+            {
+              "month_year": "2018-06",
+              "location_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2018-06",
+              "location_category": "icu",
+              "n": 1
+            },
+            {
+              "month_year": "2018-06",
+              "location_category": "stepdown",
+              "n": 2
+            },
+            {
+              "month_year": "2018-06",
+              "location_category": "ward",
+              "n": 4
+            },
+            {
+              "month_year": "2018-07",
+              "location_category": "ed",
+              "n": 2
+            },
+            {
+              "month_year": "2018-07",
+              "location_category": "icu",
+              "n": 2
+            },
+            {
+              "month_year": "2018-07",
+              "location_category": "stepdown",
+              "n": 1
+            },
+            {
+              "month_year": "2018-07",
+              "location_category": "ward",
+              "n": 2
+            },
+            {
+              "month_year": "2018-08",
+              "location_category": "ed",
+              "n": 3
+            },
+            {
+              "month_year": "2018-08",
+              "location_category": "icu",
+              "n": 3
+            },
+            {
+              "month_year": "2018-08",
+              "location_category": "stepdown",
+              "n": 5
+            },
+            {
+              "month_year": "2018-08",
+              "location_category": "ward",
+              "n": 3
+            },
+            {
+              "month_year": "2018-09",
+              "location_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2018-09",
+              "location_category": "icu",
+              "n": 2
+            },
+            {
+              "month_year": "2018-09",
+              "location_category": "stepdown",
+              "n": 1
+            },
+            {
+              "month_year": "2018-09",
+              "location_category": "ward",
+              "n": 3
+            },
+            {
+              "month_year": "2018-10",
+              "location_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2018-10",
+              "location_category": "ward",
+              "n": 1
+            },
+            {
+              "month_year": "2018-11",
+              "location_category": "ed",
+              "n": 3
+            },
+            {
+              "month_year": "2018-11",
+              "location_category": "icu",
+              "n": 4
+            },
+            {
+              "month_year": "2018-11",
+              "location_category": "stepdown",
+              "n": 2
+            },
+            {
+              "month_year": "2018-11",
+              "location_category": "ward",
+              "n": 2
+            },
+            {
+              "month_year": "2019-01",
+              "location_category": "ed",
+              "n": 4
+            },
+            {
+              "month_year": "2019-01",
+              "location_category": "icu",
+              "n": 3
+            },
+            {
+              "month_year": "2019-01",
+              "location_category": "stepdown",
+              "n": 2
+            },
+            {
+              "month_year": "2019-01",
+              "location_category": "ward",
+              "n": 1
+            },
+            {
+              "month_year": "2019-02",
+              "location_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2019-02",
+              "location_category": "icu",
+              "n": 3
+            },
+            {
+              "month_year": "2019-02",
+              "location_category": "stepdown",
+              "n": 2
+            },
+            {
+              "month_year": "2019-02",
+              "location_category": "ward",
+              "n": 1
+            },
+            {
+              "month_year": "2019-03",
+              "location_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2019-03",
+              "location_category": "icu",
+              "n": 2
+            },
+            {
+              "month_year": "2019-03",
+              "location_category": "stepdown",
+              "n": 1
+            },
+            {
+              "month_year": "2019-03",
+              "location_category": "ward",
+              "n": 3
+            },
+            {
+              "month_year": "2019-04",
+              "location_category": "icu",
+              "n": 1
+            },
+            {
+              "month_year": "2019-05",
+              "location_category": "ed",
+              "n": 3
+            },
+            {
+              "month_year": "2019-05",
+              "location_category": "icu",
+              "n": 4
+            },
+            {
+              "month_year": "2019-05",
+              "location_category": "stepdown",
+              "n": 6
+            },
+            {
+              "month_year": "2019-05",
+              "location_category": "ward",
+              "n": 2
+            },
+            {
+              "month_year": "2019-06",
+              "location_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2019-06",
+              "location_category": "icu",
+              "n": 1
+            },
+            {
+              "month_year": "2019-06",
+              "location_category": "stepdown",
+              "n": 1
+            },
+            {
+              "month_year": "2019-06",
+              "location_category": "ward",
+              "n": 4
+            },
+            {
+              "month_year": "2019-07",
+              "location_category": "ed",
+              "n": 4
+            },
+            {
+              "month_year": "2019-07",
+              "location_category": "icu",
+              "n": 5
+            },
+            {
+              "month_year": "2019-07",
+              "location_category": "stepdown",
+              "n": 4
+            },
+            {
+              "month_year": "2019-07",
+              "location_category": "ward",
+              "n": 3
+            },
+            {
+              "month_year": "2019-08",
+              "location_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2019-08",
+              "location_category": "icu",
+              "n": 1
+            },
+            {
+              "month_year": "2019-08",
+              "location_category": "ward",
+              "n": 2
+            },
+            {
+              "month_year": "2019-09",
+              "location_category": "ed",
+              "n": 2
+            },
+            {
+              "month_year": "2019-09",
+              "location_category": "icu",
+              "n": 2
+            },
+            {
+              "month_year": "2019-09",
+              "location_category": "stepdown",
+              "n": 2
+            },
+            {
+              "month_year": "2019-09",
+              "location_category": "ward",
+              "n": 1
+            },
+            {
+              "month_year": "2019-10",
+              "location_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2019-10",
+              "location_category": "icu",
+              "n": 1
+            },
+            {
+              "month_year": "2019-10",
+              "location_category": "stepdown",
+              "n": 1
+            },
+            {
+              "month_year": "2019-10",
+              "location_category": "ward",
+              "n": 1
+            },
+            {
+              "month_year": "2019-11",
+              "location_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2019-11",
+              "location_category": "icu",
+              "n": 4
+            },
+            {
+              "month_year": "2019-11",
+              "location_category": "stepdown",
+              "n": 3
+            },
+            {
+              "month_year": "2019-11",
+              "location_category": "ward",
+              "n": 1
+            },
+            {
+              "month_year": "2019-12",
+              "location_category": "ed",
+              "n": 4
+            },
+            {
+              "month_year": "2019-12",
+              "location_category": "icu",
+              "n": 3
+            },
+            {
+              "month_year": "2019-12",
+              "location_category": "stepdown",
+              "n": 3
+            },
+            {
+              "month_year": "2019-12",
+              "location_category": "ward",
+              "n": 2
+            },
+            {
+              "month_year": "2020-01",
+              "location_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2020-01",
+              "location_category": "stepdown",
+              "n": 1
+            },
+            {
+              "month_year": "2020-01",
+              "location_category": "ward",
+              "n": 3
+            },
+            {
+              "month_year": "2020-02",
+              "location_category": "icu",
+              "n": 1
+            },
+            {
+              "month_year": "2020-02",
+              "location_category": "stepdown",
+              "n": 1
+            },
+            {
+              "month_year": "2020-03",
+              "location_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2020-03",
+              "location_category": "icu",
+              "n": 1
+            },
+            {
+              "month_year": "2020-03",
+              "location_category": "stepdown",
+              "n": 1
+            },
+            {
+              "month_year": "2020-03",
+              "location_category": "ward",
+              "n": 1
+            },
+            {
+              "month_year": "2020-04",
+              "location_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2020-04",
+              "location_category": "icu",
+              "n": 3
+            },
+            {
+              "month_year": "2020-04",
+              "location_category": "stepdown",
+              "n": 1
+            },
+            {
+              "month_year": "2020-04",
+              "location_category": "ward",
+              "n": 2
+            },
+            {
+              "month_year": "2020-05",
+              "location_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2020-05",
+              "location_category": "icu",
+              "n": 5
+            },
+            {
+              "month_year": "2020-05",
+              "location_category": "stepdown",
+              "n": 4
+            },
+            {
+              "month_year": "2020-05",
+              "location_category": "ward",
+              "n": 3
+            },
+            {
+              "month_year": "2020-06",
+              "location_category": "ed",
+              "n": 2
+            },
+            {
+              "month_year": "2020-06",
+              "location_category": "icu",
+              "n": 7
+            },
+            {
+              "month_year": "2020-06",
+              "location_category": "stepdown",
+              "n": 4
+            },
+            {
+              "month_year": "2020-06",
+              "location_category": "ward",
+              "n": 5
+            },
+            {
+              "month_year": "2020-07",
+              "location_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2020-07",
+              "location_category": "icu",
+              "n": 1
+            },
+            {
+              "month_year": "2020-07",
+              "location_category": "stepdown",
+              "n": 2
+            },
+            {
+              "month_year": "2020-07",
+              "location_category": "ward",
+              "n": 2
+            },
+            {
+              "month_year": "2020-08",
+              "location_category": "icu",
+              "n": 1
+            },
+            {
+              "month_year": "2020-08",
+              "location_category": "stepdown",
+              "n": 1
+            },
+            {
+              "month_year": "2020-08",
+              "location_category": "ward",
+              "n": 2
+            },
+            {
+              "month_year": "2020-09",
+              "location_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2020-09",
+              "location_category": "icu",
+              "n": 2
+            },
+            {
+              "month_year": "2020-09",
+              "location_category": "stepdown",
+              "n": 2
+            },
+            {
+              "month_year": "2020-09",
+              "location_category": "ward",
+              "n": 2
+            },
+            {
+              "month_year": "2020-10",
+              "location_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2020-10",
+              "location_category": "icu",
+              "n": 4
+            },
+            {
+              "month_year": "2020-10",
+              "location_category": "stepdown",
+              "n": 3
+            },
+            {
+              "month_year": "2020-10",
+              "location_category": "ward",
+              "n": 1
+            },
+            {
+              "month_year": "2020-11",
+              "location_category": "icu",
+              "n": 2
+            },
+            {
+              "month_year": "2020-11",
+              "location_category": "stepdown",
+              "n": 2
+            },
+            {
+              "month_year": "2020-11",
+              "location_category": "ward",
+              "n": 3
+            },
+            {
+              "month_year": "2020-12",
+              "location_category": "icu",
+              "n": 1
+            },
+            {
+              "month_year": "2021-01",
+              "location_category": "icu",
+              "n": 2
+            },
+            {
+              "month_year": "2021-01",
+              "location_category": "stepdown",
+              "n": 2
+            },
+            {
+              "month_year": "2021-02",
+              "location_category": "icu",
+              "n": 4
+            },
+            {
+              "month_year": "2021-02",
+              "location_category": "stepdown",
+              "n": 2
+            },
+            {
+              "month_year": "2021-02",
+              "location_category": "ward",
+              "n": 4
+            },
+            {
+              "month_year": "2021-03",
+              "location_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2021-03",
+              "location_category": "icu",
+              "n": 1
+            },
+            {
+              "month_year": "2021-03",
+              "location_category": "stepdown",
+              "n": 1
+            },
+            {
+              "month_year": "2021-03",
+              "location_category": "ward",
+              "n": 2
+            },
+            {
+              "month_year": "2021-04",
+              "location_category": "icu",
+              "n": 1
+            },
+            {
+              "month_year": "2021-04",
+              "location_category": "stepdown",
+              "n": 1
+            },
+            {
+              "month_year": "2021-04",
+              "location_category": "ward",
+              "n": 2
+            },
+            {
+              "month_year": "2021-05",
+              "location_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2021-05",
+              "location_category": "icu",
+              "n": 1
+            },
+            {
+              "month_year": "2021-05",
+              "location_category": "stepdown",
+              "n": 2
+            },
+            {
+              "month_year": "2021-05",
+              "location_category": "ward",
+              "n": 2
+            },
+            {
+              "month_year": "2021-06",
+              "location_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2021-06",
+              "location_category": "icu",
+              "n": 1
+            },
+            {
+              "month_year": "2021-07",
+              "location_category": "ed",
+              "n": 2
+            },
+            {
+              "month_year": "2021-07",
+              "location_category": "icu",
+              "n": 2
+            },
+            {
+              "month_year": "2021-07",
+              "location_category": "stepdown",
+              "n": 2
+            },
+            {
+              "month_year": "2021-07",
+              "location_category": "ward",
+              "n": 3
+            },
+            {
+              "month_year": "2021-08",
+              "location_category": "ward",
+              "n": 1
+            },
+            {
+              "month_year": "2021-09",
+              "location_category": "ed",
+              "n": 2
+            },
+            {
+              "month_year": "2021-09",
+              "location_category": "icu",
+              "n": 2
+            },
+            {
+              "month_year": "2021-10",
+              "location_category": "ed",
+              "n": 3
+            },
+            {
+              "month_year": "2021-10",
+              "location_category": "icu",
+              "n": 3
+            },
+            {
+              "month_year": "2021-10",
+              "location_category": "stepdown",
+              "n": 2
+            },
+            {
+              "month_year": "2021-10",
+              "location_category": "ward",
+              "n": 2
+            },
+            {
+              "month_year": "2021-11",
+              "location_category": "icu",
+              "n": 1
+            },
+            {
+              "month_year": "2021-11",
+              "location_category": "stepdown",
+              "n": 2
+            },
+            {
+              "month_year": "2021-12",
+              "location_category": "icu",
+              "n": 1
+            },
+            {
+              "month_year": "2021-12",
+              "location_category": "ward",
+              "n": 1
+            },
+            {
+              "month_year": "2022-01",
+              "location_category": "ed",
+              "n": 2
+            },
+            {
+              "month_year": "2022-01",
+              "location_category": "icu",
+              "n": 1
+            },
+            {
+              "month_year": "2022-01",
+              "location_category": "stepdown",
+              "n": 2
+            },
+            {
+              "month_year": "2022-01",
+              "location_category": "ward",
+              "n": 3
+            },
+            {
+              "month_year": "2022-02",
+              "location_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2022-02",
+              "location_category": "icu",
+              "n": 2
+            },
+            {
+              "month_year": "2022-02",
+              "location_category": "stepdown",
+              "n": 1
+            },
+            {
+              "month_year": "2022-02",
+              "location_category": "ward",
+              "n": 1
+            },
+            {
+              "month_year": "2022-03",
+              "location_category": "ed",
+              "n": 2
+            },
+            {
+              "month_year": "2022-03",
+              "location_category": "icu",
+              "n": 4
+            },
+            {
+              "month_year": "2022-03",
+              "location_category": "stepdown",
+              "n": 3
+            },
+            {
+              "month_year": "2022-03",
+              "location_category": "ward",
+              "n": 2
+            },
+            {
+              "month_year": "2022-04",
+              "location_category": "ed",
+              "n": 3
+            },
+            {
+              "month_year": "2022-04",
+              "location_category": "icu",
+              "n": 1
+            },
+            {
+              "month_year": "2022-04",
+              "location_category": "stepdown",
+              "n": 1
+            },
+            {
+              "month_year": "2022-04",
+              "location_category": "ward",
+              "n": 4
+            },
+            {
+              "month_year": "2022-05",
+              "location_category": "icu",
+              "n": 2
+            },
+            {
+              "month_year": "2022-06",
+              "location_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2022-06",
+              "location_category": "icu",
+              "n": 1
+            },
+            {
+              "month_year": "2022-06",
+              "location_category": "stepdown",
+              "n": 3
+            },
+            {
+              "month_year": "2022-06",
+              "location_category": "ward",
+              "n": 1
+            },
+            {
+              "month_year": "2022-07",
+              "location_category": "ed",
+              "n": 2
+            },
+            {
+              "month_year": "2022-07",
+              "location_category": "icu",
+              "n": 1
+            },
+            {
+              "month_year": "2022-07",
+              "location_category": "stepdown",
+              "n": 2
+            },
+            {
+              "month_year": "2022-07",
+              "location_category": "ward",
+              "n": 3
+            },
+            {
+              "month_year": "2022-09",
+              "location_category": "ed",
+              "n": 4
+            },
+            {
+              "month_year": "2022-09",
+              "location_category": "icu",
+              "n": 3
+            },
+            {
+              "month_year": "2022-09",
+              "location_category": "stepdown",
+              "n": 1
+            },
+            {
+              "month_year": "2022-09",
+              "location_category": "ward",
+              "n": 3
+            },
+            {
+              "month_year": "2022-10",
+              "location_category": "ed",
+              "n": 2
+            },
+            {
+              "month_year": "2022-10",
+              "location_category": "icu",
+              "n": 1
+            },
+            {
+              "month_year": "2022-10",
+              "location_category": "stepdown",
+              "n": 1
+            },
+            {
+              "month_year": "2022-11",
+              "location_category": "ed",
+              "n": 3
+            },
+            {
+              "month_year": "2022-11",
+              "location_category": "icu",
+              "n": 4
+            },
+            {
+              "month_year": "2022-11",
+              "location_category": "stepdown",
+              "n": 2
+            },
+            {
+              "month_year": "2022-11",
+              "location_category": "ward",
+              "n": 3
+            },
+            {
+              "month_year": "2022-12",
+              "location_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2022-12",
+              "location_category": "icu",
+              "n": 2
+            },
+            {
+              "month_year": "2022-12",
+              "location_category": "stepdown",
+              "n": 2
+            },
+            {
+              "month_year": "2022-12",
+              "location_category": "ward",
+              "n": 3
+            },
+            {
+              "month_year": "2023-01",
+              "location_category": "icu",
+              "n": 1
+            },
+            {
+              "month_year": "2023-01",
+              "location_category": "stepdown",
+              "n": 1
+            },
+            {
+              "month_year": "2023-01",
+              "location_category": "ward",
+              "n": 1
+            },
+            {
+              "month_year": "2023-02",
+              "location_category": "icu",
+              "n": 2
+            },
+            {
+              "month_year": "2023-02",
+              "location_category": "stepdown",
+              "n": 1
+            },
+            {
+              "month_year": "2023-02",
+              "location_category": "ward",
+              "n": 1
+            },
+            {
+              "month_year": "2023-03",
+              "location_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2023-03",
+              "location_category": "icu",
+              "n": 3
+            },
+            {
+              "month_year": "2023-03",
+              "location_category": "stepdown",
+              "n": 1
+            },
+            {
+              "month_year": "2023-03",
+              "location_category": "ward",
+              "n": 3
+            },
+            {
+              "month_year": "2023-04",
+              "location_category": "icu",
+              "n": 3
+            },
+            {
+              "month_year": "2023-04",
+              "location_category": "stepdown",
+              "n": 2
+            },
+            {
+              "month_year": "2023-04",
+              "location_category": "ward",
+              "n": 1
+            },
+            {
+              "month_year": "2023-05",
+              "location_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2023-05",
+              "location_category": "icu",
+              "n": 1
+            },
+            {
+              "month_year": "2023-05",
+              "location_category": "stepdown",
+              "n": 1
+            },
+            {
+              "month_year": "2023-05",
+              "location_category": "ward",
+              "n": 1
+            },
+            {
+              "month_year": "2023-07",
+              "location_category": "ed",
+              "n": 2
+            },
+            {
+              "month_year": "2023-07",
+              "location_category": "icu",
+              "n": 6
+            },
+            {
+              "month_year": "2023-07",
+              "location_category": "stepdown",
+              "n": 5
+            },
+            {
+              "month_year": "2023-07",
+              "location_category": "ward",
+              "n": 2
+            },
+            {
+              "month_year": "2023-08",
+              "location_category": "ed",
+              "n": 3
+            },
+            {
+              "month_year": "2023-08",
+              "location_category": "icu",
+              "n": 2
+            },
+            {
+              "month_year": "2023-08",
+              "location_category": "stepdown",
+              "n": 3
+            },
+            {
+              "month_year": "2023-08",
+              "location_category": "ward",
+              "n": 2
+            },
+            {
+              "month_year": "2023-10",
+              "location_category": "ed",
+              "n": 4
+            },
+            {
+              "month_year": "2023-10",
+              "location_category": "icu",
+              "n": 3
+            },
+            {
+              "month_year": "2023-11",
+              "location_category": "icu",
+              "n": 1
+            },
+            {
+              "month_year": "2023-11",
+              "location_category": "stepdown",
+              "n": 1
+            },
+            {
+              "month_year": "2023-11",
+              "location_category": "ward",
+              "n": 2
+            },
+            {
+              "month_year": "2023-12",
+              "location_category": "icu",
+              "n": 1
+            },
+            {
+              "month_year": "2023-12",
+              "location_category": "ward",
+              "n": 1
+            },
+            {
+              "month_year": "2024-01",
+              "location_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2024-01",
+              "location_category": "icu",
+              "n": 1
+            },
+            {
+              "month_year": "2024-02",
+              "location_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2024-02",
+              "location_category": "icu",
+              "n": 2
+            },
+            {
+              "month_year": "2024-02",
+              "location_category": "stepdown",
+              "n": 2
+            },
+            {
+              "month_year": "2024-02",
+              "location_category": "ward",
+              "n": 1
+            },
+            {
+              "month_year": "2024-03",
+              "location_category": "icu",
+              "n": 2
+            },
+            {
+              "month_year": "2024-03",
+              "location_category": "stepdown",
+              "n": 2
+            },
+            {
+              "month_year": "2024-03",
+              "location_category": "ward",
+              "n": 2
+            },
+            {
+              "month_year": "2024-04",
+              "location_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2024-04",
+              "location_category": "icu",
+              "n": 2
+            },
+            {
+              "month_year": "2024-04",
+              "location_category": "stepdown",
+              "n": 2
+            },
+            {
+              "month_year": "2024-04",
+              "location_category": "ward",
+              "n": 3
+            },
+            {
+              "month_year": "2024-05",
+              "location_category": "ed",
+              "n": 2
+            },
+            {
+              "month_year": "2024-05",
+              "location_category": "icu",
+              "n": 4
+            },
+            {
+              "month_year": "2024-05",
+              "location_category": "stepdown",
+              "n": 4
+            },
+            {
+              "month_year": "2024-05",
+              "location_category": "ward",
+              "n": 3
+            },
+            {
+              "month_year": "2024-06",
+              "location_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2024-06",
+              "location_category": "icu",
+              "n": 2
+            },
+            {
+              "month_year": "2024-06",
+              "location_category": "stepdown",
+              "n": 1
+            },
+            {
+              "month_year": "2024-06",
+              "location_category": "ward",
+              "n": 2
+            },
+            {
+              "month_year": "2024-07",
+              "location_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2024-07",
+              "location_category": "icu",
+              "n": 2
+            },
+            {
+              "month_year": "2024-07",
+              "location_category": "stepdown",
+              "n": 2
+            },
+            {
+              "month_year": "2024-07",
+              "location_category": "ward",
+              "n": 2
+            },
+            {
+              "month_year": "2024-08",
+              "location_category": "ed",
+              "n": 2
+            },
+            {
+              "month_year": "2024-08",
+              "location_category": "icu",
+              "n": 3
+            },
+            {
+              "month_year": "2024-08",
+              "location_category": "stepdown",
+              "n": 2
+            },
+            {
+              "month_year": "2024-08",
+              "location_category": "ward",
+              "n": 2
+            },
+            {
+              "month_year": "2024-09",
+              "location_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2024-09",
+              "location_category": "icu",
+              "n": 2
+            },
+            {
+              "month_year": "2024-09",
+              "location_category": "stepdown",
+              "n": 2
+            },
+            {
+              "month_year": "2024-09",
+              "location_category": "ward",
+              "n": 2
+            },
+            {
+              "month_year": "2024-10",
+              "location_category": "ed",
+              "n": 2
+            },
+            {
+              "month_year": "2024-10",
+              "location_category": "icu",
+              "n": 1
+            },
+            {
+              "month_year": "2024-10",
+              "location_category": "stepdown",
+              "n": 2
+            },
+            {
+              "month_year": "2024-10",
+              "location_category": "ward",
+              "n": 1
+            },
+            {
+              "month_year": "2024-11",
+              "location_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2024-11",
+              "location_category": "icu",
+              "n": 4
+            },
+            {
+              "month_year": "2024-11",
+              "location_category": "stepdown",
+              "n": 1
+            },
+            {
+              "month_year": "2024-11",
+              "location_category": "ward",
+              "n": 2
+            },
+            {
+              "month_year": "2024-12",
+              "location_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2024-12",
+              "location_category": "icu",
+              "n": 1
+            },
+            {
+              "month_year": "2024-12",
+              "location_category": "stepdown",
+              "n": 3
+            },
+            {
+              "month_year": "2024-12",
+              "location_category": "ward",
+              "n": 3
+            }
+          ],
+          "location_type": [
+            {
+              "month_year": "2018-01",
+              "location_type": "cardiac_icu",
+              "n": 2
+            },
+            {
+              "month_year": "2018-01",
+              "location_type": "medical_icu",
+              "n": 2
+            },
+            {
+              "month_year": "2018-03",
+              "location_type": "medical_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2018-03",
+              "location_type": "surgical_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2018-04",
+              "location_type": "general_icu",
+              "n": 2
+            },
+            {
+              "month_year": "2018-04",
+              "location_type": "surgical_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2018-05",
+              "location_type": "burn_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2018-05",
+              "location_type": "cardiac_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2018-06",
+              "location_type": "general_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2018-07",
+              "location_type": "general_icu",
+              "n": 2
+            },
+            {
+              "month_year": "2018-08",
+              "location_type": "general_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2018-08",
+              "location_type": "medical_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2018-08",
+              "location_type": "surgical_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2018-09",
+              "location_type": "medical_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2018-09",
+              "location_type": "surgical_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2018-11",
+              "location_type": "cardiac_icu",
+              "n": 2
+            },
+            {
+              "month_year": "2018-11",
+              "location_type": "general_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2018-11",
+              "location_type": "mixed_cardiothoracic_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2019-01",
+              "location_type": "cardiac_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2019-01",
+              "location_type": "general_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2019-01",
+              "location_type": "medical_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2019-02",
+              "location_type": "cardiac_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2019-02",
+              "location_type": "cardiothoracic_surgical_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2019-02",
+              "location_type": "mixed_cardiothoracic_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2019-03",
+              "location_type": "medical_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2019-03",
+              "location_type": "surgical_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2019-04",
+              "location_type": "surgical_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2019-05",
+              "location_type": "medical_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2019-05",
+              "location_type": "surgical_icu",
+              "n": 3
+            },
+            {
+              "month_year": "2019-06",
+              "location_type": "neuro_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2019-07",
+              "location_type": "burn_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2019-07",
+              "location_type": "cardiac_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2019-07",
+              "location_type": "general_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2019-07",
+              "location_type": "mixed_cardiothoracic_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2019-07",
+              "location_type": "surgical_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2019-08",
+              "location_type": "burn_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2019-09",
+              "location_type": "general_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2019-09",
+              "location_type": "neuro_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2019-10",
+              "location_type": "general_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2019-11",
+              "location_type": "burn_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2019-11",
+              "location_type": "general_icu",
+              "n": 2
+            },
+            {
+              "month_year": "2019-11",
+              "location_type": "neuro_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2019-12",
+              "location_type": "cardiac_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2019-12",
+              "location_type": "neuro_icu",
+              "n": 2
+            },
+            {
+              "month_year": "2020-02",
+              "location_type": "cardiac_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2020-03",
+              "location_type": "cardiac_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2020-04",
+              "location_type": "general_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2020-04",
+              "location_type": "surgical_icu",
+              "n": 2
+            },
+            {
+              "month_year": "2020-05",
+              "location_type": "cardiac_icu",
+              "n": 2
+            },
+            {
+              "month_year": "2020-05",
+              "location_type": "cardiothoracic_surgical_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2020-05",
+              "location_type": "mixed_cardiothoracic_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2020-05",
+              "location_type": "neuro_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2020-06",
+              "location_type": "cardiac_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2020-06",
+              "location_type": "general_icu",
+              "n": 2
+            },
+            {
+              "month_year": "2020-06",
+              "location_type": "medical_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2020-06",
+              "location_type": "mixed_cardiothoracic_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2020-06",
+              "location_type": "neuro_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2020-06",
+              "location_type": "surgical_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2020-07",
+              "location_type": "neurosurgical_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2020-08",
+              "location_type": "surgical_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2020-09",
+              "location_type": "medical_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2020-09",
+              "location_type": "surgical_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2020-10",
+              "location_type": "general_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2020-10",
+              "location_type": "medical_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2020-10",
+              "location_type": "neuro_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2020-10",
+              "location_type": "surgical_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2020-11",
+              "location_type": "surgical_icu",
+              "n": 2
+            },
+            {
+              "month_year": "2020-12",
+              "location_type": "neurosurgical_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2021-01",
+              "location_type": "general_icu",
+              "n": 2
+            },
+            {
+              "month_year": "2021-02",
+              "location_type": "cardiac_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2021-02",
+              "location_type": "medical_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2021-02",
+              "location_type": "mixed_cardiothoracic_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2021-02",
+              "location_type": "neuro_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2021-03",
+              "location_type": "mixed_cardiothoracic_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2021-04",
+              "location_type": "medical_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2021-05",
+              "location_type": "surgical_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2021-06",
+              "location_type": "general_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2021-07",
+              "location_type": "neurosurgical_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2021-07",
+              "location_type": "surgical_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2021-09",
+              "location_type": "medical_icu",
+              "n": 2
+            },
+            {
+              "month_year": "2021-10",
+              "location_type": "mixed_cardiothoracic_icu",
+              "n": 2
+            },
+            {
+              "month_year": "2021-10",
+              "location_type": "mixed_neuro_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2021-11",
+              "location_type": "neuro_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2021-12",
+              "location_type": "neuro_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2022-01",
+              "location_type": "surgical_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2022-02",
+              "location_type": "general_icu",
+              "n": 2
+            },
+            {
+              "month_year": "2022-03",
+              "location_type": "cardiac_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2022-03",
+              "location_type": "general_icu",
+              "n": 2
+            },
+            {
+              "month_year": "2022-03",
+              "location_type": "neurosurgical_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2022-04",
+              "location_type": "medical_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2022-05",
+              "location_type": "cardiac_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2022-05",
+              "location_type": "surgical_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2022-06",
+              "location_type": "mixed_cardiothoracic_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2022-07",
+              "location_type": "medical_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2022-09",
+              "location_type": "burn_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2022-09",
+              "location_type": "medical_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2022-09",
+              "location_type": "surgical_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2022-10",
+              "location_type": "medical_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2022-11",
+              "location_type": "cardiac_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2022-11",
+              "location_type": "cardiothoracic_surgical_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2022-11",
+              "location_type": "mixed_neuro_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2022-11",
+              "location_type": "surgical_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2022-12",
+              "location_type": "mixed_cardiothoracic_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2022-12",
+              "location_type": "surgical_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2023-01",
+              "location_type": "mixed_cardiothoracic_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2023-02",
+              "location_type": "surgical_icu",
+              "n": 2
+            },
+            {
+              "month_year": "2023-03",
+              "location_type": "cardiac_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2023-03",
+              "location_type": "general_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2023-03",
+              "location_type": "neuro_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2023-04",
+              "location_type": "cardiac_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2023-04",
+              "location_type": "general_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2023-04",
+              "location_type": "neuro_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2023-05",
+              "location_type": "medical_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2023-07",
+              "location_type": "general_icu",
+              "n": 2
+            },
+            {
+              "month_year": "2023-07",
+              "location_type": "medical_icu",
+              "n": 3
+            },
+            {
+              "month_year": "2023-07",
+              "location_type": "neuro_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2023-08",
+              "location_type": "burn_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2023-08",
+              "location_type": "mixed_cardiothoracic_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2023-10",
+              "location_type": "general_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2023-10",
+              "location_type": "medical_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2023-10",
+              "location_type": "neuro_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2023-11",
+              "location_type": "cardiac_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2023-12",
+              "location_type": "medical_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2024-01",
+              "location_type": "medical_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2024-02",
+              "location_type": "burn_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2024-02",
+              "location_type": "mixed_cardiothoracic_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2024-03",
+              "location_type": "cardiac_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2024-03",
+              "location_type": "mixed_neuro_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2024-04",
+              "location_type": "general_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2024-04",
+              "location_type": "neuro_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2024-05",
+              "location_type": "general_icu",
+              "n": 2
+            },
+            {
+              "month_year": "2024-05",
+              "location_type": "mixed_cardiothoracic_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2024-05",
+              "location_type": "neurosurgical_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2024-06",
+              "location_type": "medical_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2024-06",
+              "location_type": "neuro_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2024-07",
+              "location_type": "general_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2024-07",
+              "location_type": "medical_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2024-08",
+              "location_type": "medical_icu",
+              "n": 2
+            },
+            {
+              "month_year": "2024-08",
+              "location_type": "neurosurgical_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2024-09",
+              "location_type": "burn_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2024-09",
+              "location_type": "cardiac_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2024-10",
+              "location_type": "surgical_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2024-11",
+              "location_type": "cardiac_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2024-11",
+              "location_type": "general_icu",
+              "n": 1
+            },
+            {
+              "month_year": "2024-11",
+              "location_type": "surgical_icu",
+              "n": 2
+            },
+            {
+              "month_year": "2024-12",
+              "location_type": "cardiac_icu",
+              "n": 1
+            }
+          ]
+        }
+      },
+      "atomic_total": 17,
+      "atomic_passed": 17
+    },
+    "duplicate_composite_keys": {
+      "check_type": "duplicate_composite_keys",
+      "table_name": "adt",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No duplicate composite keys found",
+          "details": {}
+        }
+      ],
+      "metrics": {
+        "composite_keys": [
+          "hospitalization_id",
+          "in_dttm"
+        ],
+        "total_records": 552,
+        "unique_records": 552,
+        "duplicate_records": 0,
+        "duplicate_percent": 0.0
+      },
+      "atomic_total": 1,
+      "atomic_passed": 1
+    }
+  },
+  "table_stats": [
+    {
+      "column": "hospitalization_id",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 200,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "hospital_id",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 82,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "hospital_type",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 3,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "in_dttm",
+      "dtype": "DATETIME",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 552,
+      "min": "2018-01-22 20:36",
+      "max": "2024-12-27 13:49"
+    },
+    {
+      "column": "out_dttm",
+      "dtype": "DATETIME",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 552,
+      "min": "2018-01-23 01:20",
+      "max": "2025-01-15 06:25"
+    },
+    {
+      "column": "location_name",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 15,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "location_category",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 4,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "location_type",
+      "dtype": "VARCHAR",
+      "null_count": 381,
+      "null_pct": 69.0,
+      "unique": 10,
+      "min": null,
+      "max": null
+    }
+  ],
+  "total_rows": 552
+}

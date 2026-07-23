@@ -13,7 +13,7 @@ extract_column_field(issue)
 A single string naming the affected column(s), or \code{"NA"}.
 }
 \description{
-Priority: \code{details$column} > \code{details$extra_columns} > parse from message >
+Priority: \code{details[["column"]]} > \code{details[["extra_columns"]]} > parse from message >
 \code{"NA"}. Mirrors \code{rule_codes.extract_column_field} in clifpy.
 }
 \examples{

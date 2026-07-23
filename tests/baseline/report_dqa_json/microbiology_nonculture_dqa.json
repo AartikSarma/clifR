@@ -1,0 +1,3817 @@
+{
+  "table_name": "microbiology_nonculture",
+  "backend": "polars",
+  "conformance": {
+    "table_presence": {
+      "check_type": "table_presence",
+      "table_name": "microbiology_nonculture",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Table 'microbiology_nonculture' present with 381 rows and 18 columns",
+          "details": {}
+        }
+      ],
+      "metrics": {
+        "row_count": 381,
+        "column_count": 18
+      },
+      "atomic_total": 1,
+      "atomic_passed": 1
+    },
+    "required_columns": {
+      "check_type": "required_columns",
+      "table_name": "microbiology_nonculture",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'patient_id': present",
+          "details": {
+            "column": "patient_id"
+          }
+        },
+        {
+          "message": "Column 'hospitalization_id': present",
+          "details": {
+            "column": "hospitalization_id"
+          }
+        },
+        {
+          "message": "Column 'result_dttm': present",
+          "details": {
+            "column": "result_dttm"
+          }
+        },
+        {
+          "message": "Column 'collect_dttm': present",
+          "details": {
+            "column": "collect_dttm"
+          }
+        },
+        {
+          "message": "Column 'order_dttm': present",
+          "details": {
+            "column": "order_dttm"
+          }
+        },
+        {
+          "message": "Column 'fluid_category': present",
+          "details": {
+            "column": "fluid_category"
+          }
+        },
+        {
+          "message": "Column 'method_category': present",
+          "details": {
+            "column": "method_category"
+          }
+        },
+        {
+          "message": "Column 'organism_category': present",
+          "details": {
+            "column": "organism_category"
+          }
+        },
+        {
+          "message": "Column 'organism_group': present",
+          "details": {
+            "column": "organism_group"
+          }
+        }
+      ],
+      "metrics": {
+        "total_required": 9,
+        "total_present": 9,
+        "total_missing": 0
+      },
+      "atomic_total": 9,
+      "atomic_passed": 9
+    },
+    "column_dtypes": {
+      "check_type": "column_dtypes",
+      "table_name": "microbiology_nonculture",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'patient_id': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "patient_id",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'hospitalization_id': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "hospitalization_id",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'result_dttm': dtype matches schema (DATETIME)",
+          "details": {
+            "column": "result_dttm",
+            "expected": "DATETIME"
+          }
+        },
+        {
+          "message": "Column 'collect_dttm': dtype matches schema (DATETIME)",
+          "details": {
+            "column": "collect_dttm",
+            "expected": "DATETIME"
+          }
+        },
+        {
+          "message": "Column 'order_dttm': dtype matches schema (DATETIME)",
+          "details": {
+            "column": "order_dttm",
+            "expected": "DATETIME"
+          }
+        },
+        {
+          "message": "Column 'fluid_name': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "fluid_name",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'fluid_category': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "fluid_category",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'method_name': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "method_name",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'method_category': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "method_category",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'micro_order_name': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "micro_order_name",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'organism_category': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "organism_category",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'organism_group': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "organism_group",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'result_name': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "result_name",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'result_category': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "result_category",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'reference_low': dtype matches schema (DOUBLE)",
+          "details": {
+            "column": "reference_low",
+            "expected": "DOUBLE"
+          }
+        },
+        {
+          "message": "Column 'reference_high': dtype matches schema (DOUBLE)",
+          "details": {
+            "column": "reference_high",
+            "expected": "DOUBLE"
+          }
+        },
+        {
+          "message": "Column 'result_unit': not present in data (dtype check skipped)",
+          "details": {
+            "column": "result_unit",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'lab_loinc_code': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "lab_loinc_code",
+            "expected": "VARCHAR"
+          }
+        }
+      ],
+      "metrics": {
+        "columns_checked": 18,
+        "dtype_errors": 0,
+        "dtype_warnings": 0
+      },
+      "atomic_total": 18,
+      "atomic_passed": 18
+    },
+    "datetime_format": {
+      "check_type": "datetime_format",
+      "table_name": "microbiology_nonculture",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'result_dttm': datetime format valid",
+          "details": {
+            "column": "result_dttm"
+          }
+        },
+        {
+          "message": "Column 'collect_dttm': datetime format valid",
+          "details": {
+            "column": "collect_dttm"
+          }
+        },
+        {
+          "message": "Column 'order_dttm': datetime format valid",
+          "details": {
+            "column": "order_dttm"
+          }
+        }
+      ],
+      "metrics": {
+        "datetime_columns_checked": 3
+      },
+      "atomic_total": 3,
+      "atomic_passed": 3
+    },
+    "categorical_values": {
+      "check_type": "categorical_values",
+      "table_name": "microbiology_nonculture",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'fluid_category': all values match mCIDE permissible values",
+          "details": {
+            "column": "fluid_category"
+          }
+        },
+        {
+          "message": "Column 'method_category': all values match mCIDE permissible values",
+          "details": {
+            "column": "method_category"
+          }
+        },
+        {
+          "message": "Column 'organism_category': all values match mCIDE permissible values",
+          "details": {
+            "column": "organism_category"
+          }
+        },
+        {
+          "message": "Column 'result_category': all values match mCIDE permissible values",
+          "details": {
+            "column": "result_category"
+          }
+        }
+      ],
+      "metrics": {
+        "category_columns_checked": 4,
+        "columns_with_invalid_values": 0
+      },
+      "atomic_total": 4,
+      "atomic_passed": 4
+    },
+    "category_group_mapping": {
+      "check_type": "category_group_mapping",
+      "table_name": "microbiology_nonculture",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No category-to-group mappings defined in schema",
+          "details": {}
+        }
+      ],
+      "metrics": {},
+      "atomic_total": 0,
+      "atomic_passed": 0
+    }
+  },
+  "completeness": {
+    "missingness": {
+      "check_type": "missingness",
+      "table_name": "microbiology_nonculture",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'patient_id': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "patient_id",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'hospitalization_id': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "hospitalization_id",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'result_dttm': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "result_dttm",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'collect_dttm': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "collect_dttm",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'order_dttm': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "order_dttm",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'fluid_category': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "fluid_category",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'method_category': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "method_category",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'organism_category': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "organism_category",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'organism_group': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "organism_group",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        }
+      ],
+      "metrics": {
+        "total_rows": 381,
+        "required_columns_checked": 9,
+        "missingness_stats": [
+          {
+            "column": "patient_id",
+            "null_count": 0,
+            "total_rows": 381,
+            "percent_missing": 0.0
+          },
+          {
+            "column": "hospitalization_id",
+            "null_count": 0,
+            "total_rows": 381,
+            "percent_missing": 0.0
+          },
+          {
+            "column": "result_dttm",
+            "null_count": 0,
+            "total_rows": 381,
+            "percent_missing": 0.0
+          },
+          {
+            "column": "collect_dttm",
+            "null_count": 0,
+            "total_rows": 381,
+            "percent_missing": 0.0
+          },
+          {
+            "column": "order_dttm",
+            "null_count": 0,
+            "total_rows": 381,
+            "percent_missing": 0.0
+          },
+          {
+            "column": "fluid_category",
+            "null_count": 0,
+            "total_rows": 381,
+            "percent_missing": 0.0
+          },
+          {
+            "column": "method_category",
+            "null_count": 0,
+            "total_rows": 381,
+            "percent_missing": 0.0
+          },
+          {
+            "column": "organism_category",
+            "null_count": 0,
+            "total_rows": 381,
+            "percent_missing": 0.0
+          },
+          {
+            "column": "organism_group",
+            "null_count": 0,
+            "total_rows": 381,
+            "percent_missing": 0.0
+          }
+        ]
+      },
+      "atomic_total": 9,
+      "atomic_passed": 9
+    },
+    "conditional_requirements": {
+      "check_type": "conditional_requirements",
+      "table_name": "microbiology_nonculture",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No conditional requirements defined for this table",
+          "details": {}
+        }
+      ],
+      "metrics": {},
+      "atomic_total": 0,
+      "atomic_passed": 0
+    },
+    "mcide_value_coverage": {
+      "check_type": "mcide_value_coverage",
+      "table_name": "microbiology_nonculture",
+      "passed": false,
+      "errors": [
+        {
+          "message": "Missing 41 mCIDE values: blood_buffy, bone_cortex, bone_marrow, brain, cardiac, catheter_tip, central_nervous_system, ears, esophagus, eyes, fallopians_uterus_cervix, gallbladder_billary_pancreas, gastrointestinal_tract, genital_area, genito_urinary_tract, joints, kidneys_renal_pelvis_ureters_bladder, large_intestine, larynx, lips, liver, lymph_nodes, meninges_csf, muscle, oropharynx_tongue_oralcavity, other_unspecified, peritoneum, pleural_cavity_fluid, prostate, respiratory_tract_lower, sinuses, skin_disseminated_multiple_sites, skin_rash_pustules_abscesses, skin_unspecified, small_intestine, spinal_cord, spleen, stomach, testes, vagina, woundsite",
+          "details": {
+            "column": "fluid_category",
+            "missing_values": [
+              "blood_buffy",
+              "bone_cortex",
+              "bone_marrow",
+              "brain",
+              "cardiac",
+              "catheter_tip",
+              "central_nervous_system",
+              "ears",
+              "esophagus",
+              "eyes",
+              "fallopians_uterus_cervix",
+              "gallbladder_billary_pancreas",
+              "gastrointestinal_tract",
+              "genital_area",
+              "genito_urinary_tract",
+              "joints",
+              "kidneys_renal_pelvis_ureters_bladder",
+              "large_intestine",
+              "larynx",
+              "lips",
+              "liver",
+              "lymph_nodes",
+              "meninges_csf",
+              "muscle",
+              "oropharynx_tongue_oralcavity",
+              "other_unspecified",
+              "peritoneum",
+              "pleural_cavity_fluid",
+              "prostate",
+              "respiratory_tract_lower",
+              "sinuses",
+              "skin_disseminated_multiple_sites",
+              "skin_rash_pustules_abscesses",
+              "skin_unspecified",
+              "small_intestine",
+              "spinal_cord",
+              "spleen",
+              "stomach",
+              "testes",
+              "vagina",
+              "woundsite"
+            ],
+            "coverage_percent": 6.82
+          }
+        },
+        {
+          "message": "Missing 21 mCIDE values: adenovirus, bordetella_parapertussis, bordetella_pertussis, chlamydia_pneumoniae, coronavirus_229e, coronavirus_hku1, coronavirus_nl63, coronavirus_oc43, human_metapneumovirus, human_rhinovirus_enterovirus, influenza_a, influenza_a_h1, influenza_a_h1_2009, influenza_a_h3, influenza_b, mycoplasma_pneumoniae, parainfluenza_1, parainfluenza_2, parainfluenza_3, parainfluenza_4, pneumocystis_jirovecii",
+          "details": {
+            "column": "organism_category",
+            "missing_values": [
+              "adenovirus",
+              "bordetella_parapertussis",
+              "bordetella_pertussis",
+              "chlamydia_pneumoniae",
+              "coronavirus_229e",
+              "coronavirus_hku1",
+              "coronavirus_nl63",
+              "coronavirus_oc43",
+              "human_metapneumovirus",
+              "human_rhinovirus_enterovirus",
+              "influenza_a",
+              "influenza_a_h1",
+              "influenza_a_h1_2009",
+              "influenza_a_h3",
+              "influenza_b",
+              "mycoplasma_pneumoniae",
+              "parainfluenza_1",
+              "parainfluenza_2",
+              "parainfluenza_3",
+              "parainfluenza_4",
+              "pneumocystis_jirovecii"
+            ],
+            "coverage_percent": 12.5
+          }
+        },
+        {
+          "message": "Missing 1 mCIDE values: indeterminate",
+          "details": {
+            "column": "result_category",
+            "missing_values": [
+              "indeterminate"
+            ],
+            "coverage_percent": 66.67
+          }
+        }
+      ],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'fluid_category': 3/44 mCIDE values present",
+          "details": {
+            "column": "fluid_category",
+            "found_values": 3,
+            "expected_values": 44,
+            "coverage_percent": 6.82,
+            "atomic_count": 3
+          }
+        },
+        {
+          "message": "Column 'method_category': 1/1 mCIDE values present",
+          "details": {
+            "column": "method_category",
+            "found_values": 1,
+            "expected_values": 1,
+            "coverage_percent": 100.0,
+            "atomic_count": 1
+          }
+        },
+        {
+          "message": "Column 'organism_category': 3/24 mCIDE values present",
+          "details": {
+            "column": "organism_category",
+            "found_values": 3,
+            "expected_values": 24,
+            "coverage_percent": 12.5,
+            "atomic_count": 3
+          }
+        },
+        {
+          "message": "Column 'result_category': 2/3 mCIDE values present",
+          "details": {
+            "column": "result_category",
+            "found_values": 2,
+            "expected_values": 3,
+            "coverage_percent": 66.67,
+            "atomic_count": 2
+          }
+        }
+      ],
+      "metrics": {
+        "category_columns_checked": 4,
+        "coverage_by_column": {
+          "fluid_category": {
+            "expected_values": 44,
+            "found_values": 3,
+            "missing_values": [
+              "blood_buffy",
+              "bone_cortex",
+              "bone_marrow",
+              "brain",
+              "cardiac",
+              "catheter_tip",
+              "central_nervous_system",
+              "ears",
+              "esophagus",
+              "eyes",
+              "fallopians_uterus_cervix",
+              "gallbladder_billary_pancreas",
+              "gastrointestinal_tract",
+              "genital_area",
+              "genito_urinary_tract",
+              "joints",
+              "kidneys_renal_pelvis_ureters_bladder",
+              "large_intestine",
+              "larynx",
+              "lips",
+              "liver",
+              "lymph_nodes",
+              "meninges_csf",
+              "muscle",
+              "oropharynx_tongue_oralcavity",
+              "other_unspecified",
+              "peritoneum",
+              "pleural_cavity_fluid",
+              "prostate",
+              "respiratory_tract_lower",
+              "sinuses",
+              "skin_disseminated_multiple_sites",
+              "skin_rash_pustules_abscesses",
+              "skin_unspecified",
+              "small_intestine",
+              "spinal_cord",
+              "spleen",
+              "stomach",
+              "testes",
+              "vagina",
+              "woundsite"
+            ],
+            "coverage_percent": 6.82
+          },
+          "method_category": {
+            "expected_values": 1,
+            "found_values": 1,
+            "missing_values": [],
+            "coverage_percent": 100.0
+          },
+          "organism_category": {
+            "expected_values": 24,
+            "found_values": 3,
+            "missing_values": [
+              "adenovirus",
+              "bordetella_parapertussis",
+              "bordetella_pertussis",
+              "chlamydia_pneumoniae",
+              "coronavirus_229e",
+              "coronavirus_hku1",
+              "coronavirus_nl63",
+              "coronavirus_oc43",
+              "human_metapneumovirus",
+              "human_rhinovirus_enterovirus",
+              "influenza_a",
+              "influenza_a_h1",
+              "influenza_a_h1_2009",
+              "influenza_a_h3",
+              "influenza_b",
+              "mycoplasma_pneumoniae",
+              "parainfluenza_1",
+              "parainfluenza_2",
+              "parainfluenza_3",
+              "parainfluenza_4",
+              "pneumocystis_jirovecii"
+            ],
+            "coverage_percent": 12.5
+          },
+          "result_category": {
+            "expected_values": 3,
+            "found_values": 2,
+            "missing_values": [
+              "indeterminate"
+            ],
+            "coverage_percent": 66.67
+          }
+        }
+      },
+      "atomic_total": 72,
+      "atomic_passed": 9
+    }
+  },
+  "relational": {},
+  "plausibility": {
+    "chronological_order": {
+      "check_type": "chronological_order",
+      "table_name": "microbiology_nonculture",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Chronological order satisfied: Nonculture order must be before or equal to collection \u2014 381/381 rows valid (100%)",
+          "details": {
+            "column": "order_dttm, collect_dttm",
+            "rows_checked": 381,
+            "rows_valid": 381,
+            "percent_valid": 100.0
+          }
+        },
+        {
+          "message": "Chronological order satisfied: Nonculture collection must be before or equal to result \u2014 381/381 rows valid (100%)",
+          "details": {
+            "column": "collect_dttm, result_dttm",
+            "rows_checked": 381,
+            "rows_valid": 381,
+            "percent_valid": 100.0
+          }
+        }
+      ],
+      "metrics": {
+        "pairs_checked": 2,
+        "violations_by_pair": {
+          "order_dttm->collect_dttm": {
+            "total_applicable": 381,
+            "violations": 0,
+            "violation_percent": 0.0,
+            "description": "Nonculture order must be before or equal to collection"
+          },
+          "collect_dttm->result_dttm": {
+            "total_applicable": 381,
+            "violations": 0,
+            "violation_percent": 0.0,
+            "description": "Nonculture collection must be before or equal to result"
+          }
+        }
+      },
+      "atomic_total": 2,
+      "atomic_passed": 2
+    },
+    "numeric_range_plausibility": {
+      "check_type": "numeric_range_plausibility",
+      "table_name": "microbiology_nonculture",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No numeric range configuration for this table",
+          "details": {}
+        }
+      ],
+      "metrics": {},
+      "atomic_total": 0,
+      "atomic_passed": 0
+    },
+    "field_plausibility": {
+      "check_type": "field_plausibility",
+      "table_name": "microbiology_nonculture",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No field plausibility rules defined for this table",
+          "details": {}
+        }
+      ],
+      "metrics": {},
+      "atomic_total": 0,
+      "atomic_passed": 0
+    },
+    "category_temporal_consistency": {
+      "check_type": "category_temporal_consistency",
+      "table_name": "microbiology_nonculture",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "fluid_category: feces_stool present in 7/7 years (2018-2024)",
+          "details": {
+            "column": "fluid_category",
+            "value": "feces_stool",
+            "yearly_counts": {
+              "2018": 9,
+              "2019": 3,
+              "2020": 12,
+              "2021": 2,
+              "2022": 8,
+              "2023": 7,
+              "2024": 6
+            }
+          }
+        },
+        {
+          "message": "fluid_category: nasopharynx_upperairway present in 7/7 years (2018-2024)",
+          "details": {
+            "column": "fluid_category",
+            "value": "nasopharynx_upperairway",
+            "yearly_counts": {
+              "2018": 25,
+              "2019": 33,
+              "2020": 27,
+              "2021": 18,
+              "2022": 26,
+              "2023": 22,
+              "2024": 26
+            }
+          }
+        },
+        {
+          "message": "fluid_category: respiratory_tract present in 7/7 years (2018-2024)",
+          "details": {
+            "column": "fluid_category",
+            "value": "respiratory_tract",
+            "yearly_counts": {
+              "2018": 9,
+              "2019": 11,
+              "2020": 12,
+              "2021": 6,
+              "2022": 9,
+              "2023": 9,
+              "2024": 8
+            }
+          }
+        },
+        {
+          "message": "method_category: pcr present in 7/7 years (2018-2024)",
+          "details": {
+            "column": "method_category",
+            "value": "pcr",
+            "yearly_counts": {
+              "2018": 28,
+              "2019": 34,
+              "2020": 29,
+              "2021": 19,
+              "2022": 28,
+              "2023": 25,
+              "2024": 27
+            }
+          }
+        },
+        {
+          "message": "organism_category: clostridium_difficile present in 7/7 years (2018-2024)",
+          "details": {
+            "column": "organism_category",
+            "value": "clostridium_difficile",
+            "yearly_counts": {
+              "2018": 9,
+              "2019": 3,
+              "2020": 12,
+              "2021": 2,
+              "2022": 8,
+              "2023": 7,
+              "2024": 6
+            }
+          }
+        },
+        {
+          "message": "organism_category: respiratory_syncytial_virus present in 7/7 years (2018-2024)",
+          "details": {
+            "column": "organism_category",
+            "value": "respiratory_syncytial_virus",
+            "yearly_counts": {
+              "2018": 15,
+              "2019": 17,
+              "2020": 11,
+              "2021": 10,
+              "2022": 13,
+              "2023": 17,
+              "2024": 16
+            }
+          }
+        },
+        {
+          "message": "organism_category: sars_cov2 present in 7/7 years (2018-2024)",
+          "details": {
+            "column": "organism_category",
+            "value": "sars_cov2",
+            "yearly_counts": {
+              "2018": 24,
+              "2019": 31,
+              "2020": 28,
+              "2021": 17,
+              "2022": 25,
+              "2023": 24,
+              "2024": 26
+            }
+          }
+        },
+        {
+          "message": "result_category: detected present in 7/7 years (2018-2024)",
+          "details": {
+            "column": "result_category",
+            "value": "detected",
+            "yearly_counts": {
+              "2018": 9,
+              "2019": 7,
+              "2020": 11,
+              "2021": 5,
+              "2022": 5,
+              "2023": 5,
+              "2024": 9
+            }
+          }
+        },
+        {
+          "message": "result_category: not_detected present in 7/7 years (2018-2024)",
+          "details": {
+            "column": "result_category",
+            "value": "not_detected",
+            "yearly_counts": {
+              "2018": 27,
+              "2019": 32,
+              "2020": 27,
+              "2021": 17,
+              "2022": 26,
+              "2023": 25,
+              "2024": 24
+            }
+          }
+        }
+      ],
+      "metrics": {
+        "category_columns_checked": 4,
+        "yearly_distributions": {
+          "fluid_category": {
+            "2018": {
+              "feces_stool": 9,
+              "nasopharynx_upperairway": 25,
+              "respiratory_tract": 9
+            },
+            "2019": {
+              "feces_stool": 3,
+              "nasopharynx_upperairway": 33,
+              "respiratory_tract": 11
+            },
+            "2020": {
+              "feces_stool": 12,
+              "nasopharynx_upperairway": 27,
+              "respiratory_tract": 12
+            },
+            "2021": {
+              "feces_stool": 2,
+              "nasopharynx_upperairway": 18,
+              "respiratory_tract": 6
+            },
+            "2022": {
+              "feces_stool": 8,
+              "nasopharynx_upperairway": 26,
+              "respiratory_tract": 9
+            },
+            "2023": {
+              "feces_stool": 7,
+              "nasopharynx_upperairway": 22,
+              "respiratory_tract": 9
+            },
+            "2024": {
+              "feces_stool": 6,
+              "nasopharynx_upperairway": 26,
+              "respiratory_tract": 8
+            }
+          },
+          "method_category": {
+            "2018": {
+              "pcr": 28
+            },
+            "2019": {
+              "pcr": 34
+            },
+            "2020": {
+              "pcr": 29
+            },
+            "2021": {
+              "pcr": 19
+            },
+            "2022": {
+              "pcr": 28
+            },
+            "2023": {
+              "pcr": 25
+            },
+            "2024": {
+              "pcr": 27
+            }
+          },
+          "organism_category": {
+            "2018": {
+              "clostridium_difficile": 9,
+              "respiratory_syncytial_virus": 15,
+              "sars_cov2": 24
+            },
+            "2019": {
+              "clostridium_difficile": 3,
+              "respiratory_syncytial_virus": 17,
+              "sars_cov2": 31
+            },
+            "2020": {
+              "clostridium_difficile": 12,
+              "respiratory_syncytial_virus": 11,
+              "sars_cov2": 28
+            },
+            "2021": {
+              "clostridium_difficile": 2,
+              "respiratory_syncytial_virus": 10,
+              "sars_cov2": 17
+            },
+            "2022": {
+              "clostridium_difficile": 8,
+              "respiratory_syncytial_virus": 13,
+              "sars_cov2": 25
+            },
+            "2023": {
+              "clostridium_difficile": 7,
+              "respiratory_syncytial_virus": 17,
+              "sars_cov2": 24
+            },
+            "2024": {
+              "clostridium_difficile": 6,
+              "respiratory_syncytial_virus": 16,
+              "sars_cov2": 26
+            }
+          },
+          "result_category": {
+            "2018": {
+              "detected": 9,
+              "not_detected": 27
+            },
+            "2019": {
+              "detected": 7,
+              "not_detected": 32
+            },
+            "2020": {
+              "detected": 11,
+              "not_detected": 27
+            },
+            "2021": {
+              "detected": 5,
+              "not_detected": 17
+            },
+            "2022": {
+              "detected": 5,
+              "not_detected": 26
+            },
+            "2023": {
+              "detected": 5,
+              "not_detected": 25
+            },
+            "2024": {
+              "detected": 9,
+              "not_detected": 24
+            }
+          }
+        },
+        "missing_in_years": {},
+        "monthly_trends": {
+          "fluid_category": [
+            {
+              "month_year": "2018-01",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 3
+            },
+            {
+              "month_year": "2018-01",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2018-02",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 1
+            },
+            {
+              "month_year": "2018-02",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2018-03",
+              "fluid_category": "feces_stool",
+              "n": 1
+            },
+            {
+              "month_year": "2018-03",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 1
+            },
+            {
+              "month_year": "2018-04",
+              "fluid_category": "feces_stool",
+              "n": 2
+            },
+            {
+              "month_year": "2018-04",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 3
+            },
+            {
+              "month_year": "2018-04",
+              "fluid_category": "respiratory_tract",
+              "n": 2
+            },
+            {
+              "month_year": "2018-05",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 1
+            },
+            {
+              "month_year": "2018-06",
+              "fluid_category": "feces_stool",
+              "n": 1
+            },
+            {
+              "month_year": "2018-06",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 2
+            },
+            {
+              "month_year": "2018-06",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2018-07",
+              "fluid_category": "feces_stool",
+              "n": 2
+            },
+            {
+              "month_year": "2018-07",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 3
+            },
+            {
+              "month_year": "2018-07",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2018-08",
+              "fluid_category": "feces_stool",
+              "n": 1
+            },
+            {
+              "month_year": "2018-08",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 4
+            },
+            {
+              "month_year": "2018-09",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 2
+            },
+            {
+              "month_year": "2018-09",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2018-10",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 1
+            },
+            {
+              "month_year": "2018-11",
+              "fluid_category": "feces_stool",
+              "n": 2
+            },
+            {
+              "month_year": "2018-11",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 4
+            },
+            {
+              "month_year": "2018-11",
+              "fluid_category": "respiratory_tract",
+              "n": 2
+            },
+            {
+              "month_year": "2019-01",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 4
+            },
+            {
+              "month_year": "2019-01",
+              "fluid_category": "respiratory_tract",
+              "n": 2
+            },
+            {
+              "month_year": "2019-02",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 1
+            },
+            {
+              "month_year": "2019-02",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2019-03",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 2
+            },
+            {
+              "month_year": "2019-03",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2019-05",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 5
+            },
+            {
+              "month_year": "2019-05",
+              "fluid_category": "respiratory_tract",
+              "n": 3
+            },
+            {
+              "month_year": "2019-06",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 2
+            },
+            {
+              "month_year": "2019-07",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 6
+            },
+            {
+              "month_year": "2019-07",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2019-08",
+              "fluid_category": "feces_stool",
+              "n": 1
+            },
+            {
+              "month_year": "2019-08",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 1
+            },
+            {
+              "month_year": "2019-09",
+              "fluid_category": "feces_stool",
+              "n": 1
+            },
+            {
+              "month_year": "2019-09",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 2
+            },
+            {
+              "month_year": "2019-10",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 2
+            },
+            {
+              "month_year": "2019-10",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2019-11",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 4
+            },
+            {
+              "month_year": "2019-11",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2019-12",
+              "fluid_category": "feces_stool",
+              "n": 1
+            },
+            {
+              "month_year": "2019-12",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 4
+            },
+            {
+              "month_year": "2019-12",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2020-01",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 1
+            },
+            {
+              "month_year": "2020-02",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 1
+            },
+            {
+              "month_year": "2020-02",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2020-03",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 1
+            },
+            {
+              "month_year": "2020-04",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 3
+            },
+            {
+              "month_year": "2020-04",
+              "fluid_category": "respiratory_tract",
+              "n": 2
+            },
+            {
+              "month_year": "2020-05",
+              "fluid_category": "feces_stool",
+              "n": 3
+            },
+            {
+              "month_year": "2020-05",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 5
+            },
+            {
+              "month_year": "2020-05",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2020-06",
+              "fluid_category": "feces_stool",
+              "n": 6
+            },
+            {
+              "month_year": "2020-06",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 6
+            },
+            {
+              "month_year": "2020-06",
+              "fluid_category": "respiratory_tract",
+              "n": 4
+            },
+            {
+              "month_year": "2020-07",
+              "fluid_category": "feces_stool",
+              "n": 1
+            },
+            {
+              "month_year": "2020-07",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 2
+            },
+            {
+              "month_year": "2020-07",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2020-08",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 1
+            },
+            {
+              "month_year": "2020-09",
+              "fluid_category": "feces_stool",
+              "n": 1
+            },
+            {
+              "month_year": "2020-09",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 2
+            },
+            {
+              "month_year": "2020-09",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2020-10",
+              "fluid_category": "feces_stool",
+              "n": 1
+            },
+            {
+              "month_year": "2020-10",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 4
+            },
+            {
+              "month_year": "2020-10",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2020-11",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2020-12",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 1
+            },
+            {
+              "month_year": "2021-01",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 2
+            },
+            {
+              "month_year": "2021-02",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 3
+            },
+            {
+              "month_year": "2021-02",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2021-03",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 1
+            },
+            {
+              "month_year": "2021-04",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 1
+            },
+            {
+              "month_year": "2021-05",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 2
+            },
+            {
+              "month_year": "2021-05",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2021-06",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 1
+            },
+            {
+              "month_year": "2021-07",
+              "fluid_category": "feces_stool",
+              "n": 1
+            },
+            {
+              "month_year": "2021-07",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 3
+            },
+            {
+              "month_year": "2021-07",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2021-09",
+              "fluid_category": "feces_stool",
+              "n": 1
+            },
+            {
+              "month_year": "2021-09",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 1
+            },
+            {
+              "month_year": "2021-09",
+              "fluid_category": "respiratory_tract",
+              "n": 2
+            },
+            {
+              "month_year": "2021-10",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 3
+            },
+            {
+              "month_year": "2021-10",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2021-12",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 1
+            },
+            {
+              "month_year": "2022-01",
+              "fluid_category": "respiratory_tract",
+              "n": 2
+            },
+            {
+              "month_year": "2022-02",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 2
+            },
+            {
+              "month_year": "2022-03",
+              "fluid_category": "feces_stool",
+              "n": 1
+            },
+            {
+              "month_year": "2022-03",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 4
+            },
+            {
+              "month_year": "2022-04",
+              "fluid_category": "feces_stool",
+              "n": 2
+            },
+            {
+              "month_year": "2022-04",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 3
+            },
+            {
+              "month_year": "2022-04",
+              "fluid_category": "respiratory_tract",
+              "n": 3
+            },
+            {
+              "month_year": "2022-05",
+              "fluid_category": "feces_stool",
+              "n": 2
+            },
+            {
+              "month_year": "2022-05",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 2
+            },
+            {
+              "month_year": "2022-06",
+              "fluid_category": "feces_stool",
+              "n": 1
+            },
+            {
+              "month_year": "2022-06",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 1
+            },
+            {
+              "month_year": "2022-06",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2022-07",
+              "fluid_category": "feces_stool",
+              "n": 1
+            },
+            {
+              "month_year": "2022-07",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 2
+            },
+            {
+              "month_year": "2022-07",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2022-09",
+              "fluid_category": "feces_stool",
+              "n": 1
+            },
+            {
+              "month_year": "2022-09",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 5
+            },
+            {
+              "month_year": "2022-10",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 2
+            },
+            {
+              "month_year": "2022-11",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 3
+            },
+            {
+              "month_year": "2022-11",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2022-12",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 2
+            },
+            {
+              "month_year": "2022-12",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2023-01",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 1
+            },
+            {
+              "month_year": "2023-02",
+              "fluid_category": "feces_stool",
+              "n": 1
+            },
+            {
+              "month_year": "2023-02",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 1
+            },
+            {
+              "month_year": "2023-02",
+              "fluid_category": "respiratory_tract",
+              "n": 2
+            },
+            {
+              "month_year": "2023-03",
+              "fluid_category": "feces_stool",
+              "n": 2
+            },
+            {
+              "month_year": "2023-03",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 2
+            },
+            {
+              "month_year": "2023-03",
+              "fluid_category": "respiratory_tract",
+              "n": 2
+            },
+            {
+              "month_year": "2023-04",
+              "fluid_category": "feces_stool",
+              "n": 1
+            },
+            {
+              "month_year": "2023-04",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 3
+            },
+            {
+              "month_year": "2023-04",
+              "fluid_category": "respiratory_tract",
+              "n": 2
+            },
+            {
+              "month_year": "2023-05",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2023-07",
+              "fluid_category": "feces_stool",
+              "n": 2
+            },
+            {
+              "month_year": "2023-07",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 6
+            },
+            {
+              "month_year": "2023-07",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2023-08",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 3
+            },
+            {
+              "month_year": "2023-10",
+              "fluid_category": "feces_stool",
+              "n": 1
+            },
+            {
+              "month_year": "2023-10",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 4
+            },
+            {
+              "month_year": "2023-10",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2023-11",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 1
+            },
+            {
+              "month_year": "2023-12",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 1
+            },
+            {
+              "month_year": "2024-01",
+              "fluid_category": "feces_stool",
+              "n": 1
+            },
+            {
+              "month_year": "2024-01",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2024-02",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 2
+            },
+            {
+              "month_year": "2024-02",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2024-03",
+              "fluid_category": "feces_stool",
+              "n": 1
+            },
+            {
+              "month_year": "2024-03",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 1
+            },
+            {
+              "month_year": "2024-04",
+              "fluid_category": "feces_stool",
+              "n": 1
+            },
+            {
+              "month_year": "2024-04",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 3
+            },
+            {
+              "month_year": "2024-04",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2024-05",
+              "fluid_category": "feces_stool",
+              "n": 1
+            },
+            {
+              "month_year": "2024-05",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 3
+            },
+            {
+              "month_year": "2024-05",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2024-06",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 2
+            },
+            {
+              "month_year": "2024-07",
+              "fluid_category": "feces_stool",
+              "n": 1
+            },
+            {
+              "month_year": "2024-07",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 3
+            },
+            {
+              "month_year": "2024-07",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2024-08",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 3
+            },
+            {
+              "month_year": "2024-08",
+              "fluid_category": "respiratory_tract",
+              "n": 2
+            },
+            {
+              "month_year": "2024-09",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 2
+            },
+            {
+              "month_year": "2024-09",
+              "fluid_category": "respiratory_tract",
+              "n": 1
+            },
+            {
+              "month_year": "2024-10",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 2
+            },
+            {
+              "month_year": "2024-11",
+              "fluid_category": "feces_stool",
+              "n": 1
+            },
+            {
+              "month_year": "2024-11",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 4
+            },
+            {
+              "month_year": "2024-12",
+              "fluid_category": "nasopharynx_upperairway",
+              "n": 1
+            }
+          ],
+          "method_category": [
+            {
+              "month_year": "2018-01",
+              "method_category": "pcr",
+              "n": 3
+            },
+            {
+              "month_year": "2018-02",
+              "method_category": "pcr",
+              "n": 1
+            },
+            {
+              "month_year": "2018-03",
+              "method_category": "pcr",
+              "n": 1
+            },
+            {
+              "month_year": "2018-04",
+              "method_category": "pcr",
+              "n": 4
+            },
+            {
+              "month_year": "2018-05",
+              "method_category": "pcr",
+              "n": 1
+            },
+            {
+              "month_year": "2018-06",
+              "method_category": "pcr",
+              "n": 2
+            },
+            {
+              "month_year": "2018-07",
+              "method_category": "pcr",
+              "n": 4
+            },
+            {
+              "month_year": "2018-08",
+              "method_category": "pcr",
+              "n": 4
+            },
+            {
+              "month_year": "2018-09",
+              "method_category": "pcr",
+              "n": 2
+            },
+            {
+              "month_year": "2018-10",
+              "method_category": "pcr",
+              "n": 1
+            },
+            {
+              "month_year": "2018-11",
+              "method_category": "pcr",
+              "n": 5
+            },
+            {
+              "month_year": "2019-01",
+              "method_category": "pcr",
+              "n": 4
+            },
+            {
+              "month_year": "2019-02",
+              "method_category": "pcr",
+              "n": 2
+            },
+            {
+              "month_year": "2019-03",
+              "method_category": "pcr",
+              "n": 2
+            },
+            {
+              "month_year": "2019-05",
+              "method_category": "pcr",
+              "n": 5
+            },
+            {
+              "month_year": "2019-06",
+              "method_category": "pcr",
+              "n": 2
+            },
+            {
+              "month_year": "2019-07",
+              "method_category": "pcr",
+              "n": 6
+            },
+            {
+              "month_year": "2019-08",
+              "method_category": "pcr",
+              "n": 1
+            },
+            {
+              "month_year": "2019-09",
+              "method_category": "pcr",
+              "n": 2
+            },
+            {
+              "month_year": "2019-10",
+              "method_category": "pcr",
+              "n": 2
+            },
+            {
+              "month_year": "2019-11",
+              "method_category": "pcr",
+              "n": 4
+            },
+            {
+              "month_year": "2019-12",
+              "method_category": "pcr",
+              "n": 4
+            },
+            {
+              "month_year": "2020-01",
+              "method_category": "pcr",
+              "n": 1
+            },
+            {
+              "month_year": "2020-02",
+              "method_category": "pcr",
+              "n": 1
+            },
+            {
+              "month_year": "2020-03",
+              "method_category": "pcr",
+              "n": 1
+            },
+            {
+              "month_year": "2020-04",
+              "method_category": "pcr",
+              "n": 3
+            },
+            {
+              "month_year": "2020-05",
+              "method_category": "pcr",
+              "n": 5
+            },
+            {
+              "month_year": "2020-06",
+              "method_category": "pcr",
+              "n": 7
+            },
+            {
+              "month_year": "2020-07",
+              "method_category": "pcr",
+              "n": 2
+            },
+            {
+              "month_year": "2020-08",
+              "method_category": "pcr",
+              "n": 1
+            },
+            {
+              "month_year": "2020-09",
+              "method_category": "pcr",
+              "n": 2
+            },
+            {
+              "month_year": "2020-10",
+              "method_category": "pcr",
+              "n": 4
+            },
+            {
+              "month_year": "2020-11",
+              "method_category": "pcr",
+              "n": 1
+            },
+            {
+              "month_year": "2020-12",
+              "method_category": "pcr",
+              "n": 1
+            },
+            {
+              "month_year": "2021-01",
+              "method_category": "pcr",
+              "n": 2
+            },
+            {
+              "month_year": "2021-02",
+              "method_category": "pcr",
+              "n": 3
+            },
+            {
+              "month_year": "2021-03",
+              "method_category": "pcr",
+              "n": 1
+            },
+            {
+              "month_year": "2021-04",
+              "method_category": "pcr",
+              "n": 1
+            },
+            {
+              "month_year": "2021-05",
+              "method_category": "pcr",
+              "n": 2
+            },
+            {
+              "month_year": "2021-06",
+              "method_category": "pcr",
+              "n": 1
+            },
+            {
+              "month_year": "2021-07",
+              "method_category": "pcr",
+              "n": 3
+            },
+            {
+              "month_year": "2021-09",
+              "method_category": "pcr",
+              "n": 2
+            },
+            {
+              "month_year": "2021-10",
+              "method_category": "pcr",
+              "n": 3
+            },
+            {
+              "month_year": "2021-12",
+              "method_category": "pcr",
+              "n": 1
+            },
+            {
+              "month_year": "2022-01",
+              "method_category": "pcr",
+              "n": 2
+            },
+            {
+              "month_year": "2022-02",
+              "method_category": "pcr",
+              "n": 2
+            },
+            {
+              "month_year": "2022-03",
+              "method_category": "pcr",
+              "n": 4
+            },
+            {
+              "month_year": "2022-04",
+              "method_category": "pcr",
+              "n": 3
+            },
+            {
+              "month_year": "2022-05",
+              "method_category": "pcr",
+              "n": 2
+            },
+            {
+              "month_year": "2022-06",
+              "method_category": "pcr",
+              "n": 1
+            },
+            {
+              "month_year": "2022-07",
+              "method_category": "pcr",
+              "n": 2
+            },
+            {
+              "month_year": "2022-09",
+              "method_category": "pcr",
+              "n": 5
+            },
+            {
+              "month_year": "2022-10",
+              "method_category": "pcr",
+              "n": 2
+            },
+            {
+              "month_year": "2022-11",
+              "method_category": "pcr",
+              "n": 3
+            },
+            {
+              "month_year": "2022-12",
+              "method_category": "pcr",
+              "n": 2
+            },
+            {
+              "month_year": "2023-01",
+              "method_category": "pcr",
+              "n": 1
+            },
+            {
+              "month_year": "2023-02",
+              "method_category": "pcr",
+              "n": 2
+            },
+            {
+              "month_year": "2023-03",
+              "method_category": "pcr",
+              "n": 3
+            },
+            {
+              "month_year": "2023-04",
+              "method_category": "pcr",
+              "n": 3
+            },
+            {
+              "month_year": "2023-05",
+              "method_category": "pcr",
+              "n": 1
+            },
+            {
+              "month_year": "2023-07",
+              "method_category": "pcr",
+              "n": 6
+            },
+            {
+              "month_year": "2023-08",
+              "method_category": "pcr",
+              "n": 3
+            },
+            {
+              "month_year": "2023-10",
+              "method_category": "pcr",
+              "n": 4
+            },
+            {
+              "month_year": "2023-11",
+              "method_category": "pcr",
+              "n": 1
+            },
+            {
+              "month_year": "2023-12",
+              "method_category": "pcr",
+              "n": 1
+            },
+            {
+              "month_year": "2024-01",
+              "method_category": "pcr",
+              "n": 1
+            },
+            {
+              "month_year": "2024-02",
+              "method_category": "pcr",
+              "n": 2
+            },
+            {
+              "month_year": "2024-03",
+              "method_category": "pcr",
+              "n": 1
+            },
+            {
+              "month_year": "2024-04",
+              "method_category": "pcr",
+              "n": 3
+            },
+            {
+              "month_year": "2024-05",
+              "method_category": "pcr",
+              "n": 3
+            },
+            {
+              "month_year": "2024-06",
+              "method_category": "pcr",
+              "n": 2
+            },
+            {
+              "month_year": "2024-07",
+              "method_category": "pcr",
+              "n": 4
+            },
+            {
+              "month_year": "2024-08",
+              "method_category": "pcr",
+              "n": 3
+            },
+            {
+              "month_year": "2024-09",
+              "method_category": "pcr",
+              "n": 2
+            },
+            {
+              "month_year": "2024-10",
+              "method_category": "pcr",
+              "n": 2
+            },
+            {
+              "month_year": "2024-11",
+              "method_category": "pcr",
+              "n": 4
+            },
+            {
+              "month_year": "2024-12",
+              "method_category": "pcr",
+              "n": 1
+            }
+          ],
+          "organism_category": [
+            {
+              "month_year": "2018-01",
+              "organism_category": "respiratory_syncytial_virus",
+              "n": 2
+            },
+            {
+              "month_year": "2018-01",
+              "organism_category": "sars_cov2",
+              "n": 3
+            },
+            {
+              "month_year": "2018-02",
+              "organism_category": "sars_cov2",
+              "n": 1
+            },
+            {
+              "month_year": "2018-03",
+              "organism_category": "clostridium_difficile",
+              "n": 1
+            },
+            {
+              "month_year": "2018-03",
+              "organism_category": "sars_cov2",
+              "n": 1
+            },
+            {
+              "month_year": "2018-04",
+              "organism_category": "clostridium_difficile",
+              "n": 2
+            },
+            {
+              "month_year": "2018-04",
+              "organism_category": "respiratory_syncytial_virus",
+              "n": 2
+            },
+            {
+              "month_year": "2018-04",
+              "organism_category": "sars_cov2",
+              "n": 2
+            },
+            {
+              "month_year": "2018-05",
+              "organism_category": "respiratory_syncytial_virus",
+              "n": 1
+            },
+            {
+              "month_year": "2018-05",
+              "organism_category": "sars_cov2",
+              "n": 1
+            },
+            {
+              "month_year": "2018-06",
+              "organism_category": "clostridium_difficile",
+              "n": 1
+            },
+            {
+              "month_year": "2018-06",
+              "organism_category": "respiratory_syncytial_virus",
+              "n": 2
+            },
+            {
+              "month_year": "2018-06",
+              "organism_category": "sars_cov2",
+              "n": 2
+            },
+            {
+              "month_year": "2018-07",
+              "organism_category": "clostridium_difficile",
+              "n": 2
+            },
+            {
+              "month_year": "2018-07",
+              "organism_category": "respiratory_syncytial_virus",
+              "n": 2
+            },
+            {
+              "month_year": "2018-07",
+              "organism_category": "sars_cov2",
+              "n": 2
+            },
+            {
+              "month_year": "2018-08",
+              "organism_category": "clostridium_difficile",
+              "n": 1
+            },
+            {
+              "month_year": "2018-08",
+              "organism_category": "respiratory_syncytial_virus",
+              "n": 1
+            },
+            {
+              "month_year": "2018-08",
+              "organism_category": "sars_cov2",
+              "n": 4
+            },
+            {
+              "month_year": "2018-09",
+              "organism_category": "respiratory_syncytial_virus",
+              "n": 1
+            },
+            {
+              "month_year": "2018-09",
+              "organism_category": "sars_cov2",
+              "n": 2
+            },
+            {
+              "month_year": "2018-10",
+              "organism_category": "respiratory_syncytial_virus",
+              "n": 1
+            },
+            {
+              "month_year": "2018-10",
+              "organism_category": "sars_cov2",
+              "n": 1
+            },
+            {
+              "month_year": "2018-11",
+              "organism_category": "clostridium_difficile",
+              "n": 2
+            },
+            {
+              "month_year": "2018-11",
+              "organism_category": "respiratory_syncytial_virus",
+              "n": 3
+            },
+            {
+              "month_year": "2018-11",
+              "organism_category": "sars_cov2",
+              "n": 5
+            },
+            {
+              "month_year": "2019-01",
+              "organism_category": "respiratory_syncytial_virus",
+              "n": 2
+            },
+            {
+              "month_year": "2019-01",
+              "organism_category": "sars_cov2",
+              "n": 4
+            },
+            {
+              "month_year": "2019-02",
+              "organism_category": "sars_cov2",
+              "n": 2
+            },
+            {
+              "month_year": "2019-03",
+              "organism_category": "respiratory_syncytial_virus",
+              "n": 1
+            },
+            {
+              "month_year": "2019-03",
+              "organism_category": "sars_cov2",
+              "n": 2
+            },
+            {
+              "month_year": "2019-05",
+              "organism_category": "respiratory_syncytial_virus",
+              "n": 4
+            },
+            {
+              "month_year": "2019-05",
+              "organism_category": "sars_cov2",
+              "n": 5
+            },
+            {
+              "month_year": "2019-06",
+              "organism_category": "respiratory_syncytial_virus",
+              "n": 1
+            },
+            {
+              "month_year": "2019-06",
+              "organism_category": "sars_cov2",
+              "n": 2
+            },
+            {
+              "month_year": "2019-07",
+              "organism_category": "respiratory_syncytial_virus",
+              "n": 3
+            },
+            {
+              "month_year": "2019-07",
+              "organism_category": "sars_cov2",
+              "n": 6
+            },
+            {
+              "month_year": "2019-08",
+              "organism_category": "clostridium_difficile",
+              "n": 1
+            },
+            {
+              "month_year": "2019-08",
+              "organism_category": "sars_cov2",
+              "n": 1
+            },
+            {
+              "month_year": "2019-09",
+              "organism_category": "clostridium_difficile",
+              "n": 1
+            },
+            {
+              "month_year": "2019-09",
+              "organism_category": "sars_cov2",
+              "n": 2
+            },
+            {
+              "month_year": "2019-10",
+              "organism_category": "respiratory_syncytial_virus",
+              "n": 1
+            },
+            {
+              "month_year": "2019-10",
+              "organism_category": "sars_cov2",
+              "n": 2
+            },
+            {
+              "month_year": "2019-11",
+              "organism_category": "respiratory_syncytial_virus",
+              "n": 2
+            },
+            {
+              "month_year": "2019-11",
+              "organism_category": "sars_cov2",
+              "n": 2
+            },
+            {
+              "month_year": "2019-12",
+              "organism_category": "clostridium_difficile",
+              "n": 1
+            },
+            {
+              "month_year": "2019-12",
+              "organism_category": "respiratory_syncytial_virus",
+              "n": 3
+            },
+            {
+              "month_year": "2019-12",
+              "organism_category": "sars_cov2",
+              "n": 3
+            },
+            {
+              "month_year": "2020-01",
+              "organism_category": "sars_cov2",
+              "n": 1
+            },
+            {
+              "month_year": "2020-02",
+              "organism_category": "sars_cov2",
+              "n": 1
+            },
+            {
+              "month_year": "2020-03",
+              "organism_category": "respiratory_syncytial_virus",
+              "n": 1
+            },
+            {
+              "month_year": "2020-03",
+              "organism_category": "sars_cov2",
+              "n": 1
+            },
+            {
+              "month_year": "2020-04",
+              "organism_category": "respiratory_syncytial_virus",
+              "n": 3
+            },
+            {
+              "month_year": "2020-04",
+              "organism_category": "sars_cov2",
+              "n": 3
+            },
+            {
+              "month_year": "2020-05",
+              "organism_category": "clostridium_difficile",
+              "n": 3
+            },
+            {
+              "month_year": "2020-05",
+              "organism_category": "respiratory_syncytial_virus",
+              "n": 2
+            },
+            {
+              "month_year": "2020-05",
+              "organism_category": "sars_cov2",
+              "n": 5
+            },
+            {
+              "month_year": "2020-06",
+              "organism_category": "clostridium_difficile",
+              "n": 6
+            },
+            {
+              "month_year": "2020-06",
+              "organism_category": "respiratory_syncytial_virus",
+              "n": 3
+            },
+            {
+              "month_year": "2020-06",
+              "organism_category": "sars_cov2",
+              "n": 7
+            },
+            {
+              "month_year": "2020-07",
+              "organism_category": "clostridium_difficile",
+              "n": 1
+            },
+            {
+              "month_year": "2020-07",
+              "organism_category": "sars_cov2",
+              "n": 2
+            },
+            {
+              "month_year": "2020-08",
+              "organism_category": "sars_cov2",
+              "n": 1
+            },
+            {
+              "month_year": "2020-09",
+              "organism_category": "clostridium_difficile",
+              "n": 1
+            },
+            {
+              "month_year": "2020-09",
+              "organism_category": "respiratory_syncytial_virus",
+              "n": 1
+            },
+            {
+              "month_year": "2020-09",
+              "organism_category": "sars_cov2",
+              "n": 1
+            },
+            {
+              "month_year": "2020-10",
+              "organism_category": "clostridium_difficile",
+              "n": 1
+            },
+            {
+              "month_year": "2020-10",
+              "organism_category": "respiratory_syncytial_virus",
+              "n": 1
+            },
+            {
+              "month_year": "2020-10",
+              "organism_category": "sars_cov2",
+              "n": 4
+            },
+            {
+              "month_year": "2020-11",
+              "organism_category": "sars_cov2",
+              "n": 1
+            },
+            {
+              "month_year": "2020-12",
+              "organism_category": "sars_cov2",
+              "n": 1
+            },
+            {
+              "month_year": "2021-01",
+              "organism_category": "respiratory_syncytial_virus",
+              "n": 1
+            },
+            {
+              "month_year": "2021-01",
+              "organism_category": "sars_cov2",
+              "n": 2
+            },
+            {
+              "month_year": "2021-02",
+              "organism_category": "respiratory_syncytial_virus",
+              "n": 2
+            },
+            {
+              "month_year": "2021-02",
+              "organism_category": "sars_cov2",
+              "n": 3
+            },
+            {
+              "month_year": "2021-03",
+              "organism_category": "sars_cov2",
+              "n": 1
+            },
+            {
+              "month_year": "2021-04",
+              "organism_category": "respiratory_syncytial_virus",
+              "n": 1
+            },
+            {
+              "month_year": "2021-04",
+              "organism_category": "sars_cov2",
+              "n": 1
+            },
+            {
+              "month_year": "2021-05",
+              "organism_category": "respiratory_syncytial_virus",
+              "n": 1
+            },
+            {
+              "month_year": "2021-05",
+              "organism_category": "sars_cov2",
+              "n": 2
+            },
+            {
+              "month_year": "2021-06",
+              "organism_category": "respiratory_syncytial_virus",
+              "n": 1
+            },
+            {
+              "month_year": "2021-06",
+              "organism_category": "sars_cov2",
+              "n": 1
+            },
+            {
+              "month_year": "2021-07",
+              "organism_category": "clostridium_difficile",
+              "n": 1
+            },
+            {
+              "month_year": "2021-07",
+              "organism_category": "sars_cov2",
+              "n": 3
+            },
+            {
+              "month_year": "2021-09",
+              "organism_category": "clostridium_difficile",
+              "n": 1
+            },
+            {
+              "month_year": "2021-09",
+              "organism_category": "respiratory_syncytial_virus",
+              "n": 1
+            },
+            {
+              "month_year": "2021-09",
+              "organism_category": "sars_cov2",
+              "n": 2
+            },
+            {
+              "month_year": "2021-10",
+              "organism_category": "respiratory_syncytial_virus",
+              "n": 2
+            },
+            {
+              "month_year": "2021-10",
+              "organism_category": "sars_cov2",
+              "n": 2
+            },
+            {
+              "month_year": "2021-12",
+              "organism_category": "respiratory_syncytial_virus",
+              "n": 1
+            },
+            {
+              "month_year": "2022-01",
+              "organism_category": "sars_cov2",
+              "n": 2
+            },
+            {
+              "month_year": "2022-02",
+              "organism_category": "respiratory_syncytial_virus",
+              "n": 1
+            },
+            {
+              "month_year": "2022-02",
+              "organism_category": "sars_cov2",
+              "n": 2
+            },
+            {
+              "month_year": "2022-03",
+              "organism_category": "clostridium_difficile",
+              "n": 1
+            },
+            {
+              "month_year": "2022-03",
+              "organism_category": "respiratory_syncytial_virus",
+              "n": 3
+            },
+            {
+              "month_year": "2022-03",
+              "organism_category": "sars_cov2",
+              "n": 3
+            },
+            {
+              "month_year": "2022-04",
+              "organism_category": "clostridium_difficile",
+              "n": 2
+            },
+            {
+              "month_year": "2022-04",
+              "organism_category": "respiratory_syncytial_virus",
+              "n": 2
+            },
+            {
+              "month_year": "2022-04",
+              "organism_category": "sars_cov2",
+              "n": 3
+            },
+            {
+              "month_year": "2022-05",
+              "organism_category": "clostridium_difficile",
+              "n": 2
+            },
+            {
+              "month_year": "2022-05",
+              "organism_category": "respiratory_syncytial_virus",
+              "n": 2
+            },
+            {
+              "month_year": "2022-05",
+              "organism_category": "sars_cov2",
+              "n": 2
+            },
+            {
+              "month_year": "2022-06",
+              "organism_category": "clostridium_difficile",
+              "n": 1
+            },
+            {
+              "month_year": "2022-06",
+              "organism_category": "sars_cov2",
+              "n": 1
+            },
+            {
+              "month_year": "2022-07",
+              "organism_category": "clostridium_difficile",
+              "n": 1
+            },
+            {
+              "month_year": "2022-07",
+              "organism_category": "sars_cov2",
+              "n": 2
+            },
+            {
+              "month_year": "2022-09",
+              "organism_category": "clostridium_difficile",
+              "n": 1
+            },
+            {
+              "month_year": "2022-09",
+              "organism_category": "respiratory_syncytial_virus",
+              "n": 3
+            },
+            {
+              "month_year": "2022-09",
+              "organism_category": "sars_cov2",
+              "n": 3
+            },
+            {
+              "month_year": "2022-10",
+              "organism_category": "sars_cov2",
+              "n": 2
+            },
+            {
+              "month_year": "2022-11",
+              "organism_category": "sars_cov2",
+              "n": 3
+            },
+            {
+              "month_year": "2022-12",
+              "organism_category": "respiratory_syncytial_virus",
+              "n": 2
+            },
+            {
+              "month_year": "2022-12",
+              "organism_category": "sars_cov2",
+              "n": 2
+            },
+            {
+              "month_year": "2023-01",
+              "organism_category": "respiratory_syncytial_virus",
+              "n": 1
+            },
+            {
+              "month_year": "2023-01",
+              "organism_category": "sars_cov2",
+              "n": 1
+            },
+            {
+              "month_year": "2023-02",
+              "organism_category": "clostridium_difficile",
+              "n": 1
+            },
+            {
+              "month_year": "2023-02",
+              "organism_category": "respiratory_syncytial_virus",
+              "n": 1
+            },
+            {
+              "month_year": "2023-02",
+              "organism_category": "sars_cov2",
+              "n": 2
+            },
+            {
+              "month_year": "2023-03",
+              "organism_category": "clostridium_difficile",
+              "n": 2
+            },
+            {
+              "month_year": "2023-03",
+              "organism_category": "respiratory_syncytial_virus",
+              "n": 2
+            },
+            {
+              "month_year": "2023-03",
+              "organism_category": "sars_cov2",
+              "n": 3
+            },
+            {
+              "month_year": "2023-04",
+              "organism_category": "clostridium_difficile",
+              "n": 1
+            },
+            {
+              "month_year": "2023-04",
+              "organism_category": "respiratory_syncytial_virus",
+              "n": 2
+            },
+            {
+              "month_year": "2023-04",
+              "organism_category": "sars_cov2",
+              "n": 3
+            },
+            {
+              "month_year": "2023-05",
+              "organism_category": "sars_cov2",
+              "n": 1
+            },
+            {
+              "month_year": "2023-07",
+              "organism_category": "clostridium_difficile",
+              "n": 2
+            },
+            {
+              "month_year": "2023-07",
+              "organism_category": "respiratory_syncytial_virus",
+              "n": 5
+            },
+            {
+              "month_year": "2023-07",
+              "organism_category": "sars_cov2",
+              "n": 6
+            },
+            {
+              "month_year": "2023-08",
+              "organism_category": "respiratory_syncytial_virus",
+              "n": 2
+            },
+            {
+              "month_year": "2023-08",
+              "organism_category": "sars_cov2",
+              "n": 3
+            },
+            {
+              "month_year": "2023-10",
+              "organism_category": "clostridium_difficile",
+              "n": 1
+            },
+            {
+              "month_year": "2023-10",
+              "organism_category": "respiratory_syncytial_virus",
+              "n": 3
+            },
+            {
+              "month_year": "2023-10",
+              "organism_category": "sars_cov2",
+              "n": 4
+            },
+            {
+              "month_year": "2023-11",
+              "organism_category": "sars_cov2",
+              "n": 1
+            },
+            {
+              "month_year": "2023-12",
+              "organism_category": "respiratory_syncytial_virus",
+              "n": 1
+            },
+            {
+              "month_year": "2024-01",
+              "organism_category": "clostridium_difficile",
+              "n": 1
+            },
+            {
+              "month_year": "2024-01",
+              "organism_category": "sars_cov2",
+              "n": 1
+            },
+            {
+              "month_year": "2024-02",
+              "organism_category": "respiratory_syncytial_virus",
+              "n": 2
+            },
+            {
+              "month_year": "2024-02",
+              "organism_category": "sars_cov2",
+              "n": 2
+            },
+            {
+              "month_year": "2024-03",
+              "organism_category": "clostridium_difficile",
+              "n": 1
+            },
+            {
+              "month_year": "2024-03",
+              "organism_category": "sars_cov2",
+              "n": 1
+            },
+            {
+              "month_year": "2024-04",
+              "organism_category": "clostridium_difficile",
+              "n": 1
+            },
+            {
+              "month_year": "2024-04",
+              "organism_category": "respiratory_syncytial_virus",
+              "n": 3
+            },
+            {
+              "month_year": "2024-04",
+              "organism_category": "sars_cov2",
+              "n": 3
+            },
+            {
+              "month_year": "2024-05",
+              "organism_category": "clostridium_difficile",
+              "n": 1
+            },
+            {
+              "month_year": "2024-05",
+              "organism_category": "respiratory_syncytial_virus",
+              "n": 2
+            },
+            {
+              "month_year": "2024-05",
+              "organism_category": "sars_cov2",
+              "n": 3
+            },
+            {
+              "month_year": "2024-06",
+              "organism_category": "respiratory_syncytial_virus",
+              "n": 1
+            },
+            {
+              "month_year": "2024-06",
+              "organism_category": "sars_cov2",
+              "n": 2
+            },
+            {
+              "month_year": "2024-07",
+              "organism_category": "clostridium_difficile",
+              "n": 1
+            },
+            {
+              "month_year": "2024-07",
+              "organism_category": "respiratory_syncytial_virus",
+              "n": 3
+            },
+            {
+              "month_year": "2024-07",
+              "organism_category": "sars_cov2",
+              "n": 3
+            },
+            {
+              "month_year": "2024-08",
+              "organism_category": "respiratory_syncytial_virus",
+              "n": 1
+            },
+            {
+              "month_year": "2024-08",
+              "organism_category": "sars_cov2",
+              "n": 3
+            },
+            {
+              "month_year": "2024-09",
+              "organism_category": "respiratory_syncytial_virus",
+              "n": 1
+            },
+            {
+              "month_year": "2024-09",
+              "organism_category": "sars_cov2",
+              "n": 2
+            },
+            {
+              "month_year": "2024-10",
+              "organism_category": "respiratory_syncytial_virus",
+              "n": 1
+            },
+            {
+              "month_year": "2024-10",
+              "organism_category": "sars_cov2",
+              "n": 2
+            },
+            {
+              "month_year": "2024-11",
+              "organism_category": "clostridium_difficile",
+              "n": 1
+            },
+            {
+              "month_year": "2024-11",
+              "organism_category": "respiratory_syncytial_virus",
+              "n": 2
+            },
+            {
+              "month_year": "2024-11",
+              "organism_category": "sars_cov2",
+              "n": 4
+            },
+            {
+              "month_year": "2024-12",
+              "organism_category": "sars_cov2",
+              "n": 1
+            }
+          ],
+          "result_category": [
+            {
+              "month_year": "2018-01",
+              "result_category": "not_detected",
+              "n": 3
+            },
+            {
+              "month_year": "2018-02",
+              "result_category": "detected",
+              "n": 1
+            },
+            {
+              "month_year": "2018-02",
+              "result_category": "not_detected",
+              "n": 1
+            },
+            {
+              "month_year": "2018-03",
+              "result_category": "not_detected",
+              "n": 1
+            },
+            {
+              "month_year": "2018-04",
+              "result_category": "detected",
+              "n": 2
+            },
+            {
+              "month_year": "2018-04",
+              "result_category": "not_detected",
+              "n": 4
+            },
+            {
+              "month_year": "2018-05",
+              "result_category": "not_detected",
+              "n": 1
+            },
+            {
+              "month_year": "2018-06",
+              "result_category": "detected",
+              "n": 1
+            },
+            {
+              "month_year": "2018-06",
+              "result_category": "not_detected",
+              "n": 2
+            },
+            {
+              "month_year": "2018-07",
+              "result_category": "not_detected",
+              "n": 4
+            },
+            {
+              "month_year": "2018-08",
+              "result_category": "detected",
+              "n": 1
+            },
+            {
+              "month_year": "2018-08",
+              "result_category": "not_detected",
+              "n": 3
+            },
+            {
+              "month_year": "2018-09",
+              "result_category": "detected",
+              "n": 1
+            },
+            {
+              "month_year": "2018-09",
+              "result_category": "not_detected",
+              "n": 2
+            },
+            {
+              "month_year": "2018-10",
+              "result_category": "detected",
+              "n": 1
+            },
+            {
+              "month_year": "2018-10",
+              "result_category": "not_detected",
+              "n": 1
+            },
+            {
+              "month_year": "2018-11",
+              "result_category": "detected",
+              "n": 2
+            },
+            {
+              "month_year": "2018-11",
+              "result_category": "not_detected",
+              "n": 5
+            },
+            {
+              "month_year": "2019-01",
+              "result_category": "detected",
+              "n": 1
+            },
+            {
+              "month_year": "2019-01",
+              "result_category": "not_detected",
+              "n": 3
+            },
+            {
+              "month_year": "2019-02",
+              "result_category": "not_detected",
+              "n": 2
+            },
+            {
+              "month_year": "2019-03",
+              "result_category": "not_detected",
+              "n": 2
+            },
+            {
+              "month_year": "2019-05",
+              "result_category": "detected",
+              "n": 1
+            },
+            {
+              "month_year": "2019-05",
+              "result_category": "not_detected",
+              "n": 5
+            },
+            {
+              "month_year": "2019-06",
+              "result_category": "detected",
+              "n": 1
+            },
+            {
+              "month_year": "2019-06",
+              "result_category": "not_detected",
+              "n": 2
+            },
+            {
+              "month_year": "2019-07",
+              "result_category": "detected",
+              "n": 1
+            },
+            {
+              "month_year": "2019-07",
+              "result_category": "not_detected",
+              "n": 5
+            },
+            {
+              "month_year": "2019-08",
+              "result_category": "detected",
+              "n": 1
+            },
+            {
+              "month_year": "2019-08",
+              "result_category": "not_detected",
+              "n": 1
+            },
+            {
+              "month_year": "2019-09",
+              "result_category": "not_detected",
+              "n": 2
+            },
+            {
+              "month_year": "2019-10",
+              "result_category": "detected",
+              "n": 1
+            },
+            {
+              "month_year": "2019-10",
+              "result_category": "not_detected",
+              "n": 2
+            },
+            {
+              "month_year": "2019-11",
+              "result_category": "not_detected",
+              "n": 4
+            },
+            {
+              "month_year": "2019-12",
+              "result_category": "detected",
+              "n": 1
+            },
+            {
+              "month_year": "2019-12",
+              "result_category": "not_detected",
+              "n": 4
+            },
+            {
+              "month_year": "2020-01",
+              "result_category": "not_detected",
+              "n": 1
+            },
+            {
+              "month_year": "2020-02",
+              "result_category": "detected",
+              "n": 1
+            },
+            {
+              "month_year": "2020-02",
+              "result_category": "not_detected",
+              "n": 1
+            },
+            {
+              "month_year": "2020-03",
+              "result_category": "not_detected",
+              "n": 1
+            },
+            {
+              "month_year": "2020-04",
+              "result_category": "detected",
+              "n": 1
+            },
+            {
+              "month_year": "2020-04",
+              "result_category": "not_detected",
+              "n": 3
+            },
+            {
+              "month_year": "2020-05",
+              "result_category": "detected",
+              "n": 2
+            },
+            {
+              "month_year": "2020-05",
+              "result_category": "not_detected",
+              "n": 4
+            },
+            {
+              "month_year": "2020-06",
+              "result_category": "detected",
+              "n": 4
+            },
+            {
+              "month_year": "2020-06",
+              "result_category": "not_detected",
+              "n": 7
+            },
+            {
+              "month_year": "2020-07",
+              "result_category": "detected",
+              "n": 2
+            },
+            {
+              "month_year": "2020-07",
+              "result_category": "not_detected",
+              "n": 1
+            },
+            {
+              "month_year": "2020-08",
+              "result_category": "not_detected",
+              "n": 1
+            },
+            {
+              "month_year": "2020-09",
+              "result_category": "not_detected",
+              "n": 2
+            },
+            {
+              "month_year": "2020-10",
+              "result_category": "detected",
+              "n": 1
+            },
+            {
+              "month_year": "2020-10",
+              "result_category": "not_detected",
+              "n": 4
+            },
+            {
+              "month_year": "2020-11",
+              "result_category": "not_detected",
+              "n": 1
+            },
+            {
+              "month_year": "2020-12",
+              "result_category": "not_detected",
+              "n": 1
+            },
+            {
+              "month_year": "2021-01",
+              "result_category": "detected",
+              "n": 1
+            },
+            {
+              "month_year": "2021-01",
+              "result_category": "not_detected",
+              "n": 1
+            },
+            {
+              "month_year": "2021-02",
+              "result_category": "detected",
+              "n": 1
+            },
+            {
+              "month_year": "2021-02",
+              "result_category": "not_detected",
+              "n": 3
+            },
+            {
+              "month_year": "2021-03",
+              "result_category": "not_detected",
+              "n": 1
+            },
+            {
+              "month_year": "2021-04",
+              "result_category": "not_detected",
+              "n": 1
+            },
+            {
+              "month_year": "2021-05",
+              "result_category": "detected",
+              "n": 1
+            },
+            {
+              "month_year": "2021-05",
+              "result_category": "not_detected",
+              "n": 2
+            },
+            {
+              "month_year": "2021-06",
+              "result_category": "not_detected",
+              "n": 1
+            },
+            {
+              "month_year": "2021-07",
+              "result_category": "detected",
+              "n": 1
+            },
+            {
+              "month_year": "2021-07",
+              "result_category": "not_detected",
+              "n": 3
+            },
+            {
+              "month_year": "2021-09",
+              "result_category": "detected",
+              "n": 1
+            },
+            {
+              "month_year": "2021-09",
+              "result_category": "not_detected",
+              "n": 1
+            },
+            {
+              "month_year": "2021-10",
+              "result_category": "not_detected",
+              "n": 3
+            },
+            {
+              "month_year": "2021-12",
+              "result_category": "not_detected",
+              "n": 1
+            },
+            {
+              "month_year": "2022-01",
+              "result_category": "detected",
+              "n": 1
+            },
+            {
+              "month_year": "2022-01",
+              "result_category": "not_detected",
+              "n": 1
+            },
+            {
+              "month_year": "2022-02",
+              "result_category": "not_detected",
+              "n": 2
+            },
+            {
+              "month_year": "2022-03",
+              "result_category": "not_detected",
+              "n": 4
+            },
+            {
+              "month_year": "2022-04",
+              "result_category": "detected",
+              "n": 2
+            },
+            {
+              "month_year": "2022-04",
+              "result_category": "not_detected",
+              "n": 3
+            },
+            {
+              "month_year": "2022-05",
+              "result_category": "not_detected",
+              "n": 2
+            },
+            {
+              "month_year": "2022-06",
+              "result_category": "not_detected",
+              "n": 1
+            },
+            {
+              "month_year": "2022-07",
+              "result_category": "not_detected",
+              "n": 2
+            },
+            {
+              "month_year": "2022-09",
+              "result_category": "detected",
+              "n": 1
+            },
+            {
+              "month_year": "2022-09",
+              "result_category": "not_detected",
+              "n": 5
+            },
+            {
+              "month_year": "2022-10",
+              "result_category": "detected",
+              "n": 1
+            },
+            {
+              "month_year": "2022-10",
+              "result_category": "not_detected",
+              "n": 1
+            },
+            {
+              "month_year": "2022-11",
+              "result_category": "not_detected",
+              "n": 3
+            },
+            {
+              "month_year": "2022-12",
+              "result_category": "not_detected",
+              "n": 2
+            },
+            {
+              "month_year": "2023-01",
+              "result_category": "not_detected",
+              "n": 1
+            },
+            {
+              "month_year": "2023-02",
+              "result_category": "not_detected",
+              "n": 2
+            },
+            {
+              "month_year": "2023-03",
+              "result_category": "not_detected",
+              "n": 3
+            },
+            {
+              "month_year": "2023-04",
+              "result_category": "not_detected",
+              "n": 3
+            },
+            {
+              "month_year": "2023-05",
+              "result_category": "not_detected",
+              "n": 1
+            },
+            {
+              "month_year": "2023-07",
+              "result_category": "detected",
+              "n": 3
+            },
+            {
+              "month_year": "2023-07",
+              "result_category": "not_detected",
+              "n": 6
+            },
+            {
+              "month_year": "2023-08",
+              "result_category": "detected",
+              "n": 1
+            },
+            {
+              "month_year": "2023-08",
+              "result_category": "not_detected",
+              "n": 3
+            },
+            {
+              "month_year": "2023-10",
+              "result_category": "detected",
+              "n": 1
+            },
+            {
+              "month_year": "2023-10",
+              "result_category": "not_detected",
+              "n": 4
+            },
+            {
+              "month_year": "2023-11",
+              "result_category": "not_detected",
+              "n": 1
+            },
+            {
+              "month_year": "2023-12",
+              "result_category": "not_detected",
+              "n": 1
+            },
+            {
+              "month_year": "2024-01",
+              "result_category": "not_detected",
+              "n": 1
+            },
+            {
+              "month_year": "2024-02",
+              "result_category": "detected",
+              "n": 1
+            },
+            {
+              "month_year": "2024-02",
+              "result_category": "not_detected",
+              "n": 1
+            },
+            {
+              "month_year": "2024-03",
+              "result_category": "not_detected",
+              "n": 1
+            },
+            {
+              "month_year": "2024-04",
+              "result_category": "detected",
+              "n": 1
+            },
+            {
+              "month_year": "2024-04",
+              "result_category": "not_detected",
+              "n": 3
+            },
+            {
+              "month_year": "2024-05",
+              "result_category": "detected",
+              "n": 1
+            },
+            {
+              "month_year": "2024-05",
+              "result_category": "not_detected",
+              "n": 3
+            },
+            {
+              "month_year": "2024-06",
+              "result_category": "not_detected",
+              "n": 2
+            },
+            {
+              "month_year": "2024-07",
+              "result_category": "detected",
+              "n": 1
+            },
+            {
+              "month_year": "2024-07",
+              "result_category": "not_detected",
+              "n": 3
+            },
+            {
+              "month_year": "2024-08",
+              "result_category": "detected",
+              "n": 2
+            },
+            {
+              "month_year": "2024-08",
+              "result_category": "not_detected",
+              "n": 2
+            },
+            {
+              "month_year": "2024-09",
+              "result_category": "not_detected",
+              "n": 2
+            },
+            {
+              "month_year": "2024-10",
+              "result_category": "not_detected",
+              "n": 2
+            },
+            {
+              "month_year": "2024-11",
+              "result_category": "detected",
+              "n": 3
+            },
+            {
+              "month_year": "2024-11",
+              "result_category": "not_detected",
+              "n": 3
+            },
+            {
+              "month_year": "2024-12",
+              "result_category": "not_detected",
+              "n": 1
+            }
+          ]
+        }
+      },
+      "atomic_total": 9,
+      "atomic_passed": 9
+    },
+    "duplicate_composite_keys": {
+      "check_type": "duplicate_composite_keys",
+      "table_name": "microbiology_nonculture",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No composite keys defined for this table",
+          "details": {}
+        }
+      ],
+      "metrics": {},
+      "atomic_total": 0,
+      "atomic_passed": 0
+    }
+  },
+  "table_stats": [
+    {
+      "column": "patient_id",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 150,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "hospitalization_id",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 190,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "result_dttm",
+      "dtype": "DATETIME",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 381,
+      "min": "2018-01-23 19:21",
+      "max": "2024-12-16 13:35"
+    },
+    {
+      "column": "collect_dttm",
+      "dtype": "DATETIME",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 381,
+      "min": "2018-01-23 12:44",
+      "max": "2024-12-16 09:05"
+    },
+    {
+      "column": "order_dttm",
+      "dtype": "DATETIME",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 381,
+      "min": "2018-01-23 12:08",
+      "max": "2024-12-16 08:26"
+    },
+    {
+      "column": "fluid_name",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 3,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "fluid_category",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 3,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "method_name",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 1,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "method_category",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 1,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "micro_order_name",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 5,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "organism_category",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 3,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "organism_group",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 3,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "result_name",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 2,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "result_category",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 2,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "reference_low",
+      "dtype": "DOUBLE",
+      "null_count": 381,
+      "null_pct": 100.0,
+      "unique": 0,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "reference_high",
+      "dtype": "DOUBLE",
+      "null_count": 381,
+      "null_pct": 100.0,
+      "unique": 0,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "lab_loinc_code",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 5,
+      "min": null,
+      "max": null
+    }
+  ],
+  "total_rows": 381
+}

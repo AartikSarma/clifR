@@ -1,0 +1,47 @@
+{
+  "all": [
+    "adt",
+    "code_status",
+    "crrt_therapy",
+    "ecmo_mcs",
+    "hospital_diagnosis",
+    "hospitalization",
+    "labs",
+    "medication_admin_continuous",
+    "medication_admin_intermittent",
+    "microbiology_culture",
+    "microbiology_nonculture",
+    "microbiology_susceptibility",
+    "patient",
+    "patient_assessments",
+    "patient_procedures",
+    "position",
+    "respiratory_support",
+    "vitals"
+  ],
+  "partial": [
+    "patient",
+    "adt",
+    "position"
+  ],
+  "present": [
+    "adt",
+    "code_status",
+    "crrt_therapy",
+    "ecmo_mcs",
+    "hospital_diagnosis",
+    "hospitalization",
+    "labs",
+    "medication_admin_continuous",
+    "medication_admin_intermittent",
+    "microbiology_culture",
+    "microbiology_nonculture",
+    "microbiology_susceptibility",
+    "patient",
+    "patient_assessments",
+    "patient_procedures",
+    "position",
+    "respiratory_support",
+    "vitals"
+  ]
+}

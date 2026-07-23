@@ -28,7 +28,7 @@ UNIT_NAMING_VARIANTS <- c(
   # volume
   "l" = "l(iters|itres|itre|iter)?",
   # mass ("µ" is the micro sign, "μ" is the Greek letter mu)
-  "mcg" = "^(u|µ|μ)g",
+  "mcg" = "^(u|\u00b5|\u03bc)g",
   "g" = "^g(rams|ram)?"
 )
 

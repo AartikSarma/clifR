@@ -271,6 +271,75 @@ load_clif_data <- function(file_path, filetype = c("csv", "parquet"),
   dplyr::as_tibble(loaded_data)
 }
 
+#' Load a CLIF table (Polars-compatible entry point)
+#'
+#' R port of clifpy's `load_data_polars`. clifpy ships a Polars-backed loader
+#' alongside its pandas one; clifR has a single DuckDB-backed engine, so this
+#' delegates to [load_data()] and returns a tibble. The `lazy` argument is accepted
+#' for signature compatibility and is a no-op — clifR always returns a materialized
+#' tibble.
+#'
+#' @inheritParams load_data
+#' @param lazy Accepted for clifpy compatibility; ignored in R.
+#' @return A tibble.
+#' @export
+load_data_polars <- function(table_name,
+                             table_path,
+                             table_format_type,
+                             sample_size = NULL,
+                             columns = NULL,
+                             filters = NULL,
+                             site_tz = NULL,
+                             lazy = TRUE,
+                             verbose = FALSE) {
+  load_data(
+    table_name = table_name,
+    table_path = table_path,
+    table_format_type = table_format_type,
+    sample_size = sample_size,
+    columns = columns,
+    filters = filters,
+    site_tz = site_tz,
+    verbose = verbose
+  )
+}
+
+#' Load a CLIF table with common filters (Polars-compatible entry point)
+#'
+#' R port of clifpy's `load_clif_table_polars`, a convenience loader that filters by
+#' `hospitalization_ids` at read time. Delegates to [load_data()].
+#'
+#' @param data_directory Directory containing the CLIF data files.
+#' @param table_name snake_case CLIF table name.
+#' @param filetype Either `"parquet"` or `"csv"`.
+#' @param hospitalization_ids Optional character vector to filter on.
+#' @param columns Optional character vector of columns to read.
+#' @param site_tz Optional Olson timezone to convert `dttm` columns into.
+#' @param lazy Accepted for clifpy compatibility; ignored in R.
+#' @return A tibble.
+#' @export
+load_clif_table_polars <- function(data_directory,
+                                   table_name,
+                                   filetype = "parquet",
+                                   hospitalization_ids = NULL,
+                                   columns = NULL,
+                                   site_tz = NULL,
+                                   lazy = TRUE) {
+  filters <- if (!is.null(hospitalization_ids)) {
+    list(hospitalization_id = hospitalization_ids)
+  } else {
+    NULL
+  }
+  load_data(
+    table_name = table_name,
+    table_path = data_directory,
+    table_format_type = filetype,
+    columns = columns,
+    filters = filters,
+    site_tz = site_tz
+  )
+}
+
 #' Save CLIF data file
 #'
 #' @param data tibble or data.frame. Data to save.

@@ -26,6 +26,12 @@ MedicationAdminContinuous <- R6::R6Class(
   classname = "MedicationAdminContinuous",
   inherit = BaseTable,
   public = list(
+    #' @field df_converted Dose-converted data set by the orchestrator's
+    #'   `convert_dose_units_for_continuous_meds()` when `save_to_table = TRUE`.
+    df_converted = NULL,
+    #' @field conversion_counts Per-unit conversion tallies accompanying `df_converted`.
+    conversion_counts = NULL,
+
     #' @description Create a MedicationAdminContinuous table instance.
     #' @param data_directory Directory containing the CLIF data files.
     #' @param filetype Either `"csv"` or `"parquet"`.

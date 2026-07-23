@@ -24,6 +24,16 @@ medication_table$med_category_to_group_mapping()
 \section{Super class}{
 \code{\link[clifR:BaseTable]{clifR::BaseTable}} -> \code{MedicationAdminIntermittent}
 }
+\section{Public fields}{
+\if{html}{\out{<div class="r6-fields">}}
+\describe{
+\item{\code{df_converted}}{Dose-converted data set by the orchestrator's
+\code{convert_dose_units_for_intermittent_meds()} when \code{save_to_table = TRUE}.}
+
+\item{\code{conversion_counts}}{Per-unit conversion tallies accompanying \code{df_converted}.}
+}
+\if{html}{\out{</div>}}
+}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
@@ -36,8 +46,10 @@ medication_table$med_category_to_group_mapping()
 <details><summary>Inherited methods</summary>
 <ul>
 <li><span class="pkg-link" data-pkg="clifR" data-topic="BaseTable" data-id="analyze_categorical_distributions"><a href='../../clifR/html/BaseTable.html#method-BaseTable-analyze_categorical_distributions'><code>clifR::BaseTable$analyze_categorical_distributions()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="clifR" data-topic="BaseTable" data-id="calculate_stratified_ecdf"><a href='../../clifR/html/BaseTable.html#method-BaseTable-calculate_stratified_ecdf'><code>clifR::BaseTable$calculate_stratified_ecdf()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="clifR" data-topic="BaseTable" data-id="get_summary"><a href='../../clifR/html/BaseTable.html#method-BaseTable-get_summary'><code>clifR::BaseTable$get_summary()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="clifR" data-topic="BaseTable" data-id="isvalid"><a href='../../clifR/html/BaseTable.html#method-BaseTable-isvalid'><code>clifR::BaseTable$isvalid()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="clifR" data-topic="BaseTable" data-id="plot_categorical_distributions"><a href='../../clifR/html/BaseTable.html#method-BaseTable-plot_categorical_distributions'><code>clifR::BaseTable$plot_categorical_distributions()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="clifR" data-topic="BaseTable" data-id="print"><a href='../../clifR/html/BaseTable.html#method-BaseTable-print'><code>clifR::BaseTable$print()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="clifR" data-topic="BaseTable" data-id="save_summary"><a href='../../clifR/html/BaseTable.html#method-BaseTable-save_summary'><code>clifR::BaseTable$save_summary()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="clifR" data-topic="BaseTable" data-id="validate"><a href='../../clifR/html/BaseTable.html#method-BaseTable-validate'><code>clifR::BaseTable$validate()</code></a></span></li>

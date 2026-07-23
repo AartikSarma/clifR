@@ -151,7 +151,7 @@ check_missing_antimicrobials <- function(merged_df, organism_config, organism_na
         }
       }
       if (length(flags_requiring) > 0) {
-        cli::cli_bullets(c("*" = "{agent} — required for: {paste(flags_requiring, collapse = ', ')}"))
+        cli::cli_bullets(c("*" = "{agent} \u2014 required for: {paste(flags_requiring, collapse = ', ')}"))
       } else {
         cli::cli_bullets(c("*" = "{agent}"))
       }

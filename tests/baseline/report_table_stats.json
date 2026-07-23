@@ -1,0 +1,1730 @@
+{
+  "adt": [
+    {
+      "column": "hospitalization_id",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 200
+    },
+    {
+      "column": "hospital_id",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 82
+    },
+    {
+      "column": "hospital_type",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 3
+    },
+    {
+      "column": "in_dttm",
+      "dtype": "DATETIME",
+      "max": "2024-12-27 13:49",
+      "min": "2018-01-22 20:36",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 552
+    },
+    {
+      "column": "out_dttm",
+      "dtype": "DATETIME",
+      "max": "2025-01-15 06:25",
+      "min": "2018-01-23 01:20",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 552
+    },
+    {
+      "column": "location_name",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 15
+    },
+    {
+      "column": "location_category",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 4
+    },
+    {
+      "column": "location_type",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 381,
+      "null_pct": 69.0,
+      "unique": 10
+    }
+  ],
+  "code_status": [
+    {
+      "column": "patient_id",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 157
+    },
+    {
+      "column": "start_dttm",
+      "dtype": "DATETIME",
+      "max": "2024-12-15 19:20",
+      "min": "2018-01-22 20:36",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 204
+    },
+    {
+      "column": "code_status_name",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 5
+    },
+    {
+      "column": "code_status_category",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 5
+    }
+  ],
+  "crrt_therapy": [
+    {
+      "column": "hospitalization_id",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 12
+    },
+    {
+      "column": "device_id",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 836
+    },
+    {
+      "column": "recorded_dttm",
+      "dtype": "DATETIME",
+      "max": "2023-03-19 22:48",
+      "min": "2018-01-23 10:09",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 874
+    },
+    {
+      "column": "crrt_mode_name",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 3
+    },
+    {
+      "column": "crrt_mode_category",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 3
+    },
+    {
+      "column": "dialysis_machine_name",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 4
+    },
+    {
+      "column": "blood_flow_rate",
+      "dtype": "DOUBLE",
+      "max": "250.0",
+      "min": "150.0",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 101
+    },
+    {
+      "column": "pre_filter_replacement_fluid_rate",
+      "dtype": "DOUBLE",
+      "max": "1499.0",
+      "min": "503.0",
+      "null_count": 287,
+      "null_pct": 32.8,
+      "unique": 444
+    },
+    {
+      "column": "post_filter_replacement_fluid_rate",
+      "dtype": "DOUBLE",
+      "max": "1498.0",
+      "min": "505.0",
+      "null_count": 287,
+      "null_pct": 32.8,
+      "unique": 430
+    },
+    {
+      "column": "dialysate_flow_rate",
+      "dtype": "DOUBLE",
+      "max": "1996.0",
+      "min": "1001.0",
+      "null_count": 204,
+      "null_pct": 23.3,
+      "unique": 487
+    },
+    {
+      "column": "ultrafiltration_out",
+      "dtype": "DOUBLE",
+      "max": "200.0",
+      "min": "50.0",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 151
+    }
+  ],
+  "ecmo_mcs": [
+    {
+      "column": "hospitalization_id",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 2
+    },
+    {
+      "column": "recorded_dttm",
+      "dtype": "DATETIME",
+      "max": "2022-06-03 13:26",
+      "min": "2018-03-23 17:04",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 271
+    },
+    {
+      "column": "device_name",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 2
+    },
+    {
+      "column": "device_category",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 2
+    }
+  ],
+  "hospital_diagnosis": [
+    {
+      "column": "hospitalization_id",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 197
+    },
+    {
+      "column": "diagnosis_code",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 42
+    },
+    {
+      "column": "diagnosis_code_format",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 1
+    },
+    {
+      "column": "diagnosis_primary",
+      "dtype": "INT",
+      "max": "1",
+      "min": "0",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 2
+    },
+    {
+      "column": "poa_present",
+      "dtype": "INT",
+      "max": "1",
+      "min": "0",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 2
+    }
+  ],
+  "hospitalization": [
+    {
+      "column": "patient_id",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 157
+    },
+    {
+      "column": "hospitalization_id",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 200
+    },
+    {
+      "column": "hospitalization_joined_id",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 200
+    },
+    {
+      "column": "admission_dttm",
+      "dtype": "DATETIME",
+      "max": "2024-12-15 19:20",
+      "min": "2018-01-22 20:36",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 200
+    },
+    {
+      "column": "discharge_dttm",
+      "dtype": "DATETIME",
+      "max": "2025-01-15 06:25",
+      "min": "2018-01-25 10:18",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 200
+    },
+    {
+      "column": "age_at_admission",
+      "dtype": "INT",
+      "max": "96",
+      "min": "16",
+      "null_count": 2,
+      "null_pct": 1.0,
+      "unique": 67
+    },
+    {
+      "column": "admission_type_name",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 6
+    },
+    {
+      "column": "admission_type_category",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 4,
+      "null_pct": 2.0,
+      "unique": 6
+    },
+    {
+      "column": "discharge_name",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 2,
+      "null_pct": 1.0,
+      "unique": 16
+    },
+    {
+      "column": "discharge_category",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 16
+    },
+    {
+      "column": "zipcode_nine_digit",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 200
+    },
+    {
+      "column": "zipcode_five_digit",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 200
+    },
+    {
+      "column": "census_block_code",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 200
+    },
+    {
+      "column": "census_block_group_code",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 200
+    },
+    {
+      "column": "census_tract",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 200
+    },
+    {
+      "column": "state_code",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 51
+    },
+    {
+      "column": "county_code",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 200
+    },
+    {
+      "column": "fips_version",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 1
+    }
+  ],
+  "labs": [
+    {
+      "column": "hospitalization_id",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 200
+    },
+    {
+      "column": "lab_order_dttm",
+      "dtype": "DATETIME",
+      "max": "2025-01-14 08:59",
+      "min": "2018-01-22 20:36",
+      "null_count": 759,
+      "null_pct": 1.9,
+      "unique": 9349
+    },
+    {
+      "column": "lab_collect_dttm",
+      "dtype": "DATETIME",
+      "max": "2025-01-14 09:26",
+      "min": "2018-01-22 20:48",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 9263
+    },
+    {
+      "column": "lab_result_dttm",
+      "dtype": "DATETIME",
+      "max": "2025-01-14 11:27",
+      "min": "2018-01-22 22:57",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 9348
+    },
+    {
+      "column": "lab_order_name",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 8
+    },
+    {
+      "column": "lab_order_category",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 6
+    },
+    {
+      "column": "lab_name",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 29
+    },
+    {
+      "column": "lab_category",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 29
+    },
+    {
+      "column": "lab_value",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 3407
+    },
+    {
+      "column": "lab_value_numeric",
+      "dtype": "DOUBLE",
+      "max": "458.0",
+      "min": "0.0",
+      "null_count": 2025,
+      "null_pct": 5.1,
+      "unique": 3329
+    },
+    {
+      "column": "reference_unit",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 11
+    },
+    {
+      "column": "lab_specimen_name",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 5
+    },
+    {
+      "column": "lab_specimen_category",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 1
+    },
+    {
+      "column": "lab_loinc_code",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 29
+    }
+  ],
+  "medication_admin_continuous": [
+    {
+      "column": "hospitalization_id",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 127
+    },
+    {
+      "column": "med_order_id",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 256
+    },
+    {
+      "column": "admin_dttm",
+      "dtype": "DATETIME",
+      "max": "2024-12-19 17:20",
+      "min": "2018-01-24 23:27",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 10588
+    },
+    {
+      "column": "med_name",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 12
+    },
+    {
+      "column": "med_category",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 12
+    },
+    {
+      "column": "med_group",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 4
+    },
+    {
+      "column": "med_route_name",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 1
+    },
+    {
+      "column": "med_route_category",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 1
+    },
+    {
+      "column": "med_dose",
+      "dtype": "DOUBLE",
+      "max": "1674.672",
+      "min": "0.01",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 879
+    },
+    {
+      "column": "med_dose_unit",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 7
+    },
+    {
+      "column": "mar_action_name",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 5
+    },
+    {
+      "column": "mar_action_category",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 5
+    },
+    {
+      "column": "mar_action_group",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 1
+    }
+  ],
+  "medication_admin_intermittent": [
+    {
+      "column": "hospitalization_id",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 196
+    },
+    {
+      "column": "med_order_id",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 520
+    },
+    {
+      "column": "admin_dttm",
+      "dtype": "DATETIME",
+      "max": "2025-01-15 05:49",
+      "min": "2018-01-22 20:36",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 24126
+    },
+    {
+      "column": "med_name",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 8
+    },
+    {
+      "column": "med_category",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 8
+    },
+    {
+      "column": "med_group",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 2
+    },
+    {
+      "column": "med_route_name",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 2
+    },
+    {
+      "column": "med_route_category",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 2
+    },
+    {
+      "column": "med_dose",
+      "dtype": "DOUBLE",
+      "max": "4463.0",
+      "min": "1.0",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 304
+    },
+    {
+      "column": "med_dose_unit",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 1
+    },
+    {
+      "column": "mar_action_name",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 4
+    },
+    {
+      "column": "mar_action_category",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 4
+    },
+    {
+      "column": "mar_action_group",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 3
+    }
+  ],
+  "microbiology_culture": [
+    {
+      "column": "patient_id",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 85
+    },
+    {
+      "column": "hospitalization_id",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 97
+    },
+    {
+      "column": "organism_id",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 299
+    },
+    {
+      "column": "order_dttm",
+      "dtype": "DATETIME",
+      "max": "2024-11-11 01:58",
+      "min": "2018-01-25 17:50",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 299
+    },
+    {
+      "column": "collect_dttm",
+      "dtype": "DATETIME",
+      "max": "2024-11-11 02:47",
+      "min": "2018-01-25 18:09",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 299
+    },
+    {
+      "column": "result_dttm",
+      "dtype": "DATETIME",
+      "max": "2024-11-13 23:47",
+      "min": "2018-01-27 06:02",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 299
+    },
+    {
+      "column": "fluid_name",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 4
+    },
+    {
+      "column": "fluid_category",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 4
+    },
+    {
+      "column": "method_name",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 3
+    },
+    {
+      "column": "method_category",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 3
+    },
+    {
+      "column": "organism_name",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 10
+    },
+    {
+      "column": "organism_category",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 10
+    },
+    {
+      "column": "organism_group",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 10
+    },
+    {
+      "column": "lab_loinc_code",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 4
+    }
+  ],
+  "microbiology_nonculture": [
+    {
+      "column": "patient_id",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 150
+    },
+    {
+      "column": "hospitalization_id",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 190
+    },
+    {
+      "column": "result_dttm",
+      "dtype": "DATETIME",
+      "max": "2024-12-16 13:35",
+      "min": "2018-01-23 19:21",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 381
+    },
+    {
+      "column": "collect_dttm",
+      "dtype": "DATETIME",
+      "max": "2024-12-16 09:05",
+      "min": "2018-01-23 12:44",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 381
+    },
+    {
+      "column": "order_dttm",
+      "dtype": "DATETIME",
+      "max": "2024-12-16 08:26",
+      "min": "2018-01-23 12:08",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 381
+    },
+    {
+      "column": "fluid_name",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 3
+    },
+    {
+      "column": "fluid_category",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 3
+    },
+    {
+      "column": "method_name",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 1
+    },
+    {
+      "column": "method_category",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 1
+    },
+    {
+      "column": "micro_order_name",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 5
+    },
+    {
+      "column": "organism_category",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 3
+    },
+    {
+      "column": "organism_group",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 3
+    },
+    {
+      "column": "result_name",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 2
+    },
+    {
+      "column": "result_category",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 2
+    },
+    {
+      "column": "reference_low",
+      "dtype": "DOUBLE",
+      "max": null,
+      "min": null,
+      "null_count": 381,
+      "null_pct": 100.0,
+      "unique": 0
+    },
+    {
+      "column": "reference_high",
+      "dtype": "DOUBLE",
+      "max": null,
+      "min": null,
+      "null_count": 381,
+      "null_pct": 100.0,
+      "unique": 0
+    },
+    {
+      "column": "lab_loinc_code",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 5
+    }
+  ],
+  "microbiology_susceptibility": [
+    {
+      "column": "organism_id",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 78
+    },
+    {
+      "column": "antimicrobial_name",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 13
+    },
+    {
+      "column": "antimicrobial_category",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 13
+    },
+    {
+      "column": "sensitivity_name",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 3
+    },
+    {
+      "column": "susceptibility_name",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 3
+    },
+    {
+      "column": "susceptibility_category",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 3
+    }
+  ],
+  "patient": [
+    {
+      "column": "patient_id",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 157
+    },
+    {
+      "column": "race_name",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 6
+    },
+    {
+      "column": "race_category",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 5,
+      "null_pct": 3.2,
+      "unique": 6
+    },
+    {
+      "column": "ethnicity_name",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 3
+    },
+    {
+      "column": "ethnicity_category",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 3,
+      "null_pct": 1.9,
+      "unique": 3
+    },
+    {
+      "column": "sex_name",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 2
+    },
+    {
+      "column": "sex_category",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 2
+    },
+    {
+      "column": "birth_date",
+      "dtype": "DATE",
+      "max": "2008-06-16",
+      "min": "1926-06-16",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 156
+    },
+    {
+      "column": "death_dttm",
+      "dtype": "DATETIME",
+      "max": "2024-08-24 06:57",
+      "min": "2018-01-11 09:12",
+      "null_count": 117,
+      "null_pct": 74.5,
+      "unique": 40
+    },
+    {
+      "column": "language_name",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 11
+    },
+    {
+      "column": "language_category",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 9,
+      "null_pct": 5.7,
+      "unique": 11
+    }
+  ],
+  "patient_assessments": [
+    {
+      "column": "hospitalization_id",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 200
+    },
+    {
+      "column": "recorded_dttm",
+      "dtype": "DATETIME",
+      "max": "2025-01-15 04:45",
+      "min": "2018-01-22 20:36",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 53286
+    },
+    {
+      "column": "assessment_name",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 9
+    },
+    {
+      "column": "assessment_category",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 9
+    },
+    {
+      "column": "assessment_group",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 6
+    },
+    {
+      "column": "numerical_value",
+      "dtype": "DOUBLE",
+      "max": "74.0",
+      "min": "-4.0",
+      "null_count": 1136,
+      "null_pct": 1.0,
+      "unique": 76
+    },
+    {
+      "column": "categorical_value",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 105924,
+      "null_pct": 96.5,
+      "unique": 3
+    },
+    {
+      "column": "text_value",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 109813,
+      "null_pct": 100.0,
+      "unique": 0
+    }
+  ],
+  "patient_procedures": [
+    {
+      "column": "hospitalization_id",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 165
+    },
+    {
+      "column": "billing_provider_id",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 299
+    },
+    {
+      "column": "performing_provider_id",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 299
+    },
+    {
+      "column": "procedure_code",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 24
+    },
+    {
+      "column": "procedure_code_format",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 2
+    },
+    {
+      "column": "procedure_billed_dttm",
+      "dtype": "DATETIME",
+      "max": "2024-12-16 04:10",
+      "min": "2018-01-24 22:37",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 299
+    }
+  ],
+  "position": [
+    {
+      "column": "hospitalization_id",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 200
+    },
+    {
+      "column": "recorded_dttm",
+      "dtype": "DATETIME",
+      "max": "2025-01-15 05:06",
+      "min": "2018-01-22 20:36",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 34563
+    },
+    {
+      "column": "position_name",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 2
+    },
+    {
+      "column": "position_category",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 2
+    }
+  ],
+  "respiratory_support": [
+    {
+      "column": "hospitalization_id",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 200
+    },
+    {
+      "column": "recorded_dttm",
+      "dtype": "DATETIME",
+      "max": "2025-01-15 06:04",
+      "min": "2018-01-22 20:36",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 37468
+    },
+    {
+      "column": "device_name",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 7
+    },
+    {
+      "column": "device_id",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 8853
+    },
+    {
+      "column": "device_category",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 7
+    },
+    {
+      "column": "vent_brand_name",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 24726,
+      "null_pct": 66.0,
+      "unique": 5
+    },
+    {
+      "column": "mode_name",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 21335,
+      "null_pct": 56.9,
+      "unique": 6
+    },
+    {
+      "column": "mode_category",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 21335,
+      "null_pct": 56.9,
+      "unique": 6
+    },
+    {
+      "column": "tracheostomy",
+      "dtype": "INT",
+      "max": "1",
+      "min": "0",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 2
+    },
+    {
+      "column": "fio2_set",
+      "dtype": "DOUBLE",
+      "max": "0.86",
+      "min": "0.21",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 61
+    },
+    {
+      "column": "lpm_set",
+      "dtype": "DOUBLE",
+      "max": "15.0",
+      "min": "1.0",
+      "null_count": 30885,
+      "null_pct": 82.4,
+      "unique": 15
+    },
+    {
+      "column": "tidal_volume_set",
+      "dtype": "DOUBLE",
+      "max": "550.0",
+      "min": "350.0",
+      "null_count": 24726,
+      "null_pct": 66.0,
+      "unique": 201
+    },
+    {
+      "column": "resp_rate_set",
+      "dtype": "DOUBLE",
+      "max": "24.0",
+      "min": "12.0",
+      "null_count": 24726,
+      "null_pct": 66.0,
+      "unique": 13
+    },
+    {
+      "column": "pressure_control_set",
+      "dtype": "DOUBLE",
+      "max": "35.0",
+      "min": "15.0",
+      "null_count": 37171,
+      "null_pct": 99.2,
+      "unique": 21
+    },
+    {
+      "column": "pressure_support_set",
+      "dtype": "DOUBLE",
+      "max": "20.0",
+      "min": "5.0",
+      "null_count": 31997,
+      "null_pct": 85.4,
+      "unique": 16
+    },
+    {
+      "column": "flow_rate_set",
+      "dtype": "DOUBLE",
+      "max": "60.0",
+      "min": "20.0",
+      "null_count": 33910,
+      "null_pct": 90.5,
+      "unique": 41
+    },
+    {
+      "column": "peak_inspiratory_pressure_set",
+      "dtype": "DOUBLE",
+      "max": "40.0",
+      "min": "15.0",
+      "null_count": 24726,
+      "null_pct": 66.0,
+      "unique": 26
+    },
+    {
+      "column": "inspiratory_time_set",
+      "dtype": "DOUBLE",
+      "max": "1.5",
+      "min": "0.8",
+      "null_count": 24726,
+      "null_pct": 66.0,
+      "unique": 71
+    },
+    {
+      "column": "peep_set",
+      "dtype": "DOUBLE",
+      "max": "20.0",
+      "min": "5.0",
+      "null_count": 21335,
+      "null_pct": 56.9,
+      "unique": 11
+    },
+    {
+      "column": "tidal_volume_obs",
+      "dtype": "DOUBLE",
+      "max": "647.0",
+      "min": "261.0",
+      "null_count": 24726,
+      "null_pct": 66.0,
+      "unique": 338
+    },
+    {
+      "column": "resp_rate_obs",
+      "dtype": "DOUBLE",
+      "max": "34.0",
+      "min": "1.0",
+      "null_count": 24726,
+      "null_pct": 66.0,
+      "unique": 32
+    },
+    {
+      "column": "plateau_pressure_obs",
+      "dtype": "DOUBLE",
+      "max": "30.0",
+      "min": "12.0",
+      "null_count": 28496,
+      "null_pct": 76.1,
+      "unique": 19
+    },
+    {
+      "column": "peak_inspiratory_pressure_obs",
+      "dtype": "DOUBLE",
+      "max": "45.0",
+      "min": "9.0",
+      "null_count": 24726,
+      "null_pct": 66.0,
+      "unique": 37
+    },
+    {
+      "column": "peep_obs",
+      "dtype": "DOUBLE",
+      "max": "21.0",
+      "min": "3.0",
+      "null_count": 24726,
+      "null_pct": 66.0,
+      "unique": 19
+    },
+    {
+      "column": "minute_vent_obs",
+      "dtype": "DOUBLE",
+      "max": "15.0",
+      "min": "5.0",
+      "null_count": 24726,
+      "null_pct": 66.0,
+      "unique": 101
+    },
+    {
+      "column": "mean_airway_pressure_obs",
+      "dtype": "DOUBLE",
+      "max": "25.0",
+      "min": "8.0",
+      "null_count": 24726,
+      "null_pct": 66.0,
+      "unique": 18
+    }
+  ],
+  "vitals": [
+    {
+      "column": "hospitalization_id",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 200
+    },
+    {
+      "column": "recorded_dttm",
+      "dtype": "DATETIME",
+      "max": "2025-01-15 05:50",
+      "min": "2018-01-22 20:36",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 52997
+    },
+    {
+      "column": "vital_name",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 9
+    },
+    {
+      "column": "vital_category",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 9
+    },
+    {
+      "column": "vital_value",
+      "dtype": "DOUBLE",
+      "max": "261.95525966771856",
+      "min": "0.0",
+      "null_count": 15602,
+      "null_pct": 5.0,
+      "unique": 18359
+    },
+    {
+      "column": "meas_site_name",
+      "dtype": "VARCHAR",
+      "max": null,
+      "min": null,
+      "null_count": 276868,
+      "null_pct": 88.1,
+      "unique": 5
+    }
+  ]
+}

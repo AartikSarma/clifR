@@ -52,6 +52,8 @@ configured CLIF version.
 \item \href{#method-BaseTable-get_summary}{\code{BaseTable$get_summary()}}
 \item \href{#method-BaseTable-save_summary}{\code{BaseTable$save_summary()}}
 \item \href{#method-BaseTable-analyze_categorical_distributions}{\code{BaseTable$analyze_categorical_distributions()}}
+\item \href{#method-BaseTable-plot_categorical_distributions}{\code{BaseTable$plot_categorical_distributions()}}
+\item \href{#method-BaseTable-calculate_stratified_ecdf}{\code{BaseTable$calculate_stratified_ecdf()}}
 \item \href{#method-BaseTable-print}{\code{BaseTable$print()}}
 \item \href{#method-BaseTable-clone}{\code{BaseTable$clone()}}
 }
@@ -181,6 +183,79 @@ absent) per category value, matching clifpy's denominator choice.
 }
 \subsection{Returns}{
 A named list of tibbles, one per categorical column.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-BaseTable-plot_categorical_distributions"></a>}}
+\if{latex}{\out{\hypertarget{method-BaseTable-plot_categorical_distributions}{}}}
+\subsection{Method \code{plot_categorical_distributions()}}{
+Bar plots of each categorical column's distribution by encounter.
+
+Counts distinct \code{hospitalization_id} (or \code{patient_id}) per category value and
+draws one bar plot per categorical column. Ports clifpy's
+\code{plot_categorical_distributions}; uses ggplot2 with the viridis palette.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{BaseTable$plot_categorical_distributions(
+  columns = NULL,
+  save = TRUE,
+  width = 10,
+  height = 6,
+  dpi = 300
+)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{columns}}{Optional character vector restricting which categorical columns
+to plot.}
+
+\item{\code{save}}{Whether to write one PNG per column to the output directory.}
+
+\item{\code{width, height}}{Plot dimensions in inches.}
+
+\item{\code{dpi}}{Resolution for saved plots.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+A named list of ggplot objects, one per categorical column.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-BaseTable-calculate_stratified_ecdf"></a>}}
+\if{latex}{\out{\hypertarget{method-BaseTable-calculate_stratified_ecdf}{}}}
+\subsection{Method \code{calculate_stratified_ecdf()}}{
+Empirical CDF of a numeric column stratified by category.
+
+For each category value, computes the ECDF of \code{value_column}: sorted values
+paired with \code{rank / n} cumulative probabilities. Ports clifpy's
+\code{calculate_stratified_ecdf}.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{BaseTable$calculate_stratified_ecdf(
+  value_column,
+  category_column,
+  category_values = NULL,
+  save = TRUE
+)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{value_column}}{Numeric column to compute the ECDF for.}
+
+\item{\code{category_column}}{Categorical column to stratify by.}
+
+\item{\code{category_values}}{Optional character vector of categories to include.
+Defaults to the schema's permissible values, or all observed values.}
+
+\item{\code{save}}{Whether to write the combined ECDF to a CSV.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+A named list of tibbles, one per category, or \code{NULL} when no data.
 }
 }
 \if{html}{\out{<hr>}}

@@ -235,7 +235,9 @@ clifR targets **clifpy 0.5.0** and supports CLIF schema versions **2.1 and 3.0**
 0.5.0 by the cross-language parity suite; the current status is generated into
 `tests/CROSS_VALIDATION_RESULTS.md` by `Rscript dev/run_parity_report.R`.
 
-**As of the 0.5.0 parity port: 757 parity assertions pass, 0 failures.**
+**The port is complete: every clifpy 0.5.0 module is ported. 6,660 parity
+assertions across 15 components pass with 0 failures, plus 35 migration-runner
+assertions. `R CMD check`: 0 errors, 0 warnings.**
 
 ### ✅ Completed and parity-verified
 
@@ -255,7 +257,13 @@ completeness, plausibility), wide dataset construction and hourly aggregation,
 medication dose unit conversion, both SOFA implementations (`compute_sofa` and the
 self-contained `compute_sofa_direct`), Charlson and Elixhauser comorbidity indices,
 encounter stitching, respiratory support waterfall, outlier handling, the 2.1→3.0
-crosswalk, extremal-value query, and MDRO flags.
+crosswalk, extremal-value query, MDRO flags, CDC Adult Sepsis Event (`compute_ase`),
+DQA report generation, the 2.1→3.0 migration runner (`CrosswalkMigrationRunner`,
+`migrate_clif_2_1_to_3_0`), and the datetime standardization helpers.
+
+**Vignettes**: seven, all knitting against the bundled demo data — getting-started,
+vitals-and-labs, clinical-scores, medication-analysis, wide-datasets, microbiology,
+and data-quality.
 
 ### Notes and intentional divergences
 
@@ -270,13 +278,29 @@ crosswalk, extremal-value query, and MDRO flags.
   correct spelling, noted in roxygen); the waterfall's trach-collar branch erases
   data upstream, reproduced for parity with an explanatory comment.
 
-### ⏳ Not yet ported
+- **PDF reports become HTML.** clifpy renders PDFs with reportlab, which has no R
+  equivalent. `generate_validation_html()` / `generate_combined_validation_html()`
+  emit self-contained HTML with the same structure; the `*_pdf()` aliases forward to
+  them. The text and CSV reports are exact-parity.
+- **The `*_polars` entry points are aliases.** clifpy ships parallel pandas and Polars
+  backends; R has one engine, so `load_data_polars()` and friends delegate to the
+  single implementation and accept `lazy`/`target_time_unit` for signature
+  compatibility only.
 
-- Polars-specific datetime helpers (the R port uses one backend per function).
-- `ase.py` (CDC Adult Sepsis Event), `report_generator.py` (PDF/CSV DQA reports),
-  and `migrate_versions_2_1_to_3.py` (whole-folder migration runner).
-- Vignettes still document the pre-port API and use `eval = FALSE`; they need updating
-  to the current function names.
+### Integration gotchas learned the hard way
+
+- **R sources every `R/*.R` into one namespace**, so a file-scope helper can silently
+  shadow another module's public function (last file alphabetically wins). This bit us
+  twice: `load_outlier_config` and `standardize_datetime_columns`. After adding a
+  module, grep for duplicate `<- function` names.
+- **`$` on a list does partial matching**; `details$column` resolves to
+  `columns_checked` where Python's `.get('column')` returns `None`. Use `[["key"]]` for
+  any field access ported from a Python dict lookup.
+- **R6 objects are locked by default** — a field the orchestrator assigns later (e.g.
+  `df_converted`) must be declared in the class's `public` list or assignment fails.
+- **Non-ASCII in code strings** must be written as `\uXXXX` escapes to keep `R CMD
+  check` clean; several validator messages contain em-dashes that must match clifpy
+  byte-for-byte, so escape them rather than replacing them.
 
 ## Key Features Implementation Details
 

@@ -26,8 +26,8 @@ LOG_LEVEL_VALUES <- c(debug = 10L, info = 20L, warning = 30L, error = 40L, criti
 LOG_LEVEL_EMOJI <- c(
   debug = "\U0001F41B",
   info = "\U0001F4E2",
-  warning = "⚠️",
-  error = "❌",
+  warning = "\u26a0\ufe0f",
+  error = "\u274c",
   critical = "\U0001F198"
 )
 

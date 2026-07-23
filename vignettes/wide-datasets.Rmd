@@ -13,631 +13,147 @@ vignette: >
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
+  message = FALSE,
+  warning = FALSE,
   fig.width = 7,
-  fig.height = 5
+  fig.height = 4.5
 )
 ```
 
-# Introduction
-
-CLIF data is stored in "narrow" (long) format where each measurement is a separate row. For time-series analysis, machine learning, or statistical modeling, you often need data in "wide" format where each timepoint is a row and measurements are columns.
-
-This vignette demonstrates:
-
-- Creating wide datasets from narrow vitals/labs data
-- Time resolution options (hourly, 4-hourly, daily)
-- Handling missing data
-- Time-series visualizations
-- Advanced analyses
-
-# Setup
-
-```{r eval=FALSE}
+```{r}
 library(clifR)
 library(dplyr)
 library(tidyr)
 library(ggplot2)
-library(lubridate)
 
-# Initialize orchestrator
-orchestrator <- ClifOrchestrator$new(
-  data_directory = "path/to/clif/data",
-  filetype = "csv",
-  timezone = "America/New_York"
-)
-
-# Load required tables
-orchestrator$initialize_tables(
-  tables = c("patient", "hospitalization", "vitals", "labs"),
-  validate = TRUE
+okabe_ito <- c(
+  "#E69F00", "#56B4E9", "#009E73", "#F0E442",
+  "#0072B2", "#D55E00", "#CC79A7", "#000000"
 )
 ```
 
-# Creating Wide Datasets
+# Overview
 
-## Basic Wide Dataset
+CLIF tables are stored in a narrow (long) form: one row per measurement, with a
+category column naming the measurement and a value column holding it. Most analyses
+instead want a **wide, time-aligned** view: one row per patient per timestamp, with
+one column per measurement type. clifR builds this with `create_wide_dataset()` and
+then aggregates it into fixed-width time windows with `convert_wide_to_hourly()`.
 
-```{r eval=FALSE}
-# Create hourly wide dataset
-wide_data_hourly <- orchestrator$create_wide_dataset(
-  time_resolution = "hour"
+Both are DuckDB pipelines ported from clifpy for numerical parity.
+
+# Building a wide dataset
+
+`ClifOrchestrator$create_wide_dataset()` pivots the requested narrow tables and joins
+them on a common event timeline. `category_filters` selects which category values to
+keep from each pivot table (and becomes the resulting column names).
+
+```{r}
+clif <- load_demo_clif()
+
+wide_dataset <- clif$create_wide_dataset(
+  tables_to_load = c("vitals", "labs"),
+  category_filters = list(
+    vitals = c("heart_rate", "sbp", "map", "spo2"),
+    labs   = c("creatinine", "sodium", "potassium")
+  ),
+  show_progress = FALSE
 )
 
-# View structure
-head(wide_data_hourly)
-colnames(wide_data_hourly)
-
-# Dimensions
-dim(wide_data_hourly)
+dim(wide_dataset)
+names(wide_dataset)
 ```
 
-## Available Time Resolutions
+Each measurement is now its own column, keyed by `hospitalization_id` and
+`event_time`:
 
-```{r eval=FALSE}
-# Hourly (most granular)
-wide_hourly <- orchestrator$create_wide_dataset(
-  time_resolution = "hour"
-)
-
-# 4-hourly (common nursing vital frequency)
-wide_4hour <- orchestrator$create_wide_dataset(
-  time_resolution = "4hour"
-)
-
-# Daily (for labs and daily summaries)
-wide_daily <- orchestrator$create_wide_dataset(
-  time_resolution = "day"
-)
+```{r}
+wide_dataset |>
+  select(hospitalization_id, event_time, heart_rate, map, spo2, creatinine) |>
+  arrange(hospitalization_id, event_time) |>
+  head(10)
 ```
 
-## Understanding the Structure
+Because measurements are recorded at different times, any single row is typically
+sparse (a vitals row has no lab values, and vice versa). The next step fills that in
+by aggregating within time windows.
 
-Wide datasets include:
+# Aggregating into time windows
 
-**Identifiers:**
-- `hospitalization_id`
-- `time_rounded` - Rounded timestamp
+`convert_wide_to_hourly()` collapses the wide dataset into fixed-width windows per
+patient. The `aggregation_config` maps an aggregation method to the columns it applies
+to. Available methods include `mean`, `max`, `min`, `median`, `first`, `last`,
+`boolean`, and `one_hot_encode`. `hourly_window` sets the window width in hours.
 
-**Vital Signs:**
-- `temp_c`, `heart_rate`, `sbp`, `dbp`, `map`
-- `resp_rate`, `spo2`, `weight_kg`
+```{r}
+hourly_dataset <- clif$convert_wide_to_hourly(
+  aggregation_config = list(
+    mean = c("heart_rate", "sbp", "map", "spo2"),
+    max  = c("creatinine", "potassium"),
+    min  = c("sodium")
+  ),
+  hourly_window = 6
+)
 
-**Laboratory Results:**
-- Chemistry: `sodium`, `potassium`, `creatinine`, `bun`, `glucose`
-- Hematology: `wbc`, `hemoglobin`, `platelet`
-- Liver: `bilirubin_total`, `ast`, `alt`
-- Coagulation: `inr`, `pt`, `ptt`
-- Blood gas: `pao2`, `paco2`, `ph`, `lactate`
+dim(hourly_dataset)
+names(hourly_dataset)
+```
 
-**Calculated Values:**
-- `pf_ratio` - PaO2/FiO2 ratio (requires respiratory support data)
+Aggregated columns are suffixed with their method, and each window carries its start
+and end timestamps:
 
-# Handling Missing Data
+```{r}
+hourly_dataset |>
+  select(hospitalization_id, window_number, window_start_dttm,
+         heart_rate_mean, map_mean, spo2_mean, creatinine_max) |>
+  arrange(hospitalization_id, window_number) |>
+  head(10)
+```
 
-## Examining Missingness
+# A worked example: one patient's trajectory
 
-```{r eval=FALSE}
-# Calculate missing percentage per column
-missing_summary <- wide_data_hourly %>%
-  summarize(across(
-    where(is.numeric),
-    ~mean(is.na(.)) * 100
-  )) %>%
-  pivot_longer(
-    cols = everything(),
-    names_to = "variable",
-    values_to = "pct_missing"
-  ) %>%
-  arrange(desc(pct_missing))
+```{r}
+example_hospitalization <- hourly_dataset |>
+  count(hospitalization_id, sort = TRUE) |>
+  slice(1) |>
+  pull(hospitalization_id)
 
-print(missing_summary)
+patient_windows <- hourly_dataset |>
+  filter(hospitalization_id == example_hospitalization) |>
+  arrange(window_number)
 
-# Visualize missingness
-ggplot(missing_summary, aes(x = reorder(variable, -pct_missing), y = pct_missing)) +
-  geom_bar(stat = "identity", fill = "steelblue") +
-  coord_flip() +
+nrow(patient_windows)
+```
+
+```{r fig.alt="Windowed mean vital signs over time for one hospitalization"}
+patient_windows |>
+  select(window_start_dttm, heart_rate_mean, map_mean, spo2_mean) |>
+  pivot_longer(-window_start_dttm, names_to = "measurement", values_to = "value") |>
+  filter(!is.na(value)) |>
+  ggplot(aes(x = window_start_dttm, y = value, colour = measurement)) +
+  geom_line() +
+  geom_point(size = 1) +
+  scale_colour_manual(values = okabe_ito, name = NULL) +
   labs(
-    title = "Missingness by Variable",
-    x = "Variable",
-    y = "% Missing"
+    title = sprintf("6-hour windowed vitals, hospitalization %s", example_hospitalization),
+    x = "Window start",
+    y = "Mean value"
   ) +
   theme_minimal()
 ```
 
-## Missingness Patterns
-
-```{r eval=FALSE}
-# Examine missingness patterns for one patient
-example_patient <- wide_data_hourly %>%
-  filter(hospitalization_id == unique(hospitalization_id)[1]) %>%
-  select(time_rounded, temp_c, heart_rate, sbp, creatinine, lactate)
-
-# Create missingness indicator matrix
-missing_matrix <- example_patient %>%
-  mutate(across(
-    -time_rounded,
-    ~if_else(is.na(.), "Missing", "Present")
-  ))
-
-# Visualize (simplified)
-missing_matrix_long <- missing_matrix %>%
-  pivot_longer(
-    cols = -time_rounded,
-    names_to = "variable",
-    values_to = "status"
-  )
-
-ggplot(missing_matrix_long, aes(x = time_rounded, y = variable, fill = status)) +
-  geom_tile() +
-  scale_fill_manual(values = c("Present" = "steelblue", "Missing" = "white")) +
-  labs(
-    title = "Data Availability Over Time",
-    x = "Time",
-    y = "Variable",
-    fill = "Status"
-  ) +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
-```
-
-## Imputation Strategies
-
-### Forward Fill (Last Observation Carried Forward)
-
-```{r eval=FALSE}
-# Fill forward within each hospitalization
-wide_filled <- wide_data_hourly %>%
-  group_by(hospitalization_id) %>%
-  arrange(time_rounded) %>%
-  fill(
-    temp_c, heart_rate, sbp, dbp, map, resp_rate, spo2,
-    .direction = "down"
-  ) %>%
-  ungroup()
-
-# Check improvement
-missing_after_fill <- wide_filled %>%
-  summarize(across(
-    where(is.numeric),
-    ~mean(is.na(.)) * 100
-  ))
-```
-
-### Interpolation
-
-```{r eval=FALSE}
-# Linear interpolation for continuous variables
-library(zoo)
-
-wide_interpolated <- wide_data_hourly %>%
-  group_by(hospitalization_id) %>%
-  arrange(time_rounded) %>%
-  mutate(across(
-    c(temp_c, heart_rate, sbp, map),
-    ~na.approx(., na.rm = FALSE)
-  )) %>%
-  ungroup()
-```
-
-# Time-Series Analysis
-
-## Descriptive Statistics by Time Window
-
-```{r eval=FALSE}
-# Calculate summary statistics per day
-daily_summaries <- wide_data_hourly %>%
-  mutate(date = as.Date(time_rounded)) %>%
-  group_by(hospitalization_id, date) %>%
-  summarize(
-    # Temperature
-    mean_temp = mean(temp_c, na.rm = TRUE),
-    max_temp = max(temp_c, na.rm = TRUE),
-    min_temp = min(temp_c, na.rm = TRUE),
-
-    # Heart rate
-    mean_hr = mean(heart_rate, na.rm = TRUE),
-    max_hr = max(heart_rate, na.rm = TRUE),
-
-    # Blood pressure
-    mean_map = mean(map, na.rm = TRUE),
-    min_map = min(map, na.rm = TRUE),
-
-    .groups = "drop"
-  )
-
-head(daily_summaries)
-```
-
-## Rolling Statistics
-
-```{r eval=FALSE}
-# Calculate rolling means (6-hour windows)
-rolling_stats <- wide_data_hourly %>%
-  group_by(hospitalization_id) %>%
-  arrange(time_rounded) %>%
-  mutate(
-    hr_6h_mean = zoo::rollmean(heart_rate, k = 6, fill = NA, align = "right"),
-    temp_6h_mean = zoo::rollmean(temp_c, k = 6, fill = NA, align = "right"),
-    map_6h_mean = zoo::rollmean(map, k = 6, fill = NA, align = "right")
-  ) %>%
-  ungroup()
-
-# Visualize
-example_patient <- rolling_stats %>%
-  filter(hospitalization_id == unique(hospitalization_id)[1])
-
-ggplot(example_patient) +
-  geom_line(aes(x = time_rounded, y = heart_rate), color = "lightgray") +
-  geom_line(aes(x = time_rounded, y = hr_6h_mean), color = "steelblue", size = 1) +
-  labs(
-    title = "Heart Rate with 6-Hour Rolling Mean",
-    x = "Time",
-    y = "Heart Rate (bpm)"
-  ) +
-  theme_minimal()
-```
-
-## Change from Baseline
-
-```{r eval=FALSE}
-# Calculate change from admission baseline
-baseline_changes <- wide_data_hourly %>%
-  group_by(hospitalization_id) %>%
-  arrange(time_rounded) %>%
-  mutate(
-    # Use first non-missing value as baseline
-    baseline_hr = first(na.omit(heart_rate)),
-    baseline_map = first(na.omit(map)),
-    baseline_cr = first(na.omit(creatinine)),
-
-    # Calculate changes
-    delta_hr = heart_rate - baseline_hr,
-    delta_map = map - baseline_map,
-    delta_cr = creatinine - baseline_cr,
-
-    # Percent changes
-    pct_change_hr = (delta_hr / baseline_hr) * 100,
-    pct_change_map = (delta_map / baseline_map) * 100,
-    pct_change_cr = (delta_cr / baseline_cr) * 100
-  ) %>%
-  ungroup()
-```
-
-## Trajectory Clustering
-
-Group patients by similar trajectories:
-
-```{r eval=FALSE}
-# Prepare data for clustering
-# Extract MAP trajectory for first 24 hours
-
-map_trajectories <- wide_data_hourly %>%
-  group_by(hospitalization_id) %>%
-  arrange(time_rounded) %>%
-  mutate(hour = row_number()) %>%
-  filter(hour <= 24) %>%
-  select(hospitalization_id, hour, map) %>%
-  pivot_wider(
-    names_from = hour,
-    values_from = map,
-    names_prefix = "hour_"
-  )
-
-# Clustering (simplified example)
-# Remove rows with too much missing data
-map_complete <- map_trajectories %>%
-  filter(rowSums(is.na(select(., starts_with("hour_")))) < 12)
-
-# Perform clustering (example with k-means)
-set.seed(42)
-cluster_data <- map_complete %>%
-  select(starts_with("hour_")) %>%
-  as.matrix()
-
-# Impute remaining missing values with median
-cluster_data_imputed <- apply(cluster_data, 2, function(x) {
-  x[is.na(x)] <- median(x, na.rm = TRUE)
-  x
-})
-
-# K-means clustering
-kmeans_result <- kmeans(cluster_data_imputed, centers = 3, nstart = 25)
-
-# Add cluster assignments
-map_complete$cluster <- kmeans_result$cluster
-
-# Visualize cluster centroids
-centroids <- kmeans_result$centers %>%
-  as.data.frame() %>%
-  mutate(cluster = row_number()) %>%
-  pivot_longer(
-    cols = starts_with("hour_"),
-    names_to = "hour",
-    values_to = "map"
-  ) %>%
-  mutate(hour = as.numeric(gsub("hour_", "", hour)))
-
-ggplot(centroids, aes(x = hour, y = map, color = factor(cluster), group = cluster)) +
-  geom_line(size = 1) +
-  labs(
-    title = "MAP Trajectory Clusters",
-    x = "Hour",
-    y = "Mean Arterial Pressure (mmHg)",
-    color = "Cluster"
-  ) +
-  theme_minimal()
-```
-
-# Advanced Analyses
-
-## Correlation Analysis
-
-```{r eval=FALSE}
-# Calculate correlations between variables
-cor_matrix <- wide_data_hourly %>%
-  select(where(is.numeric), -hospitalization_id) %>%
-  cor(use = "pairwise.complete.obs")
-
-# Visualize with heatmap
-library(reshape2)
-
-cor_long <- melt(cor_matrix)
-
-ggplot(cor_long, aes(x = Var1, y = Var2, fill = value)) +
-  geom_tile() +
-  scale_fill_gradient2(
-    low = "blue", mid = "white", high = "red",
-    midpoint = 0, limits = c(-1, 1)
-  ) +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-  labs(
-    title = "Variable Correlations",
-    x = "", y = "", fill = "Correlation"
-  )
-```
-
-## Temporal Associations
-
-```{r eval=FALSE}
-# Examine lead-lag relationships
-# Example: Does rising lactate precede MAP decline?
-
-lead_lag_analysis <- wide_data_hourly %>%
-  group_by(hospitalization_id) %>%
-  arrange(time_rounded) %>%
-  mutate(
-    lactate_6h_ago = lag(lactate, n = 6),
-    map_future_6h = lead(map, n = 6)
-  ) %>%
-  ungroup()
-
-# Correlation between lactate now and MAP in 6 hours
-cor.test(
-  lead_lag_analysis$lactate,
-  lead_lag_analysis$map_future_6h,
-  use = "pairwise.complete.obs"
-)
-```
-
-## Multivariate Time Series
-
-Create combined severity indices:
-
-```{r eval=FALSE}
-# Create composite severity score
-severity_index <- wide_data_hourly %>%
-  mutate(
-    # Normalize variables (z-scores)
-    hr_z = scale(heart_rate),
-    map_z = -scale(map),  # Negative because low MAP is worse
-    lactate_z = scale(lactate),
-    cr_z = scale(creatinine),
-
-    # Composite score (mean of available z-scores)
-    severity_score = rowMeans(
-      cbind(hr_z, map_z, lactate_z, cr_z),
-      na.rm = TRUE
-    )
-  )
-
-# Visualize for one patient
-example_severity <- severity_index %>%
-  filter(hospitalization_id == unique(hospitalization_id)[1])
-
-ggplot(example_severity, aes(x = time_rounded, y = severity_score)) +
-  geom_line(color = "steelblue") +
-  geom_hline(yintercept = 0, linetype = "dashed") +
-  geom_smooth(method = "loess", color = "red", se = FALSE) +
-  labs(
-    title = "Composite Severity Index Over Time",
-    x = "Time",
-    y = "Severity Score (Z-score)"
-  ) +
-  theme_minimal()
-```
-
-# Machine Learning Applications
-
-## Feature Engineering
-
-```{r eval=FALSE}
-# Create features for prediction modeling
-ml_features <- wide_data_hourly %>%
-  group_by(hospitalization_id) %>%
-  arrange(time_rounded) %>%
-  mutate(
-    # Time-based features
-    hour_of_day = hour(time_rounded),
-    day_of_week = wday(time_rounded),
-    hours_since_admission = as.numeric(
-      difftime(time_rounded, first(time_rounded), units = "hours")
-    ),
-
-    # Trend features (change over last 6 hours)
-    hr_trend = heart_rate - lag(heart_rate, n = 6),
-    map_trend = map - lag(map, n = 6),
-    temp_trend = temp_c - lag(temp_c, n = 6),
-
-    # Variability features (SD over last 6 hours)
-    hr_variability = zoo::rollapply(
-      heart_rate, width = 6, FUN = sd, fill = NA, align = "right"
-    ),
-
-    # Missing data indicators
-    vitals_complete = !is.na(temp_c) & !is.na(heart_rate) & !is.na(sbp),
-    labs_complete = !is.na(creatinine) & !is.na(lactate)
-  ) %>%
-  ungroup()
-```
-
-## Train/Test Split by Time
-
-```{r eval=FALSE}
-# Split data temporally (first 70% for training, last 30% for testing)
-train_test_split <- ml_features %>%
-  group_by(hospitalization_id) %>%
-  mutate(
-    row_num = row_number(),
-    total_rows = n(),
-    set = if_else(row_num <= total_rows * 0.7, "train", "test")
-  ) %>%
-  ungroup()
-
-train_data <- train_test_split %>% filter(set == "train")
-test_data <- train_test_split %>% filter(set == "test")
-```
-
-# Export for External Analysis
-
-## Save Wide Dataset
-
-```{r eval=FALSE}
-# Export to CSV for analysis in other tools
-write.csv(
-  wide_data_hourly,
-  "wide_dataset_hourly.csv",
-  row.names = FALSE
-)
-
-# Export to Parquet for efficient storage
-arrow::write_parquet(
-  wide_data_hourly,
-  "wide_dataset_hourly.parquet"
-)
-
-# Export to RDS for R-specific use
-saveRDS(
-  wide_data_hourly,
-  "wide_dataset_hourly.rds"
-)
-```
-
-## Create Analysis-Ready Dataset
-
-Combine wide data with outcomes:
-
-```{r eval=FALSE}
-# Get hospitalization outcomes
-outcomes <- orchestrator$hospitalization$df %>%
-  select(
-    hospitalization_id,
-    hospital_expire_flag,
-    length_of_stay_days,
-    admission_dttm,
-    discharge_dttm
-  )
-
-# Join with first timepoint features
-analysis_dataset <- wide_data_hourly %>%
-  group_by(hospitalization_id) %>%
-  filter(row_number() == 1) %>%  # First observation
-  ungroup() %>%
-  select(-time_rounded) %>%
-  inner_join(outcomes, by = "hospitalization_id")
-
-# Save
-write.csv(
-  analysis_dataset,
-  "analysis_ready_dataset.csv",
-  row.names = FALSE
-)
-```
-
-# Visualization Gallery
-
-## Heatmap of Patient Trajectories
-
-```{r eval=FALSE}
-# Create heatmap showing multiple patients' heart rate trajectories
-patients_sample <- unique(wide_data_hourly$hospitalization_id)[1:20]
-
-trajectory_data <- wide_data_hourly %>%
-  filter(hospitalization_id %in% patients_sample) %>%
-  group_by(hospitalization_id) %>%
-  mutate(hours_from_start = as.numeric(
-    difftime(time_rounded, min(time_rounded), units = "hours")
-  )) %>%
-  filter(hours_from_start <= 72)  # First 72 hours
-
-ggplot(trajectory_data, aes(x = hours_from_start, y = hospitalization_id, fill = heart_rate)) +
-  geom_tile() +
-  scale_fill_gradient2(
-    low = "blue", mid = "yellow", high = "red",
-    midpoint = 100,
-    na.value = "gray90"
-  ) +
-  labs(
-    title = "Heart Rate Trajectories - First 72 Hours",
-    x = "Hours from Admission",
-    y = "Patient",
-    fill = "Heart Rate\n(bpm)"
-  ) +
-  theme_minimal()
-```
-
-## Multi-Panel Physiologic Dashboard
-
-```{r eval=FALSE}
-# Create comprehensive dashboard for one patient
-patient_data <- wide_data_hourly %>%
-  filter(hospitalization_id == unique(hospitalization_id)[1])
-
-# Prepare data for faceting
-dashboard_data <- patient_data %>%
-  select(time_rounded, temp_c, heart_rate, map, spo2) %>%
-  pivot_longer(
-    cols = -time_rounded,
-    names_to = "variable",
-    values_to = "value"
-  )
-
-ggplot(dashboard_data, aes(x = time_rounded, y = value)) +
-  geom_line(color = "steelblue") +
-  facet_wrap(~variable, scales = "free_y", ncol = 1) +
-  labs(
-    title = "Physiologic Dashboard",
-    x = "Time",
-    y = "Value"
-  ) +
-  theme_minimal()
-```
-
-# Summary
-
-This vignette covered:
-
-- Creating wide datasets at different time resolutions
-- Handling missing data (patterns, imputation)
-- Time-series analysis (rolling stats, trajectories, clustering)
-- Advanced analyses (correlations, composite scores)
-- Machine learning feature engineering
-- Comprehensive visualizations
-
-Wide datasets unlock powerful time-series analyses and form the foundation for predictive modeling in critical care!
-
-# Session Info
-
-```{r eval=FALSE}
+# Notes
+
+- `create_wide_dataset()` also stores its result on the orchestrator as `clif$wide_df`,
+  so `convert_wide_to_hourly()` can be called without re-passing it.
+- For very large datasets, `create_wide_dataset()` accepts `batch_size`,
+  `memory_limit`, and `threads` to tune the DuckDB engine, and can write directly to
+  disk via `output_format` / `save_to_data_location` instead of returning a data frame.
+- `hourly_window = 1` gives true hourly windows; larger values give 4-hourly, 6-hourly,
+  daily, etc.
+
+# Session info
+
+```{r}
 sessionInfo()
 ```
