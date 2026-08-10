@@ -1,3 +1,54 @@
+#' Locate a CLIF table's data file
+#'
+#' @description
+#' Searches a data directory for the file belonging to a given CLIF table.
+#' CLIF data directories are not guaranteed to use a single naming
+#' convention: some sites name files exactly after the table
+#' (e.g. `patient.parquet`), while many CLIF consortium datasets use a
+#' `clif_` prefix (e.g. `clif_patient.parquet`). This helper checks both
+#' conventions, falling back to a case-insensitive match, so table lookup
+#' does not depend on a single hardcoded filename pattern.
+#'
+#' @param data_directory Character. Path to directory containing data files.
+#' @param table_name Character. Name of the CLIF table (e.g. "patient").
+#' @param filetype Character. File type: "csv" or "parquet".
+#'
+#' @return Character path to the located file, or `NA_character_` if no
+#'   matching file is found.
+#'
+#' @export
+find_clif_table_file <- function(data_directory, table_name, filetype) {
+  candidate_names <- c(
+    paste0(table_name, ".", filetype),
+    paste0("clif_", table_name, ".", filetype)
+  )
+
+  candidate_paths <- file.path(data_directory, candidate_names)
+  existing_paths <- candidate_paths[file.exists(candidate_paths)]
+
+  if (length(existing_paths) > 0) {
+    return(existing_paths[[1]])
+  }
+
+  # Fall back to a case-insensitive scan of the directory contents, in case
+  # the file exists but with different capitalization (e.g. "Patient.csv").
+  if (dir.exists(data_directory)) {
+    pattern <- paste0("^(clif_)?", table_name, "\\.", filetype, "$")
+    matches <- list.files(
+      data_directory,
+      pattern = pattern,
+      ignore.case = TRUE,
+      full.names = TRUE
+    )
+
+    if (length(matches) > 0) {
+      return(matches[[1]])
+    }
+  }
+
+  return(NA_character_)
+}
+
 #' Load CLIF data file
 #'
 #' @description
@@ -191,14 +242,13 @@ load_all_tables <- function(data_directory, table_names = NULL,
   }
 
   tables <- list()
-  extension <- switch(filetype, csv = ".csv", parquet = ".parquet")
 
   cli::cli_alert_info("Loading tables from {.file {data_directory}}")
 
   for (table_name in table_names) {
-    file_path <- file.path(data_directory, paste0(table_name, extension))
+    file_path <- find_clif_table_file(data_directory, table_name, filetype)
 
-    if (file.exists(file_path)) {
+    if (!is.na(file_path)) {
       tables[[table_name]] <- load_clif_data(
         file_path,
         filetype = filetype,
