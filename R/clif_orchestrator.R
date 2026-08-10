@@ -284,6 +284,12 @@ ClifOrchestrator <- R6::R6Class(
     #' @return Invisible self.
     initialize_tables = function(tables = NULL, validate = TRUE) {
 
+      if (!dir.exists(self$data_directory)) {
+        cli::cli_abort(
+          "Data directory not found: {.file {self$data_directory}}"
+        )
+      }
+
       # Default tables to load
       if (is.null(tables)) {
         tables <- c("patient", "hospitalization", "adt", "vitals", "labs")
@@ -293,12 +299,13 @@ ClifOrchestrator <- R6::R6Class(
 
       # Load each table
       for (table_name in tables) {
-        file_path <- file.path(
+        file_path <- find_clif_table_file(
           self$data_directory,
-          paste0(table_name, ".", self$filetype)
+          table_name,
+          self$filetype
         )
 
-        if (file.exists(file_path)) {
+        if (!is.na(file_path)) {
           tryCatch({
             self$load_table(table_name)
           }, error = function(e) {

@@ -83,10 +83,22 @@ BaseTable <- R6::R6Class(
         cli::cli_abort("No data directory specified and no data provided")
       }
 
-      file_path <- file.path(
+      file_path <- find_clif_table_file(
         self$data_directory,
-        paste0(self$table_name, ".", self$filetype)
+        self$table_name,
+        self$filetype
       )
+
+      if (is.na(file_path)) {
+        cli::cli_abort(c(
+          "Data file not found for table {.field {self$table_name}}",
+          "i" = paste0(
+            "Looked in {.file {self$data_directory}} for ",
+            "{.file {self$table_name}.{self$filetype}} or ",
+            "{.file clif_{self$table_name}.{self$filetype}}"
+          )
+        ))
+      }
 
       self$df <- load_clif_data(
         file_path,
