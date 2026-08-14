@@ -399,6 +399,82 @@ load_clif_table_polars <- function(data_directory,
   )
 }
 
+#' Load a single CLIF table with optional filters
+#'
+#' @description
+#' Load data for a specific CLIF table from a directory, optionally
+#' restricting rows to matching values in one or more columns. This mirrors
+#' clifpy's `load_data()` helper, letting users load a single table (e.g.
+#' `"vitals"`) directly without constructing a full `ClifOrchestrator`.
+#'
+#' @param table_name Character. Name of the CLIF table (e.g. "vitals").
+#' @param table_path Character. Path to directory containing CLIF data files.
+#' @param table_format_type Character. File type: "csv" or "parquet"
+#'   (default: "csv").
+#' @param site_tz Character. Timezone for datetime columns (default: "UTC").
+#' @param filters Named list. Optional column filters to apply after
+#'   loading. Each element's name is a column in the table, and its value is
+#'   a scalar or vector of values; rows are kept when the column matches any
+#'   of the specified values.
+#' @param schema_dir Character. Custom schema directory (default: NULL uses
+#'   package default).
+#'
+#' @return tibble containing the (optionally filtered) table data.
+#'
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' vitals_data <- load_data(
+#'   table_name = "vitals",
+#'   table_path = "path/to/clif/data",
+#'   table_format_type = "csv",
+#'   site_tz = "US/Eastern",
+#'   filters = list(vital_category = "weight_kg")
+#' )
+#' }
+load_data <- function(table_name, table_path,
+                       table_format_type = c("csv", "parquet"),
+                       site_tz = "UTC", filters = NULL, schema_dir = NULL) {
+  table_format_type <- match.arg(table_format_type)
+
+  file_path <- find_clif_table_file(table_path, table_name, table_format_type)
+
+  if (is.na(file_path)) {
+    cli::cli_abort(c(
+      "Data file not found for table {.field {table_name}}",
+      "i" = paste0(
+        "Looked in {.file {table_path}} for ",
+        "{.file {table_name}.{table_format_type}} or ",
+        "{.file clif_{table_name}.{table_format_type}}"
+      )
+    ))
+  }
+
+  schema <- load_schema(table_name, schema_dir = schema_dir)
+
+  data <- load_clif_data(
+    file_path,
+    filetype = table_format_type,
+    timezone = site_tz,
+    schema = schema
+  )
+
+  if (!is.null(filters) && length(filters) > 0) {
+    for (column_name in names(filters)) {
+      if (!(column_name %in% names(data))) {
+        cli::cli_abort(
+          "Filter column {.field {column_name}} not found in {.field {table_name}} table"
+        )
+      }
+
+      data <- data[data[[column_name]] %in% filters[[column_name]], ]
+    }
+  }
+
+  return(dplyr::as_tibble(data))
+}
+
 #' Save CLIF data file
 #'
 #' @param data tibble or data.frame. Data to save.

@@ -2,47 +2,52 @@
 % Please edit documentation in R/util_io.R
 \name{load_data}
 \alias{load_data}
-\title{Load a CLIF table from a data directory}
+\title{Load a single CLIF table with optional filters}
 \usage{
 load_data(
   table_name,
   table_path,
-  table_format_type,
-  sample_size = NULL,
-  columns = NULL,
+  table_format_type = c("csv", "parquet"),
+  site_tz = "UTC",
   filters = NULL,
-  site_tz = NULL,
-  verbose = FALSE
+  schema_dir = NULL
 )
 }
 \arguments{
-\item{table_name}{snake_case table name, e.g. \code{"labs"}.}
+\item{table_name}{Character. Name of the CLIF table (e.g. "vitals").}
 
-\item{table_path}{Directory containing the data file.}
+\item{table_path}{Character. Path to directory containing CLIF data files.}
 
-\item{table_format_type}{Either \code{"csv"} or \code{"parquet"}.}
+\item{table_format_type}{Character. File type: "csv" or "parquet"
+(default: "csv").}
 
-\item{sample_size}{Optional maximum number of rows to read.}
+\item{site_tz}{Character. Timezone for datetime columns (default: "UTC").}
 
-\item{columns}{Optional character vector of columns to select.}
+\item{filters}{Named list. Optional column filters to apply after
+loading. Each element's name is a column in the table, and its value is
+a scalar or vector of values; rows are kept when the column matches any
+of the specified values.}
 
-\item{filters}{Optional named list of equality filters. A length-1 value becomes
-\code{column = value}; a longer vector becomes \verb{column IN (...)}.}
-
-\item{site_tz}{Optional Olson timezone to convert \code{dttm} columns into.}
-
-\item{verbose}{Whether to emit loading messages.}
+\item{schema_dir}{Character. Custom schema directory (default: NULL uses
+package default).}
 }
 \value{
-A tibble.
+tibble containing the (optionally filtered) table data.
 }
 \description{
-Reads \verb{clif_<table_name>.<filetype>} from \code{table_path} using DuckDB, applying
-optional column selection, equality filters and row sampling before the data
-reaches R. Port of \code{clifpy.utils.io.load_data}.
+Load data for a specific CLIF table from a directory, optionally
+restricting rows to matching values in one or more columns. This mirrors
+clifpy's \code{load_data()} helper, letting users load a single table (e.g.
+\code{"vitals"}) directly without constructing a full \code{ClifOrchestrator}.
 }
 \examples{
 \dontrun{
-labs <- load_data("labs", "data/clif", "parquet", site_tz = "US/Central")
+vitals_data <- load_data(
+  table_name = "vitals",
+  table_path = "path/to/clif/data",
+  table_format_type = "csv",
+  site_tz = "US/Eastern",
+  filters = list(vital_category = "weight_kg")
+)
 }
 }
