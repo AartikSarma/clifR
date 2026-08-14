@@ -1,0 +1,5569 @@
+{
+  "table_name": "medication_admin_continuous",
+  "backend": "polars",
+  "conformance": {
+    "table_presence": {
+      "check_type": "table_presence",
+      "table_name": "medication_admin_continuous",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Table 'medication_admin_continuous' present with 10660 rows and 13 columns",
+          "details": {}
+        }
+      ],
+      "metrics": {
+        "row_count": 10660,
+        "column_count": 13
+      },
+      "atomic_total": 1,
+      "atomic_passed": 1
+    },
+    "required_columns": {
+      "check_type": "required_columns",
+      "table_name": "medication_admin_continuous",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'hospitalization_id': present",
+          "details": {
+            "column": "hospitalization_id"
+          }
+        },
+        {
+          "message": "Column 'admin_dttm': present",
+          "details": {
+            "column": "admin_dttm"
+          }
+        },
+        {
+          "message": "Column 'med_category': present",
+          "details": {
+            "column": "med_category"
+          }
+        },
+        {
+          "message": "Column 'med_group': present",
+          "details": {
+            "column": "med_group"
+          }
+        },
+        {
+          "message": "Column 'med_route_category': present",
+          "details": {
+            "column": "med_route_category"
+          }
+        },
+        {
+          "message": "Column 'med_dose': present",
+          "details": {
+            "column": "med_dose"
+          }
+        },
+        {
+          "message": "Column 'med_dose_unit': present",
+          "details": {
+            "column": "med_dose_unit"
+          }
+        },
+        {
+          "message": "Column 'mar_action_category': present",
+          "details": {
+            "column": "mar_action_category"
+          }
+        },
+        {
+          "message": "Column 'mar_action_group': present",
+          "details": {
+            "column": "mar_action_group"
+          }
+        }
+      ],
+      "metrics": {
+        "total_required": 9,
+        "total_present": 9,
+        "total_missing": 0
+      },
+      "atomic_total": 9,
+      "atomic_passed": 9
+    },
+    "column_dtypes": {
+      "check_type": "column_dtypes",
+      "table_name": "medication_admin_continuous",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'hospitalization_id': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "hospitalization_id",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'med_order_id': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "med_order_id",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'ordering_provider_id': not present in data (dtype check skipped)",
+          "details": {
+            "column": "ordering_provider_id",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'administering_provider_id': not present in data (dtype check skipped)",
+          "details": {
+            "column": "administering_provider_id",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'admin_dttm': dtype matches schema (DATETIME)",
+          "details": {
+            "column": "admin_dttm",
+            "expected": "DATETIME"
+          }
+        },
+        {
+          "message": "Column 'med_name': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "med_name",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'med_category': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "med_category",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'med_group': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "med_group",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'med_route_name': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "med_route_name",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'med_route_category': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "med_route_category",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'med_dose': dtype matches schema (DOUBLE)",
+          "details": {
+            "column": "med_dose",
+            "expected": "DOUBLE"
+          }
+        },
+        {
+          "message": "Column 'med_dose_unit': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "med_dose_unit",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'rx_norm_code': not present in data (dtype check skipped)",
+          "details": {
+            "column": "rx_norm_code",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'volume_infusion_rate': not present in data (dtype check skipped)",
+          "details": {
+            "column": "volume_infusion_rate",
+            "expected": "DOUBLE"
+          }
+        },
+        {
+          "message": "Column 'volume_infusion_rate_unit': not present in data (dtype check skipped)",
+          "details": {
+            "column": "volume_infusion_rate_unit",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'mar_action_name': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "mar_action_name",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'mar_action_category': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "mar_action_category",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'mar_action_group': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "mar_action_group",
+            "expected": "VARCHAR"
+          }
+        }
+      ],
+      "metrics": {
+        "columns_checked": 18,
+        "dtype_errors": 0,
+        "dtype_warnings": 0
+      },
+      "atomic_total": 18,
+      "atomic_passed": 18
+    },
+    "datetime_format": {
+      "check_type": "datetime_format",
+      "table_name": "medication_admin_continuous",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'admin_dttm': datetime format valid",
+          "details": {
+            "column": "admin_dttm"
+          }
+        }
+      ],
+      "metrics": {
+        "datetime_columns_checked": 1
+      },
+      "atomic_total": 1,
+      "atomic_passed": 1
+    },
+    "categorical_values": {
+      "check_type": "categorical_values",
+      "table_name": "medication_admin_continuous",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'med_category': all values match mCIDE permissible values",
+          "details": {
+            "column": "med_category"
+          }
+        },
+        {
+          "message": "Column 'med_route_category': all values match mCIDE permissible values",
+          "details": {
+            "column": "med_route_category"
+          }
+        },
+        {
+          "message": "Column 'mar_action_category': all values match mCIDE permissible values",
+          "details": {
+            "column": "mar_action_category"
+          }
+        }
+      ],
+      "metrics": {
+        "category_columns_checked": 3,
+        "columns_with_invalid_values": 0
+      },
+      "atomic_total": 3,
+      "atomic_passed": 3
+    },
+    "category_group_mapping": {
+      "check_type": "category_group_mapping",
+      "table_name": "medication_admin_continuous",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Category 'albumin_5': not present in data",
+          "details": {
+            "column": "albumin_5",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'albumin_25': not present in data",
+          "details": {
+            "column": "albumin_25",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'albuterol': not present in data",
+          "details": {
+            "column": "albuterol",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'alprostadil': not present in data",
+          "details": {
+            "column": "alprostadil",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'aminocaproic_acid': not present in data",
+          "details": {
+            "column": "aminocaproic_acid",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'aminophylline': not present in data",
+          "details": {
+            "column": "aminophylline",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'amiodarone': not present in data",
+          "details": {
+            "column": "amiodarone",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'angiotensin': not present in data",
+          "details": {
+            "column": "angiotensin",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'argatroban': not present in data",
+          "details": {
+            "column": "argatroban",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'baclofen': not present in data",
+          "details": {
+            "column": "baclofen",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'bivalirudin': not present in data",
+          "details": {
+            "column": "bivalirudin",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'bumetanide': not present in data",
+          "details": {
+            "column": "bumetanide",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'bupivacaine': not present in data",
+          "details": {
+            "column": "bupivacaine",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'cangrelor': not present in data",
+          "details": {
+            "column": "cangrelor",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'cisatracurium': not present in data",
+          "details": {
+            "column": "cisatracurium",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'clevidipine': not present in data",
+          "details": {
+            "column": "clevidipine",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'dexmedetomidine': group mapping correct",
+          "details": {
+            "column": "dexmedetomidine",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'dextrose_10_water': not present in data",
+          "details": {
+            "column": "dextrose_10_water",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'dextrose_5_water': not present in data",
+          "details": {
+            "column": "dextrose_5_water",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'dextrose_other': not present in data",
+          "details": {
+            "column": "dextrose_other",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'diltiazem': not present in data",
+          "details": {
+            "column": "diltiazem",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'dobutamine': group mapping correct",
+          "details": {
+            "column": "dobutamine",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'dopamine': group mapping correct",
+          "details": {
+            "column": "dopamine",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'epinephrine': group mapping correct",
+          "details": {
+            "column": "epinephrine",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'epoprostenol': not present in data",
+          "details": {
+            "column": "epoprostenol",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'eptifibatide': not present in data",
+          "details": {
+            "column": "eptifibatide",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'esmolol': not present in data",
+          "details": {
+            "column": "esmolol",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'esomeprazole': not present in data",
+          "details": {
+            "column": "esomeprazole",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'fentanyl': group mapping correct",
+          "details": {
+            "column": "fentanyl",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'furosemide': not present in data",
+          "details": {
+            "column": "furosemide",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'heparin': group mapping correct",
+          "details": {
+            "column": "heparin",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'hydromorphone': not present in data",
+          "details": {
+            "column": "hydromorphone",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'insulin': group mapping correct",
+          "details": {
+            "column": "insulin",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'ipratropium': not present in data",
+          "details": {
+            "column": "ipratropium",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'isoproterenol': not present in data",
+          "details": {
+            "column": "isoproterenol",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'ketamine': not present in data",
+          "details": {
+            "column": "ketamine",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'labetalol': not present in data",
+          "details": {
+            "column": "labetalol",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'lactated_ringers_solution': not present in data",
+          "details": {
+            "column": "lactated_ringers_solution",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'levothyroxine': not present in data",
+          "details": {
+            "column": "levothyroxine",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'lidocaine': not present in data",
+          "details": {
+            "column": "lidocaine",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'liothyronine': not present in data",
+          "details": {
+            "column": "liothyronine",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'lorazepam': not present in data",
+          "details": {
+            "column": "lorazepam",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'magnesium_sulfate': not present in data",
+          "details": {
+            "column": "magnesium_sulfate",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'midazolam': not present in data",
+          "details": {
+            "column": "midazolam",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'milrinone': not present in data",
+          "details": {
+            "column": "milrinone",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'morphine': group mapping correct",
+          "details": {
+            "column": "morphine",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'naloxone': not present in data",
+          "details": {
+            "column": "naloxone",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'nicardipine': not present in data",
+          "details": {
+            "column": "nicardipine",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'nitric_oxide': not present in data",
+          "details": {
+            "column": "nitric_oxide",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'nitroglycerin': not present in data",
+          "details": {
+            "column": "nitroglycerin",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'nitroprusside': not present in data",
+          "details": {
+            "column": "nitroprusside",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'norepinephrine': group mapping correct",
+          "details": {
+            "column": "norepinephrine",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'octreotide': not present in data",
+          "details": {
+            "column": "octreotide",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'oxytocin': not present in data",
+          "details": {
+            "column": "oxytocin",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'pantoprazole': not present in data",
+          "details": {
+            "column": "pantoprazole",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'papaverine': not present in data",
+          "details": {
+            "column": "papaverine",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'pentobarbital': not present in data",
+          "details": {
+            "column": "pentobarbital",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'phentolamine': not present in data",
+          "details": {
+            "column": "phentolamine",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'phenylephrine': group mapping correct",
+          "details": {
+            "column": "phenylephrine",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'pitocin': not present in data",
+          "details": {
+            "column": "pitocin",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'plasma_lyte': not present in data",
+          "details": {
+            "column": "plasma_lyte",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'procainamide': not present in data",
+          "details": {
+            "column": "procainamide",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'propofol': group mapping correct",
+          "details": {
+            "column": "propofol",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'remifentanil': not present in data",
+          "details": {
+            "column": "remifentanil",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'rocuronium': not present in data",
+          "details": {
+            "column": "rocuronium",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'ropivacaine': not present in data",
+          "details": {
+            "column": "ropivacaine",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'sodium_bicarbonate': not present in data",
+          "details": {
+            "column": "sodium_bicarbonate",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'sodium_chloride': not present in data",
+          "details": {
+            "column": "sodium_chloride",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'tacrolimus': not present in data",
+          "details": {
+            "column": "tacrolimus",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'terbutaline': not present in data",
+          "details": {
+            "column": "terbutaline",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'torsemide': not present in data",
+          "details": {
+            "column": "torsemide",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'tpn': not present in data",
+          "details": {
+            "column": "tpn",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'treprostinil': not present in data",
+          "details": {
+            "column": "treprostinil",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'vasopressin': group mapping correct",
+          "details": {
+            "column": "vasopressin",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'vecuronium': not present in data",
+          "details": {
+            "column": "vecuronium",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        },
+        {
+          "message": "Category 'zidovudine': not present in data",
+          "details": {
+            "column": "zidovudine",
+            "category_column": "med_category",
+            "group_column": "med_group"
+          }
+        }
+      ],
+      "metrics": {
+        "med_category_to_group_mapping_total_records": 10660,
+        "med_category_to_group_mapping_mismatch_count": 0
+      },
+      "atomic_total": 76,
+      "atomic_passed": 76
+    }
+  },
+  "completeness": {
+    "missingness": {
+      "check_type": "missingness",
+      "table_name": "medication_admin_continuous",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'hospitalization_id': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "hospitalization_id",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'admin_dttm': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "admin_dttm",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'med_category': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "med_category",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'med_group': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "med_group",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'med_route_category': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "med_route_category",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'med_dose': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "med_dose",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'med_dose_unit': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "med_dose_unit",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'mar_action_category': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "mar_action_category",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'mar_action_group': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "mar_action_group",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        }
+      ],
+      "metrics": {
+        "total_rows": 10660,
+        "required_columns_checked": 9,
+        "missingness_stats": [
+          {
+            "column": "hospitalization_id",
+            "null_count": 0,
+            "total_rows": 10660,
+            "percent_missing": 0.0
+          },
+          {
+            "column": "admin_dttm",
+            "null_count": 0,
+            "total_rows": 10660,
+            "percent_missing": 0.0
+          },
+          {
+            "column": "med_category",
+            "null_count": 0,
+            "total_rows": 10660,
+            "percent_missing": 0.0
+          },
+          {
+            "column": "med_group",
+            "null_count": 0,
+            "total_rows": 10660,
+            "percent_missing": 0.0
+          },
+          {
+            "column": "med_route_category",
+            "null_count": 0,
+            "total_rows": 10660,
+            "percent_missing": 0.0
+          },
+          {
+            "column": "med_dose",
+            "null_count": 0,
+            "total_rows": 10660,
+            "percent_missing": 0.0
+          },
+          {
+            "column": "med_dose_unit",
+            "null_count": 0,
+            "total_rows": 10660,
+            "percent_missing": 0.0
+          },
+          {
+            "column": "mar_action_category",
+            "null_count": 0,
+            "total_rows": 10660,
+            "percent_missing": 0.0
+          },
+          {
+            "column": "mar_action_group",
+            "null_count": 0,
+            "total_rows": 10660,
+            "percent_missing": 0.0
+          }
+        ]
+      },
+      "atomic_total": 9,
+      "atomic_passed": 9
+    },
+    "conditional_requirements": {
+      "check_type": "conditional_requirements",
+      "table_name": "medication_admin_continuous",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No conditional requirements defined for this table",
+          "details": {}
+        }
+      ],
+      "metrics": {},
+      "atomic_total": 0,
+      "atomic_passed": 0
+    },
+    "mcide_value_coverage": {
+      "check_type": "mcide_value_coverage",
+      "table_name": "medication_admin_continuous",
+      "passed": false,
+      "errors": [
+        {
+          "message": "Missing 64 mCIDE values: albumin_5, albumin_25, albuterol, alprostadil, aminocaproic_acid, aminophylline, amiodarone, angiotensin, argatroban, baclofen, bivalirudin, bumetanide, bupivacaine, cangrelor, cisatracurium, clevidipine, dextrose_10_water, dextrose_5_water, dextrose_other, diltiazem, epoprostenol, eptifibatide, esmolol, esomeprazole, furosemide, hydromorphone, ipratropium, isoproterenol, ketamine, labetalol, lactated_ringers_solution, levothyroxine, lidocaine, liothyronine, lorazepam, magnesium_sulfate, midazolam, milrinone, naloxone, nicardipine, nitric_oxide, nitroglycerin, nitroprusside, octreotide, oxytocin, pantoprazole, papaverine, pentobarbital, phentolamine, pitocin, plasma_lyte, procainamide, remifentanil, rocuronium, ropivacaine, sodium_bicarbonate, sodium_chloride, tacrolimus, terbutaline, torsemide, tpn, treprostinil, vecuronium, zidovudine",
+          "details": {
+            "column": "med_category",
+            "missing_values": [
+              "albumin_5",
+              "albumin_25",
+              "albuterol",
+              "alprostadil",
+              "aminocaproic_acid",
+              "aminophylline",
+              "amiodarone",
+              "angiotensin",
+              "argatroban",
+              "baclofen",
+              "bivalirudin",
+              "bumetanide",
+              "bupivacaine",
+              "cangrelor",
+              "cisatracurium",
+              "clevidipine",
+              "dextrose_10_water",
+              "dextrose_5_water",
+              "dextrose_other",
+              "diltiazem",
+              "epoprostenol",
+              "eptifibatide",
+              "esmolol",
+              "esomeprazole",
+              "furosemide",
+              "hydromorphone",
+              "ipratropium",
+              "isoproterenol",
+              "ketamine",
+              "labetalol",
+              "lactated_ringers_solution",
+              "levothyroxine",
+              "lidocaine",
+              "liothyronine",
+              "lorazepam",
+              "magnesium_sulfate",
+              "midazolam",
+              "milrinone",
+              "naloxone",
+              "nicardipine",
+              "nitric_oxide",
+              "nitroglycerin",
+              "nitroprusside",
+              "octreotide",
+              "oxytocin",
+              "pantoprazole",
+              "papaverine",
+              "pentobarbital",
+              "phentolamine",
+              "pitocin",
+              "plasma_lyte",
+              "procainamide",
+              "remifentanil",
+              "rocuronium",
+              "ropivacaine",
+              "sodium_bicarbonate",
+              "sodium_chloride",
+              "tacrolimus",
+              "terbutaline",
+              "torsemide",
+              "tpn",
+              "treprostinil",
+              "vecuronium",
+              "zidovudine"
+            ],
+            "coverage_percent": 15.79
+          }
+        },
+        {
+          "message": "Missing 2 mCIDE values: im, inhaled",
+          "details": {
+            "column": "med_route_category",
+            "missing_values": [
+              "im",
+              "inhaled"
+            ],
+            "coverage_percent": 33.33
+          }
+        },
+        {
+          "message": "Missing 1 mCIDE values: other",
+          "details": {
+            "column": "mar_action_category",
+            "missing_values": [
+              "other"
+            ],
+            "coverage_percent": 83.33
+          }
+        }
+      ],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'med_category': 12/76 mCIDE values present",
+          "details": {
+            "column": "med_category",
+            "found_values": 12,
+            "expected_values": 76,
+            "coverage_percent": 15.79,
+            "atomic_count": 12
+          }
+        },
+        {
+          "message": "Column 'med_route_category': 1/3 mCIDE values present",
+          "details": {
+            "column": "med_route_category",
+            "found_values": 1,
+            "expected_values": 3,
+            "coverage_percent": 33.33,
+            "atomic_count": 1
+          }
+        },
+        {
+          "message": "Column 'mar_action_category': 5/6 mCIDE values present",
+          "details": {
+            "column": "mar_action_category",
+            "found_values": 5,
+            "expected_values": 6,
+            "coverage_percent": 83.33,
+            "atomic_count": 5
+          }
+        }
+      ],
+      "metrics": {
+        "category_columns_checked": 3,
+        "coverage_by_column": {
+          "med_category": {
+            "expected_values": 76,
+            "found_values": 12,
+            "missing_values": [
+              "albumin_5",
+              "albumin_25",
+              "albuterol",
+              "alprostadil",
+              "aminocaproic_acid",
+              "aminophylline",
+              "amiodarone",
+              "angiotensin",
+              "argatroban",
+              "baclofen",
+              "bivalirudin",
+              "bumetanide",
+              "bupivacaine",
+              "cangrelor",
+              "cisatracurium",
+              "clevidipine",
+              "dextrose_10_water",
+              "dextrose_5_water",
+              "dextrose_other",
+              "diltiazem",
+              "epoprostenol",
+              "eptifibatide",
+              "esmolol",
+              "esomeprazole",
+              "furosemide",
+              "hydromorphone",
+              "ipratropium",
+              "isoproterenol",
+              "ketamine",
+              "labetalol",
+              "lactated_ringers_solution",
+              "levothyroxine",
+              "lidocaine",
+              "liothyronine",
+              "lorazepam",
+              "magnesium_sulfate",
+              "midazolam",
+              "milrinone",
+              "naloxone",
+              "nicardipine",
+              "nitric_oxide",
+              "nitroglycerin",
+              "nitroprusside",
+              "octreotide",
+              "oxytocin",
+              "pantoprazole",
+              "papaverine",
+              "pentobarbital",
+              "phentolamine",
+              "pitocin",
+              "plasma_lyte",
+              "procainamide",
+              "remifentanil",
+              "rocuronium",
+              "ropivacaine",
+              "sodium_bicarbonate",
+              "sodium_chloride",
+              "tacrolimus",
+              "terbutaline",
+              "torsemide",
+              "tpn",
+              "treprostinil",
+              "vecuronium",
+              "zidovudine"
+            ],
+            "coverage_percent": 15.79
+          },
+          "med_route_category": {
+            "expected_values": 3,
+            "found_values": 1,
+            "missing_values": [
+              "im",
+              "inhaled"
+            ],
+            "coverage_percent": 33.33
+          },
+          "mar_action_category": {
+            "expected_values": 6,
+            "found_values": 5,
+            "missing_values": [
+              "other"
+            ],
+            "coverage_percent": 83.33
+          }
+        }
+      },
+      "atomic_total": 85,
+      "atomic_passed": 18
+    }
+  },
+  "relational": {},
+  "plausibility": {
+    "chronological_order": {
+      "check_type": "chronological_order",
+      "table_name": "medication_admin_continuous",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No chronological order rules defined for this table",
+          "details": {}
+        }
+      ],
+      "metrics": {},
+      "atomic_total": 0,
+      "atomic_passed": 0
+    },
+    "numeric_range_plausibility": {
+      "check_type": "numeric_range_plausibility",
+      "table_name": "medication_admin_continuous",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "All numeric values within plausible ranges (med_dose)",
+          "details": {
+            "columns_checked": [
+              "med_dose"
+            ]
+          }
+        }
+      ],
+      "metrics": {
+        "columns_checked": 1,
+        "out_of_range_summary": {
+          "med_dose": {
+            "total_non_null": 7052,
+            "out_of_range": 0,
+            "out_of_range_percent": 0.0
+          }
+        }
+      },
+      "atomic_total": 42,
+      "atomic_passed": 42
+    },
+    "field_plausibility": {
+      "check_type": "field_plausibility",
+      "table_name": "medication_admin_continuous",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No field plausibility rules defined for this table",
+          "details": {}
+        }
+      ],
+      "metrics": {},
+      "atomic_total": 0,
+      "atomic_passed": 0
+    },
+    "medication_dose_unit_consistency": {
+      "check_type": "medication_dose_unit_consistency",
+      "table_name": "medication_admin_continuous",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "All med_dose_unit values use rate-based units (e.g. mcg/kg/min) appropriate for continuous administration",
+          "details": {}
+        }
+      ],
+      "metrics": {
+        "total_rows": 10660,
+        "unit_pattern_violations": 0,
+        "violation_percent": 0.0
+      },
+      "atomic_total": 1,
+      "atomic_passed": 1
+    },
+    "category_temporal_consistency": {
+      "check_type": "category_temporal_consistency",
+      "table_name": "medication_admin_continuous",
+      "passed": true,
+      "errors": [],
+      "warnings": [
+        {
+          "message": "med_category: dobutamine absent in 3/7 years (2018-2024)",
+          "details": {
+            "column": "med_category",
+            "value": "dobutamine",
+            "absent_years": [
+              2021,
+              2022,
+              2024
+            ],
+            "total_years": 7,
+            "yearly_counts": {
+              "2018": 1,
+              "2019": 2,
+              "2020": 1,
+              "2021": 0,
+              "2022": 0,
+              "2023": 1,
+              "2024": 0
+            }
+          }
+        },
+        {
+          "message": "med_category: dopamine absent in 1/7 years (2018-2024)",
+          "details": {
+            "column": "med_category",
+            "value": "dopamine",
+            "absent_years": [
+              2022
+            ],
+            "total_years": 7,
+            "yearly_counts": {
+              "2018": 1,
+              "2019": 2,
+              "2020": 2,
+              "2021": 2,
+              "2022": 0,
+              "2023": 1,
+              "2024": 1
+            }
+          }
+        },
+        {
+          "message": "med_category: epinephrine absent in 1/7 years (2018-2024)",
+          "details": {
+            "column": "med_category",
+            "value": "epinephrine",
+            "absent_years": [
+              2023
+            ],
+            "total_years": 7,
+            "yearly_counts": {
+              "2018": 2,
+              "2019": 1,
+              "2020": 1,
+              "2021": 1,
+              "2022": 3,
+              "2023": 0,
+              "2024": 1
+            }
+          }
+        },
+        {
+          "message": "med_category: phenylephrine absent in 1/7 years (2018-2024)",
+          "details": {
+            "column": "med_category",
+            "value": "phenylephrine",
+            "absent_years": [
+              2024
+            ],
+            "total_years": 7,
+            "yearly_counts": {
+              "2018": 2,
+              "2019": 1,
+              "2020": 1,
+              "2021": 1,
+              "2022": 1,
+              "2023": 2,
+              "2024": 0
+            }
+          }
+        },
+        {
+          "message": "med_category: vasopressin absent in 2/7 years (2018-2024)",
+          "details": {
+            "column": "med_category",
+            "value": "vasopressin",
+            "absent_years": [
+              2020,
+              2023
+            ],
+            "total_years": 7,
+            "yearly_counts": {
+              "2018": 2,
+              "2019": 2,
+              "2020": 0,
+              "2021": 3,
+              "2022": 2,
+              "2023": 0,
+              "2024": 4
+            }
+          }
+        }
+      ],
+      "info": [
+        {
+          "message": "med_category: dexmedetomidine present in 7/7 years (2018-2024)",
+          "details": {
+            "column": "med_category",
+            "value": "dexmedetomidine",
+            "yearly_counts": {
+              "2018": 2,
+              "2019": 3,
+              "2020": 3,
+              "2021": 4,
+              "2022": 4,
+              "2023": 2,
+              "2024": 6
+            }
+          }
+        },
+        {
+          "message": "med_category: fentanyl present in 7/7 years (2018-2024)",
+          "details": {
+            "column": "med_category",
+            "value": "fentanyl",
+            "yearly_counts": {
+              "2018": 5,
+              "2019": 4,
+              "2020": 5,
+              "2021": 5,
+              "2022": 5,
+              "2023": 5,
+              "2024": 6
+            }
+          }
+        },
+        {
+          "message": "med_category: heparin present in 7/7 years (2018-2024)",
+          "details": {
+            "column": "med_category",
+            "value": "heparin",
+            "yearly_counts": {
+              "2018": 8,
+              "2019": 6,
+              "2020": 5,
+              "2021": 4,
+              "2022": 3,
+              "2023": 2,
+              "2024": 3
+            }
+          }
+        },
+        {
+          "message": "med_category: insulin present in 7/7 years (2018-2024)",
+          "details": {
+            "column": "med_category",
+            "value": "insulin",
+            "yearly_counts": {
+              "2018": 7,
+              "2019": 10,
+              "2020": 3,
+              "2021": 2,
+              "2022": 6,
+              "2023": 5,
+              "2024": 4
+            }
+          }
+        },
+        {
+          "message": "med_category: morphine present in 7/7 years (2018-2024)",
+          "details": {
+            "column": "med_category",
+            "value": "morphine",
+            "yearly_counts": {
+              "2018": 2,
+              "2019": 7,
+              "2020": 1,
+              "2021": 3,
+              "2022": 2,
+              "2023": 3,
+              "2024": 3
+            }
+          }
+        },
+        {
+          "message": "med_category: norepinephrine present in 7/7 years (2018-2024)",
+          "details": {
+            "column": "med_category",
+            "value": "norepinephrine",
+            "yearly_counts": {
+              "2018": 4,
+              "2019": 5,
+              "2020": 3,
+              "2021": 5,
+              "2022": 4,
+              "2023": 7,
+              "2024": 4
+            }
+          }
+        },
+        {
+          "message": "med_category: propofol present in 7/7 years (2018-2024)",
+          "details": {
+            "column": "med_category",
+            "value": "propofol",
+            "yearly_counts": {
+              "2018": 5,
+              "2019": 8,
+              "2020": 3,
+              "2021": 4,
+              "2022": 3,
+              "2023": 6,
+              "2024": 3
+            }
+          }
+        },
+        {
+          "message": "med_route_category: iv present in 7/7 years (2018-2024)",
+          "details": {
+            "column": "med_route_category",
+            "value": "iv",
+            "yearly_counts": {
+              "2018": 18,
+              "2019": 28,
+              "2020": 16,
+              "2021": 14,
+              "2022": 18,
+              "2023": 17,
+              "2024": 16
+            }
+          }
+        },
+        {
+          "message": "mar_action_category: dose_change present in 7/7 years (2018-2024)",
+          "details": {
+            "column": "mar_action_category",
+            "value": "dose_change",
+            "yearly_counts": {
+              "2018": 18,
+              "2019": 28,
+              "2020": 16,
+              "2021": 14,
+              "2022": 18,
+              "2023": 17,
+              "2024": 16
+            }
+          }
+        },
+        {
+          "message": "mar_action_category: going present in 7/7 years (2018-2024)",
+          "details": {
+            "column": "mar_action_category",
+            "value": "going",
+            "yearly_counts": {
+              "2018": 18,
+              "2019": 28,
+              "2020": 16,
+              "2021": 14,
+              "2022": 18,
+              "2023": 17,
+              "2024": 16
+            }
+          }
+        },
+        {
+          "message": "mar_action_category: start present in 7/7 years (2018-2024)",
+          "details": {
+            "column": "mar_action_category",
+            "value": "start",
+            "yearly_counts": {
+              "2018": 17,
+              "2019": 26,
+              "2020": 16,
+              "2021": 14,
+              "2022": 17,
+              "2023": 17,
+              "2024": 15
+            }
+          }
+        },
+        {
+          "message": "mar_action_category: stop present in 7/7 years (2018-2024)",
+          "details": {
+            "column": "mar_action_category",
+            "value": "stop",
+            "yearly_counts": {
+              "2018": 17,
+              "2019": 27,
+              "2020": 16,
+              "2021": 14,
+              "2022": 17,
+              "2023": 17,
+              "2024": 15
+            }
+          }
+        },
+        {
+          "message": "mar_action_category: verify present in 7/7 years (2018-2024)",
+          "details": {
+            "column": "mar_action_category",
+            "value": "verify",
+            "yearly_counts": {
+              "2018": 17,
+              "2019": 28,
+              "2020": 16,
+              "2021": 13,
+              "2022": 18,
+              "2023": 16,
+              "2024": 16
+            }
+          }
+        }
+      ],
+      "metrics": {
+        "category_columns_checked": 3,
+        "yearly_distributions": {
+          "med_category": {
+            "2018": {
+              "dexmedetomidine": 2,
+              "dobutamine": 1,
+              "dopamine": 1,
+              "epinephrine": 2,
+              "fentanyl": 5,
+              "heparin": 8,
+              "insulin": 7,
+              "morphine": 2,
+              "norepinephrine": 4,
+              "phenylephrine": 2,
+              "propofol": 5,
+              "vasopressin": 2
+            },
+            "2019": {
+              "dexmedetomidine": 3,
+              "dobutamine": 2,
+              "dopamine": 2,
+              "epinephrine": 1,
+              "fentanyl": 4,
+              "heparin": 6,
+              "insulin": 10,
+              "morphine": 7,
+              "norepinephrine": 5,
+              "phenylephrine": 1,
+              "propofol": 8,
+              "vasopressin": 2
+            },
+            "2020": {
+              "dexmedetomidine": 3,
+              "dobutamine": 1,
+              "dopamine": 2,
+              "epinephrine": 1,
+              "fentanyl": 5,
+              "heparin": 5,
+              "insulin": 3,
+              "morphine": 1,
+              "norepinephrine": 3,
+              "phenylephrine": 1,
+              "propofol": 3
+            },
+            "2021": {
+              "dexmedetomidine": 4,
+              "dopamine": 2,
+              "epinephrine": 1,
+              "fentanyl": 5,
+              "heparin": 4,
+              "insulin": 2,
+              "morphine": 3,
+              "norepinephrine": 5,
+              "phenylephrine": 1,
+              "propofol": 4,
+              "vasopressin": 3
+            },
+            "2022": {
+              "dexmedetomidine": 4,
+              "epinephrine": 3,
+              "fentanyl": 5,
+              "heparin": 3,
+              "insulin": 6,
+              "morphine": 2,
+              "norepinephrine": 4,
+              "phenylephrine": 1,
+              "propofol": 3,
+              "vasopressin": 2
+            },
+            "2023": {
+              "dexmedetomidine": 2,
+              "dobutamine": 1,
+              "dopamine": 1,
+              "fentanyl": 5,
+              "heparin": 2,
+              "insulin": 5,
+              "morphine": 3,
+              "norepinephrine": 7,
+              "phenylephrine": 2,
+              "propofol": 6
+            },
+            "2024": {
+              "dexmedetomidine": 6,
+              "dopamine": 1,
+              "epinephrine": 1,
+              "fentanyl": 6,
+              "heparin": 3,
+              "insulin": 4,
+              "morphine": 3,
+              "norepinephrine": 4,
+              "propofol": 3,
+              "vasopressin": 4
+            }
+          },
+          "med_route_category": {
+            "2018": {
+              "iv": 18
+            },
+            "2019": {
+              "iv": 28
+            },
+            "2020": {
+              "iv": 16
+            },
+            "2021": {
+              "iv": 14
+            },
+            "2022": {
+              "iv": 18
+            },
+            "2023": {
+              "iv": 17
+            },
+            "2024": {
+              "iv": 16
+            }
+          },
+          "mar_action_category": {
+            "2018": {
+              "dose_change": 18,
+              "going": 18,
+              "start": 17,
+              "stop": 17,
+              "verify": 17
+            },
+            "2019": {
+              "dose_change": 28,
+              "going": 28,
+              "start": 26,
+              "stop": 27,
+              "verify": 28
+            },
+            "2020": {
+              "dose_change": 16,
+              "going": 16,
+              "start": 16,
+              "stop": 16,
+              "verify": 16
+            },
+            "2021": {
+              "dose_change": 14,
+              "going": 14,
+              "start": 14,
+              "stop": 14,
+              "verify": 13
+            },
+            "2022": {
+              "dose_change": 18,
+              "going": 18,
+              "start": 17,
+              "stop": 17,
+              "verify": 18
+            },
+            "2023": {
+              "dose_change": 17,
+              "going": 17,
+              "start": 17,
+              "stop": 17,
+              "verify": 16
+            },
+            "2024": {
+              "dose_change": 16,
+              "going": 16,
+              "start": 15,
+              "stop": 15,
+              "verify": 16
+            }
+          }
+        },
+        "missing_in_years": {
+          "med_category": {
+            "vasopressin": [
+              2020,
+              2023
+            ],
+            "phenylephrine": [
+              2024
+            ],
+            "dobutamine": [
+              2021,
+              2022,
+              2024
+            ],
+            "dopamine": [
+              2022
+            ],
+            "epinephrine": [
+              2023
+            ]
+          }
+        },
+        "monthly_trends": {
+          "med_category": [
+            {
+              "month_year": "2018-01",
+              "med_category": "fentanyl",
+              "med_dose_unit": "mcg/hr",
+              "n": 1,
+              "avg": 84.45479452054786
+            },
+            {
+              "month_year": "2018-01",
+              "med_category": "heparin",
+              "med_dose_unit": "units/hr",
+              "n": 1,
+              "avg": 570.1289104477612
+            },
+            {
+              "month_year": "2018-01",
+              "med_category": "insulin",
+              "med_dose_unit": "units/hr",
+              "n": 1,
+              "avg": 0.8564255319148929
+            },
+            {
+              "month_year": "2018-01",
+              "med_category": "morphine",
+              "med_dose_unit": "mg/hr",
+              "n": 1,
+              "avg": 6.883375
+            },
+            {
+              "month_year": "2018-01",
+              "med_category": "norepinephrine",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 0.017072463768115952
+            },
+            {
+              "month_year": "2018-01",
+              "med_category": "phenylephrine",
+              "med_dose_unit": "mcg/min",
+              "n": 2,
+              "avg": 82.88446153846145
+            },
+            {
+              "month_year": "2018-01",
+              "med_category": "propofol",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 2,
+              "avg": 12.160129032258066
+            },
+            {
+              "month_year": "2018-02",
+              "med_category": "heparin",
+              "med_dose_unit": "units/hr",
+              "n": 1,
+              "avg": 1037.6677777777775
+            },
+            {
+              "month_year": "2018-03",
+              "med_category": "heparin",
+              "med_dose_unit": "units/hr",
+              "n": 1,
+              "avg": 1185.8329523809534
+            },
+            {
+              "month_year": "2018-03",
+              "med_category": "insulin",
+              "med_dose_unit": "units/hr",
+              "n": 1,
+              "avg": 2.1556315789473692
+            },
+            {
+              "month_year": "2018-04",
+              "med_category": "dobutamine",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 5.828622950819671
+            },
+            {
+              "month_year": "2018-04",
+              "med_category": "heparin",
+              "med_dose_unit": "units/hr",
+              "n": 1,
+              "avg": 933.1800000000002
+            },
+            {
+              "month_year": "2018-04",
+              "med_category": "insulin",
+              "med_dose_unit": "units/hr",
+              "n": 1,
+              "avg": 1.8835294117647057
+            },
+            {
+              "month_year": "2018-04",
+              "med_category": "vasopressin",
+              "med_dose_unit": "units/min",
+              "n": 1,
+              "avg": 0.033624999999999995
+            },
+            {
+              "month_year": "2018-05",
+              "med_category": "insulin",
+              "med_dose_unit": "units/hr",
+              "n": 1,
+              "avg": 3.332571428571428
+            },
+            {
+              "month_year": "2018-05",
+              "med_category": "norepinephrine",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 0.20963636363636365
+            },
+            {
+              "month_year": "2018-06",
+              "med_category": "insulin",
+              "med_dose_unit": "units/hr",
+              "n": 1,
+              "avg": 3.694970149253734
+            },
+            {
+              "month_year": "2018-07",
+              "med_category": "dexmedetomidine",
+              "med_dose_unit": "mcg/kg/hr",
+              "n": 1,
+              "avg": 1.1221538461538467
+            },
+            {
+              "month_year": "2018-07",
+              "med_category": "dopamine",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 4.166964285714285
+            },
+            {
+              "month_year": "2018-07",
+              "med_category": "epinephrine",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 0.07019047619047618
+            },
+            {
+              "month_year": "2018-07",
+              "med_category": "fentanyl",
+              "med_dose_unit": "mcg/hr",
+              "n": 1,
+              "avg": 54.718041095890406
+            },
+            {
+              "month_year": "2018-07",
+              "med_category": "norepinephrine",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 0.20570370370370375
+            },
+            {
+              "month_year": "2018-07",
+              "med_category": "vasopressin",
+              "med_dose_unit": "units/min",
+              "n": 1,
+              "avg": 0.013076923076923083
+            },
+            {
+              "month_year": "2018-08",
+              "med_category": "fentanyl",
+              "med_dose_unit": "mcg/hr",
+              "n": 2,
+              "avg": 121.37598888888893
+            },
+            {
+              "month_year": "2018-08",
+              "med_category": "heparin",
+              "med_dose_unit": "units/hr",
+              "n": 3,
+              "avg": 845.9966153846136
+            },
+            {
+              "month_year": "2018-08",
+              "med_category": "propofol",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 2,
+              "avg": 18.974820143884898
+            },
+            {
+              "month_year": "2018-10",
+              "med_category": "heparin",
+              "med_dose_unit": "units/hr",
+              "n": 1,
+              "avg": 843.4935135135132
+            },
+            {
+              "month_year": "2018-10",
+              "med_category": "morphine",
+              "med_dose_unit": "mg/hr",
+              "n": 1,
+              "avg": 3.4953333333333343
+            },
+            {
+              "month_year": "2018-10",
+              "med_category": "propofol",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 39.923363636363646
+            },
+            {
+              "month_year": "2018-11",
+              "med_category": "dexmedetomidine",
+              "med_dose_unit": "mcg/kg/hr",
+              "n": 1,
+              "avg": 0.5645555555555557
+            },
+            {
+              "month_year": "2018-11",
+              "med_category": "epinephrine",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 0.14541025641025643
+            },
+            {
+              "month_year": "2018-11",
+              "med_category": "fentanyl",
+              "med_dose_unit": "mcg/hr",
+              "n": 1,
+              "avg": 59.96178787878791
+            },
+            {
+              "month_year": "2018-11",
+              "med_category": "insulin",
+              "med_dose_unit": "units/hr",
+              "n": 2,
+              "avg": 3.5720000000000014
+            },
+            {
+              "month_year": "2018-11",
+              "med_category": "norepinephrine",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 0.03180000000000001
+            },
+            {
+              "month_year": "2019-01",
+              "med_category": "dexmedetomidine",
+              "med_dose_unit": "mcg/kg/hr",
+              "n": 1,
+              "avg": 0.49866666666666665
+            },
+            {
+              "month_year": "2019-01",
+              "med_category": "fentanyl",
+              "med_dose_unit": "mcg/hr",
+              "n": 1,
+              "avg": 141.10923076923078
+            },
+            {
+              "month_year": "2019-01",
+              "med_category": "heparin",
+              "med_dose_unit": "units/hr",
+              "n": 1,
+              "avg": 925.2739090909095
+            },
+            {
+              "month_year": "2019-01",
+              "med_category": "insulin",
+              "med_dose_unit": "units/hr",
+              "n": 3,
+              "avg": 1.8193970588235298
+            },
+            {
+              "month_year": "2019-01",
+              "med_category": "morphine",
+              "med_dose_unit": "mg/hr",
+              "n": 1,
+              "avg": 3.2079999999999993
+            },
+            {
+              "month_year": "2019-01",
+              "med_category": "norepinephrine",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 0.08125000000000004
+            },
+            {
+              "month_year": "2019-01",
+              "med_category": "propofol",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 37.79633333333334
+            },
+            {
+              "month_year": "2019-01",
+              "med_category": "vasopressin",
+              "med_dose_unit": "units/min",
+              "n": 1,
+              "avg": 0.011208333333333336
+            },
+            {
+              "month_year": "2019-02",
+              "med_category": "fentanyl",
+              "med_dose_unit": "mcg/hr",
+              "n": 1,
+              "avg": 115.0
+            },
+            {
+              "month_year": "2019-02",
+              "med_category": "morphine",
+              "med_dose_unit": "mg/hr",
+              "n": 1,
+              "avg": 3.596181818181819
+            },
+            {
+              "month_year": "2019-02",
+              "med_category": "norepinephrine",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 0.2537499999999999
+            },
+            {
+              "month_year": "2019-02",
+              "med_category": "propofol",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 45.318696969696965
+            },
+            {
+              "month_year": "2019-03",
+              "med_category": "heparin",
+              "med_dose_unit": "units/hr",
+              "n": 1,
+              "avg": 1136.332108108109
+            },
+            {
+              "month_year": "2019-03",
+              "med_category": "insulin",
+              "med_dose_unit": "units/hr",
+              "n": 1,
+              "avg": 3.739117647058823
+            },
+            {
+              "month_year": "2019-05",
+              "med_category": "fentanyl",
+              "med_dose_unit": "mcg/hr",
+              "n": 1,
+              "avg": 85.14800000000004
+            },
+            {
+              "month_year": "2019-05",
+              "med_category": "heparin",
+              "med_dose_unit": "units/hr",
+              "n": 1,
+              "avg": 1085.303
+            },
+            {
+              "month_year": "2019-05",
+              "med_category": "phenylephrine",
+              "med_dose_unit": "mcg/min",
+              "n": 1,
+              "avg": 116.74101639344269
+            },
+            {
+              "month_year": "2019-05",
+              "med_category": "propofol",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 63.45575000000002
+            },
+            {
+              "month_year": "2019-06",
+              "med_category": "fentanyl",
+              "med_dose_unit": "mcg/hr",
+              "n": 1,
+              "avg": 54.29689795918365
+            },
+            {
+              "month_year": "2019-06",
+              "med_category": "heparin",
+              "med_dose_unit": "units/hr",
+              "n": 1,
+              "avg": 879.6262962962969
+            },
+            {
+              "month_year": "2019-06",
+              "med_category": "norepinephrine",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 2,
+              "avg": 0.11468674698795173
+            },
+            {
+              "month_year": "2019-06",
+              "med_category": "propofol",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 24.215222222222238
+            },
+            {
+              "month_year": "2019-07",
+              "med_category": "fentanyl",
+              "med_dose_unit": "mcg/hr",
+              "n": 1,
+              "avg": 61.950612903225824
+            },
+            {
+              "month_year": "2019-07",
+              "med_category": "heparin",
+              "med_dose_unit": "units/hr",
+              "n": 1,
+              "avg": 1122.8966666666665
+            },
+            {
+              "month_year": "2019-07",
+              "med_category": "insulin",
+              "med_dose_unit": "units/hr",
+              "n": 1,
+              "avg": 1.2032857142857145
+            },
+            {
+              "month_year": "2019-07",
+              "med_category": "morphine",
+              "med_dose_unit": "mg/hr",
+              "n": 1,
+              "avg": 3.9391428571428535
+            },
+            {
+              "month_year": "2019-07",
+              "med_category": "propofol",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 2,
+              "avg": 29.70411627906976
+            },
+            {
+              "month_year": "2019-09",
+              "med_category": "dexmedetomidine",
+              "med_dose_unit": "mcg/kg/hr",
+              "n": 1,
+              "avg": 0.8681632653061224
+            },
+            {
+              "month_year": "2019-09",
+              "med_category": "epinephrine",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 0.016200000000000006
+            },
+            {
+              "month_year": "2019-09",
+              "med_category": "morphine",
+              "med_dose_unit": "mg/hr",
+              "n": 1,
+              "avg": 8.605280000000002
+            },
+            {
+              "month_year": "2019-09",
+              "med_category": "vasopressin",
+              "med_dose_unit": "units/min",
+              "n": 1,
+              "avg": 0.026212121212121225
+            },
+            {
+              "month_year": "2019-10",
+              "med_category": "dopamine",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 2,
+              "avg": 12.4205283018868
+            },
+            {
+              "month_year": "2019-10",
+              "med_category": "insulin",
+              "med_dose_unit": "units/hr",
+              "n": 1,
+              "avg": 4.349761904761901
+            },
+            {
+              "month_year": "2019-10",
+              "med_category": "morphine",
+              "med_dose_unit": "mg/hr",
+              "n": 1,
+              "avg": 3.7070000000000003
+            },
+            {
+              "month_year": "2019-10",
+              "med_category": "propofol",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 52.043090909090914
+            },
+            {
+              "month_year": "2019-11",
+              "med_category": "dexmedetomidine",
+              "med_dose_unit": "mcg/kg/hr",
+              "n": 1,
+              "avg": 0.3863043478260868
+            },
+            {
+              "month_year": "2019-11",
+              "med_category": "dobutamine",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 4.150583333333333
+            },
+            {
+              "month_year": "2019-11",
+              "med_category": "insulin",
+              "med_dose_unit": "units/hr",
+              "n": 3,
+              "avg": 1.6171603053435106
+            },
+            {
+              "month_year": "2019-11",
+              "med_category": "morphine",
+              "med_dose_unit": "mg/hr",
+              "n": 1,
+              "avg": 1.7794999999999996
+            },
+            {
+              "month_year": "2019-11",
+              "med_category": "norepinephrine",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 0.0841818181818182
+            },
+            {
+              "month_year": "2019-12",
+              "med_category": "dobutamine",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 8.138095238095238
+            },
+            {
+              "month_year": "2019-12",
+              "med_category": "heparin",
+              "med_dose_unit": "units/hr",
+              "n": 1,
+              "avg": 1038.9593478260867
+            },
+            {
+              "month_year": "2019-12",
+              "med_category": "insulin",
+              "med_dose_unit": "units/hr",
+              "n": 1,
+              "avg": 0.71875
+            },
+            {
+              "month_year": "2019-12",
+              "med_category": "morphine",
+              "med_dose_unit": "mg/hr",
+              "n": 1,
+              "avg": 4.861857142857143
+            },
+            {
+              "month_year": "2019-12",
+              "med_category": "propofol",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 24.694999999999997
+            },
+            {
+              "month_year": "2020-03",
+              "med_category": "phenylephrine",
+              "med_dose_unit": "mcg/min",
+              "n": 1,
+              "avg": 107.44228571428576
+            },
+            {
+              "month_year": "2020-04",
+              "med_category": "fentanyl",
+              "med_dose_unit": "mcg/hr",
+              "n": 1,
+              "avg": 55.717333333333336
+            },
+            {
+              "month_year": "2020-04",
+              "med_category": "heparin",
+              "med_dose_unit": "units/hr",
+              "n": 1,
+              "avg": 828.2551529411766
+            },
+            {
+              "month_year": "2020-04",
+              "med_category": "propofol",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 33.938454545454555
+            },
+            {
+              "month_year": "2020-05",
+              "med_category": "dobutamine",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 3.6176666666666666
+            },
+            {
+              "month_year": "2020-05",
+              "med_category": "dopamine",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 6.192882352941175
+            },
+            {
+              "month_year": "2020-05",
+              "med_category": "fentanyl",
+              "med_dose_unit": "mcg/hr",
+              "n": 1,
+              "avg": 127.0974594594595
+            },
+            {
+              "month_year": "2020-05",
+              "med_category": "heparin",
+              "med_dose_unit": "units/hr",
+              "n": 1,
+              "avg": 665.1205641025643
+            },
+            {
+              "month_year": "2020-05",
+              "med_category": "insulin",
+              "med_dose_unit": "units/hr",
+              "n": 1,
+              "avg": 2.465444444444445
+            },
+            {
+              "month_year": "2020-05",
+              "med_category": "propofol",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 46.189804123711376
+            },
+            {
+              "month_year": "2020-06",
+              "med_category": "dexmedetomidine",
+              "med_dose_unit": "mcg/kg/hr",
+              "n": 1,
+              "avg": 0.5700000000000002
+            },
+            {
+              "month_year": "2020-06",
+              "med_category": "epinephrine",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 0.06448148148148145
+            },
+            {
+              "month_year": "2020-06",
+              "med_category": "heparin",
+              "med_dose_unit": "units/hr",
+              "n": 1,
+              "avg": 1075.833756097561
+            },
+            {
+              "month_year": "2020-06",
+              "med_category": "insulin",
+              "med_dose_unit": "units/hr",
+              "n": 1,
+              "avg": 2.055000000000001
+            },
+            {
+              "month_year": "2020-06",
+              "med_category": "morphine",
+              "med_dose_unit": "mg/hr",
+              "n": 1,
+              "avg": 1.293
+            },
+            {
+              "month_year": "2020-06",
+              "med_category": "norepinephrine",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 2,
+              "avg": 0.1468983050847458
+            },
+            {
+              "month_year": "2020-07",
+              "med_category": "fentanyl",
+              "med_dose_unit": "mcg/hr",
+              "n": 1,
+              "avg": 66.12965168539327
+            },
+            {
+              "month_year": "2020-07",
+              "med_category": "heparin",
+              "med_dose_unit": "units/hr",
+              "n": 2,
+              "avg": 691.606876033058
+            },
+            {
+              "month_year": "2020-07",
+              "med_category": "propofol",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 40.03991803278691
+            },
+            {
+              "month_year": "2020-09",
+              "med_category": "insulin",
+              "med_dose_unit": "units/hr",
+              "n": 1,
+              "avg": 5.395869565217393
+            },
+            {
+              "month_year": "2020-09",
+              "med_category": "norepinephrine",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 0.13800000000000004
+            },
+            {
+              "month_year": "2020-10",
+              "med_category": "dexmedetomidine",
+              "med_dose_unit": "mcg/kg/hr",
+              "n": 2,
+              "avg": 0.44787368421052665
+            },
+            {
+              "month_year": "2020-10",
+              "med_category": "fentanyl",
+              "med_dose_unit": "mcg/hr",
+              "n": 2,
+              "avg": 67.75144827586207
+            },
+            {
+              "month_year": "2020-10",
+              "med_category": "heparin",
+              "med_dose_unit": "units/hr",
+              "n": 1,
+              "avg": 1370.6131428571427
+            },
+            {
+              "month_year": "2020-11",
+              "med_category": "dopamine",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 2.027999999999999
+            },
+            {
+              "month_year": "2020-11",
+              "med_category": "heparin",
+              "med_dose_unit": "units/hr",
+              "n": 1,
+              "avg": 1377.7560000000005
+            },
+            {
+              "month_year": "2021-01",
+              "med_category": "dopamine",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 11.101000000000004
+            },
+            {
+              "month_year": "2021-02",
+              "med_category": "dexmedetomidine",
+              "med_dose_unit": "mcg/kg/hr",
+              "n": 1,
+              "avg": 0.5770000000000002
+            },
+            {
+              "month_year": "2021-02",
+              "med_category": "heparin",
+              "med_dose_unit": "units/hr",
+              "n": 2,
+              "avg": 1029.6656571428575
+            },
+            {
+              "month_year": "2021-02",
+              "med_category": "morphine",
+              "med_dose_unit": "mg/hr",
+              "n": 2,
+              "avg": 5.356490909090906
+            },
+            {
+              "month_year": "2021-02",
+              "med_category": "propofol",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 46.2266363636364
+            },
+            {
+              "month_year": "2021-03",
+              "med_category": "heparin",
+              "med_dose_unit": "units/hr",
+              "n": 1,
+              "avg": 1356.6539819819827
+            },
+            {
+              "month_year": "2021-03",
+              "med_category": "morphine",
+              "med_dose_unit": "mg/hr",
+              "n": 1,
+              "avg": 2.0005833333333336
+            },
+            {
+              "month_year": "2021-03",
+              "med_category": "norepinephrine",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 0.13850000000000004
+            },
+            {
+              "month_year": "2021-03",
+              "med_category": "propofol",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 20.9574375
+            },
+            {
+              "month_year": "2021-03",
+              "med_category": "vasopressin",
+              "med_dose_unit": "units/min",
+              "n": 1,
+              "avg": 0.029562500000000012
+            },
+            {
+              "month_year": "2021-05",
+              "med_category": "norepinephrine",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 0.2940000000000001
+            },
+            {
+              "month_year": "2021-05",
+              "med_category": "phenylephrine",
+              "med_dose_unit": "mcg/min",
+              "n": 1,
+              "avg": 97.76075757575754
+            },
+            {
+              "month_year": "2021-05",
+              "med_category": "vasopressin",
+              "med_dose_unit": "units/min",
+              "n": 1,
+              "avg": 0.01717777777777779
+            },
+            {
+              "month_year": "2021-06",
+              "med_category": "fentanyl",
+              "med_dose_unit": "mcg/hr",
+              "n": 1,
+              "avg": 42.212142857142865
+            },
+            {
+              "month_year": "2021-06",
+              "med_category": "propofol",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 23.462576923076924
+            },
+            {
+              "month_year": "2021-07",
+              "med_category": "fentanyl",
+              "med_dose_unit": "mcg/hr",
+              "n": 1,
+              "avg": 59.39729870129871
+            },
+            {
+              "month_year": "2021-07",
+              "med_category": "norepinephrine",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 2,
+              "avg": 0.09916326530612243
+            },
+            {
+              "month_year": "2021-07",
+              "med_category": "propofol",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 57.05000000000001
+            },
+            {
+              "month_year": "2021-09",
+              "med_category": "dexmedetomidine",
+              "med_dose_unit": "mcg/kg/hr",
+              "n": 1,
+              "avg": 0.44099999999999995
+            },
+            {
+              "month_year": "2021-09",
+              "med_category": "epinephrine",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 0.0644285714285714
+            },
+            {
+              "month_year": "2021-09",
+              "med_category": "fentanyl",
+              "med_dose_unit": "mcg/hr",
+              "n": 1,
+              "avg": 34.955275862068966
+            },
+            {
+              "month_year": "2021-09",
+              "med_category": "heparin",
+              "med_dose_unit": "units/hr",
+              "n": 1,
+              "avg": 676.0434666666667
+            },
+            {
+              "month_year": "2021-09",
+              "med_category": "insulin",
+              "med_dose_unit": "units/hr",
+              "n": 1,
+              "avg": 2.1360000000000006
+            },
+            {
+              "month_year": "2021-09",
+              "med_category": "vasopressin",
+              "med_dose_unit": "units/min",
+              "n": 1,
+              "avg": 0.01183333333333334
+            },
+            {
+              "month_year": "2021-10",
+              "med_category": "dexmedetomidine",
+              "med_dose_unit": "mcg/kg/hr",
+              "n": 2,
+              "avg": 0.5993687943262415
+            },
+            {
+              "month_year": "2021-10",
+              "med_category": "dopamine",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 2.022619047619047
+            },
+            {
+              "month_year": "2021-10",
+              "med_category": "fentanyl",
+              "med_dose_unit": "mcg/hr",
+              "n": 2,
+              "avg": 44.32971111111111
+            },
+            {
+              "month_year": "2021-10",
+              "med_category": "insulin",
+              "med_dose_unit": "units/hr",
+              "n": 1,
+              "avg": 2.751444444444446
+            },
+            {
+              "month_year": "2021-10",
+              "med_category": "norepinephrine",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 0.03000000000000001
+            },
+            {
+              "month_year": "2022-01",
+              "med_category": "heparin",
+              "med_dose_unit": "units/hr",
+              "n": 2,
+              "avg": 667.4371428571429
+            },
+            {
+              "month_year": "2022-01",
+              "med_category": "insulin",
+              "med_dose_unit": "units/hr",
+              "n": 1,
+              "avg": 4.336666666666667
+            },
+            {
+              "month_year": "2022-02",
+              "med_category": "epinephrine",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 0.08700000000000004
+            },
+            {
+              "month_year": "2022-02",
+              "med_category": "phenylephrine",
+              "med_dose_unit": "mcg/min",
+              "n": 1,
+              "avg": 52.29914285714286
+            },
+            {
+              "month_year": "2022-04",
+              "med_category": "epinephrine",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 0.11576190476190476
+            },
+            {
+              "month_year": "2022-04",
+              "med_category": "insulin",
+              "med_dose_unit": "units/hr",
+              "n": 1,
+              "avg": 4.318769230769231
+            },
+            {
+              "month_year": "2022-04",
+              "med_category": "norepinephrine",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 2,
+              "avg": 0.15730232558139537
+            },
+            {
+              "month_year": "2022-04",
+              "med_category": "vasopressin",
+              "med_dose_unit": "units/min",
+              "n": 1,
+              "avg": 0.010486486486486491
+            },
+            {
+              "month_year": "2022-05",
+              "med_category": "insulin",
+              "med_dose_unit": "units/hr",
+              "n": 1,
+              "avg": 0.749
+            },
+            {
+              "month_year": "2022-05",
+              "med_category": "norepinephrine",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 0.123
+            },
+            {
+              "month_year": "2022-06",
+              "med_category": "morphine",
+              "med_dose_unit": "mg/hr",
+              "n": 1,
+              "avg": 1.2897538461538463
+            },
+            {
+              "month_year": "2022-06",
+              "med_category": "propofol",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 57.83638461538462
+            },
+            {
+              "month_year": "2022-07",
+              "med_category": "fentanyl",
+              "med_dose_unit": "mcg/hr",
+              "n": 1,
+              "avg": 32.10845454545454
+            },
+            {
+              "month_year": "2022-07",
+              "med_category": "propofol",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 13.808436363636362
+            },
+            {
+              "month_year": "2022-09",
+              "med_category": "dexmedetomidine",
+              "med_dose_unit": "mcg/kg/hr",
+              "n": 3,
+              "avg": 0.4898461538461539
+            },
+            {
+              "month_year": "2022-09",
+              "med_category": "epinephrine",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 0.1747719298245613
+            },
+            {
+              "month_year": "2022-09",
+              "med_category": "fentanyl",
+              "med_dose_unit": "mcg/hr",
+              "n": 3,
+              "avg": 68.86075155279502
+            },
+            {
+              "month_year": "2022-09",
+              "med_category": "heparin",
+              "med_dose_unit": "units/hr",
+              "n": 1,
+              "avg": 1100.4173870967736
+            },
+            {
+              "month_year": "2022-09",
+              "med_category": "norepinephrine",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 0.11954545454545454
+            },
+            {
+              "month_year": "2022-09",
+              "med_category": "vasopressin",
+              "med_dose_unit": "units/min",
+              "n": 1,
+              "avg": 0.012619047619047622
+            },
+            {
+              "month_year": "2022-10",
+              "med_category": "dexmedetomidine",
+              "med_dose_unit": "mcg/kg/hr",
+              "n": 1,
+              "avg": 0.529095238095238
+            },
+            {
+              "month_year": "2022-10",
+              "med_category": "fentanyl",
+              "med_dose_unit": "mcg/hr",
+              "n": 2,
+              "avg": 83.37616666666666
+            },
+            {
+              "month_year": "2022-11",
+              "med_category": "insulin",
+              "med_dose_unit": "units/hr",
+              "n": 1,
+              "avg": 2.2079999999999993
+            },
+            {
+              "month_year": "2022-11",
+              "med_category": "morphine",
+              "med_dose_unit": "mg/hr",
+              "n": 1,
+              "avg": 1.6689583333333333
+            },
+            {
+              "month_year": "2022-11",
+              "med_category": "propofol",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 54.43764705882352
+            },
+            {
+              "month_year": "2022-12",
+              "med_category": "insulin",
+              "med_dose_unit": "units/hr",
+              "n": 2,
+              "avg": 3.8626428571428564
+            },
+            {
+              "month_year": "2023-01",
+              "med_category": "morphine",
+              "med_dose_unit": "mg/hr",
+              "n": 1,
+              "avg": 2.26764367816092
+            },
+            {
+              "month_year": "2023-01",
+              "med_category": "propofol",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 26.973000000000006
+            },
+            {
+              "month_year": "2023-02",
+              "med_category": "fentanyl",
+              "med_dose_unit": "mcg/hr",
+              "n": 1,
+              "avg": 176.08010714285712
+            },
+            {
+              "month_year": "2023-02",
+              "med_category": "insulin",
+              "med_dose_unit": "units/hr",
+              "n": 1,
+              "avg": 1.065818181818182
+            },
+            {
+              "month_year": "2023-02",
+              "med_category": "norepinephrine",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 0.20900000000000005
+            },
+            {
+              "month_year": "2023-02",
+              "med_category": "propofol",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 31.516000000000002
+            },
+            {
+              "month_year": "2023-03",
+              "med_category": "dopamine",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 5.984454545454546
+            },
+            {
+              "month_year": "2023-03",
+              "med_category": "fentanyl",
+              "med_dose_unit": "mcg/hr",
+              "n": 1,
+              "avg": 113.10807547169806
+            },
+            {
+              "month_year": "2023-03",
+              "med_category": "insulin",
+              "med_dose_unit": "units/hr",
+              "n": 1,
+              "avg": 3.6911886792452813
+            },
+            {
+              "month_year": "2023-03",
+              "med_category": "norepinephrine",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 0.11992592592592591
+            },
+            {
+              "month_year": "2023-03",
+              "med_category": "propofol",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 27.85967924528305
+            },
+            {
+              "month_year": "2023-04",
+              "med_category": "norepinephrine",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 0.08052380952380955
+            },
+            {
+              "month_year": "2023-04",
+              "med_category": "phenylephrine",
+              "med_dose_unit": "mcg/min",
+              "n": 1,
+              "avg": 37.68917647058824
+            },
+            {
+              "month_year": "2023-05",
+              "med_category": "dobutamine",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 9.930000000000005
+            },
+            {
+              "month_year": "2023-05",
+              "med_category": "insulin",
+              "med_dose_unit": "units/hr",
+              "n": 1,
+              "avg": 1.0936470588235294
+            },
+            {
+              "month_year": "2023-05",
+              "med_category": "phenylephrine",
+              "med_dose_unit": "mcg/min",
+              "n": 1,
+              "avg": 110.37281818181815
+            },
+            {
+              "month_year": "2023-07",
+              "med_category": "dexmedetomidine",
+              "med_dose_unit": "mcg/kg/hr",
+              "n": 1,
+              "avg": 0.35129411764705887
+            },
+            {
+              "month_year": "2023-07",
+              "med_category": "fentanyl",
+              "med_dose_unit": "mcg/hr",
+              "n": 1,
+              "avg": 105.64846938775516
+            },
+            {
+              "month_year": "2023-07",
+              "med_category": "insulin",
+              "med_dose_unit": "units/hr",
+              "n": 1,
+              "avg": 2.8652500000000014
+            },
+            {
+              "month_year": "2023-07",
+              "med_category": "morphine",
+              "med_dose_unit": "mg/hr",
+              "n": 1,
+              "avg": 2.161081081081081
+            },
+            {
+              "month_year": "2023-07",
+              "med_category": "norepinephrine",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 0.28522222222222227
+            },
+            {
+              "month_year": "2023-07",
+              "med_category": "propofol",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 31.884666666666657
+            },
+            {
+              "month_year": "2023-08",
+              "med_category": "dexmedetomidine",
+              "med_dose_unit": "mcg/kg/hr",
+              "n": 1,
+              "avg": 0.5346363636363636
+            },
+            {
+              "month_year": "2023-08",
+              "med_category": "fentanyl",
+              "med_dose_unit": "mcg/hr",
+              "n": 1,
+              "avg": 158.6019493670887
+            },
+            {
+              "month_year": "2023-08",
+              "med_category": "heparin",
+              "med_dose_unit": "units/hr",
+              "n": 1,
+              "avg": 688.8000819672128
+            },
+            {
+              "month_year": "2023-08",
+              "med_category": "insulin",
+              "med_dose_unit": "units/hr",
+              "n": 1,
+              "avg": 2.814999999999999
+            },
+            {
+              "month_year": "2023-08",
+              "med_category": "norepinephrine",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 2,
+              "avg": 0.10690909090909097
+            },
+            {
+              "month_year": "2023-11",
+              "med_category": "morphine",
+              "med_dose_unit": "mg/hr",
+              "n": 1,
+              "avg": 2.0070833333333336
+            },
+            {
+              "month_year": "2023-11",
+              "med_category": "propofol",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 5.441599999999999
+            },
+            {
+              "month_year": "2023-12",
+              "med_category": "fentanyl",
+              "med_dose_unit": "mcg/hr",
+              "n": 1,
+              "avg": 92.53499999999994
+            },
+            {
+              "month_year": "2023-12",
+              "med_category": "heparin",
+              "med_dose_unit": "units/hr",
+              "n": 1,
+              "avg": 1135.7846666666662
+            },
+            {
+              "month_year": "2023-12",
+              "med_category": "norepinephrine",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 0.07466666666666667
+            },
+            {
+              "month_year": "2023-12",
+              "med_category": "propofol",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 16.989034482758615
+            },
+            {
+              "month_year": "2024-01",
+              "med_category": "norepinephrine",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 0.021153846153846162
+            },
+            {
+              "month_year": "2024-01",
+              "med_category": "vasopressin",
+              "med_dose_unit": "units/min",
+              "n": 1,
+              "avg": 0.02064285714285714
+            },
+            {
+              "month_year": "2024-02",
+              "med_category": "insulin",
+              "med_dose_unit": "units/hr",
+              "n": 2,
+              "avg": 4.4555652173913085
+            },
+            {
+              "month_year": "2024-02",
+              "med_category": "norepinephrine",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 0.0674897959183674
+            },
+            {
+              "month_year": "2024-02",
+              "med_category": "vasopressin",
+              "med_dose_unit": "units/min",
+              "n": 1,
+              "avg": 0.011307692307692314
+            },
+            {
+              "month_year": "2024-05",
+              "med_category": "fentanyl",
+              "med_dose_unit": "mcg/hr",
+              "n": 1,
+              "avg": 29.219578947368422
+            },
+            {
+              "month_year": "2024-05",
+              "med_category": "norepinephrine",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 0.18428571428571436
+            },
+            {
+              "month_year": "2024-05",
+              "med_category": "propofol",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 28.742842105263147
+            },
+            {
+              "month_year": "2024-05",
+              "med_category": "vasopressin",
+              "med_dose_unit": "units/min",
+              "n": 1,
+              "avg": 0.011250000000000005
+            },
+            {
+              "month_year": "2024-06",
+              "med_category": "fentanyl",
+              "med_dose_unit": "mcg/hr",
+              "n": 1,
+              "avg": 63.92707692307693
+            },
+            {
+              "month_year": "2024-06",
+              "med_category": "heparin",
+              "med_dose_unit": "units/hr",
+              "n": 1,
+              "avg": 1135.3812352941177
+            },
+            {
+              "month_year": "2024-06",
+              "med_category": "insulin",
+              "med_dose_unit": "units/hr",
+              "n": 1,
+              "avg": 0.9745319148936171
+            },
+            {
+              "month_year": "2024-06",
+              "med_category": "norepinephrine",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 0.267
+            },
+            {
+              "month_year": "2024-06",
+              "med_category": "propofol",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 20.21623076923077
+            },
+            {
+              "month_year": "2024-06",
+              "med_category": "vasopressin",
+              "med_dose_unit": "units/min",
+              "n": 1,
+              "avg": 0.01440000000000001
+            },
+            {
+              "month_year": "2024-07",
+              "med_category": "dexmedetomidine",
+              "med_dose_unit": "mcg/kg/hr",
+              "n": 1,
+              "avg": 0.8587358490566035
+            },
+            {
+              "month_year": "2024-07",
+              "med_category": "fentanyl",
+              "med_dose_unit": "mcg/hr",
+              "n": 2,
+              "avg": 69.9071727272727
+            },
+            {
+              "month_year": "2024-07",
+              "med_category": "morphine",
+              "med_dose_unit": "mg/hr",
+              "n": 1,
+              "avg": 5.089769230769232
+            },
+            {
+              "month_year": "2024-07",
+              "med_category": "propofol",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 2,
+              "avg": 18.39433695652173
+            },
+            {
+              "month_year": "2024-08",
+              "med_category": "dexmedetomidine",
+              "med_dose_unit": "mcg/kg/hr",
+              "n": 1,
+              "avg": 0.7829090909090909
+            },
+            {
+              "month_year": "2024-08",
+              "med_category": "heparin",
+              "med_dose_unit": "units/hr",
+              "n": 1,
+              "avg": 987.6136037735855
+            },
+            {
+              "month_year": "2024-08",
+              "med_category": "morphine",
+              "med_dose_unit": "mg/hr",
+              "n": 1,
+              "avg": 2.9050000000000007
+            },
+            {
+              "month_year": "2024-09",
+              "med_category": "dexmedetomidine",
+              "med_dose_unit": "mcg/kg/hr",
+              "n": 2,
+              "avg": 0.3811144278606964
+            },
+            {
+              "month_year": "2024-09",
+              "med_category": "dopamine",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 6.489000000000003
+            },
+            {
+              "month_year": "2024-09",
+              "med_category": "fentanyl",
+              "med_dose_unit": "mcg/hr",
+              "n": 1,
+              "avg": 99.12281818181819
+            },
+            {
+              "month_year": "2024-09",
+              "med_category": "morphine",
+              "med_dose_unit": "mg/hr",
+              "n": 1,
+              "avg": 1.9377777777777776
+            },
+            {
+              "month_year": "2024-11",
+              "med_category": "dexmedetomidine",
+              "med_dose_unit": "mcg/kg/hr",
+              "n": 2,
+              "avg": 0.9450454545454545
+            },
+            {
+              "month_year": "2024-11",
+              "med_category": "epinephrine",
+              "med_dose_unit": "mcg/kg/min",
+              "n": 1,
+              "avg": 0.147
+            },
+            {
+              "month_year": "2024-11",
+              "med_category": "fentanyl",
+              "med_dose_unit": "mcg/hr",
+              "n": 2,
+              "avg": 79.28984920634919
+            },
+            {
+              "month_year": "2024-11",
+              "med_category": "insulin",
+              "med_dose_unit": "units/hr",
+              "n": 1,
+              "avg": 4.406272727272729
+            },
+            {
+              "month_year": "2024-12",
+              "med_category": "dexmedetomidine",
+              "med_dose_unit": "mcg/kg/hr",
+              "n": 1,
+              "avg": 0.667
+            },
+            {
+              "month_year": "2024-12",
+              "med_category": "fentanyl",
+              "med_dose_unit": "mcg/hr",
+              "n": 1,
+              "avg": 115.93933333333332
+            },
+            {
+              "month_year": "2024-12",
+              "med_category": "heparin",
+              "med_dose_unit": "units/hr",
+              "n": 1,
+              "avg": 1225.2038461538477
+            }
+          ],
+          "med_route_category": [
+            {
+              "month_year": "2018-01",
+              "med_route_category": "iv",
+              "n": 2
+            },
+            {
+              "month_year": "2018-02",
+              "med_route_category": "iv",
+              "n": 1
+            },
+            {
+              "month_year": "2018-03",
+              "med_route_category": "iv",
+              "n": 2
+            },
+            {
+              "month_year": "2018-04",
+              "med_route_category": "iv",
+              "n": 2
+            },
+            {
+              "month_year": "2018-05",
+              "med_route_category": "iv",
+              "n": 1
+            },
+            {
+              "month_year": "2018-06",
+              "med_route_category": "iv",
+              "n": 1
+            },
+            {
+              "month_year": "2018-07",
+              "med_route_category": "iv",
+              "n": 2
+            },
+            {
+              "month_year": "2018-08",
+              "med_route_category": "iv",
+              "n": 3
+            },
+            {
+              "month_year": "2018-10",
+              "med_route_category": "iv",
+              "n": 1
+            },
+            {
+              "month_year": "2018-11",
+              "med_route_category": "iv",
+              "n": 3
+            },
+            {
+              "month_year": "2019-01",
+              "med_route_category": "iv",
+              "n": 5
+            },
+            {
+              "month_year": "2019-02",
+              "med_route_category": "iv",
+              "n": 3
+            },
+            {
+              "month_year": "2019-03",
+              "med_route_category": "iv",
+              "n": 2
+            },
+            {
+              "month_year": "2019-05",
+              "med_route_category": "iv",
+              "n": 3
+            },
+            {
+              "month_year": "2019-06",
+              "med_route_category": "iv",
+              "n": 2
+            },
+            {
+              "month_year": "2019-07",
+              "med_route_category": "iv",
+              "n": 4
+            },
+            {
+              "month_year": "2019-09",
+              "med_route_category": "iv",
+              "n": 2
+            },
+            {
+              "month_year": "2019-10",
+              "med_route_category": "iv",
+              "n": 2
+            },
+            {
+              "month_year": "2019-11",
+              "med_route_category": "iv",
+              "n": 3
+            },
+            {
+              "month_year": "2019-12",
+              "med_route_category": "iv",
+              "n": 3
+            },
+            {
+              "month_year": "2020-03",
+              "med_route_category": "iv",
+              "n": 1
+            },
+            {
+              "month_year": "2020-04",
+              "med_route_category": "iv",
+              "n": 2
+            },
+            {
+              "month_year": "2020-05",
+              "med_route_category": "iv",
+              "n": 2
+            },
+            {
+              "month_year": "2020-06",
+              "med_route_category": "iv",
+              "n": 5
+            },
+            {
+              "month_year": "2020-07",
+              "med_route_category": "iv",
+              "n": 2
+            },
+            {
+              "month_year": "2020-09",
+              "med_route_category": "iv",
+              "n": 1
+            },
+            {
+              "month_year": "2020-10",
+              "med_route_category": "iv",
+              "n": 3
+            },
+            {
+              "month_year": "2020-11",
+              "med_route_category": "iv",
+              "n": 2
+            },
+            {
+              "month_year": "2021-01",
+              "med_route_category": "iv",
+              "n": 1
+            },
+            {
+              "month_year": "2021-02",
+              "med_route_category": "iv",
+              "n": 3
+            },
+            {
+              "month_year": "2021-03",
+              "med_route_category": "iv",
+              "n": 1
+            },
+            {
+              "month_year": "2021-05",
+              "med_route_category": "iv",
+              "n": 1
+            },
+            {
+              "month_year": "2021-06",
+              "med_route_category": "iv",
+              "n": 1
+            },
+            {
+              "month_year": "2021-07",
+              "med_route_category": "iv",
+              "n": 2
+            },
+            {
+              "month_year": "2021-09",
+              "med_route_category": "iv",
+              "n": 2
+            },
+            {
+              "month_year": "2021-10",
+              "med_route_category": "iv",
+              "n": 3
+            },
+            {
+              "month_year": "2022-01",
+              "med_route_category": "iv",
+              "n": 2
+            },
+            {
+              "month_year": "2022-02",
+              "med_route_category": "iv",
+              "n": 1
+            },
+            {
+              "month_year": "2022-04",
+              "med_route_category": "iv",
+              "n": 3
+            },
+            {
+              "month_year": "2022-05",
+              "med_route_category": "iv",
+              "n": 1
+            },
+            {
+              "month_year": "2022-06",
+              "med_route_category": "iv",
+              "n": 1
+            },
+            {
+              "month_year": "2022-07",
+              "med_route_category": "iv",
+              "n": 1
+            },
+            {
+              "month_year": "2022-09",
+              "med_route_category": "iv",
+              "n": 5
+            },
+            {
+              "month_year": "2022-10",
+              "med_route_category": "iv",
+              "n": 2
+            },
+            {
+              "month_year": "2022-11",
+              "med_route_category": "iv",
+              "n": 1
+            },
+            {
+              "month_year": "2022-12",
+              "med_route_category": "iv",
+              "n": 2
+            },
+            {
+              "month_year": "2023-01",
+              "med_route_category": "iv",
+              "n": 1
+            },
+            {
+              "month_year": "2023-02",
+              "med_route_category": "iv",
+              "n": 2
+            },
+            {
+              "month_year": "2023-03",
+              "med_route_category": "iv",
+              "n": 2
+            },
+            {
+              "month_year": "2023-04",
+              "med_route_category": "iv",
+              "n": 2
+            },
+            {
+              "month_year": "2023-05",
+              "med_route_category": "iv",
+              "n": 1
+            },
+            {
+              "month_year": "2023-07",
+              "med_route_category": "iv",
+              "n": 4
+            },
+            {
+              "month_year": "2023-08",
+              "med_route_category": "iv",
+              "n": 3
+            },
+            {
+              "month_year": "2023-11",
+              "med_route_category": "iv",
+              "n": 1
+            },
+            {
+              "month_year": "2023-12",
+              "med_route_category": "iv",
+              "n": 1
+            },
+            {
+              "month_year": "2024-01",
+              "med_route_category": "iv",
+              "n": 1
+            },
+            {
+              "month_year": "2024-02",
+              "med_route_category": "iv",
+              "n": 2
+            },
+            {
+              "month_year": "2024-05",
+              "med_route_category": "iv",
+              "n": 1
+            },
+            {
+              "month_year": "2024-06",
+              "med_route_category": "iv",
+              "n": 2
+            },
+            {
+              "month_year": "2024-07",
+              "med_route_category": "iv",
+              "n": 3
+            },
+            {
+              "month_year": "2024-08",
+              "med_route_category": "iv",
+              "n": 2
+            },
+            {
+              "month_year": "2024-09",
+              "med_route_category": "iv",
+              "n": 2
+            },
+            {
+              "month_year": "2024-11",
+              "med_route_category": "iv",
+              "n": 3
+            },
+            {
+              "month_year": "2024-12",
+              "med_route_category": "iv",
+              "n": 2
+            }
+          ],
+          "mar_action_category": [
+            {
+              "month_year": "2018-01",
+              "mar_action_category": "dose_change",
+              "n": 2
+            },
+            {
+              "month_year": "2018-01",
+              "mar_action_category": "going",
+              "n": 2
+            },
+            {
+              "month_year": "2018-01",
+              "mar_action_category": "start",
+              "n": 2
+            },
+            {
+              "month_year": "2018-01",
+              "mar_action_category": "stop",
+              "n": 2
+            },
+            {
+              "month_year": "2018-01",
+              "mar_action_category": "verify",
+              "n": 2
+            },
+            {
+              "month_year": "2018-02",
+              "mar_action_category": "dose_change",
+              "n": 1
+            },
+            {
+              "month_year": "2018-02",
+              "mar_action_category": "going",
+              "n": 1
+            },
+            {
+              "month_year": "2018-02",
+              "mar_action_category": "start",
+              "n": 1
+            },
+            {
+              "month_year": "2018-02",
+              "mar_action_category": "stop",
+              "n": 1
+            },
+            {
+              "month_year": "2018-02",
+              "mar_action_category": "verify",
+              "n": 1
+            },
+            {
+              "month_year": "2018-03",
+              "mar_action_category": "dose_change",
+              "n": 2
+            },
+            {
+              "month_year": "2018-03",
+              "mar_action_category": "going",
+              "n": 2
+            },
+            {
+              "month_year": "2018-03",
+              "mar_action_category": "start",
+              "n": 2
+            },
+            {
+              "month_year": "2018-03",
+              "mar_action_category": "stop",
+              "n": 2
+            },
+            {
+              "month_year": "2018-03",
+              "mar_action_category": "verify",
+              "n": 2
+            },
+            {
+              "month_year": "2018-04",
+              "mar_action_category": "dose_change",
+              "n": 2
+            },
+            {
+              "month_year": "2018-04",
+              "mar_action_category": "going",
+              "n": 2
+            },
+            {
+              "month_year": "2018-04",
+              "mar_action_category": "start",
+              "n": 2
+            },
+            {
+              "month_year": "2018-04",
+              "mar_action_category": "stop",
+              "n": 2
+            },
+            {
+              "month_year": "2018-04",
+              "mar_action_category": "verify",
+              "n": 2
+            },
+            {
+              "month_year": "2018-05",
+              "mar_action_category": "dose_change",
+              "n": 1
+            },
+            {
+              "month_year": "2018-05",
+              "mar_action_category": "going",
+              "n": 1
+            },
+            {
+              "month_year": "2018-05",
+              "mar_action_category": "start",
+              "n": 1
+            },
+            {
+              "month_year": "2018-05",
+              "mar_action_category": "stop",
+              "n": 1
+            },
+            {
+              "month_year": "2018-05",
+              "mar_action_category": "verify",
+              "n": 1
+            },
+            {
+              "month_year": "2018-06",
+              "mar_action_category": "dose_change",
+              "n": 1
+            },
+            {
+              "month_year": "2018-06",
+              "mar_action_category": "going",
+              "n": 1
+            },
+            {
+              "month_year": "2018-06",
+              "mar_action_category": "start",
+              "n": 1
+            },
+            {
+              "month_year": "2018-06",
+              "mar_action_category": "stop",
+              "n": 1
+            },
+            {
+              "month_year": "2018-06",
+              "mar_action_category": "verify",
+              "n": 1
+            },
+            {
+              "month_year": "2018-07",
+              "mar_action_category": "dose_change",
+              "n": 2
+            },
+            {
+              "month_year": "2018-07",
+              "mar_action_category": "going",
+              "n": 2
+            },
+            {
+              "month_year": "2018-07",
+              "mar_action_category": "start",
+              "n": 2
+            },
+            {
+              "month_year": "2018-07",
+              "mar_action_category": "stop",
+              "n": 2
+            },
+            {
+              "month_year": "2018-07",
+              "mar_action_category": "verify",
+              "n": 2
+            },
+            {
+              "month_year": "2018-08",
+              "mar_action_category": "dose_change",
+              "n": 3
+            },
+            {
+              "month_year": "2018-08",
+              "mar_action_category": "going",
+              "n": 3
+            },
+            {
+              "month_year": "2018-08",
+              "mar_action_category": "start",
+              "n": 3
+            },
+            {
+              "month_year": "2018-08",
+              "mar_action_category": "stop",
+              "n": 3
+            },
+            {
+              "month_year": "2018-08",
+              "mar_action_category": "verify",
+              "n": 3
+            },
+            {
+              "month_year": "2018-10",
+              "mar_action_category": "dose_change",
+              "n": 1
+            },
+            {
+              "month_year": "2018-10",
+              "mar_action_category": "going",
+              "n": 1
+            },
+            {
+              "month_year": "2018-10",
+              "mar_action_category": "start",
+              "n": 1
+            },
+            {
+              "month_year": "2018-10",
+              "mar_action_category": "stop",
+              "n": 1
+            },
+            {
+              "month_year": "2018-10",
+              "mar_action_category": "verify",
+              "n": 1
+            },
+            {
+              "month_year": "2018-11",
+              "mar_action_category": "dose_change",
+              "n": 3
+            },
+            {
+              "month_year": "2018-11",
+              "mar_action_category": "going",
+              "n": 3
+            },
+            {
+              "month_year": "2018-11",
+              "mar_action_category": "start",
+              "n": 2
+            },
+            {
+              "month_year": "2018-11",
+              "mar_action_category": "stop",
+              "n": 2
+            },
+            {
+              "month_year": "2018-11",
+              "mar_action_category": "verify",
+              "n": 2
+            },
+            {
+              "month_year": "2019-01",
+              "mar_action_category": "dose_change",
+              "n": 5
+            },
+            {
+              "month_year": "2019-01",
+              "mar_action_category": "going",
+              "n": 5
+            },
+            {
+              "month_year": "2019-01",
+              "mar_action_category": "start",
+              "n": 5
+            },
+            {
+              "month_year": "2019-01",
+              "mar_action_category": "stop",
+              "n": 5
+            },
+            {
+              "month_year": "2019-01",
+              "mar_action_category": "verify",
+              "n": 5
+            },
+            {
+              "month_year": "2019-02",
+              "mar_action_category": "dose_change",
+              "n": 3
+            },
+            {
+              "month_year": "2019-02",
+              "mar_action_category": "going",
+              "n": 3
+            },
+            {
+              "month_year": "2019-02",
+              "mar_action_category": "start",
+              "n": 3
+            },
+            {
+              "month_year": "2019-02",
+              "mar_action_category": "stop",
+              "n": 3
+            },
+            {
+              "month_year": "2019-02",
+              "mar_action_category": "verify",
+              "n": 3
+            },
+            {
+              "month_year": "2019-03",
+              "mar_action_category": "dose_change",
+              "n": 2
+            },
+            {
+              "month_year": "2019-03",
+              "mar_action_category": "going",
+              "n": 2
+            },
+            {
+              "month_year": "2019-03",
+              "mar_action_category": "start",
+              "n": 2
+            },
+            {
+              "month_year": "2019-03",
+              "mar_action_category": "stop",
+              "n": 2
+            },
+            {
+              "month_year": "2019-03",
+              "mar_action_category": "verify",
+              "n": 2
+            },
+            {
+              "month_year": "2019-05",
+              "mar_action_category": "dose_change",
+              "n": 3
+            },
+            {
+              "month_year": "2019-05",
+              "mar_action_category": "going",
+              "n": 3
+            },
+            {
+              "month_year": "2019-05",
+              "mar_action_category": "start",
+              "n": 2
+            },
+            {
+              "month_year": "2019-05",
+              "mar_action_category": "stop",
+              "n": 3
+            },
+            {
+              "month_year": "2019-05",
+              "mar_action_category": "verify",
+              "n": 3
+            },
+            {
+              "month_year": "2019-06",
+              "mar_action_category": "dose_change",
+              "n": 2
+            },
+            {
+              "month_year": "2019-06",
+              "mar_action_category": "going",
+              "n": 2
+            },
+            {
+              "month_year": "2019-06",
+              "mar_action_category": "start",
+              "n": 2
+            },
+            {
+              "month_year": "2019-06",
+              "mar_action_category": "stop",
+              "n": 2
+            },
+            {
+              "month_year": "2019-06",
+              "mar_action_category": "verify",
+              "n": 2
+            },
+            {
+              "month_year": "2019-07",
+              "mar_action_category": "dose_change",
+              "n": 4
+            },
+            {
+              "month_year": "2019-07",
+              "mar_action_category": "going",
+              "n": 4
+            },
+            {
+              "month_year": "2019-07",
+              "mar_action_category": "start",
+              "n": 3
+            },
+            {
+              "month_year": "2019-07",
+              "mar_action_category": "stop",
+              "n": 3
+            },
+            {
+              "month_year": "2019-07",
+              "mar_action_category": "verify",
+              "n": 4
+            },
+            {
+              "month_year": "2019-09",
+              "mar_action_category": "dose_change",
+              "n": 2
+            },
+            {
+              "month_year": "2019-09",
+              "mar_action_category": "going",
+              "n": 2
+            },
+            {
+              "month_year": "2019-09",
+              "mar_action_category": "start",
+              "n": 2
+            },
+            {
+              "month_year": "2019-09",
+              "mar_action_category": "stop",
+              "n": 2
+            },
+            {
+              "month_year": "2019-09",
+              "mar_action_category": "verify",
+              "n": 2
+            },
+            {
+              "month_year": "2019-10",
+              "mar_action_category": "dose_change",
+              "n": 2
+            },
+            {
+              "month_year": "2019-10",
+              "mar_action_category": "going",
+              "n": 2
+            },
+            {
+              "month_year": "2019-10",
+              "mar_action_category": "start",
+              "n": 2
+            },
+            {
+              "month_year": "2019-10",
+              "mar_action_category": "stop",
+              "n": 2
+            },
+            {
+              "month_year": "2019-10",
+              "mar_action_category": "verify",
+              "n": 2
+            },
+            {
+              "month_year": "2019-11",
+              "mar_action_category": "dose_change",
+              "n": 3
+            },
+            {
+              "month_year": "2019-11",
+              "mar_action_category": "going",
+              "n": 3
+            },
+            {
+              "month_year": "2019-11",
+              "mar_action_category": "start",
+              "n": 3
+            },
+            {
+              "month_year": "2019-11",
+              "mar_action_category": "stop",
+              "n": 3
+            },
+            {
+              "month_year": "2019-11",
+              "mar_action_category": "verify",
+              "n": 3
+            },
+            {
+              "month_year": "2019-12",
+              "mar_action_category": "dose_change",
+              "n": 3
+            },
+            {
+              "month_year": "2019-12",
+              "mar_action_category": "going",
+              "n": 3
+            },
+            {
+              "month_year": "2019-12",
+              "mar_action_category": "start",
+              "n": 3
+            },
+            {
+              "month_year": "2019-12",
+              "mar_action_category": "stop",
+              "n": 3
+            },
+            {
+              "month_year": "2019-12",
+              "mar_action_category": "verify",
+              "n": 3
+            },
+            {
+              "month_year": "2020-03",
+              "mar_action_category": "dose_change",
+              "n": 1
+            },
+            {
+              "month_year": "2020-03",
+              "mar_action_category": "going",
+              "n": 1
+            },
+            {
+              "month_year": "2020-03",
+              "mar_action_category": "start",
+              "n": 1
+            },
+            {
+              "month_year": "2020-03",
+              "mar_action_category": "stop",
+              "n": 1
+            },
+            {
+              "month_year": "2020-03",
+              "mar_action_category": "verify",
+              "n": 1
+            },
+            {
+              "month_year": "2020-04",
+              "mar_action_category": "dose_change",
+              "n": 2
+            },
+            {
+              "month_year": "2020-04",
+              "mar_action_category": "going",
+              "n": 2
+            },
+            {
+              "month_year": "2020-04",
+              "mar_action_category": "start",
+              "n": 2
+            },
+            {
+              "month_year": "2020-04",
+              "mar_action_category": "stop",
+              "n": 2
+            },
+            {
+              "month_year": "2020-04",
+              "mar_action_category": "verify",
+              "n": 2
+            },
+            {
+              "month_year": "2020-05",
+              "mar_action_category": "dose_change",
+              "n": 2
+            },
+            {
+              "month_year": "2020-05",
+              "mar_action_category": "going",
+              "n": 2
+            },
+            {
+              "month_year": "2020-05",
+              "mar_action_category": "start",
+              "n": 2
+            },
+            {
+              "month_year": "2020-05",
+              "mar_action_category": "stop",
+              "n": 2
+            },
+            {
+              "month_year": "2020-05",
+              "mar_action_category": "verify",
+              "n": 2
+            },
+            {
+              "month_year": "2020-06",
+              "mar_action_category": "dose_change",
+              "n": 5
+            },
+            {
+              "month_year": "2020-06",
+              "mar_action_category": "going",
+              "n": 5
+            },
+            {
+              "month_year": "2020-06",
+              "mar_action_category": "start",
+              "n": 5
+            },
+            {
+              "month_year": "2020-06",
+              "mar_action_category": "stop",
+              "n": 5
+            },
+            {
+              "month_year": "2020-06",
+              "mar_action_category": "verify",
+              "n": 5
+            },
+            {
+              "month_year": "2020-07",
+              "mar_action_category": "dose_change",
+              "n": 2
+            },
+            {
+              "month_year": "2020-07",
+              "mar_action_category": "going",
+              "n": 2
+            },
+            {
+              "month_year": "2020-07",
+              "mar_action_category": "start",
+              "n": 1
+            },
+            {
+              "month_year": "2020-07",
+              "mar_action_category": "stop",
+              "n": 2
+            },
+            {
+              "month_year": "2020-07",
+              "mar_action_category": "verify",
+              "n": 2
+            },
+            {
+              "month_year": "2020-09",
+              "mar_action_category": "dose_change",
+              "n": 1
+            },
+            {
+              "month_year": "2020-09",
+              "mar_action_category": "going",
+              "n": 1
+            },
+            {
+              "month_year": "2020-09",
+              "mar_action_category": "start",
+              "n": 1
+            },
+            {
+              "month_year": "2020-09",
+              "mar_action_category": "stop",
+              "n": 1
+            },
+            {
+              "month_year": "2020-09",
+              "mar_action_category": "verify",
+              "n": 1
+            },
+            {
+              "month_year": "2020-10",
+              "mar_action_category": "dose_change",
+              "n": 3
+            },
+            {
+              "month_year": "2020-10",
+              "mar_action_category": "going",
+              "n": 3
+            },
+            {
+              "month_year": "2020-10",
+              "mar_action_category": "start",
+              "n": 2
+            },
+            {
+              "month_year": "2020-10",
+              "mar_action_category": "stop",
+              "n": 2
+            },
+            {
+              "month_year": "2020-10",
+              "mar_action_category": "verify",
+              "n": 3
+            },
+            {
+              "month_year": "2020-11",
+              "mar_action_category": "dose_change",
+              "n": 2
+            },
+            {
+              "month_year": "2020-11",
+              "mar_action_category": "going",
+              "n": 2
+            },
+            {
+              "month_year": "2020-11",
+              "mar_action_category": "start",
+              "n": 2
+            },
+            {
+              "month_year": "2020-11",
+              "mar_action_category": "stop",
+              "n": 2
+            },
+            {
+              "month_year": "2020-11",
+              "mar_action_category": "verify",
+              "n": 1
+            },
+            {
+              "month_year": "2021-01",
+              "mar_action_category": "dose_change",
+              "n": 1
+            },
+            {
+              "month_year": "2021-01",
+              "mar_action_category": "going",
+              "n": 1
+            },
+            {
+              "month_year": "2021-01",
+              "mar_action_category": "start",
+              "n": 1
+            },
+            {
+              "month_year": "2021-01",
+              "mar_action_category": "stop",
+              "n": 1
+            },
+            {
+              "month_year": "2021-01",
+              "mar_action_category": "verify",
+              "n": 1
+            },
+            {
+              "month_year": "2021-02",
+              "mar_action_category": "dose_change",
+              "n": 3
+            },
+            {
+              "month_year": "2021-02",
+              "mar_action_category": "going",
+              "n": 3
+            },
+            {
+              "month_year": "2021-02",
+              "mar_action_category": "start",
+              "n": 3
+            },
+            {
+              "month_year": "2021-02",
+              "mar_action_category": "stop",
+              "n": 3
+            },
+            {
+              "month_year": "2021-02",
+              "mar_action_category": "verify",
+              "n": 3
+            },
+            {
+              "month_year": "2021-03",
+              "mar_action_category": "dose_change",
+              "n": 1
+            },
+            {
+              "month_year": "2021-03",
+              "mar_action_category": "going",
+              "n": 1
+            },
+            {
+              "month_year": "2021-03",
+              "mar_action_category": "start",
+              "n": 1
+            },
+            {
+              "month_year": "2021-03",
+              "mar_action_category": "stop",
+              "n": 1
+            },
+            {
+              "month_year": "2021-03",
+              "mar_action_category": "verify",
+              "n": 1
+            },
+            {
+              "month_year": "2021-05",
+              "mar_action_category": "dose_change",
+              "n": 1
+            },
+            {
+              "month_year": "2021-05",
+              "mar_action_category": "going",
+              "n": 1
+            },
+            {
+              "month_year": "2021-05",
+              "mar_action_category": "start",
+              "n": 1
+            },
+            {
+              "month_year": "2021-05",
+              "mar_action_category": "stop",
+              "n": 1
+            },
+            {
+              "month_year": "2021-05",
+              "mar_action_category": "verify",
+              "n": 1
+            },
+            {
+              "month_year": "2021-06",
+              "mar_action_category": "dose_change",
+              "n": 1
+            },
+            {
+              "month_year": "2021-06",
+              "mar_action_category": "going",
+              "n": 1
+            },
+            {
+              "month_year": "2021-06",
+              "mar_action_category": "start",
+              "n": 1
+            },
+            {
+              "month_year": "2021-06",
+              "mar_action_category": "stop",
+              "n": 1
+            },
+            {
+              "month_year": "2021-06",
+              "mar_action_category": "verify",
+              "n": 1
+            },
+            {
+              "month_year": "2021-07",
+              "mar_action_category": "dose_change",
+              "n": 2
+            },
+            {
+              "month_year": "2021-07",
+              "mar_action_category": "going",
+              "n": 2
+            },
+            {
+              "month_year": "2021-07",
+              "mar_action_category": "start",
+              "n": 2
+            },
+            {
+              "month_year": "2021-07",
+              "mar_action_category": "stop",
+              "n": 2
+            },
+            {
+              "month_year": "2021-07",
+              "mar_action_category": "verify",
+              "n": 2
+            },
+            {
+              "month_year": "2021-09",
+              "mar_action_category": "dose_change",
+              "n": 2
+            },
+            {
+              "month_year": "2021-09",
+              "mar_action_category": "going",
+              "n": 2
+            },
+            {
+              "month_year": "2021-09",
+              "mar_action_category": "start",
+              "n": 2
+            },
+            {
+              "month_year": "2021-09",
+              "mar_action_category": "stop",
+              "n": 2
+            },
+            {
+              "month_year": "2021-09",
+              "mar_action_category": "verify",
+              "n": 1
+            },
+            {
+              "month_year": "2021-10",
+              "mar_action_category": "dose_change",
+              "n": 3
+            },
+            {
+              "month_year": "2021-10",
+              "mar_action_category": "going",
+              "n": 3
+            },
+            {
+              "month_year": "2021-10",
+              "mar_action_category": "start",
+              "n": 3
+            },
+            {
+              "month_year": "2021-10",
+              "mar_action_category": "stop",
+              "n": 3
+            },
+            {
+              "month_year": "2021-10",
+              "mar_action_category": "verify",
+              "n": 3
+            },
+            {
+              "month_year": "2022-01",
+              "mar_action_category": "dose_change",
+              "n": 2
+            },
+            {
+              "month_year": "2022-01",
+              "mar_action_category": "going",
+              "n": 2
+            },
+            {
+              "month_year": "2022-01",
+              "mar_action_category": "start",
+              "n": 2
+            },
+            {
+              "month_year": "2022-01",
+              "mar_action_category": "stop",
+              "n": 2
+            },
+            {
+              "month_year": "2022-01",
+              "mar_action_category": "verify",
+              "n": 2
+            },
+            {
+              "month_year": "2022-02",
+              "mar_action_category": "dose_change",
+              "n": 1
+            },
+            {
+              "month_year": "2022-02",
+              "mar_action_category": "going",
+              "n": 1
+            },
+            {
+              "month_year": "2022-02",
+              "mar_action_category": "start",
+              "n": 1
+            },
+            {
+              "month_year": "2022-02",
+              "mar_action_category": "stop",
+              "n": 1
+            },
+            {
+              "month_year": "2022-02",
+              "mar_action_category": "verify",
+              "n": 1
+            },
+            {
+              "month_year": "2022-04",
+              "mar_action_category": "dose_change",
+              "n": 3
+            },
+            {
+              "month_year": "2022-04",
+              "mar_action_category": "going",
+              "n": 3
+            },
+            {
+              "month_year": "2022-04",
+              "mar_action_category": "start",
+              "n": 3
+            },
+            {
+              "month_year": "2022-04",
+              "mar_action_category": "stop",
+              "n": 3
+            },
+            {
+              "month_year": "2022-04",
+              "mar_action_category": "verify",
+              "n": 3
+            },
+            {
+              "month_year": "2022-05",
+              "mar_action_category": "dose_change",
+              "n": 1
+            },
+            {
+              "month_year": "2022-05",
+              "mar_action_category": "going",
+              "n": 1
+            },
+            {
+              "month_year": "2022-05",
+              "mar_action_category": "start",
+              "n": 1
+            },
+            {
+              "month_year": "2022-05",
+              "mar_action_category": "stop",
+              "n": 1
+            },
+            {
+              "month_year": "2022-05",
+              "mar_action_category": "verify",
+              "n": 1
+            },
+            {
+              "month_year": "2022-06",
+              "mar_action_category": "dose_change",
+              "n": 1
+            },
+            {
+              "month_year": "2022-06",
+              "mar_action_category": "going",
+              "n": 1
+            },
+            {
+              "month_year": "2022-06",
+              "mar_action_category": "start",
+              "n": 1
+            },
+            {
+              "month_year": "2022-06",
+              "mar_action_category": "stop",
+              "n": 1
+            },
+            {
+              "month_year": "2022-06",
+              "mar_action_category": "verify",
+              "n": 1
+            },
+            {
+              "month_year": "2022-07",
+              "mar_action_category": "dose_change",
+              "n": 1
+            },
+            {
+              "month_year": "2022-07",
+              "mar_action_category": "going",
+              "n": 1
+            },
+            {
+              "month_year": "2022-07",
+              "mar_action_category": "start",
+              "n": 1
+            },
+            {
+              "month_year": "2022-07",
+              "mar_action_category": "stop",
+              "n": 1
+            },
+            {
+              "month_year": "2022-07",
+              "mar_action_category": "verify",
+              "n": 1
+            },
+            {
+              "month_year": "2022-09",
+              "mar_action_category": "dose_change",
+              "n": 5
+            },
+            {
+              "month_year": "2022-09",
+              "mar_action_category": "going",
+              "n": 5
+            },
+            {
+              "month_year": "2022-09",
+              "mar_action_category": "start",
+              "n": 4
+            },
+            {
+              "month_year": "2022-09",
+              "mar_action_category": "stop",
+              "n": 4
+            },
+            {
+              "month_year": "2022-09",
+              "mar_action_category": "verify",
+              "n": 5
+            },
+            {
+              "month_year": "2022-10",
+              "mar_action_category": "dose_change",
+              "n": 2
+            },
+            {
+              "month_year": "2022-10",
+              "mar_action_category": "going",
+              "n": 2
+            },
+            {
+              "month_year": "2022-10",
+              "mar_action_category": "start",
+              "n": 1
+            },
+            {
+              "month_year": "2022-10",
+              "mar_action_category": "stop",
+              "n": 2
+            },
+            {
+              "month_year": "2022-10",
+              "mar_action_category": "verify",
+              "n": 2
+            },
+            {
+              "month_year": "2022-11",
+              "mar_action_category": "dose_change",
+              "n": 1
+            },
+            {
+              "month_year": "2022-11",
+              "mar_action_category": "going",
+              "n": 1
+            },
+            {
+              "month_year": "2022-11",
+              "mar_action_category": "start",
+              "n": 1
+            },
+            {
+              "month_year": "2022-11",
+              "mar_action_category": "stop",
+              "n": 1
+            },
+            {
+              "month_year": "2022-11",
+              "mar_action_category": "verify",
+              "n": 1
+            },
+            {
+              "month_year": "2022-12",
+              "mar_action_category": "dose_change",
+              "n": 2
+            },
+            {
+              "month_year": "2022-12",
+              "mar_action_category": "going",
+              "n": 2
+            },
+            {
+              "month_year": "2022-12",
+              "mar_action_category": "start",
+              "n": 2
+            },
+            {
+              "month_year": "2022-12",
+              "mar_action_category": "stop",
+              "n": 2
+            },
+            {
+              "month_year": "2022-12",
+              "mar_action_category": "verify",
+              "n": 2
+            },
+            {
+              "month_year": "2023-01",
+              "mar_action_category": "dose_change",
+              "n": 1
+            },
+            {
+              "month_year": "2023-01",
+              "mar_action_category": "going",
+              "n": 1
+            },
+            {
+              "month_year": "2023-01",
+              "mar_action_category": "start",
+              "n": 1
+            },
+            {
+              "month_year": "2023-01",
+              "mar_action_category": "stop",
+              "n": 1
+            },
+            {
+              "month_year": "2023-01",
+              "mar_action_category": "verify",
+              "n": 1
+            },
+            {
+              "month_year": "2023-02",
+              "mar_action_category": "dose_change",
+              "n": 2
+            },
+            {
+              "month_year": "2023-02",
+              "mar_action_category": "going",
+              "n": 2
+            },
+            {
+              "month_year": "2023-02",
+              "mar_action_category": "start",
+              "n": 2
+            },
+            {
+              "month_year": "2023-02",
+              "mar_action_category": "stop",
+              "n": 2
+            },
+            {
+              "month_year": "2023-02",
+              "mar_action_category": "verify",
+              "n": 2
+            },
+            {
+              "month_year": "2023-03",
+              "mar_action_category": "dose_change",
+              "n": 2
+            },
+            {
+              "month_year": "2023-03",
+              "mar_action_category": "going",
+              "n": 2
+            },
+            {
+              "month_year": "2023-03",
+              "mar_action_category": "start",
+              "n": 2
+            },
+            {
+              "month_year": "2023-03",
+              "mar_action_category": "stop",
+              "n": 2
+            },
+            {
+              "month_year": "2023-03",
+              "mar_action_category": "verify",
+              "n": 2
+            },
+            {
+              "month_year": "2023-04",
+              "mar_action_category": "dose_change",
+              "n": 2
+            },
+            {
+              "month_year": "2023-04",
+              "mar_action_category": "going",
+              "n": 2
+            },
+            {
+              "month_year": "2023-04",
+              "mar_action_category": "start",
+              "n": 2
+            },
+            {
+              "month_year": "2023-04",
+              "mar_action_category": "stop",
+              "n": 2
+            },
+            {
+              "month_year": "2023-04",
+              "mar_action_category": "verify",
+              "n": 2
+            },
+            {
+              "month_year": "2023-05",
+              "mar_action_category": "dose_change",
+              "n": 1
+            },
+            {
+              "month_year": "2023-05",
+              "mar_action_category": "going",
+              "n": 1
+            },
+            {
+              "month_year": "2023-05",
+              "mar_action_category": "start",
+              "n": 1
+            },
+            {
+              "month_year": "2023-05",
+              "mar_action_category": "stop",
+              "n": 1
+            },
+            {
+              "month_year": "2023-05",
+              "mar_action_category": "verify",
+              "n": 1
+            },
+            {
+              "month_year": "2023-07",
+              "mar_action_category": "dose_change",
+              "n": 4
+            },
+            {
+              "month_year": "2023-07",
+              "mar_action_category": "going",
+              "n": 4
+            },
+            {
+              "month_year": "2023-07",
+              "mar_action_category": "start",
+              "n": 4
+            },
+            {
+              "month_year": "2023-07",
+              "mar_action_category": "stop",
+              "n": 4
+            },
+            {
+              "month_year": "2023-07",
+              "mar_action_category": "verify",
+              "n": 3
+            },
+            {
+              "month_year": "2023-08",
+              "mar_action_category": "dose_change",
+              "n": 3
+            },
+            {
+              "month_year": "2023-08",
+              "mar_action_category": "going",
+              "n": 3
+            },
+            {
+              "month_year": "2023-08",
+              "mar_action_category": "start",
+              "n": 3
+            },
+            {
+              "month_year": "2023-08",
+              "mar_action_category": "stop",
+              "n": 3
+            },
+            {
+              "month_year": "2023-08",
+              "mar_action_category": "verify",
+              "n": 3
+            },
+            {
+              "month_year": "2023-11",
+              "mar_action_category": "dose_change",
+              "n": 1
+            },
+            {
+              "month_year": "2023-11",
+              "mar_action_category": "going",
+              "n": 1
+            },
+            {
+              "month_year": "2023-11",
+              "mar_action_category": "start",
+              "n": 1
+            },
+            {
+              "month_year": "2023-11",
+              "mar_action_category": "stop",
+              "n": 1
+            },
+            {
+              "month_year": "2023-11",
+              "mar_action_category": "verify",
+              "n": 1
+            },
+            {
+              "month_year": "2023-12",
+              "mar_action_category": "dose_change",
+              "n": 1
+            },
+            {
+              "month_year": "2023-12",
+              "mar_action_category": "going",
+              "n": 1
+            },
+            {
+              "month_year": "2023-12",
+              "mar_action_category": "start",
+              "n": 1
+            },
+            {
+              "month_year": "2023-12",
+              "mar_action_category": "stop",
+              "n": 1
+            },
+            {
+              "month_year": "2023-12",
+              "mar_action_category": "verify",
+              "n": 1
+            },
+            {
+              "month_year": "2024-01",
+              "mar_action_category": "dose_change",
+              "n": 1
+            },
+            {
+              "month_year": "2024-01",
+              "mar_action_category": "going",
+              "n": 1
+            },
+            {
+              "month_year": "2024-01",
+              "mar_action_category": "start",
+              "n": 1
+            },
+            {
+              "month_year": "2024-01",
+              "mar_action_category": "stop",
+              "n": 1
+            },
+            {
+              "month_year": "2024-01",
+              "mar_action_category": "verify",
+              "n": 1
+            },
+            {
+              "month_year": "2024-02",
+              "mar_action_category": "dose_change",
+              "n": 2
+            },
+            {
+              "month_year": "2024-02",
+              "mar_action_category": "going",
+              "n": 2
+            },
+            {
+              "month_year": "2024-02",
+              "mar_action_category": "start",
+              "n": 2
+            },
+            {
+              "month_year": "2024-02",
+              "mar_action_category": "stop",
+              "n": 2
+            },
+            {
+              "month_year": "2024-02",
+              "mar_action_category": "verify",
+              "n": 2
+            },
+            {
+              "month_year": "2024-05",
+              "mar_action_category": "dose_change",
+              "n": 1
+            },
+            {
+              "month_year": "2024-05",
+              "mar_action_category": "going",
+              "n": 1
+            },
+            {
+              "month_year": "2024-05",
+              "mar_action_category": "start",
+              "n": 1
+            },
+            {
+              "month_year": "2024-05",
+              "mar_action_category": "stop",
+              "n": 1
+            },
+            {
+              "month_year": "2024-05",
+              "mar_action_category": "verify",
+              "n": 1
+            },
+            {
+              "month_year": "2024-06",
+              "mar_action_category": "dose_change",
+              "n": 2
+            },
+            {
+              "month_year": "2024-06",
+              "mar_action_category": "going",
+              "n": 2
+            },
+            {
+              "month_year": "2024-06",
+              "mar_action_category": "start",
+              "n": 2
+            },
+            {
+              "month_year": "2024-06",
+              "mar_action_category": "stop",
+              "n": 2
+            },
+            {
+              "month_year": "2024-06",
+              "mar_action_category": "verify",
+              "n": 2
+            },
+            {
+              "month_year": "2024-07",
+              "mar_action_category": "dose_change",
+              "n": 3
+            },
+            {
+              "month_year": "2024-07",
+              "mar_action_category": "going",
+              "n": 3
+            },
+            {
+              "month_year": "2024-07",
+              "mar_action_category": "start",
+              "n": 3
+            },
+            {
+              "month_year": "2024-07",
+              "mar_action_category": "stop",
+              "n": 2
+            },
+            {
+              "month_year": "2024-07",
+              "mar_action_category": "verify",
+              "n": 3
+            },
+            {
+              "month_year": "2024-08",
+              "mar_action_category": "dose_change",
+              "n": 2
+            },
+            {
+              "month_year": "2024-08",
+              "mar_action_category": "going",
+              "n": 2
+            },
+            {
+              "month_year": "2024-08",
+              "mar_action_category": "start",
+              "n": 2
+            },
+            {
+              "month_year": "2024-08",
+              "mar_action_category": "stop",
+              "n": 2
+            },
+            {
+              "month_year": "2024-08",
+              "mar_action_category": "verify",
+              "n": 2
+            },
+            {
+              "month_year": "2024-09",
+              "mar_action_category": "dose_change",
+              "n": 2
+            },
+            {
+              "month_year": "2024-09",
+              "mar_action_category": "going",
+              "n": 2
+            },
+            {
+              "month_year": "2024-09",
+              "mar_action_category": "start",
+              "n": 2
+            },
+            {
+              "month_year": "2024-09",
+              "mar_action_category": "stop",
+              "n": 2
+            },
+            {
+              "month_year": "2024-09",
+              "mar_action_category": "verify",
+              "n": 2
+            },
+            {
+              "month_year": "2024-11",
+              "mar_action_category": "dose_change",
+              "n": 3
+            },
+            {
+              "month_year": "2024-11",
+              "mar_action_category": "going",
+              "n": 3
+            },
+            {
+              "month_year": "2024-11",
+              "mar_action_category": "start",
+              "n": 2
+            },
+            {
+              "month_year": "2024-11",
+              "mar_action_category": "stop",
+              "n": 3
+            },
+            {
+              "month_year": "2024-11",
+              "mar_action_category": "verify",
+              "n": 3
+            },
+            {
+              "month_year": "2024-12",
+              "mar_action_category": "dose_change",
+              "n": 2
+            },
+            {
+              "month_year": "2024-12",
+              "mar_action_category": "going",
+              "n": 2
+            },
+            {
+              "month_year": "2024-12",
+              "mar_action_category": "start",
+              "n": 2
+            },
+            {
+              "month_year": "2024-12",
+              "mar_action_category": "stop",
+              "n": 2
+            },
+            {
+              "month_year": "2024-12",
+              "mar_action_category": "verify",
+              "n": 2
+            }
+          ]
+        }
+      },
+      "atomic_total": 18,
+      "atomic_passed": 18
+    },
+    "duplicate_composite_keys": {
+      "check_type": "duplicate_composite_keys",
+      "table_name": "medication_admin_continuous",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No duplicate composite keys found",
+          "details": {}
+        }
+      ],
+      "metrics": {
+        "composite_keys": [
+          "hospitalization_id",
+          "admin_dttm",
+          "med_category",
+          "mar_action_category"
+        ],
+        "total_records": 10660,
+        "unique_records": 10660,
+        "duplicate_records": 0,
+        "duplicate_percent": 0.0
+      },
+      "atomic_total": 1,
+      "atomic_passed": 1
+    }
+  },
+  "table_stats": [
+    {
+      "column": "hospitalization_id",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 127,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "med_order_id",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 256,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "admin_dttm",
+      "dtype": "DATETIME",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 10588,
+      "min": "2018-01-24 23:27",
+      "max": "2024-12-19 17:20"
+    },
+    {
+      "column": "med_name",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 12,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "med_category",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 12,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "med_group",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 4,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "med_route_name",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 1,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "med_route_category",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 1,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "med_dose",
+      "dtype": "DOUBLE",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 879,
+      "min": "0.01",
+      "max": "1674.672"
+    },
+    {
+      "column": "med_dose_unit",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 7,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "mar_action_name",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 5,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "mar_action_category",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 5,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "mar_action_group",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 1,
+      "min": null,
+      "max": null
+    }
+  ],
+  "total_rows": 10660
+}

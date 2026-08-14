@@ -1,0 +1,29 @@
+{
+  "artifact": "sofa_scores",
+  "columns": [
+    "hospitalization_id",
+    "p_f",
+    "p_f_imputed",
+    "sofa_cns",
+    "sofa_coag",
+    "sofa_cv_97",
+    "sofa_liver",
+    "sofa_renal",
+    "sofa_resp",
+    "sofa_total"
+  ],
+  "dtypes": {
+    "hospitalization_id": "str",
+    "p_f": "float64",
+    "p_f_imputed": "float64",
+    "sofa_cns": "int32",
+    "sofa_coag": "Int32",
+    "sofa_cv_97": "Int32",
+    "sofa_liver": "Int32",
+    "sofa_renal": "int32",
+    "sofa_resp": "Int32",
+    "sofa_total": "Int32"
+  },
+  "n_columns": 10,
+  "n_rows": 200
+}

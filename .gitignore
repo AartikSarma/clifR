@@ -52,12 +52,21 @@ data-raw/*.csv
 data-raw/*.parquet
 !data-raw/README.md
 
-# Baseline comparison files (keep in version control)
+# Baseline comparison files and the parity fixture cohort are deliberately kept in
+# version control: together they let the cross-language tests run from a fresh
+# clone without regenerating anything. Both are small (~13 MB combined).
 # tests/baseline/
+# tests/fixtures/cohort/
 
-# Exclude large synthetic data files (keep generator script)
+# Exclude the large legacy synthetic data files (keep the generator script)
 tests/fixtures/synthetic_data/*.csv
 tests/fixtures/synthetic_data/*.parquet
+
+# Run artifacts written by tables and the orchestrator during tests
+output/
+tests/baseline_py/output/
+tests/fixtures/cohort/output/
+inst/schemas/**/output/
 
 # Python cache
 __pycache__/

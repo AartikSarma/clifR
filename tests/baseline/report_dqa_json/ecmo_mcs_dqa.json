@@ -1,0 +1,640 @@
+{
+  "table_name": "ecmo_mcs",
+  "backend": "polars",
+  "conformance": {
+    "table_presence": {
+      "check_type": "table_presence",
+      "table_name": "ecmo_mcs",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Table 'ecmo_mcs' present with 271 rows and 12 columns",
+          "details": {}
+        }
+      ],
+      "metrics": {
+        "row_count": 271,
+        "column_count": 12
+      },
+      "atomic_total": 1,
+      "atomic_passed": 1
+    },
+    "required_columns": {
+      "check_type": "required_columns",
+      "table_name": "ecmo_mcs",
+      "passed": false,
+      "errors": [
+        {
+          "message": "Column 'support_category': missing from data",
+          "details": {
+            "column": "support_category"
+          }
+        },
+        {
+          "message": "Column 'config_category': missing from data",
+          "details": {
+            "column": "config_category"
+          }
+        },
+        {
+          "message": "Column 'setting_category': missing from data",
+          "details": {
+            "column": "setting_category"
+          }
+        },
+        {
+          "message": "Column 'setting_value': missing from data",
+          "details": {
+            "column": "setting_value"
+          }
+        }
+      ],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'hospitalization_id': present",
+          "details": {
+            "column": "hospitalization_id"
+          }
+        },
+        {
+          "message": "Column 'recorded_dttm': present",
+          "details": {
+            "column": "recorded_dttm"
+          }
+        },
+        {
+          "message": "Column 'device_category': present",
+          "details": {
+            "column": "device_category"
+          }
+        }
+      ],
+      "metrics": {
+        "total_required": 7,
+        "total_present": 3,
+        "total_missing": 4
+      },
+      "atomic_total": 7,
+      "atomic_passed": 3
+    },
+    "column_dtypes": {
+      "check_type": "column_dtypes",
+      "table_name": "ecmo_mcs",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'hospitalization_id': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "hospitalization_id",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'recorded_dttm': dtype matches schema (DATETIME)",
+          "details": {
+            "column": "recorded_dttm",
+            "expected": "DATETIME"
+          }
+        },
+        {
+          "message": "Column 'support_name': not present in data (dtype check skipped)",
+          "details": {
+            "column": "support_name",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'support_category': not present in data (dtype check skipped)",
+          "details": {
+            "column": "support_category",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'device_name': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "device_name",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'device_category': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "device_category",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'config_name': not present in data (dtype check skipped)",
+          "details": {
+            "column": "config_name",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'config_category': not present in data (dtype check skipped)",
+          "details": {
+            "column": "config_category",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'setting_name': not present in data (dtype check skipped)",
+          "details": {
+            "column": "setting_name",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'setting_category': not present in data (dtype check skipped)",
+          "details": {
+            "column": "setting_category",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'setting_value': not present in data (dtype check skipped)",
+          "details": {
+            "column": "setting_value",
+            "expected": "DOUBLE"
+          }
+        }
+      ],
+      "metrics": {
+        "columns_checked": 11,
+        "dtype_errors": 0,
+        "dtype_warnings": 0
+      },
+      "atomic_total": 11,
+      "atomic_passed": 11
+    },
+    "datetime_format": {
+      "check_type": "datetime_format",
+      "table_name": "ecmo_mcs",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'recorded_dttm': datetime format valid",
+          "details": {
+            "column": "recorded_dttm"
+          }
+        }
+      ],
+      "metrics": {
+        "datetime_columns_checked": 1
+      },
+      "atomic_total": 1,
+      "atomic_passed": 1
+    },
+    "categorical_values": {
+      "check_type": "categorical_values",
+      "table_name": "ecmo_mcs",
+      "passed": true,
+      "errors": [],
+      "warnings": [
+        {
+          "message": "2 invalid categorical values",
+          "details": {
+            "column": "device_category",
+            "top_invalid": [
+              {
+                "value": "VV_ECMO",
+                "count": 198
+              },
+              {
+                "value": "VA_ECMO",
+                "count": 73
+              }
+            ],
+            "permissible_values": [
+              "cardiohelp",
+              "rotaflow",
+              "centrimag",
+              "tandemheart",
+              "impella",
+              "durable"
+            ]
+          }
+        }
+      ],
+      "info": [
+        {
+          "message": "Column 'support_category': not present in data (categorical check skipped)",
+          "details": {
+            "column": "support_category"
+          }
+        },
+        {
+          "message": "Column 'config_category': not present in data (categorical check skipped)",
+          "details": {
+            "column": "config_category"
+          }
+        },
+        {
+          "message": "Column 'setting_category': not present in data (categorical check skipped)",
+          "details": {
+            "column": "setting_category"
+          }
+        }
+      ],
+      "metrics": {
+        "category_columns_checked": 4,
+        "columns_with_invalid_values": 1
+      },
+      "atomic_total": 4,
+      "atomic_passed": 4
+    },
+    "category_group_mapping": {
+      "check_type": "category_group_mapping",
+      "table_name": "ecmo_mcs",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No category-to-group mappings defined in schema",
+          "details": {}
+        }
+      ],
+      "metrics": {},
+      "atomic_total": 0,
+      "atomic_passed": 0
+    }
+  },
+  "completeness": {
+    "missingness": {
+      "check_type": "missingness",
+      "table_name": "ecmo_mcs",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'hospitalization_id': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "hospitalization_id",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'recorded_dttm': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "recorded_dttm",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'device_category': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "device_category",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'support_category': not present in data (missingness check skipped)",
+          "details": {
+            "column": "support_category"
+          }
+        },
+        {
+          "message": "Column 'config_category': not present in data (missingness check skipped)",
+          "details": {
+            "column": "config_category"
+          }
+        },
+        {
+          "message": "Column 'setting_category': not present in data (missingness check skipped)",
+          "details": {
+            "column": "setting_category"
+          }
+        },
+        {
+          "message": "Column 'setting_value': not present in data (missingness check skipped)",
+          "details": {
+            "column": "setting_value"
+          }
+        }
+      ],
+      "metrics": {
+        "total_rows": 271,
+        "required_columns_checked": 3,
+        "missingness_stats": [
+          {
+            "column": "hospitalization_id",
+            "null_count": 0,
+            "total_rows": 271,
+            "percent_missing": 0.0
+          },
+          {
+            "column": "recorded_dttm",
+            "null_count": 0,
+            "total_rows": 271,
+            "percent_missing": 0.0
+          },
+          {
+            "column": "device_category",
+            "null_count": 0,
+            "total_rows": 271,
+            "percent_missing": 0.0
+          }
+        ]
+      },
+      "atomic_total": 7,
+      "atomic_passed": 3
+    },
+    "conditional_requirements": {
+      "check_type": "conditional_requirements",
+      "table_name": "ecmo_mcs",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No conditional requirements defined for this table",
+          "details": {}
+        }
+      ],
+      "metrics": {},
+      "atomic_total": 0,
+      "atomic_passed": 0
+    },
+    "mcide_value_coverage": {
+      "check_type": "mcide_value_coverage",
+      "table_name": "ecmo_mcs",
+      "passed": false,
+      "errors": [
+        {
+          "message": "Missing 6 mCIDE values: cardiohelp, rotaflow, centrimag, tandemheart, impella, durable",
+          "details": {
+            "column": "device_category",
+            "missing_values": [
+              "cardiohelp",
+              "rotaflow",
+              "centrimag",
+              "tandemheart",
+              "impella",
+              "durable"
+            ],
+            "coverage_percent": 0.0
+          }
+        }
+      ],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'support_category': not present in data (coverage check skipped)",
+          "details": {
+            "column": "support_category"
+          }
+        },
+        {
+          "message": "Column 'config_category': not present in data (coverage check skipped)",
+          "details": {
+            "column": "config_category"
+          }
+        },
+        {
+          "message": "Column 'setting_category': not present in data (coverage check skipped)",
+          "details": {
+            "column": "setting_category"
+          }
+        }
+      ],
+      "metrics": {
+        "category_columns_checked": 4,
+        "coverage_by_column": {
+          "device_category": {
+            "expected_values": 6,
+            "found_values": 0,
+            "missing_values": [
+              "cardiohelp",
+              "rotaflow",
+              "centrimag",
+              "tandemheart",
+              "impella",
+              "durable"
+            ],
+            "coverage_percent": 0.0
+          }
+        }
+      },
+      "atomic_total": 38,
+      "atomic_passed": 0
+    }
+  },
+  "relational": {},
+  "plausibility": {
+    "chronological_order": {
+      "check_type": "chronological_order",
+      "table_name": "ecmo_mcs",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No chronological order rules defined for this table",
+          "details": {}
+        }
+      ],
+      "metrics": {},
+      "atomic_total": 0,
+      "atomic_passed": 0
+    },
+    "numeric_range_plausibility": {
+      "check_type": "numeric_range_plausibility",
+      "table_name": "ecmo_mcs",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "All numeric values within plausible ranges (flow)",
+          "details": {
+            "columns_checked": [
+              "flow"
+            ]
+          }
+        }
+      ],
+      "metrics": {
+        "columns_checked": 1,
+        "out_of_range_summary": {
+          "flow": {
+            "total_non_null": 271,
+            "out_of_range": 0,
+            "out_of_range_percent": 0.0
+          }
+        }
+      },
+      "atomic_total": 18,
+      "atomic_passed": 18
+    },
+    "field_plausibility": {
+      "check_type": "field_plausibility",
+      "table_name": "ecmo_mcs",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No field plausibility rules defined for this table",
+          "details": {}
+        }
+      ],
+      "metrics": {},
+      "atomic_total": 0,
+      "atomic_passed": 0
+    },
+    "category_temporal_consistency": {
+      "check_type": "category_temporal_consistency",
+      "table_name": "ecmo_mcs",
+      "passed": true,
+      "errors": [],
+      "warnings": [
+        {
+          "message": "device_category: va_ecmo absent in 1/2 years (2018-2022)",
+          "details": {
+            "column": "device_category",
+            "value": "va_ecmo",
+            "absent_years": [
+              2022
+            ],
+            "total_years": 2,
+            "yearly_counts": {
+              "2018": 1,
+              "2022": 0
+            }
+          }
+        },
+        {
+          "message": "device_category: vv_ecmo absent in 1/2 years (2018-2022)",
+          "details": {
+            "column": "device_category",
+            "value": "vv_ecmo",
+            "absent_years": [
+              2018
+            ],
+            "total_years": 2,
+            "yearly_counts": {
+              "2018": 0,
+              "2022": 1
+            }
+          }
+        }
+      ],
+      "info": [],
+      "metrics": {
+        "category_columns_checked": 1,
+        "yearly_distributions": {
+          "device_category": {
+            "2018": {
+              "va_ecmo": 1
+            },
+            "2022": {
+              "vv_ecmo": 1
+            }
+          }
+        },
+        "missing_in_years": {
+          "device_category": {
+            "va_ecmo": [
+              2022
+            ],
+            "vv_ecmo": [
+              2018
+            ]
+          }
+        },
+        "monthly_trends": {
+          "device_category": [
+            {
+              "month_year": "2018-03",
+              "device_category": "va_ecmo",
+              "n": 1
+            },
+            {
+              "month_year": "2022-05",
+              "device_category": "vv_ecmo",
+              "n": 1
+            },
+            {
+              "month_year": "2022-06",
+              "device_category": "vv_ecmo",
+              "n": 1
+            }
+          ]
+        }
+      },
+      "atomic_total": 2,
+      "atomic_passed": 2
+    },
+    "duplicate_composite_keys": {
+      "check_type": "duplicate_composite_keys",
+      "table_name": "ecmo_mcs",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No composite keys defined for this table",
+          "details": {}
+        }
+      ],
+      "metrics": {},
+      "atomic_total": 0,
+      "atomic_passed": 0
+    }
+  },
+  "table_stats": [
+    {
+      "column": "hospitalization_id",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 2,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "recorded_dttm",
+      "dtype": "DATETIME",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 271,
+      "min": "2018-03-23 17:04",
+      "max": "2022-06-03 13:26"
+    },
+    {
+      "column": "device_name",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 2,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "device_category",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 2,
+      "min": null,
+      "max": null
+    }
+  ],
+  "total_rows": 271
+}

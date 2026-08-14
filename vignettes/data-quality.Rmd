@@ -1,0 +1,197 @@
+---
+title: "Data Quality and Validation"
+author: "clifR Package"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Data Quality and Validation}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  message = FALSE,
+  warning = FALSE,
+  fig.width = 7,
+  fig.height = 4.5
+)
+```
+
+```{r}
+library(clifR)
+library(dplyr)
+```
+
+# Overview
+
+Data quality is central to multi-site ICU research: results are only comparable if
+every site's data conforms to the same CLIF specification. clifR ports clifpy's data
+quality assessment (DQA) engine, which checks each table across four families of
+rules:
+
+- **Conformance** — required columns, data types, datetime formats, permissible
+  categorical values, category-to-group mappings.
+- **Completeness** — missingness, conditionally required fields, mCIDE value coverage.
+- **Relational integrity** — foreign-key relationships across tables.
+- **Plausibility** — chronological ordering, numeric-range plausibility, field
+  plausibility, temporal consistency, duplicate composite keys.
+
+This vignette works against the bundled CLIF demo data, which is CLIF 2.1. clifR also
+supports CLIF 3.0, and includes a migration path from 2.1 to 3.0.
+
+# Per-table validation
+
+The quickest check is each table object's own `validate()` method, which validates
+against its schema and records findings in `$errors`. `isvalid()` reports whether the
+last run was clean.
+
+```{r}
+labs_table <- load_demo_labs()
+labs_table$validate(verbose = TRUE)
+labs_table$isvalid()
+```
+
+```{r}
+# Inspect the first few findings, if any
+length(labs_table$errors)
+if (length(labs_table$errors) > 0) labs_table$errors[[1]]
+```
+
+Across an orchestrator, `validate_all()` runs this for every loaded table:
+
+```{r}
+clif <- load_demo_clif(tables = c("patient", "hospitalization", "adt", "vitals", "labs"))
+invisible(clif$validate_all(verbose = TRUE))
+```
+
+# The full DQA engine
+
+`run_full_dqa()` runs the complete DuckDB-backed check suite on a single table's data
+frame and schema, returning a nested result grouped by check family. Each individual
+check is a named list with `check_type`, `passed`, and lists of `errors`, `warnings`,
+and `info` messages.
+
+```{r}
+dqa_result <- run_full_dqa(
+  df = labs_table$df,
+  schema = labs_table$schema,
+  table_name = "labs",
+  clif_version = "2.1"
+)
+
+names(dqa_result)
+names(dqa_result$conformance)
+```
+
+## Summarizing the results
+
+It is convenient to flatten the nested result into one row per check:
+
+```{r}
+check_families <- c("conformance", "completeness", "relational", "plausibility")
+
+summarize_family <- function(family) {
+  checks <- dqa_result[[family]]
+  if (length(checks) == 0) return(NULL)
+  rows <- lapply(checks, function(single_check) {
+    tibble(
+      family = family,
+      check = single_check$check_type,
+      passed = isTRUE(single_check$passed),
+      n_errors = length(single_check$errors),
+      n_warnings = length(single_check$warnings)
+    )
+  })
+  bind_rows(rows)
+}
+
+dqa_summary <- bind_rows(lapply(check_families, summarize_family))
+dqa_summary
+```
+
+```{r}
+# Headline: how many checks passed?
+dqa_summary |>
+  count(passed)
+```
+
+```{r}
+# Any check that raised errors or warnings
+dqa_summary |>
+  filter(n_errors > 0 | n_warnings > 0)
+```
+
+A single check can be inspected in full to see the underlying messages:
+
+```{r}
+str(dqa_result$plausibility$numeric_range_plausibility, max.level = 2, list.len = 4)
+```
+
+# Generating validation reports
+
+For sharing with a site, clifR renders human-readable reports from validation output.
+`generate_text_report()` writes a plain-text report for one table, and
+`generate_combined_report()` assembles per-table JSON results (written to a directory)
+into a combined HTML/PDF report. These write files, so they are shown but not executed
+here.
+
+```{r eval=FALSE}
+# Text report for a single table
+generate_text_report(
+  validation_data = dqa_result,
+  table_name = "labs",
+  output_path = "labs_validation_report.txt",
+  site_name = "Example Health System"
+)
+
+# Combined report across tables (reads per-table JSON from json_dir)
+generate_combined_report(
+  json_dir = "validation_json",
+  output_dir = "validation_reports",
+  table_names = c("patient", "hospitalization", "labs", "vitals"),
+  site_name = "Example Health System"
+)
+```
+
+# Adult Sepsis Event (ASE)
+
+`compute_ase()` implements the CDC Adult Sepsis Event surveillance definition as a
+DuckDB pipeline ported from clifpy. It reads directly from a CLIF data directory
+(cultures, labs, medications, vitals, and more), so it needs a full dataset rather
+than a single table and is shown here for reference:
+
+```{r eval=FALSE}
+ase_results <- compute_ase(
+  data_directory = "path/to/clif/data",
+  filetype = "parquet",
+  timezone = "US/Central"
+)
+```
+
+# Migrating CLIF 2.1 to 3.0
+
+Sites still on CLIF 2.1 can upgrade their files to CLIF 3.0 with
+`migrate_clif_2_1_to_3_0()`, which applies the bundled table crosswalks and writes the
+migrated tables to an output directory. Use `dry_run = TRUE` to preview the changes
+(including any timezone-handling concerns) without writing files.
+
+```{r eval=FALSE}
+migration_report <- migrate_clif_2_1_to_3_0(
+  data_dir = "path/to/clif_2_1",
+  output_dir = "path/to/clif_3_0",
+  filetype = "parquet",
+  dry_run = TRUE
+)
+```
+
+Individual tables can be crosswalked in memory with `crosswalk_table_2_1_to_3_0()`
+when you do not want to migrate a whole directory at once.
+
+# Session info
+
+```{r}
+sessionInfo()
+```

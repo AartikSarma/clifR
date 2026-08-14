@@ -1,0 +1,15 @@
+{
+  "artifact": "query_windows",
+  "columns": [
+    "end_dttm",
+    "hospitalization_id",
+    "start_dttm"
+  ],
+  "dtypes": {
+    "end_dttm": "datetime64[us, US/Central]",
+    "hospitalization_id": "str",
+    "start_dttm": "datetime64[us, US/Central]"
+  },
+  "n_columns": 3,
+  "n_rows": 25
+}

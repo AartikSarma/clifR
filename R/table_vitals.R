@@ -1,126 +1,130 @@
-#' Vitals Table Class
+#' Vitals table
 #'
 #' @description
-#' R6 class for CLIF vital signs data.
-#' Inherits from BaseTable.
+#' R6 class for the CLIF `vitals` table. Inherits all loading, validation and
+#' summary behaviour from [BaseTable] and adds category filtering, per-category
+#' summary statistics and accessors for the schema's expected units and ranges.
+#' Port of `clifpy.tables.vitals.Vitals`.
+#'
+#' @note clifpy defines `validate_vital_ranges()` but leaves it commented out, so
+#' range checking is not part of validation in either implementation. The
+#' `vital_ranges()` accessor exposes the schema values for callers that want to
+#' apply their own checks.
 #'
 #' @export
+#' @examples
+#' \dontrun{
+#' vitals_table <- Vitals$new(
+#'   data_directory = "data/clif",
+#'   filetype = "parquet",
+#'   timezone = "US/Central"
+#' )
+#' vitals_table$filter_by_vital_category("heart_rate")
+#' vitals_table$get_vital_summary_stats()
+#' }
 Vitals <- R6::R6Class(
   classname = "Vitals",
   inherit = BaseTable,
-
   public = list(
-    #' @description
-    #' Initialize a Vitals table instance
-    #'
-    #' @param data_directory Character. Path to directory containing data files.
-    #' @param filetype Character. File type: "csv" or "parquet" (default: "csv").
-    #' @param timezone Character. Timezone for datetime columns (default: "UTC").
-    #' @param output_directory Character. Path for saving outputs (default: NULL).
-    #' @param data Optional tibble. Pre-loaded data (if NULL, loads from file).
-    #' @param schema_dir Character. Custom schema directory (default: NULL).
-    #'
-    #' @return A new Vitals table instance.
+    #' @description Create a Vitals table instance.
+    #' @param data_directory Directory containing the CLIF data files.
+    #' @param filetype Either `"csv"` or `"parquet"`.
+    #' @param timezone Olson timezone for datetime columns.
+    #' @param output_directory Directory for logs and outputs. Defaults to
+    #'   `<data_directory>/output`.
+    #' @param data Optional pre-loaded data frame. When supplied, no file is read.
+    #' @param clif_version CLIF schema version. Defaults to [DEFAULT_CLIF_VERSION].
+    #' @return A new `Vitals` instance.
     initialize = function(data_directory = NULL,
-                          filetype = "csv",
+                          filetype = NULL,
                           timezone = "UTC",
                           output_directory = NULL,
                           data = NULL,
-                          schema_dir = NULL) {
-
+                          clif_version = DEFAULT_CLIF_VERSION) {
       super$initialize(
-        table_name = "vitals",
         data_directory = data_directory,
         filetype = filetype,
         timezone = timezone,
         output_directory = output_directory,
         data = data,
-        schema_dir = schema_dir
+        clif_version = clif_version
       )
+      private$load_vitals_schema_data()
     },
 
-    #' @description
-    #' Filter vitals by category
-    #'
-    #' @param vital_category Character. Vital category to filter.
-    #'
-    #' @return tibble of filtered vital signs.
-    filter_by_category = function(vital_category) {
-      if (!"vital_category" %in% names(self$df)) {
-        cli::cli_abort("vital_category column not found")
-      }
-
-      filtered <- self$df %>%
-        dplyr::filter(vital_category == !!vital_category)
-
-      cli::cli_alert_info(
-        "Found {nrow(filtered)} vital signs for category: {.val {vital_category}}"
-      )
-
-      return(filtered)
+    #' @description Expected measurement unit for each vital category.
+    #' @return A named list mapping vital category to unit, empty when the schema
+    #'   defines none.
+    vital_units = function() {
+      private$vital_units_map
     },
 
-    #' @description
-    #' Get summary statistics for a specific vital sign
-    #'
-    #' @param vital_category Character. Vital category to summarize.
-    #'
-    #' @return List of summary statistics.
-    get_vital_summary = function(vital_category) {
-      vital_data <- self$filter_by_category(vital_category)
-
-      if (!"vital_value" %in% names(vital_data)) {
-        cli::cli_abort("vital_value column not found")
-      }
-
-      summary <- list(
-        vital_category = vital_category,
-        n_measurements = nrow(vital_data),
-        mean = mean(vital_data$vital_value, na.rm = TRUE),
-        median = median(vital_data$vital_value, na.rm = TRUE),
-        sd = sd(vital_data$vital_value, na.rm = TRUE),
-        min = min(vital_data$vital_value, na.rm = TRUE),
-        max = max(vital_data$vital_value, na.rm = TRUE),
-        n_missing = sum(is.na(vital_data$vital_value))
-      )
-
-      cli::cli_h3("Vital Summary: {vital_category}")
-      cli::cli_text("N: {.val {summary$n_measurements}}")
-      cli::cli_text("Mean: {.val {round(summary$mean, 2)}}")
-      cli::cli_text("Range: [{.val {round(summary$min, 2)}}, {.val {round(summary$max, 2)}}]")
-
-      return(invisible(summary))
+    #' @description Expected value range for each vital category.
+    #' @return A named list of `list(min = , max = )` entries, empty when the
+    #'   schema defines none.
+    vital_ranges = function() {
+      private$vital_ranges_map
     },
 
-    #' @description
-    #' Calculate mean arterial pressure (MAP) if not present
-    #'
-    #' @return tibble with calculated MAP values.
-    calculate_map = function() {
-      # Check if we have SBP and DBP
-      sbp_data <- self$filter_by_category("sbp")
-      dbp_data <- self$filter_by_category("dbp")
+    #' @description All records for one vital category.
+    #' @param vital_category Category to filter on, e.g. `"heart_rate"`.
+    #' @return A tibble of matching rows; empty when the column is absent.
+    filter_by_vital_category = function(vital_category) {
+      if (is.null(self$df) || !"vital_category" %in% names(self$df)) {
+        return(dplyr::tibble())
+      }
+      dplyr::filter(self$df, .data$vital_category == !!vital_category)
+    },
 
-      if (nrow(sbp_data) == 0 || nrow(dbp_data) == 0) {
-        cli::cli_abort("Need both SBP and DBP to calculate MAP")
+    #' @description Summary statistics for each vital category.
+    #' @return A tibble with one row per `vital_category` and columns `count`,
+    #'   `mean`, `std`, `min`, `max`, `q1`, `median` and `q3`, rounded to 2
+    #'   decimals. Empty tibble when `vital_value` is absent.
+    get_vital_summary_stats = function() {
+      if (is.null(self$df) || !"vital_value" %in% names(self$df)) {
+        return(dplyr::tibble())
       }
 
-      # Join and calculate MAP
-      map_data <- sbp_data %>%
-        dplyr::inner_join(
-          dbp_data,
-          by = c("hospitalization_id", "recorded_dttm"),
-          suffix = c("_sbp", "_dbp")
-        ) %>%
-        dplyr::mutate(
-          vital_category = "map",
-          vital_value = (vital_value_sbp + 2 * vital_value_dbp) / 3
-        ) %>%
-        dplyr::select(hospitalization_id, recorded_dttm, vital_category, vital_value)
+      numeric_vital_values <- suppressWarnings(as.numeric(self$df$vital_value))
 
-      cli::cli_alert_success("Calculated {nrow(map_data)} MAP values")
+      self$df |>
+        dplyr::mutate(vital_value = numeric_vital_values) |>
+        dplyr::filter(!is.na(.data$vital_category)) |>
+        dplyr::group_by(.data$vital_category) |>
+        dplyr::summarise(
+          count = sum(!is.na(.data$vital_value)),
+          mean = round(mean(.data$vital_value, na.rm = TRUE), 2),
+          std = round(stats::sd(.data$vital_value, na.rm = TRUE), 2),
+          min = round(column_min_or_na(.data$vital_value), 2),
+          max = round(column_max_or_na(.data$vital_value), 2),
+          q1 = round(
+            stats::quantile(.data$vital_value, 0.25, na.rm = TRUE, names = FALSE, type = 7),
+            2
+          ),
+          median = round(
+            stats::quantile(.data$vital_value, 0.5, na.rm = TRUE, names = FALSE, type = 7),
+            2
+          ),
+          q3 = round(
+            stats::quantile(.data$vital_value, 0.75, na.rm = TRUE, names = FALSE, type = 7),
+            2
+          ),
+          .groups = "drop"
+        ) |>
+        dplyr::arrange(.data$vital_category)
+    }
+  ),
+  private = list(
+    vital_units_map = list(),
+    vital_ranges_map = list(),
 
-      return(map_data)
+    load_vitals_schema_data = function() {
+      if (is.null(self$schema)) {
+        return(invisible(NULL))
+      }
+      private$vital_units_map <- self$schema$vital_units %||% list()
+      private$vital_ranges_map <- self$schema$vital_ranges %||% list()
+      invisible(NULL)
     }
   )
 )

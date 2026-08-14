@@ -1,0 +1,3070 @@
+{
+  "table_name": "hospitalization",
+  "backend": "polars",
+  "conformance": {
+    "table_presence": {
+      "check_type": "table_presence",
+      "table_name": "hospitalization",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Table 'hospitalization' present with 200 rows and 18 columns",
+          "details": {}
+        }
+      ],
+      "metrics": {
+        "row_count": 200,
+        "column_count": 18
+      },
+      "atomic_total": 1,
+      "atomic_passed": 1
+    },
+    "required_columns": {
+      "check_type": "required_columns",
+      "table_name": "hospitalization",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'patient_id': present",
+          "details": {
+            "column": "patient_id"
+          }
+        },
+        {
+          "message": "Column 'hospitalization_id': present",
+          "details": {
+            "column": "hospitalization_id"
+          }
+        },
+        {
+          "message": "Column 'admission_dttm': present",
+          "details": {
+            "column": "admission_dttm"
+          }
+        },
+        {
+          "message": "Column 'discharge_dttm': present",
+          "details": {
+            "column": "discharge_dttm"
+          }
+        },
+        {
+          "message": "Column 'age_at_admission': present",
+          "details": {
+            "column": "age_at_admission"
+          }
+        },
+        {
+          "message": "Column 'admission_type_category': present",
+          "details": {
+            "column": "admission_type_category"
+          }
+        },
+        {
+          "message": "Column 'discharge_category': present",
+          "details": {
+            "column": "discharge_category"
+          }
+        }
+      ],
+      "metrics": {
+        "total_required": 7,
+        "total_present": 7,
+        "total_missing": 0
+      },
+      "atomic_total": 7,
+      "atomic_passed": 7
+    },
+    "column_dtypes": {
+      "check_type": "column_dtypes",
+      "table_name": "hospitalization",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'patient_id': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "patient_id",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'hospitalization_id': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "hospitalization_id",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'hospitalization_joined_id': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "hospitalization_joined_id",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'admission_dttm': dtype matches schema (DATETIME)",
+          "details": {
+            "column": "admission_dttm",
+            "expected": "DATETIME"
+          }
+        },
+        {
+          "message": "Column 'discharge_dttm': dtype matches schema (DATETIME)",
+          "details": {
+            "column": "discharge_dttm",
+            "expected": "DATETIME"
+          }
+        },
+        {
+          "message": "Column 'age_at_admission': dtype matches schema (INT)",
+          "details": {
+            "column": "age_at_admission",
+            "expected": "INT"
+          }
+        },
+        {
+          "message": "Column 'admission_type_name': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "admission_type_name",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'admission_type_category': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "admission_type_category",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'discharge_name': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "discharge_name",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'discharge_category': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "discharge_category",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'zipcode_nine_digit': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "zipcode_nine_digit",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'zipcode_five_digit': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "zipcode_five_digit",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'census_block_code': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "census_block_code",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'census_block_group_code': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "census_block_group_code",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'census_tract': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "census_tract",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'state_code': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "state_code",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'county_code': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "county_code",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'fips_version': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "fips_version",
+            "expected": "VARCHAR"
+          }
+        }
+      ],
+      "metrics": {
+        "columns_checked": 18,
+        "dtype_errors": 0,
+        "dtype_warnings": 0
+      },
+      "atomic_total": 18,
+      "atomic_passed": 18
+    },
+    "datetime_format": {
+      "check_type": "datetime_format",
+      "table_name": "hospitalization",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'admission_dttm': datetime format valid",
+          "details": {
+            "column": "admission_dttm"
+          }
+        },
+        {
+          "message": "Column 'discharge_dttm': datetime format valid",
+          "details": {
+            "column": "discharge_dttm"
+          }
+        }
+      ],
+      "metrics": {
+        "datetime_columns_checked": 2
+      },
+      "atomic_total": 2,
+      "atomic_passed": 2
+    },
+    "categorical_values": {
+      "check_type": "categorical_values",
+      "table_name": "hospitalization",
+      "passed": true,
+      "errors": [],
+      "warnings": [
+        {
+          "message": "9 invalid categorical values",
+          "details": {
+            "column": "discharge_category",
+            "top_invalid": [
+              {
+                "value": "Skilled Nursing Facility (SNF)",
+                "count": 23
+              },
+              {
+                "value": "Acute Inpatient Rehab Facility",
+                "count": 15
+              },
+              {
+                "value": "Against Medical Advice (AMA)",
+                "count": 7
+              },
+              {
+                "value": "Long Term Care Hospital (LTACH)",
+                "count": 7
+              },
+              {
+                "value": "Acute Care Hospital",
+                "count": 5
+              },
+              {
+                "value": "Group Home",
+                "count": 5
+              },
+              {
+                "value": "Chemical Dependency",
+                "count": 4
+              },
+              {
+                "value": "Assisted Living",
+                "count": 3
+              },
+              {
+                "value": "Still Admitted",
+                "count": 3
+              }
+            ],
+            "permissible_values": [
+              "home",
+              "snf",
+              "expired",
+              "acute_ip_rehab",
+              "hospice",
+              "ltach",
+              "acute_care_hosp",
+              "group_home",
+              "chemical_dependency",
+              "ama",
+              "assisted_living",
+              "still_admitted",
+              "missing",
+              "other",
+              "mental_health_hosp",
+              "shelter",
+              "jail"
+            ]
+          }
+        }
+      ],
+      "info": [
+        {
+          "message": "Column 'admission_type_category': all values match mCIDE permissible values",
+          "details": {
+            "column": "admission_type_category"
+          }
+        }
+      ],
+      "metrics": {
+        "category_columns_checked": 2,
+        "columns_with_invalid_values": 1
+      },
+      "atomic_total": 2,
+      "atomic_passed": 2
+    },
+    "category_group_mapping": {
+      "check_type": "category_group_mapping",
+      "table_name": "hospitalization",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No category-to-group mappings defined in schema",
+          "details": {}
+        }
+      ],
+      "metrics": {},
+      "atomic_total": 0,
+      "atomic_passed": 0
+    }
+  },
+  "completeness": {
+    "missingness": {
+      "check_type": "missingness",
+      "table_name": "hospitalization",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'admission_type_category': 2.0% missing (below thresholds)",
+          "details": {
+            "column": "admission_type_category",
+            "percent_missing": 2.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'age_at_admission': 1.0% missing (below thresholds)",
+          "details": {
+            "column": "age_at_admission",
+            "percent_missing": 1.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'patient_id': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "patient_id",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'hospitalization_id': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "hospitalization_id",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'admission_dttm': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "admission_dttm",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'discharge_dttm': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "discharge_dttm",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'discharge_category': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "discharge_category",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        }
+      ],
+      "metrics": {
+        "total_rows": 200,
+        "required_columns_checked": 7,
+        "missingness_stats": [
+          {
+            "column": "admission_type_category",
+            "null_count": 4,
+            "total_rows": 200,
+            "percent_missing": 2.0
+          },
+          {
+            "column": "age_at_admission",
+            "null_count": 2,
+            "total_rows": 200,
+            "percent_missing": 1.0
+          },
+          {
+            "column": "patient_id",
+            "null_count": 0,
+            "total_rows": 200,
+            "percent_missing": 0.0
+          },
+          {
+            "column": "hospitalization_id",
+            "null_count": 0,
+            "total_rows": 200,
+            "percent_missing": 0.0
+          },
+          {
+            "column": "admission_dttm",
+            "null_count": 0,
+            "total_rows": 200,
+            "percent_missing": 0.0
+          },
+          {
+            "column": "discharge_dttm",
+            "null_count": 0,
+            "total_rows": 200,
+            "percent_missing": 0.0
+          },
+          {
+            "column": "discharge_category",
+            "null_count": 0,
+            "total_rows": 200,
+            "percent_missing": 0.0
+          }
+        ]
+      },
+      "atomic_total": 7,
+      "atomic_passed": 7
+    },
+    "conditional_requirements": {
+      "check_type": "conditional_requirements",
+      "table_name": "hospitalization",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No conditional requirements defined for this table",
+          "details": {}
+        }
+      ],
+      "metrics": {},
+      "atomic_total": 0,
+      "atomic_passed": 0
+    },
+    "mcide_value_coverage": {
+      "check_type": "mcide_value_coverage",
+      "table_name": "hospitalization",
+      "passed": false,
+      "errors": [
+        {
+          "message": "Missing 10 mCIDE values: snf, acute_ip_rehab, ltach, acute_care_hosp, group_home, chemical_dependency, ama, assisted_living, still_admitted, mental_health_hosp",
+          "details": {
+            "column": "discharge_category",
+            "missing_values": [
+              "snf",
+              "acute_ip_rehab",
+              "ltach",
+              "acute_care_hosp",
+              "group_home",
+              "chemical_dependency",
+              "ama",
+              "assisted_living",
+              "still_admitted",
+              "mental_health_hosp"
+            ],
+            "coverage_percent": 41.18
+          }
+        }
+      ],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'admission_type_category': 6/6 mCIDE values present",
+          "details": {
+            "column": "admission_type_category",
+            "found_values": 6,
+            "expected_values": 6,
+            "coverage_percent": 100.0,
+            "atomic_count": 6
+          }
+        },
+        {
+          "message": "Column 'discharge_category': 7/17 mCIDE values present",
+          "details": {
+            "column": "discharge_category",
+            "found_values": 7,
+            "expected_values": 17,
+            "coverage_percent": 41.18,
+            "atomic_count": 7
+          }
+        }
+      ],
+      "metrics": {
+        "category_columns_checked": 2,
+        "coverage_by_column": {
+          "admission_type_category": {
+            "expected_values": 6,
+            "found_values": 6,
+            "missing_values": [],
+            "coverage_percent": 100.0
+          },
+          "discharge_category": {
+            "expected_values": 17,
+            "found_values": 7,
+            "missing_values": [
+              "snf",
+              "acute_ip_rehab",
+              "ltach",
+              "acute_care_hosp",
+              "group_home",
+              "chemical_dependency",
+              "ama",
+              "assisted_living",
+              "still_admitted",
+              "mental_health_hosp"
+            ],
+            "coverage_percent": 41.18
+          }
+        }
+      },
+      "atomic_total": 23,
+      "atomic_passed": 13
+    }
+  },
+  "relational": {},
+  "plausibility": {
+    "chronological_order": {
+      "check_type": "chronological_order",
+      "table_name": "hospitalization",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Chronological order satisfied: Admission must be strictly before discharge \u2014 200/200 rows valid (100%)",
+          "details": {
+            "column": "admission_dttm, discharge_dttm",
+            "rows_checked": 200,
+            "rows_valid": 200,
+            "percent_valid": 100.0
+          }
+        }
+      ],
+      "metrics": {
+        "pairs_checked": 1,
+        "violations_by_pair": {
+          "admission_dttm->discharge_dttm": {
+            "total_applicable": 200,
+            "violations": 0,
+            "violation_percent": 0.0,
+            "description": "Admission must be strictly before discharge"
+          }
+        }
+      },
+      "atomic_total": 1,
+      "atomic_passed": 1
+    },
+    "numeric_range_plausibility": {
+      "check_type": "numeric_range_plausibility",
+      "table_name": "hospitalization",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'age_at_admission': all 198 values within range [0, 120]",
+          "details": {
+            "column": "age_at_admission",
+            "total": 198,
+            "atomic_count": 1
+          }
+        },
+        {
+          "message": "All numeric values within plausible ranges (age_at_admission)",
+          "details": {
+            "columns_checked": [
+              "age_at_admission"
+            ]
+          }
+        }
+      ],
+      "metrics": {
+        "columns_checked": 1,
+        "out_of_range_summary": {
+          "age_at_admission": {
+            "total_non_null": 198,
+            "out_of_range": 0,
+            "out_of_range_percent": 0.0,
+            "below_min": 0,
+            "above_max": 0,
+            "min": 0,
+            "max": 120
+          }
+        }
+      },
+      "atomic_total": 1,
+      "atomic_passed": 1
+    },
+    "field_plausibility": {
+      "check_type": "field_plausibility",
+      "table_name": "hospitalization",
+      "passed": true,
+      "errors": [],
+      "warnings": [
+        {
+          "message": "Field plausibility violation: Discharged patients (discharge_dttm not null) should not have discharge_category 'Still Admitted' \u2014 3/200 rows (1.5%)",
+          "details": {
+            "rule": "Discharged patients (discharge_dttm not null) should not have discharge_category 'Still Admitted'",
+            "violations": 3,
+            "total": 200,
+            "percent": 1.5
+          }
+        }
+      ],
+      "info": [],
+      "metrics": {
+        "rules_checked": 1,
+        "violations_by_rule": {
+          "Discharged patients (discharge_dttm not null) should not have discharge_category 'Still Admitted'": {
+            "total_applicable": 200,
+            "violations": 3,
+            "violation_percent": 1.5
+          }
+        }
+      },
+      "atomic_total": 1,
+      "atomic_passed": 1
+    },
+    "category_temporal_consistency": {
+      "check_type": "category_temporal_consistency",
+      "table_name": "hospitalization",
+      "passed": true,
+      "errors": [],
+      "warnings": [
+        {
+          "message": "admission_type_category: elective absent in 1/7 years (2018-2024)",
+          "details": {
+            "column": "admission_type_category",
+            "value": "elective",
+            "absent_years": [
+              2021
+            ],
+            "total_years": 7,
+            "yearly_counts": {
+              "2018": 3,
+              "2019": 5,
+              "2020": 4,
+              "2021": 0,
+              "2022": 3,
+              "2023": 1,
+              "2024": 3
+            }
+          }
+        },
+        {
+          "message": "admission_type_category: other absent in 2/7 years (2018-2024)",
+          "details": {
+            "column": "admission_type_category",
+            "value": "other",
+            "absent_years": [
+              2021,
+              2023
+            ],
+            "total_years": 7,
+            "yearly_counts": {
+              "2018": 1,
+              "2019": 2,
+              "2020": 3,
+              "2021": 0,
+              "2022": 2,
+              "2023": 0,
+              "2024": 3
+            }
+          }
+        },
+        {
+          "message": "discharge_category: acute care hospital absent in 4/7 years (2018-2024)",
+          "details": {
+            "column": "discharge_category",
+            "value": "acute care hospital",
+            "absent_years": [
+              2018,
+              2020,
+              2021,
+              2023
+            ],
+            "total_years": 7,
+            "yearly_counts": {
+              "2018": 0,
+              "2019": 1,
+              "2020": 0,
+              "2021": 0,
+              "2022": 2,
+              "2023": 0,
+              "2024": 2
+            }
+          }
+        },
+        {
+          "message": "discharge_category: against medical advice (ama) absent in 2/7 years (2018-2024)",
+          "details": {
+            "column": "discharge_category",
+            "value": "against medical advice (ama)",
+            "absent_years": [
+              2020,
+              2024
+            ],
+            "total_years": 7,
+            "yearly_counts": {
+              "2018": 2,
+              "2019": 1,
+              "2020": 0,
+              "2021": 1,
+              "2022": 1,
+              "2023": 2,
+              "2024": 0
+            }
+          }
+        },
+        {
+          "message": "discharge_category: assisted living absent in 4/7 years (2018-2024)",
+          "details": {
+            "column": "discharge_category",
+            "value": "assisted living",
+            "absent_years": [
+              2018,
+              2019,
+              2020,
+              2023
+            ],
+            "total_years": 7,
+            "yearly_counts": {
+              "2018": 0,
+              "2019": 0,
+              "2020": 0,
+              "2021": 1,
+              "2022": 1,
+              "2023": 0,
+              "2024": 1
+            }
+          }
+        },
+        {
+          "message": "discharge_category: chemical dependency absent in 3/7 years (2018-2024)",
+          "details": {
+            "column": "discharge_category",
+            "value": "chemical dependency",
+            "absent_years": [
+              2018,
+              2019,
+              2021
+            ],
+            "total_years": 7,
+            "yearly_counts": {
+              "2018": 0,
+              "2019": 0,
+              "2020": 1,
+              "2021": 0,
+              "2022": 1,
+              "2023": 1,
+              "2024": 1
+            }
+          }
+        },
+        {
+          "message": "discharge_category: expired absent in 6/7 years (2018-2024)",
+          "details": {
+            "column": "discharge_category",
+            "value": "expired",
+            "absent_years": [
+              2018,
+              2019,
+              2020,
+              2021,
+              2022,
+              2023
+            ],
+            "total_years": 7,
+            "yearly_counts": {
+              "2018": 0,
+              "2019": 0,
+              "2020": 0,
+              "2021": 0,
+              "2022": 0,
+              "2023": 0,
+              "2024": 1
+            }
+          }
+        },
+        {
+          "message": "discharge_category: group home absent in 4/7 years (2018-2024)",
+          "details": {
+            "column": "discharge_category",
+            "value": "group home",
+            "absent_years": [
+              2018,
+              2020,
+              2022,
+              2023
+            ],
+            "total_years": 7,
+            "yearly_counts": {
+              "2018": 0,
+              "2019": 1,
+              "2020": 0,
+              "2021": 2,
+              "2022": 0,
+              "2023": 0,
+              "2024": 2
+            }
+          }
+        },
+        {
+          "message": "discharge_category: hospice absent in 1/7 years (2018-2024)",
+          "details": {
+            "column": "discharge_category",
+            "value": "hospice",
+            "absent_years": [
+              2024
+            ],
+            "total_years": 7,
+            "yearly_counts": {
+              "2018": 1,
+              "2019": 2,
+              "2020": 3,
+              "2021": 1,
+              "2022": 2,
+              "2023": 1,
+              "2024": 0
+            }
+          }
+        },
+        {
+          "message": "discharge_category: jail absent in 6/7 years (2018-2024)",
+          "details": {
+            "column": "discharge_category",
+            "value": "jail",
+            "absent_years": [
+              2019,
+              2020,
+              2021,
+              2022,
+              2023,
+              2024
+            ],
+            "total_years": 7,
+            "yearly_counts": {
+              "2018": 1,
+              "2019": 0,
+              "2020": 0,
+              "2021": 0,
+              "2022": 0,
+              "2023": 0,
+              "2024": 0
+            }
+          }
+        },
+        {
+          "message": "discharge_category: long term care hospital (ltach) absent in 2/7 years (2018-2024)",
+          "details": {
+            "column": "discharge_category",
+            "value": "long term care hospital (ltach)",
+            "absent_years": [
+              2019,
+              2023
+            ],
+            "total_years": 7,
+            "yearly_counts": {
+              "2018": 1,
+              "2019": 0,
+              "2020": 1,
+              "2021": 2,
+              "2022": 2,
+              "2023": 0,
+              "2024": 1
+            }
+          }
+        },
+        {
+          "message": "discharge_category: missing absent in 1/7 years (2018-2024)",
+          "details": {
+            "column": "discharge_category",
+            "value": "missing",
+            "absent_years": [
+              2020
+            ],
+            "total_years": 7,
+            "yearly_counts": {
+              "2018": 1,
+              "2019": 1,
+              "2020": 0,
+              "2021": 1,
+              "2022": 1,
+              "2023": 5,
+              "2024": 1
+            }
+          }
+        },
+        {
+          "message": "discharge_category: other absent in 3/7 years (2018-2024)",
+          "details": {
+            "column": "discharge_category",
+            "value": "other",
+            "absent_years": [
+              2021,
+              2022,
+              2023
+            ],
+            "total_years": 7,
+            "yearly_counts": {
+              "2018": 1,
+              "2019": 3,
+              "2020": 1,
+              "2021": 0,
+              "2022": 0,
+              "2023": 0,
+              "2024": 1
+            }
+          }
+        },
+        {
+          "message": "discharge_category: shelter absent in 5/7 years (2018-2024)",
+          "details": {
+            "column": "discharge_category",
+            "value": "shelter",
+            "absent_years": [
+              2018,
+              2021,
+              2022,
+              2023,
+              2024
+            ],
+            "total_years": 7,
+            "yearly_counts": {
+              "2018": 0,
+              "2019": 1,
+              "2020": 1,
+              "2021": 0,
+              "2022": 0,
+              "2023": 0,
+              "2024": 0
+            }
+          }
+        },
+        {
+          "message": "discharge_category: still admitted absent in 4/7 years (2018-2024)",
+          "details": {
+            "column": "discharge_category",
+            "value": "still admitted",
+            "absent_years": [
+              2019,
+              2022,
+              2023,
+              2024
+            ],
+            "total_years": 7,
+            "yearly_counts": {
+              "2018": 1,
+              "2019": 0,
+              "2020": 1,
+              "2021": 1,
+              "2022": 0,
+              "2023": 0,
+              "2024": 0
+            }
+          }
+        }
+      ],
+      "info": [
+        {
+          "message": "admission_type_category: direct present in 7/7 years (2018-2024)",
+          "details": {
+            "column": "admission_type_category",
+            "value": "direct",
+            "yearly_counts": {
+              "2018": 7,
+              "2019": 4,
+              "2020": 3,
+              "2021": 1,
+              "2022": 5,
+              "2023": 7,
+              "2024": 7
+            }
+          }
+        },
+        {
+          "message": "admission_type_category: ed present in 7/7 years (2018-2024)",
+          "details": {
+            "column": "admission_type_category",
+            "value": "ed",
+            "yearly_counts": {
+              "2018": 8,
+              "2019": 16,
+              "2020": 14,
+              "2021": 14,
+              "2022": 14,
+              "2023": 12,
+              "2024": 11
+            }
+          }
+        },
+        {
+          "message": "admission_type_category: facility present in 7/7 years (2018-2024)",
+          "details": {
+            "column": "admission_type_category",
+            "value": "facility",
+            "yearly_counts": {
+              "2018": 4,
+              "2019": 5,
+              "2020": 2,
+              "2021": 5,
+              "2022": 1,
+              "2023": 1,
+              "2024": 2
+            }
+          }
+        },
+        {
+          "message": "admission_type_category: osh present in 7/7 years (2018-2024)",
+          "details": {
+            "column": "admission_type_category",
+            "value": "osh",
+            "yearly_counts": {
+              "2018": 6,
+              "2019": 4,
+              "2020": 4,
+              "2021": 1,
+              "2022": 3,
+              "2023": 3,
+              "2024": 2
+            }
+          }
+        },
+        {
+          "message": "discharge_category: acute inpatient rehab facility present in 7/7 years (2018-2024)",
+          "details": {
+            "column": "discharge_category",
+            "value": "acute inpatient rehab facility",
+            "yearly_counts": {
+              "2018": 3,
+              "2019": 2,
+              "2020": 3,
+              "2021": 2,
+              "2022": 3,
+              "2023": 1,
+              "2024": 1
+            }
+          }
+        },
+        {
+          "message": "discharge_category: home present in 7/7 years (2018-2024)",
+          "details": {
+            "column": "discharge_category",
+            "value": "home",
+            "yearly_counts": {
+              "2018": 15,
+              "2019": 23,
+              "2020": 15,
+              "2021": 7,
+              "2022": 12,
+              "2023": 12,
+              "2024": 14
+            }
+          }
+        },
+        {
+          "message": "discharge_category: skilled nursing facility (snf) present in 7/7 years (2018-2024)",
+          "details": {
+            "column": "discharge_category",
+            "value": "skilled nursing facility (snf)",
+            "yearly_counts": {
+              "2018": 3,
+              "2019": 3,
+              "2020": 4,
+              "2021": 3,
+              "2022": 4,
+              "2023": 3,
+              "2024": 3
+            }
+          }
+        }
+      ],
+      "metrics": {
+        "category_columns_checked": 2,
+        "yearly_distributions": {
+          "admission_type_category": {
+            "2018": {
+              "direct": 7,
+              "ed": 8,
+              "elective": 3,
+              "facility": 4,
+              "osh": 6,
+              "other": 1
+            },
+            "2019": {
+              "direct": 4,
+              "ed": 16,
+              "elective": 5,
+              "facility": 5,
+              "osh": 4,
+              "other": 2
+            },
+            "2020": {
+              "direct": 3,
+              "ed": 14,
+              "elective": 4,
+              "facility": 2,
+              "osh": 4,
+              "other": 3
+            },
+            "2021": {
+              "direct": 1,
+              "ed": 14,
+              "facility": 5,
+              "osh": 1
+            },
+            "2022": {
+              "direct": 5,
+              "ed": 14,
+              "elective": 3,
+              "facility": 1,
+              "osh": 3,
+              "other": 2
+            },
+            "2023": {
+              "direct": 7,
+              "ed": 12,
+              "elective": 1,
+              "facility": 1,
+              "osh": 3
+            },
+            "2024": {
+              "direct": 7,
+              "ed": 11,
+              "elective": 3,
+              "facility": 2,
+              "osh": 2,
+              "other": 3
+            }
+          },
+          "discharge_category": {
+            "2018": {
+              "acute inpatient rehab facility": 3,
+              "against medical advice (ama)": 2,
+              "home": 15,
+              "hospice": 1,
+              "jail": 1,
+              "long term care hospital (ltach)": 1,
+              "missing": 1,
+              "other": 1,
+              "skilled nursing facility (snf)": 3,
+              "still admitted": 1
+            },
+            "2019": {
+              "acute care hospital": 1,
+              "acute inpatient rehab facility": 2,
+              "against medical advice (ama)": 1,
+              "group home": 1,
+              "home": 23,
+              "hospice": 2,
+              "missing": 1,
+              "other": 3,
+              "shelter": 1,
+              "skilled nursing facility (snf)": 3
+            },
+            "2020": {
+              "acute inpatient rehab facility": 3,
+              "chemical dependency": 1,
+              "home": 15,
+              "hospice": 3,
+              "long term care hospital (ltach)": 1,
+              "other": 1,
+              "shelter": 1,
+              "skilled nursing facility (snf)": 4,
+              "still admitted": 1
+            },
+            "2021": {
+              "acute inpatient rehab facility": 2,
+              "against medical advice (ama)": 1,
+              "assisted living": 1,
+              "group home": 2,
+              "home": 7,
+              "hospice": 1,
+              "long term care hospital (ltach)": 2,
+              "missing": 1,
+              "skilled nursing facility (snf)": 3,
+              "still admitted": 1
+            },
+            "2022": {
+              "acute care hospital": 2,
+              "acute inpatient rehab facility": 3,
+              "against medical advice (ama)": 1,
+              "assisted living": 1,
+              "chemical dependency": 1,
+              "home": 12,
+              "hospice": 2,
+              "long term care hospital (ltach)": 2,
+              "missing": 1,
+              "skilled nursing facility (snf)": 4
+            },
+            "2023": {
+              "acute inpatient rehab facility": 1,
+              "against medical advice (ama)": 2,
+              "chemical dependency": 1,
+              "home": 12,
+              "hospice": 1,
+              "missing": 5,
+              "skilled nursing facility (snf)": 3
+            },
+            "2024": {
+              "acute care hospital": 2,
+              "acute inpatient rehab facility": 1,
+              "assisted living": 1,
+              "chemical dependency": 1,
+              "expired": 1,
+              "group home": 2,
+              "home": 14,
+              "long term care hospital (ltach)": 1,
+              "missing": 1,
+              "other": 1,
+              "skilled nursing facility (snf)": 3
+            }
+          }
+        },
+        "missing_in_years": {
+          "admission_type_category": {
+            "other": [
+              2021,
+              2023
+            ],
+            "elective": [
+              2021
+            ]
+          },
+          "discharge_category": {
+            "missing": [
+              2020
+            ],
+            "long term care hospital (ltach)": [
+              2019,
+              2023
+            ],
+            "shelter": [
+              2018,
+              2021,
+              2022,
+              2023,
+              2024
+            ],
+            "still admitted": [
+              2019,
+              2022,
+              2023,
+              2024
+            ],
+            "other": [
+              2021,
+              2022,
+              2023
+            ],
+            "jail": [
+              2019,
+              2020,
+              2021,
+              2022,
+              2023,
+              2024
+            ],
+            "hospice": [
+              2024
+            ],
+            "acute care hospital": [
+              2018,
+              2020,
+              2021,
+              2023
+            ],
+            "expired": [
+              2018,
+              2019,
+              2020,
+              2021,
+              2022,
+              2023
+            ],
+            "group home": [
+              2018,
+              2020,
+              2022,
+              2023
+            ],
+            "against medical advice (ama)": [
+              2020,
+              2024
+            ],
+            "chemical dependency": [
+              2018,
+              2019,
+              2021
+            ],
+            "assisted living": [
+              2018,
+              2019,
+              2020,
+              2023
+            ]
+          }
+        },
+        "monthly_trends": {
+          "admission_type_category": [
+            {
+              "month_year": "2018-01",
+              "admission_type_category": "direct",
+              "n": 1
+            },
+            {
+              "month_year": "2018-01",
+              "admission_type_category": "ed",
+              "n": 3
+            },
+            {
+              "month_year": "2018-03",
+              "admission_type_category": "direct",
+              "n": 2
+            },
+            {
+              "month_year": "2018-04",
+              "admission_type_category": "direct",
+              "n": 1
+            },
+            {
+              "month_year": "2018-04",
+              "admission_type_category": "facility",
+              "n": 2
+            },
+            {
+              "month_year": "2018-04",
+              "admission_type_category": "other",
+              "n": 1
+            },
+            {
+              "month_year": "2018-05",
+              "admission_type_category": "elective",
+              "n": 1
+            },
+            {
+              "month_year": "2018-05",
+              "admission_type_category": "facility",
+              "n": 1
+            },
+            {
+              "month_year": "2018-06",
+              "admission_type_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2018-06",
+              "admission_type_category": "facility",
+              "n": 1
+            },
+            {
+              "month_year": "2018-07",
+              "admission_type_category": "direct",
+              "n": 1
+            },
+            {
+              "month_year": "2018-07",
+              "admission_type_category": "elective",
+              "n": 1
+            },
+            {
+              "month_year": "2018-07",
+              "admission_type_category": "osh",
+              "n": 1
+            },
+            {
+              "month_year": "2018-08",
+              "admission_type_category": "direct",
+              "n": 1
+            },
+            {
+              "month_year": "2018-08",
+              "admission_type_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2018-08",
+              "admission_type_category": "osh",
+              "n": 2
+            },
+            {
+              "month_year": "2018-09",
+              "admission_type_category": "elective",
+              "n": 1
+            },
+            {
+              "month_year": "2018-09",
+              "admission_type_category": "osh",
+              "n": 1
+            },
+            {
+              "month_year": "2018-10",
+              "admission_type_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2018-11",
+              "admission_type_category": "direct",
+              "n": 1
+            },
+            {
+              "month_year": "2018-11",
+              "admission_type_category": "ed",
+              "n": 2
+            },
+            {
+              "month_year": "2018-11",
+              "admission_type_category": "osh",
+              "n": 2
+            },
+            {
+              "month_year": "2019-01",
+              "admission_type_category": "direct",
+              "n": 1
+            },
+            {
+              "month_year": "2019-01",
+              "admission_type_category": "ed",
+              "n": 2
+            },
+            {
+              "month_year": "2019-01",
+              "admission_type_category": "elective",
+              "n": 2
+            },
+            {
+              "month_year": "2019-02",
+              "admission_type_category": "ed",
+              "n": 3
+            },
+            {
+              "month_year": "2019-03",
+              "admission_type_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2019-03",
+              "admission_type_category": "other",
+              "n": 1
+            },
+            {
+              "month_year": "2019-04",
+              "admission_type_category": "elective",
+              "n": 1
+            },
+            {
+              "month_year": "2019-05",
+              "admission_type_category": "ed",
+              "n": 3
+            },
+            {
+              "month_year": "2019-05",
+              "admission_type_category": "elective",
+              "n": 1
+            },
+            {
+              "month_year": "2019-05",
+              "admission_type_category": "other",
+              "n": 1
+            },
+            {
+              "month_year": "2019-06",
+              "admission_type_category": "direct",
+              "n": 1
+            },
+            {
+              "month_year": "2019-06",
+              "admission_type_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2019-07",
+              "admission_type_category": "direct",
+              "n": 1
+            },
+            {
+              "month_year": "2019-07",
+              "admission_type_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2019-07",
+              "admission_type_category": "elective",
+              "n": 1
+            },
+            {
+              "month_year": "2019-07",
+              "admission_type_category": "facility",
+              "n": 3
+            },
+            {
+              "month_year": "2019-08",
+              "admission_type_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2019-09",
+              "admission_type_category": "facility",
+              "n": 1
+            },
+            {
+              "month_year": "2019-09",
+              "admission_type_category": "osh",
+              "n": 1
+            },
+            {
+              "month_year": "2019-10",
+              "admission_type_category": "direct",
+              "n": 1
+            },
+            {
+              "month_year": "2019-10",
+              "admission_type_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2019-11",
+              "admission_type_category": "ed",
+              "n": 2
+            },
+            {
+              "month_year": "2019-11",
+              "admission_type_category": "osh",
+              "n": 2
+            },
+            {
+              "month_year": "2019-12",
+              "admission_type_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2019-12",
+              "admission_type_category": "facility",
+              "n": 1
+            },
+            {
+              "month_year": "2019-12",
+              "admission_type_category": "osh",
+              "n": 1
+            },
+            {
+              "month_year": "2020-01",
+              "admission_type_category": "osh",
+              "n": 1
+            },
+            {
+              "month_year": "2020-02",
+              "admission_type_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2020-03",
+              "admission_type_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2020-04",
+              "admission_type_category": "direct",
+              "n": 1
+            },
+            {
+              "month_year": "2020-04",
+              "admission_type_category": "facility",
+              "n": 1
+            },
+            {
+              "month_year": "2020-04",
+              "admission_type_category": "other",
+              "n": 1
+            },
+            {
+              "month_year": "2020-05",
+              "admission_type_category": "direct",
+              "n": 1
+            },
+            {
+              "month_year": "2020-05",
+              "admission_type_category": "ed",
+              "n": 3
+            },
+            {
+              "month_year": "2020-05",
+              "admission_type_category": "elective",
+              "n": 1
+            },
+            {
+              "month_year": "2020-06",
+              "admission_type_category": "direct",
+              "n": 1
+            },
+            {
+              "month_year": "2020-06",
+              "admission_type_category": "ed",
+              "n": 3
+            },
+            {
+              "month_year": "2020-06",
+              "admission_type_category": "elective",
+              "n": 1
+            },
+            {
+              "month_year": "2020-06",
+              "admission_type_category": "facility",
+              "n": 1
+            },
+            {
+              "month_year": "2020-06",
+              "admission_type_category": "other",
+              "n": 1
+            },
+            {
+              "month_year": "2020-07",
+              "admission_type_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2020-07",
+              "admission_type_category": "osh",
+              "n": 1
+            },
+            {
+              "month_year": "2020-08",
+              "admission_type_category": "other",
+              "n": 1
+            },
+            {
+              "month_year": "2020-09",
+              "admission_type_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2020-09",
+              "admission_type_category": "osh",
+              "n": 1
+            },
+            {
+              "month_year": "2020-10",
+              "admission_type_category": "ed",
+              "n": 2
+            },
+            {
+              "month_year": "2020-10",
+              "admission_type_category": "elective",
+              "n": 1
+            },
+            {
+              "month_year": "2020-10",
+              "admission_type_category": "osh",
+              "n": 1
+            },
+            {
+              "month_year": "2020-11",
+              "admission_type_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2020-11",
+              "admission_type_category": "elective",
+              "n": 1
+            },
+            {
+              "month_year": "2020-12",
+              "admission_type_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2021-01",
+              "admission_type_category": "direct",
+              "n": 1
+            },
+            {
+              "month_year": "2021-01",
+              "admission_type_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2021-02",
+              "admission_type_category": "ed",
+              "n": 2
+            },
+            {
+              "month_year": "2021-02",
+              "admission_type_category": "facility",
+              "n": 2
+            },
+            {
+              "month_year": "2021-03",
+              "admission_type_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2021-04",
+              "admission_type_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2021-05",
+              "admission_type_category": "facility",
+              "n": 1
+            },
+            {
+              "month_year": "2021-05",
+              "admission_type_category": "osh",
+              "n": 1
+            },
+            {
+              "month_year": "2021-06",
+              "admission_type_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2021-07",
+              "admission_type_category": "ed",
+              "n": 3
+            },
+            {
+              "month_year": "2021-09",
+              "admission_type_category": "ed",
+              "n": 2
+            },
+            {
+              "month_year": "2021-10",
+              "admission_type_category": "ed",
+              "n": 2
+            },
+            {
+              "month_year": "2021-10",
+              "admission_type_category": "facility",
+              "n": 1
+            },
+            {
+              "month_year": "2021-11",
+              "admission_type_category": "facility",
+              "n": 1
+            },
+            {
+              "month_year": "2021-12",
+              "admission_type_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2022-01",
+              "admission_type_category": "direct",
+              "n": 1
+            },
+            {
+              "month_year": "2022-01",
+              "admission_type_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2022-02",
+              "admission_type_category": "ed",
+              "n": 2
+            },
+            {
+              "month_year": "2022-03",
+              "admission_type_category": "direct",
+              "n": 1
+            },
+            {
+              "month_year": "2022-03",
+              "admission_type_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2022-03",
+              "admission_type_category": "elective",
+              "n": 1
+            },
+            {
+              "month_year": "2022-03",
+              "admission_type_category": "facility",
+              "n": 1
+            },
+            {
+              "month_year": "2022-04",
+              "admission_type_category": "elective",
+              "n": 1
+            },
+            {
+              "month_year": "2022-04",
+              "admission_type_category": "osh",
+              "n": 1
+            },
+            {
+              "month_year": "2022-04",
+              "admission_type_category": "other",
+              "n": 1
+            },
+            {
+              "month_year": "2022-05",
+              "admission_type_category": "other",
+              "n": 1
+            },
+            {
+              "month_year": "2022-06",
+              "admission_type_category": "direct",
+              "n": 1
+            },
+            {
+              "month_year": "2022-07",
+              "admission_type_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2022-07",
+              "admission_type_category": "osh",
+              "n": 1
+            },
+            {
+              "month_year": "2022-09",
+              "admission_type_category": "direct",
+              "n": 1
+            },
+            {
+              "month_year": "2022-09",
+              "admission_type_category": "ed",
+              "n": 3
+            },
+            {
+              "month_year": "2022-09",
+              "admission_type_category": "osh",
+              "n": 1
+            },
+            {
+              "month_year": "2022-10",
+              "admission_type_category": "direct",
+              "n": 1
+            },
+            {
+              "month_year": "2022-10",
+              "admission_type_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2022-11",
+              "admission_type_category": "ed",
+              "n": 4
+            },
+            {
+              "month_year": "2022-12",
+              "admission_type_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2022-12",
+              "admission_type_category": "elective",
+              "n": 1
+            },
+            {
+              "month_year": "2023-01",
+              "admission_type_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2023-02",
+              "admission_type_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2023-03",
+              "admission_type_category": "direct",
+              "n": 1
+            },
+            {
+              "month_year": "2023-03",
+              "admission_type_category": "ed",
+              "n": 2
+            },
+            {
+              "month_year": "2023-04",
+              "admission_type_category": "ed",
+              "n": 3
+            },
+            {
+              "month_year": "2023-05",
+              "admission_type_category": "direct",
+              "n": 1
+            },
+            {
+              "month_year": "2023-07",
+              "admission_type_category": "direct",
+              "n": 3
+            },
+            {
+              "month_year": "2023-07",
+              "admission_type_category": "ed",
+              "n": 2
+            },
+            {
+              "month_year": "2023-07",
+              "admission_type_category": "osh",
+              "n": 1
+            },
+            {
+              "month_year": "2023-08",
+              "admission_type_category": "ed",
+              "n": 2
+            },
+            {
+              "month_year": "2023-08",
+              "admission_type_category": "osh",
+              "n": 1
+            },
+            {
+              "month_year": "2023-10",
+              "admission_type_category": "direct",
+              "n": 1
+            },
+            {
+              "month_year": "2023-10",
+              "admission_type_category": "elective",
+              "n": 1
+            },
+            {
+              "month_year": "2023-10",
+              "admission_type_category": "facility",
+              "n": 1
+            },
+            {
+              "month_year": "2023-10",
+              "admission_type_category": "osh",
+              "n": 1
+            },
+            {
+              "month_year": "2023-11",
+              "admission_type_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2023-12",
+              "admission_type_category": "direct",
+              "n": 1
+            },
+            {
+              "month_year": "2024-01",
+              "admission_type_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2024-02",
+              "admission_type_category": "direct",
+              "n": 2
+            },
+            {
+              "month_year": "2024-03",
+              "admission_type_category": "other",
+              "n": 2
+            },
+            {
+              "month_year": "2024-04",
+              "admission_type_category": "direct",
+              "n": 1
+            },
+            {
+              "month_year": "2024-04",
+              "admission_type_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2024-05",
+              "admission_type_category": "direct",
+              "n": 2
+            },
+            {
+              "month_year": "2024-05",
+              "admission_type_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2024-05",
+              "admission_type_category": "other",
+              "n": 1
+            },
+            {
+              "month_year": "2024-06",
+              "admission_type_category": "ed",
+              "n": 2
+            },
+            {
+              "month_year": "2024-07",
+              "admission_type_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2024-07",
+              "admission_type_category": "facility",
+              "n": 1
+            },
+            {
+              "month_year": "2024-07",
+              "admission_type_category": "osh",
+              "n": 1
+            },
+            {
+              "month_year": "2024-08",
+              "admission_type_category": "direct",
+              "n": 1
+            },
+            {
+              "month_year": "2024-08",
+              "admission_type_category": "ed",
+              "n": 2
+            },
+            {
+              "month_year": "2024-09",
+              "admission_type_category": "ed",
+              "n": 1
+            },
+            {
+              "month_year": "2024-09",
+              "admission_type_category": "elective",
+              "n": 1
+            },
+            {
+              "month_year": "2024-10",
+              "admission_type_category": "elective",
+              "n": 1
+            },
+            {
+              "month_year": "2024-10",
+              "admission_type_category": "facility",
+              "n": 1
+            },
+            {
+              "month_year": "2024-11",
+              "admission_type_category": "direct",
+              "n": 1
+            },
+            {
+              "month_year": "2024-11",
+              "admission_type_category": "ed",
+              "n": 2
+            },
+            {
+              "month_year": "2024-11",
+              "admission_type_category": "osh",
+              "n": 1
+            },
+            {
+              "month_year": "2024-12",
+              "admission_type_category": "elective",
+              "n": 1
+            }
+          ],
+          "discharge_category": [
+            {
+              "month_year": "2018-01",
+              "discharge_category": "acute inpatient rehab facility",
+              "n": 1
+            },
+            {
+              "month_year": "2018-01",
+              "discharge_category": "home",
+              "n": 2
+            },
+            {
+              "month_year": "2018-01",
+              "discharge_category": "still admitted",
+              "n": 1
+            },
+            {
+              "month_year": "2018-03",
+              "discharge_category": "home",
+              "n": 2
+            },
+            {
+              "month_year": "2018-04",
+              "discharge_category": "home",
+              "n": 2
+            },
+            {
+              "month_year": "2018-04",
+              "discharge_category": "hospice",
+              "n": 1
+            },
+            {
+              "month_year": "2018-04",
+              "discharge_category": "other",
+              "n": 1
+            },
+            {
+              "month_year": "2018-05",
+              "discharge_category": "acute inpatient rehab facility",
+              "n": 1
+            },
+            {
+              "month_year": "2018-05",
+              "discharge_category": "missing",
+              "n": 1
+            },
+            {
+              "month_year": "2018-06",
+              "discharge_category": "against medical advice (ama)",
+              "n": 1
+            },
+            {
+              "month_year": "2018-06",
+              "discharge_category": "home",
+              "n": 1
+            },
+            {
+              "month_year": "2018-07",
+              "discharge_category": "acute inpatient rehab facility",
+              "n": 1
+            },
+            {
+              "month_year": "2018-07",
+              "discharge_category": "home",
+              "n": 2
+            },
+            {
+              "month_year": "2018-08",
+              "discharge_category": "home",
+              "n": 2
+            },
+            {
+              "month_year": "2018-08",
+              "discharge_category": "jail",
+              "n": 1
+            },
+            {
+              "month_year": "2018-08",
+              "discharge_category": "skilled nursing facility (snf)",
+              "n": 1
+            },
+            {
+              "month_year": "2018-09",
+              "discharge_category": "home",
+              "n": 1
+            },
+            {
+              "month_year": "2018-09",
+              "discharge_category": "long term care hospital (ltach)",
+              "n": 1
+            },
+            {
+              "month_year": "2018-10",
+              "discharge_category": "home",
+              "n": 1
+            },
+            {
+              "month_year": "2018-11",
+              "discharge_category": "against medical advice (ama)",
+              "n": 1
+            },
+            {
+              "month_year": "2018-11",
+              "discharge_category": "home",
+              "n": 2
+            },
+            {
+              "month_year": "2018-11",
+              "discharge_category": "skilled nursing facility (snf)",
+              "n": 2
+            },
+            {
+              "month_year": "2019-01",
+              "discharge_category": "home",
+              "n": 2
+            },
+            {
+              "month_year": "2019-01",
+              "discharge_category": "other",
+              "n": 1
+            },
+            {
+              "month_year": "2019-01",
+              "discharge_category": "skilled nursing facility (snf)",
+              "n": 2
+            },
+            {
+              "month_year": "2019-02",
+              "discharge_category": "acute inpatient rehab facility",
+              "n": 1
+            },
+            {
+              "month_year": "2019-02",
+              "discharge_category": "home",
+              "n": 1
+            },
+            {
+              "month_year": "2019-02",
+              "discharge_category": "hospice",
+              "n": 1
+            },
+            {
+              "month_year": "2019-03",
+              "discharge_category": "home",
+              "n": 2
+            },
+            {
+              "month_year": "2019-03",
+              "discharge_category": "shelter",
+              "n": 1
+            },
+            {
+              "month_year": "2019-04",
+              "discharge_category": "home",
+              "n": 1
+            },
+            {
+              "month_year": "2019-05",
+              "discharge_category": "home",
+              "n": 4
+            },
+            {
+              "month_year": "2019-05",
+              "discharge_category": "hospice",
+              "n": 1
+            },
+            {
+              "month_year": "2019-06",
+              "discharge_category": "home",
+              "n": 2
+            },
+            {
+              "month_year": "2019-07",
+              "discharge_category": "acute care hospital",
+              "n": 1
+            },
+            {
+              "month_year": "2019-07",
+              "discharge_category": "acute inpatient rehab facility",
+              "n": 1
+            },
+            {
+              "month_year": "2019-07",
+              "discharge_category": "home",
+              "n": 3
+            },
+            {
+              "month_year": "2019-07",
+              "discharge_category": "other",
+              "n": 1
+            },
+            {
+              "month_year": "2019-08",
+              "discharge_category": "home",
+              "n": 1
+            },
+            {
+              "month_year": "2019-09",
+              "discharge_category": "home",
+              "n": 1
+            },
+            {
+              "month_year": "2019-09",
+              "discharge_category": "other",
+              "n": 1
+            },
+            {
+              "month_year": "2019-10",
+              "discharge_category": "against medical advice (ama)",
+              "n": 1
+            },
+            {
+              "month_year": "2019-10",
+              "discharge_category": "home",
+              "n": 1
+            },
+            {
+              "month_year": "2019-11",
+              "discharge_category": "home",
+              "n": 4
+            },
+            {
+              "month_year": "2019-12",
+              "discharge_category": "group home",
+              "n": 1
+            },
+            {
+              "month_year": "2019-12",
+              "discharge_category": "home",
+              "n": 1
+            },
+            {
+              "month_year": "2019-12",
+              "discharge_category": "missing",
+              "n": 1
+            },
+            {
+              "month_year": "2019-12",
+              "discharge_category": "skilled nursing facility (snf)",
+              "n": 1
+            },
+            {
+              "month_year": "2020-01",
+              "discharge_category": "home",
+              "n": 1
+            },
+            {
+              "month_year": "2020-02",
+              "discharge_category": "home",
+              "n": 1
+            },
+            {
+              "month_year": "2020-03",
+              "discharge_category": "home",
+              "n": 1
+            },
+            {
+              "month_year": "2020-04",
+              "discharge_category": "acute inpatient rehab facility",
+              "n": 1
+            },
+            {
+              "month_year": "2020-04",
+              "discharge_category": "home",
+              "n": 1
+            },
+            {
+              "month_year": "2020-04",
+              "discharge_category": "shelter",
+              "n": 1
+            },
+            {
+              "month_year": "2020-05",
+              "discharge_category": "home",
+              "n": 2
+            },
+            {
+              "month_year": "2020-05",
+              "discharge_category": "hospice",
+              "n": 2
+            },
+            {
+              "month_year": "2020-05",
+              "discharge_category": "skilled nursing facility (snf)",
+              "n": 1
+            },
+            {
+              "month_year": "2020-06",
+              "discharge_category": "chemical dependency",
+              "n": 1
+            },
+            {
+              "month_year": "2020-06",
+              "discharge_category": "home",
+              "n": 5
+            },
+            {
+              "month_year": "2020-06",
+              "discharge_category": "other",
+              "n": 1
+            },
+            {
+              "month_year": "2020-07",
+              "discharge_category": "home",
+              "n": 2
+            },
+            {
+              "month_year": "2020-08",
+              "discharge_category": "long term care hospital (ltach)",
+              "n": 1
+            },
+            {
+              "month_year": "2020-09",
+              "discharge_category": "home",
+              "n": 1
+            },
+            {
+              "month_year": "2020-09",
+              "discharge_category": "skilled nursing facility (snf)",
+              "n": 1
+            },
+            {
+              "month_year": "2020-10",
+              "discharge_category": "acute inpatient rehab facility",
+              "n": 1
+            },
+            {
+              "month_year": "2020-10",
+              "discharge_category": "home",
+              "n": 1
+            },
+            {
+              "month_year": "2020-10",
+              "discharge_category": "skilled nursing facility (snf)",
+              "n": 2
+            },
+            {
+              "month_year": "2020-11",
+              "discharge_category": "acute inpatient rehab facility",
+              "n": 1
+            },
+            {
+              "month_year": "2020-11",
+              "discharge_category": "still admitted",
+              "n": 1
+            },
+            {
+              "month_year": "2020-12",
+              "discharge_category": "hospice",
+              "n": 1
+            },
+            {
+              "month_year": "2021-01",
+              "discharge_category": "group home",
+              "n": 1
+            },
+            {
+              "month_year": "2021-01",
+              "discharge_category": "home",
+              "n": 1
+            },
+            {
+              "month_year": "2021-02",
+              "discharge_category": "against medical advice (ama)",
+              "n": 1
+            },
+            {
+              "month_year": "2021-02",
+              "discharge_category": "home",
+              "n": 2
+            },
+            {
+              "month_year": "2021-02",
+              "discharge_category": "skilled nursing facility (snf)",
+              "n": 1
+            },
+            {
+              "month_year": "2021-03",
+              "discharge_category": "long term care hospital (ltach)",
+              "n": 1
+            },
+            {
+              "month_year": "2021-04",
+              "discharge_category": "skilled nursing facility (snf)",
+              "n": 1
+            },
+            {
+              "month_year": "2021-05",
+              "discharge_category": "acute inpatient rehab facility",
+              "n": 1
+            },
+            {
+              "month_year": "2021-05",
+              "discharge_category": "missing",
+              "n": 1
+            },
+            {
+              "month_year": "2021-06",
+              "discharge_category": "home",
+              "n": 1
+            },
+            {
+              "month_year": "2021-07",
+              "discharge_category": "acute inpatient rehab facility",
+              "n": 1
+            },
+            {
+              "month_year": "2021-07",
+              "discharge_category": "group home",
+              "n": 1
+            },
+            {
+              "month_year": "2021-07",
+              "discharge_category": "long term care hospital (ltach)",
+              "n": 1
+            },
+            {
+              "month_year": "2021-09",
+              "discharge_category": "home",
+              "n": 2
+            },
+            {
+              "month_year": "2021-10",
+              "discharge_category": "home",
+              "n": 1
+            },
+            {
+              "month_year": "2021-10",
+              "discharge_category": "skilled nursing facility (snf)",
+              "n": 1
+            },
+            {
+              "month_year": "2021-10",
+              "discharge_category": "still admitted",
+              "n": 1
+            },
+            {
+              "month_year": "2021-11",
+              "discharge_category": "hospice",
+              "n": 1
+            },
+            {
+              "month_year": "2021-12",
+              "discharge_category": "assisted living",
+              "n": 1
+            },
+            {
+              "month_year": "2022-01",
+              "discharge_category": "against medical advice (ama)",
+              "n": 1
+            },
+            {
+              "month_year": "2022-01",
+              "discharge_category": "home",
+              "n": 1
+            },
+            {
+              "month_year": "2022-02",
+              "discharge_category": "home",
+              "n": 1
+            },
+            {
+              "month_year": "2022-02",
+              "discharge_category": "skilled nursing facility (snf)",
+              "n": 1
+            },
+            {
+              "month_year": "2022-03",
+              "discharge_category": "home",
+              "n": 1
+            },
+            {
+              "month_year": "2022-03",
+              "discharge_category": "missing",
+              "n": 1
+            },
+            {
+              "month_year": "2022-03",
+              "discharge_category": "skilled nursing facility (snf)",
+              "n": 2
+            },
+            {
+              "month_year": "2022-04",
+              "discharge_category": "acute inpatient rehab facility",
+              "n": 1
+            },
+            {
+              "month_year": "2022-04",
+              "discharge_category": "chemical dependency",
+              "n": 1
+            },
+            {
+              "month_year": "2022-04",
+              "discharge_category": "home",
+              "n": 1
+            },
+            {
+              "month_year": "2022-05",
+              "discharge_category": "acute care hospital",
+              "n": 1
+            },
+            {
+              "month_year": "2022-05",
+              "discharge_category": "home",
+              "n": 1
+            },
+            {
+              "month_year": "2022-06",
+              "discharge_category": "skilled nursing facility (snf)",
+              "n": 1
+            },
+            {
+              "month_year": "2022-07",
+              "discharge_category": "home",
+              "n": 2
+            },
+            {
+              "month_year": "2022-09",
+              "discharge_category": "acute inpatient rehab facility",
+              "n": 2
+            },
+            {
+              "month_year": "2022-09",
+              "discharge_category": "home",
+              "n": 3
+            },
+            {
+              "month_year": "2022-10",
+              "discharge_category": "home",
+              "n": 1
+            },
+            {
+              "month_year": "2022-10",
+              "discharge_category": "long term care hospital (ltach)",
+              "n": 1
+            },
+            {
+              "month_year": "2022-11",
+              "discharge_category": "acute care hospital",
+              "n": 1
+            },
+            {
+              "month_year": "2022-11",
+              "discharge_category": "home",
+              "n": 1
+            },
+            {
+              "month_year": "2022-11",
+              "discharge_category": "hospice",
+              "n": 1
+            },
+            {
+              "month_year": "2022-11",
+              "discharge_category": "long term care hospital (ltach)",
+              "n": 1
+            },
+            {
+              "month_year": "2022-12",
+              "discharge_category": "assisted living",
+              "n": 1
+            },
+            {
+              "month_year": "2022-12",
+              "discharge_category": "hospice",
+              "n": 1
+            },
+            {
+              "month_year": "2023-01",
+              "discharge_category": "skilled nursing facility (snf)",
+              "n": 1
+            },
+            {
+              "month_year": "2023-02",
+              "discharge_category": "missing",
+              "n": 1
+            },
+            {
+              "month_year": "2023-02",
+              "discharge_category": "skilled nursing facility (snf)",
+              "n": 1
+            },
+            {
+              "month_year": "2023-03",
+              "discharge_category": "chemical dependency",
+              "n": 1
+            },
+            {
+              "month_year": "2023-03",
+              "discharge_category": "home",
+              "n": 1
+            },
+            {
+              "month_year": "2023-03",
+              "discharge_category": "missing",
+              "n": 1
+            },
+            {
+              "month_year": "2023-04",
+              "discharge_category": "against medical advice (ama)",
+              "n": 1
+            },
+            {
+              "month_year": "2023-04",
+              "discharge_category": "home",
+              "n": 2
+            },
+            {
+              "month_year": "2023-05",
+              "discharge_category": "home",
+              "n": 1
+            },
+            {
+              "month_year": "2023-07",
+              "discharge_category": "home",
+              "n": 3
+            },
+            {
+              "month_year": "2023-07",
+              "discharge_category": "missing",
+              "n": 3
+            },
+            {
+              "month_year": "2023-08",
+              "discharge_category": "home",
+              "n": 2
+            },
+            {
+              "month_year": "2023-08",
+              "discharge_category": "hospice",
+              "n": 1
+            },
+            {
+              "month_year": "2023-10",
+              "discharge_category": "against medical advice (ama)",
+              "n": 1
+            },
+            {
+              "month_year": "2023-10",
+              "discharge_category": "home",
+              "n": 3
+            },
+            {
+              "month_year": "2023-11",
+              "discharge_category": "skilled nursing facility (snf)",
+              "n": 1
+            },
+            {
+              "month_year": "2023-12",
+              "discharge_category": "acute inpatient rehab facility",
+              "n": 1
+            },
+            {
+              "month_year": "2024-01",
+              "discharge_category": "home",
+              "n": 1
+            },
+            {
+              "month_year": "2024-02",
+              "discharge_category": "home",
+              "n": 2
+            },
+            {
+              "month_year": "2024-03",
+              "discharge_category": "home",
+              "n": 2
+            },
+            {
+              "month_year": "2024-04",
+              "discharge_category": "chemical dependency",
+              "n": 1
+            },
+            {
+              "month_year": "2024-04",
+              "discharge_category": "skilled nursing facility (snf)",
+              "n": 1
+            },
+            {
+              "month_year": "2024-05",
+              "discharge_category": "expired",
+              "n": 1
+            },
+            {
+              "month_year": "2024-05",
+              "discharge_category": "home",
+              "n": 1
+            },
+            {
+              "month_year": "2024-05",
+              "discharge_category": "other",
+              "n": 1
+            },
+            {
+              "month_year": "2024-05",
+              "discharge_category": "skilled nursing facility (snf)",
+              "n": 1
+            },
+            {
+              "month_year": "2024-06",
+              "discharge_category": "acute care hospital",
+              "n": 1
+            },
+            {
+              "month_year": "2024-06",
+              "discharge_category": "home",
+              "n": 1
+            },
+            {
+              "month_year": "2024-07",
+              "discharge_category": "group home",
+              "n": 1
+            },
+            {
+              "month_year": "2024-07",
+              "discharge_category": "home",
+              "n": 1
+            },
+            {
+              "month_year": "2024-07",
+              "discharge_category": "skilled nursing facility (snf)",
+              "n": 1
+            },
+            {
+              "month_year": "2024-08",
+              "discharge_category": "acute inpatient rehab facility",
+              "n": 1
+            },
+            {
+              "month_year": "2024-08",
+              "discharge_category": "home",
+              "n": 1
+            },
+            {
+              "month_year": "2024-08",
+              "discharge_category": "missing",
+              "n": 1
+            },
+            {
+              "month_year": "2024-09",
+              "discharge_category": "acute care hospital",
+              "n": 1
+            },
+            {
+              "month_year": "2024-09",
+              "discharge_category": "home",
+              "n": 1
+            },
+            {
+              "month_year": "2024-10",
+              "discharge_category": "home",
+              "n": 2
+            },
+            {
+              "month_year": "2024-11",
+              "discharge_category": "assisted living",
+              "n": 1
+            },
+            {
+              "month_year": "2024-11",
+              "discharge_category": "group home",
+              "n": 1
+            },
+            {
+              "month_year": "2024-11",
+              "discharge_category": "home",
+              "n": 2
+            },
+            {
+              "month_year": "2024-12",
+              "discharge_category": "long term care hospital (ltach)",
+              "n": 1
+            }
+          ]
+        }
+      },
+      "atomic_total": 22,
+      "atomic_passed": 22
+    },
+    "duplicate_composite_keys": {
+      "check_type": "duplicate_composite_keys",
+      "table_name": "hospitalization",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No duplicate composite keys found",
+          "details": {}
+        }
+      ],
+      "metrics": {
+        "composite_keys": [
+          "hospitalization_id"
+        ],
+        "total_records": 200,
+        "unique_records": 200,
+        "duplicate_records": 0,
+        "duplicate_percent": 0.0
+      },
+      "atomic_total": 1,
+      "atomic_passed": 1
+    }
+  },
+  "table_stats": [
+    {
+      "column": "patient_id",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 157,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "hospitalization_id",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 200,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "hospitalization_joined_id",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 200,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "admission_dttm",
+      "dtype": "DATETIME",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 200,
+      "min": "2018-01-22 20:36",
+      "max": "2024-12-15 19:20"
+    },
+    {
+      "column": "discharge_dttm",
+      "dtype": "DATETIME",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 200,
+      "min": "2018-01-25 10:18",
+      "max": "2025-01-15 06:25"
+    },
+    {
+      "column": "age_at_admission",
+      "dtype": "INT",
+      "null_count": 2,
+      "null_pct": 1.0,
+      "unique": 67,
+      "min": "16",
+      "max": "96"
+    },
+    {
+      "column": "admission_type_name",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 6,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "admission_type_category",
+      "dtype": "VARCHAR",
+      "null_count": 4,
+      "null_pct": 2.0,
+      "unique": 6,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "discharge_name",
+      "dtype": "VARCHAR",
+      "null_count": 2,
+      "null_pct": 1.0,
+      "unique": 16,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "discharge_category",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 16,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "zipcode_nine_digit",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 200,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "zipcode_five_digit",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 200,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "census_block_code",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 200,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "census_block_group_code",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 200,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "census_tract",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 200,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "state_code",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 51,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "county_code",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 200,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "fips_version",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 1,
+      "min": null,
+      "max": null
+    }
+  ],
+  "total_rows": 200
+}

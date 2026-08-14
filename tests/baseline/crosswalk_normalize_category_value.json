@@ -1,0 +1,54 @@
+[
+  {
+    "input": "Black or African American",
+    "output": "black_or_african_american"
+  },
+  {
+    "input": "Non-Hispanic",
+    "output": "non_hispanic"
+  },
+  {
+    "input": "Other",
+    "output": "other"
+  },
+  {
+    "input": "Unknown or NA",
+    "output": "unknown_or_na"
+  },
+  {
+    "input": "Sign Language",
+    "output": "sign_language"
+  },
+  {
+    "input": "Haitian Creole",
+    "output": "haitian_creole"
+  },
+  {
+    "input": "ED",
+    "output": "ed"
+  },
+  {
+    "input": "ICU",
+    "output": "icu"
+  },
+  {
+    "input": "Ward & Stepdown",
+    "output": "ward_and_stepdown"
+  },
+  {
+    "input": "IMV",
+    "output": "imv"
+  },
+  {
+    "input": "High Flow NC",
+    "output": "high_flow_nc"
+  },
+  {
+    "input": "vasopressin/norepinephrine",
+    "output": "vasopressin_or_norepinephrine"
+  },
+  {
+    "input": "",
+    "output": ""
+  }
+]

@@ -1,0 +1,41 @@
+{
+  "artifact": "mdro_pseudomonas",
+  "columns": [
+    "DTR",
+    "MDR",
+    "PDR",
+    "XDR",
+    "aminoglycosides_group",
+    "antipseudomonal_carbapenems_group",
+    "antipseudomonal_cephalosporins_group",
+    "antipseudomonal_fluoroquinolones_group",
+    "antipseudomonal_penicillins_beta_lactamase_inhibitors_group",
+    "cefepime_agent",
+    "ciprofloxacin_agent",
+    "gentamicin_agent",
+    "hospitalization_id",
+    "meropenem_agent",
+    "organism_id",
+    "piperacillin_tazobactam_agent"
+  ],
+  "dtypes": {
+    "DTR": "int64",
+    "MDR": "int64",
+    "PDR": "int64",
+    "XDR": "int64",
+    "aminoglycosides_group": "int64",
+    "antipseudomonal_carbapenems_group": "int64",
+    "antipseudomonal_cephalosporins_group": "int64",
+    "antipseudomonal_fluoroquinolones_group": "int64",
+    "antipseudomonal_penicillins_beta_lactamase_inhibitors_group": "int64",
+    "cefepime_agent": "str",
+    "ciprofloxacin_agent": "str",
+    "gentamicin_agent": "str",
+    "hospitalization_id": "object",
+    "meropenem_agent": "str",
+    "organism_id": "object",
+    "piperacillin_tazobactam_agent": "str"
+  },
+  "n_columns": 16,
+  "n_rows": 19
+}

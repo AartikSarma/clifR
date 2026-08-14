@@ -1,0 +1,13 @@
+{
+  "artifact": "encounter_mapping",
+  "columns": [
+    "encounter_block",
+    "hospitalization_id"
+  ],
+  "dtypes": {
+    "encounter_block": "int32",
+    "hospitalization_id": "string"
+  },
+  "n_columns": 2,
+  "n_rows": 200
+}

@@ -1,0 +1,5921 @@
+{
+  "table_name": "vitals",
+  "backend": "polars",
+  "conformance": {
+    "table_presence": {
+      "check_type": "table_presence",
+      "table_name": "vitals",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Table 'vitals' present with 314376 rows and 6 columns",
+          "details": {}
+        }
+      ],
+      "metrics": {
+        "row_count": 314376,
+        "column_count": 6
+      },
+      "atomic_total": 1,
+      "atomic_passed": 1
+    },
+    "required_columns": {
+      "check_type": "required_columns",
+      "table_name": "vitals",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'hospitalization_id': present",
+          "details": {
+            "column": "hospitalization_id"
+          }
+        },
+        {
+          "message": "Column 'recorded_dttm': present",
+          "details": {
+            "column": "recorded_dttm"
+          }
+        },
+        {
+          "message": "Column 'vital_category': present",
+          "details": {
+            "column": "vital_category"
+          }
+        },
+        {
+          "message": "Column 'vital_value': present",
+          "details": {
+            "column": "vital_value"
+          }
+        }
+      ],
+      "metrics": {
+        "total_required": 4,
+        "total_present": 4,
+        "total_missing": 0
+      },
+      "atomic_total": 4,
+      "atomic_passed": 4
+    },
+    "column_dtypes": {
+      "check_type": "column_dtypes",
+      "table_name": "vitals",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'hospitalization_id': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "hospitalization_id",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'recorded_dttm': dtype matches schema (DATETIME)",
+          "details": {
+            "column": "recorded_dttm",
+            "expected": "DATETIME"
+          }
+        },
+        {
+          "message": "Column 'measured_dttm': not present in data (dtype check skipped)",
+          "details": {
+            "column": "measured_dttm",
+            "expected": "DATETIME"
+          }
+        },
+        {
+          "message": "Column 'vital_name': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "vital_name",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'vital_category': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "vital_category",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'vital_value': dtype matches schema (DOUBLE)",
+          "details": {
+            "column": "vital_value",
+            "expected": "DOUBLE"
+          }
+        },
+        {
+          "message": "Column 'meas_site_name': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "meas_site_name",
+            "expected": "VARCHAR"
+          }
+        }
+      ],
+      "metrics": {
+        "columns_checked": 7,
+        "dtype_errors": 0,
+        "dtype_warnings": 0
+      },
+      "atomic_total": 7,
+      "atomic_passed": 7
+    },
+    "datetime_format": {
+      "check_type": "datetime_format",
+      "table_name": "vitals",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'measured_dttm': not present in data (datetime check skipped)",
+          "details": {
+            "column": "measured_dttm"
+          }
+        },
+        {
+          "message": "Column 'recorded_dttm': datetime format valid",
+          "details": {
+            "column": "recorded_dttm"
+          }
+        }
+      ],
+      "metrics": {
+        "datetime_columns_checked": 2
+      },
+      "atomic_total": 2,
+      "atomic_passed": 2
+    },
+    "categorical_values": {
+      "check_type": "categorical_values",
+      "table_name": "vitals",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'vital_category': all values match mCIDE permissible values",
+          "details": {
+            "column": "vital_category"
+          }
+        }
+      ],
+      "metrics": {
+        "category_columns_checked": 1,
+        "columns_with_invalid_values": 0
+      },
+      "atomic_total": 1,
+      "atomic_passed": 1
+    },
+    "category_group_mapping": {
+      "check_type": "category_group_mapping",
+      "table_name": "vitals",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No category-to-group mappings defined in schema",
+          "details": {}
+        }
+      ],
+      "metrics": {},
+      "atomic_total": 0,
+      "atomic_passed": 0
+    }
+  },
+  "completeness": {
+    "missingness": {
+      "check_type": "missingness",
+      "table_name": "vitals",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'vital_value': 4.96% missing (below thresholds)",
+          "details": {
+            "column": "vital_value",
+            "percent_missing": 4.96,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'hospitalization_id': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "hospitalization_id",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'recorded_dttm': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "recorded_dttm",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'vital_category': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "vital_category",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        }
+      ],
+      "metrics": {
+        "total_rows": 314376,
+        "required_columns_checked": 4,
+        "missingness_stats": [
+          {
+            "column": "vital_value",
+            "null_count": 15602,
+            "total_rows": 314376,
+            "percent_missing": 4.96
+          },
+          {
+            "column": "hospitalization_id",
+            "null_count": 0,
+            "total_rows": 314376,
+            "percent_missing": 0.0
+          },
+          {
+            "column": "recorded_dttm",
+            "null_count": 0,
+            "total_rows": 314376,
+            "percent_missing": 0.0
+          },
+          {
+            "column": "vital_category",
+            "null_count": 0,
+            "total_rows": 314376,
+            "percent_missing": 0.0
+          }
+        ]
+      },
+      "atomic_total": 4,
+      "atomic_passed": 4
+    },
+    "conditional_requirements": {
+      "check_type": "conditional_requirements",
+      "table_name": "vitals",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No conditional requirements defined for this table",
+          "details": {}
+        }
+      ],
+      "metrics": {},
+      "atomic_total": 0,
+      "atomic_passed": 0
+    },
+    "mcide_value_coverage": {
+      "check_type": "mcide_value_coverage",
+      "table_name": "vitals",
+      "passed": false,
+      "errors": [
+        {
+          "message": "Missing 2 mCIDE values: intracranial_pressure, pulse_pressure_variation",
+          "details": {
+            "column": "vital_category",
+            "missing_values": [
+              "intracranial_pressure",
+              "pulse_pressure_variation"
+            ],
+            "coverage_percent": 81.82
+          }
+        }
+      ],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'vital_category': 9/11 mCIDE values present",
+          "details": {
+            "column": "vital_category",
+            "found_values": 9,
+            "expected_values": 11,
+            "coverage_percent": 81.82,
+            "atomic_count": 9
+          }
+        }
+      ],
+      "metrics": {
+        "category_columns_checked": 1,
+        "coverage_by_column": {
+          "vital_category": {
+            "expected_values": 11,
+            "found_values": 9,
+            "missing_values": [
+              "intracranial_pressure",
+              "pulse_pressure_variation"
+            ],
+            "coverage_percent": 81.82
+          }
+        }
+      },
+      "atomic_total": 11,
+      "atomic_passed": 9
+    }
+  },
+  "relational": {},
+  "plausibility": {
+    "chronological_order": {
+      "check_type": "chronological_order",
+      "table_name": "vitals",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No chronological order rules defined for this table",
+          "details": {}
+        }
+      ],
+      "metrics": {},
+      "atomic_total": 0,
+      "atomic_passed": 0
+    },
+    "numeric_range_plausibility": {
+      "check_type": "numeric_range_plausibility",
+      "table_name": "vitals",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "All numeric values within plausible ranges (vital_value)",
+          "details": {
+            "columns_checked": [
+              "vital_value"
+            ]
+          }
+        }
+      ],
+      "metrics": {
+        "columns_checked": 1,
+        "out_of_range_summary": {
+          "vital_value": {
+            "total_non_null": 298774,
+            "out_of_range": 0,
+            "out_of_range_percent": 0.0
+          }
+        }
+      },
+      "atomic_total": 9,
+      "atomic_passed": 9
+    },
+    "field_plausibility": {
+      "check_type": "field_plausibility",
+      "table_name": "vitals",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No field plausibility rules defined for this table",
+          "details": {}
+        }
+      ],
+      "metrics": {},
+      "atomic_total": 0,
+      "atomic_passed": 0
+    },
+    "category_temporal_consistency": {
+      "check_type": "category_temporal_consistency",
+      "table_name": "vitals",
+      "passed": true,
+      "errors": [],
+      "warnings": [
+        {
+          "message": "vital_category: height_cm absent in 1/8 years (2018-2025)",
+          "details": {
+            "column": "vital_category",
+            "value": "height_cm",
+            "absent_years": [
+              2025
+            ],
+            "total_years": 8,
+            "yearly_counts": {
+              "2018": 29,
+              "2019": 38,
+              "2020": 30,
+              "2021": 21,
+              "2022": 29,
+              "2023": 25,
+              "2024": 28,
+              "2025": 0
+            }
+          }
+        },
+        {
+          "message": "vital_category: weight_kg absent in 1/8 years (2018-2025)",
+          "details": {
+            "column": "vital_category",
+            "value": "weight_kg",
+            "absent_years": [
+              2025
+            ],
+            "total_years": 8,
+            "yearly_counts": {
+              "2018": 29,
+              "2019": 38,
+              "2020": 30,
+              "2021": 21,
+              "2022": 29,
+              "2023": 25,
+              "2024": 28,
+              "2025": 0
+            }
+          }
+        }
+      ],
+      "info": [
+        {
+          "message": "vital_category: dbp present in 8/8 years (2018-2025)",
+          "details": {
+            "column": "vital_category",
+            "value": "dbp",
+            "yearly_counts": {
+              "2018": 29,
+              "2019": 38,
+              "2020": 32,
+              "2021": 21,
+              "2022": 31,
+              "2023": 26,
+              "2024": 28,
+              "2025": 1
+            }
+          }
+        },
+        {
+          "message": "vital_category: heart_rate present in 8/8 years (2018-2025)",
+          "details": {
+            "column": "vital_category",
+            "value": "heart_rate",
+            "yearly_counts": {
+              "2018": 29,
+              "2019": 38,
+              "2020": 32,
+              "2021": 21,
+              "2022": 31,
+              "2023": 26,
+              "2024": 28,
+              "2025": 1
+            }
+          }
+        },
+        {
+          "message": "vital_category: map present in 8/8 years (2018-2025)",
+          "details": {
+            "column": "vital_category",
+            "value": "map",
+            "yearly_counts": {
+              "2018": 29,
+              "2019": 38,
+              "2020": 32,
+              "2021": 21,
+              "2022": 31,
+              "2023": 26,
+              "2024": 28,
+              "2025": 1
+            }
+          }
+        },
+        {
+          "message": "vital_category: respiratory_rate present in 8/8 years (2018-2025)",
+          "details": {
+            "column": "vital_category",
+            "value": "respiratory_rate",
+            "yearly_counts": {
+              "2018": 29,
+              "2019": 38,
+              "2020": 32,
+              "2021": 21,
+              "2022": 31,
+              "2023": 26,
+              "2024": 28,
+              "2025": 1
+            }
+          }
+        },
+        {
+          "message": "vital_category: sbp present in 8/8 years (2018-2025)",
+          "details": {
+            "column": "vital_category",
+            "value": "sbp",
+            "yearly_counts": {
+              "2018": 29,
+              "2019": 38,
+              "2020": 32,
+              "2021": 21,
+              "2022": 31,
+              "2023": 26,
+              "2024": 28,
+              "2025": 1
+            }
+          }
+        },
+        {
+          "message": "vital_category: spo2 present in 8/8 years (2018-2025)",
+          "details": {
+            "column": "vital_category",
+            "value": "spo2",
+            "yearly_counts": {
+              "2018": 29,
+              "2019": 38,
+              "2020": 32,
+              "2021": 21,
+              "2022": 31,
+              "2023": 26,
+              "2024": 28,
+              "2025": 1
+            }
+          }
+        },
+        {
+          "message": "vital_category: temp_c present in 8/8 years (2018-2025)",
+          "details": {
+            "column": "vital_category",
+            "value": "temp_c",
+            "yearly_counts": {
+              "2018": 29,
+              "2019": 38,
+              "2020": 32,
+              "2021": 21,
+              "2022": 31,
+              "2023": 26,
+              "2024": 28,
+              "2025": 1
+            }
+          }
+        }
+      ],
+      "metrics": {
+        "category_columns_checked": 1,
+        "yearly_distributions": {
+          "vital_category": {
+            "2018": {
+              "dbp": 29,
+              "heart_rate": 29,
+              "height_cm": 29,
+              "map": 29,
+              "respiratory_rate": 29,
+              "sbp": 29,
+              "spo2": 29,
+              "temp_c": 29,
+              "weight_kg": 29
+            },
+            "2019": {
+              "dbp": 38,
+              "heart_rate": 38,
+              "height_cm": 38,
+              "map": 38,
+              "respiratory_rate": 38,
+              "sbp": 38,
+              "spo2": 38,
+              "temp_c": 38,
+              "weight_kg": 38
+            },
+            "2020": {
+              "dbp": 32,
+              "heart_rate": 32,
+              "height_cm": 30,
+              "map": 32,
+              "respiratory_rate": 32,
+              "sbp": 32,
+              "spo2": 32,
+              "temp_c": 32,
+              "weight_kg": 30
+            },
+            "2021": {
+              "dbp": 21,
+              "heart_rate": 21,
+              "height_cm": 21,
+              "map": 21,
+              "respiratory_rate": 21,
+              "sbp": 21,
+              "spo2": 21,
+              "temp_c": 21,
+              "weight_kg": 21
+            },
+            "2022": {
+              "dbp": 31,
+              "heart_rate": 31,
+              "height_cm": 29,
+              "map": 31,
+              "respiratory_rate": 31,
+              "sbp": 31,
+              "spo2": 31,
+              "temp_c": 31,
+              "weight_kg": 29
+            },
+            "2023": {
+              "dbp": 26,
+              "heart_rate": 26,
+              "height_cm": 25,
+              "map": 26,
+              "respiratory_rate": 26,
+              "sbp": 26,
+              "spo2": 26,
+              "temp_c": 26,
+              "weight_kg": 25
+            },
+            "2024": {
+              "dbp": 28,
+              "heart_rate": 28,
+              "height_cm": 28,
+              "map": 28,
+              "respiratory_rate": 28,
+              "sbp": 28,
+              "spo2": 28,
+              "temp_c": 28,
+              "weight_kg": 28
+            },
+            "2025": {
+              "dbp": 1,
+              "heart_rate": 1,
+              "map": 1,
+              "respiratory_rate": 1,
+              "sbp": 1,
+              "spo2": 1,
+              "temp_c": 1
+            }
+          }
+        },
+        "missing_in_years": {
+          "vital_category": {
+            "weight_kg": [
+              2025
+            ],
+            "height_cm": [
+              2025
+            ]
+          }
+        },
+        "monthly_trends": {
+          "vital_category": [
+            {
+              "month_year": "2018-01",
+              "vital_category": "dbp",
+              "n": 4,
+              "avg": 78.08426966292134,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2018-01",
+              "vital_category": "heart_rate",
+              "n": 4,
+              "avg": 78.76258538725824,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2018-01",
+              "vital_category": "height_cm",
+              "n": 4,
+              "avg": 169.35,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2018-01",
+              "vital_category": "map",
+              "n": 4,
+              "avg": 92.82300884955752,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2018-01",
+              "vital_category": "respiratory_rate",
+              "n": 4,
+              "avg": 16.608187134502923,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2018-01",
+              "vital_category": "sbp",
+              "n": 4,
+              "avg": 122.58105779753555,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2018-01",
+              "vital_category": "spo2",
+              "n": 4,
+              "avg": 95.83771471197414,
+              "unit": "%"
+            },
+            {
+              "month_year": "2018-01",
+              "vital_category": "temp_c",
+              "n": 3,
+              "avg": 36.97778425896245,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2018-01",
+              "vital_category": "weight_kg",
+              "n": 4,
+              "avg": 66.875,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2018-02",
+              "vital_category": "dbp",
+              "n": 3,
+              "avg": 78.14603386757423,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2018-02",
+              "vital_category": "heart_rate",
+              "n": 3,
+              "avg": 81.72213758058906,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2018-02",
+              "vital_category": "map",
+              "n": 3,
+              "avg": 90.22088239067809,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2018-02",
+              "vital_category": "respiratory_rate",
+              "n": 3,
+              "avg": 16.744911247902987,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2018-02",
+              "vital_category": "sbp",
+              "n": 3,
+              "avg": 115.07180569464734,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2018-02",
+              "vital_category": "spo2",
+              "n": 3,
+              "avg": 96.11906235852875,
+              "unit": "%"
+            },
+            {
+              "month_year": "2018-02",
+              "vital_category": "temp_c",
+              "n": 3,
+              "avg": 37.06856396973556,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2018-03",
+              "vital_category": "dbp",
+              "n": 3,
+              "avg": 78.3513675342747,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2018-03",
+              "vital_category": "heart_rate",
+              "n": 3,
+              "avg": 80.828727019829,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2018-03",
+              "vital_category": "height_cm",
+              "n": 2,
+              "avg": 173.69999999999996,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2018-03",
+              "vital_category": "map",
+              "n": 3,
+              "avg": 92.5620842051449,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2018-03",
+              "vital_category": "respiratory_rate",
+              "n": 3,
+              "avg": 17.286849195229962,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2018-03",
+              "vital_category": "sbp",
+              "n": 3,
+              "avg": 119.67336194082542,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2018-03",
+              "vital_category": "spo2",
+              "n": 3,
+              "avg": 95.91969325224785,
+              "unit": "%"
+            },
+            {
+              "month_year": "2018-03",
+              "vital_category": "temp_c",
+              "n": 3,
+              "avg": 37.05433143476045,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2018-03",
+              "vital_category": "weight_kg",
+              "n": 2,
+              "avg": 72.89999999999999,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2018-04",
+              "vital_category": "dbp",
+              "n": 6,
+              "avg": 78.70284465653391,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2018-04",
+              "vital_category": "heart_rate",
+              "n": 6,
+              "avg": 78.30266437962388,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2018-04",
+              "vital_category": "height_cm",
+              "n": 4,
+              "avg": 169.78333333333333,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2018-04",
+              "vital_category": "map",
+              "n": 6,
+              "avg": 91.8217182983285,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2018-04",
+              "vital_category": "respiratory_rate",
+              "n": 6,
+              "avg": 17.123047544242592,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2018-04",
+              "vital_category": "sbp",
+              "n": 6,
+              "avg": 121.0970870556579,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2018-04",
+              "vital_category": "spo2",
+              "n": 6,
+              "avg": 95.89219250986264,
+              "unit": "%"
+            },
+            {
+              "month_year": "2018-04",
+              "vital_category": "temp_c",
+              "n": 6,
+              "avg": 36.90864402667967,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2018-04",
+              "vital_category": "weight_kg",
+              "n": 4,
+              "avg": 70.08000000000001,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2018-05",
+              "vital_category": "dbp",
+              "n": 3,
+              "avg": 78.85178314448247,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2018-05",
+              "vital_category": "heart_rate",
+              "n": 3,
+              "avg": 82.56668410637025,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2018-05",
+              "vital_category": "height_cm",
+              "n": 2,
+              "avg": 164.96666666666667,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2018-05",
+              "vital_category": "map",
+              "n": 3,
+              "avg": 91.3634244113747,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2018-05",
+              "vital_category": "respiratory_rate",
+              "n": 3,
+              "avg": 15.35097848182659,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2018-05",
+              "vital_category": "sbp",
+              "n": 3,
+              "avg": 121.31557574764788,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2018-05",
+              "vital_category": "spo2",
+              "n": 3,
+              "avg": 96.22514619883042,
+              "unit": "%"
+            },
+            {
+              "month_year": "2018-05",
+              "vital_category": "temp_c",
+              "n": 3,
+              "avg": 37.0500862520668,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2018-05",
+              "vital_category": "weight_kg",
+              "n": 2,
+              "avg": 76.26666666666667,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2018-06",
+              "vital_category": "dbp",
+              "n": 4,
+              "avg": 76.19763209315092,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2018-06",
+              "vital_category": "heart_rate",
+              "n": 4,
+              "avg": 80.11892311072778,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2018-06",
+              "vital_category": "height_cm",
+              "n": 2,
+              "avg": 160.23333333333335,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2018-06",
+              "vital_category": "map",
+              "n": 4,
+              "avg": 90.89394167507223,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2018-06",
+              "vital_category": "respiratory_rate",
+              "n": 4,
+              "avg": 17.17424309196532,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2018-06",
+              "vital_category": "sbp",
+              "n": 4,
+              "avg": 120.01541137855544,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2018-06",
+              "vital_category": "spo2",
+              "n": 4,
+              "avg": 96.62906229305013,
+              "unit": "%"
+            },
+            {
+              "month_year": "2018-06",
+              "vital_category": "temp_c",
+              "n": 4,
+              "avg": 37.06559575376246,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2018-06",
+              "vital_category": "weight_kg",
+              "n": 2,
+              "avg": 73.49999999999999,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2018-07",
+              "vital_category": "dbp",
+              "n": 5,
+              "avg": 79.46449162515974,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2018-07",
+              "vital_category": "heart_rate",
+              "n": 5,
+              "avg": 81.5556958433362,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2018-07",
+              "vital_category": "height_cm",
+              "n": 3,
+              "avg": 175.0,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2018-07",
+              "vital_category": "map",
+              "n": 5,
+              "avg": 92.89698652159451,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2018-07",
+              "vital_category": "respiratory_rate",
+              "n": 5,
+              "avg": 17.96306007354454,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2018-07",
+              "vital_category": "sbp",
+              "n": 5,
+              "avg": 119.4161527974629,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2018-07",
+              "vital_category": "spo2",
+              "n": 5,
+              "avg": 96.52741937761839,
+              "unit": "%"
+            },
+            {
+              "month_year": "2018-07",
+              "vital_category": "temp_c",
+              "n": 5,
+              "avg": 37.0676673250386,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2018-07",
+              "vital_category": "weight_kg",
+              "n": 3,
+              "avg": 85.0,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2018-08",
+              "vital_category": "dbp",
+              "n": 6,
+              "avg": 79.75581262312481,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2018-08",
+              "vital_category": "heart_rate",
+              "n": 6,
+              "avg": 81.60033016294022,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2018-08",
+              "vital_category": "height_cm",
+              "n": 4,
+              "avg": 168.04000000000002,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2018-08",
+              "vital_category": "map",
+              "n": 6,
+              "avg": 92.3373413688902,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2018-08",
+              "vital_category": "respiratory_rate",
+              "n": 6,
+              "avg": 17.16979613735098,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2018-08",
+              "vital_category": "sbp",
+              "n": 6,
+              "avg": 118.09870239676953,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2018-08",
+              "vital_category": "spo2",
+              "n": 6,
+              "avg": 96.17362584435693,
+              "unit": "%"
+            },
+            {
+              "month_year": "2018-08",
+              "vital_category": "temp_c",
+              "n": 6,
+              "avg": 37.04264257401545,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2018-08",
+              "vital_category": "weight_kg",
+              "n": 4,
+              "avg": 78.02000000000001,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2018-09",
+              "vital_category": "dbp",
+              "n": 5,
+              "avg": 78.89569791506158,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2018-09",
+              "vital_category": "heart_rate",
+              "n": 5,
+              "avg": 77.92867061432347,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2018-09",
+              "vital_category": "height_cm",
+              "n": 2,
+              "avg": 176.35000000000002,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2018-09",
+              "vital_category": "map",
+              "n": 5,
+              "avg": 91.67313839051992,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2018-09",
+              "vital_category": "respiratory_rate",
+              "n": 5,
+              "avg": 16.476222444599063,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2018-09",
+              "vital_category": "sbp",
+              "n": 5,
+              "avg": 117.81022451079103,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2018-09",
+              "vital_category": "spo2",
+              "n": 5,
+              "avg": 96.27164832962637,
+              "unit": "%"
+            },
+            {
+              "month_year": "2018-09",
+              "vital_category": "temp_c",
+              "n": 5,
+              "avg": 37.036740909045236,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2018-09",
+              "vital_category": "weight_kg",
+              "n": 2,
+              "avg": 93.30000000000001,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2018-10",
+              "vital_category": "dbp",
+              "n": 2,
+              "avg": 75.24813958313707,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2018-10",
+              "vital_category": "heart_rate",
+              "n": 2,
+              "avg": 82.6963834304449,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2018-10",
+              "vital_category": "height_cm",
+              "n": 1,
+              "avg": 168.8,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2018-10",
+              "vital_category": "map",
+              "n": 2,
+              "avg": 87.8108108108108,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2018-10",
+              "vital_category": "respiratory_rate",
+              "n": 2,
+              "avg": 15.753164556962025,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2018-10",
+              "vital_category": "sbp",
+              "n": 2,
+              "avg": 117.56047728544517,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2018-10",
+              "vital_category": "spo2",
+              "n": 2,
+              "avg": 96.10684608572454,
+              "unit": "%"
+            },
+            {
+              "month_year": "2018-10",
+              "vital_category": "temp_c",
+              "n": 2,
+              "avg": 37.027643907869454,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2018-10",
+              "vital_category": "weight_kg",
+              "n": 1,
+              "avg": 82.1,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2018-11",
+              "vital_category": "dbp",
+              "n": 5,
+              "avg": 78.90926415112432,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2018-11",
+              "vital_category": "heart_rate",
+              "n": 5,
+              "avg": 81.64102201361123,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2018-11",
+              "vital_category": "height_cm",
+              "n": 5,
+              "avg": 170.54999999999998,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2018-11",
+              "vital_category": "map",
+              "n": 5,
+              "avg": 90.49651692273079,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2018-11",
+              "vital_category": "respiratory_rate",
+              "n": 5,
+              "avg": 17.46099290780142,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2018-11",
+              "vital_category": "sbp",
+              "n": 5,
+              "avg": 112.18438237692386,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2018-11",
+              "vital_category": "spo2",
+              "n": 5,
+              "avg": 95.80518048203484,
+              "unit": "%"
+            },
+            {
+              "month_year": "2018-11",
+              "vital_category": "temp_c",
+              "n": 5,
+              "avg": 37.17637094807669,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2018-11",
+              "vital_category": "weight_kg",
+              "n": 5,
+              "avg": 71.46000000000001,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2019-01",
+              "vital_category": "dbp",
+              "n": 5,
+              "avg": 77.0428784047126,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2019-01",
+              "vital_category": "heart_rate",
+              "n": 5,
+              "avg": 81.31700753227416,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2019-01",
+              "vital_category": "height_cm",
+              "n": 5,
+              "avg": 171.03333333333333,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2019-01",
+              "vital_category": "map",
+              "n": 5,
+              "avg": 91.46917784161205,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2019-01",
+              "vital_category": "respiratory_rate",
+              "n": 5,
+              "avg": 18.889207935295104,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2019-01",
+              "vital_category": "sbp",
+              "n": 5,
+              "avg": 119.81613514981954,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2019-01",
+              "vital_category": "spo2",
+              "n": 5,
+              "avg": 96.50305728565537,
+              "unit": "%"
+            },
+            {
+              "month_year": "2019-01",
+              "vital_category": "temp_c",
+              "n": 5,
+              "avg": 36.875846085343994,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2019-01",
+              "vital_category": "weight_kg",
+              "n": 5,
+              "avg": 91.44000000000001,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2019-02",
+              "vital_category": "dbp",
+              "n": 4,
+              "avg": 75.78407318110695,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2019-02",
+              "vital_category": "heart_rate",
+              "n": 4,
+              "avg": 83.85590994542284,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2019-02",
+              "vital_category": "height_cm",
+              "n": 3,
+              "avg": 177.48,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2019-02",
+              "vital_category": "map",
+              "n": 4,
+              "avg": 85.49944995639551,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2019-02",
+              "vital_category": "respiratory_rate",
+              "n": 4,
+              "avg": 16.567251461988302,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2019-02",
+              "vital_category": "sbp",
+              "n": 4,
+              "avg": 109.93713715757038,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2019-02",
+              "vital_category": "spo2",
+              "n": 4,
+              "avg": 96.11931818181819,
+              "unit": "%"
+            },
+            {
+              "month_year": "2019-02",
+              "vital_category": "temp_c",
+              "n": 4,
+              "avg": 36.991801514035295,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2019-02",
+              "vital_category": "weight_kg",
+              "n": 3,
+              "avg": 83.22,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2019-03",
+              "vital_category": "dbp",
+              "n": 4,
+              "avg": 78.54119048359667,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2019-03",
+              "vital_category": "heart_rate",
+              "n": 4,
+              "avg": 82.2390786236982,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2019-03",
+              "vital_category": "height_cm",
+              "n": 3,
+              "avg": 163.45,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2019-03",
+              "vital_category": "map",
+              "n": 4,
+              "avg": 91.23370079896473,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2019-03",
+              "vital_category": "respiratory_rate",
+              "n": 4,
+              "avg": 16.21603017381372,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2019-03",
+              "vital_category": "sbp",
+              "n": 4,
+              "avg": 119.78902601643101,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2019-03",
+              "vital_category": "spo2",
+              "n": 4,
+              "avg": 96.21358574445989,
+              "unit": "%"
+            },
+            {
+              "month_year": "2019-03",
+              "vital_category": "temp_c",
+              "n": 4,
+              "avg": 37.11976950706834,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2019-03",
+              "vital_category": "weight_kg",
+              "n": 3,
+              "avg": 83.60000000000001,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2019-04",
+              "vital_category": "dbp",
+              "n": 2,
+              "avg": 75.86434385758163,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2019-04",
+              "vital_category": "heart_rate",
+              "n": 2,
+              "avg": 78.48148148148148,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2019-04",
+              "vital_category": "height_cm",
+              "n": 1,
+              "avg": 158.3,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2019-04",
+              "vital_category": "map",
+              "n": 2,
+              "avg": 89.40384615384616,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2019-04",
+              "vital_category": "respiratory_rate",
+              "n": 2,
+              "avg": 17.04573855943628,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2019-04",
+              "vital_category": "sbp",
+              "n": 2,
+              "avg": 116.37798636090271,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2019-04",
+              "vital_category": "spo2",
+              "n": 2,
+              "avg": 96.6961365149834,
+              "unit": "%"
+            },
+            {
+              "month_year": "2019-04",
+              "vital_category": "temp_c",
+              "n": 2,
+              "avg": 36.90730788266573,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2019-04",
+              "vital_category": "weight_kg",
+              "n": 1,
+              "avg": 80.1,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2019-05",
+              "vital_category": "dbp",
+              "n": 6,
+              "avg": 78.28806206731907,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2019-05",
+              "vital_category": "heart_rate",
+              "n": 6,
+              "avg": 79.68509572345233,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2019-05",
+              "vital_category": "height_cm",
+              "n": 5,
+              "avg": 182.8909400195928,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2019-05",
+              "vital_category": "map",
+              "n": 6,
+              "avg": 92.54135428869381,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2019-05",
+              "vital_category": "respiratory_rate",
+              "n": 6,
+              "avg": 16.845410959525204,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2019-05",
+              "vital_category": "sbp",
+              "n": 6,
+              "avg": 120.59822296297662,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2019-05",
+              "vital_category": "spo2",
+              "n": 6,
+              "avg": 96.1915555604584,
+              "unit": "%"
+            },
+            {
+              "month_year": "2019-05",
+              "vital_category": "temp_c",
+              "n": 6,
+              "avg": 36.99482456272972,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2019-05",
+              "vital_category": "weight_kg",
+              "n": 5,
+              "avg": 79.51428571428572,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2019-06",
+              "vital_category": "dbp",
+              "n": 5,
+              "avg": 77.76292469410156,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2019-06",
+              "vital_category": "heart_rate",
+              "n": 5,
+              "avg": 79.80774030737543,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2019-06",
+              "vital_category": "height_cm",
+              "n": 2,
+              "avg": 168.95,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2019-06",
+              "vital_category": "map",
+              "n": 5,
+              "avg": 91.9272704276616,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2019-06",
+              "vital_category": "respiratory_rate",
+              "n": 5,
+              "avg": 16.485251273976765,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2019-06",
+              "vital_category": "sbp",
+              "n": 5,
+              "avg": 121.01456769028624,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2019-06",
+              "vital_category": "spo2",
+              "n": 5,
+              "avg": 95.86427217126744,
+              "unit": "%"
+            },
+            {
+              "month_year": "2019-06",
+              "vital_category": "temp_c",
+              "n": 5,
+              "avg": 36.91388860105696,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2019-06",
+              "vital_category": "weight_kg",
+              "n": 2,
+              "avg": 72.35,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2019-07",
+              "vital_category": "dbp",
+              "n": 6,
+              "avg": 79.08838658415118,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2019-07",
+              "vital_category": "heart_rate",
+              "n": 6,
+              "avg": 81.20144936365014,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2019-07",
+              "vital_category": "height_cm",
+              "n": 6,
+              "avg": 168.65714285714284,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2019-07",
+              "vital_category": "map",
+              "n": 6,
+              "avg": 93.84045098964936,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2019-07",
+              "vital_category": "respiratory_rate",
+              "n": 6,
+              "avg": 16.449319320840832,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2019-07",
+              "vital_category": "sbp",
+              "n": 6,
+              "avg": 121.81003113141124,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2019-07",
+              "vital_category": "spo2",
+              "n": 6,
+              "avg": 96.26539026182795,
+              "unit": "%"
+            },
+            {
+              "month_year": "2019-07",
+              "vital_category": "temp_c",
+              "n": 6,
+              "avg": 37.08749461507757,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2019-07",
+              "vital_category": "weight_kg",
+              "n": 6,
+              "avg": 85.04285714285713,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2019-08",
+              "vital_category": "dbp",
+              "n": 3,
+              "avg": 79.62686422567657,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2019-08",
+              "vital_category": "heart_rate",
+              "n": 3,
+              "avg": 83.03230580772305,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2019-08",
+              "vital_category": "height_cm",
+              "n": 1,
+              "avg": 172.5,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2019-08",
+              "vital_category": "map",
+              "n": 3,
+              "avg": 93.21339735095727,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2019-08",
+              "vital_category": "respiratory_rate",
+              "n": 3,
+              "avg": 16.30436458731722,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2019-08",
+              "vital_category": "sbp",
+              "n": 3,
+              "avg": 121.06701030927834,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2019-08",
+              "vital_category": "spo2",
+              "n": 3,
+              "avg": 95.81986566526322,
+              "unit": "%"
+            },
+            {
+              "month_year": "2019-08",
+              "vital_category": "temp_c",
+              "n": 3,
+              "avg": 36.912815112867754,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2019-08",
+              "vital_category": "weight_kg",
+              "n": 1,
+              "avg": 82.0,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2019-09",
+              "vital_category": "dbp",
+              "n": 3,
+              "avg": 79.22308701896334,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2019-09",
+              "vital_category": "heart_rate",
+              "n": 3,
+              "avg": 81.85508460792272,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2019-09",
+              "vital_category": "height_cm",
+              "n": 2,
+              "avg": 180.4666666666667,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2019-09",
+              "vital_category": "map",
+              "n": 3,
+              "avg": 93.51572844215062,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2019-09",
+              "vital_category": "respiratory_rate",
+              "n": 3,
+              "avg": 17.149583423120955,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2019-09",
+              "vital_category": "sbp",
+              "n": 3,
+              "avg": 120.45700577934598,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2019-09",
+              "vital_category": "spo2",
+              "n": 3,
+              "avg": 96.1388368958697,
+              "unit": "%"
+            },
+            {
+              "month_year": "2019-09",
+              "vital_category": "temp_c",
+              "n": 3,
+              "avg": 36.96888326214003,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2019-09",
+              "vital_category": "weight_kg",
+              "n": 2,
+              "avg": 107.33333333333333,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2019-10",
+              "vital_category": "dbp",
+              "n": 3,
+              "avg": 76.77238782147653,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2019-10",
+              "vital_category": "heart_rate",
+              "n": 3,
+              "avg": 82.6038548507151,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2019-10",
+              "vital_category": "height_cm",
+              "n": 2,
+              "avg": 168.20000000000002,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2019-10",
+              "vital_category": "map",
+              "n": 3,
+              "avg": 87.62433862433862,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2019-10",
+              "vital_category": "respiratory_rate",
+              "n": 3,
+              "avg": 17.74623488506783,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2019-10",
+              "vital_category": "sbp",
+              "n": 3,
+              "avg": 108.34226964602318,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2019-10",
+              "vital_category": "spo2",
+              "n": 3,
+              "avg": 96.45791972988569,
+              "unit": "%"
+            },
+            {
+              "month_year": "2019-10",
+              "vital_category": "temp_c",
+              "n": 3,
+              "avg": 36.95657489930789,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2019-10",
+              "vital_category": "weight_kg",
+              "n": 2,
+              "avg": 75.8,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2019-11",
+              "vital_category": "dbp",
+              "n": 4,
+              "avg": 76.86337334394189,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2019-11",
+              "vital_category": "heart_rate",
+              "n": 4,
+              "avg": 81.08219355091428,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2019-11",
+              "vital_category": "height_cm",
+              "n": 4,
+              "avg": 168.75,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2019-11",
+              "vital_category": "map",
+              "n": 4,
+              "avg": 89.91222337627859,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2019-11",
+              "vital_category": "respiratory_rate",
+              "n": 4,
+              "avg": 16.278583409851937,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2019-11",
+              "vital_category": "sbp",
+              "n": 4,
+              "avg": 117.25681685673517,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2019-11",
+              "vital_category": "spo2",
+              "n": 4,
+              "avg": 96.07123156141596,
+              "unit": "%"
+            },
+            {
+              "month_year": "2019-11",
+              "vital_category": "temp_c",
+              "n": 4,
+              "avg": 36.996481909544556,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2019-11",
+              "vital_category": "weight_kg",
+              "n": 4,
+              "avg": 83.47999999999999,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2019-12",
+              "vital_category": "dbp",
+              "n": 6,
+              "avg": 77.35638377710318,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2019-12",
+              "vital_category": "heart_rate",
+              "n": 6,
+              "avg": 80.06464466554725,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2019-12",
+              "vital_category": "height_cm",
+              "n": 4,
+              "avg": 159.27181008184402,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2019-12",
+              "vital_category": "map",
+              "n": 6,
+              "avg": 91.51392918905943,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2019-12",
+              "vital_category": "respiratory_rate",
+              "n": 6,
+              "avg": 17.208810182129334,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2019-12",
+              "vital_category": "sbp",
+              "n": 6,
+              "avg": 119.23532109420736,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2019-12",
+              "vital_category": "spo2",
+              "n": 6,
+              "avg": 96.0439562644654,
+              "unit": "%"
+            },
+            {
+              "month_year": "2019-12",
+              "vital_category": "temp_c",
+              "n": 6,
+              "avg": 36.99361447259763,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2019-12",
+              "vital_category": "weight_kg",
+              "n": 4,
+              "avg": 68.07499999999999,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2020-01",
+              "vital_category": "dbp",
+              "n": 3,
+              "avg": 78.2038371234788,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2020-01",
+              "vital_category": "heart_rate",
+              "n": 3,
+              "avg": 80.57918118113913,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2020-01",
+              "vital_category": "height_cm",
+              "n": 1,
+              "avg": 168.8,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2020-01",
+              "vital_category": "map",
+              "n": 3,
+              "avg": 91.99378726810004,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2020-01",
+              "vital_category": "respiratory_rate",
+              "n": 3,
+              "avg": 17.238423525598925,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2020-01",
+              "vital_category": "sbp",
+              "n": 3,
+              "avg": 118.33263216880063,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2020-01",
+              "vital_category": "spo2",
+              "n": 3,
+              "avg": 95.89914838900323,
+              "unit": "%"
+            },
+            {
+              "month_year": "2020-01",
+              "vital_category": "temp_c",
+              "n": 3,
+              "avg": 36.99533757588892,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2020-01",
+              "vital_category": "weight_kg",
+              "n": 1,
+              "avg": 76.7,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2020-02",
+              "vital_category": "dbp",
+              "n": 3,
+              "avg": 79.11844815333038,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2020-02",
+              "vital_category": "heart_rate",
+              "n": 3,
+              "avg": 80.11862880542671,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2020-02",
+              "vital_category": "height_cm",
+              "n": 1,
+              "avg": 176.3,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2020-02",
+              "vital_category": "map",
+              "n": 3,
+              "avg": 92.640638305682,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2020-02",
+              "vital_category": "respiratory_rate",
+              "n": 3,
+              "avg": 15.459971703402081,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2020-02",
+              "vital_category": "sbp",
+              "n": 3,
+              "avg": 117.91267751396556,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2020-02",
+              "vital_category": "spo2",
+              "n": 3,
+              "avg": 96.05087363147373,
+              "unit": "%"
+            },
+            {
+              "month_year": "2020-02",
+              "vital_category": "temp_c",
+              "n": 3,
+              "avg": 37.134374420076064,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2020-02",
+              "vital_category": "weight_kg",
+              "n": 1,
+              "avg": 81.6,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2020-03",
+              "vital_category": "dbp",
+              "n": 1,
+              "avg": 80.43636363636364,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2020-03",
+              "vital_category": "heart_rate",
+              "n": 1,
+              "avg": 82.37037037037037,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2020-03",
+              "vital_category": "height_cm",
+              "n": 1,
+              "avg": 185.7,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2020-03",
+              "vital_category": "map",
+              "n": 1,
+              "avg": 93.70731707317073,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2020-03",
+              "vital_category": "respiratory_rate",
+              "n": 1,
+              "avg": 15.588235294117647,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2020-03",
+              "vital_category": "sbp",
+              "n": 1,
+              "avg": 120.61111111111111,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2020-03",
+              "vital_category": "spo2",
+              "n": 1,
+              "avg": 96.87037037037037,
+              "unit": "%"
+            },
+            {
+              "month_year": "2020-03",
+              "vital_category": "temp_c",
+              "n": 1,
+              "avg": 36.93411016499606,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2020-03",
+              "vital_category": "weight_kg",
+              "n": 1,
+              "avg": 85.5,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2020-04",
+              "vital_category": "dbp",
+              "n": 3,
+              "avg": 79.11276257080013,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2020-04",
+              "vital_category": "heart_rate",
+              "n": 3,
+              "avg": 81.29834454958865,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2020-04",
+              "vital_category": "height_cm",
+              "n": 3,
+              "avg": 178.23333333333335,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2020-04",
+              "vital_category": "map",
+              "n": 3,
+              "avg": 92.81530583175257,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2020-04",
+              "vital_category": "respiratory_rate",
+              "n": 3,
+              "avg": 18.177183388701476,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2020-04",
+              "vital_category": "sbp",
+              "n": 3,
+              "avg": 120.04305923367949,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2020-04",
+              "vital_category": "spo2",
+              "n": 3,
+              "avg": 96.32050786023906,
+              "unit": "%"
+            },
+            {
+              "month_year": "2020-04",
+              "vital_category": "temp_c",
+              "n": 3,
+              "avg": 37.03952735415897,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2020-04",
+              "vital_category": "weight_kg",
+              "n": 3,
+              "avg": 98.23333333333333,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2020-05",
+              "vital_category": "dbp",
+              "n": 5,
+              "avg": 78.08012375797806,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2020-05",
+              "vital_category": "heart_rate",
+              "n": 5,
+              "avg": 82.07299758427513,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2020-05",
+              "vital_category": "height_cm",
+              "n": 5,
+              "avg": 171.63750000000002,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2020-05",
+              "vital_category": "map",
+              "n": 5,
+              "avg": 91.39804481829673,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2020-05",
+              "vital_category": "respiratory_rate",
+              "n": 5,
+              "avg": 17.33308178300587,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2020-05",
+              "vital_category": "sbp",
+              "n": 5,
+              "avg": 116.08002790570436,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2020-05",
+              "vital_category": "spo2",
+              "n": 5,
+              "avg": 96.0276072635407,
+              "unit": "%"
+            },
+            {
+              "month_year": "2020-05",
+              "vital_category": "temp_c",
+              "n": 5,
+              "avg": 36.94324049771981,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2020-05",
+              "vital_category": "weight_kg",
+              "n": 5,
+              "avg": 76.65,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2020-06",
+              "vital_category": "dbp",
+              "n": 8,
+              "avg": 79.24840525799175,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2020-06",
+              "vital_category": "heart_rate",
+              "n": 8,
+              "avg": 80.88953703709664,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2020-06",
+              "vital_category": "height_cm",
+              "n": 7,
+              "avg": 167.8777777777778,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2020-06",
+              "vital_category": "map",
+              "n": 8,
+              "avg": 92.72962487995751,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2020-06",
+              "vital_category": "respiratory_rate",
+              "n": 8,
+              "avg": 17.45767165816498,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2020-06",
+              "vital_category": "sbp",
+              "n": 8,
+              "avg": 119.97633034497868,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2020-06",
+              "vital_category": "spo2",
+              "n": 8,
+              "avg": 96.21158778087187,
+              "unit": "%"
+            },
+            {
+              "month_year": "2020-06",
+              "vital_category": "temp_c",
+              "n": 8,
+              "avg": 37.01748891230066,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2020-06",
+              "vital_category": "weight_kg",
+              "n": 7,
+              "avg": 78.41111111111111,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2020-07",
+              "vital_category": "dbp",
+              "n": 5,
+              "avg": 75.28836140836624,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2020-07",
+              "vital_category": "heart_rate",
+              "n": 5,
+              "avg": 80.26419224714064,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2020-07",
+              "vital_category": "height_cm",
+              "n": 2,
+              "avg": 172.36666666666667,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2020-07",
+              "vital_category": "map",
+              "n": 5,
+              "avg": 90.51927782528999,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2020-07",
+              "vital_category": "respiratory_rate",
+              "n": 5,
+              "avg": 18.40759774310643,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2020-07",
+              "vital_category": "sbp",
+              "n": 5,
+              "avg": 120.12896887950967,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2020-07",
+              "vital_category": "spo2",
+              "n": 5,
+              "avg": 96.43160826035565,
+              "unit": "%"
+            },
+            {
+              "month_year": "2020-07",
+              "vital_category": "temp_c",
+              "n": 5,
+              "avg": 36.97636545514146,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2020-07",
+              "vital_category": "weight_kg",
+              "n": 2,
+              "avg": 87.33333333333333,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2020-08",
+              "vital_category": "dbp",
+              "n": 2,
+              "avg": 76.40655332393658,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2020-08",
+              "vital_category": "heart_rate",
+              "n": 2,
+              "avg": 80.44114154373528,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2020-08",
+              "vital_category": "height_cm",
+              "n": 1,
+              "avg": 174.9,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2020-08",
+              "vital_category": "map",
+              "n": 2,
+              "avg": 91.23570642035406,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2020-08",
+              "vital_category": "respiratory_rate",
+              "n": 2,
+              "avg": 18.081415772436312,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2020-08",
+              "vital_category": "sbp",
+              "n": 2,
+              "avg": 120.69382673030039,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2020-08",
+              "vital_category": "spo2",
+              "n": 2,
+              "avg": 95.36341681840933,
+              "unit": "%"
+            },
+            {
+              "month_year": "2020-08",
+              "vital_category": "temp_c",
+              "n": 2,
+              "avg": 36.93400823485782,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2020-08",
+              "vital_category": "weight_kg",
+              "n": 1,
+              "avg": 83.2,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2020-09",
+              "vital_category": "dbp",
+              "n": 3,
+              "avg": 77.44119703710759,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2020-09",
+              "vital_category": "heart_rate",
+              "n": 3,
+              "avg": 80.98620593773157,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2020-09",
+              "vital_category": "height_cm",
+              "n": 2,
+              "avg": 163.5,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2020-09",
+              "vital_category": "map",
+              "n": 3,
+              "avg": 91.3717643997129,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2020-09",
+              "vital_category": "respiratory_rate",
+              "n": 3,
+              "avg": 16.48343288861156,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2020-09",
+              "vital_category": "sbp",
+              "n": 3,
+              "avg": 118.28264691110219,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2020-09",
+              "vital_category": "spo2",
+              "n": 3,
+              "avg": 95.77337852772465,
+              "unit": "%"
+            },
+            {
+              "month_year": "2020-09",
+              "vital_category": "temp_c",
+              "n": 3,
+              "avg": 37.07101149624541,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2020-09",
+              "vital_category": "weight_kg",
+              "n": 2,
+              "avg": 74.26666666666667,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2020-10",
+              "vital_category": "dbp",
+              "n": 5,
+              "avg": 77.29376570387754,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2020-10",
+              "vital_category": "heart_rate",
+              "n": 5,
+              "avg": 81.3128564773009,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2020-10",
+              "vital_category": "height_cm",
+              "n": 4,
+              "avg": 171.0666666666667,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2020-10",
+              "vital_category": "map",
+              "n": 5,
+              "avg": 91.82462941808737,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2020-10",
+              "vital_category": "respiratory_rate",
+              "n": 5,
+              "avg": 16.55396704293999,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2020-10",
+              "vital_category": "sbp",
+              "n": 5,
+              "avg": 121.17965251116806,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2020-10",
+              "vital_category": "spo2",
+              "n": 5,
+              "avg": 96.23407374598298,
+              "unit": "%"
+            },
+            {
+              "month_year": "2020-10",
+              "vital_category": "temp_c",
+              "n": 5,
+              "avg": 36.85733305053041,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2020-10",
+              "vital_category": "weight_kg",
+              "n": 4,
+              "avg": 72.2,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2020-11",
+              "vital_category": "dbp",
+              "n": 5,
+              "avg": 78.03590119892887,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2020-11",
+              "vital_category": "heart_rate",
+              "n": 5,
+              "avg": 79.55479401139884,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2020-11",
+              "vital_category": "height_cm",
+              "n": 2,
+              "avg": 166.35,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2020-11",
+              "vital_category": "map",
+              "n": 5,
+              "avg": 92.32424246852446,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2020-11",
+              "vital_category": "respiratory_rate",
+              "n": 5,
+              "avg": 16.419425733219857,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2020-11",
+              "vital_category": "sbp",
+              "n": 5,
+              "avg": 121.82887790519037,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2020-11",
+              "vital_category": "spo2",
+              "n": 5,
+              "avg": 96.43817763428495,
+              "unit": "%"
+            },
+            {
+              "month_year": "2020-11",
+              "vital_category": "temp_c",
+              "n": 5,
+              "avg": 37.038056122271364,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2020-11",
+              "vital_category": "weight_kg",
+              "n": 2,
+              "avg": 128.06022917456008,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2020-12",
+              "vital_category": "dbp",
+              "n": 1,
+              "avg": 57.6,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2020-12",
+              "vital_category": "heart_rate",
+              "n": 1,
+              "avg": 105.33333333333333,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2020-12",
+              "vital_category": "height_cm",
+              "n": 1,
+              "avg": 178.2,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2020-12",
+              "vital_category": "map",
+              "n": 1,
+              "avg": 65.0,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2020-12",
+              "vital_category": "respiratory_rate",
+              "n": 1,
+              "avg": 22.083333333333332,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2020-12",
+              "vital_category": "sbp",
+              "n": 1,
+              "avg": 78.36363636363636,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2020-12",
+              "vital_category": "spo2",
+              "n": 1,
+              "avg": 88.91666666666667,
+              "unit": "%"
+            },
+            {
+              "month_year": "2020-12",
+              "vital_category": "temp_c",
+              "n": 1,
+              "avg": 38.0616179254834,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2020-12",
+              "vital_category": "weight_kg",
+              "n": 1,
+              "avg": 79.9,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2021-01",
+              "vital_category": "dbp",
+              "n": 2,
+              "avg": 77.19095606671775,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2021-01",
+              "vital_category": "heart_rate",
+              "n": 2,
+              "avg": 79.61357283846945,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2021-01",
+              "vital_category": "height_cm",
+              "n": 2,
+              "avg": 162.25,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2021-01",
+              "vital_category": "map",
+              "n": 2,
+              "avg": 93.21677954983821,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2021-01",
+              "vital_category": "respiratory_rate",
+              "n": 2,
+              "avg": 15.205950145333778,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2021-01",
+              "vital_category": "sbp",
+              "n": 2,
+              "avg": 122.48170343253783,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2021-01",
+              "vital_category": "spo2",
+              "n": 2,
+              "avg": 96.71300173197992,
+              "unit": "%"
+            },
+            {
+              "month_year": "2021-01",
+              "vital_category": "temp_c",
+              "n": 2,
+              "avg": 37.08165921354444,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2021-01",
+              "vital_category": "weight_kg",
+              "n": 2,
+              "avg": 69.4,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2021-02",
+              "vital_category": "dbp",
+              "n": 6,
+              "avg": 77.73048193674772,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2021-02",
+              "vital_category": "heart_rate",
+              "n": 6,
+              "avg": 82.22854062705545,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2021-02",
+              "vital_category": "height_cm",
+              "n": 4,
+              "avg": 170.5,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2021-02",
+              "vital_category": "map",
+              "n": 6,
+              "avg": 91.19870504599972,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2021-02",
+              "vital_category": "respiratory_rate",
+              "n": 6,
+              "avg": 16.534145770482375,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2021-02",
+              "vital_category": "sbp",
+              "n": 6,
+              "avg": 118.9795770347126,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2021-02",
+              "vital_category": "spo2",
+              "n": 6,
+              "avg": 95.76918114683689,
+              "unit": "%"
+            },
+            {
+              "month_year": "2021-02",
+              "vital_category": "temp_c",
+              "n": 6,
+              "avg": 36.97640801488153,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2021-02",
+              "vital_category": "weight_kg",
+              "n": 4,
+              "avg": 69.25,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2021-03",
+              "vital_category": "dbp",
+              "n": 3,
+              "avg": 76.55205231007066,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2021-03",
+              "vital_category": "heart_rate",
+              "n": 3,
+              "avg": 80.33577071348539,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2021-03",
+              "vital_category": "height_cm",
+              "n": 1,
+              "avg": null,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2021-03",
+              "vital_category": "map",
+              "n": 3,
+              "avg": 89.58911158634206,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2021-03",
+              "vital_category": "respiratory_rate",
+              "n": 3,
+              "avg": 16.843390134551022,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2021-03",
+              "vital_category": "sbp",
+              "n": 3,
+              "avg": 116.7610756513562,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2021-03",
+              "vital_category": "spo2",
+              "n": 3,
+              "avg": 96.01279976831542,
+              "unit": "%"
+            },
+            {
+              "month_year": "2021-03",
+              "vital_category": "temp_c",
+              "n": 3,
+              "avg": 36.919725626856405,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2021-03",
+              "vital_category": "weight_kg",
+              "n": 1,
+              "avg": 71.3,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2021-04",
+              "vital_category": "dbp",
+              "n": 2,
+              "avg": 79.53119239606818,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2021-04",
+              "vital_category": "heart_rate",
+              "n": 2,
+              "avg": 77.63917266643585,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2021-04",
+              "vital_category": "height_cm",
+              "n": 1,
+              "avg": 178.15,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2021-04",
+              "vital_category": "map",
+              "n": 2,
+              "avg": 91.61573080546653,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2021-04",
+              "vital_category": "respiratory_rate",
+              "n": 2,
+              "avg": 15.986766566395097,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2021-04",
+              "vital_category": "sbp",
+              "n": 2,
+              "avg": 115.9696499594127,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2021-04",
+              "vital_category": "spo2",
+              "n": 2,
+              "avg": 95.81165418234009,
+              "unit": "%"
+            },
+            {
+              "month_year": "2021-04",
+              "vital_category": "temp_c",
+              "n": 2,
+              "avg": 36.9529153980287,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2021-04",
+              "vital_category": "weight_kg",
+              "n": 1,
+              "avg": 82.65,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2021-05",
+              "vital_category": "dbp",
+              "n": 3,
+              "avg": 78.78106133278736,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2021-05",
+              "vital_category": "heart_rate",
+              "n": 3,
+              "avg": 78.59784849074863,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2021-05",
+              "vital_category": "height_cm",
+              "n": 2,
+              "avg": 171.55,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2021-05",
+              "vital_category": "map",
+              "n": 3,
+              "avg": 94.62754218546529,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2021-05",
+              "vital_category": "respiratory_rate",
+              "n": 3,
+              "avg": 16.194051647045654,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2021-05",
+              "vital_category": "sbp",
+              "n": 3,
+              "avg": 123.98492547265708,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2021-05",
+              "vital_category": "spo2",
+              "n": 3,
+              "avg": 96.01843866854337,
+              "unit": "%"
+            },
+            {
+              "month_year": "2021-05",
+              "vital_category": "temp_c",
+              "n": 3,
+              "avg": 36.88578974275419,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2021-05",
+              "vital_category": "weight_kg",
+              "n": 2,
+              "avg": 70.65,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2021-06",
+              "vital_category": "dbp",
+              "n": 1,
+              "avg": 82.06954960695302,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2021-06",
+              "vital_category": "heart_rate",
+              "n": 1,
+              "avg": 81.75391652471676,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2021-06",
+              "vital_category": "height_cm",
+              "n": 1,
+              "avg": 166.95,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2021-06",
+              "vital_category": "map",
+              "n": 1,
+              "avg": 93.95564066889736,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2021-06",
+              "vital_category": "respiratory_rate",
+              "n": 1,
+              "avg": 17.985714285714284,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2021-06",
+              "vital_category": "sbp",
+              "n": 1,
+              "avg": 117.8449575838513,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2021-06",
+              "vital_category": "spo2",
+              "n": 1,
+              "avg": 95.92068151089323,
+              "unit": "%"
+            },
+            {
+              "month_year": "2021-06",
+              "vital_category": "temp_c",
+              "n": 1,
+              "avg": 36.94381747642184,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2021-06",
+              "vital_category": "weight_kg",
+              "n": 1,
+              "avg": 63.6,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2021-07",
+              "vital_category": "dbp",
+              "n": 4,
+              "avg": 76.1906934461104,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2021-07",
+              "vital_category": "heart_rate",
+              "n": 4,
+              "avg": 80.7917096393474,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2021-07",
+              "vital_category": "height_cm",
+              "n": 3,
+              "avg": 170.01666666666665,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2021-07",
+              "vital_category": "map",
+              "n": 4,
+              "avg": 90.09073454473057,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2021-07",
+              "vital_category": "respiratory_rate",
+              "n": 4,
+              "avg": 17.984597554701047,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2021-07",
+              "vital_category": "sbp",
+              "n": 4,
+              "avg": 118.48836554902635,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2021-07",
+              "vital_category": "spo2",
+              "n": 4,
+              "avg": 95.73633232618081,
+              "unit": "%"
+            },
+            {
+              "month_year": "2021-07",
+              "vital_category": "temp_c",
+              "n": 4,
+              "avg": 36.94493608592228,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2021-07",
+              "vital_category": "weight_kg",
+              "n": 3,
+              "avg": 80.64000000000001,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2021-08",
+              "vital_category": "dbp",
+              "n": 2,
+              "avg": 79.1085309287457,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2021-08",
+              "vital_category": "heart_rate",
+              "n": 2,
+              "avg": 80.13055811555287,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2021-08",
+              "vital_category": "map",
+              "n": 2,
+              "avg": 91.85246830133646,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2021-08",
+              "vital_category": "respiratory_rate",
+              "n": 2,
+              "avg": 18.26568216571303,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2021-08",
+              "vital_category": "sbp",
+              "n": 2,
+              "avg": 118.50247891767039,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2021-08",
+              "vital_category": "spo2",
+              "n": 2,
+              "avg": 95.5389414554838,
+              "unit": "%"
+            },
+            {
+              "month_year": "2021-08",
+              "vital_category": "temp_c",
+              "n": 2,
+              "avg": 36.96725076794743,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2021-09",
+              "vital_category": "dbp",
+              "n": 4,
+              "avg": 78.18674339951734,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2021-09",
+              "vital_category": "heart_rate",
+              "n": 4,
+              "avg": 79.96121177231721,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2021-09",
+              "vital_category": "height_cm",
+              "n": 2,
+              "avg": 173.05,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2021-09",
+              "vital_category": "map",
+              "n": 4,
+              "avg": 91.82470177082652,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2021-09",
+              "vital_category": "respiratory_rate",
+              "n": 4,
+              "avg": 18.289693593314762,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2021-09",
+              "vital_category": "sbp",
+              "n": 4,
+              "avg": 119.58734270141554,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2021-09",
+              "vital_category": "spo2",
+              "n": 4,
+              "avg": 96.07795490217548,
+              "unit": "%"
+            },
+            {
+              "month_year": "2021-09",
+              "vital_category": "temp_c",
+              "n": 4,
+              "avg": 37.003315350529284,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2021-09",
+              "vital_category": "weight_kg",
+              "n": 2,
+              "avg": 81.56666666666666,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2021-10",
+              "vital_category": "dbp",
+              "n": 3,
+              "avg": 78.27284931666131,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2021-10",
+              "vital_category": "heart_rate",
+              "n": 3,
+              "avg": 82.99234797423486,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2021-10",
+              "vital_category": "height_cm",
+              "n": 3,
+              "avg": 175.26666666666665,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2021-10",
+              "vital_category": "map",
+              "n": 3,
+              "avg": 91.75988533672117,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2021-10",
+              "vital_category": "respiratory_rate",
+              "n": 3,
+              "avg": 16.235075029227907,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2021-10",
+              "vital_category": "sbp",
+              "n": 3,
+              "avg": 118.2647176680394,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2021-10",
+              "vital_category": "spo2",
+              "n": 3,
+              "avg": 96.1044265624605,
+              "unit": "%"
+            },
+            {
+              "month_year": "2021-10",
+              "vital_category": "temp_c",
+              "n": 3,
+              "avg": 37.02559780153398,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2021-10",
+              "vital_category": "weight_kg",
+              "n": 3,
+              "avg": 85.60000000000001,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2021-11",
+              "vital_category": "dbp",
+              "n": 3,
+              "avg": 76.25499843030653,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2021-11",
+              "vital_category": "heart_rate",
+              "n": 3,
+              "avg": 81.19227957751906,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2021-11",
+              "vital_category": "height_cm",
+              "n": 1,
+              "avg": 163.3,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2021-11",
+              "vital_category": "map",
+              "n": 3,
+              "avg": 90.06813859254423,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2021-11",
+              "vital_category": "respiratory_rate",
+              "n": 3,
+              "avg": 16.26647560250455,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2021-11",
+              "vital_category": "sbp",
+              "n": 3,
+              "avg": 120.53954841604013,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2021-11",
+              "vital_category": "spo2",
+              "n": 3,
+              "avg": 95.82000032002107,
+              "unit": "%"
+            },
+            {
+              "month_year": "2021-11",
+              "vital_category": "temp_c",
+              "n": 3,
+              "avg": 37.03694350766527,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2021-11",
+              "vital_category": "weight_kg",
+              "n": 1,
+              "avg": 85.2,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2021-12",
+              "vital_category": "dbp",
+              "n": 2,
+              "avg": 79.73848633098595,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2021-12",
+              "vital_category": "heart_rate",
+              "n": 2,
+              "avg": 82.60487683763566,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2021-12",
+              "vital_category": "height_cm",
+              "n": 1,
+              "avg": 164.8,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2021-12",
+              "vital_category": "map",
+              "n": 2,
+              "avg": 93.39442231075697,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2021-12",
+              "vital_category": "respiratory_rate",
+              "n": 2,
+              "avg": 15.873058819811105,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2021-12",
+              "vital_category": "sbp",
+              "n": 2,
+              "avg": 119.48478309815512,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2021-12",
+              "vital_category": "spo2",
+              "n": 2,
+              "avg": 95.92451317228624,
+              "unit": "%"
+            },
+            {
+              "month_year": "2021-12",
+              "vital_category": "temp_c",
+              "n": 2,
+              "avg": 37.03539629328926,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2021-12",
+              "vital_category": "weight_kg",
+              "n": 1,
+              "avg": 78.7,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2022-01",
+              "vital_category": "dbp",
+              "n": 4,
+              "avg": 78.46735175056666,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2022-01",
+              "vital_category": "heart_rate",
+              "n": 4,
+              "avg": 79.14791263192845,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2022-01",
+              "vital_category": "height_cm",
+              "n": 2,
+              "avg": 166.95,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2022-01",
+              "vital_category": "map",
+              "n": 4,
+              "avg": 92.7582177420168,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2022-01",
+              "vital_category": "respiratory_rate",
+              "n": 4,
+              "avg": 16.598847286507556,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2022-01",
+              "vital_category": "sbp",
+              "n": 4,
+              "avg": 120.32186690407389,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2022-01",
+              "vital_category": "spo2",
+              "n": 4,
+              "avg": 96.31345603642689,
+              "unit": "%"
+            },
+            {
+              "month_year": "2022-01",
+              "vital_category": "temp_c",
+              "n": 4,
+              "avg": 37.019444301826766,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2022-01",
+              "vital_category": "weight_kg",
+              "n": 2,
+              "avg": 71.7,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2022-02",
+              "vital_category": "dbp",
+              "n": 3,
+              "avg": 75.37922486038099,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2022-02",
+              "vital_category": "heart_rate",
+              "n": 3,
+              "avg": 80.67941104564538,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2022-02",
+              "vital_category": "height_cm",
+              "n": 2,
+              "avg": 159.77199213062303,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2022-02",
+              "vital_category": "map",
+              "n": 3,
+              "avg": 89.15942028985508,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2022-02",
+              "vital_category": "respiratory_rate",
+              "n": 3,
+              "avg": 14.453915806226101,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2022-02",
+              "vital_category": "sbp",
+              "n": 3,
+              "avg": 115.9131613562636,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2022-02",
+              "vital_category": "spo2",
+              "n": 3,
+              "avg": 96.04762885353357,
+              "unit": "%"
+            },
+            {
+              "month_year": "2022-02",
+              "vital_category": "temp_c",
+              "n": 3,
+              "avg": 36.901107277580884,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2022-02",
+              "vital_category": "weight_kg",
+              "n": 2,
+              "avg": 71.8,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2022-03",
+              "vital_category": "dbp",
+              "n": 5,
+              "avg": 78.80902700297378,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2022-03",
+              "vital_category": "heart_rate",
+              "n": 5,
+              "avg": 82.29052928584673,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2022-03",
+              "vital_category": "height_cm",
+              "n": 4,
+              "avg": 169.01250000000002,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2022-03",
+              "vital_category": "map",
+              "n": 5,
+              "avg": 92.0218667977757,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2022-03",
+              "vital_category": "respiratory_rate",
+              "n": 5,
+              "avg": 16.772195275639604,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2022-03",
+              "vital_category": "sbp",
+              "n": 5,
+              "avg": 119.98358385463534,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2022-03",
+              "vital_category": "spo2",
+              "n": 5,
+              "avg": 96.25789349325566,
+              "unit": "%"
+            },
+            {
+              "month_year": "2022-03",
+              "vital_category": "temp_c",
+              "n": 5,
+              "avg": 37.07492111688269,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2022-03",
+              "vital_category": "weight_kg",
+              "n": 4,
+              "avg": 73.91428571428571,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2022-04",
+              "vital_category": "dbp",
+              "n": 5,
+              "avg": 79.36762960736935,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2022-04",
+              "vital_category": "heart_rate",
+              "n": 5,
+              "avg": 80.39033457254803,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2022-04",
+              "vital_category": "height_cm",
+              "n": 3,
+              "avg": 174.57500000000002,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2022-04",
+              "vital_category": "map",
+              "n": 5,
+              "avg": 91.69211634118504,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2022-04",
+              "vital_category": "respiratory_rate",
+              "n": 5,
+              "avg": 16.070754605564105,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2022-04",
+              "vital_category": "sbp",
+              "n": 5,
+              "avg": 117.28987265716768,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2022-04",
+              "vital_category": "spo2",
+              "n": 5,
+              "avg": 96.44669365721997,
+              "unit": "%"
+            },
+            {
+              "month_year": "2022-04",
+              "vital_category": "temp_c",
+              "n": 5,
+              "avg": 37.08987446478334,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2022-04",
+              "vital_category": "weight_kg",
+              "n": 3,
+              "avg": 81.9,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2022-05",
+              "vital_category": "dbp",
+              "n": 2,
+              "avg": 79.0,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2022-05",
+              "vital_category": "heart_rate",
+              "n": 2,
+              "avg": 86.84705882352941,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2022-05",
+              "vital_category": "height_cm",
+              "n": 2,
+              "avg": 165.55,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2022-05",
+              "vital_category": "map",
+              "n": 2,
+              "avg": 90.98796372304167,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2022-05",
+              "vital_category": "respiratory_rate",
+              "n": 2,
+              "avg": 16.92391304347826,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2022-05",
+              "vital_category": "sbp",
+              "n": 2,
+              "avg": 114.92097379699155,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2022-05",
+              "vital_category": "spo2",
+              "n": 2,
+              "avg": 96.32425533686056,
+              "unit": "%"
+            },
+            {
+              "month_year": "2022-05",
+              "vital_category": "temp_c",
+              "n": 2,
+              "avg": 37.259598260289884,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2022-05",
+              "vital_category": "weight_kg",
+              "n": 2,
+              "avg": 68.3,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2022-06",
+              "vital_category": "dbp",
+              "n": 3,
+              "avg": 78.72312809482993,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2022-06",
+              "vital_category": "heart_rate",
+              "n": 3,
+              "avg": 80.28390337577993,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2022-06",
+              "vital_category": "height_cm",
+              "n": 1,
+              "avg": 182.9,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2022-06",
+              "vital_category": "map",
+              "n": 3,
+              "avg": 91.87304864028648,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2022-06",
+              "vital_category": "respiratory_rate",
+              "n": 3,
+              "avg": 16.081764824439905,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2022-06",
+              "vital_category": "sbp",
+              "n": 3,
+              "avg": 119.6020605669802,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2022-06",
+              "vital_category": "spo2",
+              "n": 3,
+              "avg": 96.44127088120125,
+              "unit": "%"
+            },
+            {
+              "month_year": "2022-06",
+              "vital_category": "temp_c",
+              "n": 3,
+              "avg": 36.95072014542136,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2022-06",
+              "vital_category": "weight_kg",
+              "n": 1,
+              "avg": 60.2,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2022-07",
+              "vital_category": "dbp",
+              "n": 4,
+              "avg": 76.38777453669228,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2022-07",
+              "vital_category": "heart_rate",
+              "n": 4,
+              "avg": 80.07151240919306,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2022-07",
+              "vital_category": "height_cm",
+              "n": 2,
+              "avg": 167.45,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2022-07",
+              "vital_category": "map",
+              "n": 4,
+              "avg": 89.4385869992866,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2022-07",
+              "vital_category": "respiratory_rate",
+              "n": 4,
+              "avg": 16.121462332545356,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2022-07",
+              "vital_category": "sbp",
+              "n": 4,
+              "avg": 116.97267974364725,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2022-07",
+              "vital_category": "spo2",
+              "n": 4,
+              "avg": 95.96604667421921,
+              "unit": "%"
+            },
+            {
+              "month_year": "2022-07",
+              "vital_category": "temp_c",
+              "n": 4,
+              "avg": 37.03292667396562,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2022-07",
+              "vital_category": "weight_kg",
+              "n": 2,
+              "avg": 81.25,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2022-08",
+              "vital_category": "dbp",
+              "n": 1,
+              "avg": 71.93548387096774,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2022-08",
+              "vital_category": "heart_rate",
+              "n": 1,
+              "avg": 85.45161290322581,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2022-08",
+              "vital_category": "map",
+              "n": 1,
+              "avg": 93.41156114243614,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2022-08",
+              "vital_category": "respiratory_rate",
+              "n": 1,
+              "avg": 18.0,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2022-08",
+              "vital_category": "sbp",
+              "n": 1,
+              "avg": 126.78125,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2022-08",
+              "vital_category": "spo2",
+              "n": 1,
+              "avg": 95.07142857142857,
+              "unit": "%"
+            },
+            {
+              "month_year": "2022-08",
+              "vital_category": "temp_c",
+              "n": 1,
+              "avg": 36.38222640267098,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2022-09",
+              "vital_category": "dbp",
+              "n": 5,
+              "avg": 77.03708880716432,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2022-09",
+              "vital_category": "heart_rate",
+              "n": 5,
+              "avg": 78.03097594946023,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2022-09",
+              "vital_category": "height_cm",
+              "n": 5,
+              "avg": 170.88333333333335,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2022-09",
+              "vital_category": "map",
+              "n": 5,
+              "avg": 90.51517632061194,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2022-09",
+              "vital_category": "respiratory_rate",
+              "n": 5,
+              "avg": 17.004200222523203,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2022-09",
+              "vital_category": "sbp",
+              "n": 5,
+              "avg": 117.8750163833788,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2022-09",
+              "vital_category": "spo2",
+              "n": 5,
+              "avg": 96.12694601483904,
+              "unit": "%"
+            },
+            {
+              "month_year": "2022-09",
+              "vital_category": "temp_c",
+              "n": 5,
+              "avg": 37.02564464308113,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2022-09",
+              "vital_category": "weight_kg",
+              "n": 5,
+              "avg": 76.10000000000001,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2022-10",
+              "vital_category": "dbp",
+              "n": 4,
+              "avg": 76.58424746047677,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2022-10",
+              "vital_category": "heart_rate",
+              "n": 4,
+              "avg": 87.23917042577253,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2022-10",
+              "vital_category": "height_cm",
+              "n": 2,
+              "avg": 171.36666666666665,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2022-10",
+              "vital_category": "map",
+              "n": 4,
+              "avg": 89.92572603489378,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2022-10",
+              "vital_category": "respiratory_rate",
+              "n": 4,
+              "avg": 16.494204421564316,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2022-10",
+              "vital_category": "sbp",
+              "n": 4,
+              "avg": 117.16128796556767,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2022-10",
+              "vital_category": "spo2",
+              "n": 4,
+              "avg": 96.2610540886317,
+              "unit": "%"
+            },
+            {
+              "month_year": "2022-10",
+              "vital_category": "temp_c",
+              "n": 4,
+              "avg": 37.090504696963855,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2022-10",
+              "vital_category": "weight_kg",
+              "n": 2,
+              "avg": 79.75,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2022-11",
+              "vital_category": "dbp",
+              "n": 5,
+              "avg": 78.62678239841097,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2022-11",
+              "vital_category": "heart_rate",
+              "n": 5,
+              "avg": 79.80464233150748,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2022-11",
+              "vital_category": "height_cm",
+              "n": 4,
+              "avg": 173.35,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2022-11",
+              "vital_category": "map",
+              "n": 5,
+              "avg": 91.83277797651739,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2022-11",
+              "vital_category": "respiratory_rate",
+              "n": 5,
+              "avg": 15.84716893427837,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2022-11",
+              "vital_category": "sbp",
+              "n": 5,
+              "avg": 119.82047525914307,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2022-11",
+              "vital_category": "spo2",
+              "n": 5,
+              "avg": 96.22689677098577,
+              "unit": "%"
+            },
+            {
+              "month_year": "2022-11",
+              "vital_category": "temp_c",
+              "n": 5,
+              "avg": 37.03021130519862,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2022-11",
+              "vital_category": "weight_kg",
+              "n": 4,
+              "avg": 91.125,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2022-12",
+              "vital_category": "dbp",
+              "n": 5,
+              "avg": 78.32442959882817,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2022-12",
+              "vital_category": "heart_rate",
+              "n": 5,
+              "avg": 80.00415063386535,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2022-12",
+              "vital_category": "height_cm",
+              "n": 2,
+              "avg": 163.4,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2022-12",
+              "vital_category": "map",
+              "n": 5,
+              "avg": 91.56494235463165,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2022-12",
+              "vital_category": "respiratory_rate",
+              "n": 5,
+              "avg": 17.218875272311177,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2022-12",
+              "vital_category": "sbp",
+              "n": 5,
+              "avg": 119.42904611972799,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2022-12",
+              "vital_category": "spo2",
+              "n": 5,
+              "avg": 96.1357510342385,
+              "unit": "%"
+            },
+            {
+              "month_year": "2022-12",
+              "vital_category": "temp_c",
+              "n": 5,
+              "avg": 37.058070506908805,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2022-12",
+              "vital_category": "weight_kg",
+              "n": 2,
+              "avg": 59.85,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2023-01",
+              "vital_category": "dbp",
+              "n": 2,
+              "avg": 77.45901639344262,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2023-01",
+              "vital_category": "heart_rate",
+              "n": 2,
+              "avg": 86.08317497338412,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2023-01",
+              "vital_category": "height_cm",
+              "n": 1,
+              "avg": 184.1,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2023-01",
+              "vital_category": "map",
+              "n": 2,
+              "avg": 89.88698627175542,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2023-01",
+              "vital_category": "respiratory_rate",
+              "n": 2,
+              "avg": 18.417989417989418,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2023-01",
+              "vital_category": "sbp",
+              "n": 2,
+              "avg": 119.03514364748968,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2023-01",
+              "vital_category": "spo2",
+              "n": 2,
+              "avg": 95.55614973262033,
+              "unit": "%"
+            },
+            {
+              "month_year": "2023-01",
+              "vital_category": "temp_c",
+              "n": 2,
+              "avg": 37.20023669232422,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2023-01",
+              "vital_category": "weight_kg",
+              "n": 1,
+              "avg": 93.4,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2023-02",
+              "vital_category": "dbp",
+              "n": 2,
+              "avg": 71.76923076923077,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2023-02",
+              "vital_category": "heart_rate",
+              "n": 2,
+              "avg": 77.51645627535727,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2023-02",
+              "vital_category": "height_cm",
+              "n": 2,
+              "avg": 162.63333333333335,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2023-02",
+              "vital_category": "map",
+              "n": 2,
+              "avg": 79.32183216797962,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2023-02",
+              "vital_category": "respiratory_rate",
+              "n": 2,
+              "avg": 18.682539682539684,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2023-02",
+              "vital_category": "sbp",
+              "n": 2,
+              "avg": 106.0,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2023-02",
+              "vital_category": "spo2",
+              "n": 2,
+              "avg": 96.1774193548387,
+              "unit": "%"
+            },
+            {
+              "month_year": "2023-02",
+              "vital_category": "temp_c",
+              "n": 2,
+              "avg": 37.0423052514288,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2023-02",
+              "vital_category": "weight_kg",
+              "n": 2,
+              "avg": 77.06666666666668,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2023-03",
+              "vital_category": "dbp",
+              "n": 3,
+              "avg": 77.95966597395756,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2023-03",
+              "vital_category": "heart_rate",
+              "n": 3,
+              "avg": 81.0128690317504,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2023-03",
+              "vital_category": "height_cm",
+              "n": 3,
+              "avg": 169.65,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2023-03",
+              "vital_category": "map",
+              "n": 3,
+              "avg": 92.32595262478817,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2023-03",
+              "vital_category": "respiratory_rate",
+              "n": 3,
+              "avg": 16.347979998231605,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2023-03",
+              "vital_category": "sbp",
+              "n": 3,
+              "avg": 116.66439855986721,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2023-03",
+              "vital_category": "spo2",
+              "n": 3,
+              "avg": 95.74840807084998,
+              "unit": "%"
+            },
+            {
+              "month_year": "2023-03",
+              "vital_category": "temp_c",
+              "n": 3,
+              "avg": 37.089513195810426,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2023-03",
+              "vital_category": "weight_kg",
+              "n": 3,
+              "avg": 77.3,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2023-04",
+              "vital_category": "dbp",
+              "n": 3,
+              "avg": 77.5357522258639,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2023-04",
+              "vital_category": "heart_rate",
+              "n": 3,
+              "avg": 74.19156877622652,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2023-04",
+              "vital_category": "height_cm",
+              "n": 3,
+              "avg": 167.675,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2023-04",
+              "vital_category": "map",
+              "n": 3,
+              "avg": 90.625,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2023-04",
+              "vital_category": "respiratory_rate",
+              "n": 3,
+              "avg": 16.903666678306084,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2023-04",
+              "vital_category": "sbp",
+              "n": 3,
+              "avg": 115.47420690756073,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2023-04",
+              "vital_category": "spo2",
+              "n": 3,
+              "avg": 96.88607594936708,
+              "unit": "%"
+            },
+            {
+              "month_year": "2023-04",
+              "vital_category": "temp_c",
+              "n": 3,
+              "avg": 37.185931999387776,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2023-04",
+              "vital_category": "weight_kg",
+              "n": 3,
+              "avg": 102.83333333333333,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2023-05",
+              "vital_category": "dbp",
+              "n": 2,
+              "avg": 80.45569620253164,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2023-05",
+              "vital_category": "heart_rate",
+              "n": 2,
+              "avg": 82.96131757888242,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2023-05",
+              "vital_category": "height_cm",
+              "n": 1,
+              "avg": 178.65,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2023-05",
+              "vital_category": "map",
+              "n": 2,
+              "avg": 91.32228025893446,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2023-05",
+              "vital_category": "respiratory_rate",
+              "n": 2,
+              "avg": 15.2375,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2023-05",
+              "vital_category": "sbp",
+              "n": 2,
+              "avg": 113.9219455409699,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2023-05",
+              "vital_category": "spo2",
+              "n": 2,
+              "avg": 97.28571428571429,
+              "unit": "%"
+            },
+            {
+              "month_year": "2023-05",
+              "vital_category": "temp_c",
+              "n": 2,
+              "avg": 37.041298186009215,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2023-05",
+              "vital_category": "weight_kg",
+              "n": 1,
+              "avg": 73.75,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2023-07",
+              "vital_category": "dbp",
+              "n": 6,
+              "avg": 76.372048958555,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2023-07",
+              "vital_category": "heart_rate",
+              "n": 6,
+              "avg": 81.16310679611651,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2023-07",
+              "vital_category": "height_cm",
+              "n": 6,
+              "avg": 168.12857142857143,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2023-07",
+              "vital_category": "map",
+              "n": 6,
+              "avg": 88.9671935422525,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2023-07",
+              "vital_category": "respiratory_rate",
+              "n": 6,
+              "avg": 15.904286715798676,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2023-07",
+              "vital_category": "sbp",
+              "n": 6,
+              "avg": 118.14527825657898,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2023-07",
+              "vital_category": "spo2",
+              "n": 6,
+              "avg": 96.3367139959432,
+              "unit": "%"
+            },
+            {
+              "month_year": "2023-07",
+              "vital_category": "temp_c",
+              "n": 6,
+              "avg": 36.94065509044162,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2023-07",
+              "vital_category": "weight_kg",
+              "n": 6,
+              "avg": 79.41666666666667,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2023-08",
+              "vital_category": "dbp",
+              "n": 4,
+              "avg": 78.83211300805532,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2023-08",
+              "vital_category": "heart_rate",
+              "n": 4,
+              "avg": 81.76202724101792,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2023-08",
+              "vital_category": "height_cm",
+              "n": 3,
+              "avg": 171.2,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2023-08",
+              "vital_category": "map",
+              "n": 4,
+              "avg": 91.07522241602204,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2023-08",
+              "vital_category": "respiratory_rate",
+              "n": 4,
+              "avg": 15.990610328638498,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2023-08",
+              "vital_category": "sbp",
+              "n": 4,
+              "avg": 116.44637007256527,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2023-08",
+              "vital_category": "spo2",
+              "n": 4,
+              "avg": 97.08372093023256,
+              "unit": "%"
+            },
+            {
+              "month_year": "2023-08",
+              "vital_category": "temp_c",
+              "n": 3,
+              "avg": 37.30348682105402,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2023-08",
+              "vital_category": "weight_kg",
+              "n": 3,
+              "avg": 80.53333333333332,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2023-09",
+              "vital_category": "dbp",
+              "n": 1,
+              "avg": 84.45833333333333,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2023-09",
+              "vital_category": "heart_rate",
+              "n": 1,
+              "avg": 80.52173913043478,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2023-09",
+              "vital_category": "map",
+              "n": 1,
+              "avg": 101.0,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2023-09",
+              "vital_category": "respiratory_rate",
+              "n": 1,
+              "avg": 15.958333333333334,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2023-09",
+              "vital_category": "sbp",
+              "n": 1,
+              "avg": 132.16666666666666,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2023-09",
+              "vital_category": "spo2",
+              "n": 1,
+              "avg": 98.79166666666667,
+              "unit": "%"
+            },
+            {
+              "month_year": "2023-09",
+              "vital_category": "temp_c",
+              "n": 1,
+              "avg": 36.97674343280779,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2023-10",
+              "vital_category": "dbp",
+              "n": 4,
+              "avg": 80.40025731481877,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2023-10",
+              "vital_category": "heart_rate",
+              "n": 4,
+              "avg": 78.89839866800635,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2023-10",
+              "vital_category": "height_cm",
+              "n": 4,
+              "avg": 172.3,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2023-10",
+              "vital_category": "map",
+              "n": 4,
+              "avg": 94.69677419354839,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2023-10",
+              "vital_category": "respiratory_rate",
+              "n": 4,
+              "avg": 18.233766233766232,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2023-10",
+              "vital_category": "sbp",
+              "n": 4,
+              "avg": 122.67797472243126,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2023-10",
+              "vital_category": "spo2",
+              "n": 4,
+              "avg": 96.69736842105263,
+              "unit": "%"
+            },
+            {
+              "month_year": "2023-10",
+              "vital_category": "temp_c",
+              "n": 4,
+              "avg": 37.012245577961046,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2023-10",
+              "vital_category": "weight_kg",
+              "n": 4,
+              "avg": 72.525,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2023-11",
+              "vital_category": "dbp",
+              "n": 2,
+              "avg": 79.97996500150616,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2023-11",
+              "vital_category": "heart_rate",
+              "n": 2,
+              "avg": 80.78277785993085,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2023-11",
+              "vital_category": "height_cm",
+              "n": 1,
+              "avg": 176.5,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2023-11",
+              "vital_category": "map",
+              "n": 2,
+              "avg": 93.669396311086,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2023-11",
+              "vital_category": "respiratory_rate",
+              "n": 2,
+              "avg": 17.670499134252278,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2023-11",
+              "vital_category": "sbp",
+              "n": 2,
+              "avg": 120.73888341721695,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2023-11",
+              "vital_category": "spo2",
+              "n": 2,
+              "avg": 95.62703690545787,
+              "unit": "%"
+            },
+            {
+              "month_year": "2023-11",
+              "vital_category": "temp_c",
+              "n": 2,
+              "avg": 37.115269992699034,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2023-11",
+              "vital_category": "weight_kg",
+              "n": 1,
+              "avg": 30.0,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2023-12",
+              "vital_category": "dbp",
+              "n": 1,
+              "avg": 81.38516603062351,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2023-12",
+              "vital_category": "heart_rate",
+              "n": 1,
+              "avg": 85.22502648638878,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2023-12",
+              "vital_category": "height_cm",
+              "n": 1,
+              "avg": 159.4,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2023-12",
+              "vital_category": "map",
+              "n": 1,
+              "avg": 92.29166666666667,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2023-12",
+              "vital_category": "respiratory_rate",
+              "n": 1,
+              "avg": 17.693538430373657,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2023-12",
+              "vital_category": "sbp",
+              "n": 1,
+              "avg": 118.00165830780806,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2023-12",
+              "vital_category": "spo2",
+              "n": 1,
+              "avg": 95.64556962025317,
+              "unit": "%"
+            },
+            {
+              "month_year": "2023-12",
+              "vital_category": "temp_c",
+              "n": 1,
+              "avg": 37.04026416360647,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2023-12",
+              "vital_category": "weight_kg",
+              "n": 1,
+              "avg": 66.3,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2024-01",
+              "vital_category": "dbp",
+              "n": 1,
+              "avg": 78.01360544217687,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2024-01",
+              "vital_category": "heart_rate",
+              "n": 1,
+              "avg": 79.66490341335245,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2024-01",
+              "vital_category": "height_cm",
+              "n": 1,
+              "avg": 167.2,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2024-01",
+              "vital_category": "map",
+              "n": 1,
+              "avg": 91.69138032675636,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2024-01",
+              "vital_category": "respiratory_rate",
+              "n": 1,
+              "avg": 16.12,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2024-01",
+              "vital_category": "sbp",
+              "n": 1,
+              "avg": 125.2341645522243,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2024-01",
+              "vital_category": "spo2",
+              "n": 1,
+              "avg": 95.89302013005255,
+              "unit": "%"
+            },
+            {
+              "month_year": "2024-01",
+              "vital_category": "temp_c",
+              "n": 1,
+              "avg": 36.813214876231605,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2024-01",
+              "vital_category": "weight_kg",
+              "n": 1,
+              "avg": 88.05,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2024-02",
+              "vital_category": "dbp",
+              "n": 3,
+              "avg": 78.38209534852417,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2024-02",
+              "vital_category": "heart_rate",
+              "n": 3,
+              "avg": 81.08083235016679,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2024-02",
+              "vital_category": "height_cm",
+              "n": 2,
+              "avg": 164.7,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2024-02",
+              "vital_category": "map",
+              "n": 3,
+              "avg": 91.50685018884197,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2024-02",
+              "vital_category": "respiratory_rate",
+              "n": 3,
+              "avg": 17.539127311316985,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2024-02",
+              "vital_category": "sbp",
+              "n": 3,
+              "avg": 118.21556876618625,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2024-02",
+              "vital_category": "spo2",
+              "n": 3,
+              "avg": 95.92322112959644,
+              "unit": "%"
+            },
+            {
+              "month_year": "2024-02",
+              "vital_category": "temp_c",
+              "n": 3,
+              "avg": 37.00342851602303,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2024-02",
+              "vital_category": "weight_kg",
+              "n": 2,
+              "avg": 77.95,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2024-03",
+              "vital_category": "dbp",
+              "n": 5,
+              "avg": 77.20932165003794,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2024-03",
+              "vital_category": "heart_rate",
+              "n": 5,
+              "avg": 81.72520934968746,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2024-03",
+              "vital_category": "height_cm",
+              "n": 2,
+              "avg": 171.0666666666667,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2024-03",
+              "vital_category": "map",
+              "n": 5,
+              "avg": 91.48993823064343,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2024-03",
+              "vital_category": "respiratory_rate",
+              "n": 5,
+              "avg": 17.99036861569067,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2024-03",
+              "vital_category": "sbp",
+              "n": 5,
+              "avg": 118.76825920299,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2024-03",
+              "vital_category": "spo2",
+              "n": 5,
+              "avg": 95.95153273218067,
+              "unit": "%"
+            },
+            {
+              "month_year": "2024-03",
+              "vital_category": "temp_c",
+              "n": 4,
+              "avg": 36.9585418831262,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2024-03",
+              "vital_category": "weight_kg",
+              "n": 2,
+              "avg": 71.39999999999999,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2024-04",
+              "vital_category": "dbp",
+              "n": 4,
+              "avg": 78.25145760559715,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2024-04",
+              "vital_category": "heart_rate",
+              "n": 4,
+              "avg": 81.55424660791047,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2024-04",
+              "vital_category": "height_cm",
+              "n": 2,
+              "avg": 167.43333333333334,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2024-04",
+              "vital_category": "map",
+              "n": 4,
+              "avg": 91.46126352021358,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2024-04",
+              "vital_category": "respiratory_rate",
+              "n": 4,
+              "avg": 15.931769417086386,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2024-04",
+              "vital_category": "sbp",
+              "n": 4,
+              "avg": 118.3499196169707,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2024-04",
+              "vital_category": "spo2",
+              "n": 4,
+              "avg": 95.82254847695286,
+              "unit": "%"
+            },
+            {
+              "month_year": "2024-04",
+              "vital_category": "temp_c",
+              "n": 4,
+              "avg": 37.017664953397706,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2024-04",
+              "vital_category": "weight_kg",
+              "n": 2,
+              "avg": 83.10000000000001,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2024-05",
+              "vital_category": "dbp",
+              "n": 6,
+              "avg": 78.2368648517772,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2024-05",
+              "vital_category": "heart_rate",
+              "n": 6,
+              "avg": 81.01963588560282,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2024-05",
+              "vital_category": "height_cm",
+              "n": 4,
+              "avg": 165.96666666666667,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2024-05",
+              "vital_category": "map",
+              "n": 6,
+              "avg": 92.32990683859853,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2024-05",
+              "vital_category": "respiratory_rate",
+              "n": 6,
+              "avg": 16.161899659337774,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2024-05",
+              "vital_category": "sbp",
+              "n": 6,
+              "avg": 119.89376344426819,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2024-05",
+              "vital_category": "spo2",
+              "n": 6,
+              "avg": 95.86584586613397,
+              "unit": "%"
+            },
+            {
+              "month_year": "2024-05",
+              "vital_category": "temp_c",
+              "n": 6,
+              "avg": 37.02509206134635,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2024-05",
+              "vital_category": "weight_kg",
+              "n": 4,
+              "avg": 69.025,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2024-06",
+              "vital_category": "dbp",
+              "n": 3,
+              "avg": 79.18378154424335,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2024-06",
+              "vital_category": "heart_rate",
+              "n": 3,
+              "avg": 83.15231502311589,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2024-06",
+              "vital_category": "height_cm",
+              "n": 2,
+              "avg": 182.55,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2024-06",
+              "vital_category": "map",
+              "n": 3,
+              "avg": 93.63456250231346,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2024-06",
+              "vital_category": "respiratory_rate",
+              "n": 3,
+              "avg": 15.859296698062966,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2024-06",
+              "vital_category": "sbp",
+              "n": 3,
+              "avg": 123.42288400629455,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2024-06",
+              "vital_category": "spo2",
+              "n": 3,
+              "avg": 95.86288607442282,
+              "unit": "%"
+            },
+            {
+              "month_year": "2024-06",
+              "vital_category": "temp_c",
+              "n": 3,
+              "avg": 37.04090122387538,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2024-06",
+              "vital_category": "weight_kg",
+              "n": 2,
+              "avg": 72.8,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2024-07",
+              "vital_category": "dbp",
+              "n": 5,
+              "avg": 76.55773666564747,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2024-07",
+              "vital_category": "heart_rate",
+              "n": 5,
+              "avg": 80.08135939829128,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2024-07",
+              "vital_category": "height_cm",
+              "n": 3,
+              "avg": 166.4,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2024-07",
+              "vital_category": "map",
+              "n": 5,
+              "avg": 89.66324398678944,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2024-07",
+              "vital_category": "respiratory_rate",
+              "n": 5,
+              "avg": 15.296665611736834,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2024-07",
+              "vital_category": "sbp",
+              "n": 5,
+              "avg": 117.1538081958147,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2024-07",
+              "vital_category": "spo2",
+              "n": 5,
+              "avg": 95.93043476781314,
+              "unit": "%"
+            },
+            {
+              "month_year": "2024-07",
+              "vital_category": "temp_c",
+              "n": 5,
+              "avg": 36.997758142813396,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2024-07",
+              "vital_category": "weight_kg",
+              "n": 3,
+              "avg": 88.43333333333332,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2024-08",
+              "vital_category": "dbp",
+              "n": 3,
+              "avg": 75.078125,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2024-08",
+              "vital_category": "heart_rate",
+              "n": 3,
+              "avg": 82.00972080723298,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2024-08",
+              "vital_category": "height_cm",
+              "n": 3,
+              "avg": 169.5666666666667,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2024-08",
+              "vital_category": "map",
+              "n": 3,
+              "avg": 90.01888967104928,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2024-08",
+              "vital_category": "respiratory_rate",
+              "n": 3,
+              "avg": 16.276923076923076,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2024-08",
+              "vital_category": "sbp",
+              "n": 3,
+              "avg": 114.3609022556391,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2024-08",
+              "vital_category": "spo2",
+              "n": 3,
+              "avg": 95.61602953109849,
+              "unit": "%"
+            },
+            {
+              "month_year": "2024-08",
+              "vital_category": "temp_c",
+              "n": 3,
+              "avg": 37.145247565788374,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2024-08",
+              "vital_category": "weight_kg",
+              "n": 3,
+              "avg": 80.8,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2024-09",
+              "vital_category": "dbp",
+              "n": 2,
+              "avg": 77.42342882121923,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2024-09",
+              "vital_category": "heart_rate",
+              "n": 2,
+              "avg": 82.79748602442726,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2024-09",
+              "vital_category": "height_cm",
+              "n": 2,
+              "avg": 170.70000000000002,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2024-09",
+              "vital_category": "map",
+              "n": 2,
+              "avg": 90.80245161683148,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2024-09",
+              "vital_category": "respiratory_rate",
+              "n": 2,
+              "avg": 18.64587360400883,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2024-09",
+              "vital_category": "sbp",
+              "n": 2,
+              "avg": 116.4870147759299,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2024-09",
+              "vital_category": "spo2",
+              "n": 2,
+              "avg": 96.2936046511628,
+              "unit": "%"
+            },
+            {
+              "month_year": "2024-09",
+              "vital_category": "temp_c",
+              "n": 2,
+              "avg": 37.207962293003106,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2024-09",
+              "vital_category": "weight_kg",
+              "n": 2,
+              "avg": 80.35,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2024-10",
+              "vital_category": "dbp",
+              "n": 3,
+              "avg": 77.89334784861606,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2024-10",
+              "vital_category": "heart_rate",
+              "n": 3,
+              "avg": 81.22646111991419,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2024-10",
+              "vital_category": "height_cm",
+              "n": 2,
+              "avg": 176.26666666666665,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2024-10",
+              "vital_category": "map",
+              "n": 3,
+              "avg": 92.0973849373336,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2024-10",
+              "vital_category": "respiratory_rate",
+              "n": 3,
+              "avg": 17.17064105376903,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2024-10",
+              "vital_category": "sbp",
+              "n": 3,
+              "avg": 120.54858254580553,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2024-10",
+              "vital_category": "spo2",
+              "n": 3,
+              "avg": 96.45639411807777,
+              "unit": "%"
+            },
+            {
+              "month_year": "2024-10",
+              "vital_category": "temp_c",
+              "n": 3,
+              "avg": 37.02666900583453,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2024-10",
+              "vital_category": "weight_kg",
+              "n": 2,
+              "avg": 86.03333333333335,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2024-11",
+              "vital_category": "dbp",
+              "n": 5,
+              "avg": 80.28134748740307,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2024-11",
+              "vital_category": "heart_rate",
+              "n": 5,
+              "avg": 80.01187024889278,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2024-11",
+              "vital_category": "height_cm",
+              "n": 4,
+              "avg": 172.16666666666666,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2024-11",
+              "vital_category": "map",
+              "n": 5,
+              "avg": 93.28036746510277,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2024-11",
+              "vital_category": "respiratory_rate",
+              "n": 5,
+              "avg": 16.938960603446017,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2024-11",
+              "vital_category": "sbp",
+              "n": 5,
+              "avg": 119.19201779702858,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2024-11",
+              "vital_category": "spo2",
+              "n": 5,
+              "avg": 96.07398535998988,
+              "unit": "%"
+            },
+            {
+              "month_year": "2024-11",
+              "vital_category": "temp_c",
+              "n": 5,
+              "avg": 36.90526374248193,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2024-11",
+              "vital_category": "weight_kg",
+              "n": 4,
+              "avg": 77.225,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2024-12",
+              "vital_category": "dbp",
+              "n": 3,
+              "avg": 78.74523837598797,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2024-12",
+              "vital_category": "heart_rate",
+              "n": 3,
+              "avg": 79.30939700986703,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2024-12",
+              "vital_category": "height_cm",
+              "n": 1,
+              "avg": 167.1,
+              "unit": "Centimeters"
+            },
+            {
+              "month_year": "2024-12",
+              "vital_category": "map",
+              "n": 3,
+              "avg": 91.47886123299385,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2024-12",
+              "vital_category": "respiratory_rate",
+              "n": 3,
+              "avg": 16.245254995671097,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2024-12",
+              "vital_category": "sbp",
+              "n": 3,
+              "avg": 117.2064272755999,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2024-12",
+              "vital_category": "spo2",
+              "n": 3,
+              "avg": 96.19382518296442,
+              "unit": "%"
+            },
+            {
+              "month_year": "2024-12",
+              "vital_category": "temp_c",
+              "n": 3,
+              "avg": 36.96843195441651,
+              "unit": "Celsius"
+            },
+            {
+              "month_year": "2024-12",
+              "vital_category": "weight_kg",
+              "n": 1,
+              "avg": 83.15,
+              "unit": "Kg"
+            },
+            {
+              "month_year": "2025-01",
+              "vital_category": "dbp",
+              "n": 1,
+              "avg": 77.6905329270273,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2025-01",
+              "vital_category": "heart_rate",
+              "n": 1,
+              "avg": 79.07929850397159,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2025-01",
+              "vital_category": "map",
+              "n": 1,
+              "avg": 92.87243683525702,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2025-01",
+              "vital_category": "respiratory_rate",
+              "n": 1,
+              "avg": 17.30719144514502,
+              "unit": "(no units)"
+            },
+            {
+              "month_year": "2025-01",
+              "vital_category": "sbp",
+              "n": 1,
+              "avg": 121.5159519774065,
+              "unit": "mmHg"
+            },
+            {
+              "month_year": "2025-01",
+              "vital_category": "spo2",
+              "n": 1,
+              "avg": 95.68053192295564,
+              "unit": "%"
+            },
+            {
+              "month_year": "2025-01",
+              "vital_category": "temp_c",
+              "n": 1,
+              "avg": 37.0637968625736,
+              "unit": "Celsius"
+            }
+          ]
+        }
+      },
+      "atomic_total": 9,
+      "atomic_passed": 9
+    },
+    "duplicate_composite_keys": {
+      "check_type": "duplicate_composite_keys",
+      "table_name": "vitals",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No duplicate composite keys found",
+          "details": {}
+        }
+      ],
+      "metrics": {
+        "composite_keys": [
+          "hospitalization_id",
+          "recorded_dttm",
+          "vital_category"
+        ],
+        "total_records": 314376,
+        "unique_records": 314376,
+        "duplicate_records": 0,
+        "duplicate_percent": 0.0
+      },
+      "atomic_total": 1,
+      "atomic_passed": 1
+    }
+  },
+  "table_stats": [
+    {
+      "column": "hospitalization_id",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 200,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "recorded_dttm",
+      "dtype": "DATETIME",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 52997,
+      "min": "2018-01-22 20:36",
+      "max": "2025-01-15 05:50"
+    },
+    {
+      "column": "vital_name",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 9,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "vital_category",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 9,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "vital_value",
+      "dtype": "DOUBLE",
+      "null_count": 15602,
+      "null_pct": 5.0,
+      "unique": 18359,
+      "min": "0.0",
+      "max": "261.95525966771856"
+    },
+    {
+      "column": "meas_site_name",
+      "dtype": "VARCHAR",
+      "null_count": 276868,
+      "null_pct": 88.1,
+      "unique": 5,
+      "min": null,
+      "max": null
+    }
+  ],
+  "total_rows": 314376
+}

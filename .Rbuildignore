@@ -11,6 +11,20 @@
 ^renv\.lock$
 ^CLAUDE\.md$
 ^data-raw$
-^tests/fixtures/generate_synthetic_data\.py$
-^tests/generate_baselines\.py$
 ^\.DS_Store$
+# Development tooling and notes, not part of the installable package
+^dev$
+^PROGRESS\.md$
+^QUICKSTART\.md$
+^install_dependencies\.R$
+^test_pipeline\.R$
+^output$
+# Cross-language test harness: the uv Python project (including its .venv) and the
+# large synthetic source data are only used to (re)generate baselines, never shipped.
+^tests/baseline_py$
+^tests/fixtures/generate_synthetic_data\.py$
+^tests/fixtures/generate_synthetic_data\.R$
+^tests/fixtures/synthetic_data$
+^tests/generate_baselines\.py$
+^tests/CROSS_VALIDATION_RESULTS\.md$
+^\.claude$

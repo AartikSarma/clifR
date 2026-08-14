@@ -1,0 +1,6088 @@
+{
+  "table_name": "patient_assessments",
+  "backend": "polars",
+  "conformance": {
+    "table_presence": {
+      "check_type": "table_presence",
+      "table_name": "patient_assessments",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Table 'patient_assessments' present with 109813 rows and 8 columns",
+          "details": {}
+        }
+      ],
+      "metrics": {
+        "row_count": 109813,
+        "column_count": 8
+      },
+      "atomic_total": 1,
+      "atomic_passed": 1
+    },
+    "required_columns": {
+      "check_type": "required_columns",
+      "table_name": "patient_assessments",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'hospitalization_id': present",
+          "details": {
+            "column": "hospitalization_id"
+          }
+        },
+        {
+          "message": "Column 'recorded_dttm': present",
+          "details": {
+            "column": "recorded_dttm"
+          }
+        },
+        {
+          "message": "Column 'assessment_category': present",
+          "details": {
+            "column": "assessment_category"
+          }
+        },
+        {
+          "message": "Column 'numerical_value': present",
+          "details": {
+            "column": "numerical_value"
+          }
+        },
+        {
+          "message": "Column 'categorical_value': present",
+          "details": {
+            "column": "categorical_value"
+          }
+        },
+        {
+          "message": "Column 'text_value': present",
+          "details": {
+            "column": "text_value"
+          }
+        }
+      ],
+      "metrics": {
+        "total_required": 6,
+        "total_present": 6,
+        "total_missing": 0
+      },
+      "atomic_total": 6,
+      "atomic_passed": 6
+    },
+    "column_dtypes": {
+      "check_type": "column_dtypes",
+      "table_name": "patient_assessments",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'hospitalization_id': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "hospitalization_id",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'documenting_provider_id': not present in data (dtype check skipped)",
+          "details": {
+            "column": "documenting_provider_id",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'recorded_dttm': dtype matches schema (DATETIME)",
+          "details": {
+            "column": "recorded_dttm",
+            "expected": "DATETIME"
+          }
+        },
+        {
+          "message": "Column 'assessment_name': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "assessment_name",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'assessment_category': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "assessment_category",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'assessment_group': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "assessment_group",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'numerical_value': dtype matches schema (DOUBLE)",
+          "details": {
+            "column": "numerical_value",
+            "expected": "DOUBLE"
+          }
+        },
+        {
+          "message": "Column 'categorical_value': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "categorical_value",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'text_value': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "text_value",
+            "expected": "VARCHAR"
+          }
+        }
+      ],
+      "metrics": {
+        "columns_checked": 9,
+        "dtype_errors": 0,
+        "dtype_warnings": 0
+      },
+      "atomic_total": 9,
+      "atomic_passed": 9
+    },
+    "datetime_format": {
+      "check_type": "datetime_format",
+      "table_name": "patient_assessments",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'recorded_dttm': datetime format valid",
+          "details": {
+            "column": "recorded_dttm"
+          }
+        }
+      ],
+      "metrics": {
+        "datetime_columns_checked": 1
+      },
+      "atomic_total": 1,
+      "atomic_passed": 1
+    },
+    "categorical_values": {
+      "check_type": "categorical_values",
+      "table_name": "patient_assessments",
+      "passed": true,
+      "errors": [],
+      "warnings": [
+        {
+          "message": "1 invalid categorical values",
+          "details": {
+            "column": "assessment_category",
+            "top_invalid": [
+              {
+                "value": "Morse Fall Scale",
+                "count": 2461
+              }
+            ],
+            "permissible_values": [
+              "am_pac",
+              "ams",
+              "apgar",
+              "avpu",
+              "bps",
+              "braden_activity",
+              "braden_friction",
+              "braden_mobility",
+              "braden_moisture",
+              "braden_nutrition",
+              "braden_sensory",
+              "braden_total",
+              "cam_inattention",
+              "cam_loc",
+              "cam_mental",
+              "cam_thinking",
+              "cam_total",
+              "ciwa",
+              "cows",
+              "cpot_body",
+              "cpot_facial",
+              "cpot_intubated",
+              "cpot_muscle",
+              "cpot_total",
+              "cpot_vocalization",
+              "dvprs",
+              "gcs_eye",
+              "gcs_motor",
+              "gcs_total",
+              "gcs_verbal",
+              "icans",
+              "icsdc",
+              "icsdc_agitation",
+              "icsdc_disorientation",
+              "icsdc_hallucination",
+              "icsdc_inattention",
+              "icsdc_loc",
+              "icsdc_sleep",
+              "icsdc_speech",
+              "icsdc_symptoms",
+              "icsdc_total",
+              "ims",
+              "minds",
+              "morse_fall_scale",
+              "npi_l",
+              "npi_r",
+              "nrs",
+              "nvps",
+              "painad",
+              "pupil_reactive_l",
+              "pupil_reactive_r",
+              "pupil_size_l",
+              "pupil_size_r",
+              "rass",
+              "sas",
+              "sat_delivery_pass_fail",
+              "sat_delivery_performed",
+              "sat_escalating_sedation",
+              "sat_intracranial_pressure",
+              "sat_myocardial_ischemia",
+              "sat_neuromuscular_blockers",
+              "sat_screen_pass_fail",
+              "sat_screen_performed",
+              "sat_sedative_infusion",
+              "sbt_agitation",
+              "sbt_delivery_pass_fail",
+              "sbt_delivery_performed",
+              "sbt_fail_reason",
+              "sbt_inadequate_oxygenation",
+              "sbt_intracranial_pressure",
+              "sbt_no_spontaneous_effort",
+              "sbt_screen_pass_fail",
+              "sbt_screen_performed",
+              "sbt_vasopressor_use",
+              "tof",
+              "vas",
+              "wat"
+            ]
+          }
+        }
+      ],
+      "info": [],
+      "metrics": {
+        "category_columns_checked": 1,
+        "columns_with_invalid_values": 1
+      },
+      "atomic_total": 1,
+      "atomic_passed": 1
+    },
+    "category_group_mapping": {
+      "check_type": "category_group_mapping",
+      "table_name": "patient_assessments",
+      "passed": true,
+      "errors": [],
+      "warnings": [
+        {
+          "message": "Category 'braden_total': group mismatch (expected 'nursing_risk')",
+          "details": {
+            "column": "braden_total",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group",
+            "mismatched_pairs": [
+              {
+                "category": "braden_total",
+                "actual_group": "skin",
+                "expected_group": "nursing_risk",
+                "count": 2461
+              }
+            ]
+          }
+        },
+        {
+          "message": "Category 'gcs_eye': group mismatch (expected 'neurological')",
+          "details": {
+            "column": "gcs_eye",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group",
+            "mismatched_pairs": [
+              {
+                "category": "gcs_eye",
+                "actual_group": "gcs",
+                "expected_group": "neurological",
+                "count": 17819
+              }
+            ]
+          }
+        },
+        {
+          "message": "Category 'gcs_motor': group mismatch (expected 'neurological')",
+          "details": {
+            "column": "gcs_motor",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group",
+            "mismatched_pairs": [
+              {
+                "category": "gcs_motor",
+                "actual_group": "gcs",
+                "expected_group": "neurological",
+                "count": 17819
+              }
+            ]
+          }
+        },
+        {
+          "message": "Category 'gcs_total': group mismatch (expected 'neurological')",
+          "details": {
+            "column": "gcs_total",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group",
+            "mismatched_pairs": [
+              {
+                "category": "gcs_total",
+                "actual_group": "gcs",
+                "expected_group": "neurological",
+                "count": 17819
+              }
+            ]
+          }
+        },
+        {
+          "message": "Category 'gcs_verbal': group mismatch (expected 'neurological')",
+          "details": {
+            "column": "gcs_verbal",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group",
+            "mismatched_pairs": [
+              {
+                "category": "gcs_verbal",
+                "actual_group": "gcs",
+                "expected_group": "neurological",
+                "count": 17819
+              }
+            ]
+          }
+        },
+        {
+          "message": "Category 'rass': group mismatch (expected 'sedation_or_agitation')",
+          "details": {
+            "column": "rass",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group",
+            "mismatched_pairs": [
+              {
+                "category": "rass",
+                "actual_group": "sedation",
+                "expected_group": "sedation_or_agitation",
+                "count": 11805
+              }
+            ]
+          }
+        }
+      ],
+      "info": [
+        {
+          "message": "Category 'am_pac': not present in data",
+          "details": {
+            "column": "am_pac",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'ams': not present in data",
+          "details": {
+            "column": "ams",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'apgar': not present in data",
+          "details": {
+            "column": "apgar",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'avpu': not present in data",
+          "details": {
+            "column": "avpu",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'bps': not present in data",
+          "details": {
+            "column": "bps",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'braden_activity': not present in data",
+          "details": {
+            "column": "braden_activity",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'braden_friction': not present in data",
+          "details": {
+            "column": "braden_friction",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'braden_mobility': not present in data",
+          "details": {
+            "column": "braden_mobility",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'braden_moisture': not present in data",
+          "details": {
+            "column": "braden_moisture",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'braden_nutrition': not present in data",
+          "details": {
+            "column": "braden_nutrition",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'braden_sensory': not present in data",
+          "details": {
+            "column": "braden_sensory",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'cam_inattention': not present in data",
+          "details": {
+            "column": "cam_inattention",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'cam_loc': not present in data",
+          "details": {
+            "column": "cam_loc",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'cam_mental': not present in data",
+          "details": {
+            "column": "cam_mental",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'cam_thinking': not present in data",
+          "details": {
+            "column": "cam_thinking",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'cam_total': group mapping correct",
+          "details": {
+            "column": "cam_total",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'ciwa': not present in data",
+          "details": {
+            "column": "ciwa",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'cows': not present in data",
+          "details": {
+            "column": "cows",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'cpot_body': not present in data",
+          "details": {
+            "column": "cpot_body",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'cpot_facial': not present in data",
+          "details": {
+            "column": "cpot_facial",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'cpot_intubated': not present in data",
+          "details": {
+            "column": "cpot_intubated",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'cpot_muscle': not present in data",
+          "details": {
+            "column": "cpot_muscle",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'cpot_total': not present in data",
+          "details": {
+            "column": "cpot_total",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'cpot_vocalization': not present in data",
+          "details": {
+            "column": "cpot_vocalization",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'dvprs': not present in data",
+          "details": {
+            "column": "dvprs",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'icans': not present in data",
+          "details": {
+            "column": "icans",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'icsdc': not present in data",
+          "details": {
+            "column": "icsdc",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'icsdc_agitation': not present in data",
+          "details": {
+            "column": "icsdc_agitation",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'icsdc_disorientation': not present in data",
+          "details": {
+            "column": "icsdc_disorientation",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'icsdc_hallucination': not present in data",
+          "details": {
+            "column": "icsdc_hallucination",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'icsdc_inattention': not present in data",
+          "details": {
+            "column": "icsdc_inattention",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'icsdc_loc': not present in data",
+          "details": {
+            "column": "icsdc_loc",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'icsdc_sleep': not present in data",
+          "details": {
+            "column": "icsdc_sleep",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'icsdc_speech': not present in data",
+          "details": {
+            "column": "icsdc_speech",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'icsdc_symptoms': not present in data",
+          "details": {
+            "column": "icsdc_symptoms",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'icsdc_total': not present in data",
+          "details": {
+            "column": "icsdc_total",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'ims': not present in data",
+          "details": {
+            "column": "ims",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'minds': not present in data",
+          "details": {
+            "column": "minds",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'morse_fall_scale': not present in data",
+          "details": {
+            "column": "morse_fall_scale",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'npi_l': not present in data",
+          "details": {
+            "column": "npi_l",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'npi_r': not present in data",
+          "details": {
+            "column": "npi_r",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'nrs': group mapping correct",
+          "details": {
+            "column": "nrs",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'nvps': not present in data",
+          "details": {
+            "column": "nvps",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'painad': not present in data",
+          "details": {
+            "column": "painad",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'pupil_reactive_l': not present in data",
+          "details": {
+            "column": "pupil_reactive_l",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'pupil_reactive_r': not present in data",
+          "details": {
+            "column": "pupil_reactive_r",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'pupil_size_l': not present in data",
+          "details": {
+            "column": "pupil_size_l",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'pupil_size_r': not present in data",
+          "details": {
+            "column": "pupil_size_r",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'sas': not present in data",
+          "details": {
+            "column": "sas",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'sat_delivery_pass_fail': not present in data",
+          "details": {
+            "column": "sat_delivery_pass_fail",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'sat_delivery_performed': not present in data",
+          "details": {
+            "column": "sat_delivery_performed",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'sat_escalating_sedation': not present in data",
+          "details": {
+            "column": "sat_escalating_sedation",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'sat_intracranial_pressure': not present in data",
+          "details": {
+            "column": "sat_intracranial_pressure",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'sat_myocardial_ischemia': not present in data",
+          "details": {
+            "column": "sat_myocardial_ischemia",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'sat_neuromuscular_blockers': not present in data",
+          "details": {
+            "column": "sat_neuromuscular_blockers",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'sat_screen_pass_fail': not present in data",
+          "details": {
+            "column": "sat_screen_pass_fail",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'sat_screen_performed': not present in data",
+          "details": {
+            "column": "sat_screen_performed",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'sat_sedative_infusion': not present in data",
+          "details": {
+            "column": "sat_sedative_infusion",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'sbt_agitation': not present in data",
+          "details": {
+            "column": "sbt_agitation",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'sbt_delivery_pass_fail': not present in data",
+          "details": {
+            "column": "sbt_delivery_pass_fail",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'sbt_delivery_performed': not present in data",
+          "details": {
+            "column": "sbt_delivery_performed",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'sbt_fail_reason': not present in data",
+          "details": {
+            "column": "sbt_fail_reason",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'sbt_inadequate_oxygenation': not present in data",
+          "details": {
+            "column": "sbt_inadequate_oxygenation",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'sbt_intracranial_pressure': not present in data",
+          "details": {
+            "column": "sbt_intracranial_pressure",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'sbt_no_spontaneous_effort': not present in data",
+          "details": {
+            "column": "sbt_no_spontaneous_effort",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'sbt_screen_pass_fail': not present in data",
+          "details": {
+            "column": "sbt_screen_pass_fail",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'sbt_screen_performed': not present in data",
+          "details": {
+            "column": "sbt_screen_performed",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'sbt_vasopressor_use': not present in data",
+          "details": {
+            "column": "sbt_vasopressor_use",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'tof': not present in data",
+          "details": {
+            "column": "tof",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'vas': not present in data",
+          "details": {
+            "column": "vas",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        },
+        {
+          "message": "Category 'wat': not present in data",
+          "details": {
+            "column": "wat",
+            "category_column": "assessment_category",
+            "group_column": "assessment_group"
+          }
+        }
+      ],
+      "metrics": {
+        "assessment_category_to_group_mapping_total_records": 109813,
+        "assessment_category_to_group_mapping_mismatch_count": 6
+      },
+      "atomic_total": 77,
+      "atomic_passed": 71
+    }
+  },
+  "completeness": {
+    "missingness": {
+      "check_type": "missingness",
+      "table_name": "patient_assessments",
+      "passed": true,
+      "errors": [],
+      "warnings": [
+        {
+          "message": "Column 'categorical_value' has 96.46% missing values",
+          "details": {
+            "column": "categorical_value",
+            "percent_missing": 96.46,
+            "severity": "warning"
+          }
+        },
+        {
+          "message": "Column 'text_value' has 100.0% missing values",
+          "details": {
+            "column": "text_value",
+            "percent_missing": 100.0,
+            "severity": "warning"
+          }
+        }
+      ],
+      "info": [
+        {
+          "message": "Column 'numerical_value': 1.03% missing (below thresholds)",
+          "details": {
+            "column": "numerical_value",
+            "percent_missing": 1.03,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'hospitalization_id': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "hospitalization_id",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'recorded_dttm': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "recorded_dttm",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'assessment_category': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "assessment_category",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        }
+      ],
+      "metrics": {
+        "total_rows": 109813,
+        "required_columns_checked": 6,
+        "missingness_stats": [
+          {
+            "column": "text_value",
+            "null_count": 109813,
+            "total_rows": 109813,
+            "percent_missing": 100.0
+          },
+          {
+            "column": "categorical_value",
+            "null_count": 105924,
+            "total_rows": 109813,
+            "percent_missing": 96.46
+          },
+          {
+            "column": "numerical_value",
+            "null_count": 1136,
+            "total_rows": 109813,
+            "percent_missing": 1.03
+          },
+          {
+            "column": "hospitalization_id",
+            "null_count": 0,
+            "total_rows": 109813,
+            "percent_missing": 0.0
+          },
+          {
+            "column": "recorded_dttm",
+            "null_count": 0,
+            "total_rows": 109813,
+            "percent_missing": 0.0
+          },
+          {
+            "column": "assessment_category",
+            "null_count": 0,
+            "total_rows": 109813,
+            "percent_missing": 0.0
+          }
+        ]
+      },
+      "atomic_total": 6,
+      "atomic_passed": 6
+    },
+    "conditional_requirements": {
+      "check_type": "conditional_requirements",
+      "table_name": "patient_assessments",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No conditional requirements defined for this table",
+          "details": {}
+        }
+      ],
+      "metrics": {},
+      "atomic_total": 0,
+      "atomic_passed": 0
+    },
+    "mcide_value_coverage": {
+      "check_type": "mcide_value_coverage",
+      "table_name": "patient_assessments",
+      "passed": false,
+      "errors": [
+        {
+          "message": "Missing 69 mCIDE values: am_pac, ams, apgar, avpu, bps, braden_activity, braden_friction, braden_mobility, braden_moisture, braden_nutrition, braden_sensory, cam_inattention, cam_loc, cam_mental, cam_thinking, ciwa, cows, cpot_body, cpot_facial, cpot_intubated, cpot_muscle, cpot_total, cpot_vocalization, dvprs, icans, icsdc, icsdc_agitation, icsdc_disorientation, icsdc_hallucination, icsdc_inattention, icsdc_loc, icsdc_sleep, icsdc_speech, icsdc_symptoms, icsdc_total, ims, minds, morse_fall_scale, npi_l, npi_r, nvps, painad, pupil_reactive_l, pupil_reactive_r, pupil_size_l, pupil_size_r, sas, sat_delivery_pass_fail, sat_delivery_performed, sat_escalating_sedation, sat_intracranial_pressure, sat_myocardial_ischemia, sat_neuromuscular_blockers, sat_screen_pass_fail, sat_screen_performed, sat_sedative_infusion, sbt_agitation, sbt_delivery_pass_fail, sbt_delivery_performed, sbt_fail_reason, sbt_inadequate_oxygenation, sbt_intracranial_pressure, sbt_no_spontaneous_effort, sbt_screen_pass_fail, sbt_screen_performed, sbt_vasopressor_use, tof, vas, wat",
+          "details": {
+            "column": "assessment_category",
+            "missing_values": [
+              "am_pac",
+              "ams",
+              "apgar",
+              "avpu",
+              "bps",
+              "braden_activity",
+              "braden_friction",
+              "braden_mobility",
+              "braden_moisture",
+              "braden_nutrition",
+              "braden_sensory",
+              "cam_inattention",
+              "cam_loc",
+              "cam_mental",
+              "cam_thinking",
+              "ciwa",
+              "cows",
+              "cpot_body",
+              "cpot_facial",
+              "cpot_intubated",
+              "cpot_muscle",
+              "cpot_total",
+              "cpot_vocalization",
+              "dvprs",
+              "icans",
+              "icsdc",
+              "icsdc_agitation",
+              "icsdc_disorientation",
+              "icsdc_hallucination",
+              "icsdc_inattention",
+              "icsdc_loc",
+              "icsdc_sleep",
+              "icsdc_speech",
+              "icsdc_symptoms",
+              "icsdc_total",
+              "ims",
+              "minds",
+              "morse_fall_scale",
+              "npi_l",
+              "npi_r",
+              "nvps",
+              "painad",
+              "pupil_reactive_l",
+              "pupil_reactive_r",
+              "pupil_size_l",
+              "pupil_size_r",
+              "sas",
+              "sat_delivery_pass_fail",
+              "sat_delivery_performed",
+              "sat_escalating_sedation",
+              "sat_intracranial_pressure",
+              "sat_myocardial_ischemia",
+              "sat_neuromuscular_blockers",
+              "sat_screen_pass_fail",
+              "sat_screen_performed",
+              "sat_sedative_infusion",
+              "sbt_agitation",
+              "sbt_delivery_pass_fail",
+              "sbt_delivery_performed",
+              "sbt_fail_reason",
+              "sbt_inadequate_oxygenation",
+              "sbt_intracranial_pressure",
+              "sbt_no_spontaneous_effort",
+              "sbt_screen_pass_fail",
+              "sbt_screen_performed",
+              "sbt_vasopressor_use",
+              "tof",
+              "vas",
+              "wat"
+            ],
+            "coverage_percent": 10.39
+          }
+        }
+      ],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'assessment_category': 8/77 mCIDE values present",
+          "details": {
+            "column": "assessment_category",
+            "found_values": 8,
+            "expected_values": 77,
+            "coverage_percent": 10.39,
+            "atomic_count": 8
+          }
+        }
+      ],
+      "metrics": {
+        "category_columns_checked": 1,
+        "coverage_by_column": {
+          "assessment_category": {
+            "expected_values": 77,
+            "found_values": 8,
+            "missing_values": [
+              "am_pac",
+              "ams",
+              "apgar",
+              "avpu",
+              "bps",
+              "braden_activity",
+              "braden_friction",
+              "braden_mobility",
+              "braden_moisture",
+              "braden_nutrition",
+              "braden_sensory",
+              "cam_inattention",
+              "cam_loc",
+              "cam_mental",
+              "cam_thinking",
+              "ciwa",
+              "cows",
+              "cpot_body",
+              "cpot_facial",
+              "cpot_intubated",
+              "cpot_muscle",
+              "cpot_total",
+              "cpot_vocalization",
+              "dvprs",
+              "icans",
+              "icsdc",
+              "icsdc_agitation",
+              "icsdc_disorientation",
+              "icsdc_hallucination",
+              "icsdc_inattention",
+              "icsdc_loc",
+              "icsdc_sleep",
+              "icsdc_speech",
+              "icsdc_symptoms",
+              "icsdc_total",
+              "ims",
+              "minds",
+              "morse_fall_scale",
+              "npi_l",
+              "npi_r",
+              "nvps",
+              "painad",
+              "pupil_reactive_l",
+              "pupil_reactive_r",
+              "pupil_size_l",
+              "pupil_size_r",
+              "sas",
+              "sat_delivery_pass_fail",
+              "sat_delivery_performed",
+              "sat_escalating_sedation",
+              "sat_intracranial_pressure",
+              "sat_myocardial_ischemia",
+              "sat_neuromuscular_blockers",
+              "sat_screen_pass_fail",
+              "sat_screen_performed",
+              "sat_sedative_infusion",
+              "sbt_agitation",
+              "sbt_delivery_pass_fail",
+              "sbt_delivery_performed",
+              "sbt_fail_reason",
+              "sbt_inadequate_oxygenation",
+              "sbt_intracranial_pressure",
+              "sbt_no_spontaneous_effort",
+              "sbt_screen_pass_fail",
+              "sbt_screen_performed",
+              "sbt_vasopressor_use",
+              "tof",
+              "vas",
+              "wat"
+            ],
+            "coverage_percent": 10.39
+          }
+        }
+      },
+      "atomic_total": 77,
+      "atomic_passed": 8
+    }
+  },
+  "relational": {},
+  "plausibility": {
+    "chronological_order": {
+      "check_type": "chronological_order",
+      "table_name": "patient_assessments",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No chronological order rules defined for this table",
+          "details": {}
+        }
+      ],
+      "metrics": {},
+      "atomic_total": 0,
+      "atomic_passed": 0
+    },
+    "numeric_range_plausibility": {
+      "check_type": "numeric_range_plausibility",
+      "table_name": "patient_assessments",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "All numeric values within plausible ranges (numerical_value)",
+          "details": {
+            "columns_checked": [
+              "numerical_value"
+            ]
+          }
+        }
+      ],
+      "metrics": {
+        "columns_checked": 1,
+        "out_of_range_summary": {
+          "numerical_value": {
+            "total_non_null": 108677,
+            "out_of_range": 0,
+            "out_of_range_percent": 0.0
+          }
+        }
+      },
+      "atomic_total": 66,
+      "atomic_passed": 66
+    },
+    "field_plausibility": {
+      "check_type": "field_plausibility",
+      "table_name": "patient_assessments",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No field plausibility rules defined for this table",
+          "details": {}
+        }
+      ],
+      "metrics": {},
+      "atomic_total": 0,
+      "atomic_passed": 0
+    },
+    "category_temporal_consistency": {
+      "check_type": "category_temporal_consistency",
+      "table_name": "patient_assessments",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "assessment_category: braden_total present in 8/8 years (2018-2025)",
+          "details": {
+            "column": "assessment_category",
+            "value": "braden_total",
+            "yearly_counts": {
+              "2018": 24,
+              "2019": 28,
+              "2020": 24,
+              "2021": 18,
+              "2022": 24,
+              "2023": 22,
+              "2024": 23,
+              "2025": 1
+            }
+          }
+        },
+        {
+          "message": "assessment_category: cam_total present in 8/8 years (2018-2025)",
+          "details": {
+            "column": "assessment_category",
+            "value": "cam_total",
+            "yearly_counts": {
+              "2018": 19,
+              "2019": 19,
+              "2020": 18,
+              "2021": 8,
+              "2022": 22,
+              "2023": 14,
+              "2024": 21,
+              "2025": 1
+            }
+          }
+        },
+        {
+          "message": "assessment_category: gcs_eye present in 8/8 years (2018-2025)",
+          "details": {
+            "column": "assessment_category",
+            "value": "gcs_eye",
+            "yearly_counts": {
+              "2018": 29,
+              "2019": 38,
+              "2020": 32,
+              "2021": 21,
+              "2022": 31,
+              "2023": 26,
+              "2024": 28,
+              "2025": 1
+            }
+          }
+        },
+        {
+          "message": "assessment_category: gcs_motor present in 8/8 years (2018-2025)",
+          "details": {
+            "column": "assessment_category",
+            "value": "gcs_motor",
+            "yearly_counts": {
+              "2018": 29,
+              "2019": 38,
+              "2020": 32,
+              "2021": 21,
+              "2022": 31,
+              "2023": 26,
+              "2024": 28,
+              "2025": 1
+            }
+          }
+        },
+        {
+          "message": "assessment_category: gcs_total present in 8/8 years (2018-2025)",
+          "details": {
+            "column": "assessment_category",
+            "value": "gcs_total",
+            "yearly_counts": {
+              "2018": 29,
+              "2019": 38,
+              "2020": 32,
+              "2021": 21,
+              "2022": 31,
+              "2023": 26,
+              "2024": 28,
+              "2025": 1
+            }
+          }
+        },
+        {
+          "message": "assessment_category: gcs_verbal present in 8/8 years (2018-2025)",
+          "details": {
+            "column": "assessment_category",
+            "value": "gcs_verbal",
+            "yearly_counts": {
+              "2018": 29,
+              "2019": 38,
+              "2020": 32,
+              "2021": 21,
+              "2022": 31,
+              "2023": 26,
+              "2024": 28,
+              "2025": 1
+            }
+          }
+        },
+        {
+          "message": "assessment_category: morse fall scale present in 8/8 years (2018-2025)",
+          "details": {
+            "column": "assessment_category",
+            "value": "morse fall scale",
+            "yearly_counts": {
+              "2018": 24,
+              "2019": 28,
+              "2020": 24,
+              "2021": 18,
+              "2022": 24,
+              "2023": 22,
+              "2024": 23,
+              "2025": 1
+            }
+          }
+        },
+        {
+          "message": "assessment_category: nrs present in 8/8 years (2018-2025)",
+          "details": {
+            "column": "assessment_category",
+            "value": "nrs",
+            "yearly_counts": {
+              "2018": 29,
+              "2019": 38,
+              "2020": 32,
+              "2021": 21,
+              "2022": 31,
+              "2023": 26,
+              "2024": 28,
+              "2025": 1
+            }
+          }
+        },
+        {
+          "message": "assessment_category: rass present in 8/8 years (2018-2025)",
+          "details": {
+            "column": "assessment_category",
+            "value": "rass",
+            "yearly_counts": {
+              "2018": 21,
+              "2019": 21,
+              "2020": 28,
+              "2021": 10,
+              "2022": 20,
+              "2023": 18,
+              "2024": 21,
+              "2025": 1
+            }
+          }
+        }
+      ],
+      "metrics": {
+        "category_columns_checked": 1,
+        "yearly_distributions": {
+          "assessment_category": {
+            "2018": {
+              "braden_total": 24,
+              "cam_total": 19,
+              "gcs_eye": 29,
+              "gcs_motor": 29,
+              "gcs_total": 29,
+              "gcs_verbal": 29,
+              "morse fall scale": 24,
+              "nrs": 29,
+              "rass": 21
+            },
+            "2019": {
+              "braden_total": 28,
+              "cam_total": 19,
+              "gcs_eye": 38,
+              "gcs_motor": 38,
+              "gcs_total": 38,
+              "gcs_verbal": 38,
+              "morse fall scale": 28,
+              "nrs": 38,
+              "rass": 21
+            },
+            "2020": {
+              "braden_total": 24,
+              "cam_total": 18,
+              "gcs_eye": 32,
+              "gcs_motor": 32,
+              "gcs_total": 32,
+              "gcs_verbal": 32,
+              "morse fall scale": 24,
+              "nrs": 32,
+              "rass": 28
+            },
+            "2021": {
+              "braden_total": 18,
+              "cam_total": 8,
+              "gcs_eye": 21,
+              "gcs_motor": 21,
+              "gcs_total": 21,
+              "gcs_verbal": 21,
+              "morse fall scale": 18,
+              "nrs": 21,
+              "rass": 10
+            },
+            "2022": {
+              "braden_total": 24,
+              "cam_total": 22,
+              "gcs_eye": 31,
+              "gcs_motor": 31,
+              "gcs_total": 31,
+              "gcs_verbal": 31,
+              "morse fall scale": 24,
+              "nrs": 31,
+              "rass": 20
+            },
+            "2023": {
+              "braden_total": 22,
+              "cam_total": 14,
+              "gcs_eye": 26,
+              "gcs_motor": 26,
+              "gcs_total": 26,
+              "gcs_verbal": 26,
+              "morse fall scale": 22,
+              "nrs": 26,
+              "rass": 18
+            },
+            "2024": {
+              "braden_total": 23,
+              "cam_total": 21,
+              "gcs_eye": 28,
+              "gcs_motor": 28,
+              "gcs_total": 28,
+              "gcs_verbal": 28,
+              "morse fall scale": 23,
+              "nrs": 28,
+              "rass": 21
+            },
+            "2025": {
+              "braden_total": 1,
+              "cam_total": 1,
+              "gcs_eye": 1,
+              "gcs_motor": 1,
+              "gcs_total": 1,
+              "gcs_verbal": 1,
+              "morse fall scale": 1,
+              "nrs": 1,
+              "rass": 1
+            }
+          }
+        },
+        "missing_in_years": {},
+        "monthly_trends": {
+          "assessment_category": [
+            {
+              "month_year": "2018-01",
+              "assessment_category": "braden_total",
+              "n": 3,
+              "avg": 16.916666666666668
+            },
+            {
+              "month_year": "2018-01",
+              "assessment_category": "cam_total",
+              "n": 3,
+              "avg": 0.0
+            },
+            {
+              "month_year": "2018-01",
+              "assessment_category": "gcs_eye",
+              "n": 4,
+              "avg": 1.94
+            },
+            {
+              "month_year": "2018-01",
+              "assessment_category": "gcs_motor",
+              "n": 4,
+              "avg": 3.3
+            },
+            {
+              "month_year": "2018-01",
+              "assessment_category": "gcs_total",
+              "n": 4,
+              "avg": 6.9
+            },
+            {
+              "month_year": "2018-01",
+              "assessment_category": "gcs_verbal",
+              "n": 4,
+              "avg": 1.66
+            },
+            {
+              "month_year": "2018-01",
+              "assessment_category": "morse fall scale",
+              "n": 3,
+              "avg": 38.75
+            },
+            {
+              "month_year": "2018-01",
+              "assessment_category": "nrs",
+              "n": 4,
+              "avg": 1.78125
+            },
+            {
+              "month_year": "2018-01",
+              "assessment_category": "rass",
+              "n": 4,
+              "avg": -1.8613861386138615
+            },
+            {
+              "month_year": "2018-02",
+              "assessment_category": "braden_total",
+              "n": 2,
+              "avg": 15.625
+            },
+            {
+              "month_year": "2018-02",
+              "assessment_category": "cam_total",
+              "n": 3,
+              "avg": 0.0
+            },
+            {
+              "month_year": "2018-02",
+              "assessment_category": "gcs_eye",
+              "n": 3,
+              "avg": 2.008888888888889
+            },
+            {
+              "month_year": "2018-02",
+              "assessment_category": "gcs_motor",
+              "n": 3,
+              "avg": 3.2311111111111113
+            },
+            {
+              "month_year": "2018-02",
+              "assessment_category": "gcs_total",
+              "n": 3,
+              "avg": 7.04
+            },
+            {
+              "month_year": "2018-02",
+              "assessment_category": "gcs_verbal",
+              "n": 3,
+              "avg": 1.8
+            },
+            {
+              "month_year": "2018-02",
+              "assessment_category": "morse fall scale",
+              "n": 2,
+              "avg": 42.75
+            },
+            {
+              "month_year": "2018-02",
+              "assessment_category": "nrs",
+              "n": 3,
+              "avg": 1.5625
+            },
+            {
+              "month_year": "2018-02",
+              "assessment_category": "rass",
+              "n": 3,
+              "avg": -1.8127659574468085
+            },
+            {
+              "month_year": "2018-03",
+              "assessment_category": "braden_total",
+              "n": 2,
+              "avg": 16.208333333333332
+            },
+            {
+              "month_year": "2018-03",
+              "assessment_category": "cam_total",
+              "n": 3,
+              "avg": 0.0
+            },
+            {
+              "month_year": "2018-03",
+              "assessment_category": "gcs_eye",
+              "n": 3,
+              "avg": 2.4561933534743203
+            },
+            {
+              "month_year": "2018-03",
+              "assessment_category": "gcs_motor",
+              "n": 3,
+              "avg": 3.882175226586103
+            },
+            {
+              "month_year": "2018-03",
+              "assessment_category": "gcs_total",
+              "n": 3,
+              "avg": 8.842900302114804
+            },
+            {
+              "month_year": "2018-03",
+              "assessment_category": "gcs_verbal",
+              "n": 3,
+              "avg": 2.504531722054381
+            },
+            {
+              "month_year": "2018-03",
+              "assessment_category": "morse fall scale",
+              "n": 2,
+              "avg": 39.5
+            },
+            {
+              "month_year": "2018-03",
+              "assessment_category": "nrs",
+              "n": 3,
+              "avg": 1.8823529411764706
+            },
+            {
+              "month_year": "2018-03",
+              "assessment_category": "rass",
+              "n": 2,
+              "avg": -1.3076923076923077
+            },
+            {
+              "month_year": "2018-04",
+              "assessment_category": "braden_total",
+              "n": 5,
+              "avg": 16.477272727272727
+            },
+            {
+              "month_year": "2018-04",
+              "assessment_category": "cam_total",
+              "n": 6,
+              "avg": 0.0
+            },
+            {
+              "month_year": "2018-04",
+              "assessment_category": "gcs_eye",
+              "n": 6,
+              "avg": 3.1424148606811144
+            },
+            {
+              "month_year": "2018-04",
+              "assessment_category": "gcs_motor",
+              "n": 6,
+              "avg": 4.777089783281734
+            },
+            {
+              "month_year": "2018-04",
+              "assessment_category": "gcs_total",
+              "n": 6,
+              "avg": 11.510835913312693
+            },
+            {
+              "month_year": "2018-04",
+              "assessment_category": "gcs_verbal",
+              "n": 6,
+              "avg": 3.5913312693498454
+            },
+            {
+              "month_year": "2018-04",
+              "assessment_category": "morse fall scale",
+              "n": 5,
+              "avg": 48.34090909090909
+            },
+            {
+              "month_year": "2018-04",
+              "assessment_category": "nrs",
+              "n": 6,
+              "avg": 2.2962962962962963
+            },
+            {
+              "month_year": "2018-04",
+              "assessment_category": "rass",
+              "n": 5,
+              "avg": -0.7075471698113207
+            },
+            {
+              "month_year": "2018-05",
+              "assessment_category": "braden_total",
+              "n": 2,
+              "avg": 16.393939393939394
+            },
+            {
+              "month_year": "2018-05",
+              "assessment_category": "cam_total",
+              "n": 2,
+              "avg": 0.0
+            },
+            {
+              "month_year": "2018-05",
+              "assessment_category": "gcs_eye",
+              "n": 3,
+              "avg": 3.7989690721649483
+            },
+            {
+              "month_year": "2018-05",
+              "assessment_category": "gcs_motor",
+              "n": 3,
+              "avg": 5.77319587628866
+            },
+            {
+              "month_year": "2018-05",
+              "assessment_category": "gcs_total",
+              "n": 3,
+              "avg": 14.24742268041237
+            },
+            {
+              "month_year": "2018-05",
+              "assessment_category": "gcs_verbal",
+              "n": 3,
+              "avg": 4.675257731958763
+            },
+            {
+              "month_year": "2018-05",
+              "assessment_category": "morse fall scale",
+              "n": 2,
+              "avg": 49.42424242424242
+            },
+            {
+              "month_year": "2018-05",
+              "assessment_category": "nrs",
+              "n": 3,
+              "avg": 2.6945812807881775
+            },
+            {
+              "month_year": "2018-05",
+              "assessment_category": "rass",
+              "n": 2,
+              "avg": 0.06806282722513089
+            },
+            {
+              "month_year": "2018-06",
+              "assessment_category": "braden_total",
+              "n": 3,
+              "avg": 16.11111111111111
+            },
+            {
+              "month_year": "2018-06",
+              "assessment_category": "cam_total",
+              "n": 2,
+              "avg": 0.016129032258064516
+            },
+            {
+              "month_year": "2018-06",
+              "assessment_category": "gcs_eye",
+              "n": 4,
+              "avg": 3.800604229607251
+            },
+            {
+              "month_year": "2018-06",
+              "assessment_category": "gcs_motor",
+              "n": 4,
+              "avg": 5.824773413897281
+            },
+            {
+              "month_year": "2018-06",
+              "assessment_category": "gcs_total",
+              "n": 4,
+              "avg": 14.308157099697885
+            },
+            {
+              "month_year": "2018-06",
+              "assessment_category": "gcs_verbal",
+              "n": 4,
+              "avg": 4.682779456193353
+            },
+            {
+              "month_year": "2018-06",
+              "assessment_category": "morse fall scale",
+              "n": 3,
+              "avg": 46.22222222222222
+            },
+            {
+              "month_year": "2018-06",
+              "assessment_category": "nrs",
+              "n": 4,
+              "avg": 2.364985163204748
+            },
+            {
+              "month_year": "2018-06",
+              "assessment_category": "rass",
+              "n": 4,
+              "avg": 0.10526315789473684
+            },
+            {
+              "month_year": "2018-07",
+              "assessment_category": "braden_total",
+              "n": 5,
+              "avg": 16.903846153846153
+            },
+            {
+              "month_year": "2018-07",
+              "assessment_category": "cam_total",
+              "n": 4,
+              "avg": 0.07352941176470588
+            },
+            {
+              "month_year": "2018-07",
+              "assessment_category": "gcs_eye",
+              "n": 5,
+              "avg": 3.0481099656357387
+            },
+            {
+              "month_year": "2018-07",
+              "assessment_category": "gcs_motor",
+              "n": 5,
+              "avg": 4.838487972508591
+            },
+            {
+              "month_year": "2018-07",
+              "assessment_category": "gcs_total",
+              "n": 5,
+              "avg": 11.484536082474227
+            },
+            {
+              "month_year": "2018-07",
+              "assessment_category": "gcs_verbal",
+              "n": 5,
+              "avg": 3.597938144329897
+            },
+            {
+              "month_year": "2018-07",
+              "assessment_category": "morse fall scale",
+              "n": 5,
+              "avg": 43.42307692307692
+            },
+            {
+              "month_year": "2018-07",
+              "assessment_category": "nrs",
+              "n": 5,
+              "avg": 2.107142857142857
+            },
+            {
+              "month_year": "2018-07",
+              "assessment_category": "rass",
+              "n": 5,
+              "avg": -0.6326530612244898
+            },
+            {
+              "month_year": "2018-08",
+              "assessment_category": "braden_total",
+              "n": 6,
+              "avg": 16.973333333333333
+            },
+            {
+              "month_year": "2018-08",
+              "assessment_category": "cam_total",
+              "n": 3,
+              "avg": 0.0
+            },
+            {
+              "month_year": "2018-08",
+              "assessment_category": "gcs_eye",
+              "n": 6,
+              "avg": 2.177242888402626
+            },
+            {
+              "month_year": "2018-08",
+              "assessment_category": "gcs_motor",
+              "n": 6,
+              "avg": 3.4682713347921226
+            },
+            {
+              "month_year": "2018-08",
+              "assessment_category": "gcs_total",
+              "n": 6,
+              "avg": 7.724288840262582
+            },
+            {
+              "month_year": "2018-08",
+              "assessment_category": "gcs_verbal",
+              "n": 6,
+              "avg": 2.078774617067834
+            },
+            {
+              "month_year": "2018-08",
+              "assessment_category": "morse fall scale",
+              "n": 6,
+              "avg": 45.92
+            },
+            {
+              "month_year": "2018-08",
+              "assessment_category": "nrs",
+              "n": 6,
+              "avg": 1.8287671232876712
+            },
+            {
+              "month_year": "2018-08",
+              "assessment_category": "rass",
+              "n": 4,
+              "avg": -1.2681388012618298
+            },
+            {
+              "month_year": "2018-09",
+              "assessment_category": "braden_total",
+              "n": 5,
+              "avg": 16.163265306122447
+            },
+            {
+              "month_year": "2018-09",
+              "assessment_category": "cam_total",
+              "n": 1,
+              "avg": null
+            },
+            {
+              "month_year": "2018-09",
+              "assessment_category": "gcs_eye",
+              "n": 5,
+              "avg": 2.120567375886525
+            },
+            {
+              "month_year": "2018-09",
+              "assessment_category": "gcs_motor",
+              "n": 5,
+              "avg": 3.3900709219858154
+            },
+            {
+              "month_year": "2018-09",
+              "assessment_category": "gcs_total",
+              "n": 5,
+              "avg": 7.5638297872340425
+            },
+            {
+              "month_year": "2018-09",
+              "assessment_category": "gcs_verbal",
+              "n": 5,
+              "avg": 2.0531914893617023
+            },
+            {
+              "month_year": "2018-09",
+              "assessment_category": "morse fall scale",
+              "n": 5,
+              "avg": 45.89795918367347
+            },
+            {
+              "month_year": "2018-09",
+              "assessment_category": "nrs",
+              "n": 5,
+              "avg": 1.970909090909091
+            },
+            {
+              "month_year": "2018-09",
+              "assessment_category": "rass",
+              "n": 3,
+              "avg": -1.716279069767442
+            },
+            {
+              "month_year": "2018-10",
+              "assessment_category": "braden_total",
+              "n": 2,
+              "avg": 15.818181818181818
+            },
+            {
+              "month_year": "2018-10",
+              "assessment_category": "gcs_eye",
+              "n": 2,
+              "avg": 1.5135135135135136
+            },
+            {
+              "month_year": "2018-10",
+              "assessment_category": "gcs_motor",
+              "n": 2,
+              "avg": 2.554054054054054
+            },
+            {
+              "month_year": "2018-10",
+              "assessment_category": "gcs_total",
+              "n": 2,
+              "avg": 5.0675675675675675
+            },
+            {
+              "month_year": "2018-10",
+              "assessment_category": "gcs_verbal",
+              "n": 2,
+              "avg": 1.0
+            },
+            {
+              "month_year": "2018-10",
+              "assessment_category": "morse fall scale",
+              "n": 2,
+              "avg": 41.18181818181818
+            },
+            {
+              "month_year": "2018-10",
+              "assessment_category": "nrs",
+              "n": 2,
+              "avg": 1.5942028985507246
+            },
+            {
+              "month_year": "2018-10",
+              "assessment_category": "rass",
+              "n": 1,
+              "avg": -2.230769230769231
+            },
+            {
+              "month_year": "2018-11",
+              "assessment_category": "braden_total",
+              "n": 3,
+              "avg": 16.0
+            },
+            {
+              "month_year": "2018-11",
+              "assessment_category": "cam_total",
+              "n": 4,
+              "avg": 0.0
+            },
+            {
+              "month_year": "2018-11",
+              "assessment_category": "gcs_eye",
+              "n": 5,
+              "avg": 3.8620689655172415
+            },
+            {
+              "month_year": "2018-11",
+              "assessment_category": "gcs_motor",
+              "n": 5,
+              "avg": 5.810344827586207
+            },
+            {
+              "month_year": "2018-11",
+              "assessment_category": "gcs_total",
+              "n": 5,
+              "avg": 14.275862068965518
+            },
+            {
+              "month_year": "2018-11",
+              "assessment_category": "gcs_verbal",
+              "n": 5,
+              "avg": 4.603448275862069
+            },
+            {
+              "month_year": "2018-11",
+              "assessment_category": "morse fall scale",
+              "n": 3,
+              "avg": 43.2
+            },
+            {
+              "month_year": "2018-11",
+              "assessment_category": "nrs",
+              "n": 5,
+              "avg": 2.1052631578947367
+            },
+            {
+              "month_year": "2018-11",
+              "assessment_category": "rass",
+              "n": 4,
+              "avg": 0.11538461538461539
+            },
+            {
+              "month_year": "2019-01",
+              "assessment_category": "braden_total",
+              "n": 4,
+              "avg": 17.333333333333332
+            },
+            {
+              "month_year": "2019-01",
+              "assessment_category": "cam_total",
+              "n": 2,
+              "avg": 0.5
+            },
+            {
+              "month_year": "2019-01",
+              "assessment_category": "gcs_eye",
+              "n": 5,
+              "avg": 3.392156862745098
+            },
+            {
+              "month_year": "2019-01",
+              "assessment_category": "gcs_motor",
+              "n": 5,
+              "avg": 5.254901960784314
+            },
+            {
+              "month_year": "2019-01",
+              "assessment_category": "gcs_total",
+              "n": 5,
+              "avg": 12.509803921568627
+            },
+            {
+              "month_year": "2019-01",
+              "assessment_category": "gcs_verbal",
+              "n": 5,
+              "avg": 3.8627450980392157
+            },
+            {
+              "month_year": "2019-01",
+              "assessment_category": "morse fall scale",
+              "n": 4,
+              "avg": 45.888888888888886
+            },
+            {
+              "month_year": "2019-01",
+              "assessment_category": "nrs",
+              "n": 5,
+              "avg": 2.3793103448275863
+            },
+            {
+              "month_year": "2019-01",
+              "assessment_category": "rass",
+              "n": 3,
+              "avg": 0.19047619047619047
+            },
+            {
+              "month_year": "2019-02",
+              "assessment_category": "braden_total",
+              "n": 1,
+              "avg": 18.0
+            },
+            {
+              "month_year": "2019-02",
+              "assessment_category": "cam_total",
+              "n": 1,
+              "avg": null
+            },
+            {
+              "month_year": "2019-02",
+              "assessment_category": "gcs_eye",
+              "n": 4,
+              "avg": 3.0606060606060606
+            },
+            {
+              "month_year": "2019-02",
+              "assessment_category": "gcs_motor",
+              "n": 4,
+              "avg": 4.5
+            },
+            {
+              "month_year": "2019-02",
+              "assessment_category": "gcs_total",
+              "n": 4,
+              "avg": 10.909090909090908
+            },
+            {
+              "month_year": "2019-02",
+              "assessment_category": "gcs_verbal",
+              "n": 4,
+              "avg": 3.3484848484848486
+            },
+            {
+              "month_year": "2019-02",
+              "assessment_category": "morse fall scale",
+              "n": 1,
+              "avg": 35.0
+            },
+            {
+              "month_year": "2019-02",
+              "assessment_category": "nrs",
+              "n": 4,
+              "avg": 2.235294117647059
+            },
+            {
+              "month_year": "2019-02",
+              "assessment_category": "rass",
+              "n": 1,
+              "avg": -1.9545454545454546
+            },
+            {
+              "month_year": "2019-03",
+              "assessment_category": "braden_total",
+              "n": 3,
+              "avg": 16.823529411764707
+            },
+            {
+              "month_year": "2019-03",
+              "assessment_category": "cam_total",
+              "n": 2,
+              "avg": 0.0
+            },
+            {
+              "month_year": "2019-03",
+              "assessment_category": "gcs_eye",
+              "n": 4,
+              "avg": 3.75
+            },
+            {
+              "month_year": "2019-03",
+              "assessment_category": "gcs_motor",
+              "n": 4,
+              "avg": 5.774038461538462
+            },
+            {
+              "month_year": "2019-03",
+              "assessment_category": "gcs_total",
+              "n": 4,
+              "avg": 14.192307692307692
+            },
+            {
+              "month_year": "2019-03",
+              "assessment_category": "gcs_verbal",
+              "n": 4,
+              "avg": 4.668269230769231
+            },
+            {
+              "month_year": "2019-03",
+              "assessment_category": "morse fall scale",
+              "n": 3,
+              "avg": 45.0
+            },
+            {
+              "month_year": "2019-03",
+              "assessment_category": "nrs",
+              "n": 4,
+              "avg": 2.691542288557214
+            },
+            {
+              "month_year": "2019-03",
+              "assessment_category": "rass",
+              "n": 2,
+              "avg": 0.14864864864864866
+            },
+            {
+              "month_year": "2019-04",
+              "assessment_category": "braden_total",
+              "n": 2,
+              "avg": 17.0
+            },
+            {
+              "month_year": "2019-04",
+              "assessment_category": "cam_total",
+              "n": 1,
+              "avg": 0.0
+            },
+            {
+              "month_year": "2019-04",
+              "assessment_category": "gcs_eye",
+              "n": 2,
+              "avg": 3.7560975609756095
+            },
+            {
+              "month_year": "2019-04",
+              "assessment_category": "gcs_motor",
+              "n": 2,
+              "avg": 5.853658536585366
+            },
+            {
+              "month_year": "2019-04",
+              "assessment_category": "gcs_total",
+              "n": 2,
+              "avg": 14.21951219512195
+            },
+            {
+              "month_year": "2019-04",
+              "assessment_category": "gcs_verbal",
+              "n": 2,
+              "avg": 4.609756097560975
+            },
+            {
+              "month_year": "2019-04",
+              "assessment_category": "morse fall scale",
+              "n": 2,
+              "avg": 51.285714285714285
+            },
+            {
+              "month_year": "2019-04",
+              "assessment_category": "nrs",
+              "n": 2,
+              "avg": 2.340909090909091
+            },
+            {
+              "month_year": "2019-04",
+              "assessment_category": "rass",
+              "n": 1,
+              "avg": 0.0
+            },
+            {
+              "month_year": "2019-05",
+              "assessment_category": "braden_total",
+              "n": 5,
+              "avg": 16.23076923076923
+            },
+            {
+              "month_year": "2019-05",
+              "assessment_category": "cam_total",
+              "n": 3,
+              "avg": 0.4603174603174603
+            },
+            {
+              "month_year": "2019-05",
+              "assessment_category": "gcs_eye",
+              "n": 6,
+              "avg": 3.307443365695793
+            },
+            {
+              "month_year": "2019-05",
+              "assessment_category": "gcs_motor",
+              "n": 6,
+              "avg": 5.085760517799352
+            },
+            {
+              "month_year": "2019-05",
+              "assessment_category": "gcs_total",
+              "n": 6,
+              "avg": 12.279935275080906
+            },
+            {
+              "month_year": "2019-05",
+              "assessment_category": "gcs_verbal",
+              "n": 6,
+              "avg": 3.8867313915857604
+            },
+            {
+              "month_year": "2019-05",
+              "assessment_category": "morse fall scale",
+              "n": 5,
+              "avg": 46.89423076923077
+            },
+            {
+              "month_year": "2019-05",
+              "assessment_category": "nrs",
+              "n": 6,
+              "avg": 2.152755905511811
+            },
+            {
+              "month_year": "2019-05",
+              "assessment_category": "rass",
+              "n": 5,
+              "avg": -0.46324786324786327
+            },
+            {
+              "month_year": "2019-06",
+              "assessment_category": "braden_total",
+              "n": 4,
+              "avg": 16.430555555555557
+            },
+            {
+              "month_year": "2019-06",
+              "assessment_category": "cam_total",
+              "n": 1,
+              "avg": 0.660377358490566
+            },
+            {
+              "month_year": "2019-06",
+              "assessment_category": "gcs_eye",
+              "n": 5,
+              "avg": 3.2494226327944573
+            },
+            {
+              "month_year": "2019-06",
+              "assessment_category": "gcs_motor",
+              "n": 5,
+              "avg": 5.069284064665127
+            },
+            {
+              "month_year": "2019-06",
+              "assessment_category": "gcs_total",
+              "n": 5,
+              "avg": 12.110854503464203
+            },
+            {
+              "month_year": "2019-06",
+              "assessment_category": "gcs_verbal",
+              "n": 5,
+              "avg": 3.792147806004619
+            },
+            {
+              "month_year": "2019-06",
+              "assessment_category": "morse fall scale",
+              "n": 4,
+              "avg": 42.75
+            },
+            {
+              "month_year": "2019-06",
+              "assessment_category": "nrs",
+              "n": 5,
+              "avg": 2.4414414414414414
+            },
+            {
+              "month_year": "2019-06",
+              "assessment_category": "rass",
+              "n": 4,
+              "avg": -0.4449648711943794
+            },
+            {
+              "month_year": "2019-07",
+              "assessment_category": "braden_total",
+              "n": 3,
+              "avg": 15.333333333333334
+            },
+            {
+              "month_year": "2019-07",
+              "assessment_category": "cam_total",
+              "n": 3,
+              "avg": 0.08571428571428572
+            },
+            {
+              "month_year": "2019-07",
+              "assessment_category": "gcs_eye",
+              "n": 6,
+              "avg": 3.2743682310469313
+            },
+            {
+              "month_year": "2019-07",
+              "assessment_category": "gcs_motor",
+              "n": 6,
+              "avg": 5.036101083032491
+            },
+            {
+              "month_year": "2019-07",
+              "assessment_category": "gcs_total",
+              "n": 6,
+              "avg": 12.191335740072201
+            },
+            {
+              "month_year": "2019-07",
+              "assessment_category": "gcs_verbal",
+              "n": 6,
+              "avg": 3.88086642599278
+            },
+            {
+              "month_year": "2019-07",
+              "assessment_category": "morse fall scale",
+              "n": 3,
+              "avg": 50.142857142857146
+            },
+            {
+              "month_year": "2019-07",
+              "assessment_category": "nrs",
+              "n": 6,
+              "avg": 2.325174825174825
+            },
+            {
+              "month_year": "2019-07",
+              "assessment_category": "rass",
+              "n": 3,
+              "avg": 0.13114754098360656
+            },
+            {
+              "month_year": "2019-08",
+              "assessment_category": "braden_total",
+              "n": 2,
+              "avg": 16.764705882352942
+            },
+            {
+              "month_year": "2019-08",
+              "assessment_category": "cam_total",
+              "n": 2,
+              "avg": 0.029850746268656716
+            },
+            {
+              "month_year": "2019-08",
+              "assessment_category": "gcs_eye",
+              "n": 3,
+              "avg": 3.7464788732394365
+            },
+            {
+              "month_year": "2019-08",
+              "assessment_category": "gcs_motor",
+              "n": 3,
+              "avg": 5.788732394366197
+            },
+            {
+              "month_year": "2019-08",
+              "assessment_category": "gcs_total",
+              "n": 3,
+              "avg": 14.150234741784038
+            },
+            {
+              "month_year": "2019-08",
+              "assessment_category": "gcs_verbal",
+              "n": 3,
+              "avg": 4.615023474178404
+            },
+            {
+              "month_year": "2019-08",
+              "assessment_category": "morse fall scale",
+              "n": 2,
+              "avg": 43.911764705882355
+            },
+            {
+              "month_year": "2019-08",
+              "assessment_category": "nrs",
+              "n": 3,
+              "avg": 2.585714285714286
+            },
+            {
+              "month_year": "2019-08",
+              "assessment_category": "rass",
+              "n": 2,
+              "avg": 0.19230769230769232
+            },
+            {
+              "month_year": "2019-09",
+              "assessment_category": "braden_total",
+              "n": 3,
+              "avg": 15.735849056603774
+            },
+            {
+              "month_year": "2019-09",
+              "assessment_category": "cam_total",
+              "n": 2,
+              "avg": 0.34065934065934067
+            },
+            {
+              "month_year": "2019-09",
+              "assessment_category": "gcs_eye",
+              "n": 3,
+              "avg": 3.4751552795031055
+            },
+            {
+              "month_year": "2019-09",
+              "assessment_category": "gcs_motor",
+              "n": 3,
+              "avg": 5.319875776397516
+            },
+            {
+              "month_year": "2019-09",
+              "assessment_category": "gcs_total",
+              "n": 3,
+              "avg": 12.953416149068323
+            },
+            {
+              "month_year": "2019-09",
+              "assessment_category": "gcs_verbal",
+              "n": 3,
+              "avg": 4.158385093167702
+            },
+            {
+              "month_year": "2019-09",
+              "assessment_category": "morse fall scale",
+              "n": 3,
+              "avg": 44.20754716981132
+            },
+            {
+              "month_year": "2019-09",
+              "assessment_category": "nrs",
+              "n": 3,
+              "avg": 2.4559748427672954
+            },
+            {
+              "month_year": "2019-09",
+              "assessment_category": "rass",
+              "n": 1,
+              "avg": 0.09448818897637795
+            },
+            {
+              "month_year": "2019-10",
+              "assessment_category": "braden_total",
+              "n": 2,
+              "avg": 16.363636363636363
+            },
+            {
+              "month_year": "2019-10",
+              "assessment_category": "cam_total",
+              "n": 1,
+              "avg": 0.6666666666666666
+            },
+            {
+              "month_year": "2019-10",
+              "assessment_category": "gcs_eye",
+              "n": 3,
+              "avg": 3.670886075949367
+            },
+            {
+              "month_year": "2019-10",
+              "assessment_category": "gcs_motor",
+              "n": 3,
+              "avg": 5.632911392405063
+            },
+            {
+              "month_year": "2019-10",
+              "assessment_category": "gcs_total",
+              "n": 3,
+              "avg": 13.759493670886076
+            },
+            {
+              "month_year": "2019-10",
+              "assessment_category": "gcs_verbal",
+              "n": 3,
+              "avg": 4.455696202531645
+            },
+            {
+              "month_year": "2019-10",
+              "assessment_category": "morse fall scale",
+              "n": 2,
+              "avg": 50.63636363636363
+            },
+            {
+              "month_year": "2019-10",
+              "assessment_category": "nrs",
+              "n": 3,
+              "avg": 2.025
+            },
+            {
+              "month_year": "2019-10",
+              "assessment_category": "rass",
+              "n": 1,
+              "avg": 0.05263157894736842
+            },
+            {
+              "month_year": "2019-11",
+              "assessment_category": "braden_total",
+              "n": 3,
+              "avg": 16.22222222222222
+            },
+            {
+              "month_year": "2019-11",
+              "assessment_category": "cam_total",
+              "n": 3,
+              "avg": 0.0
+            },
+            {
+              "month_year": "2019-11",
+              "assessment_category": "gcs_eye",
+              "n": 4,
+              "avg": 3.724
+            },
+            {
+              "month_year": "2019-11",
+              "assessment_category": "gcs_motor",
+              "n": 4,
+              "avg": 5.732
+            },
+            {
+              "month_year": "2019-11",
+              "assessment_category": "gcs_total",
+              "n": 4,
+              "avg": 14.088
+            },
+            {
+              "month_year": "2019-11",
+              "assessment_category": "gcs_verbal",
+              "n": 4,
+              "avg": 4.632
+            },
+            {
+              "month_year": "2019-11",
+              "assessment_category": "morse fall scale",
+              "n": 3,
+              "avg": 46.05555555555556
+            },
+            {
+              "month_year": "2019-11",
+              "assessment_category": "nrs",
+              "n": 4,
+              "avg": 2.491869918699187
+            },
+            {
+              "month_year": "2019-11",
+              "assessment_category": "rass",
+              "n": 3,
+              "avg": 0.12601626016260162
+            },
+            {
+              "month_year": "2019-12",
+              "assessment_category": "braden_total",
+              "n": 5,
+              "avg": 15.863013698630137
+            },
+            {
+              "month_year": "2019-12",
+              "assessment_category": "cam_total",
+              "n": 5,
+              "avg": 0.029411764705882353
+            },
+            {
+              "month_year": "2019-12",
+              "assessment_category": "gcs_eye",
+              "n": 6,
+              "avg": 3.7868525896414345
+            },
+            {
+              "month_year": "2019-12",
+              "assessment_category": "gcs_motor",
+              "n": 6,
+              "avg": 5.782868525896414
+            },
+            {
+              "month_year": "2019-12",
+              "assessment_category": "gcs_total",
+              "n": 6,
+              "avg": 14.262948207171315
+            },
+            {
+              "month_year": "2019-12",
+              "assessment_category": "gcs_verbal",
+              "n": 6,
+              "avg": 4.693227091633466
+            },
+            {
+              "month_year": "2019-12",
+              "assessment_category": "morse fall scale",
+              "n": 5,
+              "avg": 46.945205479452056
+            },
+            {
+              "month_year": "2019-12",
+              "assessment_category": "nrs",
+              "n": 6,
+              "avg": 2.496932515337423
+            },
+            {
+              "month_year": "2019-12",
+              "assessment_category": "rass",
+              "n": 3,
+              "avg": 0.06310679611650485
+            },
+            {
+              "month_year": "2020-01",
+              "assessment_category": "braden_total",
+              "n": 3,
+              "avg": 16.741935483870968
+            },
+            {
+              "month_year": "2020-01",
+              "assessment_category": "cam_total",
+              "n": 2,
+              "avg": 0.0
+            },
+            {
+              "month_year": "2020-01",
+              "assessment_category": "gcs_eye",
+              "n": 3,
+              "avg": 3.7983193277310923
+            },
+            {
+              "month_year": "2020-01",
+              "assessment_category": "gcs_motor",
+              "n": 3,
+              "avg": 5.8011204481792715
+            },
+            {
+              "month_year": "2020-01",
+              "assessment_category": "gcs_total",
+              "n": 3,
+              "avg": 14.30812324929972
+            },
+            {
+              "month_year": "2020-01",
+              "assessment_category": "gcs_verbal",
+              "n": 3,
+              "avg": 4.708683473389356
+            },
+            {
+              "month_year": "2020-01",
+              "assessment_category": "morse fall scale",
+              "n": 3,
+              "avg": 47.774193548387096
+            },
+            {
+              "month_year": "2020-01",
+              "assessment_category": "nrs",
+              "n": 3,
+              "avg": 2.4078947368421053
+            },
+            {
+              "month_year": "2020-01",
+              "assessment_category": "rass",
+              "n": 3,
+              "avg": 0.13279132791327913
+            },
+            {
+              "month_year": "2020-02",
+              "assessment_category": "braden_total",
+              "n": 2,
+              "avg": 16.48
+            },
+            {
+              "month_year": "2020-02",
+              "assessment_category": "cam_total",
+              "n": 1,
+              "avg": 0.0
+            },
+            {
+              "month_year": "2020-02",
+              "assessment_category": "gcs_eye",
+              "n": 3,
+              "avg": 3.801282051282051
+            },
+            {
+              "month_year": "2020-02",
+              "assessment_category": "gcs_motor",
+              "n": 3,
+              "avg": 5.769230769230769
+            },
+            {
+              "month_year": "2020-02",
+              "assessment_category": "gcs_total",
+              "n": 3,
+              "avg": 14.294871794871796
+            },
+            {
+              "month_year": "2020-02",
+              "assessment_category": "gcs_verbal",
+              "n": 3,
+              "avg": 4.7243589743589745
+            },
+            {
+              "month_year": "2020-02",
+              "assessment_category": "morse fall scale",
+              "n": 2,
+              "avg": 41.88
+            },
+            {
+              "month_year": "2020-02",
+              "assessment_category": "nrs",
+              "n": 3,
+              "avg": 2.55625
+            },
+            {
+              "month_year": "2020-02",
+              "assessment_category": "rass",
+              "n": 3,
+              "avg": 0.13245033112582782
+            },
+            {
+              "month_year": "2020-03",
+              "assessment_category": "cam_total",
+              "n": 1,
+              "avg": 0.6666666666666666
+            },
+            {
+              "month_year": "2020-03",
+              "assessment_category": "gcs_eye",
+              "n": 1,
+              "avg": 3.7857142857142856
+            },
+            {
+              "month_year": "2020-03",
+              "assessment_category": "gcs_motor",
+              "n": 1,
+              "avg": 5.678571428571429
+            },
+            {
+              "month_year": "2020-03",
+              "assessment_category": "gcs_total",
+              "n": 1,
+              "avg": 14.071428571428571
+            },
+            {
+              "month_year": "2020-03",
+              "assessment_category": "gcs_verbal",
+              "n": 1,
+              "avg": 4.607142857142857
+            },
+            {
+              "month_year": "2020-03",
+              "assessment_category": "nrs",
+              "n": 1,
+              "avg": 2.6153846153846154
+            },
+            {
+              "month_year": "2020-03",
+              "assessment_category": "rass",
+              "n": 1,
+              "avg": 0.37037037037037035
+            },
+            {
+              "month_year": "2020-04",
+              "assessment_category": "braden_total",
+              "n": 1,
+              "avg": 15.0
+            },
+            {
+              "month_year": "2020-04",
+              "assessment_category": "cam_total",
+              "n": 1,
+              "avg": 0.0
+            },
+            {
+              "month_year": "2020-04",
+              "assessment_category": "gcs_eye",
+              "n": 3,
+              "avg": 3.782122905027933
+            },
+            {
+              "month_year": "2020-04",
+              "assessment_category": "gcs_motor",
+              "n": 3,
+              "avg": 5.731843575418995
+            },
+            {
+              "month_year": "2020-04",
+              "assessment_category": "gcs_total",
+              "n": 3,
+              "avg": 14.240223463687151
+            },
+            {
+              "month_year": "2020-04",
+              "assessment_category": "gcs_verbal",
+              "n": 3,
+              "avg": 4.726256983240224
+            },
+            {
+              "month_year": "2020-04",
+              "assessment_category": "morse fall scale",
+              "n": 1,
+              "avg": 59.0
+            },
+            {
+              "month_year": "2020-04",
+              "assessment_category": "nrs",
+              "n": 3,
+              "avg": 2.715736040609137
+            },
+            {
+              "month_year": "2020-04",
+              "assessment_category": "rass",
+              "n": 2,
+              "avg": -0.016666666666666666
+            },
+            {
+              "month_year": "2020-05",
+              "assessment_category": "braden_total",
+              "n": 4,
+              "avg": 16.40909090909091
+            },
+            {
+              "month_year": "2020-05",
+              "assessment_category": "cam_total",
+              "n": 4,
+              "avg": 0.28
+            },
+            {
+              "month_year": "2020-05",
+              "assessment_category": "gcs_eye",
+              "n": 5,
+              "avg": 2.8208955223880596
+            },
+            {
+              "month_year": "2020-05",
+              "assessment_category": "gcs_motor",
+              "n": 5,
+              "avg": 4.395522388059701
+            },
+            {
+              "month_year": "2020-05",
+              "assessment_category": "gcs_total",
+              "n": 5,
+              "avg": 10.388059701492537
+            },
+            {
+              "month_year": "2020-05",
+              "assessment_category": "gcs_verbal",
+              "n": 5,
+              "avg": 3.171641791044776
+            },
+            {
+              "month_year": "2020-05",
+              "assessment_category": "morse fall scale",
+              "n": 4,
+              "avg": 42.77272727272727
+            },
+            {
+              "month_year": "2020-05",
+              "assessment_category": "nrs",
+              "n": 5,
+              "avg": 1.8905109489051095
+            },
+            {
+              "month_year": "2020-05",
+              "assessment_category": "rass",
+              "n": 4,
+              "avg": -1.0592592592592593
+            },
+            {
+              "month_year": "2020-06",
+              "assessment_category": "braden_total",
+              "n": 8,
+              "avg": 17.09090909090909
+            },
+            {
+              "month_year": "2020-06",
+              "assessment_category": "cam_total",
+              "n": 5,
+              "avg": 0.2808988764044944
+            },
+            {
+              "month_year": "2020-06",
+              "assessment_category": "gcs_eye",
+              "n": 8,
+              "avg": 3.71
+            },
+            {
+              "month_year": "2020-06",
+              "assessment_category": "gcs_motor",
+              "n": 8,
+              "avg": 5.68
+            },
+            {
+              "month_year": "2020-06",
+              "assessment_category": "gcs_total",
+              "n": 8,
+              "avg": 13.966666666666667
+            },
+            {
+              "month_year": "2020-06",
+              "assessment_category": "gcs_verbal",
+              "n": 8,
+              "avg": 4.576666666666667
+            },
+            {
+              "month_year": "2020-06",
+              "assessment_category": "morse fall scale",
+              "n": 8,
+              "avg": 41.56363636363636
+            },
+            {
+              "month_year": "2020-06",
+              "assessment_category": "nrs",
+              "n": 8,
+              "avg": 2.562913907284768
+            },
+            {
+              "month_year": "2020-06",
+              "assessment_category": "rass",
+              "n": 5,
+              "avg": -0.07142857142857142
+            },
+            {
+              "month_year": "2020-07",
+              "assessment_category": "braden_total",
+              "n": 4,
+              "avg": 16.975609756097562
+            },
+            {
+              "month_year": "2020-07",
+              "assessment_category": "cam_total",
+              "n": 1,
+              "avg": 0.6153846153846154
+            },
+            {
+              "month_year": "2020-07",
+              "assessment_category": "gcs_eye",
+              "n": 5,
+              "avg": 2.6940298507462686
+            },
+            {
+              "month_year": "2020-07",
+              "assessment_category": "gcs_motor",
+              "n": 5,
+              "avg": 4.2611940298507465
+            },
+            {
+              "month_year": "2020-07",
+              "assessment_category": "gcs_total",
+              "n": 5,
+              "avg": 9.89179104477612
+            },
+            {
+              "month_year": "2020-07",
+              "assessment_category": "gcs_verbal",
+              "n": 5,
+              "avg": 2.9365671641791047
+            },
+            {
+              "month_year": "2020-07",
+              "assessment_category": "morse fall scale",
+              "n": 4,
+              "avg": 40.8780487804878
+            },
+            {
+              "month_year": "2020-07",
+              "assessment_category": "nrs",
+              "n": 5,
+              "avg": 2.099236641221374
+            },
+            {
+              "month_year": "2020-07",
+              "assessment_category": "rass",
+              "n": 4,
+              "avg": -1.1581196581196582
+            },
+            {
+              "month_year": "2020-08",
+              "assessment_category": "braden_total",
+              "n": 1,
+              "avg": 16.53125
+            },
+            {
+              "month_year": "2020-08",
+              "assessment_category": "cam_total",
+              "n": 1,
+              "avg": 0.0
+            },
+            {
+              "month_year": "2020-08",
+              "assessment_category": "gcs_eye",
+              "n": 2,
+              "avg": 1.9189189189189189
+            },
+            {
+              "month_year": "2020-08",
+              "assessment_category": "gcs_motor",
+              "n": 2,
+              "avg": 3.1171171171171173
+            },
+            {
+              "month_year": "2020-08",
+              "assessment_category": "gcs_total",
+              "n": 2,
+              "avg": 6.675675675675675
+            },
+            {
+              "month_year": "2020-08",
+              "assessment_category": "gcs_verbal",
+              "n": 2,
+              "avg": 1.6396396396396395
+            },
+            {
+              "month_year": "2020-08",
+              "assessment_category": "morse fall scale",
+              "n": 1,
+              "avg": 47.46875
+            },
+            {
+              "month_year": "2020-08",
+              "assessment_category": "nrs",
+              "n": 2,
+              "avg": 1.6652360515021458
+            },
+            {
+              "month_year": "2020-08",
+              "assessment_category": "rass",
+              "n": 2,
+              "avg": -1.9162995594713657
+            },
+            {
+              "month_year": "2020-09",
+              "assessment_category": "braden_total",
+              "n": 3,
+              "avg": 16.1
+            },
+            {
+              "month_year": "2020-09",
+              "assessment_category": "cam_total",
+              "n": 2,
+              "avg": 0.0
+            },
+            {
+              "month_year": "2020-09",
+              "assessment_category": "gcs_eye",
+              "n": 3,
+              "avg": 3.2142857142857144
+            },
+            {
+              "month_year": "2020-09",
+              "assessment_category": "gcs_motor",
+              "n": 3,
+              "avg": 4.912087912087912
+            },
+            {
+              "month_year": "2020-09",
+              "assessment_category": "gcs_total",
+              "n": 3,
+              "avg": 11.840659340659341
+            },
+            {
+              "month_year": "2020-09",
+              "assessment_category": "gcs_verbal",
+              "n": 3,
+              "avg": 3.7142857142857144
+            },
+            {
+              "month_year": "2020-09",
+              "assessment_category": "morse fall scale",
+              "n": 3,
+              "avg": 42.333333333333336
+            },
+            {
+              "month_year": "2020-09",
+              "assessment_category": "nrs",
+              "n": 3,
+              "avg": 2.2937853107344632
+            },
+            {
+              "month_year": "2020-09",
+              "assessment_category": "rass",
+              "n": 3,
+              "avg": -0.46408839779005523
+            },
+            {
+              "month_year": "2020-10",
+              "assessment_category": "braden_total",
+              "n": 5,
+              "avg": 16.869565217391305
+            },
+            {
+              "month_year": "2020-10",
+              "assessment_category": "cam_total",
+              "n": 3,
+              "avg": 0.5121951219512195
+            },
+            {
+              "month_year": "2020-10",
+              "assessment_category": "gcs_eye",
+              "n": 5,
+              "avg": 2.831275720164609
+            },
+            {
+              "month_year": "2020-10",
+              "assessment_category": "gcs_motor",
+              "n": 5,
+              "avg": 4.42798353909465
+            },
+            {
+              "month_year": "2020-10",
+              "assessment_category": "gcs_total",
+              "n": 5,
+              "avg": 10.411522633744855
+            },
+            {
+              "month_year": "2020-10",
+              "assessment_category": "gcs_verbal",
+              "n": 5,
+              "avg": 3.152263374485597
+            },
+            {
+              "month_year": "2020-10",
+              "assessment_category": "morse fall scale",
+              "n": 5,
+              "avg": 42.02173913043478
+            },
+            {
+              "month_year": "2020-10",
+              "assessment_category": "nrs",
+              "n": 5,
+              "avg": 2.199170124481328
+            },
+            {
+              "month_year": "2020-10",
+              "assessment_category": "rass",
+              "n": 5,
+              "avg": -0.8097165991902834
+            },
+            {
+              "month_year": "2020-11",
+              "assessment_category": "braden_total",
+              "n": 4,
+              "avg": 15.868421052631579
+            },
+            {
+              "month_year": "2020-11",
+              "assessment_category": "cam_total",
+              "n": 3,
+              "avg": 0.09375
+            },
+            {
+              "month_year": "2020-11",
+              "assessment_category": "gcs_eye",
+              "n": 5,
+              "avg": 3.3976377952755907
+            },
+            {
+              "month_year": "2020-11",
+              "assessment_category": "gcs_motor",
+              "n": 5,
+              "avg": 5.173228346456693
+            },
+            {
+              "month_year": "2020-11",
+              "assessment_category": "gcs_total",
+              "n": 5,
+              "avg": 12.578740157480315
+            },
+            {
+              "month_year": "2020-11",
+              "assessment_category": "gcs_verbal",
+              "n": 5,
+              "avg": 4.0078740157480315
+            },
+            {
+              "month_year": "2020-11",
+              "assessment_category": "morse fall scale",
+              "n": 4,
+              "avg": 45.36842105263158
+            },
+            {
+              "month_year": "2020-11",
+              "assessment_category": "nrs",
+              "n": 5,
+              "avg": 2.154135338345865
+            },
+            {
+              "month_year": "2020-11",
+              "assessment_category": "rass",
+              "n": 5,
+              "avg": -0.3667953667953668
+            },
+            {
+              "month_year": "2020-12",
+              "assessment_category": "braden_total",
+              "n": 1,
+              "avg": 14.0
+            },
+            {
+              "month_year": "2020-12",
+              "assessment_category": "gcs_eye",
+              "n": 1,
+              "avg": 3.3333333333333335
+            },
+            {
+              "month_year": "2020-12",
+              "assessment_category": "gcs_motor",
+              "n": 1,
+              "avg": 5.666666666666667
+            },
+            {
+              "month_year": "2020-12",
+              "assessment_category": "gcs_total",
+              "n": 1,
+              "avg": 13.666666666666666
+            },
+            {
+              "month_year": "2020-12",
+              "assessment_category": "gcs_verbal",
+              "n": 1,
+              "avg": 4.666666666666667
+            },
+            {
+              "month_year": "2020-12",
+              "assessment_category": "morse fall scale",
+              "n": 1,
+              "avg": 20.0
+            },
+            {
+              "month_year": "2020-12",
+              "assessment_category": "nrs",
+              "n": 1,
+              "avg": 1.3333333333333333
+            },
+            {
+              "month_year": "2020-12",
+              "assessment_category": "rass",
+              "n": 1,
+              "avg": 0.25
+            },
+            {
+              "month_year": "2021-01",
+              "assessment_category": "braden_total",
+              "n": 1,
+              "avg": 16.6
+            },
+            {
+              "month_year": "2021-01",
+              "assessment_category": "cam_total",
+              "n": 2,
+              "avg": 0.0
+            },
+            {
+              "month_year": "2021-01",
+              "assessment_category": "gcs_eye",
+              "n": 2,
+              "avg": 3.7884615384615383
+            },
+            {
+              "month_year": "2021-01",
+              "assessment_category": "gcs_motor",
+              "n": 2,
+              "avg": 5.756410256410256
+            },
+            {
+              "month_year": "2021-01",
+              "assessment_category": "gcs_total",
+              "n": 2,
+              "avg": 14.224358974358974
+            },
+            {
+              "month_year": "2021-01",
+              "assessment_category": "gcs_verbal",
+              "n": 2,
+              "avg": 4.67948717948718
+            },
+            {
+              "month_year": "2021-01",
+              "assessment_category": "morse fall scale",
+              "n": 1,
+              "avg": 48.6
+            },
+            {
+              "month_year": "2021-01",
+              "assessment_category": "nrs",
+              "n": 2,
+              "avg": 2.432258064516129
+            },
+            {
+              "month_year": "2021-02",
+              "assessment_category": "braden_total",
+              "n": 5,
+              "avg": 16.537037037037038
+            },
+            {
+              "month_year": "2021-02",
+              "assessment_category": "cam_total",
+              "n": 3,
+              "avg": 0.0
+            },
+            {
+              "month_year": "2021-02",
+              "assessment_category": "gcs_eye",
+              "n": 6,
+              "avg": 3.3027989821882953
+            },
+            {
+              "month_year": "2021-02",
+              "assessment_category": "gcs_motor",
+              "n": 6,
+              "avg": 4.989821882951654
+            },
+            {
+              "month_year": "2021-02",
+              "assessment_category": "gcs_total",
+              "n": 6,
+              "avg": 12.101781170483461
+            },
+            {
+              "month_year": "2021-02",
+              "assessment_category": "gcs_verbal",
+              "n": 6,
+              "avg": 3.8091603053435112
+            },
+            {
+              "month_year": "2021-02",
+              "assessment_category": "morse fall scale",
+              "n": 5,
+              "avg": 46.96296296296296
+            },
+            {
+              "month_year": "2021-02",
+              "assessment_category": "nrs",
+              "n": 6,
+              "avg": 2.1275
+            },
+            {
+              "month_year": "2021-03",
+              "assessment_category": "braden_total",
+              "n": 2,
+              "avg": 16.790697674418606
+            },
+            {
+              "month_year": "2021-03",
+              "assessment_category": "cam_total",
+              "n": 1,
+              "avg": null
+            },
+            {
+              "month_year": "2021-03",
+              "assessment_category": "gcs_eye",
+              "n": 3,
+              "avg": 1.5414634146341464
+            },
+            {
+              "month_year": "2021-03",
+              "assessment_category": "gcs_motor",
+              "n": 3,
+              "avg": 2.5829268292682928
+            },
+            {
+              "month_year": "2021-03",
+              "assessment_category": "gcs_total",
+              "n": 3,
+              "avg": 5.124390243902439
+            },
+            {
+              "month_year": "2021-03",
+              "assessment_category": "gcs_verbal",
+              "n": 3,
+              "avg": 1.0
+            },
+            {
+              "month_year": "2021-03",
+              "assessment_category": "morse fall scale",
+              "n": 2,
+              "avg": 48.18604651162791
+            },
+            {
+              "month_year": "2021-03",
+              "assessment_category": "nrs",
+              "n": 3,
+              "avg": 1.429951690821256
+            },
+            {
+              "month_year": "2021-03",
+              "assessment_category": "rass",
+              "n": 1,
+              "avg": -2.302013422818792
+            },
+            {
+              "month_year": "2021-04",
+              "assessment_category": "braden_total",
+              "n": 2,
+              "avg": 16.78125
+            },
+            {
+              "month_year": "2021-04",
+              "assessment_category": "cam_total",
+              "n": 1,
+              "avg": null
+            },
+            {
+              "month_year": "2021-04",
+              "assessment_category": "gcs_eye",
+              "n": 2,
+              "avg": 1.6789473684210525
+            },
+            {
+              "month_year": "2021-04",
+              "assessment_category": "gcs_motor",
+              "n": 2,
+              "avg": 2.6894736842105265
+            },
+            {
+              "month_year": "2021-04",
+              "assessment_category": "gcs_total",
+              "n": 2,
+              "avg": 5.610526315789474
+            },
+            {
+              "month_year": "2021-04",
+              "assessment_category": "gcs_verbal",
+              "n": 2,
+              "avg": 1.2421052631578948
+            },
+            {
+              "month_year": "2021-04",
+              "assessment_category": "morse fall scale",
+              "n": 2,
+              "avg": 39.03125
+            },
+            {
+              "month_year": "2021-04",
+              "assessment_category": "nrs",
+              "n": 2,
+              "avg": 1.4793814432989691
+            },
+            {
+              "month_year": "2021-05",
+              "assessment_category": "braden_total",
+              "n": 3,
+              "avg": 16.105263157894736
+            },
+            {
+              "month_year": "2021-05",
+              "assessment_category": "cam_total",
+              "n": 1,
+              "avg": null
+            },
+            {
+              "month_year": "2021-05",
+              "assessment_category": "gcs_eye",
+              "n": 3,
+              "avg": 2.3990825688073394
+            },
+            {
+              "month_year": "2021-05",
+              "assessment_category": "gcs_motor",
+              "n": 3,
+              "avg": 3.793577981651376
+            },
+            {
+              "month_year": "2021-05",
+              "assessment_category": "gcs_total",
+              "n": 3,
+              "avg": 8.65137614678899
+            },
+            {
+              "month_year": "2021-05",
+              "assessment_category": "gcs_verbal",
+              "n": 3,
+              "avg": 2.458715596330275
+            },
+            {
+              "month_year": "2021-05",
+              "assessment_category": "morse fall scale",
+              "n": 3,
+              "avg": 46.578947368421055
+            },
+            {
+              "month_year": "2021-05",
+              "assessment_category": "nrs",
+              "n": 3,
+              "avg": 2.0235849056603774
+            },
+            {
+              "month_year": "2021-05",
+              "assessment_category": "rass",
+              "n": 2,
+              "avg": 0.12790697674418605
+            },
+            {
+              "month_year": "2021-06",
+              "assessment_category": "braden_total",
+              "n": 1,
+              "avg": 16.181818181818183
+            },
+            {
+              "month_year": "2021-06",
+              "assessment_category": "gcs_eye",
+              "n": 1,
+              "avg": 1.463235294117647
+            },
+            {
+              "month_year": "2021-06",
+              "assessment_category": "gcs_motor",
+              "n": 1,
+              "avg": 2.426470588235294
+            },
+            {
+              "month_year": "2021-06",
+              "assessment_category": "gcs_total",
+              "n": 1,
+              "avg": 4.889705882352941
+            },
+            {
+              "month_year": "2021-06",
+              "assessment_category": "gcs_verbal",
+              "n": 1,
+              "avg": 1.0
+            },
+            {
+              "month_year": "2021-06",
+              "assessment_category": "morse fall scale",
+              "n": 1,
+              "avg": 44.95454545454545
+            },
+            {
+              "month_year": "2021-06",
+              "assessment_category": "nrs",
+              "n": 1,
+              "avg": 1.3669064748201438
+            },
+            {
+              "month_year": "2021-07",
+              "assessment_category": "braden_total",
+              "n": 4,
+              "avg": 16.267605633802816
+            },
+            {
+              "month_year": "2021-07",
+              "assessment_category": "cam_total",
+              "n": 2,
+              "avg": 0.0
+            },
+            {
+              "month_year": "2021-07",
+              "assessment_category": "gcs_eye",
+              "n": 4,
+              "avg": 2.6587677725118484
+            },
+            {
+              "month_year": "2021-07",
+              "assessment_category": "gcs_motor",
+              "n": 4,
+              "avg": 4.18957345971564
+            },
+            {
+              "month_year": "2021-07",
+              "assessment_category": "gcs_total",
+              "n": 4,
+              "avg": 9.708530805687204
+            },
+            {
+              "month_year": "2021-07",
+              "assessment_category": "gcs_verbal",
+              "n": 4,
+              "avg": 2.860189573459716
+            },
+            {
+              "month_year": "2021-07",
+              "assessment_category": "morse fall scale",
+              "n": 4,
+              "avg": 46.352112676056336
+            },
+            {
+              "month_year": "2021-07",
+              "assessment_category": "nrs",
+              "n": 4,
+              "avg": 2.0985576923076925
+            },
+            {
+              "month_year": "2021-07",
+              "assessment_category": "rass",
+              "n": 2,
+              "avg": -0.8714285714285714
+            },
+            {
+              "month_year": "2021-08",
+              "assessment_category": "braden_total",
+              "n": 2,
+              "avg": 16.370967741935484
+            },
+            {
+              "month_year": "2021-08",
+              "assessment_category": "cam_total",
+              "n": 1,
+              "avg": 0.0
+            },
+            {
+              "month_year": "2021-08",
+              "assessment_category": "gcs_eye",
+              "n": 2,
+              "avg": 2.6807387862796834
+            },
+            {
+              "month_year": "2021-08",
+              "assessment_category": "gcs_motor",
+              "n": 2,
+              "avg": 4.192612137203167
+            },
+            {
+              "month_year": "2021-08",
+              "assessment_category": "gcs_total",
+              "n": 2,
+              "avg": 9.79419525065963
+            },
+            {
+              "month_year": "2021-08",
+              "assessment_category": "gcs_verbal",
+              "n": 2,
+              "avg": 2.920844327176781
+            },
+            {
+              "month_year": "2021-08",
+              "assessment_category": "morse fall scale",
+              "n": 2,
+              "avg": 44.58064516129032
+            },
+            {
+              "month_year": "2021-08",
+              "assessment_category": "nrs",
+              "n": 2,
+              "avg": 2.0
+            },
+            {
+              "month_year": "2021-09",
+              "assessment_category": "braden_total",
+              "n": 3,
+              "avg": 15.741935483870968
+            },
+            {
+              "month_year": "2021-09",
+              "assessment_category": "cam_total",
+              "n": 1,
+              "avg": 0.0
+            },
+            {
+              "month_year": "2021-09",
+              "assessment_category": "gcs_eye",
+              "n": 4,
+              "avg": 3.305
+            },
+            {
+              "month_year": "2021-09",
+              "assessment_category": "gcs_motor",
+              "n": 4,
+              "avg": 5.175
+            },
+            {
+              "month_year": "2021-09",
+              "assessment_category": "gcs_total",
+              "n": 4,
+              "avg": 12.42
+            },
+            {
+              "month_year": "2021-09",
+              "assessment_category": "gcs_verbal",
+              "n": 4,
+              "avg": 3.94
+            },
+            {
+              "month_year": "2021-09",
+              "assessment_category": "morse fall scale",
+              "n": 3,
+              "avg": 44.903225806451616
+            },
+            {
+              "month_year": "2021-09",
+              "assessment_category": "nrs",
+              "n": 4,
+              "avg": 2.306122448979592
+            },
+            {
+              "month_year": "2021-09",
+              "assessment_category": "rass",
+              "n": 1,
+              "avg": -2.5555555555555554
+            },
+            {
+              "month_year": "2021-10",
+              "assessment_category": "braden_total",
+              "n": 3,
+              "avg": 16.72222222222222
+            },
+            {
+              "month_year": "2021-10",
+              "assessment_category": "cam_total",
+              "n": 1,
+              "avg": null
+            },
+            {
+              "month_year": "2021-10",
+              "assessment_category": "gcs_eye",
+              "n": 3,
+              "avg": 2.6408668730650153
+            },
+            {
+              "month_year": "2021-10",
+              "assessment_category": "gcs_motor",
+              "n": 3,
+              "avg": 4.21671826625387
+            },
+            {
+              "month_year": "2021-10",
+              "assessment_category": "gcs_total",
+              "n": 3,
+              "avg": 9.743034055727554
+            },
+            {
+              "month_year": "2021-10",
+              "assessment_category": "gcs_verbal",
+              "n": 3,
+              "avg": 2.8854489164086687
+            },
+            {
+              "month_year": "2021-10",
+              "assessment_category": "morse fall scale",
+              "n": 3,
+              "avg": 44.7962962962963
+            },
+            {
+              "month_year": "2021-10",
+              "assessment_category": "nrs",
+              "n": 3,
+              "avg": 2.185410334346505
+            },
+            {
+              "month_year": "2021-10",
+              "assessment_category": "rass",
+              "n": 3,
+              "avg": -1.149390243902439
+            },
+            {
+              "month_year": "2021-11",
+              "assessment_category": "braden_total",
+              "n": 3,
+              "avg": 16.925
+            },
+            {
+              "month_year": "2021-11",
+              "assessment_category": "cam_total",
+              "n": 2,
+              "avg": 0.6666666666666666
+            },
+            {
+              "month_year": "2021-11",
+              "assessment_category": "gcs_eye",
+              "n": 3,
+              "avg": 2.049586776859504
+            },
+            {
+              "month_year": "2021-11",
+              "assessment_category": "gcs_motor",
+              "n": 3,
+              "avg": 3.3140495867768593
+            },
+            {
+              "month_year": "2021-11",
+              "assessment_category": "gcs_total",
+              "n": 3,
+              "avg": 7.309917355371901
+            },
+            {
+              "month_year": "2021-11",
+              "assessment_category": "gcs_verbal",
+              "n": 3,
+              "avg": 1.9462809917355373
+            },
+            {
+              "month_year": "2021-11",
+              "assessment_category": "morse fall scale",
+              "n": 3,
+              "avg": 42.2
+            },
+            {
+              "month_year": "2021-11",
+              "assessment_category": "nrs",
+              "n": 3,
+              "avg": 1.8388429752066116
+            },
+            {
+              "month_year": "2021-11",
+              "assessment_category": "rass",
+              "n": 2,
+              "avg": -1.7905982905982907
+            },
+            {
+              "month_year": "2021-12",
+              "assessment_category": "braden_total",
+              "n": 2,
+              "avg": 15.594594594594595
+            },
+            {
+              "month_year": "2021-12",
+              "assessment_category": "cam_total",
+              "n": 2,
+              "avg": 0.6666666666666666
+            },
+            {
+              "month_year": "2021-12",
+              "assessment_category": "gcs_eye",
+              "n": 2,
+              "avg": 1.7924528301886793
+            },
+            {
+              "month_year": "2021-12",
+              "assessment_category": "gcs_motor",
+              "n": 2,
+              "avg": 2.900943396226415
+            },
+            {
+              "month_year": "2021-12",
+              "assessment_category": "gcs_total",
+              "n": 2,
+              "avg": 6.099056603773585
+            },
+            {
+              "month_year": "2021-12",
+              "assessment_category": "gcs_verbal",
+              "n": 2,
+              "avg": 1.4056603773584906
+            },
+            {
+              "month_year": "2021-12",
+              "assessment_category": "morse fall scale",
+              "n": 2,
+              "avg": 40.91891891891892
+            },
+            {
+              "month_year": "2021-12",
+              "assessment_category": "nrs",
+              "n": 2,
+              "avg": 1.4428571428571428
+            },
+            {
+              "month_year": "2021-12",
+              "assessment_category": "rass",
+              "n": 2,
+              "avg": -2.085714285714286
+            },
+            {
+              "month_year": "2022-01",
+              "assessment_category": "braden_total",
+              "n": 4,
+              "avg": 16.073170731707318
+            },
+            {
+              "month_year": "2022-01",
+              "assessment_category": "cam_total",
+              "n": 4,
+              "avg": 0.2236842105263158
+            },
+            {
+              "month_year": "2022-01",
+              "assessment_category": "gcs_eye",
+              "n": 4,
+              "avg": 3.4681647940074907
+            },
+            {
+              "month_year": "2022-01",
+              "assessment_category": "gcs_motor",
+              "n": 4,
+              "avg": 5.355805243445693
+            },
+            {
+              "month_year": "2022-01",
+              "assessment_category": "gcs_total",
+              "n": 4,
+              "avg": 12.910112359550562
+            },
+            {
+              "month_year": "2022-01",
+              "assessment_category": "gcs_verbal",
+              "n": 4,
+              "avg": 4.086142322097379
+            },
+            {
+              "month_year": "2022-01",
+              "assessment_category": "morse fall scale",
+              "n": 4,
+              "avg": 47.63414634146341
+            },
+            {
+              "month_year": "2022-01",
+              "assessment_category": "nrs",
+              "n": 4,
+              "avg": 2.4356060606060606
+            },
+            {
+              "month_year": "2022-01",
+              "assessment_category": "rass",
+              "n": 2,
+              "avg": -0.7310924369747899
+            },
+            {
+              "month_year": "2022-02",
+              "assessment_category": "braden_total",
+              "n": 2,
+              "avg": 16.307692307692307
+            },
+            {
+              "month_year": "2022-02",
+              "assessment_category": "cam_total",
+              "n": 2,
+              "avg": 0.0
+            },
+            {
+              "month_year": "2022-02",
+              "assessment_category": "gcs_eye",
+              "n": 3,
+              "avg": 3.848
+            },
+            {
+              "month_year": "2022-02",
+              "assessment_category": "gcs_motor",
+              "n": 3,
+              "avg": 5.8
+            },
+            {
+              "month_year": "2022-02",
+              "assessment_category": "gcs_total",
+              "n": 3,
+              "avg": 14.328
+            },
+            {
+              "month_year": "2022-02",
+              "assessment_category": "gcs_verbal",
+              "n": 3,
+              "avg": 4.68
+            },
+            {
+              "month_year": "2022-02",
+              "assessment_category": "morse fall scale",
+              "n": 2,
+              "avg": 44.46153846153846
+            },
+            {
+              "month_year": "2022-02",
+              "assessment_category": "nrs",
+              "n": 3,
+              "avg": 2.848
+            },
+            {
+              "month_year": "2022-02",
+              "assessment_category": "rass",
+              "n": 1,
+              "avg": 0.14814814814814814
+            },
+            {
+              "month_year": "2022-03",
+              "assessment_category": "braden_total",
+              "n": 4,
+              "avg": 16.15
+            },
+            {
+              "month_year": "2022-03",
+              "assessment_category": "cam_total",
+              "n": 4,
+              "avg": 0.1794871794871795
+            },
+            {
+              "month_year": "2022-03",
+              "assessment_category": "gcs_eye",
+              "n": 5,
+              "avg": 3.7844827586206895
+            },
+            {
+              "month_year": "2022-03",
+              "assessment_category": "gcs_motor",
+              "n": 5,
+              "avg": 5.788793103448276
+            },
+            {
+              "month_year": "2022-03",
+              "assessment_category": "gcs_total",
+              "n": 5,
+              "avg": 14.288793103448276
+            },
+            {
+              "month_year": "2022-03",
+              "assessment_category": "gcs_verbal",
+              "n": 5,
+              "avg": 4.7155172413793105
+            },
+            {
+              "month_year": "2022-03",
+              "assessment_category": "morse fall scale",
+              "n": 4,
+              "avg": 42.7
+            },
+            {
+              "month_year": "2022-03",
+              "assessment_category": "nrs",
+              "n": 5,
+              "avg": 2.461206896551724
+            },
+            {
+              "month_year": "2022-03",
+              "assessment_category": "rass",
+              "n": 3,
+              "avg": 0.07142857142857142
+            },
+            {
+              "month_year": "2022-04",
+              "assessment_category": "braden_total",
+              "n": 5,
+              "avg": 16.91176470588235
+            },
+            {
+              "month_year": "2022-04",
+              "assessment_category": "cam_total",
+              "n": 5,
+              "avg": 0.5070422535211268
+            },
+            {
+              "month_year": "2022-04",
+              "assessment_category": "gcs_eye",
+              "n": 5,
+              "avg": 3.814814814814815
+            },
+            {
+              "month_year": "2022-04",
+              "assessment_category": "gcs_motor",
+              "n": 5,
+              "avg": 5.810185185185185
+            },
+            {
+              "month_year": "2022-04",
+              "assessment_category": "gcs_total",
+              "n": 5,
+              "avg": 14.305555555555555
+            },
+            {
+              "month_year": "2022-04",
+              "assessment_category": "gcs_verbal",
+              "n": 5,
+              "avg": 4.680555555555555
+            },
+            {
+              "month_year": "2022-04",
+              "assessment_category": "morse fall scale",
+              "n": 5,
+              "avg": 43.411764705882355
+            },
+            {
+              "month_year": "2022-04",
+              "assessment_category": "nrs",
+              "n": 5,
+              "avg": 2.6372549019607843
+            },
+            {
+              "month_year": "2022-04",
+              "assessment_category": "rass",
+              "n": 5,
+              "avg": 0.10426540284360189
+            },
+            {
+              "month_year": "2022-05",
+              "assessment_category": "braden_total",
+              "n": 1,
+              "avg": 18.0
+            },
+            {
+              "month_year": "2022-05",
+              "assessment_category": "cam_total",
+              "n": 1,
+              "avg": 0.0
+            },
+            {
+              "month_year": "2022-05",
+              "assessment_category": "gcs_eye",
+              "n": 2,
+              "avg": 3.8
+            },
+            {
+              "month_year": "2022-05",
+              "assessment_category": "gcs_motor",
+              "n": 2,
+              "avg": 5.688888888888889
+            },
+            {
+              "month_year": "2022-05",
+              "assessment_category": "gcs_total",
+              "n": 2,
+              "avg": 14.177777777777777
+            },
+            {
+              "month_year": "2022-05",
+              "assessment_category": "gcs_verbal",
+              "n": 2,
+              "avg": 4.688888888888889
+            },
+            {
+              "month_year": "2022-05",
+              "assessment_category": "morse fall scale",
+              "n": 1,
+              "avg": 46.142857142857146
+            },
+            {
+              "month_year": "2022-05",
+              "assessment_category": "nrs",
+              "n": 2,
+              "avg": 2.953488372093023
+            },
+            {
+              "month_year": "2022-05",
+              "assessment_category": "rass",
+              "n": 1,
+              "avg": 0.1111111111111111
+            },
+            {
+              "month_year": "2022-06",
+              "assessment_category": "braden_total",
+              "n": 2,
+              "avg": 16.477272727272727
+            },
+            {
+              "month_year": "2022-06",
+              "assessment_category": "cam_total",
+              "n": 2,
+              "avg": 0.0
+            },
+            {
+              "month_year": "2022-06",
+              "assessment_category": "gcs_eye",
+              "n": 3,
+              "avg": 3.0441176470588234
+            },
+            {
+              "month_year": "2022-06",
+              "assessment_category": "gcs_motor",
+              "n": 3,
+              "avg": 4.727941176470588
+            },
+            {
+              "month_year": "2022-06",
+              "assessment_category": "gcs_total",
+              "n": 3,
+              "avg": 11.297794117647058
+            },
+            {
+              "month_year": "2022-06",
+              "assessment_category": "gcs_verbal",
+              "n": 3,
+              "avg": 3.525735294117647
+            },
+            {
+              "month_year": "2022-06",
+              "assessment_category": "morse fall scale",
+              "n": 2,
+              "avg": 38.63636363636363
+            },
+            {
+              "month_year": "2022-06",
+              "assessment_category": "nrs",
+              "n": 3,
+              "avg": 2.2968197879858656
+            },
+            {
+              "month_year": "2022-06",
+              "assessment_category": "rass",
+              "n": 2,
+              "avg": -2.097826086956522
+            },
+            {
+              "month_year": "2022-07",
+              "assessment_category": "braden_total",
+              "n": 2,
+              "avg": 16.516129032258064
+            },
+            {
+              "month_year": "2022-07",
+              "assessment_category": "cam_total",
+              "n": 3,
+              "avg": 0.0
+            },
+            {
+              "month_year": "2022-07",
+              "assessment_category": "gcs_eye",
+              "n": 4,
+              "avg": 3.508403361344538
+            },
+            {
+              "month_year": "2022-07",
+              "assessment_category": "gcs_motor",
+              "n": 4,
+              "avg": 5.415966386554622
+            },
+            {
+              "month_year": "2022-07",
+              "assessment_category": "gcs_total",
+              "n": 4,
+              "avg": 13.159663865546218
+            },
+            {
+              "month_year": "2022-07",
+              "assessment_category": "gcs_verbal",
+              "n": 4,
+              "avg": 4.235294117647059
+            },
+            {
+              "month_year": "2022-07",
+              "assessment_category": "morse fall scale",
+              "n": 2,
+              "avg": 43.38709677419355
+            },
+            {
+              "month_year": "2022-07",
+              "assessment_category": "nrs",
+              "n": 4,
+              "avg": 2.184549356223176
+            },
+            {
+              "month_year": "2022-07",
+              "assessment_category": "rass",
+              "n": 3,
+              "avg": -1.574468085106383
+            },
+            {
+              "month_year": "2022-08",
+              "assessment_category": "braden_total",
+              "n": 1,
+              "avg": 15.5
+            },
+            {
+              "month_year": "2022-08",
+              "assessment_category": "cam_total",
+              "n": 1,
+              "avg": 0.0
+            },
+            {
+              "month_year": "2022-08",
+              "assessment_category": "gcs_eye",
+              "n": 1,
+              "avg": 3.8823529411764706
+            },
+            {
+              "month_year": "2022-08",
+              "assessment_category": "gcs_motor",
+              "n": 1,
+              "avg": 5.588235294117647
+            },
+            {
+              "month_year": "2022-08",
+              "assessment_category": "gcs_total",
+              "n": 1,
+              "avg": 14.058823529411764
+            },
+            {
+              "month_year": "2022-08",
+              "assessment_category": "gcs_verbal",
+              "n": 1,
+              "avg": 4.588235294117647
+            },
+            {
+              "month_year": "2022-08",
+              "assessment_category": "morse fall scale",
+              "n": 1,
+              "avg": 60.5
+            },
+            {
+              "month_year": "2022-08",
+              "assessment_category": "nrs",
+              "n": 1,
+              "avg": 2.388888888888889
+            },
+            {
+              "month_year": "2022-09",
+              "assessment_category": "braden_total",
+              "n": 3,
+              "avg": 17.55
+            },
+            {
+              "month_year": "2022-09",
+              "assessment_category": "cam_total",
+              "n": 2,
+              "avg": 0.5
+            },
+            {
+              "month_year": "2022-09",
+              "assessment_category": "gcs_eye",
+              "n": 5,
+              "avg": 1.934782608695652
+            },
+            {
+              "month_year": "2022-09",
+              "assessment_category": "gcs_motor",
+              "n": 5,
+              "avg": 3.1739130434782608
+            },
+            {
+              "month_year": "2022-09",
+              "assessment_category": "gcs_total",
+              "n": 5,
+              "avg": 6.706521739130435
+            },
+            {
+              "month_year": "2022-09",
+              "assessment_category": "gcs_verbal",
+              "n": 5,
+              "avg": 1.5978260869565217
+            },
+            {
+              "month_year": "2022-09",
+              "assessment_category": "morse fall scale",
+              "n": 3,
+              "avg": 43.05
+            },
+            {
+              "month_year": "2022-09",
+              "assessment_category": "nrs",
+              "n": 5,
+              "avg": 1.6296296296296295
+            },
+            {
+              "month_year": "2022-09",
+              "assessment_category": "rass",
+              "n": 3,
+              "avg": -2.24468085106383
+            },
+            {
+              "month_year": "2022-10",
+              "assessment_category": "braden_total",
+              "n": 3,
+              "avg": 17.833333333333332
+            },
+            {
+              "month_year": "2022-10",
+              "assessment_category": "cam_total",
+              "n": 1,
+              "avg": null
+            },
+            {
+              "month_year": "2022-10",
+              "assessment_category": "gcs_eye",
+              "n": 4,
+              "avg": 1.6320754716981132
+            },
+            {
+              "month_year": "2022-10",
+              "assessment_category": "gcs_motor",
+              "n": 4,
+              "avg": 2.5283018867924527
+            },
+            {
+              "month_year": "2022-10",
+              "assessment_category": "gcs_total",
+              "n": 4,
+              "avg": 5.268867924528302
+            },
+            {
+              "month_year": "2022-10",
+              "assessment_category": "gcs_verbal",
+              "n": 4,
+              "avg": 1.1084905660377358
+            },
+            {
+              "month_year": "2022-10",
+              "assessment_category": "morse fall scale",
+              "n": 3,
+              "avg": 35.0
+            },
+            {
+              "month_year": "2022-10",
+              "assessment_category": "nrs",
+              "n": 4,
+              "avg": 1.5330188679245282
+            },
+            {
+              "month_year": "2022-10",
+              "assessment_category": "rass",
+              "n": 2,
+              "avg": -2.326530612244898
+            },
+            {
+              "month_year": "2022-11",
+              "assessment_category": "braden_total",
+              "n": 3,
+              "avg": 15.772727272727273
+            },
+            {
+              "month_year": "2022-11",
+              "assessment_category": "cam_total",
+              "n": 4,
+              "avg": 0.0
+            },
+            {
+              "month_year": "2022-11",
+              "assessment_category": "gcs_eye",
+              "n": 5,
+              "avg": 2.4395604395604398
+            },
+            {
+              "month_year": "2022-11",
+              "assessment_category": "gcs_motor",
+              "n": 5,
+              "avg": 3.8461538461538463
+            },
+            {
+              "month_year": "2022-11",
+              "assessment_category": "gcs_total",
+              "n": 5,
+              "avg": 8.795604395604396
+            },
+            {
+              "month_year": "2022-11",
+              "assessment_category": "gcs_verbal",
+              "n": 5,
+              "avg": 2.50989010989011
+            },
+            {
+              "month_year": "2022-11",
+              "assessment_category": "morse fall scale",
+              "n": 3,
+              "avg": 46.31818181818182
+            },
+            {
+              "month_year": "2022-11",
+              "assessment_category": "nrs",
+              "n": 5,
+              "avg": 1.9399141630901287
+            },
+            {
+              "month_year": "2022-11",
+              "assessment_category": "rass",
+              "n": 3,
+              "avg": -1.1787709497206704
+            },
+            {
+              "month_year": "2022-12",
+              "assessment_category": "braden_total",
+              "n": 3,
+              "avg": 16.317073170731707
+            },
+            {
+              "month_year": "2022-12",
+              "assessment_category": "cam_total",
+              "n": 4,
+              "avg": 0.07894736842105263
+            },
+            {
+              "month_year": "2022-12",
+              "assessment_category": "gcs_eye",
+              "n": 5,
+              "avg": 3.176767676767677
+            },
+            {
+              "month_year": "2022-12",
+              "assessment_category": "gcs_motor",
+              "n": 5,
+              "avg": 4.936868686868687
+            },
+            {
+              "month_year": "2022-12",
+              "assessment_category": "gcs_total",
+              "n": 5,
+              "avg": 11.848484848484848
+            },
+            {
+              "month_year": "2022-12",
+              "assessment_category": "gcs_verbal",
+              "n": 5,
+              "avg": 3.734848484848485
+            },
+            {
+              "month_year": "2022-12",
+              "assessment_category": "morse fall scale",
+              "n": 3,
+              "avg": 49.21951219512195
+            },
+            {
+              "month_year": "2022-12",
+              "assessment_category": "nrs",
+              "n": 5,
+              "avg": 2.427480916030534
+            },
+            {
+              "month_year": "2022-12",
+              "assessment_category": "rass",
+              "n": 5,
+              "avg": -0.4699738903394256
+            },
+            {
+              "month_year": "2023-01",
+              "assessment_category": "braden_total",
+              "n": 2,
+              "avg": 16.75
+            },
+            {
+              "month_year": "2023-01",
+              "assessment_category": "cam_total",
+              "n": 2,
+              "avg": 0.0
+            },
+            {
+              "month_year": "2023-01",
+              "assessment_category": "gcs_eye",
+              "n": 2,
+              "avg": 2.314814814814815
+            },
+            {
+              "month_year": "2023-01",
+              "assessment_category": "gcs_motor",
+              "n": 2,
+              "avg": 3.7962962962962963
+            },
+            {
+              "month_year": "2023-01",
+              "assessment_category": "gcs_total",
+              "n": 2,
+              "avg": 8.574074074074074
+            },
+            {
+              "month_year": "2023-01",
+              "assessment_category": "gcs_verbal",
+              "n": 2,
+              "avg": 2.462962962962963
+            },
+            {
+              "month_year": "2023-01",
+              "assessment_category": "morse fall scale",
+              "n": 2,
+              "avg": 44.5
+            },
+            {
+              "month_year": "2023-01",
+              "assessment_category": "nrs",
+              "n": 2,
+              "avg": 2.4705882352941178
+            },
+            {
+              "month_year": "2023-01",
+              "assessment_category": "rass",
+              "n": 2,
+              "avg": -1.280701754385965
+            },
+            {
+              "month_year": "2023-02",
+              "assessment_category": "braden_total",
+              "n": 2,
+              "avg": 14.2
+            },
+            {
+              "month_year": "2023-02",
+              "assessment_category": "cam_total",
+              "n": 1,
+              "avg": 0.0
+            },
+            {
+              "month_year": "2023-02",
+              "assessment_category": "gcs_eye",
+              "n": 2,
+              "avg": 2.2333333333333334
+            },
+            {
+              "month_year": "2023-02",
+              "assessment_category": "gcs_motor",
+              "n": 2,
+              "avg": 3.8333333333333335
+            },
+            {
+              "month_year": "2023-02",
+              "assessment_category": "gcs_total",
+              "n": 2,
+              "avg": 8.433333333333334
+            },
+            {
+              "month_year": "2023-02",
+              "assessment_category": "gcs_verbal",
+              "n": 2,
+              "avg": 2.3666666666666667
+            },
+            {
+              "month_year": "2023-02",
+              "assessment_category": "morse fall scale",
+              "n": 2,
+              "avg": 41.8
+            },
+            {
+              "month_year": "2023-02",
+              "assessment_category": "nrs",
+              "n": 2,
+              "avg": 1.7037037037037037
+            },
+            {
+              "month_year": "2023-02",
+              "assessment_category": "rass",
+              "n": 2,
+              "avg": -1.4074074074074074
+            },
+            {
+              "month_year": "2023-03",
+              "assessment_category": "braden_total",
+              "n": 2,
+              "avg": 17.2
+            },
+            {
+              "month_year": "2023-03",
+              "assessment_category": "cam_total",
+              "n": 3,
+              "avg": 0.2127659574468085
+            },
+            {
+              "month_year": "2023-03",
+              "assessment_category": "gcs_eye",
+              "n": 3,
+              "avg": 3.4895104895104896
+            },
+            {
+              "month_year": "2023-03",
+              "assessment_category": "gcs_motor",
+              "n": 3,
+              "avg": 5.398601398601398
+            },
+            {
+              "month_year": "2023-03",
+              "assessment_category": "gcs_total",
+              "n": 3,
+              "avg": 13.146853146853147
+            },
+            {
+              "month_year": "2023-03",
+              "assessment_category": "gcs_verbal",
+              "n": 3,
+              "avg": 4.258741258741258
+            },
+            {
+              "month_year": "2023-03",
+              "assessment_category": "morse fall scale",
+              "n": 2,
+              "avg": 58.2
+            },
+            {
+              "month_year": "2023-03",
+              "assessment_category": "nrs",
+              "n": 3,
+              "avg": 2.616883116883117
+            },
+            {
+              "month_year": "2023-03",
+              "assessment_category": "rass",
+              "n": 3,
+              "avg": -0.3333333333333333
+            },
+            {
+              "month_year": "2023-04",
+              "assessment_category": "braden_total",
+              "n": 3,
+              "avg": 15.333333333333334
+            },
+            {
+              "month_year": "2023-04",
+              "assessment_category": "cam_total",
+              "n": 2,
+              "avg": 0.0
+            },
+            {
+              "month_year": "2023-04",
+              "assessment_category": "gcs_eye",
+              "n": 3,
+              "avg": 3.783333333333333
+            },
+            {
+              "month_year": "2023-04",
+              "assessment_category": "gcs_motor",
+              "n": 3,
+              "avg": 5.85
+            },
+            {
+              "month_year": "2023-04",
+              "assessment_category": "gcs_total",
+              "n": 3,
+              "avg": 14.383333333333333
+            },
+            {
+              "month_year": "2023-04",
+              "assessment_category": "gcs_verbal",
+              "n": 3,
+              "avg": 4.75
+            },
+            {
+              "month_year": "2023-04",
+              "assessment_category": "morse fall scale",
+              "n": 3,
+              "avg": 45.75
+            },
+            {
+              "month_year": "2023-04",
+              "assessment_category": "nrs",
+              "n": 3,
+              "avg": 1.9830508474576272
+            },
+            {
+              "month_year": "2023-04",
+              "assessment_category": "rass",
+              "n": 1,
+              "avg": 0.0
+            },
+            {
+              "month_year": "2023-05",
+              "assessment_category": "braden_total",
+              "n": 2,
+              "avg": 17.428571428571427
+            },
+            {
+              "month_year": "2023-05",
+              "assessment_category": "gcs_eye",
+              "n": 2,
+              "avg": 3.8947368421052633
+            },
+            {
+              "month_year": "2023-05",
+              "assessment_category": "gcs_motor",
+              "n": 2,
+              "avg": 5.868421052631579
+            },
+            {
+              "month_year": "2023-05",
+              "assessment_category": "gcs_total",
+              "n": 2,
+              "avg": 14.473684210526315
+            },
+            {
+              "month_year": "2023-05",
+              "assessment_category": "gcs_verbal",
+              "n": 2,
+              "avg": 4.7105263157894735
+            },
+            {
+              "month_year": "2023-05",
+              "assessment_category": "morse fall scale",
+              "n": 2,
+              "avg": 48.0
+            },
+            {
+              "month_year": "2023-05",
+              "assessment_category": "nrs",
+              "n": 2,
+              "avg": 2.0
+            },
+            {
+              "month_year": "2023-05",
+              "assessment_category": "rass",
+              "n": 1,
+              "avg": 0.375
+            },
+            {
+              "month_year": "2023-07",
+              "assessment_category": "braden_total",
+              "n": 5,
+              "avg": 15.954545454545455
+            },
+            {
+              "month_year": "2023-07",
+              "assessment_category": "cam_total",
+              "n": 1,
+              "avg": 0.0
+            },
+            {
+              "month_year": "2023-07",
+              "assessment_category": "gcs_eye",
+              "n": 6,
+              "avg": 3.6373626373626373
+            },
+            {
+              "month_year": "2023-07",
+              "assessment_category": "gcs_motor",
+              "n": 6,
+              "avg": 5.637362637362638
+            },
+            {
+              "month_year": "2023-07",
+              "assessment_category": "gcs_total",
+              "n": 6,
+              "avg": 13.758241758241759
+            },
+            {
+              "month_year": "2023-07",
+              "assessment_category": "gcs_verbal",
+              "n": 6,
+              "avg": 4.483516483516484
+            },
+            {
+              "month_year": "2023-07",
+              "assessment_category": "morse fall scale",
+              "n": 5,
+              "avg": 44.77272727272727
+            },
+            {
+              "month_year": "2023-07",
+              "assessment_category": "nrs",
+              "n": 6,
+              "avg": 2.6288659793814433
+            },
+            {
+              "month_year": "2023-07",
+              "assessment_category": "rass",
+              "n": 3,
+              "avg": 0.18181818181818182
+            },
+            {
+              "month_year": "2023-08",
+              "assessment_category": "braden_total",
+              "n": 3,
+              "avg": 16.785714285714285
+            },
+            {
+              "month_year": "2023-08",
+              "assessment_category": "cam_total",
+              "n": 1,
+              "avg": 0.75
+            },
+            {
+              "month_year": "2023-08",
+              "assessment_category": "gcs_eye",
+              "n": 4,
+              "avg": 2.6790123456790123
+            },
+            {
+              "month_year": "2023-08",
+              "assessment_category": "gcs_motor",
+              "n": 4,
+              "avg": 4.222222222222222
+            },
+            {
+              "month_year": "2023-08",
+              "assessment_category": "gcs_total",
+              "n": 4,
+              "avg": 9.938271604938272
+            },
+            {
+              "month_year": "2023-08",
+              "assessment_category": "gcs_verbal",
+              "n": 4,
+              "avg": 3.037037037037037
+            },
+            {
+              "month_year": "2023-08",
+              "assessment_category": "morse fall scale",
+              "n": 3,
+              "avg": 41.214285714285715
+            },
+            {
+              "month_year": "2023-08",
+              "assessment_category": "nrs",
+              "n": 3,
+              "avg": 1.8313253012048192
+            },
+            {
+              "month_year": "2023-08",
+              "assessment_category": "rass",
+              "n": 3,
+              "avg": -1.471698113207547
+            },
+            {
+              "month_year": "2023-09",
+              "assessment_category": "braden_total",
+              "n": 1,
+              "avg": 19.0
+            },
+            {
+              "month_year": "2023-09",
+              "assessment_category": "gcs_eye",
+              "n": 1,
+              "avg": 3.75
+            },
+            {
+              "month_year": "2023-09",
+              "assessment_category": "gcs_motor",
+              "n": 1,
+              "avg": 5.75
+            },
+            {
+              "month_year": "2023-09",
+              "assessment_category": "gcs_total",
+              "n": 1,
+              "avg": 14.125
+            },
+            {
+              "month_year": "2023-09",
+              "assessment_category": "gcs_verbal",
+              "n": 1,
+              "avg": 4.625
+            },
+            {
+              "month_year": "2023-09",
+              "assessment_category": "morse fall scale",
+              "n": 1,
+              "avg": 27.0
+            },
+            {
+              "month_year": "2023-09",
+              "assessment_category": "nrs",
+              "n": 1,
+              "avg": 1.5714285714285714
+            },
+            {
+              "month_year": "2023-10",
+              "assessment_category": "braden_total",
+              "n": 2,
+              "avg": 18.6
+            },
+            {
+              "month_year": "2023-10",
+              "assessment_category": "cam_total",
+              "n": 3,
+              "avg": 0.75
+            },
+            {
+              "month_year": "2023-10",
+              "assessment_category": "gcs_eye",
+              "n": 4,
+              "avg": 3.783132530120482
+            },
+            {
+              "month_year": "2023-10",
+              "assessment_category": "gcs_motor",
+              "n": 4,
+              "avg": 5.831325301204819
+            },
+            {
+              "month_year": "2023-10",
+              "assessment_category": "gcs_total",
+              "n": 4,
+              "avg": 14.301204819277109
+            },
+            {
+              "month_year": "2023-10",
+              "assessment_category": "gcs_verbal",
+              "n": 4,
+              "avg": 4.686746987951807
+            },
+            {
+              "month_year": "2023-10",
+              "assessment_category": "morse fall scale",
+              "n": 2,
+              "avg": 51.2
+            },
+            {
+              "month_year": "2023-10",
+              "assessment_category": "nrs",
+              "n": 4,
+              "avg": 2.4096385542168677
+            },
+            {
+              "month_year": "2023-10",
+              "assessment_category": "rass",
+              "n": 2,
+              "avg": -0.2
+            },
+            {
+              "month_year": "2023-11",
+              "assessment_category": "braden_total",
+              "n": 2,
+              "avg": 16.571428571428573
+            },
+            {
+              "month_year": "2023-11",
+              "assessment_category": "cam_total",
+              "n": 2,
+              "avg": 0.68
+            },
+            {
+              "month_year": "2023-11",
+              "assessment_category": "gcs_eye",
+              "n": 2,
+              "avg": 3.5584415584415585
+            },
+            {
+              "month_year": "2023-11",
+              "assessment_category": "gcs_motor",
+              "n": 2,
+              "avg": 5.402597402597403
+            },
+            {
+              "month_year": "2023-11",
+              "assessment_category": "gcs_total",
+              "n": 2,
+              "avg": 13.207792207792208
+            },
+            {
+              "month_year": "2023-11",
+              "assessment_category": "gcs_verbal",
+              "n": 2,
+              "avg": 4.246753246753247
+            },
+            {
+              "month_year": "2023-11",
+              "assessment_category": "morse fall scale",
+              "n": 2,
+              "avg": 39.285714285714285
+            },
+            {
+              "month_year": "2023-11",
+              "assessment_category": "nrs",
+              "n": 2,
+              "avg": 2.6144578313253013
+            },
+            {
+              "month_year": "2023-11",
+              "assessment_category": "rass",
+              "n": 1,
+              "avg": -3.0
+            },
+            {
+              "month_year": "2023-12",
+              "assessment_category": "braden_total",
+              "n": 1,
+              "avg": 18.25
+            },
+            {
+              "month_year": "2023-12",
+              "assessment_category": "gcs_eye",
+              "n": 1,
+              "avg": 1.4
+            },
+            {
+              "month_year": "2023-12",
+              "assessment_category": "gcs_motor",
+              "n": 1,
+              "avg": 2.05
+            },
+            {
+              "month_year": "2023-12",
+              "assessment_category": "gcs_total",
+              "n": 1,
+              "avg": 4.45
+            },
+            {
+              "month_year": "2023-12",
+              "assessment_category": "gcs_verbal",
+              "n": 1,
+              "avg": 1.0
+            },
+            {
+              "month_year": "2023-12",
+              "assessment_category": "morse fall scale",
+              "n": 1,
+              "avg": 43.5
+            },
+            {
+              "month_year": "2023-12",
+              "assessment_category": "nrs",
+              "n": 1,
+              "avg": 1.6
+            },
+            {
+              "month_year": "2023-12",
+              "assessment_category": "rass",
+              "n": 1,
+              "avg": -2.45
+            },
+            {
+              "month_year": "2024-01",
+              "assessment_category": "braden_total",
+              "n": 1,
+              "avg": 18.0
+            },
+            {
+              "month_year": "2024-01",
+              "assessment_category": "cam_total",
+              "n": 1,
+              "avg": 0.0
+            },
+            {
+              "month_year": "2024-01",
+              "assessment_category": "gcs_eye",
+              "n": 1,
+              "avg": 3.8205128205128207
+            },
+            {
+              "month_year": "2024-01",
+              "assessment_category": "gcs_motor",
+              "n": 1,
+              "avg": 5.743589743589744
+            },
+            {
+              "month_year": "2024-01",
+              "assessment_category": "gcs_total",
+              "n": 1,
+              "avg": 14.282051282051283
+            },
+            {
+              "month_year": "2024-01",
+              "assessment_category": "gcs_verbal",
+              "n": 1,
+              "avg": 4.717948717948718
+            },
+            {
+              "month_year": "2024-01",
+              "assessment_category": "morse fall scale",
+              "n": 1,
+              "avg": 48.285714285714285
+            },
+            {
+              "month_year": "2024-01",
+              "assessment_category": "nrs",
+              "n": 1,
+              "avg": 2.022222222222222
+            },
+            {
+              "month_year": "2024-01",
+              "assessment_category": "rass",
+              "n": 1,
+              "avg": 0.24390243902439024
+            },
+            {
+              "month_year": "2024-02",
+              "assessment_category": "braden_total",
+              "n": 3,
+              "avg": 16.575342465753426
+            },
+            {
+              "month_year": "2024-02",
+              "assessment_category": "cam_total",
+              "n": 3,
+              "avg": 0.0
+            },
+            {
+              "month_year": "2024-02",
+              "assessment_category": "gcs_eye",
+              "n": 3,
+              "avg": 3.8027842227378192
+            },
+            {
+              "month_year": "2024-02",
+              "assessment_category": "gcs_motor",
+              "n": 3,
+              "avg": 5.832946635730859
+            },
+            {
+              "month_year": "2024-02",
+              "assessment_category": "gcs_total",
+              "n": 3,
+              "avg": 14.324825986078887
+            },
+            {
+              "month_year": "2024-02",
+              "assessment_category": "gcs_verbal",
+              "n": 3,
+              "avg": 4.689095127610209
+            },
+            {
+              "month_year": "2024-02",
+              "assessment_category": "morse fall scale",
+              "n": 3,
+              "avg": 43.45205479452055
+            },
+            {
+              "month_year": "2024-02",
+              "assessment_category": "nrs",
+              "n": 3,
+              "avg": 2.5069444444444446
+            },
+            {
+              "month_year": "2024-02",
+              "assessment_category": "rass",
+              "n": 2,
+              "avg": 0.05813953488372093
+            },
+            {
+              "month_year": "2024-03",
+              "assessment_category": "braden_total",
+              "n": 5,
+              "avg": 16.405405405405407
+            },
+            {
+              "month_year": "2024-03",
+              "assessment_category": "cam_total",
+              "n": 4,
+              "avg": 0.0
+            },
+            {
+              "month_year": "2024-03",
+              "assessment_category": "gcs_eye",
+              "n": 5,
+              "avg": 3.8159645232815964
+            },
+            {
+              "month_year": "2024-03",
+              "assessment_category": "gcs_motor",
+              "n": 5,
+              "avg": 5.815964523281597
+            },
+            {
+              "month_year": "2024-03",
+              "assessment_category": "gcs_total",
+              "n": 5,
+              "avg": 14.292682926829269
+            },
+            {
+              "month_year": "2024-03",
+              "assessment_category": "gcs_verbal",
+              "n": 5,
+              "avg": 4.660753880266076
+            },
+            {
+              "month_year": "2024-03",
+              "assessment_category": "morse fall scale",
+              "n": 5,
+              "avg": 45.486486486486484
+            },
+            {
+              "month_year": "2024-03",
+              "assessment_category": "nrs",
+              "n": 5,
+              "avg": 2.3211206896551726
+            },
+            {
+              "month_year": "2024-03",
+              "assessment_category": "rass",
+              "n": 4,
+              "avg": 0.125
+            },
+            {
+              "month_year": "2024-04",
+              "assessment_category": "braden_total",
+              "n": 3,
+              "avg": 16.07936507936508
+            },
+            {
+              "month_year": "2024-04",
+              "assessment_category": "cam_total",
+              "n": 3,
+              "avg": 0.23809523809523808
+            },
+            {
+              "month_year": "2024-04",
+              "assessment_category": "gcs_eye",
+              "n": 4,
+              "avg": 3.8209606986899565
+            },
+            {
+              "month_year": "2024-04",
+              "assessment_category": "gcs_motor",
+              "n": 4,
+              "avg": 5.764192139737991
+            },
+            {
+              "month_year": "2024-04",
+              "assessment_category": "gcs_total",
+              "n": 4,
+              "avg": 14.279475982532752
+            },
+            {
+              "month_year": "2024-04",
+              "assessment_category": "gcs_verbal",
+              "n": 4,
+              "avg": 4.6943231441048034
+            },
+            {
+              "month_year": "2024-04",
+              "assessment_category": "morse fall scale",
+              "n": 3,
+              "avg": 42.857142857142854
+            },
+            {
+              "month_year": "2024-04",
+              "assessment_category": "nrs",
+              "n": 4,
+              "avg": 2.3640256959314776
+            },
+            {
+              "month_year": "2024-04",
+              "assessment_category": "rass",
+              "n": 1,
+              "avg": 0.15873015873015872
+            },
+            {
+              "month_year": "2024-05",
+              "assessment_category": "braden_total",
+              "n": 6,
+              "avg": 16.45
+            },
+            {
+              "month_year": "2024-05",
+              "assessment_category": "cam_total",
+              "n": 4,
+              "avg": 0.4166666666666667
+            },
+            {
+              "month_year": "2024-05",
+              "assessment_category": "gcs_eye",
+              "n": 6,
+              "avg": 3.7321937321937324
+            },
+            {
+              "month_year": "2024-05",
+              "assessment_category": "gcs_motor",
+              "n": 6,
+              "avg": 5.703703703703703
+            },
+            {
+              "month_year": "2024-05",
+              "assessment_category": "gcs_total",
+              "n": 6,
+              "avg": 14.031339031339032
+            },
+            {
+              "month_year": "2024-05",
+              "assessment_category": "gcs_verbal",
+              "n": 6,
+              "avg": 4.595441595441596
+            },
+            {
+              "month_year": "2024-05",
+              "assessment_category": "morse fall scale",
+              "n": 6,
+              "avg": 41.46666666666667
+            },
+            {
+              "month_year": "2024-05",
+              "assessment_category": "nrs",
+              "n": 6,
+              "avg": 2.5880597014925373
+            },
+            {
+              "month_year": "2024-05",
+              "assessment_category": "rass",
+              "n": 3,
+              "avg": -0.10476190476190476
+            },
+            {
+              "month_year": "2024-06",
+              "assessment_category": "braden_total",
+              "n": 3,
+              "avg": 16.083333333333332
+            },
+            {
+              "month_year": "2024-06",
+              "assessment_category": "cam_total",
+              "n": 3,
+              "avg": 0.0
+            },
+            {
+              "month_year": "2024-06",
+              "assessment_category": "gcs_eye",
+              "n": 3,
+              "avg": 3.635135135135135
+            },
+            {
+              "month_year": "2024-06",
+              "assessment_category": "gcs_motor",
+              "n": 3,
+              "avg": 5.594594594594595
+            },
+            {
+              "month_year": "2024-06",
+              "assessment_category": "gcs_total",
+              "n": 3,
+              "avg": 13.64864864864865
+            },
+            {
+              "month_year": "2024-06",
+              "assessment_category": "gcs_verbal",
+              "n": 3,
+              "avg": 4.418918918918919
+            },
+            {
+              "month_year": "2024-06",
+              "assessment_category": "morse fall scale",
+              "n": 3,
+              "avg": 45.5
+            },
+            {
+              "month_year": "2024-06",
+              "assessment_category": "nrs",
+              "n": 3,
+              "avg": 2.6153846153846154
+            },
+            {
+              "month_year": "2024-06",
+              "assessment_category": "rass",
+              "n": 3,
+              "avg": -0.04285714285714286
+            },
+            {
+              "month_year": "2024-07",
+              "assessment_category": "braden_total",
+              "n": 4,
+              "avg": 14.458333333333334
+            },
+            {
+              "month_year": "2024-07",
+              "assessment_category": "cam_total",
+              "n": 5,
+              "avg": 0.4
+            },
+            {
+              "month_year": "2024-07",
+              "assessment_category": "gcs_eye",
+              "n": 5,
+              "avg": 1.6538461538461537
+            },
+            {
+              "month_year": "2024-07",
+              "assessment_category": "gcs_motor",
+              "n": 5,
+              "avg": 2.8333333333333335
+            },
+            {
+              "month_year": "2024-07",
+              "assessment_category": "gcs_total",
+              "n": 5,
+              "avg": 5.82051282051282
+            },
+            {
+              "month_year": "2024-07",
+              "assessment_category": "gcs_verbal",
+              "n": 5,
+              "avg": 1.3333333333333333
+            },
+            {
+              "month_year": "2024-07",
+              "assessment_category": "morse fall scale",
+              "n": 4,
+              "avg": 45.0
+            },
+            {
+              "month_year": "2024-07",
+              "assessment_category": "nrs",
+              "n": 5,
+              "avg": 1.5476190476190477
+            },
+            {
+              "month_year": "2024-07",
+              "assessment_category": "rass",
+              "n": 5,
+              "avg": -2.0129032258064514
+            },
+            {
+              "month_year": "2024-08",
+              "assessment_category": "braden_total",
+              "n": 3,
+              "avg": 17.142857142857142
+            },
+            {
+              "month_year": "2024-08",
+              "assessment_category": "cam_total",
+              "n": 2,
+              "avg": 0.0
+            },
+            {
+              "month_year": "2024-08",
+              "assessment_category": "gcs_eye",
+              "n": 3,
+              "avg": 3.7534246575342465
+            },
+            {
+              "month_year": "2024-08",
+              "assessment_category": "gcs_motor",
+              "n": 3,
+              "avg": 5.821917808219178
+            },
+            {
+              "month_year": "2024-08",
+              "assessment_category": "gcs_total",
+              "n": 3,
+              "avg": 14.273972602739725
+            },
+            {
+              "month_year": "2024-08",
+              "assessment_category": "gcs_verbal",
+              "n": 3,
+              "avg": 4.698630136986301
+            },
+            {
+              "month_year": "2024-08",
+              "assessment_category": "morse fall scale",
+              "n": 3,
+              "avg": 39.214285714285715
+            },
+            {
+              "month_year": "2024-08",
+              "assessment_category": "nrs",
+              "n": 3,
+              "avg": 2.5844155844155843
+            },
+            {
+              "month_year": "2024-08",
+              "assessment_category": "rass",
+              "n": 2,
+              "avg": 0.08196721311475409
+            },
+            {
+              "month_year": "2024-09",
+              "assessment_category": "braden_total",
+              "n": 2,
+              "avg": 16.294117647058822
+            },
+            {
+              "month_year": "2024-09",
+              "assessment_category": "cam_total",
+              "n": 2,
+              "avg": 0.0
+            },
+            {
+              "month_year": "2024-09",
+              "assessment_category": "gcs_eye",
+              "n": 2,
+              "avg": 2.225806451612903
+            },
+            {
+              "month_year": "2024-09",
+              "assessment_category": "gcs_motor",
+              "n": 2,
+              "avg": 3.4838709677419355
+            },
+            {
+              "month_year": "2024-09",
+              "assessment_category": "gcs_total",
+              "n": 2,
+              "avg": 7.78494623655914
+            },
+            {
+              "month_year": "2024-09",
+              "assessment_category": "gcs_verbal",
+              "n": 2,
+              "avg": 2.075268817204301
+            },
+            {
+              "month_year": "2024-09",
+              "assessment_category": "morse fall scale",
+              "n": 2,
+              "avg": 49.411764705882355
+            },
+            {
+              "month_year": "2024-09",
+              "assessment_category": "nrs",
+              "n": 2,
+              "avg": 1.7717391304347827
+            },
+            {
+              "month_year": "2024-09",
+              "assessment_category": "rass",
+              "n": 2,
+              "avg": -1.608695652173913
+            },
+            {
+              "month_year": "2024-10",
+              "assessment_category": "braden_total",
+              "n": 1,
+              "avg": 16.666666666666668
+            },
+            {
+              "month_year": "2024-10",
+              "assessment_category": "cam_total",
+              "n": 2,
+              "avg": 0.0
+            },
+            {
+              "month_year": "2024-10",
+              "assessment_category": "gcs_eye",
+              "n": 3,
+              "avg": 3.5395348837209304
+            },
+            {
+              "month_year": "2024-10",
+              "assessment_category": "gcs_motor",
+              "n": 3,
+              "avg": 5.469767441860465
+            },
+            {
+              "month_year": "2024-10",
+              "assessment_category": "gcs_total",
+              "n": 3,
+              "avg": 13.26046511627907
+            },
+            {
+              "month_year": "2024-10",
+              "assessment_category": "gcs_verbal",
+              "n": 3,
+              "avg": 4.251162790697674
+            },
+            {
+              "month_year": "2024-10",
+              "assessment_category": "morse fall scale",
+              "n": 1,
+              "avg": 42.666666666666664
+            },
+            {
+              "month_year": "2024-10",
+              "assessment_category": "nrs",
+              "n": 3,
+              "avg": 2.352112676056338
+            },
+            {
+              "month_year": "2024-10",
+              "assessment_category": "rass",
+              "n": 3,
+              "avg": -0.09259259259259259
+            },
+            {
+              "month_year": "2024-11",
+              "assessment_category": "braden_total",
+              "n": 3,
+              "avg": 16.52173913043478
+            },
+            {
+              "month_year": "2024-11",
+              "assessment_category": "cam_total",
+              "n": 4,
+              "avg": 0.06666666666666667
+            },
+            {
+              "month_year": "2024-11",
+              "assessment_category": "gcs_eye",
+              "n": 5,
+              "avg": 2.9603174603174605
+            },
+            {
+              "month_year": "2024-11",
+              "assessment_category": "gcs_motor",
+              "n": 5,
+              "avg": 4.7023809523809526
+            },
+            {
+              "month_year": "2024-11",
+              "assessment_category": "gcs_total",
+              "n": 5,
+              "avg": 11.051587301587302
+            },
+            {
+              "month_year": "2024-11",
+              "assessment_category": "gcs_verbal",
+              "n": 5,
+              "avg": 3.388888888888889
+            },
+            {
+              "month_year": "2024-11",
+              "assessment_category": "morse fall scale",
+              "n": 3,
+              "avg": 44.95652173913044
+            },
+            {
+              "month_year": "2024-11",
+              "assessment_category": "nrs",
+              "n": 5,
+              "avg": 1.9886792452830189
+            },
+            {
+              "month_year": "2024-11",
+              "assessment_category": "rass",
+              "n": 3,
+              "avg": -0.8693467336683417
+            },
+            {
+              "month_year": "2024-12",
+              "assessment_category": "braden_total",
+              "n": 2,
+              "avg": 16.976744186046513
+            },
+            {
+              "month_year": "2024-12",
+              "assessment_category": "cam_total",
+              "n": 2,
+              "avg": null
+            },
+            {
+              "month_year": "2024-12",
+              "assessment_category": "gcs_eye",
+              "n": 3,
+              "avg": 1.89247311827957
+            },
+            {
+              "month_year": "2024-12",
+              "assessment_category": "gcs_motor",
+              "n": 3,
+              "avg": 3.045698924731183
+            },
+            {
+              "month_year": "2024-12",
+              "assessment_category": "gcs_total",
+              "n": 3,
+              "avg": 6.567204301075269
+            },
+            {
+              "month_year": "2024-12",
+              "assessment_category": "gcs_verbal",
+              "n": 3,
+              "avg": 1.6290322580645162
+            },
+            {
+              "month_year": "2024-12",
+              "assessment_category": "morse fall scale",
+              "n": 2,
+              "avg": 46.16279069767442
+            },
+            {
+              "month_year": "2024-12",
+              "assessment_category": "nrs",
+              "n": 3,
+              "avg": 1.6147540983606556
+            },
+            {
+              "month_year": "2024-12",
+              "assessment_category": "rass",
+              "n": 2,
+              "avg": -1.6024096385542168
+            },
+            {
+              "month_year": "2025-01",
+              "assessment_category": "braden_total",
+              "n": 1,
+              "avg": 15.153846153846153
+            },
+            {
+              "month_year": "2025-01",
+              "assessment_category": "cam_total",
+              "n": 1,
+              "avg": null
+            },
+            {
+              "month_year": "2025-01",
+              "assessment_category": "gcs_eye",
+              "n": 1,
+              "avg": 1.4883720930232558
+            },
+            {
+              "month_year": "2025-01",
+              "assessment_category": "gcs_motor",
+              "n": 1,
+              "avg": 2.5697674418604652
+            },
+            {
+              "month_year": "2025-01",
+              "assessment_category": "gcs_total",
+              "n": 1,
+              "avg": 5.058139534883721
+            },
+            {
+              "month_year": "2025-01",
+              "assessment_category": "gcs_verbal",
+              "n": 1,
+              "avg": 1.0
+            },
+            {
+              "month_year": "2025-01",
+              "assessment_category": "morse fall scale",
+              "n": 1,
+              "avg": 41.46153846153846
+            },
+            {
+              "month_year": "2025-01",
+              "assessment_category": "nrs",
+              "n": 1,
+              "avg": 1.5476190476190477
+            },
+            {
+              "month_year": "2025-01",
+              "assessment_category": "rass",
+              "n": 1,
+              "avg": -2.2093023255813953
+            }
+          ]
+        }
+      },
+      "atomic_total": 9,
+      "atomic_passed": 9
+    },
+    "duplicate_composite_keys": {
+      "check_type": "duplicate_composite_keys",
+      "table_name": "patient_assessments",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No duplicate composite keys found",
+          "details": {}
+        }
+      ],
+      "metrics": {
+        "composite_keys": [
+          "hospitalization_id",
+          "recorded_dttm",
+          "assessment_category"
+        ],
+        "total_records": 109813,
+        "unique_records": 109813,
+        "duplicate_records": 0,
+        "duplicate_percent": 0.0
+      },
+      "atomic_total": 1,
+      "atomic_passed": 1
+    }
+  },
+  "table_stats": [
+    {
+      "column": "hospitalization_id",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 200,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "recorded_dttm",
+      "dtype": "DATETIME",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 53286,
+      "min": "2018-01-22 20:36",
+      "max": "2025-01-15 04:45"
+    },
+    {
+      "column": "assessment_name",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 9,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "assessment_category",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 9,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "assessment_group",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 6,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "numerical_value",
+      "dtype": "DOUBLE",
+      "null_count": 1136,
+      "null_pct": 1.0,
+      "unique": 76,
+      "min": "-4.0",
+      "max": "74.0"
+    },
+    {
+      "column": "categorical_value",
+      "dtype": "VARCHAR",
+      "null_count": 105924,
+      "null_pct": 96.5,
+      "unique": 3,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "text_value",
+      "dtype": "VARCHAR",
+      "null_count": 109813,
+      "null_pct": 100.0,
+      "unique": 0,
+      "min": null,
+      "max": null
+    }
+  ],
+  "total_rows": 109813
+}

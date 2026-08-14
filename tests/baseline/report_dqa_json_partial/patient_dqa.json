@@ -1,0 +1,885 @@
+{
+  "table_name": "patient",
+  "backend": "polars",
+  "conformance": {
+    "table_presence": {
+      "check_type": "table_presence",
+      "table_name": "patient",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Table 'patient' present with 157 rows and 11 columns",
+          "details": {}
+        }
+      ],
+      "metrics": {
+        "row_count": 157,
+        "column_count": 11
+      },
+      "atomic_total": 1,
+      "atomic_passed": 1
+    },
+    "required_columns": {
+      "check_type": "required_columns",
+      "table_name": "patient",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'patient_id': present",
+          "details": {
+            "column": "patient_id"
+          }
+        },
+        {
+          "message": "Column 'race_category': present",
+          "details": {
+            "column": "race_category"
+          }
+        },
+        {
+          "message": "Column 'ethnicity_category': present",
+          "details": {
+            "column": "ethnicity_category"
+          }
+        },
+        {
+          "message": "Column 'sex_category': present",
+          "details": {
+            "column": "sex_category"
+          }
+        },
+        {
+          "message": "Column 'birth_date': present",
+          "details": {
+            "column": "birth_date"
+          }
+        },
+        {
+          "message": "Column 'death_dttm': present",
+          "details": {
+            "column": "death_dttm"
+          }
+        },
+        {
+          "message": "Column 'language_category': present",
+          "details": {
+            "column": "language_category"
+          }
+        }
+      ],
+      "metrics": {
+        "total_required": 7,
+        "total_present": 7,
+        "total_missing": 0
+      },
+      "atomic_total": 7,
+      "atomic_passed": 7
+    },
+    "column_dtypes": {
+      "check_type": "column_dtypes",
+      "table_name": "patient",
+      "passed": false,
+      "errors": [
+        {
+          "message": "Column 'birth_date' has type Datetime(time_unit='us', time_zone=None), cannot cast to DATE",
+          "details": {
+            "column": "birth_date",
+            "expected": "DATE",
+            "actual": "Datetime(time_unit='us', time_zone=None)",
+            "castable": false
+          }
+        }
+      ],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'patient_id': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "patient_id",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'race_name': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "race_name",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'race_category': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "race_category",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'ethnicity_name': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "ethnicity_name",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'ethnicity_category': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "ethnicity_category",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'sex_name': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "sex_name",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'sex_category': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "sex_category",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'death_dttm': dtype matches schema (DATETIME)",
+          "details": {
+            "column": "death_dttm",
+            "expected": "DATETIME"
+          }
+        },
+        {
+          "message": "Column 'language_name': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "language_name",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'language_category': dtype matches schema (VARCHAR)",
+          "details": {
+            "column": "language_category",
+            "expected": "VARCHAR"
+          }
+        },
+        {
+          "message": "Column 'language_interpreter': not present in data (dtype check skipped)",
+          "details": {
+            "column": "language_interpreter",
+            "expected": "INT"
+          }
+        }
+      ],
+      "metrics": {
+        "columns_checked": 12,
+        "dtype_errors": 1,
+        "dtype_warnings": 0
+      },
+      "atomic_total": 12,
+      "atomic_passed": 11
+    },
+    "datetime_format": {
+      "check_type": "datetime_format",
+      "table_name": "patient",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'birth_date': datetime format valid",
+          "details": {
+            "column": "birth_date"
+          }
+        },
+        {
+          "message": "Column 'death_dttm': datetime format valid",
+          "details": {
+            "column": "death_dttm"
+          }
+        }
+      ],
+      "metrics": {
+        "datetime_columns_checked": 2
+      },
+      "atomic_total": 2,
+      "atomic_passed": 2
+    },
+    "categorical_values": {
+      "check_type": "categorical_values",
+      "table_name": "patient",
+      "passed": true,
+      "errors": [],
+      "warnings": [
+        {
+          "message": "2 invalid categorical values",
+          "details": {
+            "column": "race_category",
+            "top_invalid": [
+              {
+                "value": "Black or African American",
+                "count": 28
+              },
+              {
+                "value": "American Indian or Alaska Native",
+                "count": 2
+              }
+            ],
+            "permissible_values": [
+              "black_or_african_american",
+              "white",
+              "american_indian_or_alaska_native",
+              "asian",
+              "native_hawaiian_or_other_pacific_islander",
+              "middle_eastern_or_north_african",
+              "unknown",
+              "other"
+            ]
+          }
+        },
+        {
+          "message": "1 invalid categorical values",
+          "details": {
+            "column": "ethnicity_category",
+            "top_invalid": [
+              {
+                "value": "Non-Hispanic",
+                "count": 134
+              }
+            ],
+            "permissible_values": [
+              "hispanic",
+              "non_hispanic",
+              "unknown"
+            ]
+          }
+        },
+        {
+          "message": "3 invalid categorical values",
+          "details": {
+            "column": "language_category",
+            "top_invalid": [
+              {
+                "value": "Sign Language",
+                "count": 2
+              },
+              {
+                "value": "Unknown or NA",
+                "count": 1
+              },
+              {
+                "value": "Haitian Creole",
+                "count": 1
+              }
+            ],
+            "permissible_values": [
+              "english",
+              "spanish",
+              "french",
+              "haitian_creole",
+              "italian",
+              "portuguese",
+              "german",
+              "yiddish_pennsylvania_dutch_or_other_west_germanic_languages",
+              "greek",
+              "russian",
+              "polish",
+              "serbo_croatian",
+              "ukrainian_or_other_slavic_languages",
+              "armenian",
+              "persian",
+              "gujarati",
+              "hindi",
+              "urdu",
+              "punjabi",
+              "bengali",
+              "nepali_marathi_or_other_indic_languages",
+              "other_european_indo_european_languages",
+              "other_asian_indo_european_languages",
+              "telugu",
+              "tamil",
+              "malayalam_kannada_or_other_dravidian_languages",
+              "chinese",
+              "japanese",
+              "korean",
+              "vietnamese",
+              "khmer",
+              "thai_lao_or_other_tai_kadai_languages",
+              "other_languages_of_asia",
+              "tagalog",
+              "ilocano_samoan_hawaiian_or_other_austronesian_languages",
+              "arabic",
+              "hebrew",
+              "amharic_somali_or_other_afro_asiatic_languages",
+              "yoruba_twi_igbo_or_other_languages_of_western_africa",
+              "swahili_or_other_languages_of_central_eastern_and_southern_africa",
+              "navajo",
+              "other_native_languages_of_north_america",
+              "other_and_unspecified_languages",
+              "sign_language",
+              "unknown"
+            ]
+          }
+        }
+      ],
+      "info": [
+        {
+          "message": "Column 'sex_category': all values match mCIDE permissible values",
+          "details": {
+            "column": "sex_category"
+          }
+        }
+      ],
+      "metrics": {
+        "category_columns_checked": 4,
+        "columns_with_invalid_values": 3
+      },
+      "atomic_total": 4,
+      "atomic_passed": 4
+    },
+    "category_group_mapping": {
+      "check_type": "category_group_mapping",
+      "table_name": "patient",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No category-to-group mappings defined in schema",
+          "details": {}
+        }
+      ],
+      "metrics": {},
+      "atomic_total": 0,
+      "atomic_passed": 0
+    }
+  },
+  "completeness": {
+    "missingness": {
+      "check_type": "missingness",
+      "table_name": "patient",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'language_category': 5.73% missing (below thresholds)",
+          "details": {
+            "column": "language_category",
+            "percent_missing": 5.73,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'race_category': 3.18% missing (below thresholds)",
+          "details": {
+            "column": "race_category",
+            "percent_missing": 3.18,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'ethnicity_category': 1.91% missing (below thresholds)",
+          "details": {
+            "column": "ethnicity_category",
+            "percent_missing": 1.91,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'patient_id': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "patient_id",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'sex_category': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "sex_category",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        },
+        {
+          "message": "Column 'birth_date': 0.0% missing (below thresholds)",
+          "details": {
+            "column": "birth_date",
+            "percent_missing": 0.0,
+            "error_threshold": 50.0,
+            "warning_threshold": 10.0
+          }
+        }
+      ],
+      "metrics": {
+        "total_rows": 157,
+        "required_columns_checked": 6,
+        "missingness_stats": [
+          {
+            "column": "language_category",
+            "null_count": 9,
+            "total_rows": 157,
+            "percent_missing": 5.73
+          },
+          {
+            "column": "race_category",
+            "null_count": 5,
+            "total_rows": 157,
+            "percent_missing": 3.18
+          },
+          {
+            "column": "ethnicity_category",
+            "null_count": 3,
+            "total_rows": 157,
+            "percent_missing": 1.91
+          },
+          {
+            "column": "patient_id",
+            "null_count": 0,
+            "total_rows": 157,
+            "percent_missing": 0.0
+          },
+          {
+            "column": "sex_category",
+            "null_count": 0,
+            "total_rows": 157,
+            "percent_missing": 0.0
+          },
+          {
+            "column": "birth_date",
+            "null_count": 0,
+            "total_rows": 157,
+            "percent_missing": 0.0
+          }
+        ]
+      },
+      "atomic_total": 7,
+      "atomic_passed": 7
+    },
+    "conditional_requirements": {
+      "check_type": "conditional_requirements",
+      "table_name": "patient",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No conditional requirements defined for this table",
+          "details": {}
+        }
+      ],
+      "metrics": {},
+      "atomic_total": 0,
+      "atomic_passed": 0
+    },
+    "mcide_value_coverage": {
+      "check_type": "mcide_value_coverage",
+      "table_name": "patient",
+      "passed": false,
+      "errors": [
+        {
+          "message": "Missing 4 mCIDE values: black_or_african_american, american_indian_or_alaska_native, native_hawaiian_or_other_pacific_islander, middle_eastern_or_north_african",
+          "details": {
+            "column": "race_category",
+            "missing_values": [
+              "black_or_african_american",
+              "american_indian_or_alaska_native",
+              "native_hawaiian_or_other_pacific_islander",
+              "middle_eastern_or_north_african"
+            ],
+            "coverage_percent": 50.0
+          }
+        },
+        {
+          "message": "Missing 1 mCIDE values: non_hispanic",
+          "details": {
+            "column": "ethnicity_category",
+            "missing_values": [
+              "non_hispanic"
+            ],
+            "coverage_percent": 66.67
+          }
+        },
+        {
+          "message": "Missing 1 mCIDE values: unknown",
+          "details": {
+            "column": "sex_category",
+            "missing_values": [
+              "unknown"
+            ],
+            "coverage_percent": 66.67
+          }
+        },
+        {
+          "message": "Missing 37 mCIDE values: french, haitian_creole, portuguese, yiddish_pennsylvania_dutch_or_other_west_germanic_languages, greek, russian, polish, serbo_croatian, ukrainian_or_other_slavic_languages, armenian, persian, gujarati, hindi, urdu, punjabi, bengali, nepali_marathi_or_other_indic_languages, other_european_indo_european_languages, other_asian_indo_european_languages, telugu, tamil, malayalam_kannada_or_other_dravidian_languages, japanese, khmer, thai_lao_or_other_tai_kadai_languages, other_languages_of_asia, tagalog, ilocano_samoan_hawaiian_or_other_austronesian_languages, hebrew, amharic_somali_or_other_afro_asiatic_languages, yoruba_twi_igbo_or_other_languages_of_western_africa, swahili_or_other_languages_of_central_eastern_and_southern_africa, navajo, other_native_languages_of_north_america, other_and_unspecified_languages, sign_language, unknown",
+          "details": {
+            "column": "language_category",
+            "missing_values": [
+              "french",
+              "haitian_creole",
+              "portuguese",
+              "yiddish_pennsylvania_dutch_or_other_west_germanic_languages",
+              "greek",
+              "russian",
+              "polish",
+              "serbo_croatian",
+              "ukrainian_or_other_slavic_languages",
+              "armenian",
+              "persian",
+              "gujarati",
+              "hindi",
+              "urdu",
+              "punjabi",
+              "bengali",
+              "nepali_marathi_or_other_indic_languages",
+              "other_european_indo_european_languages",
+              "other_asian_indo_european_languages",
+              "telugu",
+              "tamil",
+              "malayalam_kannada_or_other_dravidian_languages",
+              "japanese",
+              "khmer",
+              "thai_lao_or_other_tai_kadai_languages",
+              "other_languages_of_asia",
+              "tagalog",
+              "ilocano_samoan_hawaiian_or_other_austronesian_languages",
+              "hebrew",
+              "amharic_somali_or_other_afro_asiatic_languages",
+              "yoruba_twi_igbo_or_other_languages_of_western_africa",
+              "swahili_or_other_languages_of_central_eastern_and_southern_africa",
+              "navajo",
+              "other_native_languages_of_north_america",
+              "other_and_unspecified_languages",
+              "sign_language",
+              "unknown"
+            ],
+            "coverage_percent": 17.78
+          }
+        }
+      ],
+      "warnings": [],
+      "info": [
+        {
+          "message": "Column 'race_category': 4/8 mCIDE values present",
+          "details": {
+            "column": "race_category",
+            "found_values": 4,
+            "expected_values": 8,
+            "coverage_percent": 50.0,
+            "atomic_count": 4
+          }
+        },
+        {
+          "message": "Column 'ethnicity_category': 2/3 mCIDE values present",
+          "details": {
+            "column": "ethnicity_category",
+            "found_values": 2,
+            "expected_values": 3,
+            "coverage_percent": 66.67,
+            "atomic_count": 2
+          }
+        },
+        {
+          "message": "Column 'sex_category': 2/3 mCIDE values present",
+          "details": {
+            "column": "sex_category",
+            "found_values": 2,
+            "expected_values": 3,
+            "coverage_percent": 66.67,
+            "atomic_count": 2
+          }
+        },
+        {
+          "message": "Column 'language_category': 8/45 mCIDE values present",
+          "details": {
+            "column": "language_category",
+            "found_values": 8,
+            "expected_values": 45,
+            "coverage_percent": 17.78,
+            "atomic_count": 8
+          }
+        }
+      ],
+      "metrics": {
+        "category_columns_checked": 4,
+        "coverage_by_column": {
+          "race_category": {
+            "expected_values": 8,
+            "found_values": 4,
+            "missing_values": [
+              "black_or_african_american",
+              "american_indian_or_alaska_native",
+              "native_hawaiian_or_other_pacific_islander",
+              "middle_eastern_or_north_african"
+            ],
+            "coverage_percent": 50.0
+          },
+          "ethnicity_category": {
+            "expected_values": 3,
+            "found_values": 2,
+            "missing_values": [
+              "non_hispanic"
+            ],
+            "coverage_percent": 66.67
+          },
+          "sex_category": {
+            "expected_values": 3,
+            "found_values": 2,
+            "missing_values": [
+              "unknown"
+            ],
+            "coverage_percent": 66.67
+          },
+          "language_category": {
+            "expected_values": 45,
+            "found_values": 8,
+            "missing_values": [
+              "french",
+              "haitian_creole",
+              "portuguese",
+              "yiddish_pennsylvania_dutch_or_other_west_germanic_languages",
+              "greek",
+              "russian",
+              "polish",
+              "serbo_croatian",
+              "ukrainian_or_other_slavic_languages",
+              "armenian",
+              "persian",
+              "gujarati",
+              "hindi",
+              "urdu",
+              "punjabi",
+              "bengali",
+              "nepali_marathi_or_other_indic_languages",
+              "other_european_indo_european_languages",
+              "other_asian_indo_european_languages",
+              "telugu",
+              "tamil",
+              "malayalam_kannada_or_other_dravidian_languages",
+              "japanese",
+              "khmer",
+              "thai_lao_or_other_tai_kadai_languages",
+              "other_languages_of_asia",
+              "tagalog",
+              "ilocano_samoan_hawaiian_or_other_austronesian_languages",
+              "hebrew",
+              "amharic_somali_or_other_afro_asiatic_languages",
+              "yoruba_twi_igbo_or_other_languages_of_western_africa",
+              "swahili_or_other_languages_of_central_eastern_and_southern_africa",
+              "navajo",
+              "other_native_languages_of_north_america",
+              "other_and_unspecified_languages",
+              "sign_language",
+              "unknown"
+            ],
+            "coverage_percent": 17.78
+          }
+        }
+      },
+      "atomic_total": 59,
+      "atomic_passed": 16
+    }
+  },
+  "relational": {},
+  "plausibility": {
+    "chronological_order": {
+      "check_type": "chronological_order",
+      "table_name": "patient",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No chronological order rules defined for this table",
+          "details": {}
+        }
+      ],
+      "metrics": {},
+      "atomic_total": 0,
+      "atomic_passed": 0
+    },
+    "numeric_range_plausibility": {
+      "check_type": "numeric_range_plausibility",
+      "table_name": "patient",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No numeric range configuration for this table",
+          "details": {}
+        }
+      ],
+      "metrics": {},
+      "atomic_total": 0,
+      "atomic_passed": 0
+    },
+    "field_plausibility": {
+      "check_type": "field_plausibility",
+      "table_name": "patient",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No field plausibility rules defined for this table",
+          "details": {}
+        }
+      ],
+      "metrics": {},
+      "atomic_total": 0,
+      "atomic_passed": 0
+    },
+    "category_temporal_consistency": {
+      "check_type": "category_temporal_consistency",
+      "table_name": "patient",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No suitable datetime column found for temporal consistency check",
+          "details": {}
+        }
+      ],
+      "metrics": {},
+      "atomic_total": 0,
+      "atomic_passed": 0
+    },
+    "duplicate_composite_keys": {
+      "check_type": "duplicate_composite_keys",
+      "table_name": "patient",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "info": [
+        {
+          "message": "No duplicate composite keys found",
+          "details": {}
+        }
+      ],
+      "metrics": {
+        "composite_keys": [
+          "patient_id"
+        ],
+        "total_records": 157,
+        "unique_records": 157,
+        "duplicate_records": 0,
+        "duplicate_percent": 0.0
+      },
+      "atomic_total": 1,
+      "atomic_passed": 1
+    }
+  },
+  "table_stats": [
+    {
+      "column": "patient_id",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 157,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "race_name",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 6,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "race_category",
+      "dtype": "VARCHAR",
+      "null_count": 5,
+      "null_pct": 3.2,
+      "unique": 6,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "ethnicity_name",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 3,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "ethnicity_category",
+      "dtype": "VARCHAR",
+      "null_count": 3,
+      "null_pct": 1.9,
+      "unique": 3,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "sex_name",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 2,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "sex_category",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 2,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "birth_date",
+      "dtype": "DATE",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 156,
+      "min": "1926-06-16",
+      "max": "2008-06-16"
+    },
+    {
+      "column": "death_dttm",
+      "dtype": "DATETIME",
+      "null_count": 117,
+      "null_pct": 74.5,
+      "unique": 40,
+      "min": "2018-01-11 09:12",
+      "max": "2024-08-24 06:57"
+    },
+    {
+      "column": "language_name",
+      "dtype": "VARCHAR",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique": 11,
+      "min": null,
+      "max": null
+    },
+    {
+      "column": "language_category",
+      "dtype": "VARCHAR",
+      "null_count": 9,
+      "null_pct": 5.7,
+      "unique": 11,
+      "min": null,
+      "max": null
+    }
+  ],
+  "total_rows": 157
+}
