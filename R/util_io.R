@@ -9,6 +9,58 @@
 #' @name clif-io
 NULL
 
+#' Locate a CLIF table's data file
+#'
+#' @description
+#' Searches a data directory for the file belonging to a given CLIF table.
+#' CLIF data directories are not guaranteed to use a single naming
+#' convention: some sites name files exactly after the table
+#' (e.g. `patient.parquet`), while many CLIF consortium datasets use a
+#' `clif_` prefix (e.g. `clif_patient.parquet`). This helper checks both
+#' conventions, falling back to a case-insensitive match, so table lookup
+#' does not depend on a single hardcoded filename pattern.
+#'
+#' @param data_directory Character. Path to directory containing data files.
+#' @param table_name Character. Name of the CLIF table (e.g. "patient").
+#' @param filetype Character. File type: "csv" or "parquet".
+#'
+#' @return Character path to the located file, or `NA_character_` if no
+#'   matching file is found.
+#'
+#' @export
+find_clif_table_file <- function(data_directory, table_name, filetype) {
+  candidate_names <- c(
+    paste0(table_name, ".", filetype),
+    paste0("clif_", table_name, ".", filetype)
+  )
+
+  if (!dir.exists(data_directory)) {
+    return(NA_character_)
+  }
+
+  # Match against the directory listing rather than file.exists(): on
+  # case-insensitive filesystems (macOS, Windows) file.exists() would accept
+  # "Patient.CSV" for the candidate "patient.csv" and we would return a path
+  # whose spelling does not match the file actually on disk.
+  directory_files <- list.files(data_directory)
+
+  exact_matches <- candidate_names[candidate_names %in% directory_files]
+  if (length(exact_matches) > 0) {
+    return(file.path(data_directory, exact_matches[[1]]))
+  }
+
+  # Fall back to a case-insensitive scan of the directory contents, in case
+  # the file exists but with different capitalization (e.g. "Patient.csv").
+  pattern <- paste0("^(clif_)?", table_name, "\\.", filetype, "$")
+  matches <- grep(pattern, directory_files, ignore.case = TRUE, value = TRUE)
+
+  if (length(matches) > 0) {
+    return(file.path(data_directory, matches[[1]]))
+  }
+
+  return(NA_character_)
+}
+
 #' Open a configured DuckDB connection
 #'
 #' Applies the same session settings clifpy uses so reads behave identically. Setting
@@ -186,9 +238,16 @@ load_data <- function(table_name,
     cli::cli_abort("Unsupported filetype. Only {.val csv} and {.val parquet} are supported.")
   }
 
-  file_path <- file.path(table_path, paste0("clif_", table_name, ".", table_format_type))
-  if (!file.exists(file_path)) {
-    cli::cli_abort("The file {.file {file_path}} does not exist in the specified directory.")
+  if (!dir.exists(table_path)) {
+    cli::cli_abort("The data directory {.file {table_path}} does not exist.")
+  }
+
+  file_path <- find_clif_table_file(table_path, table_name, table_format_type)
+  if (is.na(file_path)) {
+    cli::cli_abort(c(
+      "No file found for table {.val {table_name}} in {.file {table_path}}.",
+      "i" = "Searched for {.file {paste0(table_name, '.', table_format_type)}} and {.file {paste0('clif_', table_name, '.', table_format_type)}}."
+    ))
   }
 
   connection <- duckdb_connect()
@@ -403,8 +462,8 @@ load_all_tables <- function(data_directory, table_names = NULL,
 
   loaded_tables <- list()
   for (table_name in table_names) {
-    file_path <- file.path(data_directory, paste0("clif_", table_name, ".", filetype))
-    if (file.exists(file_path)) {
+    file_path <- find_clif_table_file(data_directory, table_name, filetype)
+    if (!is.na(file_path)) {
       loaded_tables[[table_name]] <- load_data(
         table_name = table_name,
         table_path = data_directory,

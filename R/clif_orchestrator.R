@@ -163,6 +163,12 @@ ClifOrchestrator <- R6::R6Class(
     #' @param filters Optional named list mapping table names to filter lists.
     #' @return The orchestrator, invisibly.
     initialize_tables = function(tables = NULL, sample_size = NULL, columns = NULL, filters = NULL) {
+      # Fail loudly on a bad directory rather than emitting a per-table warning
+      # for every requested table (issue #3).
+      if (!dir.exists(self$data_directory)) {
+        cli::cli_abort("Data directory not found: {.file {self$data_directory}}")
+      }
+
       if (is.null(tables)) {
         tables <- "patient"
       }
