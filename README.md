@@ -42,13 +42,19 @@ devtools::install_github("AartikSarma/clifR")
 ```r
 library(clifR)
 
-# Load and validate CLIF data
 orchestrator <- ClifOrchestrator$new(
   data_directory = "path/to/clif/data",
+  filetype = "parquet",
   timezone = "US/Eastern"
 )
 
-# Validate all tables
+# Name the tables you want. initialize_tables() with no arguments loads
+# ONLY patient, matching clifpy's default of ['patient'].
+orchestrator$initialize_tables(
+  c("patient", "hospitalization", "adt", "vitals", "labs")
+)
+
+# Validate every loaded table
 orchestrator$validate_all()
 
 # Access data
@@ -59,8 +65,11 @@ labs <- orchestrator$labs$df
 wide_data <- orchestrator$create_wide_dataset()
 
 # Calculate SOFA scores
-sofa_scores <- orchestrator$calculate_sofa_scores()
+sofa_scores <- orchestrator$compute_sofa_scores()
 ```
+
+Data files must use the CLIF `clif_` prefix — `clif_patient.parquet`,
+`clif_vitals.parquet`, and so on. A bare `patient.parquet` is not recognized.
 
 ## CLIF Specification
 

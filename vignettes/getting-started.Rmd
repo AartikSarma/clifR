@@ -134,6 +134,14 @@ requested demo tables already loaded. (With your own data you would instead call
 `ClifOrchestrator$new(data_directory = ..., filetype = ..., timezone = ..., clif_version = ...)`
 followed by `initialize_tables()`.)
 
+Two things to know before pointing the orchestrator at your own directory:
+
+- **Files need the `clif_` prefix.** clifR looks for `clif_patient.parquet`,
+  not `patient.parquet`.
+- **`initialize_tables()` with no arguments loads only `patient`.** This is
+  clifpy's default (`tables=['patient']`), not an oversight — pass the vector
+  of tables you actually want, as below.
+
 ```{r}
 clif <- load_demo_clif(tables = c("patient", "hospitalization", "adt", "vitals", "labs"))
 clif

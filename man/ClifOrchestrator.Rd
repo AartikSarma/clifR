@@ -189,6 +189,19 @@ The loaded table object.
 \subsection{Method \code{initialize_tables()}}{
 Load several tables at once.
 
+\strong{Calling this with no arguments loads only \code{patient}} — not every table
+in the directory. This matches clifpy's \code{ClifOrchestrator.initialize()},
+which defaults to \verb{['patient']}. Name the tables you want explicitly:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{orchestrator$initialize_tables(
+  c("patient", "hospitalization", "adt", "vitals", "labs")
+)
+}\if{html}{\out{</div>}}
+
+Tables whose file is absent are reported as a warning and skipped, so a
+partial directory loads what it has. A \code{data_directory} that does not
+exist is an error.
+
 Runs encounter stitching afterwards when \code{stitch_encounter} is \code{TRUE}.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{ClifOrchestrator$initialize_tables(
@@ -202,7 +215,8 @@ Runs encounter stitching afterwards when \code{stitch_encounter} is \code{TRUE}.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{tables}}{Character vector of table names. Defaults to \code{"patient"}.}
+\item{\code{tables}}{Character vector of table names. Defaults to \code{"patient"}
+alone; pass the full vector to load more.}
 
 \item{\code{sample_size}}{Optional maximum number of rows per table.}
 

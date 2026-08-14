@@ -13,11 +13,11 @@ source("tests/fixtures/generate_synthetic_data.R")
 ```
 
 This creates CLIF-compliant CSV files in `tests/fixtures/synthetic_data/`:
-- `patient.csv` - 10 patients with demographics
-- `hospitalization.csv` - ~15 hospitalizations
-- `adt.csv` - ADT events for each hospitalization
-- `vitals.csv` - Hourly/4-hourly vital signs
-- `labs.csv` - Daily lab results
+- `clif_patient.csv` - 10 patients with demographics
+- `clif_hospitalization.csv` - ~15 hospitalizations
+- `clif_adt.csv` - ADT events for each hospitalization
+- `clif_vitals.csv` - Hourly/4-hourly vital signs
+- `clif_labs.csv` - Daily lab results
 
 **Important**: This data is generated with `set.seed(42)` for reproducibility.
 
@@ -109,11 +109,11 @@ tests/fixtures/
 ├── README.md (this file)
 ├── generate_synthetic_data.R (generates data)
 └── synthetic_data/ (generated files)
-    ├── patient.csv
-    ├── hospitalization.csv
-    ├── adt.csv
-    ├── vitals.csv
-    └── labs.csv
+    ├── clif_patient.csv
+    ├── clif_hospitalization.csv
+    ├── clif_adt.csv
+    ├── clif_vitals.csv
+    └── clif_labs.csv
 
 tests/
 ├── generate_baselines.py (Python baseline generator)

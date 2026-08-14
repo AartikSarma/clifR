@@ -156,8 +156,23 @@ ClifOrchestrator <- R6::R6Class(
 
     #' @description Load several tables at once.
     #'
+    #' **Calling this with no arguments loads only `patient`** — not every table
+    #' in the directory. This matches clifpy's `ClifOrchestrator.initialize()`,
+    #' which defaults to `['patient']`. Name the tables you want explicitly:
+    #'
+    #' ```
+    #' orchestrator$initialize_tables(
+    #'   c("patient", "hospitalization", "adt", "vitals", "labs")
+    #' )
+    #' ```
+    #'
+    #' Tables whose file is absent are reported as a warning and skipped, so a
+    #' partial directory loads what it has. A `data_directory` that does not
+    #' exist is an error.
+    #'
     #' Runs encounter stitching afterwards when `stitch_encounter` is `TRUE`.
-    #' @param tables Character vector of table names. Defaults to `"patient"`.
+    #' @param tables Character vector of table names. Defaults to `"patient"`
+    #'   alone; pass the full vector to load more.
     #' @param sample_size Optional maximum number of rows per table.
     #' @param columns Optional named list mapping table names to column vectors.
     #' @param filters Optional named list mapping table names to filter lists.

@@ -12,11 +12,11 @@ source("tests/fixtures/generate_synthetic_data.R")
 ```
 
 This will create:
-- `patient.csv` (1,000 patients, ~95 KB)
-- `hospitalization.csv` (1,500 hospitalizations, ~164 KB)
-- `adt.csv` (3,750 ADT events, ~276 KB)
-- `vitals.csv` (1,412,358 measurements, ~94 MB)
-- `labs.csv` (290,345 results, ~38 MB)
+- `clif_patient.csv` (1,000 patients, ~95 KB)
+- `clif_hospitalization.csv` (1,500 hospitalizations, ~164 KB)
+- `clif_adt.csv` (3,750 ADT events, ~276 KB)
+- `clif_vitals.csv` (1,412,358 measurements, ~94 MB)
+- `clif_labs.csv` (290,345 results, ~38 MB)
 
 ## Data Characteristics
 
@@ -36,7 +36,7 @@ These data files are used by **both** R (clifR) and Python (clifpy) for cross-va
 2. Python clifpy reads the **same** CSV files
 3. Outputs are compared to ensure compatibility
 
-Symlinks with `clif_` prefix are created for compatibility with clifpy's naming convention.
+All CLIF data files carry the `clif_` prefix; clifR looks for `clif_<table>.<filetype>` and does not fall back to a bare filename.
 
 ## Data Quality
 

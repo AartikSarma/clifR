@@ -100,10 +100,10 @@ orchestrator <- ClifOrchestrator$new(
   stitch_time_interval = 24     # Within 24 hours
 )
 
-# Load all tables
+# Load tables. Note: initialize_tables() with no arguments loads ONLY
+# patient (clifpy's default), so name every table you need.
 orchestrator$initialize_tables(
-  tables = c("patient", "hospitalization", "adt", "vitals", "labs"),
-  validate = TRUE
+  tables = c("patient", "hospitalization", "adt", "vitals", "labs")
 )
 
 # Access individual tables

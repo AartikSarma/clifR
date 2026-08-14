@@ -70,7 +70,7 @@ patient$death_dttm[death_idx] <- as.POSIXct(
   tz = tz
 ) + days(sample(0:30, length(death_idx), replace = TRUE))
 
-write_csv(patient, file.path(output_dir, "patient.csv"))
+write_csv(patient, file.path(output_dir, "clif_patient.csv"))
 cat("  Generated", nrow(patient), "patients\n")
 
 # ============================================================================
@@ -130,7 +130,7 @@ hospitalization <- hospitalization %>%
   ) %>%
   select(-birth_date)
 
-write_csv(hospitalization, file.path(output_dir, "hospitalization.csv"))
+write_csv(hospitalization, file.path(output_dir, "clif_hospitalization.csv"))
 cat("  Generated", nrow(hospitalization), "hospitalizations\n")
 
 # ============================================================================
@@ -190,7 +190,7 @@ for (i in 1:nrow(hospitalization)) {
 
 adt <- bind_rows(adt_list)
 
-write_csv(adt, file.path(output_dir, "adt.csv"))
+write_csv(adt, file.path(output_dir, "clif_adt.csv"))
 cat("  Generated", nrow(adt), "ADT events\n")
 
 # ============================================================================
@@ -308,7 +308,7 @@ vitals <- bind_rows(vitals_list) %>%
     vital_value = round(vital_value, 1)
   )
 
-write_csv(vitals, file.path(output_dir, "vitals.csv"))
+write_csv(vitals, file.path(output_dir, "clif_vitals.csv"))
 cat("  Generated", nrow(vitals), "vital sign measurements\n")
 
 # ============================================================================
@@ -391,7 +391,7 @@ for (i in 1:nrow(hospitalization)) {
 labs <- bind_rows(labs_list) %>%
   mutate(lab_value = round(lab_value, 2))
 
-write_csv(labs, file.path(output_dir, "labs.csv"))
+write_csv(labs, file.path(output_dir, "clif_labs.csv"))
 cat("  Generated", nrow(labs), "lab results\n")
 
 # ============================================================================
@@ -401,10 +401,10 @@ cat("  Generated", nrow(labs), "lab results\n")
 cat("\n=== Summary ===\n")
 cat("Output directory:", output_dir, "\n")
 cat("Files generated:\n")
-cat("  - patient.csv (", nrow(patient), "rows )\n")
-cat("  - hospitalization.csv (", nrow(hospitalization), "rows )\n")
-cat("  - adt.csv (", nrow(adt), "rows )\n")
-cat("  - vitals.csv (", nrow(vitals), "rows )\n")
-cat("  - labs.csv (", nrow(labs), "rows )\n")
+cat("  - clif_patient.csv (", nrow(patient), "rows )\n")
+cat("  - clif_hospitalization.csv (", nrow(hospitalization), "rows )\n")
+cat("  - clif_adt.csv (", nrow(adt), "rows )\n")
+cat("  - clif_vitals.csv (", nrow(vitals), "rows )\n")
+cat("  - clif_labs.csv (", nrow(labs), "rows )\n")
 cat("\nThese files can be used for both R (clifR) and Python (clifpy) testing.\n")
 cat("Random seed was 42 for reproducibility.\n")
